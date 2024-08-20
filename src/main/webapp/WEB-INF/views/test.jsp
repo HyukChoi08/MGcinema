@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+<<<<<<< HEAD
 제발제발제발3123123123asdasddd
+=======
+제발제발제발3123123123asdasds 김민수 수정
+>>>>>>> branch 'master' of https://github.com/HyukChoi08/MGcinema.git
+ㅇㅇㅇ
 </body>
 </html>
