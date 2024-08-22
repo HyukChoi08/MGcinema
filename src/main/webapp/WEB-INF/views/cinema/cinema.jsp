@@ -210,18 +210,25 @@ button:focus {
                 <thead>
                     <tr>
                     	<td><button id="prev-month">&lt;</button></td>
-                        <th data-dbdate=""></th>
-                        <th data-dbdate=""></th>
-                        <th data-dbdate=""></th>
-                        <th data-dbdate=""></th>
-                        <th data-dbdate=""></th>
-                        <th data-dbdate=""></th>
-                        <th data-dbdate=""></th>
+                        <th></th>
+                       	<th></th>
+                        <th></th>
+                        <th></th>
+                       	<th></th>
+                       	<th></th>
+                       	<th></th>
                         <td><button id="next-month">&gt;</button></td>
                     </tr>
                 </thead>
             </table>
         </div>
+    </div>
+    <div>
+    	<table id="movieList">
+    		<thead>
+    			
+    		</thead>
+    	</table>
     </div>
 </div>
 
@@ -254,12 +261,36 @@ $(document)
 	console.log(movied[0]);
 })
 .on('click','#calendar-table thead tr th',function(){
+	clear()
 	let mdate = $(this).data('dbdate');
 	console.log(mdate);
 	$.post('/moviedate',{mdate:mdate},function(data){
 		console.log(data);
-		
+		for(x of data){
+			console.log(x['mname']);
+			let str = '<tr>'
+			str +='<td>' + x['mname'] + '</td>' +
+			       '<td>' + x['Sname'] + '</td>' +
+			       '<td>' + x['seatlevel'] + '</td>' +
+			       '<td>' + x['moviedate'] + '</td>' +
+			       '<td>' + x['runningtime'] + '</td>' +
+			       '<td>' + x['age'] + '</td>' +
+			       '<td>' + x['allseat'] + '</td>' +
+			       '<td>' + x['lestseat'] + '</td>' +
+			       '<td>' + x['begintime'] + '</td>' +
+			       '<td>' + x['endtime'] + '</td>';
+			str +='</tr>'
+			
+				$('#movieList').append(str);
+			//x['Sname']
+			//x['seatlevel']
+			//x['moviedate']
+			//x['lestseat']
+			//x['begintime']
+			//x['endtime']
+		}
 	},'json')
+	
 })
 .on('click','.container .item', function() {
         // 클릭된 div의 data-image 속성에서 이미지 URL을 가져옴
@@ -268,5 +299,8 @@ $(document)
         // 이미지 요소의 src 속성을 새 URL로 업데이트
         $('#backgroundImage').attr('src', img);
     });
+function clear(){
+	$('#movieList').empty();
+}
 </script>
 </html>

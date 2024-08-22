@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cinema.cinema.CinemaDAO">
+<select id="Moviedate" resultType="com.cinema.cinema.MoviedateDTO">
+	select b.mname,b.runningtime,b.age,c.allseat,c.Sname,c.seatlevel,
+	a.moviedate,a.lestseat,a.begintime,a.endtime
+	from schedules a, movie b, room c
+	where a.movie_id=b.id and a.room_id=c.id and moviedate=#{param1}
+</select>
+</mapper>

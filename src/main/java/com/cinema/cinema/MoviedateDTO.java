@@ -1,5 +1,7 @@
 package com.cinema.cinema;
 
+import lombok.Data;
+@Data
 public class MoviedateDTO {
 	String mname;
 	String runningtime;
@@ -11,4 +13,5 @@ public class MoviedateDTO {
 	String lestseat;
 	String begintime;
 	String endtime;
+	
 }
