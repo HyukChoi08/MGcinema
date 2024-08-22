@@ -25,7 +25,14 @@ small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form
             padding: 0px; /* 패딩 */
             border: 1px solid black; /* 테두리 */
            
-        }
+}
+.notice{
+	background-color:white;
+	border:none;
+	width:1000px;
+	height:50px;
+	
+}
 .container a{
 	 text-decoration: none;
 	 display: block;
@@ -66,13 +73,13 @@ a:visited {
 	clear: both;
     padding-bottom: 50px;
     position: relative;
-    width: 980px;
+    width: 1000px;
     margin: 0 auto;
     border:1px solid black;
 }
 .info {
 	background-color:black;
-	width:980px;
+	width:1000px;
 	height:200px;
 	color:white;
 	/* position: absolute; */
@@ -124,6 +131,56 @@ a:visited {
     height: 111px;
     border-top: 3px solid #241d1e;
 }
+.calendar-container {
+    width:1000px;
+    background-color: white;
+    border: none;
+    overflow: hidden;
+    
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: black;
+    color: white;
+   
+}
+
+.calendar-body {
+    padding: 10px;
+}
+
+#calendar-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#calendar-table th, #calendar-table td {
+    width: 14;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+#calendar-table thead {
+    background-color: #f2f2f2;
+}
+
+button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+button:focus {
+    outline: none;
+}
+
 </style>
 <head>
 <meta charset="UTF-8">
@@ -134,7 +191,7 @@ a:visited {
 <div id="contents">
 	혹시나 다른거 들어갈 자리
 	<div><h3><img src="https://img.cgv.co.kr/R2014/images/title/h3_theater.gif"></h3></div>
-	<div class="container" style="border: 1px solid black;position: relative; width:980px; height:500px;margin:auto;">
+	<div class="container" style="border: none;position: relative; width:1000px; height:500px;margin:auto;">
 		<img src="https://img.cgv.co.kr/R2014/images/sub/specialtheater/chungdam/main_chungdam.jpg" class="background-image" id="backgroundImage" alt="zzzz">
 	 	<div class="item" data-image="https://img.cgv.co.kr/R2014/images/sub/specialtheater/chungdam/main_chungdam.jpg"><a href="#">8F 일반</a></div>
         <div class="item" data-image="https://img.cgv.co.kr/R2014/images/sub/specialtheater/chungdam/f10_02.jpg"><a href="#">7F 스위트</a></div>
@@ -152,13 +209,58 @@ a:visited {
 			<h5>위치/주차안내</h5><a class="link-more" href="/park" target="_blank" title="새창 열림"></a>
 		</div>
 	</div>
-<div class="sect-schedule"></div>
+	<div class="notice">
+		<h4>공지사항</h4><a class="link-more" href="/park" target="_blank" title="새창 열림"></a>
+	</div>
+<div class="sect-schedule">
+	<div class="calendar-container">
+        <div class="calendar-header">
+            <span id="month-year">2024년 8월</span>     
+        </div>
+        <div class="calendar-body">
+            <table id="calendar-table">
+                <thead>
+                    <tr>
+                    	<td><button id="prev-month">&lt;</button></td>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <td><button id="next-month">&gt;</button></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 날짜가 동적으로 생성됩니다 -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
 </div>
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
 $(document)
+.ready(function(){
+	for(let i = 1, j = 0:j < 6:i++,j++){
+	let now = new Date();
+	let year = now.getFullYear();
+	let month = now.getMonth() + 1;
+	let day = now.getDate();
+	month = month <10 ? '0' + month : month;
+	let days = ['일','월','화','수','목','금','토'];
+	let dow = days[now.getDay()];
+	
+	console.log(now,year,month,dow,day);
+	let daystr = month+'월'+day+'일'+dow;
+	$('#calendar-table thead th:eq('+j+')').text(daystr)
+	}
+	
+})
 .on('click','.container .item', function() {
         // 클릭된 div의 data-image 속성에서 이미지 URL을 가져옴
         var img = $(this).data('image');
