@@ -7,8 +7,18 @@
 <title>Insert title here</title>
 </head>
 <body>
+<<<<<<< HEAD
 	<input type=text id="tname"> <input type=number id="passwd">
 	<button id="submit">확인</button>
+=======
+<<<<<<< HEAD
+제발제발제발3123123123asdasddd
+=======
+제발제발제발3123123123asdasds 김민수 수정
+>>>>>>> branch 'master' of https://github.com/HyukChoi08/MGcinema.gitddddddd
+ㅇㅇㅇ
+!!!
+>>>>>>> branch 'master' of https://github.com/HyukChoi08/MGcinema.git
 </body>
 <script src='https://code.jquery.com/jquery-latest.js'></script>
 <script>
