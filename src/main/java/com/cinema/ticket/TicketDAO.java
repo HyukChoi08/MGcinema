@@ -1,4 +1,4 @@
-package com.cinema;
+package com.cinema.ticket;
 
 import org.apache.ibatis.annotations.Mapper;
 

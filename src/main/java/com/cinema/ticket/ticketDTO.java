@@ -1,4 +1,5 @@
-package com.cinema;
+package com.cinema.ticket;
+
 
 import lombok.Data;
 
