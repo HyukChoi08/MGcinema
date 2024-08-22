@@ -76,6 +76,7 @@ a:visited {
     width: 1000px;
     margin: 0 auto;
     border:1px solid black;
+    height:2000px;
 }
 .info {
 	background-color:black;
@@ -139,15 +140,7 @@ a:visited {
     
 }
 
-.calendar-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    background-color: black;
-    color: white;
-   
-}
+
 
 .calendar-body {
     padding: 10px;
@@ -165,14 +158,12 @@ a:visited {
     border: 1px solid #ddd;
 }
 
-#calendar-table thead {
-    background-color: #f2f2f2;
-}
+
 
 button {
     background: none;
     border: none;
-    color: white;
+    color: black;
     font-size: 18px;
     cursor: pointer;
 }
@@ -214,27 +205,21 @@ button:focus {
 	</div>
 <div class="sect-schedule">
 	<div class="calendar-container">
-        <div class="calendar-header">
-            <span id="month-year">2024년 8월</span>     
-        </div>
         <div class="calendar-body">
             <table id="calendar-table">
                 <thead>
                     <tr>
                     	<td><button id="prev-month">&lt;</button></td>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th data-dbdate=""></th>
+                        <th data-dbdate=""></th>
+                        <th data-dbdate=""></th>
+                        <th data-dbdate=""></th>
+                        <th data-dbdate=""></th>
+                        <th data-dbdate=""></th>
+                        <th data-dbdate=""></th>
                         <td><button id="next-month">&gt;</button></td>
                     </tr>
                 </thead>
-                <tbody>
-                    <!-- 날짜가 동적으로 생성됩니다 -->
-                </tbody>
             </table>
         </div>
     </div>
@@ -246,20 +231,35 @@ button:focus {
 <script>
 $(document)
 .ready(function(){
-	for(let i = 1, j = 0:j < 6:i++,j++){
 	let now = new Date();
-	let year = now.getFullYear();
-	let month = now.getMonth() + 1;
-	let day = now.getDate();
+	let movied = [];
+	for(let j = 0;j < 7;j++){
+	let date = new Date(now);
+	date.setDate(now.getDate()+j);
+	let year = date.getFullYear();
+	let month = date.getMonth() + 1;
+	let day = date.getDate();
 	month = month <10 ? '0' + month : month;
+	day = day < 10 ? '0' + day : day;
 	let days = ['일','월','화','수','목','금','토'];
-	let dow = days[now.getDay()];
+	let dow = days[date.getDay()];
 	
-	console.log(now,year,month,dow,day);
-	let daystr = month+'월'+day+'일'+dow;
+	//console.log(now,year,month,dow,day);
+	let daystr = month+'월'+day+'일'+'  '+dow;
+	console.log(year+'-'+month+'-'+day);
+	movied.push(year+'-'+month+'-'+day)
 	$('#calendar-table thead th:eq('+j+')').text(daystr)
+	$('#calendar-table thead th:eq('+j+')').data('dbdate',movied[j])
 	}
-	
+	console.log(movied[0]);
+})
+.on('click','#calendar-table thead tr th',function(){
+	let mdate = $(this).data('dbdate');
+	console.log(mdate);
+	$.post('/moviedate',{mdate:mdate},function(data){
+		console.log(data);
+		
+	},'json')
 })
 .on('click','.container .item', function() {
         // 클릭된 div의 data-image 속성에서 이미지 URL을 가져옴
