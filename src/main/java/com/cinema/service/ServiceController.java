@@ -12,6 +12,6 @@ public class ServiceController {
     public String getServiceHome(@RequestParam(value = "id", defaultValue = "1") int id, Model model) {
         ServiceHomeDTO serviceHome = new ServiceHomeDTO("고객센터", "아직아직아직");
         model.addAttribute("serviceHome", serviceHome);
-        return "service/ServiceHome;
+        return "service/ServiceHome";
     }
 }
