@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cinema.ticket.TicketDAO">
+	<select id="getMovies" resultType="com.cinema.ticket.movieDTO">
+        SELECT id, name FROM movie
+    </select>
+
+    <select id="getTheaters" resultType="com.cinema.ticket.theaterDTO">
+        SELECT id, name FROM room WHERE movie_id = #{movieId}
+    </select>
+
+    <select id="getDates" resultType="string">
+        SELECT DISTINCT date FROM schedules WHERE theater_id = #{theaterId}
+    </select>
+
+    <select id="getTimes" resultType="string">
+        SELECT time FROM schedules WHERE theater_id = #{theaterId} AND date = #{date}
+    </select>
+
+    <insert id="reserve">
+        INSERT INTO information (movie_id, theater_id, date, time)
+        VALUES (#{movieId}, #{theaterId}, #{date}, #{time})
+    </insert>
+</mapper>
