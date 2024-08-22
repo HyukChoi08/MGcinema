@@ -20,7 +20,7 @@ body {
     <div>
        <table>
        	<tr>
-       		<th>영화</th><th>극장</th><th>날짜</th><th>시간</th>
+       		<th>영화1111</th><th>극장</th><th>날짜</th><th>시간</th>
        	</tr>
        </table>
     </div>
