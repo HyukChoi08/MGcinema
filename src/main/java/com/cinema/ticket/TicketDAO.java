@@ -10,7 +10,7 @@ public interface TicketDAO {
 	
 	List<movieDTO> getMovies();
 
-    List<theaterDTO> getTheaters(@Param("movieId") int movieId);
+    List<theaterDTO> getTheaters(@Param("movieId") int movieId, @Param("date") int date);
 
     List<String> getDates(@Param("theaterId") int theaterId);
 

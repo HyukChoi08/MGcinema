@@ -5,5 +5,6 @@ import lombok.Data;
 @Data
 public class theaterDTO {
 	public int id;
-    public String name;
+    public String sname;
+    public String seatlevel;
 }
