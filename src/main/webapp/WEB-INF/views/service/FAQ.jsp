@@ -3,109 +3,122 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>FAQ 페이지</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고객센터 FAQ</title>
     <style>
-        /* 전체 페이지 스타일 */
+        /* 기본 스타일 */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
 
-        /* 컨테이너 스타일 */
-        .col-detail {
+        #container {
             width: 1000px;
-            margin: 0 auto; /* 가운데 정렬 */
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            overflow: hidden;
             padding: 20px;
         }
 
-        .customer_top {
-            margin-bottom: 20px;
+        #contents {
+            display: flex; /* Flexbox를 사용하여 열 배치 */
         }
 
-        .tit {
-            font-size: 24px;
+        .col-aside {
+            flex: 1;
+            max-width: 220px;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+
+        .col-detail {
+            flex: 3;
+            padding: 20px;
+        }
+
+        .snb ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .snb li {
+            margin: 5px 0;
+        }
+
+        .snb a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .snb a.on {
             font-weight: bold;
+            color: #007bff;
         }
 
-        .stit {
-            font-size: 16px;
-            color: #555;
-        }
-
-        /* 검색 영역 스타일 */
         .search_area {
             margin-bottom: 20px;
         }
 
-        .search_area legend {
-            display: none; /* 숨기기 */
+        .search_area input, .search_area button {
+            padding: 10px;
+            margin-right: 5px;
         }
 
-        .c_input {
-            padding: 8px;
-            font-size: 14px;
-            border: 1px solid #ddd;
+        .search_area input {
+            width: calc(100% - 110px);
+            border: 1px solid #ccc;
             border-radius: 4px;
         }
 
-        .round.inblack {
-            background-color: #333;
-            color: #fff;
+        .search_area button {
+            background-color: #007bff;
+            color: white;
             border: none;
-            padding: 10px 20px;
             border-radius: 4px;
-            cursor: pointer;
         }
 
-        .qu_txt {
-            margin-top: 10px;
-            font-size: 14px;
-        }
-
-        .qu_txt a {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        .qu_txt a:hover {
-            text-decoration: underline;
-        }
-
-        /* 탭 스타일 */
         .c_tab_wrap {
             margin-bottom: 20px;
         }
 
-        .c_tab {
-            list-style: none;
+        .c_tab_wrap ul {
+            list-style-type: none;
             padding: 0;
+            display: flex;
+            border-bottom: 2px solid #007bff;
+        }
+
+        .c_tab_wrap li {
             margin: 0;
         }
 
-        .c_tab li {
-            display: inline;
-            margin-right: 10px;
-        }
-
-        .c_tab li a {
+        .c_tab_wrap a {
+            display: block;
+            padding: 10px;
             text-decoration: none;
-            font-size: 11px;
             color: #333;
         }
 
-        .c_tab li.on a {
-            font-weight: bold;
+        .c_tab_wrap a:hover {
+            background-color: #f0f0f0;
         }
 
-        /* 검색 결과 스타일 */
+        .c_tab_wrap li.on a {
+            font-weight: bold;
+            border-bottom: 2px solid #007bff;
+        }
+
         .search_result {
             margin-bottom: 20px;
-            font-size: 14px;
-            color: #666;
         }
 
-        /* 테이블 스타일 */
         .tbl_area {
             margin-bottom: 20px;
         }
@@ -115,44 +128,27 @@
             border-collapse: collapse;
         }
 
-        .tbl_notice_list th,
-        .tbl_notice_list td {
-            border: 1px solid #ddd;
+        .tbl_notice_list th, .tbl_notice_list td {
             padding: 10px;
-            text-align: left; /* 왼쪽 정렬 */
+            border: 1px solid #ddd;
         }
 
         .tbl_notice_list th {
-            background-color: #f4f4f4;
+            background-color: #f0f0f0;
         }
 
-        .tbl_notice_list .tit a {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        .tbl_notice_list .tit a:hover {
-            text-decoration: underline;
-        }
-
-        .num {
-            text-align: center; /* 정렬 스타일 유지 */
-        }
-
-        /* 페이지 네비게이션 스타일 */
         .paging {
-            margin-bottom: 20px;
+            margin: 20px 0;
         }
 
         .paging ul {
-            list-style: none;
+            list-style-type: none;
             padding: 0;
-            margin: 0;
+            display: flex;
         }
 
         .paging li {
-            display: inline;
-            margin-right: 5px;
+            margin: 0 5px;
         }
 
         .paging a {
@@ -160,139 +156,111 @@
             color: #007bff;
         }
 
-        .paging .on a {
-            font-weight: bold;
-        }
-
-        .btn-paging {
-            background-color: #333;
-            color: #fff;
+        .paging .btn-paging {
+            background-color: #007bff;
+            color: white;
             border: none;
-            padding: 5px 10px;
+            padding: 10px;
+            border-radius: 4px;
             cursor: pointer;
-        }
-
-        .btn-paging.end {
-            background-color: #444;
-        }
-
-        /* 검색 순서 스타일 */
-        .search_order {
-            text-align: left; /* 왼쪽 정렬 */
-            font-size: 14px;
-        }
-
-        .search_order ol {
-            padding-left: 20px;
-        }
-
-        .search_order li {
-            margin-bottom: 10px;
-        }
-
-        .search_order a {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        .search_order a:hover {
-            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="col-detail">
-        <div class="customer_top">
-            <h2 class="tit">자주 찾는 질문</h2>
-            <p class="stit">회원님들께서 가장 자주 하시는 질문을 모았습니다. <br>궁금하신 내용에 대해 검색해보세요.</p>
-        </div>
-
-        <div class="search_area">
-            <legend><label for="searchtext">검색</label></legend>
-            <input id="searchtext" type="text" class="c_input" title="검색어 입력" placeholder="검색어를 입력해 주세요" value="" style="width:275px;">
-            <button type="button" class="round inblack" title="검색하기" id="btn_search"><span>검색하기</span></button>
-            <div class="qu_txt">
-                <em>추천 검색어 :</em>
-                <span class="first"><a href="#none">현금영수증</a></span>
-                <span><a href="#none">관람권</a></span>
-                <span><a href="#none">예매</a></span>
-                <span><a href="#none">환불</a></span>
-                <span><a href="#none">취소</a></span>
+    <div id="container">
+        <!-- Contents Area -->
+        <div id="contents">
+            <!-- 사이드바 (왼쪽) -->
+            <div class="col-aside">
+                <h2>고객센터 메뉴</h2>
+                <div class="snb">
+                    <ul>
+                        <li><a href="#">고객센터 메인</a></li>
+                        <li class="on"><a href="#" title="현재선택">자주찾는 질문</a></li>
+                        <li><a href="#">공지/뉴스</a></li>
+                        <li><a href="#">이메일 문의</a></li>
+                        <li><a href="#">단체/ 대관 문의</a></li>
+                    </ul>
+                </div>
             </div>
-        </div>
 
-        <div class="c_tab_wrap">
-            <ul class="c_tab type_free">
-                <li class="on"><a href="#" style="font-size: 11px;" title="선택된 탭 메뉴">전체</a></li>
-                <li><a href="#" style="font-size: 11px;">예매/매표</a></li>
-                <li><a href="#" style="font-size: 11px;">관람권/결제수단</a></li>
-                <li><a href="#" style="font-size: 11px;">멤버쉽/클럽서비스</a></li>
-                <li><a href="#" style="font-size: 11px;">VIP 관련</a></li>
-                <li><a href="#" style="font-size: 11px;">할인혜택</a></li>
-                <li><a href="#" style="font-size: 11px;">영화관 이용</a></li>
-                <li><a href="#" style="font-size: 11px;">특별관</a></li>
-                <li><a href="#" style="font-size: 11px;">기프트샵</a></li>
-                <li><a href="#" style="font-size: 11px;">홈페이지/모바일</a></li>
-            </ul>
-        </div>
-
-        <div class="search_result">
-            총<span class="num">156건</span>이 검색되었습니다.
-        </div>
-
-        <div class="tbl_area">
-            <table cellspacing="0" cellpadding="0" class="tbl_notice_list">
-                <caption>목록</caption>
-                <colgroup>
-                    <col style="width:40px;">
-                    <col style="width:120px;">
-                    <col style="width:560px;">
-                    <col style="auto">
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th scope="col">번호</th>
-                        <th scope="col">구분</th>
-                        <th scope="col" class="tit">제목</th>
-                        <th scope="col">조회수</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- 여기에 FAQ 데이터가 동적으로 추가됩니다. -->
-                    <tr class="first">
-                        <td>1</td>
-                        <td>ㅋㅋ</td>
-                        <td id="title0" class="txt"><a href="#">ㅋㅋ</a></td>
-                        <td class="num">537963</td>
-                    </tr>
-                    <!-- 나머지 FAQ 항목들... -->
-                </tbody>
-            </table>
-        </div>
-
-        <div class="paging">
-            <ul>
-                <li class="on"><a title="1 페이지 선택" href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">6</a></li>
-                <li><a href="#">7</a></li>
-                <li><a href="#">8</a></li>
-                <li><a href="#">9</a></li>
-                <li><a href="#">10</a></li>
-                <li><a class="btn-paging end" href="#">끝</a></li>
-            </ul>
-        </div>
-
-        <div class="search_order">
-            <ol>
-                <li><span class="ico_oder find_q">01 자주 찾는 질문 검색</span></li>
-                <li><span class="ico_oder email_i">02 이메일 문의</span><a href="#"><img src="http://img.cgv.co.kr/support/faq/btn_inquiry.png" alt="문의"></a></li>
-                <li><span class="ico_oder tel_i">03 고객센터 전화문의</span><span class="num">112233334444<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(상담 가능 시간, 월~금 09:00~18:00)</span></li>
-            </ol>
+            <!-- 콘텐츠 (오른쪽) -->
+            <div class="col-detail">
+                <div class="customer_top">
+                    <h2 class="tit">자주찾는 질문</h2>
+                    <p class="stit">회원님들께서 가장 자주하시는 질문을 모았습니다. <br>궁금하신 내용에 대해 검색해보세요.</p>
+                </div>
+                <div class="search_area">
+                    <legend><label for="searchtext">검색</label></legend>
+                    <input id="searchtext" type="text" class="c_input" title="검색어 입력" placeholder="검색어를 입력해 주세요">
+                    <button type="button" class="round inblack" title="검색하기">검색하기</button>
+                    <div class="qu_txt">
+                        <em>추천검색어 :</em>
+                        <span class="first"> <a href="#none">현금영수증</a></span>
+                        <span> <a href="#none">관람권</a></span>
+                        <span> <a href="#none">예매</a></span>
+                        <span> <a href="#none">환불</a></span>
+                        <span> <a href="#none">취소</a></span>
+                    </div>
+                </div>
+                <div class="c_tab_wrap">
+                    <ul class="c_tab type_free">
+                        <li class="on"><a href="#">전체</a></li>
+                        <li><a href="#">예매/매표</a></li>
+                        <li><a href="#">관람권/결제수단</a></li>
+                        <li><a href="#">멤버쉽/클럽서비스</a></li>
+                        <li><a href="#">VIP관련</a></li>
+                        <li><a href="#">할인혜택</a></li>
+                        <li><a href="#">영화관이용</a></li>
+                        <li><a href="#">특별관</a></li>
+                        <li><a href="#">기프트샵</a></li>
+                        <li><a href="#">홈페이지/모바일</a></li>
+                    </ul>
+                </div>
+                <div class="search_result">
+                    총<span class="num">156건</span>이 검색되었습니다.
+                </div>
+                <div class="tbl_area">
+                    <table cellspacing="0" cellpadding="0" class="tbl_notice_list">
+                        <caption>목록</caption>
+                        <colgroup>
+                            <col style="width:40px;">
+                            <col style="width:120px;">
+                            <col style="width:auto;">
+                            <col style="width:120px;">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>번호</th>
+                                <th>분류</th>
+                                <th>제목</th>
+                                <th>작성일</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="no">1</td>
+                                <td class="category">예매/매표</td>
+                                <td><a href="/support/faq/view.aspx?no=1"></a></td>
+                                <td class="date">2024-08-20</td>
+                            </tr>
+                            <!-- 추가 행들 -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="paging">
+                    <ul>
+                        <li><a href="#" class="btn-paging">이전</a></li>
+                        <li><a href="#" class="btn-paging">1</a></li>
+                        <li><a href="#" class="btn-paging">2</a></li>
+                        <li><a href="#" class="btn-paging">3</a></li>
+                        <li><a href="#" class="btn-paging">다음</a></li>
+                    </ul>
+                </div>                    
+            </div>
         </div>
     </div>
 </body>
 </html>
+
+
