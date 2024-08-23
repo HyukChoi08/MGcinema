@@ -1,11 +1,13 @@
 package com.cinema.ticket;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -62,4 +64,20 @@ public class TicketController {
 		System.out.println(mname + date + time + room);
 		return "";
 	}
+	@SuppressWarnings("unchecked")
+	@PostMapping("/reserveSeats")
+    @ResponseBody
+    public String reserveSeats(@RequestBody Map<String, Object> seatData) {
+        List<String> seats = (List<String>) seatData.get("seats");
+        int movieId = (int) seatData.get("movieId");
+        int theaterId = (int) seatData.get("theaterId");
+        String date = (String) seatData.get("date");
+        String time = (String) seatData.get("time");
+
+        // 예매 처리 로직 추가
+        tdao.reserveSeats(seats, movieId, theaterId, date, time);
+        
+        return "예매가 완료되었습니다.";
+    }
+	
 }

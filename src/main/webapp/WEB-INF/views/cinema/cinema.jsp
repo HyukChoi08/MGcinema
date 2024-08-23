@@ -313,7 +313,7 @@ $(document)
 	let room = '1관';
 	let time = '11시20분';
 	console.log(mname,date,room,time);
-	$.post('/ticket',{mname:mname,date:date,room:room,time:time},function(data){
+	$.post('/ticket/',{mname:mname,date:date,room:room,time:time},function(data){
 	},'json')	
 });
 function clear(){

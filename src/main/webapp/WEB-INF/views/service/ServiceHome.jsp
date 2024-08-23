@@ -51,7 +51,7 @@
         }
         .snb ul li a {
             text-decoration: none;
-            color: #007bff;
+            color: #red;
             font-size: 1em;
         }
         .snb ul li a:hover {

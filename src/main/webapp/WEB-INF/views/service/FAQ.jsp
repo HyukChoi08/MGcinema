@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>고객센터 FAQ</title>
+    <title>${serviceHome.title}</title>
     <style>
         /* 기본 스타일 */
         body {
@@ -28,14 +28,15 @@
         }
 
         #contents {
-            display: flex; /* Flexbox를 사용하여 열 배치 */
+            display: flex;
         }
 
         .col-aside {
             flex: 1;
-            max-width: 220px;
+            max-width: 250px;
             background-color: #f9f9f9;
             padding: 20px;
+            border-right: 1px solid #ddd;
         }
 
         .col-detail {
@@ -43,45 +44,62 @@
             padding: 20px;
         }
 
+        header, footer {
+            background-color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .snb {
+            border: 1px solid black;
+            padding: 15px;
+            background-color: #fff;
+        }
         .snb ul {
             list-style-type: none;
             padding: 0;
+            margin: 0;
         }
-
-        .snb li {
-            margin: 5px 0;
+        .snb ul li {
+            margin-bottom: 10px;
         }
-
-        .snb a {
+        .snb ul li a {
             text-decoration: none;
-            color: #333;
+            color: #red;
+            font-size: 1em;
         }
-
-        .snb a.on {
+        .snb ul li a:hover {
+            text-decoration: underline;
+        }
+        .snb ul li.on a {
             font-weight: bold;
-            color: #007bff;
         }
 
         .search_area {
             margin-bottom: 20px;
-        }
-
-        .search_area input, .search_area button {
-            padding: 10px;
-            margin-right: 5px;
+            display: flex;
+            align-items: center;
         }
 
         .search_area input {
+            padding: 10px;
             width: calc(100% - 110px);
             border: 1px solid #ccc;
             border-radius: 4px;
+            margin-right: 5px;
         }
 
         .search_area button {
+            padding: 10px;
             background-color: #007bff;
             color: white;
             border: none;
             border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .search_area button:hover {
+            background-color: #0056b3;
         }
 
         .c_tab_wrap {
@@ -93,6 +111,7 @@
             padding: 0;
             display: flex;
             border-bottom: 2px solid #007bff;
+            margin: 0;
         }
 
         .c_tab_wrap li {
@@ -131,6 +150,7 @@
         .tbl_notice_list th, .tbl_notice_list td {
             padding: 10px;
             border: 1px solid #ddd;
+            text-align: left;
         }
 
         .tbl_notice_list th {
@@ -145,6 +165,7 @@
             list-style-type: none;
             padding: 0;
             display: flex;
+            margin: 0;
         }
 
         .paging li {
@@ -154,6 +175,13 @@
         .paging a {
             text-decoration: none;
             color: #007bff;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .paging a:hover {
+            background-color: #f0f0f0;
         }
 
         .paging .btn-paging {
@@ -164,13 +192,19 @@
             border-radius: 4px;
             cursor: pointer;
         }
+
+        .paging .btn-paging:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
     <div id="container">
-        <!-- Contents Area -->
+        <header>
+            <!-- Header Content -->
+        </header>
+        
         <div id="contents">
-            <!-- 사이드바 (왼쪽) -->
             <div class="col-aside">
                 <h2>고객센터 메뉴</h2>
                 <div class="snb">
@@ -184,24 +218,15 @@
                 </div>
             </div>
 
-            <!-- 콘텐츠 (오른쪽) -->
             <div class="col-detail">
                 <div class="customer_top">
                     <h2 class="tit">자주찾는 질문</h2>
                     <p class="stit">회원님들께서 가장 자주하시는 질문을 모았습니다. <br>궁금하신 내용에 대해 검색해보세요.</p>
                 </div>
                 <div class="search_area">
-                    <legend><label for="searchtext">검색</label></legend>
+                    <label for="searchtext" class="hidden">검색어 입력</label>
                     <input id="searchtext" type="text" class="c_input" title="검색어 입력" placeholder="검색어를 입력해 주세요">
                     <button type="button" class="round inblack" title="검색하기">검색하기</button>
-                    <div class="qu_txt">
-                        <em>추천검색어 :</em>
-                        <span class="first"> <a href="#none">현금영수증</a></span>
-                        <span> <a href="#none">관람권</a></span>
-                        <span> <a href="#none">예매</a></span>
-                        <span> <a href="#none">환불</a></span>
-                        <span> <a href="#none">취소</a></span>
-                    </div>
                 </div>
                 <div class="c_tab_wrap">
                     <ul class="c_tab type_free">
@@ -238,13 +263,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="no">1</td>
-                                <td class="category">예매/매표</td>
-                                <td><a href="/support/faq/view.aspx?no=1"></a></td>
-                                <td class="date">2024-08-20</td>
-                            </tr>
-                            <!-- 추가 행들 -->
+                            <!-- 데이터 반복 -->
+                            <c:forEach var="faq" items="${faqList}">
+                                <tr>
+                                    <td class="no">${faq.id}</td>
+                                    <td class="category">${faq.category}</td>
+                                    <td><a href="/support/faq/view.jsp?no=${faq.id}">${faq.title}</a></td>
+                                    <td class="date">${faq.date}</td>
+                                </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
                 </div>
@@ -256,11 +283,13 @@
                         <li><a href="#" class="btn-paging">3</a></li>
                         <li><a href="#" class="btn-paging">다음</a></li>
                     </ul>
-                </div>                    
+                </div>
             </div>
         </div>
+
+        <footer>
+            <!-- Footer Content -->
+        </footer>
     </div>
 </body>
 </html>
-
-
