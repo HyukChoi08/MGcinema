@@ -313,7 +313,7 @@ $(document)
 	console.log(mname,date,room,time);
 	$.post('/ticket',{mname:mname,date:date,room:room,time:time},function(data){
 	},'json')	
-})
+});
 function clear(){
 	$('#timelist').empty();
 	$('#moviename').text('');

@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class CinemaController {
-	@Autowired CinemaDAO cdao;
+	@Autowired CinemaDAO cdao; 
 	
 	@GetMapping("/cinema")
 	public String cinema() {
