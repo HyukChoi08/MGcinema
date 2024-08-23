@@ -9,4 +9,5 @@ public interface CinemaDAO {
 	ArrayList<MoviedateDTO> Moviedate(String a);
 	ArrayList<MovienameDTO> Moviename(String a);
 	ArrayList<RoominfoDTO> Roominfo(String a,String b);
+	ArrayList<Roominfo2DTO> Roominfo2(String a);
 }

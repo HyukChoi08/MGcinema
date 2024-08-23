@@ -43,6 +43,39 @@ public class CinemaController {
 		}
 		return Mli.toString();
 	}
+	@PostMapping("/getroom")
+	@ResponseBody
+	public String getroom(HttpServletRequest req,Model model) {
+		String mdate = req.getParameter("mdate");
+		String mname = req.getParameter("mname");
+		ArrayList<RoominfoDTO> mlist = cdao.Roominfo(mdate,mname);
+		JSONArray Mli = new JSONArray();
+		for(RoominfoDTO Mdto : mlist) {
+			JSONObject T = new JSONObject();
+			T.put("Sname",Mdto.getSname());
+			T.put("seatlevel",Mdto.getSeatlevel());
+			T.put("allseat",Mdto.getAllseat());
+			Mli.put(T);
+		}
+		return Mli.toString();
+	}
+	@PostMapping("/getroom2")
+	@ResponseBody
+	public String getroom2(HttpServletRequest req,Model model) {
+		String mdate = req.getParameter("mdate");
+		
+		ArrayList<Roominfo2DTO> mlist = cdao.Roominfo2(mdate);
+		JSONArray Mli = new JSONArray();
+		for(Roominfo2DTO Mdto : mlist) {
+			JSONObject T = new JSONObject();
+			T.put("Sname",Mdto.getSname());
+			T.put("seatlevel",Mdto.getSeatlevel());
+			T.put("allseat",Mdto.getAllseat());
+			T.put("mname",Mdto.getMname());
+			Mli.put(T);
+		}
+		return Mli.toString();
+	}
 	
 	@PostMapping("/moviedate")
 	@ResponseBody

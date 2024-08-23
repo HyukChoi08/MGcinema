@@ -176,6 +176,7 @@ button:focus {
 	border:1px solid black;
 	margin-bottom:20px;
 }
+
 </style>
 <head>
 <meta charset="UTF-8">
@@ -262,6 +263,7 @@ $(document)
 	console.log(movied[0]);
 	$('#hiddendate').val(movied[0]);
 	moviename();
+	room()
 })
 .on('click','#calendar-table thead tr th',function(){
 	clear()
@@ -323,14 +325,43 @@ function moviename(){
 	console.log(mdate);
 	$.post('/getmoviename',{mdate:mdate},function(data){
 		console.log(data);
+		let timelist = '';
 		for(x of data){
-			console.log(x['mname']);
-			let timelist = '<div class=timelistdiv><table><tr><td>'+x['age']+'</td><td><h2 style=font-size:20px>'+x['mname']+'</h2></td><td>'+x['runningtime']+'</td></tr></table></div>'
+			
+			console.log("영화이름",x['mname']);
+			timelist = '<div class=timelistdiv id='+x['mname']+'><table><tr><td>'+x['age']+'</td><td><h2 style=font-size:20px>'+x['mname']+'</h2></td><td>'+x['runningtime']+'</td></tr></table></div>';
 				$('#timelist').append(timelist);
-		
+			
+//			$.post('/getroom',{mdate:mdate,mname:x['mname']},function(data){
+//				console.log("관정보",data);
+//					for(i of data){
+//					let room = '<div>'+x['Sname']+'</div>';
+//					$(x['mname']).append(room);
+//					}	
+//					
+//			},'json')
 		}
 		
 	},'json') 
+}
+
+function room(){
+	let mdate= $('#hiddendate').val();
+	console.log(mdate);
+		for(i=0 ; i<$('#timelist div').length; i++){
+			let id = $('#timelist div').eq(i).find('tr td:eq(1)').text();
+			console.log("1111",id);
+			
+				$.post('/getroom2',{mdate:mdate},function(data){
+					console.log(data);
+					for(x of data){
+			
+			//console.log("영화이름",x['mname']);
+			//timelist = '<div class=timelistdiv id='+x['mname']+'><table><tr><td>'+x['age']+'</td><td><h2 style=font-size:20px>'+x['mname']+'</h2></td><td>'+x['runningtime']+'</td></tr></table></div>';
+			//	$('#timelist').append(timelist);
+					}	
+				},'json') 
+		}
 }
 </script>
 </html>

@@ -15,6 +15,12 @@
 <select id="Roominfo" resultType="com.cinema.cinema.RoominfoDTO">
 	SELECT DISTINCT c.Sname,c.seatlevel,c.allseat
 	from schedules a, movie b, room c
-	where a.movie_id=b.id and a.room_id=c.id and moviedate=#{param1} and b.mname=#{param2}
+	where a.movie_id=b.id and a.room_id=c.id and moviedate=#{param1} and b.mname=#{param2} order by Sname
 </select>
+<select id="Roominfo2" resultType="com.cinema.cinema.Roominfo2DTO">
+	SELECT DISTINCT c.Sname,c.seatlevel,c.allseat,b.mname
+	from schedules a, movie b, room c
+	where a.movie_id=b.id and a.room_id=c.id and moviedate=#{param1} order by Sname;
+</select>
+
 </mapper>
