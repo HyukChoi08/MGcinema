@@ -333,7 +333,7 @@ function moviename(){
 				$('#timelist').append(timelist);
 			
 //			$.post('/getroom',{mdate:mdate,mname:x['mname']},function(data){
-//				console.log("관정보",data);
+//				console.log("관정보",data); 
 //					for(i of data){
 //					let room = '<div>'+x['Sname']+'</div>';
 //					$(x['mname']).append(room);

@@ -60,7 +60,7 @@ public class CinemaController {
 		return Mli.toString();
 	}
 	@PostMapping("/getroom2")
-	@ResponseBody
+	@ResponseBody 
 	public String getroom2(HttpServletRequest req,Model model) {
 		String mdate = req.getParameter("mdate");
 		
