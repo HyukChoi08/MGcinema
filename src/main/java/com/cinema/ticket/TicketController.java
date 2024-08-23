@@ -26,8 +26,8 @@ public class TicketController {
 
 	@GetMapping("/theaters")
 	@ResponseBody
-	public List<theaterDTO> getTheaters(@RequestParam int movieId) {
-		return tdao.getTheaters(movieId);
+	public List<theaterDTO> getTheaters(@RequestParam int movieId, @RequestParam int date) {
+		return tdao.getTheaters(movieId, date);
 	}
 
 	@GetMapping("/dates")
