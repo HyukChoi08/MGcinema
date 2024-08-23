@@ -28,6 +28,22 @@ public class CinemaController {
 		return "cinema/park";
 	}
 	
+	@PostMapping("/getmoviename")
+	@ResponseBody
+	public String getmoviename(HttpServletRequest req,Model model) {
+		String mdate = req.getParameter("mdate");
+		ArrayList<MovienameDTO> mlist = cdao.Moviename(mdate);
+		JSONArray Mli = new JSONArray();
+		for(MovienameDTO Mdto : mlist) {
+			JSONObject T = new JSONObject();
+			T.put("mname",Mdto.getMname());
+			T.put("runningtime",Mdto.getRunningtime());
+			T.put("age",Mdto.getAge());
+			Mli.put(T);
+		}
+		return Mli.toString();
+	}
+	
 	@PostMapping("/moviedate")
 	@ResponseBody
 	public String moviedate(HttpServletRequest req,Model model) {

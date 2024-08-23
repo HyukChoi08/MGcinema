@@ -76,7 +76,7 @@ a:visited {
     width: 1000px;
     margin: 0 auto;
     border:1px solid black;
-    height:2000px;
+    height:100%;
 }
 .info {
 	background-color:black;
@@ -171,7 +171,11 @@ button {
 button:focus {
     outline: none;
 }
-
+.timelistdiv {
+	height:100px;
+	border:1px solid black;
+	margin-bottom:20px;
+}
 </style>
 <head>
 <meta charset="UTF-8">
@@ -180,7 +184,7 @@ button:focus {
 </head>
 <body>
 <div id="contents">
-	혹시나 다른거 들어갈 자리
+	혹시나 다른거 들어갈 자리<input type="button" value="test" id="tsetbtn">
 	<div><h3><img src="https://img.cgv.co.kr/R2014/images/title/h3_theater.gif"></h3></div>
 	<div class="container" style="border: none;position: relative; width:1000px; height:500px;margin:auto;">
 		<img src="https://img.cgv.co.kr/R2014/images/sub/specialtheater/chungdam/main_chungdam.jpg" class="background-image" id="backgroundImage" alt="zzzz">
@@ -207,6 +211,7 @@ button:focus {
 	<div class="calendar-container">
         <div class="calendar-body">
             <table id="calendar-table">
+            	<input type="text" id="hiddendate">
                 <thead>
                     <tr>
                     	<td><button id="prev-month">&lt;</button></td>
@@ -223,12 +228,8 @@ button:focus {
             </table>
         </div>
     </div>
-    <div>
-    	<table id="movieList">
-    		<thead>
-    			
-    		</thead>
-    	</table>
+    <div id="timelist">
+    	
     </div>
 </div>
 
@@ -259,29 +260,34 @@ $(document)
 	$('#calendar-table thead th:eq('+j+')').data('dbdate',movied[j])
 	}
 	console.log(movied[0]);
+	$('#hiddendate').val(movied[0]);
+	moviename();
 })
 .on('click','#calendar-table thead tr th',function(){
 	clear()
 	let mdate = $(this).data('dbdate');
+	$('#hiddendate').val(mdate);
 	console.log(mdate);
 	$.post('/moviedate',{mdate:mdate},function(data){
 		console.log(data);
 		for(x of data){
 			console.log(x['mname']);
-			let str = '<tr>'
-			str +='<td>' + x['mname'] + '</td>' +
+			let timelist = '<div><table>'+x['age']+'<h2>'+x['mname']+'</h2>'+x['runningtime']
+			timelist += '<tr>'
+			timelist +=
+				   //'<td>' + x['mname'] + '</td>' +
 			       '<td>' + x['Sname'] + '</td>' +
 			       '<td>' + x['seatlevel'] + '</td>' +
-			       '<td>' + x['moviedate'] + '</td>' +
-			       '<td>' + x['runningtime'] + '</td>' +
-			       '<td>' + x['age'] + '</td>' +
+			       //'<td>' + x['moviedate'] + '</td>' +
+			       //'<td>' + x['runningtime'] + '</td>' +
+			       //'<td>' + x['age'] + '</td>' +
 			       '<td>' + x['allseat'] + '</td>' +
 			       '<td>' + x['lestseat'] + '</td>' +
 			       '<td>' + x['begintime'] + '</td>' +
 			       '<td>' + x['endtime'] + '</td>';
-			str +='</tr>'
-			
-				$('#movieList').append(str);
+			timelist +='</tr>'
+			timelist += '</table></div>'
+				$('#timelist').append(timelist);
 			//x['Sname']
 			//x['seatlevel']
 			//x['moviedate']
@@ -298,9 +304,33 @@ $(document)
         console.log(img);
         // 이미지 요소의 src 속성을 새 URL로 업데이트
         $('#backgroundImage').attr('src', img);
-    });
+    })
+.on('click','#tsetbtn',function(){
+	let mname = '범죄와의전쟁';
+	let date = '2024-08-24';
+	let room = '1관';
+	let time = '11시20분';
+	console.log(mname,date,room,time);
+	$.post('/ticket',{mname:mname,date:date,room:room,time:time},function(data){
+	},'json')	
+})
 function clear(){
-	$('#movieList').empty();
+	$('#timelist').empty();
+	$('#moviename').text('');
+}
+function moviename(){
+	let mdate= $('#hiddendate').val();
+	console.log(mdate);
+	$.post('/getmoviename',{mdate:mdate},function(data){
+		console.log(data);
+		for(x of data){
+			console.log(x['mname']);
+			let timelist = '<div class=timelistdiv><table><tr><td>'+x['age']+'</td><td><h2 style=font-size:20px>'+x['mname']+'</h2></td><td>'+x['runningtime']+'</td></tr></table></div>'
+				$('#timelist').append(timelist);
+		
+		}
+		
+	},'json')
 }
 </script>
 </html>

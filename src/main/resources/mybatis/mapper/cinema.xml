@@ -7,4 +7,14 @@
 	from schedules a, movie b, room c
 	where a.movie_id=b.id and a.room_id=c.id and moviedate=#{param1}
 </select>
+<select id="Moviename" resultType="com.cinema.cinema.MovienameDTO">
+	SELECT DISTINCT b.mname,b.age,b.runningtime
+	from schedules a, movie b
+	where a.movie_id=b.id and moviedate=#{param1}
+</select>
+<select id="Roominfo" resultType="com.cinema.cinema.RoominfoDTO">
+	SELECT DISTINCT c.Sname,c.seatlevel,c.allseat
+	from schedules a, movie b, room c
+	where a.movie_id=b.id and a.room_id=c.id and moviedate=#{param1} and b.mname=#{param2}
+</select>
 </mapper>
