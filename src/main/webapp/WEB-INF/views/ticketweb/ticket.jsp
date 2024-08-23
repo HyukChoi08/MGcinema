@@ -96,8 +96,8 @@ button {
 </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Movie Ticket Reservation</h1>
+    <div class="container" id="selectionScreen">
+        <h1>예매</h1> <button id="btnclear">예매 초기화</button>
         <div class="list-container">
             <div class="list-box" id="movieList"><p>영화</p>
                 <ul></ul>
@@ -114,90 +114,105 @@ button {
         </div>
         <button id="reserveBtn">좌석 선택</button>
     </div>
+    <div class="seat-selection" id="seatSelectionScreen">
+        <h2>좌석 선택</h2>
+        <div class="seats">
+            <!-- 좌석 목록 -->
+            <div class="seat" data-seat="A1"></div>
+            <div class="seat" data-seat="A2"></div>
+            <div class="seat" data-seat="A3"></div>
+            <!-- 추가 좌석 -->
+        </div>
+        <button id="confirmBtn">예매 확인</button>
+    </div>
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
     $(document).ready(function() {
-        loadMovies();
+    	$("#reserveBtn").click(function() {
+            $("#selectionScreen").hide();  // 첫 번째 화면 숨기기
+            $("#seatSelectionScreen").show();  // 두 번째 화면 보이기
+        });
+
+        // 좌석 클릭 시 선택 상태 토글
+        $(".seat").click(function() {
+            $(this).toggleClass("selected");
+        });
+
+        // "예매 확인" 버튼 클릭 시 첫 번째 화면으로 돌아가기 (선택 유지)
+        $("#confirmBtn").click(function() {
+            $("#seatSelectionScreen").hide();
+            $("#selectionScreen").show();
+        });
+    	
+    	
+    	//예매
+    	loadMovies();
 		loadDates();
-        // Load theaters when a movie is selected
         $(document).on("click", "#movieList li", function() {
             $("#movieList li").removeClass("selected");
             $(this).addClass("selected");
-            
+            $("#dateList li").removeClass("selected");
+            $("#theaterList ul").empty();
+            $("#timeList ul").empty();
         });
 
-        // Load dates when a theater is selected
         $(document).on("click", "#theaterList li", function() {
             $("#theaterList li").removeClass("selected");
             $(this).addClass("selected");
-            
-            let theaterId = $(this).data("id");
+            let movieId = $("#movieList li.selected").data("id");
+            let date = $("#dateList li.selected").data("id");
+            let roomId = $("#theaterList li.selected").text().split("-")[0];
+            console.log(movieId+"--"+date+"--"+roomId)
             $.ajax({
-                url: "/dates",
+                url: "/times",
                 type: "GET",
-                data: { theaterId: theaterId },
+                data: { movieId:movieId, date:date, roomId:roomId },
                 success: function(data) {
-                    let dateList = $("#dateList ul");
-                    dateList.empty();
-                    $.each(data, function(index, date) {
-                        dateList.append('<li>' + date + '</li>');
+                    let timeList = $("#timeList ul");
+                    timeList.empty();
+                    $.each(data, function(index, times) {
+                        timeList.append('<li>' + times.begintime +'  '+ times.lestseat+ '석</li>');
                     });
                 }
             });
         });
 
-        // Load times when a date is selected
         $(document).on("click", "#dateList li", function() {
             $("#dateList li").removeClass("selected");
             $(this).addClass("selected");
-            let movieid = $("#movieList li.selected").data("id");
-          //  let theaterId = $("#theaterList li.selected").data("id");
+            let movieId = $("#movieList li.selected").data("id");
             let date = $(this).data("id");
-            console.log(movieid+date);
+            $("#timeList ul").empty();
+            console.log(movieId+"----"+date);
             $.ajax({
                 url: "/theaters",
                 type: "GET",
-                data: { movieId: movieid, date: date },
+                data: { movieId: movieId, date: date },
                 success: function(data) {
                     let theaterList = $("#theaterList ul");
                     theaterList.empty();
                     $.each(data, function(index, theater) {
-                        theaterList.append('<li>' + theater.sname + '</li>');
+                        theaterList.append('<li>' + theater.sname + "-" + theater.seatlevel + '</li>');
                     });
                 }
             });
         });
 
-        // Handle reservation
         $("#reserveBtn").click(function() {
-            let movieId = $("#movieList li.selected").data("id");
-            let theaterId = $("#theaterList li.selected").data("id");
-            let date = $("#dateList li.selected").text();
-            let time = $("#timeList li.selected").text();
-
-            if (movieId && theaterId && date && time) {
-                $.ajax({
-                    url: "/reserve",
-                    type: "POST",
-                    data: {
-                        movieId: movieId,
-                        theaterId: theaterId,
-                        date: date,
-                        time: time
-                    },
-                    success: function(response) {
-                        alert("Reservation successful!");
-                    },
-                    error: function() {
-                        alert("Failed to reserve. Please try again.");
-                    }
-                });
-            } else {
-                alert("Please select all options.");
-            }
+            
         });
     });
+    
+    //예매
+    	$("#btnclear").click(function(){
+    		$("#movieList ul").empty();
+    		$("#dateList ul").empty();
+    		$("#theaterList ul").empty();
+    		$("#timeList ul").empty();
+    		loadMovies();
+    		loadDates();
+    	});
 function loadMovies() {
 	$.ajax({
         url: "/movies",

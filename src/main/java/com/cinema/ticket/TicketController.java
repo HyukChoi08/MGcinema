@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @Controller
 public class TicketController {
 	@Autowired TicketDAO tdao;
@@ -26,7 +28,7 @@ public class TicketController {
 
 	@GetMapping("/theaters")
 	@ResponseBody
-	public List<theaterDTO> getTheaters(@RequestParam int movieId, @RequestParam int date) {
+	public List<theaterDTO> getTheaters(@RequestParam("movieId") int movieId, @RequestParam("date") String date) {
 		return tdao.getTheaters(movieId, date);
 	}
 
@@ -38,8 +40,8 @@ public class TicketController {
 
 	@GetMapping("/times")
 	@ResponseBody
-	public List<String> getTimes(@RequestParam int theaterId, @RequestParam String date) {
-		return tdao.getTimes(theaterId, date);
+	public List<timesDTO> getTimes(@RequestParam("movieId") int movieId, @RequestParam("date") String date, @RequestParam("roomId") String roomId) {
+		return tdao.getTimes(movieId, date, roomId);
 	}
 
 	@PostMapping("/reserve")
@@ -48,5 +50,16 @@ public class TicketController {
 		// 예매 처리 로직 추가
 		tdao.reserve(movieId, theaterId, date, time);
 		return "Success";
+	}
+	
+	@PostMapping("/ticket/")
+	@ResponseBody
+	public String ticketdata(HttpServletRequest req) {
+		String mname = req.getParameter("mname");
+		String date = req.getParameter("date");
+		String time = req.getParameter("time");
+		String room = req.getParameter("room");
+		System.out.println(mname + date + time + room);
+		return "";
 	}
 }
