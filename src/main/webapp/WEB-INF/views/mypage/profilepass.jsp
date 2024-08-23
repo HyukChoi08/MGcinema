@@ -122,31 +122,14 @@
         <div class="main-content">
             <!-- 예매 내역 섹션 -->
             <div>
-                <h3>영화 결제 내역 </h3>
-                <div class="my-history">
-                    <button>내역 조회하기</button>
+                <div> 
+                    회원 정보 확인을 위해 비밀번호를 입력해주세요.
                 </div>
-            </div>
-            <div>
-                <thead >
-                    <tr>
-                        <th>구매일</th>
-                        <th>주문번호</th>
-                        <th>상품명</th>
-                        <th>결제금액</th>
-                        <th>상태</th>
-                    </tr><br>
-                    <tr>
-                        <th>0</th>
-                        <th>0</th>
-                        <th>0</th>
-                        <th>0</th>
-                        <th>0</th>  
-                    </tr>
-                </thead>
-                <div class="ask-section">
-                    <button class="button">CGV 영화 예매 바로가기</button>
+                <div>
+                    <input type="password"></input>
                 </div>
+                   
+                <button class="button">확인</button>
             </div>
         </div>
     </div>
