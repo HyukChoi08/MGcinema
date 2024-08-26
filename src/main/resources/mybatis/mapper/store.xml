@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper  namespace="com.cinema.store.storeDAO">
+
+<select id="selectpackage" resultType="com.cinema.store.storeDTO">
+select item_name,period
+	from item_detail where item_id=#{param1}
+</select>
+<select id="selectitem" resultType="com.cinema.store.storeDTO">
+select id,name,price,discount_price,composition,origin from item where id=#{param1}
+
+</select>
+<select id="getImagePath" resultType="string" parameterType="int">
+    SELECT image_path FROM images WHERE id =#{param1}
+</select>
+
+
+</mapper>
