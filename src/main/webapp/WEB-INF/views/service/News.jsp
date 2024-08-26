@@ -167,10 +167,10 @@
             <h2>고객센터 메뉴</h2>
             <div class="snb">
                 <ul>
-               		<li><a href="#">고객센터 메인<i></i></a></li>
-                    <li><a href="#">자주찾는 질문<i></i></a></li>
-                    <li class="on"><a href="#">공지/뉴스<i></i></a></li>
-                    <li><a href="#">이메일 문의<i></i></a></li>
+               		<li><a href="serviceHome">고객센터 메인<i></i></a></li>
+                    <li><a href="faq">자주찾는 질문<i></i></a></li>
+                    <li class="on"><a href="news">공지/뉴스<i></i></a></li>
+                    <li><a href="eaq">이메일 문의<i></i></a></li>
                     
                 </ul>
             </div>
@@ -205,8 +205,7 @@
                 총<span class="num"> 99999건</span>이 검색되었습니다.
             </div>
             <div class="tbl_area">
-                <table cellspacing="0" cellpadding="0" class="tbl_notice_list">
-                    <caption>목록</caption>
+                <table cellspacing="0" cellpadding="0" class="tbl_notice_list"><Br>
                     <colgroup>
                         <col style="width:70px;">
                         <col style="width:160px;">

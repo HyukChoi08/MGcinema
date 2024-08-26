@@ -1,16 +1,15 @@
 package com.cinema.service;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.web.multipart.MultipartFile;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class EAQDTO {
-    private String name;
-    private String phone;
-    private String email;
-    private String inquiryType;
-    private String theater;
+    private Long id;
     private String title;
     private String content;
-    private MultipartFile attachment;
+    private int someField; // 필요에 따라 다른 필드를 추가할 수 있습니다.
 }

@@ -39,10 +39,14 @@ public class ServiceController {
     	    model.addAttribute("newsList", newsList); // 모델에 데이터 추가
     	    return "service/News"; // 반환되는 뷰 이름 (News.jsp)
     }
-    //@GetMapping("/EAQ")
-   
+    @GetMapping("/eaq")
+    public String showEAQPage(Model model) {
+        // 예시 EAQ 데이터 생성
+        List<EAQDTO> eaqList = List.of(
+            new EAQDTO(1L, "EAQ 제목 1", "EAQ 내용 1", 100)
+        );
 
-       
-    
-    
+        model.addAttribute("eaqList", eaqList); // 모델에 데이터 추가
+        return "service/EAQ"; // 반환되는 뷰 이름 (EAQ.jsp)
+    }
 }
