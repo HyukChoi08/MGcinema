@@ -262,8 +262,7 @@ $(document)
 	}
 	console.log(movied[0]);
 	$('#hiddendate').val(movied[0]);
-	moviename();
-	room()
+	moviename(processData);
 })
 .on('click','#calendar-table thead tr th',function(){
 	clear()
@@ -320,7 +319,7 @@ function clear(){
 	$('#timelist').empty();
 	$('#moviename').text('');
 }
-function moviename(){
+function moviename(callback){
 	let mdate= $('#hiddendate').val();
 	console.log(mdate);
 	$.post('/getmoviename',{mdate:mdate},function(data){
@@ -342,25 +341,39 @@ function moviename(){
 //			},'json')
 		}
 		
+	},'json')
+	
+	ar = [];
+	
+	$.post('/getroom2',{mdate:mdate},function(data){
+		ar = data;
+		callback(data);
 	},'json') 
-}
 
-function room(){
+}
+function processData(data){
 	let mdate= $('#hiddendate').val();
-	console.log(mdate);
-		for(i=0 ; i<$('#timelist div').length; i++){
+	console.log("관정보 가져오기위한 날짜",mdate);
+		for(let i=0 ; i<$('#timelist div').length; i++){
 			let id = $('#timelist div').eq(i).find('tr td:eq(1)').text();
 			console.log("1111",id);
+			console.log(ar);
+			for(let x of ar){
+				if(x.mname==id){
+				let room = x.Sname	
+				$('#timelist div').eq(i).after(room);
+				}
+			}
 			
-				$.post('/getroom2',{mdate:mdate},function(data){
-					console.log(data);
-					for(x of data){
+				//$.post('/getroom2',{mdate:mdate},function(data){
+				//	console.log(data);
+				//	for(x of data){
 			
 			//console.log("영화이름",x['mname']);
 			//timelist = '<div class=timelistdiv id='+x['mname']+'><table><tr><td>'+x['age']+'</td><td><h2 style=font-size:20px>'+x['mname']+'</h2></td><td>'+x['runningtime']+'</td></tr></table></div>';
 			//	$('#timelist').append(timelist);
-					}	
-				},'json') 
+			//		}	
+			//	},'json') 
 		}
 }
 </script>
