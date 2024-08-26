@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1:1 문의 게시판</title>
+    <title>회원 탈퇴</title>
     <style>
         /* 전체 body 스타일 설정 */
         body {
@@ -200,7 +200,7 @@
     <div class="profile-section">
         <img src="profile-placeholder.png" width="80" height="80">
         <div class="profile-info">
-            <h2>Hi_Movie님</h2>
+            <h2 id="nickname">Hi_Movie님</h2> 
             <p>고객님은 <strong>일반</strong> 고객 입니다.</p>
         </div>
         <a href="#" class="button">닉네임 설정</a>
@@ -211,12 +211,13 @@
         <!-- 사이드바 -->
         <div class="sidebar">
             <ul>
-                <li><a href="#">MY CGV HOME</a></li>
-                <li><a href="#">나의 예매정보</a></li>
-                <li><a href="#">결제 내역</a></li>
-                <li><a href="#">1:1 문의</a></li>
-                <li><a href="#">개인 정보 변경</a></li>
-                <li><a href="#">회원 탈퇴</a></li>
+                 <li><a href="/myhome">MY CGV HOME</a></li>
+                <li><a href="/reservation">나의 예매정보</a></li>
+                <li><a href="/payment">결제 내역</a></li>
+                <li><a href="/inquiry">1:1 문의</a></li>
+                <li><a href="/profile">개인 정보 변경</a></li>
+                <li><a href="/cancel">회원 탈퇴</a></li>
+
             </ul>
         </div>
 
@@ -239,4 +240,8 @@
         </div>
     </div>
 </body>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script>
+
+</script>
 </html>
