@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,26 +60,7 @@ ul, li {
     position: relative; /* 상위 요소에 상대적으로 위치 */
 
 }
-.circle-button {
-    display: inline-flex;
-    align-items: center; /* 수직 중앙 정렬 */
-    justify-content: center; /* 수평 중앙 정렬 */
-    width: 17px;
-    height:17px;
-    line-height: 20px;
-    text-align: center;
-    border-radius: 50%;
-    background-color: grey;
-    color: white;
-    font-size: 14px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s;
-    
-    position: absolute; /* 버튼을 절대 위치로 설정 */
-    right: 20px; /* 오른쪽 끝에서 10px 떨어지도록 설정 */
-    
-}
+
 .circle-button:hover {
     background-color: #0056b3;
 }
@@ -127,19 +108,25 @@ vertical-align: middle; /* 수직 중앙 정렬 */
     display: flex;
     align-items: center; /* 수직 정렬 */
     gap: 20px; /* 텍스트와 버튼 사이의 간격 조정 */
+    font-size: 20px;
+}
+.category_dep{
+    font-size: 15px;
 }
 
 .category_inner {
     display: flex; /* Flexbox 레이아웃을 사용 */
-    flex-wrap: wrap; /* 필요 시 줄 바꿈 */
+    flex-wrap: wrap; /* 자식 요소가 필요 시 줄 바꿈 */
     gap: 20px; /* 항목 사이의 간격 추가 */
     padding: 0; /* 기본 패딩 제거 */
     margin: 0; /* 기본 마진 제거 */
 }
 .category_inner .product {
-    flex: 1 1 calc(33.333% - 20px); /* 각 항목의 너비를 3개의 열로 나누기 */
+    flex: 1 1 calc(33.333% - 20px); /* 한 줄에 3개의 항목 표시, 20px는 간격을 고려한 조정 */
     box-sizing: border-box; /* 패딩과 테두리가 너비에 포함되도록 설정 */
     text-align: center; /* 텍스트 중앙 정렬 */
+    margin-bottom: 20px; /* 항목 아래 여백 추가 */
+    position: relative; /* 자식 요소의 위치를 기준으로 설정 */
     max-width: calc(33.333% - 20px); /* 최대 너비를 33.333%로 설정 */
 }
 .product img {
@@ -153,86 +140,24 @@ vertical-align: middle; /* 수직 중앙 정렬 */
     font-size: 14px; /* 텍스트 크기 조정 */
     color: #333; /* 텍스트 색상 설정 */
 }
-.original-price {
-text-decoration: line-through; /* 가격에 취소선 추가 */
-color: #999; /* 취소선 색상 설정 */
-font-size: 14px; /* 취소선 가격 크기 조정 */
-}
-
-.discounted-price {
-    color: #ff0000; /* 할인된 가격 색상 */
-    font-size: 16px; /* 할인된 가격 크기 조정 */
-    font-weight: bold; /* 할인된 가격 굵게 표시 */
-}
-.giftcardtext,.tiket-price{
-    font-size: 14;
-    font-weight: bold;
-}
-.info_wrap {
-    width: 1000px; /* 너비를 1000px로 설정 */
-    margin: 0 auto; /* 중앙 정렬 */
-    padding: 20px; /* 내부 여백 추가 */
-    box-sizing: border-box; /* 패딩과 테두리를 너비에 포함 */
-    display: flex; /* Flexbox 레이아웃을 사용 */
-    align-items: center; /* 자식 요소를 수직으로 중앙 정렬 */
-    gap: 20px; /* 자식 요소 간의 간격 추가 */
-}
-.popup-text {
-            font-size: 24px; /* 제목 글씨 크기 조정 */
-            margin-bottom: 10px; /* 제목과 본문 사이 여백 */
-        }
-.popup-image {
-            max-width: 100%; /* 이미지가 부모 요소의 너비를 초과하지 않도록 설정 */
-            height: auto; /* 이미지 비율 유지 */
-            margin-bottom: 10px; /* 이미지와 본문 사이 여백 */
-            margin-top: -100px;
-        }
 img {
     max-width: 100%;
     height: auto;
-}
-.popup-description {
-            font-size: 16px; /* 본문 글씨 크기 조정 */
-            color: #555; /* 본문 글씨 색상 조정 */
-            margin-top: 10px; /* 본문과 제목 사이 여백 */
-        }
-.phone-icon {
-    width: 30px; /* 원하는 너비로 조정 */
-    height: auto; /* 이미지 비율 유지 */
-    vertical-align: middle; /* 텍스트와 이미지의 수직 정렬 조정 */
 }
 
 .category_content li {
     cursor: pointer; /* 클릭 커서로 변경 */
 }
-.service_center{
-    width: 1000px;        /* 너비를 1000px로 설정 */
-    margin: 0 auto;       /* 중앙 정렬 */
-}
+
 .product {
 position: relative; /* 이 부분을 추가하여 아이콘 위치 조정 */
 overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도록 설정 */
         }
-.hidden-icon {
-    display: none; /* 기본적으로 숨김 */
-    position: absolute;
-    bottom: 10px; /* 이미지 하단에 위치 조정 */
-    right: 10px; /* 이미지 오른쪽에 위치 조정 */
-    background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
-    color: white;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    line-height: 30px;
-    font-size: 16px;
-    font-weight: bold;
-}
+
 .product:hover .icon-overlay {
     display: none; /* 기본적으로 숨김 */
 }
 .icon-overlay {
-    
     position: absolute;
     top: 50%; /* 이미지 상단에서 중앙 위치 */
     left: 50%; /* 이미지 왼쪽에서 중앙 위치 */
@@ -308,14 +233,13 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
 .category_title strong {
     padding-right: 50px; /* 버튼 너비만큼 여백을 추가하여 텍스트가 버튼에 겹치지 않게 함 */
 }
- .no-underline {
-        text-decoration: none; /* 링크의 밑줄을 제거합니다 */
-         color: black;    
-    }
-
-    .no-underline:hover {
-        text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도록 합니다 */
-    }
+.no-underline {
+      text-decoration: none; /* 링크의 밑줄을 제거합니다 */
+       color: black;    
+}
+.no-underline:hover {
+text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도록 합니다 */
+}
 
     </style>
 </head>
@@ -328,8 +252,8 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
             </div>
             <div class="contegory_contents_wrap">
                 <ul class="category_content"> <!-- ul로 변경 -->
-                  	<li><a href="/pack" class="no-underline">패키지</a></li>
-                    <li><a href="/admissionticket" class="no-underline">영화관람권</a></li>
+                    <li><a href="/pack" class="no-underline">패키지</a></li>
+                    <li><a href="/admissionticket" class="no-underline">영화관람관</a></li>
                     <li><a href="/giftcard" class="no-underline">기프트카드</a></li>
                     <li><a href="/combo" class="no-underline">콤보</a></li>
                     <li><a href="/popcorn" class="no-underline">팝콘</a></li>
@@ -345,230 +269,150 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
             <div class="category_product_wrap">
                 <ul class="product_list">
                     <li>
-                        <strong class="category_title">패키지<br>
-                            <a href="/pack" class="circle-button">+</a>
+                        <strong class="category_title">기프트카드<strong class="category_dep">마음을 담아 선물하세요.</strong><br>
+                            
+              
                         </strong> 
                         <div class="separator2"></div>
                         <ul class="category_inner">
-                            <li class="product" id="1">
-                                <a href="/details?id=1" class="btn_category_product">  
-                                    <img src="/store_images/패키지1.png" alt="패키지1"></a>
+                            <li class="product">
+                                <a href="file:///D:/구임수/home.html" class="btn_category_product">  
+                                    <img src="D:\구임수\이미지\기프트카드1.png" alt="기프트카드1"></a>
                                     <div class="icon-container">
-                                        <div class="icon-item icon-left">
+                                        <a href="file:///D:/구임수/login.html" class="icon-item icon-left">
                                             <div class="icon-item icon-left">
-                                                <img src="/store_images/장바구니.png" alt="Left Icon">
+                                                <img src="D:\구임수\이미지\장바구니.png" alt="Left Icon">
                                                 <div class="hover-text">장바구니</div>
                                             </div>
-                                        </div> 
+                                        </a>    
                                         <div class="icon-item icon-center">
-                                            <img src="/store_images/선물하기.png" alt="Center Icon">
+                                            <img src="D:\구임수\이미지\선물하기.png" alt="Center Icon">
                                             <div class="hover-text">선물하기</div>
                                         </div>
                                         <div class="icon-item icon-right">
-                                            <img src="/store_images/구매하기.png" alt="Right Icon">
+                                            <img src="D:\구임수\이미지\구매하기.png" alt="Right Icon">
                                             <div class="hover-text">구매하기</div>
                                         </div>
                                     </div>
                                 <div class="product-info">
-                                    <span class="product-name">패키지1</span><br>
-                                        <span class="original-price">66,000원</span>
-                                        <span class="discounted-price">62,000원</span>
+                                    <span class="product-name">기프트카드1</span><br>
+                                        <span class="original-price">금액충전형</span>
+                                   
                                 </div>
                             </li>   
-                            <li class="product" id="2">
-                                <a href="/details?id=2" class="btn_category_product" >  
-                                    <img src="/store_images/패키지2.png" alt="패키지2"></a>
+                            <li class="product">
+                                <a href="file:///D:/구임수/home.html" class="btn_category_product">  
+                                    <img src="D:\구임수\이미지\기프트카드2.png" alt="기프트카드2"></a>
                                     <div class="icon-container">
                                         <div class="icon-item icon-left">
-                                            <img src="/store_images/장바구니.png" alt="Left Icon">
+                                            <img src="D:\구임수\이미지\장바구니.png" alt="Left Icon">
                                             <div class="hover-text">장바구니</div>
                                         </div>
                                         <div class="icon-item icon-center">
-                                            <img src="/store_images/선물하기.png" alt="Center Icon">
+                                            <img src="D:\구임수\이미지\선물하기.png" alt="Center Icon">
                                             <div class="hover-text">선물하기</div>
                                         </div>
                                         <div class="icon-item icon-right">
-                                            <img src="/store_images/구매하기.png"" alt="Right Icon">
+                                            <img src="D:\구임수\이미지\구매하기.png" alt="Right Icon">
                                             <div class="hover-text">구매하기</div>
                                         </div>
                                     </div>
                                 <div class="product-info">
-                                    <span class="product-name">패키지2</span><br>
-                                    <span class="original-price">37,000원</span>
-                                    <span class="discounted-price">35,000원</span>
+                                    <span class="product-name">기프트카드2</span><br>
+                                    <span class="original-price">금액충전형</span>
+                                
                                 </div>          
                             </li>
-                            <li class="product" id="3">
-                                <a href="/details?id=3" class="btn_category_product">  
-                                    <img src="/store_images/패키지3.png" alt="패키지3"></a>
-                                     <div class="icon-container">
+                            <li class="product">
+                                <a href="file:///D:/구임수/home.html" class="btn_category_product">  
+                                    <img src="D:\구임수\이미지\기프트카드3.png" alt="기프트카드3"></a>
+                                    <div class="icon-container">
                                         <div class="icon-item icon-left">
-                                            <img src="/store_images/장바구니.png" alt="Left Icon">
+                                            <img src="D:\구임수\이미지\장바구니.png" alt="Left Icon">
                                             <div class="hover-text">장바구니</div>
                                         </div>
                                         <div class="icon-item icon-center">
-                                            <img src="/store_images/선물하기.png" alt="Center Icon">
+                                            <img src="D:\구임수\이미지\선물하기.png" alt="Center Icon">
                                             <div class="hover-text">선물하기</div>
                                         </div>
                                         <div class="icon-item icon-right">
-                                            <img src="/store_images/구매하기.png" alt="Right Icon">
+                                            <img src="D:\구임수\이미지\구매하기.png" alt="Right Icon">
                                             <div class="hover-text">구매하기</div>
                                         </div>
                                     </div>
                                 <div class="product-info">
-                                    <span class="product-name">패키지3</span><br>
-                                    <span class="original-price">20,000원</span>
-                                    <span class="discounted-price">18,000원</span>
-                                </div>
+                                    <span class="product-name">팝콘3</span><br>
+                                    <span class="original-price">금액충전형</span>
+                                </div>          
                             </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <strong class="category_title">기프트 카드<br>
-                            <a href="/giftcard" class="circle-button">+</a>
-                        </strong>  
-                        <div class="separator2"></div>
-                        <ul class="category_inner">
-                            <li class="product" id="7">
-                                <a href="/details?id=7" class="btn_category_product">
-                                    <img src="store_images/기프트카드1.png"></a>
-                                     <div class="icon-container">
-                                        <div class="icon-item icon-left">
-                                            <img src="/store_images/장바구니.png" alt="Left Icon">
-                                            <div class="hover-text">장바구니</div>
-                                        </div>
-                                        <div class="icon-item icon-center">
-                                            <img src="/store_images/선물하기.png" alt="Center Icon">
-                                            <div class="hover-text">선물하기</div>
-                                        </div>
-                                        <div class="icon-item icon-right">
-                                            <img src="/store_images/구매하기.png" alt="Right Icon">
-                                            <div class="hover-text">구매하기</div>
-                                        </div>
-                                    </div>
-                                 
-                                    <div class="product-info">
-                                        <span class="giftcard-name">기프트카드1</span><br>
-                                        <span class="giftcardtext">금액충전형</span>
-                                    </div>     
-                            </li>
-                            <li class="product" id="8">
-                                <a href="/details?id=8" class="btn_category_product">
-                                    <img src="/store_images/기프트카드2.png"></a>
-                                     <div class="icon-container">
-                                        <div class="icon-item icon-left">
-                                            <img src="/store_images/장바구니.png" alt="Left Icon">
-                                            <div class="hover-text">장바구니</div>
-                                        </div>
-                                        <div class="icon-item icon-center">
-                                            <img src="/store_images/선물하기.png" alt="Center Icon">
-                                            <div class="hover-text">선물하기</div>
-                                        </div>
-                                        <div class="icon-item icon-right">
-                                            <img src="/store_images/구매하기.png" alt="Right Icon">
-                                            <div class="hover-text">구매하기</div>
-                                        </div>
-                                    </div>
-                                    <div class="product-info">
-                                        <span class="giftcard-name">기프트카드2</span><br>
-                                        <span class="giftcardtext">금액충전형</span>
-                                    </div>     
-                            </li>
-                            <li class="product" id="9">
-                                <a href="/details?id=13" class="btn_category_product">
-                                    <img src="/store_images/기프트카드3.png"></a>
-                                     <div class="icon-container">
-                                        <div class="icon-item icon-left">
-                                            <img src="/store_images/장바구니.png" alt="Left Icon">
-                                            <div class="hover-text">장바구니</div>
-                                        </div>
-                                        <div class="icon-item icon-center">
-                                            <img src="/store_images/선물하기.png" alt="Center Icon">
-                                            <div class="hover-text">선물하기</div>
-                                        </div>
-                                        <div class="icon-item icon-right">
-                                            <img src="/store_images/구매하기.png" alt="Right Icon">
-                                            <div class="hover-text">구매하기</div>
-                                        </div>
-                                    </div>
-                                    <div class="product-info">
-                                        <span class="giftcard-name">기프트카드3</span><br>
-                                        <span class="giftcardtext">금액충전형</span>
-                                    </div>     
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <strong class="category_title">영화관람권<br>
-                            <a href="/admissionticket" class="circle-button">+</a>
-                        </strong>
-                        <div class="separator2"></div> 
-                        <ul class="category_inner">
-                            <li class="product" id="4">
-                                <a href="/details?id=4" class="btn_category_product">
-                                    <img src="/store_images/영화관람권1.png"></a>
+                            <li class="product">
+                                <a href="file:///D:/구임수/home.html" class="btn_category_product">  
+                                    <img src="D:\구임수\이미지\기프트카드4.png" alt="기프트카드4"></a>
                                     <div class="icon-container">
                                         <div class="icon-item icon-left">
-                                            <img src="/store_images/장바구니.png" alt="Left Icon">
+                                            <img src="D:\구임수\이미지\장바구니.png" alt="Left Icon">
                                             <div class="hover-text">장바구니</div>
                                         </div>
                                         <div class="icon-item icon-center">
-                                            <img src="/store_images/선물하기.png" alt="Center Icon">
+                                            <img src="D:\구임수\이미지\선물하기.png" alt="Center Icon">
                                             <div class="hover-text">선물하기</div>
                                         </div>
                                         <div class="icon-item icon-right">
-                                            <img src="/store_images/구매하기.png" alt="Right Icon">
+                                            <img src="D:\구임수\이미지\구매하기.png" alt="Right Icon">
                                             <div class="hover-text">구매하기</div>
                                         </div>
                                     </div>
-                                    <div class="product-info">
-                                        <span class="tiket-name">영화관람권1</span><br>
-                                        <span class="tiket-price">13,000원</span>
-                                    </div>     
+                                <div class="product-info">
+                                    <span class="product-name">팝콘4</span><br>
+                                    <span class="original-price">37,000원</span>
+                                
+                                </div>          
                             </li>
-                            <li class="product" id="5">
-                                <a href="/details?id=5"class="btn_category_product">
-                                    <img src="/store_images/영화관람권2.png"></a>
+                            <li class="product">
+                                <a href="file:///D:/구임수/home.html" class="btn_category_product">  
+                                    <img src="D:\구임수\이미지\기프트카드5.png" alt="기프트카드5"></a>
                                     <div class="icon-container">
                                         <div class="icon-item icon-left">
-                                            <img src="/store_images/장바구니.png" alt="Left Icon">
+                                            <img src="D:\구임수\이미지\장바구니.png" alt="Left Icon">
                                             <div class="hover-text">장바구니</div>
                                         </div>
                                         <div class="icon-item icon-center">
-                                            <img src="/store_images/선물하기.png" alt="Center Icon">
+                                            <img src="D:\구임수\이미지\선물하기.png" alt="Center Icon">
                                             <div class="hover-text">선물하기</div>
                                         </div>
                                         <div class="icon-item icon-right">
-                                            <img src="/store_images/구매하기.png" alt="Right Icon">
+                                            <img src="D:\구임수\이미지\구매하기.png" alt="Right Icon">
                                             <div class="hover-text">구매하기</div>
                                         </div>
                                     </div>
-                                    <div class="product-info">
-                                        <span class="tiket-name">영화관람권2</span><br>
-                                        <span class="tiket-price">17,000원</span>
-                                    </div>
+                                <div class="product-info">
+                                    <span class="product-name">기프트카드5</span><br>
+                                    <span class="original-price">금액충전형</span>
+                                
+                                </div>          
                             </li>
-                            <li class="product" id="6">
-                                <a href="/details?id=6" class="btn_category_product">
-                                    <img src="/store_images/영화관람권3.png"></a>
+                            <li class="product">
+                                <a href="file:///D:/구임수/home.html" class="btn_category_product">  
+                                    <img src="D:\구임수\이미지\기프트카드6.png" alt="기프트카드6"></a>
                                     <div class="icon-container">
                                         <div class="icon-item icon-left">
-                                            <img src="/store_images/장바구니.png" alt="Left Icon">
+                                            <img src="D:\구임수\이미지\장바구니.png" alt="Left Icon">
                                             <div class="hover-text">장바구니</div>
                                         </div>
                                         <div class="icon-item icon-center">
-                                            <img src="/store_images/선물하기.png" alt="Center Icon">
+                                            <img src="D:\구임수\이미지\선물하기.png" alt="Center Icon">
                                             <div class="hover-text">선물하기</div>
                                         </div>
                                         <div class="icon-item icon-right">
-                                            <img src="/store_images/구매하기.png" alt="Right Icon">
+                                            <img src="D:\구임수\이미지\구매하기.png" alt="Right Icon">
                                             <div class="hover-text">구매하기</div>
                                         </div>
                                     </div>
-                                    <div class="product-info">
-                                        <span class="tiket-name">영화관람권3</span><br>
-                                        <span class="tiket-price">18,000원</span>
-                                     </div>     
+                                <div class="product-info">
+                                    <span class="product-name">기프트카드6</span><br>
+                                    <span class="original-price">금액충전형</span>
+                                
+                                </div>          
                             </li>
                         </ul>
                     </li>
@@ -576,26 +420,20 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
             </div>    
         </div>        
     </div>
-    <div class="info_wrap">
-        <div class="text_container">
-          
-            <h1 class="popup-text">기프트샵 이용안내</h1>
-                MG시네마 기프트샵 이용하기.
-            
-        </div>
-        <img src="/store_images/기프트샵.png" alt="Image description" class="popup-image">
-    </div>
-    <div class="service_center">
-        <h1>MG시네마고객센터</h1>   
-        <p><img src="/store_images/전화기.png" alt="전화기" class="phone-icon">1544-0000</p>
-        <p>안녕하세요</p>
-    </div>
+
+
 </body>
 <script src="https://code.jquery.com/jquery-latest.js">
 </script>
 <script>
-
-
+$(document)
+.on('click','.category_content li',function(){
+    let href = $(this).data('href'); 
+        if (href) {
+            window.location.href = href; 
+        }
+})
+//해상 사이트 이동하는거
 
 </script>
 

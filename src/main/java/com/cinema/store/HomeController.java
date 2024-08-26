@@ -12,9 +12,13 @@ import jakarta.servlet.http.HttpServletRequest;
 @Controller
 public class HomeController {
 	
-	@Autowired storeDAO itemdao;
+	@Autowired storeDAO storedao;
 	
-	
+	@GetMapping("/")
+	public String home() {
+		return "store/store";
+	}
+
 	@GetMapping("/store")
 	public String store(HttpServletRequest req) {
 		
@@ -25,18 +29,59 @@ public class HomeController {
 	    int id = Integer.parseInt(req.getParameter("id"));
 	    System.out.println(id);
 	    
-		ArrayList<storeDTO> arPackage = itemdao.selectpackage(id);
+		ArrayList<storeDTO> arPackage = storedao.selectpackage(id);
 		System.out.println("item="+arPackage.size());
-		ArrayList<storeDTO> arItem = itemdao.selectitem(id);
+		ArrayList<storeDTO> arItem = storedao.selectitem(id);
 		
-		String imagePath = itemdao.getImagePath(id);
+		String imagePath = storedao.getImagePath(id);
 		
 		model.addAttribute("arPackage",arPackage);
 		model.addAttribute("arItem",arItem);
 		model.addAttribute("imagePath", imagePath);
-	
+		
+		System.out.println(arPackage);
+		System.out.println(arItem);
+		System.out.println(imagePath);
+		
 	    return "store/details";
 	}
+	@GetMapping("/drink")
+	public String drink(HttpServletRequest req) {
+		
+		return "store/drink";
+	}
+	@GetMapping("/popcorn")
+	public String popcorn(HttpServletRequest req) {
+		
+		return "store/popcorn";
+	}
+	@GetMapping("/giftcard")
+	public String giftcard(HttpServletRequest req) {
+		
+		return "store/giftcard";
+	}
+	@GetMapping("/admissionticket")
+	public String addmissionticket(HttpServletRequest req) {
+		
+		return "store/admission_ticket";
+	}
+	@GetMapping("/pack")
+	public String pack(HttpServletRequest req) {
+		
+		return "store/package";
+	}
+	@GetMapping("/combo")
+	public String combo(HttpServletRequest req) {
+		
+		return "store/combo";
+	}
+	@GetMapping("/snack")
+	public String snack(HttpServletRequest req) {
+		
+		return "store/snack";
+	}
+	
+	
 	
 	
 

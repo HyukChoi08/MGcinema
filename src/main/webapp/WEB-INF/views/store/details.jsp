@@ -245,7 +245,14 @@
         .inline-container p {
             margin-right: 10px; /* 간격 조절 */
         }
-      
+       .no-underline {
+        text-decoration: none; /* 링크의 밑줄을 제거합니다 */
+         color: black;    
+    	}
+
+   		.no-underline:hover {
+        text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도록 합니다 */
+    	}
       
     </style>
 </head>
@@ -253,18 +260,18 @@
     <div id="container">
         <div id="contents">
             <div class="category_wrap">
-                스토어
+              
                 <div class="separator"></div>
             </div>
             <div class="contegory_contents_wrap">
                 <ul class="category_content">
-                    <li data-href="D:\구임수\login.html">패키지</li>
-                    <li data-href="D:\구임수\order.html">영화관람관</li>
-                    <li data-href="D:\구임수\order.html">기프트카드</li>
-                    <li data-href="D:\구임수\order.html">콤보</li>
-                    <li data-href="D:\구임수\프로젝트\popcorn.html">팝콘</li>
-                    <li data-href="D:\구임수\order.html">음료</li>
-                    <li data-href="D:\구임수\order.html">스낵</li>
+                    <li><a href="/pack" class="no-underline">패키지</a></li>
+                    <li><a href="/admissionticket" class="no-underline">영화관람관</a></li>
+                    <li><a href="/giftcard" class="no-underline">기프트카드</a></li>
+                    <li><a href="/combo" class="no-underline">콤보</a></li>
+                    <li><a href="/popcorn" class="no-underline">팝콘</a></li>
+                    <li><a href="/drink" class="no-underline">음료</a></li>
+                    <li><a href="/snack" class="no-underline">스낵</a></li>
                 </ul>
                 <ul class="cart_content">
                     <li>내 기프트콘<span id="giftcon">0</span></li> 
@@ -276,7 +283,7 @@
                 <div>
                  	<c:forEach items="${arItem}" var="item">
         				<div>
-            				<strong class="category_title">${item.name}</strong>
+            				<strong class="category_title">${item.item_name}</strong>
             				<input type=hidden id="idid" value='${item.id}'><br>
             					<div class="separator2"></div>
 					            <ul class="category_inner">
@@ -284,8 +291,9 @@
 					                    <img src="${imagePath}" alt="패키지1">
 					                </li>
 					                <li class="right">
-					                   	<span id="discount">${item.discount_price}원</span>
-					                   	<span id="original">${item.price}원</span>
+					                   	<span  id="discount">${item.discount_price}</span>
+					                   	
+					                   	<span  id="original">${item.price}</span>
 					                    	<div class="separator3"></div>
 					                    		<span id="composition"style="display: flex; align-items: center;" >
 					                    		<span style="margin-right: 14px; font-weight: bold;">상품구성</span>
@@ -303,7 +311,7 @@
 						                           				<span class="spacer"></span>
 						                       							</c:otherwise>
 						                   							</c:choose>
-						                   						<span id="item-period">${pkg.item_name} ${pkg.period}</span>
+						                   						<span id="item-period">${pkg.name}: ${pkg.period}</span>
 						               						</span>
 						           						</li>
 						       						</c:forEach>
@@ -342,27 +350,48 @@
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
-$(document)
-.ready(function(){
+$(document).ready(function() {
+    var $discountSpan = $('#discount');
     
-	 let discountText = $('#discount').text();
-	 let discount = parseInt(discountText.split('원')[0].replace(/,/g, ''));
-	    
-	    console.log("discount: " + discount);
-	    
-	    // 초기 가격을 할인 가격으로 설정
-	    var initialPrice = discount;
-	    
-	    // 수량 입력 필드의 값이 변경될 때마다 총 가격을 업데이트
-	    $('#cnt').on('input', function() {
-	        var quantity = $(this).val(); // 현재 수량 값 가져오기
-	        var totalPrice = initialPrice * quantity; // 총 가격 계산
-	        $('#price').val(totalPrice.toLocaleString() + '원'); // 총 가격 표시 업데이트
-	    });
+    // span 요소의 텍스트를 가져옴
+    var originalText = $discountSpan.text().trim();
+    
+    // '금액충전형'인지 확인
+    if (originalText === '금액충전형') {
+        // '금액충전형'일 경우 아무 작업도 하지 않음
+        return;
+    }
+    
+    // 텍스트에서 '원'을 제거하고 숫자 부분만 추출
+    var numericValue = originalText.replace(/원/g, '').replace(/,/g, '').trim();
+    
+    // 숫자 형식으로 변환 (쉼표를 추가)
+    var formattedValue = Number(numericValue).toLocaleString();
+    
+    // 새로운 값으로 텍스트 설정 (숫자에 '원'을 붙임)
+    $discountSpan.text(formattedValue + '원');
+    
+    // 초기 가격을 추출
+    var initialPrice = Number(numericValue);
 
-		
-})
-
+    let price=$('#price').val();
+	console.log(price);
+    
+    
+});    
+    
+    
+    // 수량 입력 필드의 값이 변경될 때마다 총 가격을 업데이트
+    $('#cnt').on('input', function() {
+        var quantity = $(this).val(); // 현재 수량 값 가져오기
+        if (quantity) {
+            var totalPrice = initialPrice * quantity; // 총 가격 계산
+            $('#price').val(totalPrice.toLocaleString() + '원'); // 총 가격 표시 업데이트
+        } else {
+            $('#price').val('0원'); // 수량이 없으면 총 가격을 0으로 설정
+        }
+    
+});
    
 </script>
 </html>
