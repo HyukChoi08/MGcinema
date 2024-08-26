@@ -357,7 +357,7 @@ function processData(data){
 		for(let i=0 ; i<$('#timelist div').length; i++){
 			let id = $('#timelist div').eq(i).find('tr td:eq(1)').text();
 			console.log("1111",id);
-			console.log(ar);
+			console.log(ar); 
 			for(let x of ar){
 				if(x.mname==id){
 				let room = x.Sname	
