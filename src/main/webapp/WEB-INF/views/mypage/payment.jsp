@@ -109,7 +109,7 @@
         <!-- 사이드바 -->
         <div class="sidebar">
             <ul>
-                 <li><a href="/myhome">MY CGV HOME</a></li>
+                <li><a href="/myhome">MY HOME</a></li>
                 <li><a href="/reservation">나의 예매정보</a></li>
                 <li><a href="/payment">결제 내역</a></li>
                 <li><a href="/inquiry">1:1 문의</a></li>
