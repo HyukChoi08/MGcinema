@@ -98,10 +98,10 @@
     <div class="profile-section">
         <img src="profile-placeholder.png" width="80" height="80">
         <div class="profile-info">
-            <h2>Hi_Movie님</h2>
+            <h2 id="nickname">Hi_Movie님</h2> 
             <p>고객님은 <strong>일반</strong> 고객 입니다.</p>
         </div>
-        <a href="#" class="button">닉네임 설정</a>
+        <a href="/profile" class="button">닉네임 설정</a>
     </div>
 
     <!-- 메인 컨테이너 -->
@@ -109,12 +109,12 @@
         <!-- 사이드바 -->
         <div class="sidebar">
             <ul>
-                <li><a href="#">MY CGV HOME</a></li>
-                <li><a href="#">나의 예매정보</a></li>
-                <li><a href="#">결제 내역</a></li>
-                <li><a href="#">1:1 문의</a></li>
-                <li><a href="#">개인 정보 변경</a></li>
-                <li><a href="#">회원 탈퇴</a></li>
+                <li><a href="/myhome">MY HOME</a></li>
+                <li><a href="/reservation">나의 예매정보</a></li>
+                <li><a href="/payment">결제 내역</a></li>
+                <li><a href="/inquiry">1:1 문의</a></li>
+                <li><a href="/profile">개인 정보 변경</a></li>
+                <li><a href="/cancel">회원 탈퇴</a></li>
             </ul>
         </div>
 
@@ -137,7 +137,7 @@
             </div>
             <!-- My CGV Home 섹션 -->
             <div class="my-cgv-home">
-                <h3>MY CGV HOME</h3>
+                <h3>My Movie Home</h3>
                 <div class="my-movie-info">
                     <p>청소년 등급 영화</p>
                 </div>
@@ -154,7 +154,27 @@
                 <p>보고싶은 영화가 있나요?</p>
                 <a href="#" class="button">상영중인 영화 바로가기</a>
             </div>
-      
+      </div>
     </div>
 </body>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script>
+$(document).ready(function() {
+    var userId = 1; // 테스트할 사용자 ID, 실제 상황에서는 동적으로 설정
+
+    $.ajax({
+        url: "/customerInfo",
+        method: "POST",
+        data: { id: userId },
+        success: function(data) {
+            // 서버에서 받아온 데이터로 프로필 섹션 업데이트
+            $('#nickname').text(data.nickname + "님");
+        },
+        error: function() {
+            $('#nickname').text("알수없음");
+            console.log("AJAX Error:", textStatus, errorThrown);
+        }
+    });
+});
+</script>
 </html>
