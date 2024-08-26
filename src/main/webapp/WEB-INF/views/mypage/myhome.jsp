@@ -109,7 +109,7 @@
         <!-- 사이드바 -->
         <div class="sidebar">
             <ul>
-                <li><a href="/myhome">MY CGV HOME</a></li>
+                <li><a href="/myhome">MY HOME</a></li>
                 <li><a href="/reservation">나의 예매정보</a></li>
                 <li><a href="/payment">결제 내역</a></li>
                 <li><a href="/inquiry">1:1 문의</a></li>
@@ -137,7 +137,7 @@
             </div>
             <!-- My CGV Home 섹션 -->
             <div class="my-cgv-home">
-                <h3>MY CGV HOME</h3>
+                <h3>My Movie Home</h3>
                 <div class="my-movie-info">
                     <p>청소년 등급 영화</p>
                 </div>
