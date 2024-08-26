@@ -8,3 +8,4 @@ public interface MypageDAO {
    void updateCusInfo(CustomerDTO cusDTO);
    void deleteCustomer(int id);
 }
+ 

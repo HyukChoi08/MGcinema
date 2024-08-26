@@ -26,4 +26,4 @@
    delete from customer where id=#{param1}
 </delete>
 
-</mapper>
+</mapper>  
