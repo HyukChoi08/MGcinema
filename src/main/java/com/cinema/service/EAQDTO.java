@@ -1,16 +1,17 @@
 package com.cinema.service;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.web.multipart.MultipartFile;
+import lombok.NoArgsConstructor;
+
+import java.util.Date;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class EAQDTO {
-    private String name;
-    private String phone;
-    private String email;
-    private String inquiryType;
-    private String theater;
+    private int id;
+    private String category;
     private String title;
-    private String content;
-    private MultipartFile attachment;
+    private Date date;
 }

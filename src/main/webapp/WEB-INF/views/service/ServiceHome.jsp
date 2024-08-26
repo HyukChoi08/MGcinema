@@ -237,9 +237,9 @@
                 <div class="notice_area">
                     <span class="tit">공지/뉴스</span>
                     <ul class="txt">
-                        <li><a href="#">공지1</a><span class="day">2024.08.21</span></li>
-                        <li><a href="#">공지2</a><span class="day">2024.08.20</span></li>
-                        <li><a href="#">공지3</a><span class="day">2024.08.19</span></li>
+                        <li><a href="#">공지1 </a><span class="day">2024.08.21</span></li>
+                        <li><a href="#">공지2 </a><span class="day">2024.08.20</span></li>
+                        <li><a href="#">공지3 </a><span class="day">2024.08.19</span></li>
                     </ul>
                     <a href="#" class="more">더보기</a>
                 </div>
