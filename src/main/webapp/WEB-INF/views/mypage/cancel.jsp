@@ -192,7 +192,7 @@ form input[type="submit"]:hover {
 </style>
 </head>
 <body>
-
+ 
    <!-- 프로필 섹션 -->
    <div class="profile-section">
       <img src="profile-placeholder.png" width="80" height="80">
