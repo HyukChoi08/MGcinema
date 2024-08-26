@@ -29,7 +29,7 @@
             margin: 20px 0;
             display: flex;
         }
-        .col-aside {
+        .sidebar {
             width: 250px;
             margin-right: 20px;
         }
@@ -173,15 +173,14 @@
 
 <div id="container">
     <div id="contents">
-        <div class="col-aside">
+        <div class="sidebar">
             <h2>고객센터 메뉴</h2>
             <div class="snb">
                 <ul>
-                    <li class="on"><a href="#">고객센터 메인<i></i></a></li>
-                    <li><a href="#">자주찾는 질문<i></i></a></li>
-                    <li><a href="#">공지/뉴스<i></i></a></li>
-                    <li><a href="#">이메일 문의<i></i></a></li>
-                    <li><a href="#">단체/ 대관 문의<i></i></a></li>
+                    <li class="on"><a href="serviceHome">고객센터 메인<i></i></a></li>
+                    <li><a href="faq">자주찾는 질문<i></i></a></li>
+                    <li><a href="news">공지/뉴스<i></i></a></li>
+                    <li><a href="eaq">이메일 문의<i></i></a></li>
                 </ul>
             </div>
             <div class="ad-area">
@@ -199,11 +198,11 @@
                         <button type="button" class="btn_search">검색</button>
                     </div>
                     <div class="c_qu">
-                        <a href="#none">현금영수증</a>
-                        <a href="#none">관람권</a>
-                        <a href="#none">예매</a>
-                        <a href="#none">환불</a>
-                        <a href="#none">취소</a>
+                        <a href="faq">현금영수증</a>
+                        <a href="faq">관람권</a>
+                        <a href="faq">예매</a>
+                        <a href="faq">환불</a>
+                        <a href="faq">취소</a>
                     </div>
                 </div>
                 <div class="c_box talk_inquiry">
@@ -214,7 +213,7 @@
                 <div class="c_box email_inquiry">
                     <strong class="c_tit">이메일 문의</strong>
                     <span class="c_txt">24시간 365일 언제든지 문의해주세요.</span>
-                    <a href="#">문의하기</a>
+                    <a href="eaq">문의하기</a>
                 </div>
                 <div class="c_box my_advice">
                     <strong class="c_tit">내 상담 내역 확인</strong>
@@ -253,3 +252,4 @@
 </footer>
 </body>
 </html>
+

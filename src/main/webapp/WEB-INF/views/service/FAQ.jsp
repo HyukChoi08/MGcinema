@@ -65,7 +65,7 @@
         }
         .snb ul li a {
             text-decoration: none;
-            color: #red;
+            color: black;
             font-size: 1em;
         }
         .snb ul li a:hover {
@@ -209,11 +209,10 @@
                 <h2>고객센터 메뉴</h2>
                 <div class="snb">
                     <ul>
-                        <li><a href="#">고객센터 메인</a></li>
-                        <li class="on"><a href="#" title="현재선택">자주찾는 질문</a></li>
-                        <li><a href="#">공지/뉴스</a></li>
-                        <li><a href="#">이메일 문의</a></li>
-                        <li><a href="#">단체/ 대관 문의</a></li>
+                        <li><a href="serviceHome">고객센터 메인</a></li>
+                        <li class="on"><a href="faq" title="현재선택">자주찾는 질문</a></li>
+                        <li><a href="news">공지/뉴스</a></li>
+                        <li><a href="eaq">이메일 문의</a></li>
                     </ul>
                 </div>
             </div>
@@ -243,7 +242,7 @@
                     </ul>
                 </div>
                 <div class="search_result">
-                    총<span class="num">156건</span>이 검색되었습니다.
+                    총<span class="num"> 0건</span>이 검색되었습니다.
                 </div>
                 <div class="tbl_area">
                     <table cellspacing="0" cellpadding="0" class="tbl_notice_list">
