@@ -225,42 +225,36 @@ form input[type="submit"]:hover {
 			<h2>1:1 문의 게시판</h2>
 
 			<!-- 문의 폼 -->
-			<h3>문의 작성</h3>
-			<!-- 사용자가 문의를 작성할 수 있는 폼 -->
-			<form action="inquiry" method="post">
-				제목: <input type="text" name="title" required /><br /><br /> 
-				내용: <textarea name="content" rows="10" cols="50" required></textarea>
-				<br />
-				<br /> <input type="submit" value="등록" />
-			</form>
-			<!-- 관리자 응답 -->
-			<div class="response">
-				<h2>관리자 답변</h2>
-				<p>//</p>
-			</div>
-
+			<button class="button" onclick="location.href='/inquiry'">문의하기</button>
 			<!-- 나의 문의 내역 -->
 			<table class="inquiry-table">
 				<h3>나의 문의 내역</h3>
-				<thead>
-					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>등록일</th>
-						<th>답변 상태</th>
-					</tr>
-				</thead>
-				<tbody >
-					<tr>
-						
-					</tr>
-				</tbody>
+				<!-- 문의 목록을 보여주는 테이블 -->
+				<table border="1" class="inquiry-table">
+					<thead>
+						<tr>
+							<th>번호</th>
+							<th>제목</th>
+							<th>작성일</th>
+							<th>상태</th>
+						</tr>
+						<tr>
+							<td>${inquiry.id}</td>
+							<td>${inquiry.title}</td>
+							<td>${inquiry.created}</td>
+							<td>${inquiry.current}</td>
+						</tr>
+					</thead>
+				
+				</table>
+				<br>
+
 			</table>
 		</div>
 	</div>
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
-
+	
 </script>
 </html>

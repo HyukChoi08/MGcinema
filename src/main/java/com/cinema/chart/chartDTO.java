@@ -1,4 +1,4 @@
-package com.cinema.chart;
+ackage com.cinema.chart;
 
 import lombok.Data;
 

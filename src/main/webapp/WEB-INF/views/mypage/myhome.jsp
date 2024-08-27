@@ -112,7 +112,7 @@
                 <li><a href="/myhome">MY HOME</a></li>
                 <li><a href="/reservation">나의 예매정보</a></li>
                 <li><a href="/payment">결제 내역</a></li>
-                <li><a href="/inquiry">1:1 문의</a></li>
+                <li><a href="/inquirylist">1:1 문의</a></li>
                 <li><a href="/profile">개인 정보 변경</a></li>
                 <li><a href="/cancel">회원 탈퇴</a></li>
             </ul>
@@ -142,7 +142,7 @@
                     <p>청소년 등급 영화</p>
                 </div>
                 <div class="my-movie-info">
-                    <p>극장관 정보</p>
+                    <p>극장관 정보</p> cinema
                 </div>
                 <div class="my-movie-info">
                     <p>스토어 바로가기</p>
