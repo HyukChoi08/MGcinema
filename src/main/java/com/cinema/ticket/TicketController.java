@@ -81,7 +81,6 @@ public class TicketController {
 	@GetMapping("/seats")
     @ResponseBody
     public Map<String, Object> getSeats(@RequestParam("theaterId") String theaterId) {
-		System.out.println(theaterId);
         List<seatDTO> seats = tdao.getSeats(theaterId);
         Map<String, Object> response = new HashMap<>();
         response.put("seats", seats);
