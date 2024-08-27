@@ -3,8 +3,7 @@ package com.cinema.chart;
 import lombok.Data;
 
 @Data
-public class chartDTO {
+public class chartArrayDTO {
 int id;
-String image;
-int reservationrate;
+String text;
 }
