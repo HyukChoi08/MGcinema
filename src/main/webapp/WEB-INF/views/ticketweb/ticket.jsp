@@ -115,9 +115,9 @@ button {
 }
 
 .seat {
-  width: 20px;
-  height: 20px;
-  margin: 2px;
+  width: 15px;
+  height: 15px;
+  margin: 1px;
   background-color: #ddd;
   cursor: pointer;
   display: inline-block; 
@@ -163,12 +163,12 @@ button {
     </div>
     <div class="seat-selection" id="seatSelectionScreen">
         <h2>좌석 선택</h2>
-        <div class="seatsa">
+        <div class="seat_A">
             <div class="seat" data-seat="A1"></div>
             <div class="seat" data-seat="A2"></div>
             <div class="seat" data-seat="A3"></div>
         </div>
-        <div class="seatsb">
+        <div class="seat_B">
         	<div class="seat" data-seat="B1"></div>
         	<div class="seat" data-seat="B2"></div>
         </div>
@@ -194,13 +194,53 @@ button {
             $("#confirmBtn").show();
             $("#reserveBtn").hide();
             $("#submitBtn").show();
+            let theaterId = "1관";
+            $.ajax({
+                type: "GET",
+                url: "/seats",
+                data: { theaterId: theaterId },
+                success: function(response) {
+                    console.log(response); // 응답 데이터 전체를 출력하여 구조 확인
+
+                    const seatsData = response.seats[0]; // response의 seats 배열의 첫 번째 객체를 가져옵니다.
+                    console.log(seatsData); // seatsData 확인
+
+                    // 기존의 좌석 정보를 모두 제거합니다.
+                    $(".seat-selection").empty();
+
+                    // 좌석 정보를 동적으로 생성하여 화면에 표시합니다.
+                    for (const [key, value] of Object.entries(seatsData)) {
+                        // 좌석 이름이 영문 대문자(A-Z)로만 구성된 경우에만 처리
+                        if (key.match(/^[a-z]$/)) {
+                            // 각 열(row)에 해당하는 새로운 div를 만듭니다.
+                            const rowDiv = $("<div></div>").addClass("seat-row").attr("data-row", key);
+
+                            for (let i = 1; i <= value; i++) {
+                                const seatId = key + i; // 예: "A1", "A2"
+                                const seatDiv = $("<div></div>").addClass("seat").attr("data-seat", seatId);
+                                rowDiv.append(seatDiv); // 열 div에 좌석 추가
+                            }
+
+                            // .seat-selection 컨테이너에 열 div 추가
+                            $(".seat-selection").append(rowDiv);
+                        }
+                    }
+                    initializeOccupiedSeats(["A1", "B2", "C3"]);
+                },
+                error: function(xhr, status, error) {
+                    console.error("좌석 정보를 가져오는 중 오류 발생:", error);
+                }
+            });
     	});
+    	
+ //   	initializeOccupiedSeats(["A1", "B2", "C3"]); // 예시: 이미 예약된 좌석 초기화
     	$(document).on("click","#confirmBtn",function(){
     		$("#seatSelectionScreen").hide();
             $("#selectionScreen").show();
             $("#confirmBtn").hide();
             $("#reserveBtn").show();
             $("#submitBtn").hide();
+            $(".seat").removeClass("selected");
     	});
     	
         $(".seat").click(function () {
@@ -255,14 +295,15 @@ button {
 
           // 초기 예약된 좌석 데이터를 설정합니다 (예시)
           function initializeOccupiedSeats(occupiedSeats) {
+        	  $(".seat").removeClass("occupied");
             occupiedSeats.forEach(function (seat) {
               $(".seat[data-seat='" + seat + "']").addClass("occupied");
             });
           }
 
-          // 예: 이미 예약된 좌석 리스트 (서버로부터 가져올 수 있음)
-          initializeOccupiedSeats(["A1", "B2", "C3"]);
     	
+          
+          
     	//예매
     	loadMovies();
 		loadDates();
