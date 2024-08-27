@@ -179,7 +179,7 @@
         <div class="col-detail">
             <div class="customer_top">
                 <h2 class="tit">공지/뉴스</h2>
-                <p class="stit">CGV의 주요한 이슈 및 여러가지 소식들을 확인하실 수 있습니다.</p>
+                <p class="stit">MG Cinema의 주요한 이슈 및 여러가지 소식들을 확인하실 수 있습니다.</p>
             </div>
             <div class="search_area">
                 <legend><label for="c_select">검색</label></legend>
@@ -202,8 +202,9 @@
                 </ul>
             </div>
             <div class="search_result">
-                총<span class="num"> 99999건</span>이 검색되었습니다.
-            </div>
+                총<span class="num"> 99999건</span>이 검색되었습니다.               
+            </div><br>
+            <button class="add-button" title="추가하기">+</button>
             <div class="tbl_area">
                 <table cellspacing="0" cellpadding="0" class="tbl_notice_list"><Br>
                     <colgroup>
