@@ -14,10 +14,7 @@ public class HomeController {
 	
 	@Autowired storeDAO storedao;
 	
-	@GetMapping("/")
-	public String home() {
-		return "store/store";
-	}
+	
 
 	@GetMapping("/store")
 	public String store(HttpServletRequest req) {
