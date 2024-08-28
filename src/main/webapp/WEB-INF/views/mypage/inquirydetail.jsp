@@ -57,7 +57,7 @@ body {
 	display: flex; /* 사이드바와 메인 콘텐츠를 옆으로 배치 */
 	max-width: 1200px;
 	margin: 20px auto;
-}
+} 
 
 /* 사이드바 스타일 */
 .sidebar {

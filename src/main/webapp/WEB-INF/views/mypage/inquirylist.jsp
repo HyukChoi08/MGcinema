@@ -35,7 +35,7 @@ body {
 
 .profile-section .profile-info {
    flex-grow: 1; /* 프로필 정보의 너비를 남은 공간에 맞추기 */
-}
+} 
 
 .button {
    background-color: #e50914; /* 버튼 배경색 */

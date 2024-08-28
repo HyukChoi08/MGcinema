@@ -53,7 +53,7 @@ public class PageController {
 //   @GetMapping("/inquirydetail")
 //   public String getInquiryDetail(HttpServletRequest req, )
    
-   
+    
    @GetMapping("/profile") //회원 정보 변경 페이지 매핑
    public String profile(HttpSession session) {
       // 패스워드 확인 여부를 세션에서 확인

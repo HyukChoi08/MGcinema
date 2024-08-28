@@ -19,7 +19,7 @@
         tellecom = #{tellecom},
         updated = NOW(),
         birthday = #{birthday}
-    WHERE id = #{id}
+    WHERE id = #{id} 
 </update>
 
 <delete id="deleteCustomer">
