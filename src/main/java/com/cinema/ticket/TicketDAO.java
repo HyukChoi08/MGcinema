@@ -23,4 +23,6 @@ public interface TicketDAO {
             @Param("theaterId") int theaterId, 
             @Param("date") String date, 
             @Param("time") String time);
+    
+    List<seatDTO> getSeats(@Param("theaterId") String theaterId);
 }

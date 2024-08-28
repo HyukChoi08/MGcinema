@@ -25,6 +25,7 @@ body {
     background-color: #f4f4f4;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
 }
 
 .list-container {
@@ -92,16 +93,17 @@ body {
 }
 
 button {
-    padding: 10px;
+    padding: 3px;
     margin-top: 20px;
-    width: 100px;
+    width: 90px;
     max-width: 100px;
+    
 }
 
 
 
 .seat-selection {
-  display: none;
+  	display: none;
     width: 1000px;
     margin-top: 50px;
     background-color: #f4f4f4;
@@ -111,13 +113,14 @@ button {
 
 .seat-row {
   display: flex;
-  margin-bottom: 5px;
+  justify-content: center;
 }
 
 .seat {
-  width: 20px;
-  height: 20px;
-  margin: 2px;
+  width: 15px;
+  height: 15px;
+  margin: 1px;
+  margin-top: 4px;
   background-color: #ddd;
   cursor: pointer;
   display: inline-block; 
@@ -135,9 +138,13 @@ button {
 	width:1000px;
 }
 .foots-container {
-	padding:10px;
-	display: flex;
+    padding: 10px;
+    display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+#btnclear {
+    margin-left: 90%;
 }
 
 </style>
@@ -162,16 +169,7 @@ button {
         </div>
     </div>
     <div class="seat-selection" id="seatSelectionScreen">
-        <h2>좌석 선택</h2>
-        <div class="seatsa">
-            <div class="seat" data-seat="A1"></div>
-            <div class="seat" data-seat="A2"></div>
-            <div class="seat" data-seat="A3"></div>
-        </div>
-        <div class="seatsb">
-        	<div class="seat" data-seat="B1"></div>
-        	<div class="seat" data-seat="B2"></div>
-        </div>
+        
     </div>
     
     <div class="foots">
@@ -189,30 +187,91 @@ button {
 <script>
     $(document).ready(function() {
     	$(document).on("click","#reserveBtn", function(){
+    		let mname = $("#movieList li.selected").text();
+    		let roomId = $("#theaterList li.selected").text().split("-")[0];
+            let date = $("#dateList li.selected").data("id");
+            let begin = $("#timeList li.selected").data("id");
+            if(mname == "") {
+            	alert("영화를 선택해주세요");
+            	return;
+            }
+            if(date == "" || date == null) {
+            	alert("날짜를 선택해주세요");
+            	return;
+            }
+            if(roomId == "") {
+            	alert("극장을 선택해주세요");
+            	return;
+            }
+            if(begin == "" || begin == null) {
+            	alert("시간을 선택해주세요");
+            	return;
+            }
+            
     		$("#selectionScreen").hide();
             $("#seatSelectionScreen").show();
             $("#confirmBtn").show();
             $("#reserveBtn").hide();
             $("#submitBtn").show();
+            let theaterId = roomId;
+            console.log(theaterId);
+            $.ajax({
+                type: "GET",
+                url: "/seats",
+                data: { theaterId: theaterId },
+                success: function(response) {
+                    const seatsData = response.seats[0];
+                    $(".seat-selection").empty();
+
+                    // 좌석 키(열 이름)를 알파벳 순으로 정렬합니다.
+                    const sortedSeatKeys = Object.keys(seatsData).filter(key => key.match(/^[a-z]$/)).sort();
+
+                    sortedSeatKeys.forEach(key => {
+                        const value = seatsData[key];
+                        
+                        if (value > 0) {
+                            const rowDiv = $("<div></div>").addClass("seat-row").attr("data-row", key);
+
+                            // 행 레이블을 추가합니다.
+                            const labelDiv = $("<div></div>").addClass("seat-row-label").text(key.toUpperCase()+"열-");
+                            rowDiv.append(labelDiv);
+
+                            for (let i = 1; i <= value; i++) {
+                                const seatId = key + i; // 예: "a1", "a2"
+                                const seatDiv = $("<div></div>").addClass("seat").attr("data-seat", seatId);
+                                rowDiv.append(seatDiv);
+                            }
+                            $(".seat-selection").append(rowDiv);
+                        }
+                    });
+                    initializeOccupiedSeats(["a1", "b2", "c3"]);
+                },
+                error: function(xhr, status, error) {
+                    console.error("좌석 정보를 가져오는 중 오류 발생:", error);
+                }
+            });
     	});
+    	
+ //   	initializeOccupiedSeats(["a1", "b2", "c3"]); // 예시: 이미 예약된 좌석 초기화
     	$(document).on("click","#confirmBtn",function(){
     		$("#seatSelectionScreen").hide();
             $("#selectionScreen").show();
             $("#confirmBtn").hide();
             $("#reserveBtn").show();
             $("#submitBtn").hide();
+            $(".seat").removeClass("selected");
     	});
     	
-        $(".seat").click(function () {
-            // 이미 예약된 좌석은 선택하지 않음
-            if ($(this).hasClass("occupied")) return;
-            
-            // 선택된 좌석인지 확인
-            $(this).toggleClass("selected");
-            
-            // 선택된 좌석 리스트를 갱신
-            updateSelectedSeats();
-          });
+    	$(document).on("click", ".seat", function () {
+    	    // 이미 예약된 좌석은 선택하지 않음
+    	    if ($(this).hasClass("occupied")) return;
+    	    
+    	    // 선택된 좌석인지 확인
+    	    $(this).toggleClass("selected");
+    	    
+    	    // 선택된 좌석 리스트를 갱신
+    	    updateSelectedSeats();
+    	});
         $(document).on("click", "#submitBtn", function() {
             let selectedSeats = [];
             $(".seat.selected").each(function() {
@@ -255,14 +314,15 @@ button {
 
           // 초기 예약된 좌석 데이터를 설정합니다 (예시)
           function initializeOccupiedSeats(occupiedSeats) {
+        	  $(".seat").removeClass("occupied");
             occupiedSeats.forEach(function (seat) {
               $(".seat[data-seat='" + seat + "']").addClass("occupied");
             });
           }
 
-          // 예: 이미 예약된 좌석 리스트 (서버로부터 가져올 수 있음)
-          initializeOccupiedSeats(["A1", "B2", "C3"]);
     	
+          
+          
     	//예매
     	loadMovies();
 		loadDates();
@@ -315,6 +375,11 @@ button {
                 }
             });
         });
+        $(document).on("click","#timeList li", function(){
+        	$("#timeList li").removeClass("selected");
+        	$(this).addClass("selected");
+        });
+        
 
     });
     

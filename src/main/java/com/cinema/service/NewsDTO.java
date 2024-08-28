@@ -1,17 +1,18 @@
 package com.cinema.service;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.sql.Timestamp;
 
-@Getter
-@Setter
-@NoArgsConstructor
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class NewsDTO {
-    private Long id;         // ID
-    private String title;    // 제목
-    private String content;  // 내용
-    private int views;       // 조회수
+    private Long num; // 게시물 번호
+    private String title; // 제목
+    private String content; // 내용
+    private Timestamp createdate; // 작성일
+    private int click; // 조회수
 }

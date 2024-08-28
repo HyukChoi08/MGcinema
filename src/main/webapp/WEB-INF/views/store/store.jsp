@@ -110,7 +110,7 @@ ul, li {
     justify-content: space-between; /* 리스트 항목 사이에 여백 추가 */
 }
 #cart-count, #giftcon {
-    display: inline-block; /* 텍스트와 함께 한 줄에 표시 */
+ display: inline-block; /* 텍스트와 함께 한 줄에 표시 */
 margin-left: 5px; /* 텍스트와 숫자 사이의 간격 추가 */
 padding: 0 4px; /* 숫자를 감싸는 여백 추가 */
 background-color: #ff0000; /* 배경색 */
@@ -122,6 +122,7 @@ height: 20px; /* 원형을 유지하기 위한 높이 */
 width: 20px; /* 원형을 유지하기 위한 너비 */
 text-align: center; /* 텍스트 중앙 정렬 */
 vertical-align: middle; /* 수직 중앙 정렬 */
+
 }
 .category_title {
     display: flex;
@@ -308,6 +309,32 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
 .category_title strong {
     padding-right: 50px; /* 버튼 너비만큼 여백을 추가하여 텍스트가 버튼에 겹치지 않게 함 */
 }
+ .no-underline {
+        text-decoration: none; /* 링크의 밑줄을 제거합니다 */
+         color: black;    
+    }
+
+    .no-underline:hover {
+        text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도록 합니다 */
+    }
+    .icon-link {
+    text-decoration: none; /* 링크의 밑줄 제거 */
+    color: inherit; /* 부모 요소의 텍스트 색상 상속 */
+    display: inline-block; /* 아이콘을 인라인 블록으로 설정 */
+	}
+
+	.icon-link img {
+    display: block; /* 이미지 아래 여백 제거 */
+	}
+	.no-style-link {
+    text-decoration: none; /* 밑줄 제거 */
+    color: inherit; /* 링크 색상 유지 */
+	}
+
+	.no-style-link:visited {
+    color: inherit; /* 방문 후 색상 유지 */
+	}
+	
 
     </style>
 </head>
@@ -320,17 +347,17 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
             </div>
             <div class="contegory_contents_wrap">
                 <ul class="category_content"> <!-- ul로 변경 -->
-                    <li data-href="D:\구임수\login.html">패키지</li>
-                    <li data-href="D:\구임수\order.html">영화관람관</li>
-                    <li data-href="D:\구임수\order.html">기프트카드</li>
-                    <li data-href="D:\구임수\order.html">콤보</li>
-                    <li data-href="D:\구임수\프로젝트\popcorn.html">팝콘</li>
-                    <li data-href="D:\구임수\order.html">음료</li>
-                    <li data-href="D:\구임수\order.html">스낵</li>
+                  	<li><a href="/package" class="no-underline">패키지</a></li>
+                    <li><a href="/admissionticket" class="no-underline">영화관람권</a></li>
+                    <li><a href="/giftcard" class="no-underline">기프트카드</a></li>
+                    <li><a href="/combo" class="no-underline">콤보</a></li>
+                    <li><a href="/popcorn" class="no-underline">팝콘</a></li>
+                    <li><a href="/drink" class="no-underline">음료</a></li>
+                    <li><a href="/snack" class="no-underline">스낵</a></li>
                 </ul>
                 <ul class="cart_content"> <!-- ul로 변경 -->
                     <li>내 기프트콘<span id="giftcon">0</span></li> 
-                    <li>장바구니<span id="cart-count">0</span></li> <!-- 장바구니 카운트 -->
+          		<li><a href="/cart" class="no-style-link">장바구니</a><span id="cart-count">0</span></li>
                 </ul>   
             </div>
             <div class="separator1"></div> <!-- 선을 contegory_contents_wrap 아래에 위치 -->
@@ -338,28 +365,26 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
                 <ul class="product_list">
                     <li>
                         <strong class="category_title">패키지<br>
-                            <a href="file:///D:/구임수/home.html" class="circle-button">+</a>
+                            <a href="/package" class="circle-button">+</a>
                         </strong> 
                         <div class="separator2"></div>
                         <ul class="category_inner">
                             <li class="product" id="1">
                                 <a href="/details?id=1" class="btn_category_product">  
-                                    <img src="/images/세트1.jpeg" alt="패키지1"></a>
+                                    <img src="/store_images/패키지1.png" alt="패키지1"></a>
                                     <div class="icon-container">
-                                        <div class="icon-item icon-left">
-                                            <div class="icon-item icon-left">
-                                                <img src="D:\구임수\이미지\장바구니.png" alt="Left Icon">
-                                                <div class="hover-text">장바구니</div>
-                                            </div>
-                                        </div> 
-                                        <div class="icon-item icon-center">
-                                            <img src="D:\구임수\이미지\선물하기.png" alt="Center Icon">
-                                            <div class="hover-text">선물하기</div>
-                                        </div>
-                                        <div class="icon-item icon-right">
-                                            <img src="D:\구임수\이미지\구매하기.png" alt="Right Icon">
-                                            <div class="hover-text">구매하기</div>
-                                        </div>
+										<a href="/cart" class="icon-item icon-left">
+    									<img src="/store_images/장바구니.png" alt="Left Icon">
+    									<span class="hover-text">장바구니</span>
+										</a>
+                                        <a href="/gift" class="icon-item icon-center">
+                                            <img src="/store_images/선물하기.png" alt="Center Icon">
+                                             <span class="hover-text">선물하기</span>  
+                                        </a>                                                                                  
+                                        <a href="/storepay" class="icon-item icon-right">
+                                            <img src="/store_images/구매하기.png" alt="Right Icon">
+                                            <span class="hover-text">구매하기</span>                          
+                                        </a>
                                     </div>
                                 <div class="product-info">
                                     <span class="product-name">패키지1</span><br>
@@ -368,21 +393,21 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
                                 </div>
                             </li>   
                             <li class="product" id="2">
-                                <a href="/details?id=22" class="btn_category_product" >  
-                                    <img src="D:\구임수\이미지\세트2.jpeg" alt="패키지2"></a>
+                                <a href="/details?id=2" class="btn_category_product" >  
+                                    <img src="/store_images/패키지2.png" alt="패키지2"></a>
                                     <div class="icon-container">
-                                        <div class="icon-item icon-left">
-                                            <img src="D:\구임수\이미지\장바구니.png" alt="Left Icon">
-                                            <div class="hover-text">장바구니</div>
-                                        </div>
-                                        <div class="icon-item icon-center">
-                                            <img src="D:\구임수\이미지\선물하기.png" alt="Center Icon">
-                                            <div class="hover-text">선물하기</div>
-                                        </div>
-                                        <div class="icon-item icon-right">
-                                            <img src="D:\구임수\이미지\구매하기.png" alt="Right Icon">
-                                            <div class="hover-text">구매하기</div>
-                                        </div>
+                                      	<a href="/cart" class="icon-item icon-left">
+    									<img src="/store_images/장바구니.png" alt="Left Icon">
+    									<span class="hover-text">장바구니</span>
+										</a>
+                                        <a href="/gift" class="icon-item icon-center">
+                                            <img src="/store_images/선물하기.png" alt="Center Icon">
+                                             <span class="hover-text">선물하기</span>  
+                                        </a>                                                                                  
+                                        <a href="/storepay" class="icon-item icon-right">
+                                            <img src="/store_images/구매하기.png" alt="Right Icon">
+                                            <span class="hover-text">구매하기</span>                          
+                                        </a>
                                     </div>
                                 <div class="product-info">
                                     <span class="product-name">패키지2</span><br>
@@ -392,7 +417,21 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
                             </li>
                             <li class="product" id="3">
                                 <a href="/details?id=3" class="btn_category_product">  
-                                    <img src="D:\구임수\이미지\세트3.jpeg" alt="패키지3"></a>
+                                    <img src="/store_images/패키지3.png" alt="패키지3"></a>
+                                     <div class="icon-container">
+                                       	<a href="/cart" class="icon-item icon-left">
+    									<img src="/store_images/장바구니.png" alt="Left Icon">
+    									<span class="hover-text">장바구니</span>
+										</a>
+                                        <a href="/gift" class="icon-item icon-center">
+                                            <img src="/store_images/선물하기.png" alt="Center Icon">
+                                             <span class="hover-text">선물하기</span>  
+                                        </a>                                                                                  
+                                        <a href="/storepay" class="icon-item icon-right">
+                                            <img src="/store_images/구매하기.png" alt="Right Icon">
+                                            <span class="hover-text">구매하기</span>                          
+                                        </a>
+                                    </div>
                                 <div class="product-info">
                                     <span class="product-name">패키지3</span><br>
                                     <span class="original-price">20,000원</span>
@@ -403,29 +442,72 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
                     </li>
                     <li>
                         <strong class="category_title">기프트 카드<br>
-                            <a href="file:///D:/구임수/home.html" class="circle-button">+</a>
+                            <a href="/giftcard" class="circle-button">+</a>
                         </strong>  
                         <div class="separator2"></div>
                         <ul class="category_inner">
                             <li class="product" id="7">
-                                <a href="/details?id=4" class="btn_category_product">
-                                    <img src="기프트카드1.png"></a>
+                                <a href="/details?id=7" class="btn_category_product">
+                                    <img src="store_images/기프트카드1.png"></a>
+                                     <div class="icon-container">
+                                        	<a href="/cart" class="icon-item icon-left">
+    									<img src="/store_images/장바구니.png" alt="Left Icon">
+    									<span class="hover-text">장바구니</span>
+										</a>
+                                        <a href="/gift" class="icon-item icon-center">
+                                            <img src="/store_images/선물하기.png" alt="Center Icon">
+                                             <span class="hover-text">선물하기</span>  
+                                        </a>                                                                                  
+                                        <a href="/storepay" class="icon-item icon-right">
+                                            <img src="/store_images/구매하기.png" alt="Right Icon">
+                                            <span class="hover-text">구매하기</span>                          
+                                        </a>
+                                    </div>
+                                 
                                     <div class="product-info">
                                         <span class="giftcard-name">기프트카드1</span><br>
                                         <span class="giftcardtext">금액충전형</span>
                                     </div>     
                             </li>
                             <li class="product" id="8">
-                                <a href="/details?id=5" class="btn_category_product">
-                                    <img src="기프트카드2.png"></a>
+                                <a href="/details?id=8" class="btn_category_product">
+                                    <img src="/store_images/기프트카드2.png"></a>
+                                     <div class="icon-container">
+                                       	<a href="/cart" class="icon-item icon-left">
+    									<img src="/store_images/장바구니.png" alt="Left Icon">
+    									<span class="hover-text">장바구니</span>
+										</a>
+                                        <a href="/gift" class="icon-item icon-center">
+                                            <img src="/store_images/선물하기.png" alt="Center Icon">
+                                             <span class="hover-text">선물하기</span>  
+                                        </a>                                                                                  
+                                        <a href="/storepay" class="icon-item icon-right">
+                                            <img src="/store_images/구매하기.png" alt="Right Icon">
+                                            <span class="hover-text">구매하기</span>                          
+                                        </a>
+                                    </div>
                                     <div class="product-info">
                                         <span class="giftcard-name">기프트카드2</span><br>
                                         <span class="giftcardtext">금액충전형</span>
                                     </div>     
                             </li>
                             <li class="product" id="9">
-                                <a href="/details?id=9" class="btn_category_product">
-                                    <img src="기프트카드3.png"></a>
+                                <a href="/details?id=13" class="btn_category_product">
+                                    <img src="/store_images/기프트카드3.png"></a>
+                                     <div class="icon-container">
+                                      	<a href="/cart" class="icon-item icon-left">
+    									<img src="/store_images/장바구니.png" alt="Left Icon">
+    									<span class="hover-text">장바구니</span>
+										</a>
+                                        <a href="/gift" class="icon-item icon-center">
+                                            <img src="/store_images/선물하기.png" alt="Center Icon">
+                                             <span class="hover-text">선물하기</span>  
+                                        </a>                                                                                  
+                                        <a href="/storepay" class="icon-item icon-right">
+                                            <img src="/store_images/구매하기.png" alt="Right Icon">
+                                            <span class="hover-text">구매하기</span>                          
+                                        </a>
+                                    </div>
                                     <div class="product-info">
                                         <span class="giftcard-name">기프트카드3</span><br>
                                         <span class="giftcardtext">금액충전형</span>
@@ -435,13 +517,27 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
                     </li>
                     <li>
                         <strong class="category_title">영화관람권<br>
-                            <a href="file:///D:/구임수/home.html" class="circle-button">+</a>
+                            <a href="/admissionticket" class="circle-button">+</a>
                         </strong>
                         <div class="separator2"></div> 
                         <ul class="category_inner">
                             <li class="product" id="4">
-                                <a href="/details?id=2" class="btn_category_product">
-                                    <img src="/images/영화관람권1.png"></a>
+                                <a href="/details?id=4" class="btn_category_product">
+                                    <img src="/store_images/영화관람권1.png"></a>
+                                    <div class="icon-container">
+                                        	<a href="/cart" class="icon-item icon-left">
+    									<img src="/store_images/장바구니.png" alt="Left Icon">
+    									<span class="hover-text">장바구니</span>
+										</a>
+                                        <a href="/gift" class="icon-item icon-center">
+                                            <img src="/store_images/선물하기.png" alt="Center Icon">
+                                             <span class="hover-text">선물하기</span>  
+                                        </a>                                                                                  
+                                        <a href="/storepay" class="icon-item icon-right">
+                                            <img src="/store_images/구매하기.png" alt="Right Icon">
+                                            <span class="hover-text">구매하기</span>                          
+                                        </a>
+                                    </div>
                                     <div class="product-info">
                                         <span class="tiket-name">영화관람권1</span><br>
                                         <span class="tiket-price">13,000원</span>
@@ -449,7 +545,21 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
                             </li>
                             <li class="product" id="5">
                                 <a href="/details?id=5"class="btn_category_product">
-                                    <img src="영화관람권2.png"></a>
+                                    <img src="/store_images/영화관람권2.png"></a>
+                                    <div class="icon-container">
+                                      	<a href="/cart" class="icon-item icon-left">
+    									<img src="/store_images/장바구니.png" alt="Left Icon">
+    									<span class="hover-text">장바구니</span>
+										</a>
+                                        <a href="/gift" class="icon-item icon-center">
+                                            <img src="/store_images/선물하기.png" alt="Center Icon">
+                                             <span class="hover-text">선물하기</span>  
+                                        </a>                                                                                  
+                                        <a href="/storepay" class="icon-item icon-right">
+                                            <img src="/store_images/구매하기.png" alt="Right Icon">
+                                            <span class="hover-text">구매하기</span>                          
+                                        </a>
+                                    </div>
                                     <div class="product-info">
                                         <span class="tiket-name">영화관람권2</span><br>
                                         <span class="tiket-price">17,000원</span>
@@ -457,7 +567,21 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
                             </li>
                             <li class="product" id="6">
                                 <a href="/details?id=6" class="btn_category_product">
-                                    <img src="영화관람권3.png"></a>
+                                    <img src="/store_images/영화관람권3.png"></a>
+                                    <div class="icon-container">
+                                       	<a href="/cart" class="icon-item icon-left">
+    									<img src="/store_images/장바구니.png" alt="Left Icon">
+    									<span class="hover-text">장바구니</span>
+										</a>
+                                        <a href="/gift" class="icon-item icon-center">
+                                            <img src="/store_images/선물하기.png" alt="Center Icon">
+                                             <span class="hover-text">선물하기</span>  
+                                        </a>                                                                                  
+                                        <a href="/storepay" class="icon-item icon-right">
+                                            <img src="/store_images/구매하기.png" alt="Right Icon">
+                                            <span class="hover-text">구매하기</span>                          
+                                        </a>
+                                    </div>
                                     <div class="product-info">
                                         <span class="tiket-name">영화관람권3</span><br>
                                         <span class="tiket-price">18,000원</span>
@@ -476,11 +600,11 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
                 MG시네마 기프트샵 이용하기.
             
         </div>
-        <img src="D:\구임수\이미지\기프트샵.png" alt="Image description" class="popup-image">
+        <img src="/store_images/기프트샵.png" alt="Image description" class="popup-image">
     </div>
     <div class="service_center">
         <h1>MG시네마고객센터</h1>   
-        <p><img src="D:\구임수\이미지\전화기.ico" alt="전화기" class="phone-icon">1544-0000</p>
+        <p><img src="/store_images/전화기.png" alt="전화기" class="phone-icon">1544-0000</p>
         <p>안녕하세요</p>
     </div>
 </body>

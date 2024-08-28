@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="java.sql.ResultSet, java.sql.PreparedStatement, java.sql.DriverManager, java.sql.Connection" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>${serviceHome.title}</title>
     <style>
+        /* 스타일은 동일합니다 */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -167,10 +169,10 @@
             <h2>고객센터 메뉴</h2>
             <div class="snb">
                 <ul>
-               		<li><a href="#">고객센터 메인<i></i></a></li>
-                    <li><a href="#">자주찾는 질문<i></i></a></li>
-                    <li class="on"><a href="#">공지/뉴스<i></i></a></li>
-                    <li><a href="#">이메일 문의<i></i></a></li>
+               		<li><a href="serviceHome">고객센터 메인<i></i></a></li>
+                    <li><a href="faq">자주찾는 질문<i></i></a></li>
+                    <li class="on"><a href="news">공지/뉴스<i></i></a></li>
+                    <li><a href="eaq">이메일 문의<i></i></a></li>
                     
                 </ul>
             </div>
@@ -179,7 +181,7 @@
         <div class="col-detail">
             <div class="customer_top">
                 <h2 class="tit">공지/뉴스</h2>
-                <p class="stit">CGV의 주요한 이슈 및 여러가지 소식들을 확인하실 수 있습니다.</p>
+                <p class="stit">MG Cinema의 주요한 이슈 및 여러가지 소식들을 확인하실 수 있습니다.</p>
             </div>
             <div class="search_area">
                 <legend><label for="c_select">검색</label></legend>
@@ -202,45 +204,80 @@
                 </ul>
             </div>
             <div class="search_result">
-                총<span class="num"> 99999건</span>이 검색되었습니다.
-            </div>
+                총<span class="num"> 99999건</span>이 검색되었습니다.               
+            </div><br>
+            <button class="add-button" title="추가하기">+</button>            
             <div class="tbl_area">
-                <table cellspacing="0" cellpadding="0" class="tbl_notice_list">
-                    <caption>목록</caption>
+            <%
+            // 데이터베이스 연결 및 데이터 조회
+            try {
+                // JDBC 드라이버 로드
+                Class.forName("com.mysql.cj.jdbc.Driver"); // 최신 드라이버 클래스 이름
+
+                // 데이터베이스 연결 정보
+                String db_address = "jdbc:mysql://localhost:3306/mgcinema";
+                String db_username = "root";
+                String db_pwd = "1234"; // 데이터베이스 비밀번호
+                Connection connection = DriverManager.getConnection(db_address, db_username, db_pwd);
+
+                // 쿼리문 선언
+                String selectQuery = "SELECT * FROM notice ORDER BY num DESC";
+                
+                // 쿼리 실행
+                PreparedStatement psmt = connection.prepareStatement(selectQuery);
+                ResultSet result = psmt.executeQuery();
+            %>
+                <table cellspacing="0" cellpadding="0" class="tbl_notice_list"><br>
                     <colgroup>
                         <col style="width:70px;">
                         <col style="width:160px;">
                         <col style="auto;">
                         <col style="width:140px;">
-                        <col style="width:120px">
+                        <col style="width:120px;">
                     </colgroup>
                     <thead>
                         <tr>
                             <th scope="col">번호</th>
                             <th scope="col">제목</th>
                             <th scope="col" class="tit">내용</th>
+                            <th scope="col">작성일</th>
                             <th scope="col">조회수</th>
+                            <th scope="col">관리</th>
                         </tr>
                     </thead>
                     <tbody>
                         <!-- 데이터 반복 -->
-                        <c:forEach var="news" items="${newsList}">
-                            <tr>
-                                <td>${news.id}</td>
-                                <td>${news.title}</td>
-                                <td class="txt">${news.content}</td>
-                                <td class="num">${news.views}</td>
-                            </tr>
-                        </c:forEach>
+                        <%
+                        while (result.next()) {
+                        %>
+                        <tr>
+                            <td><%=result.getInt("num") %></td>
+                            <td><%=result.getString("title") %></td>
+                            <td><a href="post_read.jsp?num=<%=result.getInt("num") %>"><%=result.getString("content") %></a></td>
+                            <td><%=result.getTimestamp("createdate") %></td>
+                            <td><%=result.getInt("click") %></td>
+                            <td>
+                                <button type="button" value="수정" onClick="location.href='post_modify.jsp?num=<%=result.getInt("num") %>'">수정</button>
+                                <button type="button" value="삭제" onClick="location.href='post_delete_send.jsp?num=<%=result.getInt("num") %>'">삭제</button>
+                            </td>
+                        </tr>
+                        <%
+                        }
+                        %>
                     </tbody>
                 </table>
+            <%
+            } catch (Exception ex) {
+                out.println("오류가 발생했습니다. 오류 메시 : " + ex.getMessage());
+            }
+            %>
             </div>
             <div class="paging">
                 <ul>
                     <li class="on"><a href="#">1</a></li>
                     <li><a href="#">2</a></li>
                 </ul>
-                <button class="btn-paging end" type="button" onclick="2'">끝</button>
+                <button class="btn-paging end" type="button" onclick="location.href='#'">끝</button>
             </div>
         </div>
     </div>

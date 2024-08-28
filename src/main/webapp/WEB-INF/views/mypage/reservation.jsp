@@ -109,10 +109,10 @@
         <!-- 사이드바 -->
         <div class="sidebar">
             <ul>
-                 <li><a href="/myhome">MY CGV HOME</a></li>
+                <li><a href="/myhome">MY HOME</a></li>
                 <li><a href="/reservation">나의 예매정보</a></li>
                 <li><a href="/payment">결제 내역</a></li>
-                <li><a href="/inquiry">1:1 문의</a></li>
+                <li><a href="/inquirylist">1:1 문의</a></li>
                 <li><a href="/profile">개인 정보 변경</a></li>
                 <li><a href="/cancel">회원 탈퇴</a></li>
 

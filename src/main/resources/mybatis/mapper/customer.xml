@@ -6,4 +6,24 @@
    from customer
    where id=#{param1}
 </select>
-</mapper>
+
+<update id="updateCusInfo" parameterType="com.cinema.mypage.CustomerDTO">
+    UPDATE customer
+    SET 
+        passwd = #{passwd},
+        nickname = #{nickname},
+        email = #{email},
+        region = #{region},
+        favorite = #{favorite},
+        mobile = #{mobile},
+        tellecom = #{tellecom},
+        updated = NOW(),
+        birthday = #{birthday}
+    WHERE id = #{id}
+</update>
+
+<delete id="deleteCustomer">
+   delete from customer where id=#{param1}
+</delete>
+
+</mapper>  

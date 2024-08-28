@@ -8,7 +8,6 @@ public class storeDTO {
 	int id;
 	String price;
 	String discount_price;
-	String product_type;
 	String composition;
 	String period;
 	String item_name;

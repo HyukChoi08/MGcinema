@@ -30,4 +30,8 @@
         INSERT INTO information (movie_id, theater_id, date, time)
         VALUES (#{movieId}, #{theaterId}, #{date}, #{time})
     </insert>
+    
+    <select id="getSeats" parameterType="String" resultType="com.cinema.ticket.seatDTO">
+    SELECT * FROM seatinfo WHERE sname = #{theaterId}
+	</select>
 </mapper>

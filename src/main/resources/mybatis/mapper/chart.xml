@@ -1,1 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cinema.chart.chartDAO"><!--무비차트-->
+<select id ="chartList" resultType="com.cinema.chart.chartDTO">
+	 select image ,reservationrate from chartList order by id 
+	</select>
+	
+<select id ="chartList1" resultType="com.cinema.chart.chartDTO">
+	 select image ,reservationrate from chartList order by reservationrate desc
+	</select>
+</mapper>

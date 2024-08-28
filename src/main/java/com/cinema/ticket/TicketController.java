@@ -1,5 +1,6 @@
 package com.cinema.ticket;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -56,11 +57,8 @@ public class TicketController {
 	
 	@PostMapping("/ticket/")
 	@ResponseBody
-	public String ticketdata(HttpServletRequest req) {
-		String mname = req.getParameter("mname");
-		String date = req.getParameter("date");
-		String time = req.getParameter("time");
-		String room = req.getParameter("room");
+	public String ticketdata(@RequestParam String mname, @RequestParam String date, @RequestParam String time, @RequestParam String room) {
+		
 		System.out.println(mname + date + time + room);
 		return "";
 	}
@@ -78,6 +76,15 @@ public class TicketController {
         tdao.reserveSeats(seats, movieId, theaterId, date, time);
         
         return "예매가 완료되었습니다.";
+    }
+	
+	@GetMapping("/seats")
+    @ResponseBody
+    public Map<String, Object> getSeats(@RequestParam("theaterId") String theaterId) {
+        List<seatDTO> seats = tdao.getSeats(theaterId);
+        Map<String, Object> response = new HashMap<>();
+        response.put("seats", seats);
+        return response;
     }
 	
 }
