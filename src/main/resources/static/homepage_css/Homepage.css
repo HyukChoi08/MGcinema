@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+.home-page {
+    padding: 20px;
+    background-color: #f0f0f0;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding-bottom: 60px;
+}
+
+/* 기존 navbar 스타일 */
+.navbar {
+    background-color: #333333;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.nav-links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+/* 슬라이더를 중앙에 배치하고, 컨테이너 너비 조정 */
+.promo-container {
+    margin: 0 auto; /* 가운데 정렬 */
+    max-width: 1000px; /* 원하는 최대 너비로 설정 */
+    overflow: hidden; /* 슬라이더가 컨테이너를 넘어서지 않도록 설정 */
+}
+
+.image-slide {
+    max-width: 100%; /* 부모 컨테이너의 최대 너비에 맞추기 */
+    height: auto;
+    border-radius: 10px;
+}
+
+/* slick-carousel 기본 스타일 */
+.slick-slide {
+    display: flex;
+    justify-content: center; /* 슬라이드 내용 중앙 정렬 */
+}
+
+.slick-track {
+    display: flex;
+    align-items: center; /* 슬라이드 중앙 정렬 */
+}

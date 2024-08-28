@@ -19,11 +19,17 @@
         tellecom = #{tellecom},
         updated = NOW(),
         birthday = #{birthday}
-    WHERE id = #{id}
+    WHERE id = #{id} 
 </update>
 
 <delete id="deleteCustomer">
    delete from customer where id=#{param1}
 </delete>
 
-</mapper>  
+<select id="getInquiryList" resultType="com.cinema.mypage.InquiryDTO">
+      select id,customer_id, title, content, answer, created, ancreated, current
+      from inquiry
+      where customer_id=#{param1}
+   </select>
+
+</mapper>

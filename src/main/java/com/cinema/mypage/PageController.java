@@ -1,12 +1,11 @@
 package com.cinema.mypage;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,8 +21,8 @@ import jakarta.servlet.http.HttpSession;
 public class PageController {
    @Autowired
    MypageDAO mdao;
-   InquiryDAO inquiryDAO;
-  
+   
+
    @GetMapping("/myhome") // 홈 페이지 매핑
    public String myhome() { 
       return "mypage/myhome";
@@ -38,15 +37,23 @@ public class PageController {
    public String payment() {
       return "mypage/payment";
    }
-   
-   @GetMapping("/inquirylist") //1:1 문의 내역 페이지 매핑
-   public String inquirylist() {
+
+   // 1:1문의
+   @GetMapping("/inquiry") // 메뉴 리스트 출력
+   public String getInquiryList(HttpSession session, Model model) {
+      CustomerDTO cusDTO = (CustomerDTO)(session.getAttribute("cusDTO"));
+      int customer_id = cusDTO.getId(); 
+      ArrayList<InquiryDTO> arrInqDTO = mdao.getInquiryList(customer_id);
+      System.out.println("arrInqDTO size="+ arrInqDTO.size());
+      model.addAttribute("inquiries", arrInqDTO);
       return "mypage/inquirylist";
+      
    }
-   @GetMapping("/inquiry") //1:1 문의 내역 페이지 매핑
-   public String inquiry() {
-      return "mypage/inquiry";
-   }
+   
+//   @GetMapping("/inquirydetail")
+//   public String getInquiryDetail(HttpServletRequest req, )
+   
+    
    @GetMapping("/profile") //회원 정보 변경 페이지 매핑
    public String profile(HttpSession session) {
       // 패스워드 확인 여부를 세션에서 확인
@@ -137,7 +144,12 @@ public class PageController {
 
        // 세션에서 사용자 정보를 가져옴
        CustomerDTO cusDTO = (CustomerDTO) session.getAttribute("cusDTO");
-       
+
+       if (cusDTO == null) {
+           redirectAttributes.addFlashAttribute("error", "로그인이 필요합니다.");
+           return "redirect:/login";  // 로그인 페이지로 리다이렉트
+       }
+
        // 패스워드와 패스워드 확인 값이 일치하지 않으면 오류 메시지와 함께 페이지로 리다이렉트
        if (!passwd.equals(passwd1)) {
            redirectAttributes.addFlashAttribute("error", "패스워드가 일치하지 않습니다.");
@@ -158,16 +170,11 @@ public class PageController {
        session.invalidate();
 
        // 홈 페이지로 리다이렉트
-       return "redirect:/myhome";  // 홈 페이지 경로가 맞는지 확인 필요
+       return "redirect:/cinema";  // 홈 페이지 경로가 맞는지 확인 필요
        }
+   
 
-   @GetMapping
-   public String showInquiryForm(Model model) {
-       // 나의 문의 내역을 가져와서 JSP에 전달
-       List<InquiryDTO> inquiries = inquiryDAO.getList(0); // start를 0으로 하여 모든 문의 목록 조회
-       model.addAttribute("inquiries", inquiries);
-       return "inquiry";
-   }
-  
+
+
+   
 }
-

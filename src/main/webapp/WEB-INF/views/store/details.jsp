@@ -253,7 +253,43 @@
    		.no-underline:hover {
         text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도록 합니다 */
     	}
-      
+     
+     
+         p {
+            margin: 0;
+            margin-right: 15px; /* Space between text and input */
+        }
+
+		.total-container {
+		    display: flex;
+		    align-items: center; /* 수직 가운데 정렬 */
+		    gap: 5px; /* 요소 간 간격 조정 */
+		}
+		  #totalprice {
+            border: none; /* 테두리 제거 */
+            text-align: right; /* 텍스트 오른쪽 정렬 */
+            width: 160px; /* 너비 조정 */
+            background-color: transparent; /* 배경색 투명 (선택 사항) */
+            padding: 5px; /* 패딩 추가 (선택 사항) */
+            text-indent: -5px; /* 텍스트를 왼쪽으로 이동 (필요에 따라 조정) */
+            font-size:24px;
+            color:red;
+            
+        }
+     .bottom {
+    	display: flex; /* 버튼을 수평으로 배치합니다 */
+    	gap: 50px; /* 버튼 사이에 일정한 간격을 줍니다 */
+    	margin-top:20px;
+		}
+	.no-style-link {
+    text-decoration: none; /* 밑줄 제거 */
+    color: inherit; /* 링크 색상 유지 */
+	}
+
+	.no-style-link:visited {
+    color: inherit; /* 방문 후 색상 유지 */
+	}
+	
     </style>
 </head>
 <body>
@@ -265,8 +301,8 @@
             </div>
             <div class="contegory_contents_wrap">
                 <ul class="category_content">
-                    <li><a href="/pack" class="no-underline">패키지</a></li>
-                    <li><a href="/admissionticket" class="no-underline">영화관람관</a></li>
+                    <li><a href="/package" class="no-underline">패키지</a></li>
+                    <li><a href="/admissionticket" class="no-underline">영화관람권</a></li>
                     <li><a href="/giftcard" class="no-underline">기프트카드</a></li>
                     <li><a href="/combo" class="no-underline">콤보</a></li>
                     <li><a href="/popcorn" class="no-underline">팝콘</a></li>
@@ -275,7 +311,7 @@
                 </ul>
                 <ul class="cart_content">
                     <li>내 기프트콘<span id="giftcon">0</span></li> 
-                    <li>장바구니<span id="cart-count">0</span></li>
+                <li><a href="/cart" class="no-style-link">장바구니</a><span id="cart-count">0</span></li>
                 </ul>   
             </div>
             <div class="separator1"></div>
@@ -283,12 +319,12 @@
                 <div>
                  	<c:forEach items="${arItem}" var="item">
         				<div>
-            				<strong class="category_title">${item.item_name}</strong>
+            				<strong class="category_title">${item.item_name}</strong><input type='text' id='hiddenid'><input type='text' id='userid'>
             				<input type=hidden id="idid" value='${item.id}'><br>
             					<div class="separator2"></div>
 					            <ul class="category_inner">
 					                <li class="left" id="1">
-					                    <img src="${imagePath}" alt="패키지1">
+					                    <img src="${imagePath}" id="imagepath" alt="패키지1">
 					                </li>
 					                <li class="right">
 					                   	<span  id="discount">${item.discount_price}</span>
@@ -330,13 +366,20 @@
 											        </c:otherwise>
 											    </c:choose>
         									</span>
-        									<input type="number" id="cnt" min="1" value="1" style="width:50px; margin-right:100px;">
         									
-        									<input type="text" id="price" value="${item.discount_price}원" readonly>
-        									 <div class="inline-container">
-        										<p>총 결제금액</p>
-        										<input type="text" id="totalprice">
-    										</div> 
+        								 <div class="right-align">
+        								 	<input type="number" id="cnt" min="1" value="1" style="width:50px; margin-right:100px;">
+									        <input type="text" id="price" value="${item.discount_price}원"  readonly ><br><br><br><br>
+									        	<div class="total-container">
+									            	<p>총 결제금액</p>
+									            	<input type="text" id="totalprice" style="border:none; text-align: right;" readonly>원
+									        	</div>
+									    </div>
+									  <div class='bottom'>
+									    <input type='button' id='btncart' value='장바구니'>
+									    <input type='button' id='btngift' value='선물하기'>
+									    <input type='button' id='btnbuy' value='구매하기'>
+									  </div>    
 					                </li>
 					               
 					            </ul>        
@@ -350,48 +393,131 @@
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
-$(document).ready(function() {
-    var $discountSpan = $('#discount');
-    
-    // span 요소의 텍스트를 가져옴
-    var originalText = $discountSpan.text().trim();
-    
-    // '금액충전형'인지 확인
-    if (originalText === '금액충전형') {
-        // '금액충전형'일 경우 아무 작업도 하지 않음
-        return;
+$(document)
+.ready(function() {
+	let discount_price = $('#discount').text().trim(); // #discount 요소의 텍스트를 읽어옴
+	let original_price = $('#original').text().trim();
+	
+	if(discount_price==original_price){
+		
+		 $('#original').text('');  // 빈 문자열을 설정합니다.
+	}
+	
+    if (discount_price == '금액충전형') {
+        $('#price').val('10,000원'); // #price 요소의 값을 '10,000원'으로 설정
+        $('#cnt').replaceWith(`
+                <select id="giftprice" style="width:100px; margin-right: 58px;" >
+                    <option value="1">10,000</option>
+                    <option value="2">20,000</option>
+                    <option value="3">30,000</option>
+                    <option value="4">40,000</option>
+                    <option value="5">50,000</option>
+                </select>  
+                `)
+      $('#totalprice').val('10,000');          
     }
-    
-    // 텍스트에서 '원'을 제거하고 숫자 부분만 추출
-    var numericValue = originalText.replace(/원/g, '').replace(/,/g, '').trim();
-    
-    // 숫자 형식으로 변환 (쉼표를 추가)
-    var formattedValue = Number(numericValue).toLocaleString();
-    
-    // 새로운 값으로 텍스트 설정 (숫자에 '원'을 붙임)
-    $discountSpan.text(formattedValue + '원');
-    
-    // 초기 가격을 추출
-    var initialPrice = Number(numericValue);
+    else {
+        // discount_price가 '금액충전형'이 아닌 경우 #discount에 '원'을 붙임
+        $('#discount').text(discount_price + '원');
+        $('#totalprice').val(discount_price);
+    }
+ let original= $('#original').text().trim();
+ console.log("111="+original);
+ if (original !== null && original !== '') {
+     $('#original').text(original + '원');
+ }
 
-    let price=$('#price').val();
-	console.log(price);
+ let currentUrl = window.location.href;
+
+ // 비교할 URL을 정의합니다.
+ let targetUrl = 'http://localhost:8081/details?id=7';
+	
+ if(currentUrl==targetUrl){
+	 $('#btncart').hide();
+ }
+ 
+ 
+ var queryString = window.location.search;
+ var urlParams = new URLSearchParams(queryString);
+ var id = urlParams.get('id');
+ 
+ // ID 값을 콘솔에 출력
+ console.log('ID:', id);
+ $('#hiddenid').val(id);
+ $('#userid').val('안녕하세요');
+	let userid= $('#userid').val();
+console.log(userid);
+ 
+
+
+ 
+})
+.on('change','#cnt', function() { // 'change' 이벤트 사용
+    let cnt = $('#cnt').val();
     
-    
-});    
-    
-    
-    // 수량 입력 필드의 값이 변경될 때마다 총 가격을 업데이트
-    $('#cnt').on('input', function() {
-        var quantity = $(this).val(); // 현재 수량 값 가져오기
-        if (quantity) {
-            var totalPrice = initialPrice * quantity; // 총 가격 계산
-            $('#price').val(totalPrice.toLocaleString() + '원'); // 총 가격 표시 업데이트
-        } else {
-            $('#price').val('0원'); // 수량이 없으면 총 가격을 0으로 설정
-        }
-    
-});
+    if (!cnt) {
+        cnt = 1; // 수량이 비어있거나 유효하지 않은 경우 기본값으로 1 설정
+    }
+
+    console.log(cnt);
+  
+    let discountText = $('#discount').text();
+	let discount = parseInt(discountText.split('원')[0].replace(/,/g, '')); 
+	    console.log("discount: " + discount);
+	    // 초기 가격을 할인 가격으로 설정
+	   let price = discount;   
+	  
+        let totalPrice = price * parseInt(cnt);
+        let total=$('#price').val(totalPrice.toLocaleString() + '원'); // 총 가격 표시 업데이트
+        $('#totalprice').val(totalPrice.toLocaleString()  );
+       
+  
+})
+.on('change','#giftprice',function(){
+	let giftprice=$('#giftprice option:selected').text();
+	console.log(giftprice);
+	let price=$('#price').val();
+	$('#totalprice').val(price);
+	
+	$('#price').val(giftprice+'원');
+	$('#totalprice').val('');
+	$('#totalprice').val(giftprice ); // Set the value of the #totalprice field
+})
+.on('click','#btnbuy',function(){
+	
+	  window.location.href = '/storepay'; // 클릭 시 페이지 이동
+	
+	 	
+})
+.on('click','#btncart',function(){
+	
+		let id=$('#hiddenid').val();
+		let userid=$('#userid').val();
+		console.log("id"+id);
+		console.log("userid"+userid);
+		let cnt=$('#cnt').val();
+		console.log(cnt);
+		let totalprice=$('#totalprice').val();
+		console.log(totalprice);
+
+	
+	
+		
+	  //내일 장바구니 테이블에 insert 하기 이거 공부해오기	
+	  //window.location.href = '/cart'; // 클릭 시 페이지 이동
+		 	
+})
+.on('click','#btngift',function(){
+
+	  window.location.href = '/gift'; // 클릭 시 페이지 이동
+	  
+	  
+	  
+	  
+		 	
+})
+
+
    
 </script>
 </html>

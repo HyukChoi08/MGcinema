@@ -15,7 +15,7 @@ public class chartController {
 @Autowired chartDAO cdao;
 @Autowired chartArrayDAO cadao;	
 
-@GetMapping("/")
+@GetMapping("/chart")
 public String test() {
 	return "chart/chartList";
 }

@@ -62,7 +62,7 @@ public class HomeController {
 		
 		return "store/admission_ticket";
 	}
-	@GetMapping("/pack")
+	@GetMapping("/package")
 	public String pack(HttpServletRequest req) {
 		
 		return "store/package";
@@ -77,9 +77,27 @@ public class HomeController {
 		
 		return "store/snack";
 	}
+	@GetMapping("/storepay")
+	public String storepay(HttpServletRequest req) {
+		
+		
+		return "store/storepay";
+	}
+	@GetMapping("/cart")
+	public String cart(HttpServletRequest req) {
+		
+		
+		return "store/cart";
+	}
+	@GetMapping("/gift")
+	public String gift(HttpServletRequest req) {
+		
+		
+		return "store/gift";
+	}
 	
 	
 	
 	
-
+	
 }
