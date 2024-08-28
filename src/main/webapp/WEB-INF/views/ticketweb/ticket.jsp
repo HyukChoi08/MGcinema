@@ -6,18 +6,22 @@
 <meta charset="UTF-8">
 <title>Movie Ticket Reservation</title>
 <style>
-body {
-    display: flex;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-    text-align: center;
-    font-family: Arial, sans-serif;
-}
+/* body { */
+/*     margin: 0; */
+/*     padding: 0; */
+/*     font-family: Arial, sans-serif; */
+/*     display: flex; */
+/*     justify-content: center; */
+/*     align-items: center; */
+/*     min-height: 100vh; */
+/* } */
 .maincontainer {
-	width: 1000px;
-	
+    width: 1000px; /* 너비를 설정하여 가운데 정렬 */
+    margin: 0 auto; /* 자동 마진으로 가운데 정렬 */
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 
 .container {
     width: 1000px;
@@ -25,7 +29,13 @@ body {
     background-color: #f4f4f4;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    
+}
+
+header, footer {
+    width: 100%;
+    background-color: #f4f4f4;
+    padding: 10px 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .list-container {
@@ -161,6 +171,7 @@ body {
 </style>
 </head>
 <body>
+ <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
 <div class="maincontainer">
     <div class="container" id="selectionScreen">
         <h1>예매</h1> <button id="btnclear">예매 초기화</button>
@@ -214,6 +225,7 @@ body {
 	    </div>
     </div>
 </div>
+<%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
