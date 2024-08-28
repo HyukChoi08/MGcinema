@@ -93,7 +93,7 @@
     </style>
 </head>
 <body>
-
+   <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
     <!-- 프로필 섹션 -->
     <div class="profile-section">
         <img src="profile-placeholder.png" width="80" height="80">
@@ -151,7 +151,7 @@
             </div>
         </div>
     </div>
-
+    <%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
