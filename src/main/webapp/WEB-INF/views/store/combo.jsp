@@ -240,6 +240,15 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
 .no-underline:hover {
 text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도록 합니다 */
 }
+.no-style-link {
+   text-decoration: none; /* 밑줄 제거 */
+   color: inherit; /* 링크 색상 유지 */
+}
+
+.no-style-link:visited {
+   color: inherit; /* 방문 후 색상 유지 */
+}
+
 
     </style>
 </head>
@@ -253,8 +262,8 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
             </div>
             <div class="contegory_contents_wrap">
                 <ul class="category_content"> <!-- ul로 변경 -->
-                    <li><a href="/pack" class="no-underline">패키지</a></li>
-                    <li><a href="/admissionticket" class="no-underline">영화관람관</a></li>
+                    <li><a href="/package" class="no-underline">패키지</a></li>
+                    <li><a href="/admissionticket" class="no-underline">영화관람권</a></li>
                     <li><a href="/giftcard" class="no-underline">기프트카드</a></li>
                     <li><a href="/combo" class="no-underline">콤보</a></li>
                     <li><a href="/popcorn" class="no-underline">팝콘</a></li>
@@ -263,7 +272,7 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
                 </ul>
                 <ul class="cart_content"> <!-- ul로 변경 -->
                     <li>내 기프트콘<span id="giftcon">0</span></li> 
-                    <li>장바구니<span id="cart-count">0</span></li> <!-- 장바구니 카운트 -->
+                   	<li><a href="/cart" class="no-style-link">장바구니</a><span id="cart-count">0</span></li>
                 </ul>   
             </div>
             <div class="separator1"></div> <!-- 선을 contegory_contents_wrap 아래에 위치 -->
@@ -276,24 +285,22 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
                         </strong> 
                         <div class="separator2"></div>
                         <ul class="category_inner">
-                            <li class="product">
-                                <a href="file:///D:/구임수/home.html" class="btn_category_product">  
-                                    <img src="D:\구임수\이미지\세트1.jpeg" alt="팝콘1"></a>
-                                    <div class="icon-container">
-                                        <a href="file:///D:/구임수/login.html" class="icon-item icon-left">  
-                                            <div class="icon-item icon-left">
-                                                <img src="D:\구임수\이미지\장바구니.png" alt="Left Icon">
-                                                <div class="hover-text">장바구니</div>
-                                            </div>
-                                        </a>  
-                                        <div class="icon-item icon-center">
-                                            <img src="D:\구임수\이미지\선물하기.png" alt="Center Icon">
-                                            <div class="hover-text">선물하기</div>
-                                        </div>
-                                        <div class="icon-item icon-right">
-                                            <img src="D:\구임수\이미지\구매하기.png" alt="Right Icon">
-                                            <div class="hover-text">구매하기</div>
-                                        </div>
+                            <li class="product" id="13">
+                                <a href="/details?id=13" class="btn_category_product">  
+                                    <img src="/store_images/라지콤보.jpg" alt="팝콘1"></a>
+                                     <div class="icon-container">
+										<a href="/cart" class="icon-item icon-left">
+    									<img src="/store_images/장바구니.png" alt="Left Icon">
+    									<span class="hover-text">장바구니</span>
+										</a>
+                                        <a href="/gift" class="icon-item icon-center">
+                                            <img src="/store_images/선물하기.png" alt="Center Icon">
+                                             <span class="hover-text">선물하기</span>  
+                                        </a>                                                                                  
+                                        <a href="/storepay" class="icon-item icon-right">
+                                            <img src="/store_images/구매하기.png" alt="Right Icon">
+                                            <span class="hover-text">구매하기</span>                          
+                                        </a>
                                     </div>
                                 <div class="product-info">
                                     <span class="product-name">팝콘1</span><br>
@@ -301,22 +308,22 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
                                    
                                 </div>
                             </li>   
-                            <li class="product">
-                                <a href="file:///D:/구임수/home.html" class="btn_category_product">  
-                                    <img src="D:\구임수\이미지\세트2.jpeg" alt="패키지2"></a>
-                                    <div class="icon-container">
-                                        <div class="icon-item icon-left">
-                                            <img src="D:\구임수\이미지\장바구니.png" alt="Left Icon">
-                                            <div class="hover-text">장바구니</div>
-                                        </div>
-                                        <div class="icon-item icon-center">
-                                            <img src="D:\구임수\이미지\선물하기.png" alt="Center Icon">
-                                            <div class="hover-text">선물하기</div>
-                                        </div>
-                                        <div class="icon-item icon-right">
-                                            <img src="D:\구임수\이미지\구매하기.png" alt="Right Icon">
-                                            <div class="hover-text">구매하기</div>
-                                        </div>
+                            <li class="product" id="14">
+                                <a href="/details?id=14" class="btn_category_product">  
+                                    <img src="/store_images/더블콤보.jpg" alt="패키지2"></a>
+                                     <div class="icon-container">
+										<a href="/cart" class="icon-item icon-left">
+    									<img src="/store_images/장바구니.png" alt="Left Icon">
+    									<span class="hover-text">장바구니</span>
+										</a>
+                                        <a href="/gift" class="icon-item icon-center">
+                                            <img src="/store_images/선물하기.png" alt="Center Icon">
+                                             <span class="hover-text">선물하기</span>  
+                                        </a>                                                                                  
+                                        <a href="/storepay" class="icon-item icon-right">
+                                            <img src="/store_images/구매하기.png" alt="Right Icon">
+                                            <span class="hover-text">구매하기</span>                          
+                                        </a>
                                     </div>
                                 <div class="product-info">
                                     <span class="product-name">팝콘2</span><br>
@@ -324,44 +331,44 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
                                 
                                 </div>          
                             </li>
-                            <li class="product">
-                                <a href="file:///D:/구임수/home.html" class="btn_category_product">  
-                                    <img src="D:\구임수\이미지\세트2.jpeg" alt="패키지2"></a>
-                                    <div class="icon-container">
-                                        <div class="icon-item icon-left">
-                                            <img src="D:\구임수\이미지\장바구니.png" alt="Left Icon">
-                                            <div class="hover-text">장바구니</div>
-                                        </div>
-                                        <div class="icon-item icon-center">
-                                            <img src="D:\구임수\이미지\선물하기.png" alt="Center Icon">
-                                            <div class="hover-text">선물하기</div>
-                                        </div>
-                                        <div class="icon-item icon-right">
-                                            <img src="D:\구임수\이미지\구매하기.png" alt="Right Icon">
-                                            <div class="hover-text">구매하기</div>
-                                        </div>
+                            <li class="product" id="15">
+                                <a href="/details?id=15" class="btn_category_product">  
+                                    <img src="/store_images/MG콤보.jpg" alt="패키지2"></a>
+                                     <div class="icon-container">
+										<a href="/cart" class="icon-item icon-left">
+    									<img src="/store_images/장바구니.png" alt="Left Icon">
+    									<span class="hover-text">장바구니</span>
+										</a>
+                                        <a href="/gift" class="icon-item icon-center">
+                                            <img src="/store_images/선물하기.png" alt="Center Icon">
+                                             <span class="hover-text">선물하기</span>  
+                                        </a>                                                                                  
+                                        <a href="/storepay" class="icon-item icon-right">
+                                            <img src="/store_images/구매하기.png" alt="Right Icon">
+                                            <span class="hover-text">구매하기</span>                          
+                                        </a>
                                     </div>
                                 <div class="product-info">
                                     <span class="product-name">팝콘3</span><br>
                                     <span class="original-price">37,000원</span>
                                 </div>          
                             </li>
-                            <li class="product">
-                                <a href="file:///D:/구임수/home.html" class="btn_category_product">  
-                                    <img src="D:\구임수\이미지\세트2.jpeg" alt="패키지2"></a>
-                                    <div class="icon-container">
-                                        <div class="icon-item icon-left">
-                                            <img src="D:\구임수\이미지\장바구니.png" alt="Left Icon">
-                                            <div class="hover-text">장바구니</div>
-                                        </div>
-                                        <div class="icon-item icon-center">
-                                            <img src="D:\구임수\이미지\선물하기.png" alt="Center Icon">
-                                            <div class="hover-text">선물하기</div>
-                                        </div>
-                                        <div class="icon-item icon-right">
-                                            <img src="D:\구임수\이미지\구매하기.png" alt="Right Icon">
-                                            <div class="hover-text">구매하기</div>
-                                        </div>
+                            <li class="product" id="16">
+                                <a href="/details?id=16" class="btn_category_product">  
+                                    <img src="/store_images/스몰세트.jpg" alt="패키지2"></a>
+                                     <div class="icon-container">
+										<a href="/cart" class="icon-item icon-left">
+    									<img src="/store_images/장바구니.png" alt="Left Icon">
+    									<span class="hover-text">장바구니</span>
+										</a>
+                                        <a href="/gift" class="icon-item icon-center">
+                                            <img src="/store_images/선물하기.png" alt="Center Icon">
+                                             <span class="hover-text">선물하기</span>  
+                                        </a>                                                                                  
+                                        <a href="/storepay" class="icon-item icon-right">
+                                            <img src="/store_images/구매하기.png" alt="Right Icon">
+                                            <span class="hover-text">구매하기</span>                          
+                                        </a>
                                     </div>
                                 <div class="product-info">
                                     <span class="product-name">팝콘4</span><br>
@@ -369,52 +376,7 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
                                 
                                 </div>          
                             </li>
-                            <li class="product">
-                                <a href="file:///D:/구임수/home.html" class="btn_category_product">  
-                                    <img src="D:\구임수\이미지\세트2.jpeg" alt="패키지2"></a>
-                                    <div class="icon-container">
-                                        <div class="icon-item icon-left">
-                                            <img src="D:\구임수\이미지\장바구니.png" alt="Left Icon">
-                                            <div class="hover-text">장바구니</div>
-                                        </div>
-                                        <div class="icon-item icon-center">
-                                            <img src="D:\구임수\이미지\선물하기.png" alt="Center Icon">
-                                            <div class="hover-text">선물하기</div>
-                                        </div>
-                                        <div class="icon-item icon-right">
-                                            <img src="D:\구임수\이미지\구매하기.png" alt="Right Icon">
-                                            <div class="hover-text">구매하기</div>
-                                        </div>
-                                    </div>
-                                <div class="product-info">
-                                    <span class="product-name">팝콘5</span><br>
-                                    <span class="original-price">37,000원</span>
-                                
-                                </div>          
-                            </li>
-                            <li class="product">
-                                <a href="file:///D:/구임수/home.html" class="btn_category_product">  
-                                    <img src="D:\구임수\이미지\세트2.jpeg" alt="패키지2"></a>
-                                    <div class="icon-container">
-                                        <div class="icon-item icon-left">
-                                            <img src="D:\구임수\이미지\장바구니.png" alt="Left Icon">
-                                            <div class="hover-text">장바구니</div>
-                                        </div>
-                                        <div class="icon-item icon-center">
-                                            <img src="D:\구임수\이미지\선물하기.png" alt="Center Icon">
-                                            <div class="hover-text">선물하기</div>
-                                        </div>
-                                        <div class="icon-item icon-right">
-                                            <img src="D:\구임수\이미지\구매하기.png" alt="Right Icon">
-                                            <div class="hover-text">구매하기</div>
-                                        </div>
-                                    </div>
-                                <div class="product-info">
-                                    <span class="product-name">팝콘6</span><br>
-                                    <span class="original-price">37,000원</span>
-                                
-                                </div>          
-                            </li>
+                           
                         </ul>
                     </li>
                 </ul>

@@ -253,7 +253,7 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
             </div>
             <div class="contegory_contents_wrap">
                 <ul class="category_content"> <!-- ul로 변경 -->
-                    <li><a href="/pack" class="no-underline">패키지</a></li>
+                    <li><a href="/package" class="no-underline">패키지</a></li>
                     <li><a href="/admissionticket" class="no-underline">영화관람관</a></li>
                     <li><a href="/giftcard" class="no-underline">기프트카드</a></li>
                     <li><a href="/combo" class="no-underline">콤보</a></li>
