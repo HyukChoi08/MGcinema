@@ -5,5 +5,7 @@ import lombok.Data;
 @Data
 public class timesDTO {
 	public String begintime;
+	public String endtime;
 	public int lestseat;
+	public int allseat;
 }

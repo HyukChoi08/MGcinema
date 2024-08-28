@@ -92,7 +92,7 @@ body {
     color: blue;
 }
 
-button {
+#button {
     padding: 3px;
     margin-top: 20px;
     width: 90px;
@@ -123,7 +123,11 @@ button {
   margin-top: 4px;
   background-color: #ddd;
   cursor: pointer;
-  display: inline-block; 
+  display: inline-block;
+  font-size:10px;
+  background-color:#666666;
+  color:#ffffff;
+  text-align:center;
 }
 
 .seat.selected {
@@ -131,8 +135,9 @@ button {
 }
 
 .seat.occupied {
-  background-color: #444;
+  background-color: #bbbbbb;
   cursor: not-allowed;
+  color:#ffffff;
 }
 .foots {
 	width:1000px;
@@ -145,6 +150,12 @@ button {
 }
 #btnclear {
     margin-left: 90%;
+}
+#seatinfo {
+	display: none;
+}
+.additional-info {
+	display: flex;
 }
 
 </style>
@@ -168,6 +179,27 @@ button {
             </div>
         </div>
     </div>
+    <div id="seatinfo">
+    	<p id="theaterInfo"></p>
+    	<p id="movieTime"></p>
+    	<p id="personInfo"></p>
+    	<div class="additional-info">
+    		<p>일반</p>
+            <button class="number-button" onclick="selectTicket('adult', 0)">0</button>
+            <button class="number-button" onclick="selectTicket('adult', 1)">1</button>
+            <button class="number-button" onclick="selectTicket('adult', 2)">2</button>
+            <button class="number-button" onclick="selectTicket('adult', 3)">3</button>
+            <button class="number-button" onclick="selectTicket('adult', 4)">4</button>
+        </div>
+        <div class="additional-info">
+        	<p>청소년</p>
+            <button class="number-button" onclick="selectTicket('youth', 0)">0</button>
+            <button class="number-button" onclick="selectTicket('youth', 1)">1</button>
+            <button class="number-button" onclick="selectTicket('youth', 2)">2</button>
+            <button class="number-button" onclick="selectTicket('youth', 3)">3</button>
+            <button class="number-button" onclick="selectTicket('youth', 4)">4</button>
+        </div>
+	</div>
     <div class="seat-selection" id="seatSelectionScreen">
         
     </div>
@@ -185,242 +217,280 @@ button {
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
-    $(document).ready(function() {
-    	$(document).on("click","#reserveBtn", function(){
-    		let mname = $("#movieList li.selected").text();
-    		let roomId = $("#theaterList li.selected").text().split("-")[0];
-            let date = $("#dateList li.selected").data("id");
-            let begin = $("#timeList li.selected").data("id");
-            if(mname == "") {
-            	alert("영화를 선택해주세요");
-            	return;
-            }
-            if(date == "" || date == null) {
-            	alert("날짜를 선택해주세요");
-            	return;
-            }
-            if(roomId == "") {
-            	alert("극장을 선택해주세요");
-            	return;
-            }
-            if(begin == "" || begin == null) {
-            	alert("시간을 선택해주세요");
-            	return;
-            }
-            
-    		$("#selectionScreen").hide();
-            $("#seatSelectionScreen").show();
-            $("#confirmBtn").show();
-            $("#reserveBtn").hide();
-            $("#submitBtn").show();
-            let theaterId = roomId;
-            console.log(theaterId);
-            $.ajax({
-                type: "GET",
-                url: "/seats",
-                data: { theaterId: theaterId },
-                success: function(response) {
-                    const seatsData = response.seats[0];
-                    $(".seat-selection").empty();
+$(document).ready(function() {
 
-                    // 좌석 키(열 이름)를 알파벳 순으로 정렬합니다.
-                    const sortedSeatKeys = Object.keys(seatsData).filter(key => key.match(/^[a-z]$/)).sort();
+    let totalTickets = 0;
+    let adultTicketCount = 0;
+    let youthTicketCount = 0;
 
-                    sortedSeatKeys.forEach(key => {
-                        const value = seatsData[key];
-                        
-                        if (value > 0) {
-                            const rowDiv = $("<div></div>").addClass("seat-row").attr("data-row", key);
 
-                            // 행 레이블을 추가합니다.
-                            const labelDiv = $("<div></div>").addClass("seat-row-label").text(key.toUpperCase()+"열-");
-                            rowDiv.append(labelDiv);
+    function selectTicket(type, count) {
+        if (type === 'adult') {
+            totalTickets -= adultTicketCount;
+            adultTicketCount = count;
+            totalTickets += adultTicketCount;
+        } else if (type === 'youth') {
+            totalTickets -= youthTicketCount;
+            youthTicketCount = count;
+            totalTickets += youthTicketCount;
+        }
 
-                            for (let i = 1; i <= value; i++) {
-                                const seatId = key + i; // 예: "a1", "a2"
-                                const seatDiv = $("<div></div>").addClass("seat").attr("data-seat", seatId);
-                                rowDiv.append(seatDiv);
-                            }
-                            $(".seat-selection").append(rowDiv);
+        // 최대 선택 가능 좌석 수를 초과하면 알림 표시
+        if ($(".seat.selected").length > totalTickets) {
+            alert("선택된 티켓 수만큼만 좌석을 선택할 수 있습니다.");
+            // 마지막 선택을 해제하거나 추가 조치를 수행할 수 있음
+            $(".seat.selected").last().removeClass("selected");
+        }
+
+        console.log("Total Tickets: ", totalTickets);
+    }
+
+    $(document).on("click","#reserveBtn", function(){
+        let mname = $("#movieList li.selected").text();
+        let roomId = $("#theaterList li.selected").text().split("-")[0];
+        let date = $("#dateList li.selected").data("id");
+        let begin = $("#timeList li.selected").data("id");
+        let lestseat = $("#timeList li.selected").text().split("  ")[1];
+        let allseat = $("#timeList li.selected").data("alls");
+        let day = $("#dateList li.selected .day").text();
+        let begintime = $("#timeList li.selected").text().split("  ")[0];
+        let endtime = $("#timeList li.selected").attr("title");
+        if(mname == "") {
+            alert("영화를 선택해주세요");
+            return;
+        }
+        if(date == "" || date == null) {
+            alert("날짜를 선택해주세요");
+            return;
+        }
+        if(roomId == "") {
+            alert("극장을 선택해주세요");
+            return;
+        }
+        if(begin == "" || begin == null) {
+            alert("시간을 선택해주세요");
+            return;
+        }
+        
+        $("#theaterInfo").text(roomId + " " + lestseat + "/" + allseat + "석");
+        $("#movieTime").text(date + "("+ day + ")" + begintime + " ~ " + endtime);
+        $("#personInfo").text("최대인원 4명 선택 가능");
+        
+        $("#selectionScreen").hide();
+        $("#seatSelectionScreen").show();
+        $("#seatinfo").show();
+        $("#confirmBtn").show();
+        $("#reserveBtn").hide();
+        $("#submitBtn").show();
+        let theaterId = roomId;
+        $.ajax({
+            type: "GET",
+            url: "/seats",
+            data: { theaterId: theaterId },
+            success: function(response) {
+                const seatsData = response.seats[0];
+                $(".seat-selection").empty();
+
+                // 좌석 키(열 이름)를 알파벳 순으로 정렬합니다.
+                const sortedSeatKeys = Object.keys(seatsData).filter(key => key.match(/^[a-z]$/)).sort();
+
+                sortedSeatKeys.forEach(key => {
+                    const value = seatsData[key];
+                    
+                    if (value > 0) {
+                        const rowDiv = $("<div></div>").addClass("seat-row").attr("data-row", key);
+
+                        // 행 레이블을 추가합니다.
+                        const labelDiv = $("<div></div>").addClass("seat-row-label").text(key.toUpperCase()+"열-");
+                        rowDiv.append(labelDiv);
+
+                        for (let i = 1; i <= value; i++) {
+                            const seatId = key + i; // 예: "a1", "a2"
+                            const seatDiv = $("<div></div>").addClass("seat").attr("data-seat", seatId).text(i);
+                            rowDiv.append(seatDiv);
                         }
-                    });
-                    initializeOccupiedSeats(["a1", "b2", "c3"]);
-                },
-                error: function(xhr, status, error) {
-                    console.error("좌석 정보를 가져오는 중 오류 발생:", error);
-                }
-            });
-    	});
-    	
- //   	initializeOccupiedSeats(["a1", "b2", "c3"]); // 예시: 이미 예약된 좌석 초기화
-    	$(document).on("click","#confirmBtn",function(){
-    		$("#seatSelectionScreen").hide();
-            $("#selectionScreen").show();
-            $("#confirmBtn").hide();
-            $("#reserveBtn").show();
-            $("#submitBtn").hide();
-            $(".seat").removeClass("selected");
-    	});
-    	
-    	$(document).on("click", ".seat", function () {
-    	    // 이미 예약된 좌석은 선택하지 않음
-    	    if ($(this).hasClass("occupied")) return;
-    	    
-    	    // 선택된 좌석인지 확인
-    	    $(this).toggleClass("selected");
-    	    
-    	    // 선택된 좌석 리스트를 갱신
-    	    updateSelectedSeats();
-    	});
-        $(document).on("click", "#submitBtn", function() {
-            let selectedSeats = [];
-            $(".seat.selected").each(function() {
-                selectedSeats.push($(this).data("seat"));
-            });
-            let movieId = $("#movieList li.selected").data("id");
-            let roomId = $("#theaterList li.selected").text().split("-")[0];
-            let date = $("#dateList li.selected").data("id");
-            let begin = $("#timeList li.selected").data("id");
-            $.ajax({
-                type: "POST",
-                url: "/reserveSeats",
-                contentType: "application/json",
-                data: JSON.stringify({
-                    seats: selectedSeats,
-                    movieId: movieId,
-                    theaterId: roomId,
-                    date: date,
-                    time: begin
-                }),
-                success: function(response) {
-                    alert(response);
-                },
-                error: function(xhr, status, error) {
-                    alert("예매 중 오류가 발생했습니다. 다시 시도해 주세요.");
-                }
-            });
+                        $(".seat-selection").append(rowDiv);
+                    }
+                });
+                initializeOccupiedSeats(["a1", "b2", "c3"]);
+            },
+            error: function(xhr, status, error) {
+                console.error("좌석 정보를 가져오는 중 오류 발생:", error);
+            }
         });
-        
-          function updateSelectedSeats() {
-            let selectedSeats = [];
-            
-            $(".seat.selected").each(function () {
-              selectedSeats.push($(this).data("seat"));
-            });
-            
-            console.log("Selected Seats: ", selectedSeats);
-            // 서버로 선택된 좌석 정보를 전송하거나 다른 작업 수행 가능
-          }
+    });
 
-          // 초기 예약된 좌석 데이터를 설정합니다 (예시)
-          function initializeOccupiedSeats(occupiedSeats) {
-        	  $(".seat").removeClass("occupied");
-            occupiedSeats.forEach(function (seat) {
-              $(".seat[data-seat='" + seat + "']").addClass("occupied");
-            });
-          }
+    $(document).on("click", "#confirmBtn", function() {
+        $("#seatSelectionScreen").hide();
+        $("#seatinfo").hide();
+        $("#selectionScreen").show();
+        $("#confirmBtn").hide();
+        $("#reserveBtn").show();
+        $("#submitBtn").hide();
+        $(".seat").removeClass("selected");
+    });
 
-    	
-          
-          
-    	//예매
-    	loadMovies();
-		loadDates();
-        $(document).on("click", "#movieList li", function() {
-            $("#movieList li").removeClass("selected");
-            $(this).addClass("selected");
-            $("#dateList li").removeClass("selected");
-            $("#theaterList ul").empty();
-            $("#timeList ul").empty();
-        });
 
-        $(document).on("click", "#theaterList li", function() {
-            $("#theaterList li").removeClass("selected");
-            $(this).addClass("selected");
-            let movieId = $("#movieList li.selected").data("id");
-            let date = $("#dateList li.selected").data("id");
-            let roomId = $("#theaterList li.selected").text().split("-")[0];
-            console.log(movieId+"--"+date+"--"+roomId)
-            $.ajax({
-                url: "/times",
-                type: "GET",
-                data: { movieId:movieId, date:date, roomId:roomId },
-                success: function(data) {
-                    let timeList = $("#timeList ul");
-                    timeList.empty();
-                    $.each(data, function(index, times) {
-                        timeList.append('<li data-id="' +times.begintime+ '">' + times.begintime +'  '+ times.lestseat+ '석</li>');
-                    });
-                }
-            });
-        });
-
-        $(document).on("click", "#dateList li", function() {
-            $("#dateList li").removeClass("selected");
-            $(this).addClass("selected");
-            let movieId = $("#movieList li.selected").data("id");
-            let date = $(this).data("id");
-            $("#timeList ul").empty();
-            console.log(movieId+"----"+date);
-            $.ajax({
-                url: "/theaters",
-                type: "GET",
-                data: { movieId: movieId, date: date },
-                success: function(data) {
-                    let theaterList = $("#theaterList ul");
-                    theaterList.empty();
-                    $.each(data, function(index, theater) {
-                        theaterList.append('<li>' + theater.sname + "-" + theater.seatlevel + '</li>');
-                    });
-                }
-            });
-        });
-        $(document).on("click","#timeList li", function(){
-        	$("#timeList li").removeClass("selected");
-        	$(this).addClass("selected");
-        });
+    $(document).on("click", ".seat", function () {
+        if ($(this).hasClass("occupied")) return;
         
 
+        if ($(".seat.selected").length < totalTickets || $(this).hasClass("selected")) {
+            $(this).toggleClass("selected");
+            updateSelectedSeats();
+        } else {
+            alert("선택된 티켓 수만큼만 좌석을 선택할 수 있습니다.");
+        }
+    });
+
+    // 선택된 좌석 업데이트 함수
+    function updateSelectedSeats() {
+        let selectedSeats = [];
+        $(".seat.selected").each(function () {
+            selectedSeats.push($(this).data("seat"));
+        });
+        
+        console.log("Selected Seats: ", selectedSeats);
+        // 서버로 선택된 좌석 정보를 전송하거나 다른 작업 수행 가능
+    }
+
+    // 초기 예약된 좌석 데이터를 설정합니다 (예시)
+    function initializeOccupiedSeats(occupiedSeats) {
+        $(".seat").removeClass("occupied");
+        occupiedSeats.forEach(function (seat) {
+            $(".seat[data-seat='" + seat + "']").addClass("occupied");
+        });
+    }
+
+    $(document).on("click", "#submitBtn", function() {
+        let selectedSeats = [];
+        $(".seat.selected").each(function() {
+            selectedSeats.push($(this).data("seat"));
+        });
+        let movieId = $("#movieList li.selected").data("id");
+        let roomId = $("#theaterList li.selected").text().split("-")[0];
+        let date = $("#dateList li.selected").data("id");
+        let begin = $("#timeList li.selected").data("id");
+        $.ajax({
+            type: "POST",
+            url: "/reserveSeats",
+            contentType: "application/json",
+            data: JSON.stringify({
+                seats: selectedSeats,
+                movieId: movieId,
+                theaterId: roomId,
+                date: date,
+                time: begin
+            }),
+            success: function(response) {
+                alert(response);
+            },
+            error: function(xhr, status, error) {
+                alert("예매 중 오류가 발생했습니다. 다시 시도해 주세요.");
+            }
+        });
     });
     
     //예매
-    	$("#btnclear").click(function(){
-    		$("#movieList ul").empty();
-    		$("#dateList ul").empty();
-    		$("#theaterList ul").empty();
-    		$("#timeList ul").empty();
-    		loadMovies();
-    		loadDates();
-    	});
-function loadMovies() {
-	$.ajax({
-        url: "/movies",
-        type: "GET",
-        success: function(data) {
-            let movieList = $("#movieList ul");
-            movieList.empty();
-            $.each(data, function(index, movie) {
-                movieList.append('<li data-id="' + movie.id + '">' + movie.mname + '</li>');
-            });
-        }
+    loadMovies();
+    loadDates();
+
+    $(document).on("click", "#movieList li", function() {
+        $("#movieList li").removeClass("selected");
+        $(this).addClass("selected");
+        $("#dateList li").removeClass("selected");
+        $("#theaterList ul").empty();
+        $("#timeList ul").empty();
     });
-}
-function loadDates() {
-    let dateList = $("#dateList ul");
-    dateList.empty();
+
+    $(document).on("click", "#theaterList li", function() {
+        $("#theaterList li").removeClass("selected");
+        $(this).addClass("selected");
+        let movieId = $("#movieList li.selected").data("id");
+        let date = $("#dateList li.selected").data("id");
+        let roomId = $("#theaterList li.selected").text().split("-")[0];
+        console.log(movieId+"--"+date+"--"+roomId)
+        $.ajax({
+            url: "/times",
+            type: "GET",
+            data: { movieId:movieId, date:date, roomId:roomId },
+            success: function(data) {
+                let timeList = $("#timeList ul");
+                timeList.empty();
+                $.each(data, function(index, times) {
+                    timeList.append('<li data-alls="' +times.allseat + '" data-id="' +times.begintime+ '" title="' +times.endtime + '">' + times.begintime +'  '+ times.lestseat+ '석</li>');
+                });
+            }
+        });
+    });
+
+    $(document).on("click", "#dateList li", function() {
+        $("#dateList li").removeClass("selected");
+        $(this).addClass("selected");
+        let movieId = $("#movieList li.selected").data("id");
+        let date = $(this).data("id");
+        $("#timeList ul").empty();
+        console.log(movieId+"----"+date);
+        $.ajax({
+            url: "/theaters",
+            type: "GET",
+            data: { movieId: movieId, date: date },
+            success: function(data) {
+                let theaterList = $("#theaterList ul");
+                theaterList.empty();
+                $.each(data, function(index, theater) {
+                    theaterList.append('<li>' + theater.sname + "-" + theater.seatlevel + '</li>');
+                });
+            }
+        });
+    });
+
+    $(document).on("click", "#timeList li", function() {
+        $("#timeList li").removeClass("selected");
+        $(this).addClass("selected");
+    });
+
+    $("#btnclear").click(function(){
+		$("#movieList ul").empty();
+		$("#dateList ul").empty();
+		$("#theaterList ul").empty();
+		$("#timeList ul").empty();
+		loadMovies();
+		loadDates();
+	});
     
-    let currentDate = new Date();
-    for (let i = 0; i < 20; i++) {
-        let newDate = new Date(currentDate);
-        newDate.setDate(currentDate.getDate() + i);
-
-        let dayName = newDate.toLocaleString('ko-KR', { weekday: 'short' });
-        let fulldate = newDate.toISOString().split('T')[0];
-        let dateString = newDate.toISOString().split('T')[0].split('-');
-        let dayClass = (dayName === "토") ? "saturday" : (dayName === "일") ? "sunday" : "";
-
-        dateList.append('<li data-id="'+ fulldate +'" class="' + dayClass + '"><div class="date-wrapper"><span class="day">' + dayName + '</span><span class="date">' + dateString[2] + '</span></div></li>');
+    function loadMovies() {
+    	$.ajax({
+            url: "/movies",
+            type: "GET",
+            success: function(data) {
+                let movieList = $("#movieList ul");
+                movieList.empty();
+                $.each(data, function(index, movie) {
+                    movieList.append('<li data-id="' + movie.id + '">' + movie.mname + '</li>');
+                });
+            }
+        });
     }
-}
+
+    function loadDates() {
+    	let dateList = $("#dateList ul");
+        dateList.empty();
+        
+        let currentDate = new Date();
+        for (let i = 0; i < 20; i++) {
+            let newDate = new Date(currentDate);
+            newDate.setDate(currentDate.getDate() + i);
+
+            let dayName = newDate.toLocaleString('ko-KR', { weekday: 'short' });
+            let fulldate = newDate.toISOString().split('T')[0];
+            let dateString = newDate.toISOString().split('T')[0].split('-');
+            let dayClass = (dayName === "토") ? "saturday" : (dayName === "일") ? "sunday" : "";
+
+            dateList.append('<li data-id="'+ fulldate +'" class="' + dayClass + '"><div class="date-wrapper"><span class="day">' + dayName + '</span><span class="date">' + dateString[2] + '</span></div></li>');
+        }
+    }
+
+});
 </script>
 </html>

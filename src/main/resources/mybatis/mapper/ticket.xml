@@ -19,8 +19,9 @@
     </select>
 
     <select id="getTimes" resultType="com.cinema.ticket.timesDTO">
-        select a.begintime, a.lestseat from schedules a, room b
+        select a.begintime, a.endtime, a.lestseat, c.allseat from schedules a, room b, seatinfo c
 		where a.room_id = b.id
+		and b.seatinfo_id = c.id
 		and a.movie_id=#{movieId}
 		and a.moviedate=#{date}
 		and b.sname=#{roomId}
