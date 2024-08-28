@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -13,6 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 public class HomeController {
 	
 	@Autowired storeDAO storedao;
+	@Autowired cartDAO cartdao;
 	
 	
 
@@ -95,7 +98,19 @@ public class HomeController {
 		
 		return "store/gift";
 	}
-	
+	@PostMapping("/insertcart")
+	@ResponseBody
+	public String insertcart(HttpServletRequest req) {
+		
+		String custom_id=req.getParameter("custom_id");
+		int item_id=Integer.parseInt(req.getParameter("item_id"));
+		int qty=Integer.parseInt(req.getParameter("qty"));
+		String total=req.getParameter("total");
+		
+		
+		cartdao.insertcart(custom_id, item_id, qty, total);
+		return "ok";
+	}
 	
 	
 	

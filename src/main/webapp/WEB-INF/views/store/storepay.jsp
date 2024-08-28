@@ -6,8 +6,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+#container {
+    display: flex;
+    flex-wrap: wrap;      
+    justify-content: center; 
+    padding: 20px;
+    width: 1000px; 
+    margin: 0 auto;   
+}
+
+
+</style>
 </head>
 <body>
-스토어결제
+ 	<div id="container">
+ 	안녕하세요
+ 	
+ 	
+ 	
+ 	</div>
 </body>
 </html>

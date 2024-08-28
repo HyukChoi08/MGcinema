@@ -339,6 +339,7 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
     </style>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
     <div id="container">
         <div id="contents">
             <div class="category_wrap">
@@ -355,8 +356,7 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
                     <li><a href="/drink" class="no-underline">음료</a></li>
                     <li><a href="/snack" class="no-underline">스낵</a></li>
                 </ul>
-                <ul class="cart_content"> <!-- ul로 변경 -->
-                    <li>내 기프트콘<span id="giftcon">0</span></li> 
+                <ul class="cart_content"> <!-- ul로 변경 -->                  
           		<li><a href="/cart" class="no-style-link">장바구니</a><span id="cart-count">0</span></li>
                 </ul>   
             </div>
@@ -607,6 +607,7 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
         <p><img src="/store_images/전화기.png" alt="전화기" class="phone-icon">1544-0000</p>
         <p>안녕하세요</p>
     </div>
+    <%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
 </body>
 <script src="https://code.jquery.com/jquery-latest.js">
 </script>

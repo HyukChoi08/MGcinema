@@ -250,44 +250,44 @@
          color: black;    
     	}
 
-   		.no-underline:hover {
-        text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도록 합니다 */
-    	}
-     
-     
-         p {
-            margin: 0;
-            margin-right: 15px; /* Space between text and input */
-        }
-
-		.total-container {
-		    display: flex;
-		    align-items: center; /* 수직 가운데 정렬 */
-		    gap: 5px; /* 요소 간 간격 조정 */
+	.no-underline:hover {
+		   text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도록 합니다 */
 		}
-		  #totalprice {
-            border: none; /* 테두리 제거 */
-            text-align: right; /* 텍스트 오른쪽 정렬 */
-            width: 160px; /* 너비 조정 */
-            background-color: transparent; /* 배경색 투명 (선택 사항) */
-            padding: 5px; /* 패딩 추가 (선택 사항) */
-            text-indent: -5px; /* 텍스트를 왼쪽으로 이동 (필요에 따라 조정) */
-            font-size:24px;
-            color:red;
-            
-        }
-     .bottom {
-    	display: flex; /* 버튼을 수평으로 배치합니다 */
-    	gap: 50px; /* 버튼 사이에 일정한 간격을 줍니다 */
-    	margin-top:20px;
+		
+		
+	   p {
+	      margin: 0;
+	      margin-right: 15px; /* Space between text and input */
+	  }
+
+	.total-container {
+	    display: flex;
+	    align-items: center; /* 수직 가운데 정렬 */
+	    gap: 5px; /* 요소 간 간격 조정 */
+	}
+	  #totalprice {
+		border: none; /* 테두리 제거 */
+		text-align: right; /* 텍스트 오른쪽 정렬 */
+		width: 160px; /* 너비 조정 */
+		background-color: transparent; /* 배경색 투명 (선택 사항) */
+		padding: 5px; /* 패딩 추가 (선택 사항) */
+		text-indent: -5px; /* 텍스트를 왼쪽으로 이동 (필요에 따라 조정) */
+		font-size:24px;
+		color:red;
+	          
+	}
+	.bottom {
+	   	display: flex; /* 버튼을 수평으로 배치합니다 */
+	   	gap: 50px; /* 버튼 사이에 일정한 간격을 줍니다 */
+	   	margin-top:20px;
 		}
 	.no-style-link {
-    text-decoration: none; /* 밑줄 제거 */
-    color: inherit; /* 링크 색상 유지 */
+	   text-decoration: none; /* 밑줄 제거 */
+	   color: inherit; /* 링크 색상 유지 */
 	}
-
+	
 	.no-style-link:visited {
-    color: inherit; /* 방문 후 색상 유지 */
+	   color: inherit; /* 방문 후 색상 유지 */
 	}
 	
     </style>
@@ -377,7 +377,7 @@
 									    </div>
 									  <div class='bottom'>
 									    <input type='button' id='btncart' value='장바구니'>
-									    <input type='button' id='btngift' value='선물하기'>
+									    
 									    <input type='button' id='btnbuy' value='구매하기'>
 									  </div>    
 					                </li>
@@ -427,14 +427,13 @@ $(document)
      $('#original').text(original + '원');
  }
 
- let currentUrl = window.location.href;
+// let currentUrl = window.location.href;
 
  // 비교할 URL을 정의합니다.
- let targetUrl = 'http://localhost:8081/details?id=7';
+ //let targetUrl = 'http://localhost:8081/details?id=7';
 	
- if(currentUrl==targetUrl){
-	 $('#btncart').hide();
- }
+ //if(currentUrl==targetUrl){
+//	 $('#btncart').hide();}
  
  
  var queryString = window.location.search;
@@ -491,21 +490,30 @@ console.log(userid);
 })
 .on('click','#btncart',function(){
 	
-		let id=$('#hiddenid').val();
-		let userid=$('#userid').val();
-		console.log("id"+id);
-		console.log("userid"+userid);
-		let cnt=$('#cnt').val();
-		console.log(cnt);
-		let totalprice=$('#totalprice').val();
-		console.log(totalprice);
-
-	
-	
+		let item_id=$('#hiddenid').val();
+		let custom_id=$('#userid').val();
+		let total=$('#totalprice').val();
+		let qty=$('#cnt').val();
+		console.log("id"+item_id);
+		console.log("userid"+custom_id);
+		console.log(qty);
+		console.log(total);
 		
-	  //내일 장바구니 테이블에 insert 하기 이거 공부해오기	
-	  //window.location.href = '/cart'; // 클릭 시 페이지 이동
-		 	
+		$.ajax({
+			url:'/insertcart',type:'post',data:{custom_id:custom_id,item_id:item_id,qty:qty,total:total},dataType:'text',
+			success:function(data){
+				if(data=='ok'){
+					
+					window.location.href='/cart';
+				}
+				
+				
+			}
+		
+		
+		
+		
+		})	 	
 })
 .on('click','#btngift',function(){
 

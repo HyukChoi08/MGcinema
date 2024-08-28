@@ -5,6 +5,8 @@
 
 <mapper namespace="com.cinema.store.cartDAO">
 
+<insert id='insertcart'>
+insert into cart set customer_id=#{param1}, item_id=#{param2}, qty=#{param3}, total=#{param4}
 
-
+</insert>
 </mapper>
