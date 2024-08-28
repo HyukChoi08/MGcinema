@@ -2,10 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cinema.chart.chartDAO"><!--무비차트-->
 <select id ="chartList" resultType="com.cinema.chart.chartDTO">
-	 select image ,reservationrate from chartList order by id 
+	 select id,image ,reservationrate,title from chartList order by id 
 	</select>
 	
 <select id ="chartList1" resultType="com.cinema.chart.chartDTO">
-	 select image ,reservationrate from chartList order by reservationrate desc
+	 select id,image ,reservationrate,title from chartList order by reservationrate desc
 	</select>
+	
+<select id ="chartList2" resultType="string" parameterType="int">
+	 select image from chartList where id = #{param1}
+	</select>	
 </mapper>

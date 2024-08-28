@@ -6,9 +6,12 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class chartController {
@@ -18,6 +21,17 @@ public class chartController {
 @GetMapping("/chart")
 public String test() {
 	return "chart/chartList";
+}
+@GetMapping("/chartList1")
+public String chartList1(HttpServletRequest req, Model model) {
+	int id = Integer.parseInt(req.getParameter("id"));
+	System.out.println("id"+id);
+	
+	String archart = cdao.chartList2(id);
+	
+	model.addAttribute("chartList2",archart);
+	
+	return "chart/chartList1";
 }
 @PostMapping("/chartList")//무비 차트 정렬시키는것
 @ResponseBody
@@ -30,6 +44,7 @@ public String chartList() {
 		jo.put("id", cdto.getId());
 		jo.put("image",cdto.getImage());
 		jo.put("reservationrate",cdto.getReservationrate());
+		jo.put("title", cdto.getTitle());
 				
 		ja.put(jo);
 	}
@@ -52,10 +67,12 @@ public String chartArray() {
 	return ja.toString();
 }
 
-@PostMapping("/chartList1")
+@PostMapping("/chartList11")
 @ResponseBody
-public String chartList1() {
+public String chartList11() {
 	ArrayList<chartDTO> ar = cdao.chartList1();
+	
+	
 	
 	JSONArray ja = new JSONArray();
 	for(chartDTO cdto : ar) {
@@ -63,7 +80,8 @@ public String chartList1() {
 		jo.put("id", cdto.getId());
 		jo.put("image",cdto.getImage());
 		jo.put("reservationrate",cdto.getReservationrate());
-				
+		jo.put("title", cdto.getTitle());
+		
 		ja.put(jo);
 	}
 	return ja.toString(); 

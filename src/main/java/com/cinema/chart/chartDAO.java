@@ -9,5 +9,6 @@ public interface chartDAO {
 
 ArrayList<chartDTO> chartList();
 ArrayList<chartDTO> chartList1();
+String chartList2(int id);
 }
 
