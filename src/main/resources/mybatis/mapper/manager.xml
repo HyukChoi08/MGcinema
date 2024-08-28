@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cinema.management.MovieDAO">
+<select id="movielist" resultType="com.cinema.management.MovieDTO">
+	select id,mname,runningtime from movie order by id
+</select>
+<select id="roomlist" resultType="com.cinema.management.RoomDTO">
+	select id,Sname,seatlevel from room order by id
+</select>
+<insert id="schedules">
+	insert into schedules set movie_id=#{param1}, room_id=#{param2}, moviedate=#{param3}, begintime=#{param4}, endtime=#{param5}
+</insert>
+</mapper>

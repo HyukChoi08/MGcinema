@@ -6,7 +6,7 @@
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, 
 a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, 
 small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label,
- legend, table, caption, tbody, tfoot, thead, tr, th, td {
+ legend, table, caption, tbody, tfoot, thead, tr, th{
     font-family: 'Noto Sans KR', 'CJONLYONENEW', '맑은 고딕', '돋움', Dotum, sans-serif;
     font-size: 100%;
     margin: 0;
@@ -30,7 +30,7 @@ small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form
 	background-color:white;
 	border:none;
 	width:1000px;
-	height:50px;
+	padding-bottom:20px;
 	
 }
 .container a{
@@ -39,7 +39,7 @@ small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form
 	 width: 100%;
      height: 100%;
 }
-a:visited {
+.container a:visited {
             color: white; /* 방문한 링크 색상 */
         }
 .background-image {
@@ -172,18 +172,30 @@ button:focus {
     outline: none;
 }
 .timelistdiv {
-	height:100px;
-	border:1px solid black;
+
+	border-bottom:1px solid black;
+	border-top:1px solid black;
 	margin-bottom:20px;
 }
-
+.roomdiv {
+	height:60px;
+	border:none;
+	margin-left:20px;
+}
+.timelistdiv a:visited{
+	 	color:black;
+}
+.roomname {
+	font-size:15px;
+}
 </style>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>극장정보</title>
   
 </head>
 <body>
+<%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
 <div id="contents">
 	혹시나 다른거 들어갈 자리<input type="button" value="test" id="tsetbtn">
 	<div><h3><img src="https://img.cgv.co.kr/R2014/images/title/h3_theater.gif"></h3></div>
@@ -207,12 +219,13 @@ button:focus {
 	</div>
 	<div class="notice">
 		<h4>공지사항</h4><a class="link-more" href="/park" target="_blank" title="새창 열림"></a>
+		<h4><a href="#" onclick="openPopup(); return false;">관람등급안내</a></h4>
 	</div>
 <div class="sect-schedule">
 	<div class="calendar-container">
         <div class="calendar-body">
             <table id="calendar-table">
-            	<input type="text" id="hiddendate">
+            	<input type="hidden" id="hiddendate">
                 <thead>
                     <tr>
                     	<td><button id="prev-month">&lt;</button></td>
@@ -235,6 +248,7 @@ button:focus {
 </div>
 
 </div>
+<%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
@@ -262,42 +276,13 @@ $(document)
 	}
 	console.log(movied[0]);
 	$('#hiddendate').val(movied[0]);
-	moviename(processData);
+		
+	movielist();
 })
 .on('click','#calendar-table thead tr th',function(){
-	clear()
-	let mdate = $(this).data('dbdate');
-	$('#hiddendate').val(mdate);
-	console.log(mdate);
-	$.post('/moviedate',{mdate:mdate},function(data){
-		console.log(data);
-		for(x of data){
-			console.log(x['mname']);
-			let timelist = '<div><table>'+x['age']+'<h2>'+x['mname']+'</h2>'+x['runningtime']
-			timelist += '<tr>'
-			timelist +=
-				   //'<td>' + x['mname'] + '</td>' +
-			       '<td>' + x['Sname'] + '</td>' +
-			       '<td>' + x['seatlevel'] + '</td>' +
-			       //'<td>' + x['moviedate'] + '</td>' +
-			       //'<td>' + x['runningtime'] + '</td>' +
-			       //'<td>' + x['age'] + '</td>' +
-			       '<td>' + x['allseat'] + '</td>' +
-			       '<td>' + x['lestseat'] + '</td>' +
-			       '<td>' + x['begintime'] + '</td>' +
-			       '<td>' + x['endtime'] + '</td>';
-			timelist +='</tr>'
-			timelist += '</table></div>'
-				$('#timelist').append(timelist);
-			//x['Sname']
-			//x['seatlevel']
-			//x['moviedate']
-			//x['lestseat']
-			//x['begintime']
-			//x['endtime']
-		}
-	},'json')
-	
+	$('#hiddendate').val($(this).data('dbdate'));
+	clear();
+	movielist();
 })
 .on('click','.container .item', function() {
         // 클릭된 div의 data-image 속성에서 이미지 URL을 가져옴
@@ -306,75 +291,93 @@ $(document)
         // 이미지 요소의 src 속성을 새 URL로 업데이트
         $('#backgroundImage').attr('src', img);
     })
-.on('click','#tsetbtn',function(){
-	let mname = '범죄와의전쟁';
-	let date = '2024-08-24';
-	let room = '1관';
-	let time = '11시20분';
-	console.log(mname,date,room,time);
-	$.post('/ticket/',{mname:mname,date:date,room:room,time:time},function(data){
-	},'json')	
-});
 function clear(){
 	$('#timelist').empty();
 	$('#moviename').text('');
 }
-function moviename(callback){
+
+async function movielist(){
 	let mdate= $('#hiddendate').val();
-	console.log(mdate);
-	$.post('/getmoviename',{mdate:mdate},function(data){
-		console.log(data);
-		let timelist = '';
-		for(x of data){
-			
-			console.log("영화이름",x['mname']);
-			timelist = '<div class=timelistdiv id='+x['mname']+'><table><tr><td>'+x['age']+'</td><td><h2 style=font-size:20px>'+x['mname']+'</h2></td><td>'+x['runningtime']+'</td></tr></table></div>';
-				$('#timelist').append(timelist);
-			
-//			$.post('/getroom',{mdate:mdate,mname:x['mname']},function(data){
-//				console.log("관정보",data); 
-//					for(i of data){
-//					let room = '<div>'+x['Sname']+'</div>';
-//					$(x['mname']).append(room);
-//					}	
-//					
-//			},'json')
-		}
-		
-	},'json')
+	    try {
+	        let mdate = $('#hiddendate').val();
+	        let response1 = await $.ajax({
+	            url: '/getmoviename',
+	            method: 'POST',
+	            data: { mdate: mdate },
+	            dataType: 'json'
+	        });
+	        console.log('Request 1 succeeded:', response1);
+	        processData1(response1);
+	        
+	        let response2 = await $.ajax({
+	            url: '/getroom2',
+	            method: 'POST',
+	            data: { mdate: mdate },
+	            dataType: 'json'
+	        });
+	        console.log('Request 2 succeeded:', response2);
+	        processData2(response2);
+	        
+	        let response3 = await $.ajax({
+	            url: '/gettime',
+	            method: 'POST',
+	            data: { mdate: mdate },
+	            dataType: 'json'
+	        });
+	        console.log('Request 3 succeeded:', response3);
+	        processData3(response3);
+	        
+	    } catch (error) {
+	        console.log('One or more requests failed:', error);
+	    }
 	
-	ar = [];
-	
-	$.post('/getroom2',{mdate:mdate},function(data){
-		ar = data;
-		callback(data);
-	},'json') 
 
 }
-function processData(data){
-	let mdate= $('#hiddendate').val();
-	console.log("관정보 가져오기위한 날짜",mdate);
-		for(let i=0 ; i<$('#timelist div').length; i++){
-			let id = $('#timelist div').eq(i).find('tr td:eq(1)').text();
-			console.log("1111",id);
-			console.log(ar); 
-			for(let x of ar){
-				if(x.mname==id){
-				let room = x.Sname	
-				$('#timelist div').eq(i).after(room);
-				}
-			}
-			
-				//$.post('/getroom2',{mdate:mdate},function(data){
-				//	console.log(data);
-				//	for(x of data){
-			
-			//console.log("영화이름",x['mname']);
-			//timelist = '<div class=timelistdiv id='+x['mname']+'><table><tr><td>'+x['age']+'</td><td><h2 style=font-size:20px>'+x['mname']+'</h2></td><td>'+x['runningtime']+'</td></tr></table></div>';
-			//	$('#timelist').append(timelist);
-			//		}	
-			//	},'json') 
+function processData1(data) {
+	 let timelist = '';
+		for(x of data){	
+			console.log("영화이름",x['mname']);
+			timelist = '<div class=timelistdiv><table><tr><td>'+x['age']+'</td><td><h1 style=font-size:23px>'+x['mname']+'</h1></td><td>'+x['runningtime']+'</td></tr></table></div>';
+			$('#timelist').append(timelist);
+	 		 console.log('Processing data 1:', data);
 		}
 }
+function processData2(data) {
+	for(let i=0 ; i<$('#timelist div').length; i++){
+		let id = $('#timelist div').eq(i).find('tr td:eq(1)').text();
+		console.log("1111",id);
+		console.log(data); 
+		for(let x of data){
+			if(x['mname']==id){
+			let room = '<div class=roomdiv><table><tr><td><h2 class=roomname>'+x['Sname']+'</h2></td><td style=width:65px>'+x['seatlevel']+'</td></tr></table></div>';
+			$('#timelist div').eq(i).append(room);
+			}
+		}
+	}
+    console.log('Processing data 2:', data);
+}
+
+function processData3(data) {
+	$('.timelistdiv').each(function() {
+		console.log('테스트',$(this).find('tr').find('td').eq(1).text());
+		id = $(this).find('tr').find('td').eq(1).text();
+			
+	        $(this).find('table').each(function() {
+	            let room = $(this).find('tr').find('td').eq(0).text();
+	            console.log('관이름', room);
+	            	for(let x of data){
+	            		if (x['mname'] === id && x['Sname'] === room) {
+	                        console.log('최종', x['begintime']);
+	                        $(this).append('<td><a href=/ticket/?mname='+x['mname']+'&date='+$('#hiddendate').val()+'&room='+x['Sname']+'&time='+x['begintime']+'>'+x['begintime']+'</a></td>');
+	                    }
+	            	}  	
+	        })
+	})
+    console.log('Processing data 3:', data);
+}
+function openPopup(){
+	 window.open('/ageinfo', 'popupWindow', 'width=600,height=400');
+}
+
 </script>
 </html>

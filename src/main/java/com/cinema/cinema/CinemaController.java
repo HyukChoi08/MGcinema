@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
 import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
@@ -26,6 +25,10 @@ public class CinemaController {
 	@GetMapping("/park")
 	public String park() {
 		return "cinema/park";
+	}
+	@GetMapping("/ageinfo")
+	public String ageinfo() {
+		return "cinema/ageinfo";
 	}
 	
 	@PostMapping("/getmoviename")
@@ -76,6 +79,23 @@ public class CinemaController {
 		}
 		return Mli.toString();
 	}
+	@PostMapping("/gettime")
+	@ResponseBody 
+	public String gettime(HttpServletRequest req,Model model) {
+		String mdate = req.getParameter("mdate");
+		
+		ArrayList<TimeDTO> mlist = cdao.gettime(mdate);
+		JSONArray Tli = new JSONArray();
+		for(TimeDTO Mdto : mlist) {
+			JSONObject T = new JSONObject();
+			T.put("Sname",Mdto.getSname());
+			T.put("begintime",Mdto.getBegintime());
+			T.put("mname",Mdto.getMname());
+			Tli.put(T);
+		}
+		System.out.println("tttttttt"+mlist);
+		return Tli.toString();
+	}
 	
 	@PostMapping("/moviedate")
 	@ResponseBody
@@ -102,4 +122,8 @@ public class CinemaController {
 	}
 	
 }
+
+
+
+
  

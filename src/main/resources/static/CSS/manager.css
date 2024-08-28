@@ -1,0 +1,17 @@
+@charset "UTF-8";
+.movieinsert1{
+	border:1px solid black;
+	width:300px;
+	margin:15px;
+}
+.movieinsert2{
+	border:1px solid black;
+	width:900px;
+	margin:15px;
+}
+.mselect{
+	width:180px
+}
+.container {
+    display: flex;
+}
