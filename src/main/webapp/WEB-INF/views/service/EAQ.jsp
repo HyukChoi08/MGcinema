@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>고객 이메일 문의</title>
     <style>
-        /* 기본 스타일 */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -15,104 +14,85 @@
             background-color: #f4f4f4;
         }
 
+        .banner {
+            width: 100%;
+            background-color: #e50914;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
         #container {
             max-width: 1200px;
             margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         #contents {
+            width: 100%;
             display: flex;
         }
 
-        .col-aside {
-            width: 250px;
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-right: 1px solid #ddd;
+        .sidebar {
+            width: 20%;
+            padding: 15px;
+            background-color: #f7f7f7;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            height: fit-content;
         }
 
-        .col-aside ul {
+        .sidebar ul {
             list-style-type: none;
             padding: 0;
-            margin: 0;
         }
 
-        .col-aside ul li {
-            margin-bottom: 10px;
+        .sidebar ul li {
+            margin-bottom: 15px;
         }
 
-        .col-aside ul li a {
+        .sidebar ul li a {
             text-decoration: none;
-            color: black;	
-            font-size: 1em;
+            color: #333;
+            font-weight: bold;
         }
 
-        .col-aside ul li a:hover {
-            text-decoration: underline;
+        .sidebar ul li a:hover {
+            color: #e50914;
         }
-        
-        .col-aside ul li.on a {
-        	font-weight : bold;
+
+        .sidebar ul li.on a {
+            font-weight: bold;
+        }
+
+        .col-detail {
+            width: 75%;
+            padding: 15px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .tbl_area {
-            margin: 20px 0;
+            margin-bottom: 20px;
         }
 
-        .tbl_info_txt {
-            margin: 0;
-            font-size: 14px;
-            color: #333;
-        }
-
-        table.tbl_notice_list {
+        .tbl_notice_list {
             width: 100%;
             border-collapse: collapse;
         }
 
-        table.tbl_notice_list th,
-        table.tbl_notice_list td {
+        .tbl_notice_list th,
+        .tbl_notice_list td {
             border: 1px solid #ddd;
-            padding: 10px;
+            padding: 8px;
             text-align: left;
         }
 
-        table.tbl_notice_list th {
-            background-color: #f5f5f5;
-            font-weight: bold;
-        }
-
-        table.tbl_notice_list .tbl_left {
-            width: 100%;
-        }
-
-        table.tbl_notice_list input[type="text"],
-        table.tbl_notice_list input[type="file"],
-        table.tbl_notice_list textarea,
-        table.tbl_notice_list select {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        .type_list {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .type_list li {
-            margin-bottom: 10px;
-        }
-
-        .type_list input[type="radio"] {
-            margin-right: 5px;
+        .tbl_notice_list th {
+            background-color: #f4f4f4;
         }
 
         .btn_area {
@@ -143,48 +123,135 @@
             outline: none;
         }
 
-        .byte_info {
-            font-size: 12px;
-            color: #666;
+        .search_area {
+            margin-bottom: 20px;
         }
 
-        .file_info {
-            font-size: 12px;
-            color: #666;
+        .search_area input[type="text"] {
+            padding: 5px;
+            width: 185px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .search_area button {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .search_area button:hover {
+            background-color: #0056b3;
+        }
+
+        .paging {
+            margin-top: 20px;
+        }
+
+        .paging ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .paging li {
+            display: inline;
+            margin-right: 5px;
+        }
+
+        .paging li a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .paging li a:hover {
+            text-decoration: underline;
+        }
+
+        .paging .btn-paging {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .paging .btn-paging:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            background-color: white;
+            text-align: center;
+            padding: 10px 0;
+            border-top: 1px solid #ddd;
+        }
+
+        /* 추가적인 스타일 */
+        select[disabled] {
+            background-color: #e9ecef;
+        }
+
+        .type_list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .type_list li {
+            margin-bottom: 10px;
+        }
+
+        .type_list input[type="radio"] {
+            margin-right: 5px;
         }
     </style>
+    <link rel="stylesheet" href="/Header_css/Header.css">  
 </head>
 
 <body>
-    <div id="container">
-        <div id="contents">
-            <!-- 고객 서비스 메뉴 -->
-            <aside class="col-aside">
+<header class="header">
+    <nav class="navbar">
+        <h1><a href="/">MG Cinema</a></h1>
+        <ul class="nav-links">
+            <li><a href="/login">로그인</a></li>
+            <li><a href="/signup">회원가입</a></li>
+            <li><a href="/myhome">MY페이지</a></li>
+            <li><a href="/serviceHome">고객센터</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div id="container">
+    <div id="contents">
+        <div class="sidebar">
+            <div class="snb">
                 <ul>
-                        <li><a href="serviceHome">고객센터 메인</a></li>
-                        <li><a href="faq">자주찾는 질문</a></li>
-                        <li><a href="news">공지/뉴스</a></li>
-                        <li class="on"><a href="eaq" title="현재선택">이메일 문의</a></li>
-                    </ul>
-            </aside>
+                    <li><a href="serviceHome">고객센터 메인<i></i></a></li>
+                    <li><a href="faq">자주찾는 질문<i></i></a></li>
+                    <li><a href="news">공지/뉴스<i></i></a></li>
+                    <li class="on"><a href="eaq">이메일 문의<i></i></a></li>
+                </ul>
+            </div>
+        </div>
 
-            <!-- 광고 영역 -->
-            <!-- 여기에는 광고 관련 콘텐츠가 들어갑니다. -->
-
-            <!-- 이메일 문의 폼 -->
+        <div class="col-detail">
             <form id="form1" name="form1" method="post" novalidate="novalidate" enctype="multipart/form-data">
                 <fieldset>
                     <legend>이메일 문의</legend>
                     <div class="tbl_area">
                         <p class="tbl_info_txt">체크된 항목은 필수 입력 사항입니다.</p>
-						<br>
-                        <table cellspacing="0" cellpadding="0" class="tbl_notice_list tbl_left">
-                            <caption></caption>
+                        <br>
+                        <table cellspacing="0" cellpadding="0" class="tbl_notice_list">
                             <colgroup>
-                                <col style="width:96px">
-                                <col style="width:303px">
-                                <col style="width:96px">
-                                <col style="width:303px">
+                                <col style="width: 96px;">
+                                <col style="width: 303px;">
+                                <col style="width: 96px;">
+                                <col style="width: 303px;">
                             </colgroup>
                             <tbody>
                                 <!-- 사용자 정보 -->
@@ -199,7 +266,6 @@
                                     <td><strong>010-****-1234</strong></td>
                                     <th scope="row">이메일</th>
                                     <td><span>1111111@hhhh.com</span></td>
-                                  
                                 </tr>
                                 <!-- 문의 유형 -->
                                 <tr>
@@ -210,79 +276,50 @@
                                             <li id="li_ra_2"><input type="radio" id="inp_type02" name="sel_qnatype" value="1250"><label for="inp_type02">불만</label></li>
                                             <li id="li_ra_3"><input type="radio" id="inp_type03" name="sel_qnatype" value="1251"><label for="inp_type03">칭찬</label></li>
                                             <li id="li_ra_4"><input type="radio" id="inp_type04" name="sel_qnatype" value="1252"><label for="inp_type04">제안</label></li>
-                                            <li id="li_ra_5"><input type="radio" id="inp_type05" name="sel_qnatype" value="2991"><label for="inp_type05">분실물</label></li>
+                                            <li id="li_ra_5"><input type="radio" id="inp_type05" name="sel_qnatype" value="1253"><label for="inp_type05">기타</label></li>
                                         </ul>
                                     </td>
                                 </tr>
-                                <!-- 영화관 선택 -->
+                                <!-- 문의 제목 및 내용 -->
                                 <tr>
-                                    <th scope="row">영화관 선택</th>
-                                    <td colspan="3">
-                                        <ul class="type_list">
-                                            <li class="on"><input type="radio" id="no_sel" name="sel_theaterchoise" checked="checked" value="0"><label for="no_sel">선택하지 않음</label></li>
-                                            <li><input type="radio" id="sel" name="sel_theaterchoise" value="1"><label for="sel">선택함</label></li>
-                                        </ul>
-                                        <label for="sel_t_group" class="hidden">국내,국외 선택</label>
-                                        <select title="국내,국외 선택" class="sel01" id="sel_t_group" name="sel_t_group" disabled="disabled" style="width: 96px;">
-                                            <option value="dm">국내</option>
-                                            <option value="oc">국외</option>
-                                        </select>
-                                        <label for="sel_regioncode" class="hidden">지역 선택</label>
-                                        <select title="지역 선택" class="sel01" id="sel_regioncode" name="sel_regioncode" disabled="disabled" style="width: 114px;">
-                                            <option value="" selected="selected">지역 선택</option>
-                                            <!-- 동적으로 채워지는 옵션 -->
-                                        </select>
-                                        <label for="sel_theatercode" class="hidden">영화관 선택</label>
-                                        <select title="영화관 선택" class="sel01" id="sel_theatercode" name="sel_theatercode" disabled="disabled" style="width: 114px;">
-                                            <option value="" selected="selected">영화관 선택</option>
-                                            <!-- 동적으로 채워지는 옵션 -->
-                                        </select>
-                                    </td>
+                                    <th scope="row"><label for="inp_title">제목</label></th>
+                                    <td colspan="3"><input type="text" name="txt_title" id="inp_title" maxlength="100" value=""></td>
                                 </tr>
-                                <!-- 제목 -->
                                 <tr>
-                                    <th scope="row"><label for="inp_title">제목 </em></label></th>
-                                    <td colspan="3">
-                                        <input type="text" id="inp_title" name="inp_title" class="inp01" style="width: 672px;">
-                                    </td>
+                                    <th scope="row"><label for="inp_content">내용</label></th>
+                                    <td colspan="3"><textarea name="txt_content" id="inp_content" cols="70" rows="10"></textarea></td>
                                 </tr>
-                                <!-- 내용 -->
                                 <tr>
-                                    <th scope="row"><label for="inp_textbox">내용</label></th>
-                                    <td colspan="3">
-                                        <textarea cols="60" rows="5" id="inp_textbox" name="inp_textbox" class="inp_txtbox01" style="height:94px !important;" placeholder="※문의 내용 및 첨부파일 내에 개인정보(신용카드번호, 계좌번호, 주민번호 등)가 포함되지 않도록 유의하시기 바랍니다."></textarea>
-                                        <p class="byte_info"><span id="sp_ad_content_size_1">0</span>/5000BYTE <span>(<span id="sp_ad_content_size_2">0</span>/2500자)</span></p>
-                                    </td>
-                                </tr>
-                                <!-- 파일 업로드 -->
-                                <tr>
-                                    <th scope="row"><label for="voc_upload_file">첨부파일</label></th>
-                                    <td colspan="3">
-                                        <input type="file" id="voc_upload_file" name="voc_upload_file" class="uploadfile" title="첨부파일" accept="image/*, .pdf, .zip, .hwp, .doc, .docx, .xls, .xlsx">
-                                        <p class="file_info">※파일은 최대 10MB까지 첨부 가능합니다.</p>
-                                        <p class="file_info">※파일형식: 이미지, PDF, ZIP, 한글문서, 워드문서, 엑셀문서</p>
-                                    </td>
-                                </tr>
-                                <!-- 유의사항 확인 -->
-                                <tr>
-                                    <th scope="row"><label for="chk_conform" class="regulation">유의사항 확인</label></th>
-                                    <td colspan="3">
-                                        <input type="checkbox" id="chk_conform" name="chk_conform" value="Y" onclick="conformCheck()">
-                                        <label for="chk_conform">유의사항을 확인하였으며, 동의합니다.</label>
-                                    </td>
+                                    <th scope="row">첨부파일</th>
+                                    <td colspan="3"><input type="file" name="file_attachment" id="file_attachment"></td>
                                 </tr>
                             </tbody>
                         </table>
+                        <!-- 추가 버튼 및 폼 버튼 -->
+                        <div class="btn_area">
+                            <button type="submit" class="btn_submit">제출</button>
+                            <button type="button" class="btn_cancel" onclick="window.location.href='eaq';">취소</button>
+                        </div>
                     </div>
                 </fieldset>
-
-                <!-- 제출 버튼 -->
-                <div class="btn_area">
-                    <button type="button" id="btnSubmit" class="btn_submit">제출</button>
-                    <button type="button" id="btnCancel" class="btn_cancel">취소</button>
-                </div>
             </form>
+
+            <!-- 페이지네이션 -->
+            <div class="paging">
+                <ul>
+                    <li><a href="#" class="btn-paging">이전</a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#" class="btn-paging">다음</a></li>
+                </ul>
+            </div>
         </div>
     </div>
+</div>
+
+<footer>
+    <p>MG Cinema &copy; 2024</p>
+</footer>
 </body>
 </html>

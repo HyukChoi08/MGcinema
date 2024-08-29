@@ -5,69 +5,62 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${serviceHome.title}</title>
     <style>
-        /* 스타일은 동일합니다 */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
+            background-color: #f4f4f4;
         }
-        header, footer {
+        .banner {
             width: 100%;
-            background-color: #fff;
+            background-color: #e50914;
+            color: white;
             text-align: center;
             padding: 10px 0;
-            border-bottom: 1px solid #ddd;
+            font-size: 1.2em;
+            font-weight: bold;
         }
         #container {
-            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
         #contents {
-            width: 1000px;
-            margin: 20px 0;
+            width: 100%;
             display: flex;
         }
-        .col-aside {
-            width: 250px;
-            margin-right: 20px;
-        }
-        .col-detail {
-            flex: 1;
-        }
-        .snb {
-            border: 1px solid black;
+        .sidebar {
+            width: 20%;
             padding: 15px;
-            background-color: #fff;
+            background-color: #f7f7f7;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            height: fit-content;
         }
-        .snb ul {
+        .sidebar ul {
             list-style-type: none;
             padding: 0;
-            margin: 0;
         }
-        .snb ul li {
-            margin-bottom: 10px;
+        .sidebar ul li {
+            margin-bottom: 15px;
         }
-        .snb ul li a {
+        .sidebar ul li a {
             text-decoration: none;
-            color: #red;
-            font-size: 1em;
-        }
-        .snb ul li a:hover {
-            text-decoration: underline;
-        }
-        .snb ul li.on a {
+            color: #333;
             font-weight: bold;
         }
-        .ad-area {
-            margin-top: 20px;
+        .sidebar ul li a:hover {
+            color: #e50914;
         }
-        .ad-partner01, .ad-partner02 {
-            margin-bottom: 10px;
+        .col-detail {
+            width: 75%;
+            padding: 15px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         .search_area {
             margin-bottom: 20px;
@@ -156,32 +149,45 @@
         .paging .btn-paging:hover {
             background-color: #0056b3;
         }
+        footer { 
+            background-color: white;
+            text-align: center;
+            padding: 10px 0;
+            border-top: 1px solid #ddd;
+        }
     </style>
+    <link rel="stylesheet" href="/Header_css/Header.css">    
 </head>
 <body>
-<header>
-    <!-- <h1>${serviceHome.title}</h1> -->
-</header>
+<header class="header">
+    <nav class="navbar">
+        <h1><a href="/">MG Cinema</a></h1>
+        <ul class="nav-links">
+            <li><a href="/login">로그인</a></li>
+            <li><a href="/signup">회원가입</a></li>
+            <li><a href="/myhome">My페이지</a></li>
+            <li><a href="/serviceHome">고객센터</a></li>
+        </ul>
+    </nav>
+</header>   
 
 <div id="container">
     <div id="contents">
-        <div class="col-aside">
-            <h2>고객센터 메뉴</h2>
+        <div class="sidebar">
             <div class="snb">
                 <ul>
-               		<li><a href="serviceHome">고객센터 메인<i></i></a></li>
+                    <li><a href="serviceHome">고객센터 메인<i></i></a></li>
                     <li><a href="faq">자주찾는 질문<i></i></a></li>
                     <li class="on"><a href="news">공지/뉴스<i></i></a></li>
                     <li><a href="eaq">이메일 문의<i></i></a></li>
-                    
                 </ul>
             </div>
-         </div>
+        </div>
 
         <div class="col-detail">
             <div class="customer_top">
                 <h2 class="tit">공지/뉴스</h2>
-                <p class="stit">MG Cinema의 주요한 이슈 및 여러가지 소식들을 확인하실 수 있습니다.</p>
+                <p class="stit">MG Cinema의 주요한 이슈 및 여러 가지 소식들을 확인하실 수 있습니다.</p>
             </div>
             <div class="search_area">
                 <legend><label for="c_select">검색</label></legend>
@@ -284,7 +290,7 @@
 </div>
 
 <footer>
-  
+    <!-- 푸터 내용 추가 -->
 </footer>
 </body>
 </html>

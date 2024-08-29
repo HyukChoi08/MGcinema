@@ -31,7 +31,7 @@
                 <li><a href="/login">로그인</a></li>
                 <li><a href="/signup">회원가입</a></li>
                 <li><a href="/myhome">My페이지</a></li>
-                <li><a href="/cs">고객센터</a></li>
+                <li><a href="/serviceHome">고객센터</a></li>
             </ul>
         </nav>
     </header>
