@@ -22,17 +22,19 @@ public class chartController {
 public String test() {
 	return "chart/chartList";
 }
+
 @GetMapping("/chartList1")
 public String chartList1(HttpServletRequest req, Model model) {
 	int id = Integer.parseInt(req.getParameter("id"));
 	System.out.println("id"+id);
 	
 	String archart = cdao.chartList2(id);
-	
 	model.addAttribute("chartList2",archart);
-	
+	ArrayList<chartDTO> putchart = cdao.chartList3(id);
+	model.addAttribute("chartList3", putchart);
 	return "chart/chartList1";
 }
+
 @PostMapping("/chartList")//무비 차트 정렬시키는것
 @ResponseBody
 public String chartList() {
@@ -42,9 +44,9 @@ public String chartList() {
 	for(chartDTO cdto : ar) {
 		JSONObject jo =new JSONObject();
 		jo.put("id", cdto.getId());
-		jo.put("image",cdto.getImage());
-		jo.put("reservationrate",cdto.getReservationrate());
-		jo.put("title", cdto.getTitle());
+		jo.put("imagepath",cdto.getImagepath());
+		jo.put("reservation",cdto.getReservation());
+		jo.put("mname", cdto.getMname());
 				
 		ja.put(jo);
 	}
@@ -78,9 +80,9 @@ public String chartList11() {
 	for(chartDTO cdto : ar) {
 		JSONObject jo =new JSONObject();
 		jo.put("id", cdto.getId());
-		jo.put("image",cdto.getImage());
-		jo.put("reservationrate",cdto.getReservationrate());
-		jo.put("title", cdto.getTitle());
+		jo.put("imagepath",cdto.getImagepath());
+		jo.put("reservation",cdto.getReservation());
+		jo.put("mname", cdto.getMname());
 		
 		ja.put(jo);
 	}

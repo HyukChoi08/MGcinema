@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,11 +29,12 @@ ol {
 </style>
 <body>
 <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
+<c:forEach items="${chartList3}" var="chartList3">
 <div>
 	
 	<div class="vertical-container">
 	
-		<div class="flex-container"><img src="${chartList2}" height="400px"><div class="vertical-container">설명 위에서 아래로 나오게</div>
+		<div class="flex-container"><img src="${chartList2}" height="400px"><div class="vertical-container"><div>${chartList3.mname}</div><div>예매율 ${chartList3.reservation} %</div><div><dl><dt>감독:&nbsp;${chartList3.director}</dt><dt>배우 :&nbsp;${chartList3.cast}</dt><dt>장르 : &nbsp;${chartList3.genre}/관람가:&nbsp;${chartList3.age}/상영시간:&nbsp;${chartList3.runningtime}</dt><dt>개봉일:&nbsp;${chartList3.releasedate}</dt></dl></div></div>
 				
 		</div>
 		<div>
@@ -41,7 +43,7 @@ ol {
 					<li>상세정보|</li><li>감독/출연|</li><li>스틸컷|</li><li>평점/리뷰|</li><li>상영시간</li>
 				</ul>
 			</div>
-			<div>설명창</div>
+			<div style="width:670px">${chartList3.movieinfo}</div>
 			<div>평점/리뷰
 				<ul id="putcomment">
 				
@@ -51,6 +53,7 @@ ol {
 	</div>
 	
 </div>
+</c:forEach>
  <%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
 </body>
 </html>
