@@ -76,7 +76,7 @@ public class PageController {
 	   model.addAttribute("inquiry", inqDTO);
 	   model.addAttribute("view", "inquirydetail");
 	   return "mypage/inquirydetail";
-   }
+   } 
    
    
     
