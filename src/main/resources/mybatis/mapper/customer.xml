@@ -27,9 +27,20 @@
 </delete>
 
 <select id="getInquiryList" resultType="com.cinema.mypage.InquiryDTO">
-      select id,customer_id, title, content, answer, created, ancreated, current
-      from inquiry
-      where customer_id=#{param1}
-   </select>
+    select id,customer_id, title, content, answer, created, ancreated, current
+    from inquiry
+    where customer_id=#{param1}
+ </select>
+ 
+ <insert id="inquiryWrite" parameterType="com.cinema.mypage.InquiryDTO">
+ 	insert into inquiry
+ 	set customer_id=#{customer_id}, title=#{title}, content=#{content}
+ </insert>
+ 
+ <select id="getInquiryDetail" resultType="com.cinema.mypage.InquiryDTO">
+ 	select title, content, answer, created, ancreated, current
+ 	from inquiry
+ 	where id=#{param1}
+ </select>
 
 </mapper>

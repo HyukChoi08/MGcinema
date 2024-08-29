@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -50,8 +51,33 @@ public class PageController {
       
    }
    
-//   @GetMapping("/inquirydetail")
-//   public String getInquiryDetail(HttpServletRequest req, )
+   // 1:1문의 작성폼 연결
+   @GetMapping("/inquirywrite")
+   public String getInquiryForm(Model model) {
+	   model.addAttribute("view", "inquirywrite");
+	   return "mypage/inquirydetail";
+   }
+   
+   // 1:1 문의 DB 등록
+   @PostMapping("/inquirywrite")
+   public String inquiryWrite(HttpSession session, InquiryDTO inqDTO) {
+	   CustomerDTO cusDTO = (CustomerDTO)(session.getAttribute("cusDTO"));
+	   int customer_id = cusDTO.getId();
+	   inqDTO.setCustomer_id(customer_id);
+	   mdao.inquiryWrite(inqDTO);
+	   return "redirect:/inquiry";
+   }
+   
+   // 1:1 문의글 상세 내용 확인
+   @GetMapping("/inquirydetail/{id}")
+   public String inquiryDetail(@PathVariable("id") int id, Model model) {
+	   InquiryDTO inqDTO = mdao.getInquiryDetail(id);
+	   System.out.println("문의 title: " + inqDTO.getTitle());
+	   model.addAttribute("inquiry", inqDTO);
+	   model.addAttribute("view", "inquirydetail");
+	   return "mypage/inquirydetail";
+   }
+   
    
     
    @GetMapping("/profile") //회원 정보 변경 페이지 매핑

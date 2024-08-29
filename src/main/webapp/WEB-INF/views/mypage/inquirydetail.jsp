@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -222,20 +223,42 @@ form input[type="submit"]:hover {
 		<div class="main-content">
 			<h2>1:1 문의 게시판</h2>
 
-			<!-- 문의 폼 -->
-			<h3>문의 작성</h3>
-			<!-- 사용자가 문의를 작성할 수 있는 폼 -->
-			<form action="inquiry" method="post">
-				제목: <input type="text" name="title" required /><br /><br /> 
-				내용: <textarea name="content" rows="10" cols="50" required></textarea>
-				<br />
-				<br /> <input type="submit" value="등록" />
-			</form>
-			<!-- 관리자 응답 -->
-			<div class="response">
-				<h2>관리자 답변</h2>
-				<p>//</p>
-			</div>
+			<!-- 문의 작성 폼 -->
+			<c:choose>
+			
+				<c:when test="${view == 'inquirywrite' }">
+					<h3>문의 작성</h3>
+					<!-- 사용자가 문의를 작성할 수 있는 폼 -->
+					<form action="/inquirywrite" method="post">
+						제목: <input type="text" name="title" required /><br /><br /> 
+						내용: <textarea name="content" rows="10" cols="50" required></textarea>
+						<br />
+						<br /> 
+						<input type="submit" value="등록" />
+						<button type="button" onclick="location.href='/inquiry'">목록</button>
+					</form>
+				</c:when>
+			
+				<c:when test="${view == 'inquirydetail'}">
+					<h3>1:1 문의</h3>
+					<!-- 나의 문의 내용 -->
+					제목: <input type="text" name="title" value="${inquiry.title}" readonly /><br /><br /> 
+					내용: <textarea name="content" rows="10" cols="50" readonly>${inquiry.content}</textarea>
+					<br />
+					<br /> 
+			
+					작성일자: <input type="text" name="created" value="${inquiry.created}" readonly /><br /><br />
+					<!-- 관리자 응답 -->
+					<c:if test="${inquiry.current == '답변완료'}">
+						<div class="response">
+							<h2>관리자 답변</h2>
+							답변내용: <br><textarea name=answer rows="10" cols="50" readonly>${inquiry.answer} </textarea><br>
+							답변일자: <br><input type="text" name="ancreated" value="${inquiry.ancreated}"readonly>
+						</div>
+					</c:if>
+					
+				</c:when>
+			</c:choose>
 
 			<!-- 나의 문의 내역 -->
 			<table class="inquiry-table">
