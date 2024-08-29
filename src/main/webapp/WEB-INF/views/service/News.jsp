@@ -290,7 +290,7 @@
 </div>
 
 <footer>
-    <!-- 푸터 내용 추가 -->
+    <p>MG Cinema &copy; 2024</p>
 </footer>
 </body>
 </html>

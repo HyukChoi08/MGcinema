@@ -190,18 +190,18 @@
                             <button type="button" class="btn_search">검색</button>
                         </div>
                         <div class="c_qu">
-                            <a href="faq">현금영수증</a>
-                            <a href="faq">관람권</a>
-                            <a href="faq">예매</a>
-                            <a href="faq">환불</a>
+                            <a href="faq">현금영수증</a>&nbsp;
+                            <a href="faq">관람권</a>&nbsp;
+                            <a href="faq">예매</a>&nbsp;
+                            <a href="faq">환불</a>&nbsp;
                             <a href="faq">취소</a>
                         </div>
                     </div>
-                    <div class="c_box talk_inquiry">
+                  <!--  <div class="c_box talk_inquiry">
                         <strong class="c_tit">상담톡 이용</strong>
                         <span class="c_txt">상담 톡을 이용해보세요.</span>
                         <a href="#">문의하기</a>
-                    </div>
+                    </div> -->
                     <div class="c_box email_inquiry">
                         <strong class="c_tit">이메일 문의</strong>
                         <span class="c_txt">24시간 365일 언제든지 문의해주세요.</span>
@@ -215,7 +215,7 @@
                 </div>
                 <div class="customer_notice_area">
                     <div class="service_area">
-                        <span class="tit">자주찾는 서비스</span>
+                        <span class="tit">자주찾는 질문</span>
                         <ul class="list">
                             <li><a href="#">신용카드<br>영수증출력</a></li>
                             <li><a href="#">아이디/<br>비밀번호 찾기</a></li>
@@ -241,7 +241,7 @@
         </div>
     </div>
     <footer>
-        <!--   <p>&copy; 2024 Company Name. All rights reserved.</p> -->
+        <p>MG Cinema &copy; 2024</p>
     </footer>
 </body>
 </html>

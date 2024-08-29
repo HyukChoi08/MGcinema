@@ -244,7 +244,7 @@
                 <fieldset>
                     <legend>이메일 문의</legend>
                     <div class="tbl_area">
-                        <p class="tbl_info_txt">체크된 항목은 필수 입력 사항입니다.</p>
+                        <p class="tbl_info_txt">빈 항목은 필수 입력 사항입니다.</p>
                         <br>
                         <table cellspacing="0" cellpadding="0" class="tbl_notice_list">
                             <colgroup>
@@ -267,7 +267,7 @@
                                     <th scope="row">이메일</th>
                                     <td><span>1111111@hhhh.com</span></td>
                                 </tr>
-                                <!-- 문의 유형 -->
+                                <!-- 문의 유형 
                                 <tr>
                                     <th scope="row">문의유형</th>
                                     <td colspan="3">
@@ -279,7 +279,7 @@
                                             <li id="li_ra_5"><input type="radio" id="inp_type05" name="sel_qnatype" value="1253"><label for="inp_type05">기타</label></li>
                                         </ul>
                                     </td>
-                                </tr>
+                                </tr> -->
                                 <!-- 문의 제목 및 내용 -->
                                 <tr>
                                     <th scope="row"><label for="inp_title">제목</label></th>
@@ -288,7 +288,7 @@
                                 <tr>
                                     <th scope="row"><label for="inp_content">내용</label></th>
                                     <td colspan="3"><textarea name="txt_content" id="inp_content" cols="70" rows="10"></textarea></td>
-                                </tr>
+                                </tr>	
                                 <tr>
                                     <th scope="row">첨부파일</th>
                                     <td colspan="3"><input type="file" name="file_attachment" id="file_attachment"></td>
@@ -298,14 +298,14 @@
                         <!-- 추가 버튼 및 폼 버튼 -->
                         <div class="btn_area">
                             <button type="submit" class="btn_submit">제출</button>
-                            <button type="button" class="btn_cancel" onclick="window.location.href='eaq';">취소</button>
+                            <button type="button" class="btn_cancel" onclick="eaq">취소</button>
                         </div>
                     </div>
                 </fieldset>
             </form>
 
             <!-- 페이지네이션 -->
-            <div class="paging">
+            <!--<div class="paging">
                 <ul>
                     <li><a href="#" class="btn-paging">이전</a></li>
                     <li><a href="#">1</a></li>
@@ -313,7 +313,7 @@
                     <li><a href="#">3</a></li>
                     <li><a href="#" class="btn-paging">다음</a></li>
                 </ul>
-            </div>
+            </div>-->
         </div>
     </div>
 </div>

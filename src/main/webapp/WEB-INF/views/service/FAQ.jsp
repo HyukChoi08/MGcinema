@@ -280,7 +280,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2024 Movie Theater. All rights reserved.</p>
+        <p>MG Cinema &copy; 2024</p>
     </footer>
 </body>
 </html>
