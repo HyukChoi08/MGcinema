@@ -14,7 +14,7 @@ select id,item_name,price,discount_price,composition,origin from item where id=#
 
 </select>
 <select id="getImagePath" resultType="string" parameterType="int">
-    SELECT image_path FROM store_images WHERE id =#{param1}
+    SELECT image_path FROM item WHERE id =#{param1}
 </select>
 
 

@@ -13,7 +13,7 @@ public class storeDTO {
 	String item_name;
 	String name;
 	String origin;
-	String imagePath;
+	String image_path;
 	
 	
 	

@@ -1,15 +1,18 @@
 package com.cinema.store;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class HomeController {
@@ -34,6 +37,13 @@ public class HomeController {
 		ArrayList<storeDTO> arItem = storedao.selectitem(id);
 		
 		String imagePath = storedao.getImagePath(id);
+		
+//		HttpSession s=req.getSession();
+//		String userid=(String) s.getAttribute("userid");
+//		System.out.println(userid);
+//		
+//		model.addAttribute(userid);
+		
 		
 		model.addAttribute("arPackage",arPackage);
 		model.addAttribute("arItem",arItem);
@@ -87,8 +97,18 @@ public class HomeController {
 		return "store/storepay";
 	}
 	@GetMapping("/cart")
-	public String cart(HttpServletRequest req) {
+	public String cart(HttpServletRequest req,Model model) {
+
+//		HttpSession s=req.getSession();
+//		String userid=(String) s.getAttribute("userid");
+//		System.out.println(userid);
+//		
+		String uid="rkd2";
 		
+		ArrayList<cartDTO> arCart=cartdao.selectcart(uid);
+		
+		
+		model.addAttribute("arCart",arCart);
 		
 		return "store/cart";
 	}
@@ -102,16 +122,37 @@ public class HomeController {
 	@ResponseBody
 	public String insertcart(HttpServletRequest req) {
 		
-		String custom_id=req.getParameter("custom_id");
+		String customer_id=req.getParameter("customer_id");
 		int item_id=Integer.parseInt(req.getParameter("item_id"));
 		int qty=Integer.parseInt(req.getParameter("qty"));
 		String total=req.getParameter("total");
 		
 		
-		cartdao.insertcart(custom_id, item_id, qty, total);
+		cartdao.insertcart(customer_id, item_id, qty, total);
 		return "ok";
 	}
-	
+	@PostMapping("/deletecart")
+	@ResponseBody
+	public String deletecart(HttpServletRequest req) {
+		int item_id=Integer.parseInt(req.getParameter("item_id"));
+		String customer_id=req.getParameter("customer_id");
+		
+		cartdao.deletecart(item_id, customer_id);
+		
+		return "ok";
+	}
+//    @PostMapping("/alldelete")
+//    @ResponseBody
+//    public String alldelete(@RequestBody DeleteRequest deleteRequest) {
+//        List<Integer> itemIds = deleteRequest.getItems();
+//        // DB에서 항목 삭제 처리
+//        // deleteItemsFromDatabase(itemIds); // 적절한 서비스 메서드를 호출하여 DB에서 삭제
+//        
+//        return "success";
+//    }
+//	
+//	
+//	
 	
 	
 	

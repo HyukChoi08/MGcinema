@@ -9,6 +9,12 @@ public class cartDTO {
 	int item_id;
 	int qty;
 	String total;
+	String item_name;
+	String composition;
+	String discount_price;
+	String price;
+	String image_path;
+	String uid;
 	
 	
 

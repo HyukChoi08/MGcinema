@@ -319,8 +319,8 @@
                 <div>
                  	<c:forEach items="${arItem}" var="item">
         				<div>
-            				<strong class="category_title">${item.item_name}</strong><input type='text' id='hiddenid'><input type='text' id='userid'>
-            				<input type=hidden id="idid" value='${item.id}'><br>
+            				<strong class="category_title">${item.item_name}</strong><input type='hidden' id='hiddenid'><input type='hidden' id='userid'>
+            				
             					<div class="separator2"></div>
 					            <ul class="category_inner">
 					                <li class="left" id="1">
@@ -376,8 +376,7 @@
 									        	</div>
 									    </div>
 									  <div class='bottom'>
-									    <input type='button' id='btncart' value='장바구니'>
-									    
+									    <input type='button' id='btncart' value='장바구니'>									    
 									    <input type='button' id='btnbuy' value='구매하기'>
 									  </div>    
 					                </li>
@@ -443,7 +442,7 @@ $(document)
  // ID 값을 콘솔에 출력
  console.log('ID:', id);
  $('#hiddenid').val(id);
- $('#userid').val('안녕하세요');
+ $('#userid').val('rkd2');
 	let userid= $('#userid').val();
 console.log(userid);
  
@@ -491,16 +490,17 @@ console.log(userid);
 .on('click','#btncart',function(){
 	
 		let item_id=$('#hiddenid').val();
-		let custom_id=$('#userid').val();
-		let total=$('#totalprice').val();
+		let customer_id=$('#userid').val();
+		let totalStr=$('#totalprice').val();
+		let total=parseInt(totalStr.replace(/,/g,''),10);
 		let qty=$('#cnt').val();
 		console.log("id"+item_id);
-		console.log("userid"+custom_id);
+		console.log("userid"+customer_id);
 		console.log(qty);
 		console.log(total);
 		
 		$.ajax({
-			url:'/insertcart',type:'post',data:{custom_id:custom_id,item_id:item_id,qty:qty,total:total},dataType:'text',
+			url:'/insertcart',type:'post',data:{customer_id:customer_id,item_id:item_id,qty:qty,total:total},dataType:'text',
 			success:function(data){
 				if(data=='ok'){
 					
