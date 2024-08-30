@@ -1,9 +1,9 @@
 package com.cinema.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ServiceController {
-
+    @Autowired
+    private FAQDAO faqDAO;
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -25,21 +26,30 @@ public class ServiceController {
 
     @GetMapping("/faq")
     public String showFAQPage(Model model) {
-        // 정적 데이터 생성
-        List<FAQDTO> faqList = List.of(
-            new FAQDTO(1L, "FAQ 제목 1", "FAQ 내용 1", 100)
-        );
+        // 데이터베이스에서 FAQ 목록 조회
+        List<FAQDTO> faqList = faqDAO.getAllFAQs();
 
         model.addAttribute("faqList", faqList); // 모델에 데이터 추가
         return "service/FAQ"; // 반환되는 뷰 이름 (FAQ.jsp)
     }
 
+    @GetMapping("/FAQdetail")
+    public String showFAQDetailPage(@RequestParam(value = "id") Long id, Model model) {
+        // FAQ 상세 정보를 가져오는 로직 추가
+        FAQDTO faqDetail = faqDAO.getFAQById(id);
+
+        model.addAttribute("faqDetail", faqDetail); // 모델에 데이터 추가
+        return "service/FAQdetail"; // 반환되는 뷰 이름 (FAQdetail.jsp)
+    }
+
     @GetMapping("/news")
     public String showNewsPage(Model model) {
-        // 뉴스 데이터베이스에서 조회
-        String selectQuery = "SELECT * FROM notice ORDER BY num DESC";
-        List<NewsDTO> newsList = jdbcTemplate.query(selectQuery, new BeanPropertyRowMapper<>(NewsDTO.class));
-        
+        // 정적 데이터 생성 (예제 데이터)
+        List<NewsDTO> newsList = List.of(
+            new NewsDTO(1L, "공지사항 제목 1", "공지사항 내용 1", "2024-08-30 12:00:00", 123),
+            new NewsDTO(2L, "공지사항 제목 2", "공지사항 내용 2", "2024-08-29 09:30:00", 456)
+        );
+
         model.addAttribute("newsList", newsList); // 모델에 데이터 추가
         return "service/News"; // 반환되는 뷰 이름 (News.jsp)
     }
@@ -53,11 +63,5 @@ public class ServiceController {
 
         model.addAttribute("eaqList", eaqList); // 모델에 데이터 추가
         return "service/EAQ"; // 반환되는 뷰 이름 (EAQ.jsp)
-    }
-    @GetMapping("/board")
-    public String showBoardPage(Model model) {
-        // 단순히 Board 페이지를 표시하기만 할 수 있습니다.
-        return "service/Board"; // 반환되는 뷰 이름 (Board.jsp)
-    
     }
 }

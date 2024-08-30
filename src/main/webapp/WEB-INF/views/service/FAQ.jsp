@@ -180,6 +180,21 @@
         .paging .btn-paging:hover {
             background-color: #d10813;
         }
+        
+
+		.btn-add {
+   			 padding: 10px 15px;
+    		background-color: #4CAF50; /* 추가 버튼 배경색 (예: 초록색) */
+    		color: white;
+    		border: none;
+    		border-radius: 4px;
+    		cursor: pointer;
+    		font-size: 0.9em; /* 버튼 글씨 크기 조정 */
+		}
+
+		.btn-add:hover {
+    		background-color: #45a049; /* 버튼에 마우스를 올렸을 때 색상 변경 */
+		}
         /* 푸터 스타일 */
         footer {
             background-color: white;
@@ -221,33 +236,16 @@
             <div class="col-detail">
                 <div class="customer_top">
                     <h2 class="tit">자주찾는 질문</h2>
-                    <p class="stit">회원님들께서 가장 자주하시는 질문을 모았습니다. <br>궁금하신 내용에 대해 검색해보세요.</p>
+                    <p class="stit">회원님들께서 가장 자주하시는 질문을 모았습니다. </p>
                 </div>
-                <div class="search_area">
-                    <label for="searchtext" class="hidden">검색어 입력</label>
-                    <input id="searchtext" type="text" title="검색어 입력" placeholder="검색어를 입력해 주세요">
-                    <button type="button" class="round inblack" title="검색하기">검색하기</button>
-                </div>
-                <div class="c_tab_wrap">
-                    <ul class="c_tab type_free">
-                        <li class="on"><a href="#">전체</a></li>
-                        <li><a href="#">예매/매표</a></li>
-                        <li><a href="#">관람권/결제수단</a></li>
-                        <li><a href="#">멤버쉽/클럽서비스</a></li>
-                        <li><a href="#">VIP관련</a></li>
-                        <li><a href="#">할인혜택</a></li>
-                        <li><a href="#">영화관이용</a></li>
-                        <li><a href="#">특별관</a></li>
-                        <li><a href="#">기프트샵</a></li>
-                        <li><a href="#">홈페이지/모바일</a></li>
-                    </ul>
-                </div>
+                               
                 <div class="search_result">
-                    총<span class="num"> 0건</span>
+                    총<span class="num"> 0건</span>&nbsp;
+                    <button type="button" class="btn-add" onclick="location.href='/FAQdetail?id=1'"> + </button>
+
                 </div>
-                <div class="tbl_area">
+                 <div class="tbl_area">
                     <table class="tbl_notice_list">
-                        <caption>자주찾는 질문</caption>
                         <thead>
                             <tr>
                                 <th scope="col">번호</th>
@@ -257,16 +255,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- 내용이 없을 때 -->
-                            <tr>
-                                <td colspan="4">검색된 결과가 없습니다.</td>
-                            </tr>
+                            <c:forEach var="faq" items="${faqList}">
+                                <tr>
+                                    <td>${faq.id}</td>
+                                    <td><a href="/FAQdetail?id=${faq.id}">${faq.title}</a></td>
+                                    <td>${faq.createdAt}</td>
+                                    <td>${faq.viewCount}</td>
+                                </tr>
+                            </c:forEach>
+                            <!-- FAQ 항목이 없을 때 -->
+                            <c:if test="${empty faqList}">    
+                            </c:if>
                         </tbody>
                     </table>
-                </div>
+                </div>               
                 <div class="paging">
-                    <button type="button" class="btn-paging">이전</button>
-                    <ul>
+                <button type="button" class="btn-paging">이전</button>
+                <ul>
                         <li><a href="#">1</a></li>
                         <li><a href="#">2</a></li>
                         <li><a href="#">3</a></li>

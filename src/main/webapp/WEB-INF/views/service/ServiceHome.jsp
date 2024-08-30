@@ -154,7 +154,7 @@
         <nav class="navbar">
             <h1><a href="/">MG Cinema</a></h1>
             <ul class="nav-links">
-                <li><a href="/login">로그인</a></li>
+                <li><a href="/login">로그인</li>
                 <li><a href="/signup">회원가입</a></li>
                 <li><a href="/myhome">My페이지</a></li>
                 <li><a href="/serviceHome">고객센터</a></li>
@@ -184,7 +184,7 @@
             <div class="col-detail">
                 <div class="c_check_warp">
                     <div class="c_box qna_search">
-                        <strong class="c_tit">자주찾는 질문 빠른검색</strong>
+                        <strong class="c_tit">🔍자주찾는 질문 빠른검색</strong>
                         <div class="search_box">
                             <input id="searchtext" type="text" placeholder="검색어를 입력해 주세요." />
                             <button type="button" class="btn_search">검색</button>
@@ -203,12 +203,12 @@
                         <a href="#">문의하기</a>
                     </div> -->
                     <div class="c_box email_inquiry">
-                        <strong class="c_tit">이메일 문의</strong>
+                        <strong class="c_tit">📧이메일 문의</strong>
                         <span class="c_txt">24시간 365일 언제든지 문의해주세요.</span>
                         <a href="eaq">문의하기</a>
                     </div>
                     <div class="c_box my_advice">
-                        <strong class="c_tit">내 상담 내역 확인</strong>
+                        <strong class="c_tit">🧐내 상담 내역 확인</strong>
                         <span class="c_txt">문의하신 내용을 확인하실 수 있습니다.</span>
                         <a href="#">문의내역 조회</a>
                     </div>

@@ -1,6 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page import="java.sql.ResultSet, java.sql.PreparedStatement, java.sql.DriverManager, java.sql.Connection" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -214,25 +212,6 @@
             </div><br>
             <button class="add-button" title="추가하기">+</button>            
             <div class="tbl_area">
-            <%
-            // 데이터베이스 연결 및 데이터 조회
-            try {
-                // JDBC 드라이버 로드
-                Class.forName("com.mysql.cj.jdbc.Driver"); // 최신 드라이버 클래스 이름
-
-                // 데이터베이스 연결 정보
-                String db_address = "jdbc:mysql://localhost:3306/mgcinema";
-                String db_username = "root";
-                String db_pwd = "1234"; // 데이터베이스 비밀번호
-                Connection connection = DriverManager.getConnection(db_address, db_username, db_pwd);
-
-                // 쿼리문 선언
-                String selectQuery = "SELECT * FROM notice ORDER BY num DESC";
-                
-                // 쿼리 실행
-                PreparedStatement psmt = connection.prepareStatement(selectQuery);
-                ResultSet result = psmt.executeQuery();
-            %>
                 <table cellspacing="0" cellpadding="0" class="tbl_notice_list"><br>
                     <colgroup>
                         <col style="width:70px;">
@@ -253,30 +232,21 @@
                     </thead>
                     <tbody>
                         <!-- 데이터 반복 -->
-                        <%
-                        while (result.next()) {
-                        %>
+                        <!-- 예제 데이터 -->
                         <tr>
-                            <td><%=result.getInt("num") %></td>
-                            <td><%=result.getString("title") %></td>
-                            <td><a href="post_read.jsp?num=<%=result.getInt("num") %>"><%=result.getString("content") %></a></td>
-                            <td><%=result.getTimestamp("createdate") %></td>
-                            <td><%=result.getInt("click") %></td>
+                            <td>1</td>
+                            <td>공지사항 제목</td>
+                            <td><a href="post_read.jsp?num=1">공지사항 내용</a></td>
+                            <td>2024-08-30 12:00:00</td>
+                            <td>123</td>
                             <td>
-                                <button type="button" value="수정" onClick="location.href='post_modify.jsp?num=<%=result.getInt("num") %>'">수정</button>
-                                <button type="button" value="삭제" onClick="location.href='post_delete_send.jsp?num=<%=result.getInt("num") %>'">삭제</button>
+                                <button type="button" value="수정" onClick="location.href='post_modify.jsp?num=1'">수정</button>
+                                <button type="button" value="삭제" onClick="location.href='post_delete_send.jsp?num=1'">삭제</button>
                             </td>
                         </tr>
-                        <%
-                        }
-                        %>
+                        <!-- 예제 데이터 끝 -->
                     </tbody>
                 </table>
-            <%
-            } catch (Exception ex) {
-                out.println("오류가 발생했습니다. 오류 메시 : " + ex.getMessage());
-            }
-            %>
             </div>
             <div class="paging">
                 <ul>
