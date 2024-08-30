@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +23,7 @@ body {
 	padding: 20px;
 	background-color: white; /* 프로필 섹션 배경색 */
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 프로필 섹션 그림자 효과 */
-	width: 80%; /* 프로필 섹션의 너비 조정 */
+	width: 60%; /* 프로필 섹션의 너비 조정 */
 	margin: 20px auto;
 	border-radius: 10px; /* 모서리 둥글게 */
 }
@@ -58,7 +58,7 @@ body {
 	display: flex; /* 사이드바와 메인 콘텐츠를 옆으로 배치 */
 	max-width: 1200px;
 	margin: 20px auto;
-} 
+}
 
 /* 사이드바 스타일 */
 .sidebar {
@@ -192,7 +192,8 @@ form input[type="submit"]:hover {
 </style>
 </head>
 <body>
-   <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
+	<%@ include file="/WEB-INF/views/header/header.jsp"%>
+	<!-- 헤더 포함 -->
 	<!-- 프로필 섹션 -->
 	<div class="profile-section">
 		<img src="profile-placeholder.png" width="80" height="80">
@@ -225,38 +226,45 @@ form input[type="submit"]:hover {
 
 			<!-- 문의 작성 폼 -->
 			<c:choose>
-			
+
 				<c:when test="${view == 'inquirywrite' }">
 					<h3>문의 작성</h3>
 					<!-- 사용자가 문의를 작성할 수 있는 폼 -->
 					<form action="/inquirywrite" method="post">
-						제목: <input type="text" name="title" required /><br /><br /> 
-						내용: <textarea name="content" rows="10" cols="50" required></textarea>
-						<br />
-						<br /> 
-						<input type="submit" value="등록" />
+						제목: <input type="text" name="title" required /><br /> <br />
+						내용:
+						<textarea name="content" rows="10" cols="50" required></textarea>
+						<br /> <br /> <input type="submit" value="등록" />
 						<button type="button" onclick="location.href='/inquiry'">목록</button>
 					</form>
 				</c:when>
-			
+
 				<c:when test="${view == 'inquirydetail'}">
 					<h3>1:1 문의</h3>
 					<!-- 나의 문의 내용 -->
-					제목: <input type="text" name="title" value="${inquiry.title}" readonly /><br /><br /> 
+					제목: <input type="text" name="title" value="${inquiry.title}"
+						readonly />
+					<br />
+					<br /> 
 					내용: <textarea name="content" rows="10" cols="50" readonly>${inquiry.content}</textarea>
 					<br />
 					<br /> 
 			
-					작성일자: <input type="text" name="created" value="${inquiry.created}" readonly /><br /><br />
+					작성일자: <input type="text" name="created" value="${inquiry.created}"
+						readonly />
+					<br />
+					<br />
 					<!-- 관리자 응답 -->
 					<c:if test="${inquiry.current == '답변완료'}">
 						<div class="response">
 							<h2>관리자 답변</h2>
-							답변내용: <br><textarea name=answer rows="10" cols="50" readonly>${inquiry.answer} </textarea><br>
-							답변일자: <br><input type="text" name="ancreated" value="${inquiry.ancreated}"readonly>
+							답변내용: <br>
+							<textarea name=answer rows="10" cols="50" readonly>${inquiry.answer} </textarea>
+							<br> 답변일자: <br> <input type="text" name="ancreated"
+								value="${inquiry.ancreated}" readonly>
 						</div>
 					</c:if>
-					
+
 				</c:when>
 			</c:choose>
 
@@ -272,12 +280,13 @@ form input[type="submit"]:hover {
 					</tr>
 				</thead>
 				<tbody>
-					
+
 				</tbody>
 			</table>
 		</div>
 	</div>
-	    <%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
+	<%@ include file="/WEB-INF/views/footer/footer.jsp"%>
+	<!-- 푸터 포함 -->
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>

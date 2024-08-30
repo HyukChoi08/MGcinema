@@ -73,6 +73,8 @@ public class PageController {
    public String inquiryDetail(@PathVariable("id") int id, Model model) {
 	   InquiryDTO inqDTO = mdao.getInquiryDetail(id);
 	   System.out.println("문의 title: " + inqDTO.getTitle());
+	   
+	   
 	   model.addAttribute("inquiry", inqDTO);
 	   model.addAttribute("view", "inquirydetail");
 	   return "mypage/inquirydetail";
