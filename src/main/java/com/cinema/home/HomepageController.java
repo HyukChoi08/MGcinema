@@ -24,11 +24,14 @@ public class HomepageController {
 		String linkstr = "";
 		HttpSession s = req.getSession();
 		String id = (String) s.getAttribute("uid");
+		System.out.println(id);
+		String Nickname = ldao.getNickname(id);
+		System.out.println(Nickname);
 		if(id == null || id.equals("")) {
 			linkstr = "<li><a href='/login'>로그인</a>&nbsp;&nbsp;&nbsp;"+
 					"<a href='/signup'>회원가입</a></li>";
 		}else {
-			linkstr = "<li>사용자 ["+id+"]&nbsp;&nbsp;&nbsp;"+
+			linkstr = "<li>사용자 ["+Nickname+"]&nbsp;&nbsp;&nbsp;"+
 					"<a href='/logout'>로그아웃</a></li>";
 		}
 		model.addAttribute("linkstr",linkstr);

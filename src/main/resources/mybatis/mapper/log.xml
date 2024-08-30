@@ -14,4 +14,8 @@
 	<select id="checkUidExists" resultType="int">
     	select count(*) from customer where uid = #{param1}
 	</select>
+	<select id="getNickname" resultType="String">
+        select nickname from customer
+        where uid = #{param1}
+	</select>
 </mapper>

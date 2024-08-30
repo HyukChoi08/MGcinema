@@ -11,4 +11,6 @@ public interface logDAO {
     		String region, String nickname, String favorite, String tellecom);	// 회원가입
     
     int checkUidExists(String uid); // 아이디 중복 체크
+    
+    String getNickname(String a);
 }
