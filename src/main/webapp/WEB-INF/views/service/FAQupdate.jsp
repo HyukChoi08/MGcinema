@@ -12,8 +12,8 @@
         <h1>FAQ 수정</h1>
         <a href="/service/faq">목록으로 돌아가기</a>
     </header>
-    
-    <form action="/service/faq/update" method="post">
+     
+    <form action="/service/faq/ update" method="post">
         <input type="hidden" name="id" value="${faq.id}">
         <label for="title">제목:</label>
         <input type="text" id="title" name="title" value="${faq.title}" required>
