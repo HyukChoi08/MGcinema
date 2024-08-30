@@ -19,6 +19,12 @@
     flex-direction: column; /* 세로 정렬 */
     align-items: center; /* 가운데 정렬 */
 }
+.vertical-container1 {
+    display: flex;
+    flex-direction: column; /* 세로 정렬 */
+    align-items: center; /* 가운데 정렬 */
+    width:1000px;
+}
 
 ol {
     display: flex; /* ul 요소를 플렉스 컨테이너로 설정 */
@@ -30,7 +36,7 @@ ol {
 <body>
 <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
 <c:forEach items="${chartList3}" var="chartList3">
-<div>
+<div class="vertical-container1">
 	
 	<div class="vertical-container">
 	
@@ -56,4 +62,5 @@ ol {
 </c:forEach>
  <%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
 </body>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
 </html>

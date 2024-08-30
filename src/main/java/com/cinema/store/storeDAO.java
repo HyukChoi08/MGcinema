@@ -10,7 +10,7 @@ public interface storeDAO {
 	ArrayList<storeDTO> selectpackage(int id);
 	ArrayList<storeDTO> selectitem(int id);
 	String getImagePath(int id);
-
+	
 	
 	
 }

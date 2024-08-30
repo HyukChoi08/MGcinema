@@ -9,4 +9,37 @@
 insert into cart set customer_id=#{param1}, item_id=#{param2}, qty=#{param3}, total=#{param4}
 
 </insert>
+<select id='selectcart' resultType="com.cinema.store.cartDTO">
+
+SELECT 
+    a.item_id, 
+    SUM(a.qty) AS qty, 
+    SUM(a.total) AS total,  
+    b.item_name, 
+    b.composition, 
+    b.discount_price, 
+    b.price, 
+    b.image_path, 
+    c.uid
+FROM  cart a
+JOIN item b ON a.item_id = b.id
+JOIN customer c ON a.customer_id = c.uid
+WHERE c.uid = 'rkd2'
+GROUP BY  a.item_id 
+order by item_id
+</select>
+<delete id='deletecart'>
+DELETE FROM cart
+WHERE item_id =#{param1} AND customer_id =#{param2}
+
+</delete>
+<!-- 
+ <delete id="deleteItems" parameterType="list">
+    DELETE FROM cart
+    WHERE item_id IN
+    <foreach item="itemId" collection="list" open="(" close=")" separator=",">
+        #{itemId}
+    </foreach>
+</delete>
+-->
 </mapper>

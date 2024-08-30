@@ -5,9 +5,40 @@
 	select id,mname,runningtime from movie order by id
 </select>
 <select id="roomlist" resultType="com.cinema.management.RoomDTO">
-	select id,Sname,seatlevel from room order by id
+	select a.id,a.Sname,a.seatlevel,b.allseat,a.adult_price,a.young_price
+	from room a,seatinfo b
+	where a.seatinfo_id=b.id order by a.id
 </select>
 <insert id="schedules">
-	insert into schedules set movie_id=#{param1}, room_id=#{param2}, moviedate=#{param3}, begintime=#{param4}, endtime=#{param5}
+	insert into schedules set movie_id=#{param1}, room_id=#{param2}, moviedate=#{param3}, begintime=#{param4},
+	endtime=#{param5}, lestseat=#{param6}, a_price=#{param7}, y_price=#{param8}, timetype=#{param9}
+</insert>
+<select id="getschedules" resultType="com.cinema.management.ScheDTO">
+	select a.id,b.mname,a.moviedate,b.runningtime,b.age,c.Sname,c.seatlevel,a.lestseat,a.begintime,
+			a.endtime,a.a_price,a.y_price,a.timetype
+	from schedules a, movie b, room c
+	where a.movie_id=b.id and a.room_id=c.id order by moviedate desc, begintime desc
+</select>
+<delete id="schedel">
+	delete from schedules where id=#{param1}
+</delete>
+<delete id="moviedel">
+	delete from movie where id=#{param1}
+</delete>
+<select id="getmovieinfo" resultType="com.cinema.management.MovieinfoDTO">
+	select * from movie order by id desc
+</select>
+<insert id="moviein">
+	insert into movie set mname=#{param1}, age=#{param2}, runningtime=#{param3}, imagepath=#{param4}, director=#{param5},
+							cast=#{param6}, genre=#{param7}, releasedate=#{param8}, movieinfo=#{param9}, reservation=#{param10}
+</insert>
+<select id="itemlist" resultType="com.cinema.management.ItemDTO">
+	select * from item order by id desc
+</select>
+<select id="detaillist" resultType="com.cinema.management.DetailDTO">
+	select * from item_detail order by id desc
+</select>
+<insert id="itemin">
+	insert into item set item_name=#{param1}, price=#{param2}, discount_price=#{param3}, composition=#{param4}, origin=#{param5}, image_path=#{param6}
 </insert>
 </mapper>
