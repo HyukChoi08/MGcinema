@@ -136,14 +136,14 @@
 <body>
     <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
     <div class="home-page">
-        <nav class="navbar">
+       <!--  <nav class="navbar">
             <ul class="nav-links">
                 <li><a href="/Movie">영화</a></li>
                 <li><a href="/cinema">극장</a></li>
                 <li><a href="/ticket">예매</a></li>
                 <li><a href="/store">스토어</a></li>
             </ul>
-        </nav>
+        </nav> -->
 
         <div class="promo-container">
             <div class="slider">
@@ -164,7 +164,8 @@
 
     <%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script>
         $(document).ready(function(){
@@ -180,7 +181,6 @@
             });
         });
     </script>
-</body>
 </html> 
 
 

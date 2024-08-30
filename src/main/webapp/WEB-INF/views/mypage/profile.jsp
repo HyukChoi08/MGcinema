@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원 정보 수정</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>회원 정보 수정</title>
 <style>
 /* 전체 body 스타일 설정 */
 body {
@@ -16,25 +16,25 @@ body {
 	background-color: #f4f4f4; /* 페이지 배경색 */
 }
 
-form input{
-padding: 5px;
+form input {
+	padding: 5px;
 	margin-bottom: 5px;
 	border: 1px solid #ddd;
 	border-radius: 5px;
 	font-size: 16px;
 	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 	transition: border-color 0.3s ease; /* 경계선 색상 변경 시 애니메이션 추가 */
-	
 }
 /* 프로필 섹션 스타일 */
 .profile-section {
-	display: flex; /* 이미지와 텍스트를 옆으로 배치 */
+ 	display: flex; /* 이미지와 텍스트를 옆으로 배치 */
 	align-items: center; /* 수직 중앙 정렬 */
 	padding: 20px;
 	background-color: white; /* 프로필 섹션 배경색 */
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 프로필 섹션 그림자 효과 */
-	width: 80%; /* 프로필 섹션의 너비 조정 */
-	margin: 0 auto;
+	width: 60%; /* 프로필 섹션의 너비 조정 */
+	margin: 10px auto;
+	border-radius: 10px; /* 모서리 둥글게 */
 }
 
 .profile-section img {
@@ -112,7 +112,8 @@ padding: 5px;
 </style>
 </head>
 <body>
-   <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
+	<%@ include file="/WEB-INF/views/header/header.jsp"%>
+	<!-- 헤더 포함 -->
 	<!-- DB 작업 실패 시 에러메세지 출력 -->
 	<c:if test="${not empty errorMessage}">
 		<script>
@@ -122,7 +123,7 @@ padding: 5px;
 
 	<!-- 프로필 섹션 -->
 	<div class="profile-section">
-		<img src="profile-placeholder.png" width="80" height="80">
+		<img src="/mypage_image/OO.png" alt="프로필이미지" alt="프로필이미지" width="80" height="80">
 		<div class="profile-info">
 			<h2 id="nickname">님</h2>
 			<p>
@@ -237,7 +238,8 @@ padding: 5px;
 			</div>
 		</div>
 	</div>
-    <%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
+	<%@ include file="/WEB-INF/views/footer/footer.jsp"%>
+	<!-- 푸터 포함 -->
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>

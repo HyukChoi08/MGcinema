@@ -1,207 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Movie Ticket Reservation</title>
-<style>
-/* body { */
-/*     margin: 0; */
-/*     padding: 0; */
-/*     font-family: Arial, sans-serif; */
-/*     display: flex; */
-/*     justify-content: center; */
-/*     align-items: center; */
-/*     min-height: 100vh; */
-/* } */
-.maincontainer {
-    width: 1000px; /* 너비를 설정하여 가운데 정렬 */
-    margin: 0 auto; /* 자동 마진으로 가운데 정렬 */
-    text-align: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-
-.container {
-    width: 1000px;
-    margin-top: 50px;
-    background-color: #f4f4f4;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-header, footer {
-    width: 100%;
-    background-color: #f4f4f4;
-    padding: 10px 0;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.list-container {
-    display: flex;
-    justify-content: space-between;
-}
-
-.list-box {
-    width: 22%;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    height: 300px;
-    overflow-y: scroll;
-    padding: 10px;
-}
-
-.list-box ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.list-box li {
-    padding: 8px;
-    cursor: pointer;
-    border-bottom: 1px solid #ddd;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.list-box li:hover {
-    background-color: #eee;
-}
-
-.list-box li.selected {
-    background-color: #cce5ff;
-}
-
-.date-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.date-wrapper span {
-    width: 50%;
-    text-align: left;
-}
-
-.date-wrapper .day {
-    color: #666;
-}
-
-.date-wrapper .date {
-    font-weight: bold;
-}
-
-.sunday {
-    color: red;
-}
-
-.saturday {
-    color: blue;
-}
-
-#button {
-    padding: 3px;
-    margin-top: 20px;
-    width: 90px;
-    max-width: 100px;
-    
-}
-
-
-
-.seat-selection {
-  	display: none;
-    width: 1000px;
-    margin-top: 50px;
-    background-color: #f4f4f4;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.seat-row {
-  display: flex;
-  justify-content: center;
-}
-
-.seat {
-  width: 15px;
-  height: 15px;
-  margin: 1px;
-  margin-top: 4px;
-  background-color: #ddd;
-  cursor: pointer;
-  display: inline-block;
-  font-size:10px;
-  background-color:#666666;
-  color:#ffffff;
-  text-align:center;
-}
-
-.seat.selected {
-  background-color: #6c7ae0;
-}
-
-.seat.occupied {
-  background-color: #bbbbbb;
-  cursor: not-allowed;
-  color:#ffffff;
-}
-.foots {
-	width:1000px;
-	font-size:10px;
-}
-.foots-container {
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-#btnclear {
-    margin-left: 90%;
-}
-#seatinfo {
-	display: none;
-}
-.additional-info {
-	display: flex;
-}
-#adultpernum, #youthpernum {
-	padding: 0;
-    margin: 0;
-    list-style: none;
-    display: flex;
-}
-#adultpernum li, #youthpernum li {
-    margin-right: 10px; /* 리스트 항목 사이의 간격 조정 */
-    padding: 5px; /* 항목 내부 여백 조정 */
-    display: inline-block;
-    cursor: pointer;
-}
-#adultpernum li.selected, #youthpernum li.selected {
-	color:#ffffff;
-	background-color:#666666;
-}
-.peradult, .peryouth {
-	display: flex;
-	align-items: left;
-}
-.pern {
-	width: 80px;
-	padding: 5px;
-}
-#selectionScreen.container, #seatSelectionScreen.seat-selection {
-	width: 1000px;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/ticket_css/styles.css">
 </head>
 <body>
- <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
+<%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
 <div class="maincontainer">
     <div class="container" id="selectionScreen">
-        <h1>예매</h1> <button id="btnclear">예매 초기화</button>
+        <h1>영화 예매</h1> <button id="btnclear">초기화</button>
         <div class="list-container">
             <div class="list-box" id="movieList"><p>영화</p>
                 <ul></ul>
@@ -218,44 +29,45 @@ header, footer {
         </div>
     </div>
     <div id="seatinfo">
-    	<p id="theaterInfo"></p>
-    	<p id="movieTime"></p>
-    	<p id="personInfo"></p>
-    	<div class="peradult">
-    		<span class="pern">일반</span>
-	    	<ul id="adultpernum">
-	    		<li data-count="0" data-type="adult">0</li>
-	    		<li data-count="1" data-type="adult">1</li>
-	    		<li data-count="2" data-type="adult">2</li>
-	    		<li data-count="3" data-type="adult">3</li>
-	    		<li data-count="4" data-type="adult">4</li>
-	    	</ul>
-	    </div>
-	    <div class="peryouth">
-	    	<span class="pern">청소년</span>
-	    	<ul id="youthpernum">
-	    		<li data-count="0" data-type="youth">0</li>
-	    		<li data-count="1" data-type="youth">1</li>
-	    		<li data-count="2" data-type="youth">2</li>
-	    		<li data-count="3" data-type="youth">3</li>
-	    		<li data-count="4" data-type="youth">4</li>
-	    	</ul>
-    	</div>
-	</div>
+        <p id="theaterInfo"></p>
+        <p id="movieTime"></p>
+        <p id="personInfo"></p>
+        <div class="peradult">
+            <span class="pern">일반</span>
+            <ul id="adultpernum">
+                <li data-count="0" data-type="adult">0</li>
+                <li data-count="1" data-type="adult">1</li>
+                <li data-count="2" data-type="adult">2</li>
+                <li data-count="3" data-type="adult">3</li>
+                <li data-count="4" data-type="adult">4</li>
+            </ul>
+        </div>
+        <div class="peryouth">
+            <span class="pern">청소년</span>
+            <ul id="youthpernum">
+                <li data-count="0" data-type="youth">0</li>
+                <li data-count="1" data-type="youth">1</li>
+                <li data-count="2" data-type="youth">2</li>
+                <li data-count="3" data-type="youth">3</li>
+                <li data-count="4" data-type="youth">4</li>
+            </ul>
+        </div>
+    </div>
     <div class="seat-selection" id="seatSelectionScreen">
-        
+        <!-- 좌석 선택 화면 -->
     </div>
     
     <div class="foots">
-    	<div id="lastinfo" class="foots-container">
-		    <div id="confirmBtn" style="display:none;">영화 선택 버튼</div>
-		    <div>영화정보</div>
-		    <div id="roomresult">극장정보</div>
-		    <div id="seatresult">좌석 선택</div>
-		    <div id="priceresult">결제 정보</div>
-		    <div id="reserveBtn">좌석 선택 버튼</div>
-		    <div id="submitBtn" style="display:none;">결제 선택 버튼</div>
-	    </div>
+        <div id="lastinfo" class="foots-container">
+            <div id="confirmBtn" style="display:none;">영화 선택 확인</div>
+            <div id="movieimage"></div>
+            <div id="movieresult">영화 정보</div>
+            <div id="roomresult">극장 정보</div>
+            <div id="seatresult">좌석 선택</div>
+            <div id="priceresult">결제 정보</div>
+            <div id="reserveBtn">좌석 선택</div>
+            <div id="submitBtn" style="display:none;">결제</div>
+        </div>
     </div>
 </div>
 <%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
@@ -296,7 +108,6 @@ $(document).ready(function() {
 	    let seatresult = $("#seatresult");
         seatresult.append("<p>인원" + totalTickets + "</p>");
         
-	    console.log("Total Tickets: ", totalTickets);
 	})
 	$(document).on("click","#youthpernum li", function(){
 		let type = $(this).data("type");
@@ -324,8 +135,36 @@ $(document).ready(function() {
 	    $("#seatresult").text("좌석 정보");
 	    let seatresult = $("#seatresult");
         seatresult.append("<p>인원" + totalTickets + "</p>");
-        
-	    console.log("Total Tickets: ", totalTickets);
+	})
+	
+	$(document).on("click","#adultpernum li, #youthpernum li", function(){
+		 $("#priceresult").text();
+	        let priceresult = $("#priceresult");
+	        let movieId = $("#movieList li.selected").data("id");
+	        let roomId = $("#theaterList li.selected").text().split("-")[0];
+	        let moviedate = $("#dateList li.selected").data("id");
+	        let begintime = $("#timeList li.selected").text().split("  ")[0];
+	        $.ajax({
+	            url: "/totalprice",
+	            type: "GET",
+	            data: { movieId:movieId, roomId:roomId, moviedate:moviedate, begintime:begintime },
+	            success: function(data) {
+	                priceresult.empty();
+	                let ayid = data[0].id;
+	                let aprice = data[0].a_price;
+	                let yprice = data[0].y_price;
+	                let totala = (aprice*adultTicketCount);
+	                let totaly = (yprice*youthTicketCount);
+	                if(adultTicketCount != 0) {
+	                priceresult.append('<p data-id="' + ayid + '" data-price="' + aprice + '">일반' + aprice + 'X' + adultTicketCount + '</p>');
+	                priceresult.append('<p data-totala="' + totala + '">' + totala + '</p>');
+	                };
+	                if(youthTicketCount != 0) {
+	                priceresult.append('<p data-id="' + ayid + '" data-price="' + yprice + '">청소년' + yprice + 'X' + youthTicketCount + '</p>');
+	                priceresult.append('<p data-totaly="' + totaly + '">' + totaly + '</p>');
+	                };
+	            }
+	        });
 	})
 
     $(document).on("click","#reserveBtn", function(){
@@ -334,6 +173,7 @@ $(document).ready(function() {
         let date = $("#dateList li.selected").data("id");
         let begin = $("#timeList li.selected").data("id");
         let lestseat = $("#timeList li.selected").text().split("  ")[1];
+        let timetype = $("#timeList li.selected").text().split("  ")[2];
         let allseat = $("#timeList li.selected").data("alls");
         let day = $("#dateList li.selected .day").text();
         let begintime = $("#timeList li.selected").text().split("  ")[0];
@@ -355,7 +195,7 @@ $(document).ready(function() {
             return;
         }
         
-        $("#theaterInfo").text(roomId + " " + lestseat + "/" + allseat + "석");
+        $("#theaterInfo").text(roomId + " " + lestseat + "/" + allseat + "석" + " " + timetype);
         $("#movieTime").text(date + "("+ day + ")" + begintime + " ~ " + endtime);
         $("#personInfo").text("최대인원 8명 선택 가능");
         
@@ -501,7 +341,27 @@ $(document).ready(function() {
         $("#theaterList ul").empty();
         $("#timeList ul").empty();
         $("#roomresult").text("극장정보");
+        let moviename = $("#movieList li.selected").data("name");
+        let movieage = $("#movieList li.selected").data("age");
+        
+        $("#movieresult").text("");
+        let movieresult = $("#movieresult");
+        let movieimage = $("#movieimage");
+        let movieId = $("#movieList li.selected").data("id");
+        $.ajax({
+            url: "/movieimage",
+            type: "GET",
+            data: {movieId:movieId},
+            success: function(data) {
+            	movieimage.empty();
+            	movieimage.append('<img src="' + data + '" alt="영화 차트 이미지">');
+            	movieresult.append('<p id="gochart">' + moviename + '</p>');
+            	movieresult.append('<p>' + movieage + '</p>');
+            }
+        });
+        
     });
+    
 
     $(document).on("click", "#theaterList li", function() {
         $("#theaterList li").removeClass("selected");
@@ -510,7 +370,6 @@ $(document).ready(function() {
         let date = $("#dateList li.selected").data("id");
         let roomId = $("#theaterList li.selected").text().split("-")[0];
         let day = $("#dateList li.selected .day").text();
-        console.log(movieId+"--"+date+"--"+roomId)
         $.ajax({
             url: "/times",
             type: "GET",
@@ -519,7 +378,8 @@ $(document).ready(function() {
                 let timeList = $("#timeList ul");
                 timeList.empty();
                 $.each(data, function(index, times) {
-                    timeList.append('<li data-alls="' +times.allseat + '" data-id="' +times.begintime+ '" title="' +times.endtime + '">' + times.begintime +'  '+ times.lestseat+ '석</li>');
+                    timeList.append('<li data-timetpye="' + times.timetype + '" data-alls="' + times.allseat + '" data-id="' + times.begintime + '" title="' + times.endtime + '">' +
+                    		times.begintime + '  ' + times.lestseat + '석'+ '  ' + times.timetype + '</li>');
                 });
             }
         });
@@ -568,14 +428,17 @@ $(document).ready(function() {
         roomresult.append('<p>일시 ' + date + ' ' + '(' +day+ ')' + time  + '</p>');
     });
 
+//     $("#btnclear").click(function(){
+// 		$("#movieList ul").empty();
+// 		$("#dateList ul").empty();
+// 		$("#theaterList ul").empty();
+// 		$("#timeList ul").empty();
+// 		loadMovies();
+// 		loadDates();
+// 	});
     $("#btnclear").click(function(){
-		$("#movieList ul").empty();
-		$("#dateList ul").empty();
-		$("#theaterList ul").empty();
-		$("#timeList ul").empty();
-		loadMovies();
-		loadDates();
-	});
+        location.reload();
+    });
     
     function loadMovies() {
     	$.ajax({
@@ -585,7 +448,8 @@ $(document).ready(function() {
                 let movieList = $("#movieList ul");
                 movieList.empty();
                 $.each(data, function(index, movie) {
-                    movieList.append('<li data-id="' + movie.id + '">' + movie.mname + '</li>');
+                    movieList.append('<li data-name="' + movie.mname + '" data-id="' + movie.id + '" data-age="' + movie.age + '"><span class="age' + movie.age + '">' 
+                    		+ movie.age + '</span>' + movie.mname + '</li>');
                 });
             }
         });
@@ -605,9 +469,15 @@ $(document).ready(function() {
             let dateString = newDate.toISOString().split('T')[0].split('-');
             let dayClass = (dayName === "토") ? "saturday" : (dayName === "일") ? "sunday" : "";
 
-            dateList.append('<li data-id="'+ fulldate +'" class="' + dayClass + '"><div class="date-wrapper"><span class="day">' + dayName + '</span><span class="date">' + dateString[2] + '</span></div></li>');
+            dateList.append('<li data-id="'+ fulldate +'" class="' + dayClass + '"><div class="date-wrapper"><span class="day">' 
+            		+ dayName + '</span><span class="date">' + dateString[2] + '</span></div></li>');
         }
     }
+    
+    $(document).on("click","#gochart", function(){
+    	let movieId = $("#movieList li.selected").data("id");
+    	window.location.href = "/chartList1?id=" + movieId;
+    })
 
 });
 

@@ -1,0 +1,153 @@
+@charset "UTF-8";
+/* 기본 스타일 */
+.signup-page {
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.agree-checkbox {
+    display: flex;
+    justify-content: center; /* 수직 정렬을 중앙으로 맞춤 */
+} 
+
+.agree-checkbox input[type="checkbox"] {
+    width: 20px;
+    margin-right: 10px; /* 체크박스와 라벨 사이의 간격 */
+}
+
+input::placeholder {
+    text-align: center;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #3a3d3f;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
+
+/* 스텝 인디케이터 스타일 */
+.step-indicator {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ddd;
+}
+
+.step {
+    width: 30%;
+    text-align: center;
+    font-weight: bold;
+    padding: 5px 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.step.active {
+    border-bottom: 3px solid #000000;
+    color: #000000;
+}
+
+/* 웹 화면 여백 조정 */
+@media (min-width: 1024px) {
+    .signup-page {
+        padding-bottom: 100px;
+    }
+}
+
+/* 체크박스 그룹의 상단 및 하단에 대한 스타일링 */
+.favorite-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.favorite-group-top,
+.favorite-group-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px; /* 각 그룹 사이에 간격 추가 */
+}
+
+.favorite-group-top label,
+.favorite-group-bottom label {
+    display: flex;
+    flex-direction: column; /* 체크박스 아래로 레이블 배치 */
+    align-items: center; /* 가운데 정렬 */
+    flex: 1 1 33%; /* 3개의 체크박스가 가로로 나란히 배치되도록 설정 */
+    box-sizing: border-box;
+    margin-bottom: 10px; /* 체크박스와 라벨 사이의 간격 */
+}
+
+.favorite-group-top input,
+.favorite-group-bottom input {
+    margin-bottom: 5px; /* 체크박스와 레이블 사이의 간격 */
+}
+
+/* 통신사 그룹의 상단 및 하단에 대한 스타일링 */
+.tellecom-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.tellecom-group-top,
+.tellecom-group-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px; /* 각 그룹 사이에 간격 추가 */
+}
+
+.tellecom-group-top label,
+.tellecom-group-bottom label {
+    display: flex;
+    flex-direction: column; /* 라디오 버튼 아래로 레이블 배치 */
+    align-items: center; /* 가운데 정렬 */
+    flex: 1 1 33%; /* 3개의 라디오 버튼이 가로로 나란히 배치되도록 설정 */
+    box-sizing: border-box;
+    margin-bottom: 10px; /* 라디오 버튼과 라벨 사이의 간격 */
+}
+
+.tellecom-group-top input,
+.tellecom-group-bottom input {
+    margin-bottom: 5px; /* 라디오 버튼과 레이블 사이의 간격 */
+}

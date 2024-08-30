@@ -6,4 +6,6 @@ import lombok.Data;
 public class movieDTO {
 	public int id;
     public String mname;
+    public String age;
+    public String imagepath;
 }

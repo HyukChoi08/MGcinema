@@ -47,11 +47,6 @@
 
 @charset "UTF-8";
 
-html, body {
-    margin: 0; /* 브라우저 기본 여백 제거 */
-    padding: 0; /* 브라우저 기본 패딩 제거 */
-    width: 100%; /* 전체 너비 설정 */
-}
 
 .header {
     background-color: #333;
@@ -59,31 +54,67 @@ html, body {
     padding: 10px 0; /* 상하 패딩만 설정하여 좌우 여백 제거 */
     width: 100%; /* 전체 너비 설정 */
     box-sizing: border-box; /* 패딩을 포함한 전체 너비 계산 */
-    /* position: fixed; 헤더를 화면 상단에 고정 */
+    /*  position: fixed;  헤더를 화면 상단에 고정 */
     top: 0; /* 화면 상단에 위치 */
     left: 0; /* 화면 왼쪽에 위치 */
     z-index: 1000; /* 다른 요소들보다 위에 위치 */
 }
 
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px; /* 좌우 패딩을 설정하여 내용이 사이드에 붙지 않도록 */
-    max-width: 100%; /* 최대 너비를 전체 너비로 설정 */
-    margin: 0 auto; /* 가운데 정렬 (선택 사항) */
-    box-sizing: border-box; /* 패딩과 보더를 포함한 전체 너비 계산 */
+
+
+
+
+
+/* HTML 및 BODY 설정 */
+html, body {
+    margin: 0; /* 브라우저 기본 여백 제거 */
+    padding: 0; /* 브라우저 기본 패딩 제거 */
+    width: 100%; /* 전체 너비 설정 */
+    box-sizing: border-box; /* 패딩을 포함한 전체 너비 계산 */
 }
 
-.nav-links {
-    list-style-type: none; /* 기본 목록 스타일 제거 */
-    margin: 0; /* 기본 여백 제거 */
-    padding: 0; /* 기본 패딩 제거 */
-    display: flex; /* 가로 배치 */
+/*
+.header {
+    background-color: #333; 헤더 배경색
+    color: #fff; 글자 색상
+    padding: 10px 20px; 상하 및 좌우 패딩 설정
+    width: 100%; 전체 너비 설정
+    position: fixed; 헤더를 화면 상단에 고정
+    top: 0; 화면 상단에 위치
+    left: 0; 화면 왼쪽에 위치
+    z-index: 1000; 다른 요소들보다 위에 위치
+    height: 80px; 헤더의 높이 설정
+    display: flex;
+    align-items: center; 수직 중앙 정렬
+    justify-content: center; 수평 중앙 정렬
+} */
+
+/* 네비게이션 바 설정 */
+.navbar {
+    display: flex;
+    align-items: center; /* 수직 중앙 정렬 */
+    width: 100%; /* 전체 너비 설정 */
+    max-width: 1200px; /* 최대 너비 설정 (선택 사항) */
+    margin: 0 auto; /* 가운데 정렬 */
+}
+
+.header .navbar h1 {
+    font-size: 32px; /* h1의 글자 크기 설정 */
+    margin: 0px; /* 좌우 여백 추가 (여기서 조정 가능) */
+    color: #fff; /* 글자 색상 흰색으로 설정 */
+    text-align: center; /* 중앙 정렬 */
+    flex-grow: 1; /* 남는 공간을 차지하여 중앙 정렬 유지 */
+    text-decoration: none; /*링크 밑줄 제거*/
+}
+
+/* 링크 색상 설정 */
+.header .navbar h1 a {
+    color: inherit; /* 부모의 글자 색상 상속 */
+    text-decoration: none; /* 링크 밑줄 제거 */
 }
 
 .nav-links li {
-    margin-left: 20px; /* 각 항목 사이에 여백 추가 */
+    margin-left: 30px; /* 각 항목 사이에 여백 추가 */
 }
 
 .nav-links li:first-child {
@@ -91,17 +122,48 @@ html, body {
 }
 
 .nav-links a {
-    color: #fff;
+    color: #fff; /* 링크 색상 흰색으로 설정 */
     text-decoration: none; /* 링크 밑줄 제거 */
-    font-weight: bold;
+    font-weight: bold; /* 글자 두께 설정 */
+    font-size: 18px; /* 링크 글자 크기 설정 */
 }
 
 .nav-links a:hover {
-    text-decoration: underline; /* 링크에 마우스를 올렸을 때 밑줄 추가 */
+	text-decoration: none; /*링크 밑줄 제거*/
+    /*  text-decoration: underline;  링크에 마우스를 올렸을 때 밑줄 추가 */
 }
 
-.navbar h1 a, /* css에서 우선순위 */
-.nav-links a {
-    color: #fff; /* 링크 색상 흰색으로 설정 */
-    text-decoration: none; /* 링크 밑줄 제거 */
+/* 페이지 내용 설정 */
+.home-page {
+    padding: 20px; /* 좌우 패딩 설정 */
+    padding-top: 100px; /* 헤더 높이만큼 여백 추가 */
+    background-color: #f0f0f0;
+    min-height: 100vh; /* 화면 전체 높이 설정 */
+    box-sizing: border-box; /* 패딩을 포함한 전체 너비 계산 */
 }
+
+/* 슬라이더 설정 */
+.promo-container {
+    margin: 0 auto; /* 가운데 정렬 */
+    max-width: 1000px; /* 원하는 최대 너비로 설정 */
+    overflow: hidden; /* 슬라이더가 컨테이너를 넘어서지 않도록 설정 */
+}
+
+.image-slide {
+    max-width: 100%; /* 부모 컨테이너의 최대 너비에 맞추기 */
+    height: auto;
+    border-radius: 10px;
+}
+
+/* slick-carousel 기본 스타일 */
+.slick-slide {
+    display: flex;
+    justify-content: center; /* 슬라이드 내용 중앙 정렬 */
+}
+
+.slick-track {
+    display: flex;
+    align-items: center; /* 슬라이드 중앙 정렬 */
+}
+
+
