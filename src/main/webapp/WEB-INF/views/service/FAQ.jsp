@@ -266,7 +266,7 @@
                             <!-- FAQ 항목이 없을 때 -->
                             <c:if test="${empty faqList}">    
                             </c:if>
-                         </tbody>
+                        </tbody>
                     </table>
                 </div>               
                 <div class="paging">
