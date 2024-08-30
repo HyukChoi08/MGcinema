@@ -2,11 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cinema.ticket.TicketDAO">
 	<select id="getMovies" resultType="com.cinema.ticket.movieDTO">
-        SELECT id, mname FROM movie
+        SELECT id, mname, age, imagepath FROM movie
+    </select>
+    
+    <select id="getMovieimage" resultType="java.lang.String">
+    	select imagepath from movie
+    	where id=#{movieId}
     </select>
 
     <select id="getTheaters" resultType="com.cinema.ticket.theaterDTO">
-        select b.sname,b.seatlevel from schedules a, room b
+        select b.sname, b.seatlevel from schedules a, room b
 		where a.room_id = b.id
 		and movie_id=#{movieId}
 		and moviedate=#{date}
@@ -19,7 +24,7 @@
     </select>
 
     <select id="getTimes" resultType="com.cinema.ticket.timesDTO">
-        select a.begintime, a.endtime, a.lestseat, c.allseat from schedules a, room b, seatinfo c
+        select a.begintime, a.endtime, a.lestseat, c.allseat, a.timetype from schedules a, room b, seatinfo c
 		where a.room_id = b.id
 		and b.seatinfo_id = c.id
 		and a.movie_id=#{movieId}
@@ -34,5 +39,14 @@
     
     <select id="getSeats" parameterType="String" resultType="com.cinema.ticket.seatDTO">
     SELECT * FROM seatinfo WHERE sname = #{theaterId}
+	</select>
+	
+	<select id="getTotalPrice" resultType="com.cinema.ticket.priceDTO">
+		select a.id ,a.a_price, a.y_price from schedules a, room b
+		where a.room_id=b.id
+		and a.movie_id=#{movieId}
+		and b.sname=#{roomId}
+		and a.moviedate=#{moviedate}
+		and a.begintime=#{begintime}
 	</select>
 </mapper>
