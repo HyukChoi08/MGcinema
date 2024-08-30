@@ -64,7 +64,7 @@
         <nav class="navbar">
             <div class="navbar1">
                 <ul class="nav-links">
-                    <li><a href="/Movie">영화</a></li>
+                    <li><a href="/chart">영화</a></li>
                     <li><a href="/cinema">극장</a></li>
                     <li><a href="/ticket">예매</a></li>
                     <li><a href="/store">스토어</a></li>
