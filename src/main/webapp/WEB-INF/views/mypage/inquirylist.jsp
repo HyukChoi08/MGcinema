@@ -226,7 +226,7 @@ form input[type="submit"]:hover {
          <h2>1:1 문의 게시판</h2>
 
          <!-- 문의 폼 -->
-         <button class="button" onclick="location.href='/inquiry'">문의하기</button>
+         <button class="button" onclick="location.href='/inquirywrite'">문의하기</button>
          <!-- 나의 문의 내역 -->
          <table class="inquiry-table">
             <h3>나의 문의 내역</h3>
@@ -242,7 +242,7 @@ form input[type="submit"]:hover {
                   <c:forEach var="inquiry" items="${inquiries}">
                      <tr>
                         <td>${inquiry.id}</td>
-                        <td><a href='/inquirydetail'>${inquiry.title}</a></td>
+                        <td><a href='/inquirydetail/${inquiry.id}'>${inquiry.title}</a></td>
                         <td>${inquiry.created}</td>
                         <td>${inquiry.current}</td>
                      </tr>

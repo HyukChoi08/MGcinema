@@ -151,6 +151,7 @@ header, footer {
 }
 .foots {
 	width:1000px;
+	font-size:10px;
 }
 .foots-container {
     padding: 10px;
@@ -167,7 +168,33 @@ header, footer {
 .additional-info {
 	display: flex;
 }
-
+#adultpernum, #youthpernum {
+	padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+}
+#adultpernum li, #youthpernum li {
+    margin-right: 10px; /* 리스트 항목 사이의 간격 조정 */
+    padding: 5px; /* 항목 내부 여백 조정 */
+    display: inline-block;
+    cursor: pointer;
+}
+#adultpernum li.selected, #youthpernum li.selected {
+	color:#ffffff;
+	background-color:#666666;
+}
+.peradult, .peryouth {
+	display: flex;
+	align-items: left;
+}
+.pern {
+	width: 80px;
+	padding: 5px;
+}
+#selectionScreen.container, #seatSelectionScreen.seat-selection {
+	width: 1000px;
+}
 </style>
 </head>
 <body>
@@ -194,34 +221,40 @@ header, footer {
     	<p id="theaterInfo"></p>
     	<p id="movieTime"></p>
     	<p id="personInfo"></p>
-    	<div class="additional-info">
-    		<p>일반</p>
-            <button class="number-button" onclick="selectTicket('adult', 0)">0</button>
-            <button class="number-button" onclick="selectTicket('adult', 1)">1</button>
-            <button class="number-button" onclick="selectTicket('adult', 2)">2</button>
-            <button class="number-button" onclick="selectTicket('adult', 3)">3</button>
-            <button class="number-button" onclick="selectTicket('adult', 4)">4</button>
-        </div>
-        <div class="additional-info">
-        	<p>청소년</p>
-            <button class="number-button" onclick="selectTicket('youth', 0)">0</button>
-            <button class="number-button" onclick="selectTicket('youth', 1)">1</button>
-            <button class="number-button" onclick="selectTicket('youth', 2)">2</button>
-            <button class="number-button" onclick="selectTicket('youth', 3)">3</button>
-            <button class="number-button" onclick="selectTicket('youth', 4)">4</button>
-        </div>
+    	<div class="peradult">
+    		<span class="pern">일반</span>
+	    	<ul id="adultpernum">
+	    		<li data-count="0" data-type="adult">0</li>
+	    		<li data-count="1" data-type="adult">1</li>
+	    		<li data-count="2" data-type="adult">2</li>
+	    		<li data-count="3" data-type="adult">3</li>
+	    		<li data-count="4" data-type="adult">4</li>
+	    	</ul>
+	    </div>
+	    <div class="peryouth">
+	    	<span class="pern">청소년</span>
+	    	<ul id="youthpernum">
+	    		<li data-count="0" data-type="youth">0</li>
+	    		<li data-count="1" data-type="youth">1</li>
+	    		<li data-count="2" data-type="youth">2</li>
+	    		<li data-count="3" data-type="youth">3</li>
+	    		<li data-count="4" data-type="youth">4</li>
+	    	</ul>
+    	</div>
 	</div>
     <div class="seat-selection" id="seatSelectionScreen">
         
     </div>
     
     <div class="foots">
-    	<div class="foots-container">
-		    <div id="confirmBtn" style="display:none;">영화 선택</div>
+    	<div id="lastinfo" class="foots-container">
+		    <div id="confirmBtn" style="display:none;">영화 선택 버튼</div>
 		    <div>영화정보</div>
-		    <div>극장정보</div>
-		    <div id="reserveBtn">좌석 선택</div>
-		    <div id="submitBtn" style="display:none;">결제 선택</div>
+		    <div id="roomresult">극장정보</div>
+		    <div id="seatresult">좌석 선택</div>
+		    <div id="priceresult">결제 정보</div>
+		    <div id="reserveBtn">좌석 선택 버튼</div>
+		    <div id="submitBtn" style="display:none;">결제 선택 버튼</div>
 	    </div>
     </div>
 </div>
@@ -229,33 +262,71 @@ header, footer {
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
+
+let totalTickets = 0;
+let adultTicketCount = 0;
+let youthTicketCount = 0;
+
 $(document).ready(function() {
-
-    let totalTickets = 0;
-    let adultTicketCount = 0;
-    let youthTicketCount = 0;
-
-
-    function selectTicket(type, count) {
-        if (type === 'adult') {
-            totalTickets -= adultTicketCount;
-            adultTicketCount = count;
-            totalTickets += adultTicketCount;
-        } else if (type === 'youth') {
-            totalTickets -= youthTicketCount;
-            youthTicketCount = count;
-            totalTickets += youthTicketCount;
-        }
-
-        // 최대 선택 가능 좌석 수를 초과하면 알림 표시
-        if ($(".seat.selected").length > totalTickets) {
-            alert("선택된 티켓 수만큼만 좌석을 선택할 수 있습니다.");
-            // 마지막 선택을 해제하거나 추가 조치를 수행할 수 있음
-            $(".seat.selected").last().removeClass("selected");
-        }
-
-        console.log("Total Tickets: ", totalTickets);
-    }
+	
+	$(document).on("click","#adultpernum li", function(){
+		let type = $(this).data("type");
+		let count = $(this).data("count");
+		
+		$("#adultpernum li").removeClass("selected");
+        $(this).addClass("selected");
+		
+		if (type === 'adult') {
+	        totalTickets -= adultTicketCount;
+	        adultTicketCount = count;
+	        totalTickets += adultTicketCount;
+	    } else if (type === 'youth') {
+	        totalTickets -= youthTicketCount;
+	        youthTicketCount = count;
+	        totalTickets += youthTicketCount;
+	    }
+	    
+	    if ($(".seat.selected").length > totalTickets) {
+	        alert("선택된 티켓 수만큼만 좌석을 선택할 수 있습니다.");
+	        // 마지막 선택을 해제하거나 추가 조치를 수행할 수 있음
+	        $(".seat.selected").removeClass("selected");
+	    }
+	    
+	    $("#seatresult").text("좌석 정보");
+	    let seatresult = $("#seatresult");
+        seatresult.append("<p>인원" + totalTickets + "</p>");
+        
+	    console.log("Total Tickets: ", totalTickets);
+	})
+	$(document).on("click","#youthpernum li", function(){
+		let type = $(this).data("type");
+		let count = $(this).data("count");
+		
+		$("#youthpernum li").removeClass("selected");
+        $(this).addClass("selected");
+		
+		if (type === 'adult') {
+	        totalTickets -= adultTicketCount;
+	        adultTicketCount = count;
+	        totalTickets += adultTicketCount;
+	    } else if (type === 'youth') {
+	        totalTickets -= youthTicketCount;
+	        youthTicketCount = count;
+	        totalTickets += youthTicketCount;
+	    }
+	    
+	    if ($(".seat.selected").length > totalTickets) {
+	        alert("선택된 티켓 수만큼만 좌석을 선택할 수 있습니다.");
+	        // 마지막 선택을 해제하거나 추가 조치를 수행할 수 있음
+	        $(".seat.selected").removeClass("selected");
+	    }
+	    
+	    $("#seatresult").text("좌석 정보");
+	    let seatresult = $("#seatresult");
+        seatresult.append("<p>인원" + totalTickets + "</p>");
+        
+	    console.log("Total Tickets: ", totalTickets);
+	})
 
     $(document).on("click","#reserveBtn", function(){
         let mname = $("#movieList li.selected").text();
@@ -286,7 +357,7 @@ $(document).ready(function() {
         
         $("#theaterInfo").text(roomId + " " + lestseat + "/" + allseat + "석");
         $("#movieTime").text(date + "("+ day + ")" + begintime + " ~ " + endtime);
-        $("#personInfo").text("최대인원 4명 선택 가능");
+        $("#personInfo").text("최대인원 8명 선택 가능");
         
         $("#selectionScreen").hide();
         $("#seatSelectionScreen").show();
@@ -330,6 +401,8 @@ $(document).ready(function() {
                 console.error("좌석 정보를 가져오는 중 오류 발생:", error);
             }
         });
+        $("#seatresult").text("좌석 정보");
+        
     });
 
     $(document).on("click", "#confirmBtn", function() {
@@ -340,6 +413,7 @@ $(document).ready(function() {
         $("#reserveBtn").show();
         $("#submitBtn").hide();
         $(".seat").removeClass("selected");
+        $("#seatresult").text("좌석 선택")
     });
 
 
@@ -353,16 +427,29 @@ $(document).ready(function() {
         } else {
             alert("선택된 티켓 수만큼만 좌석을 선택할 수 있습니다.");
         }
+        
     });
 
     // 선택된 좌석 업데이트 함수
     function updateSelectedSeats() {
         let selectedSeats = [];
+        let allseat = "";
         $(".seat.selected").each(function () {
             selectedSeats.push($(this).data("seat"));
         });
         
+        for(let i=0; i<selectedSeats.length;i++) {
+        	allseat += selectedSeats[i] + " ";
+        };
+        
+        
+        $("#seatresult").text("좌석 정보");
+	    let seatresult = $("#seatresult");
+        seatresult.append("<p>인원" + totalTickets + "</p>");
+        seatresult.append("<p>좌석 번호" + allseat.trim() + "</p>");
+        
         console.log("Selected Seats: ", selectedSeats);
+        
         // 서버로 선택된 좌석 정보를 전송하거나 다른 작업 수행 가능
     }
 
@@ -413,6 +500,7 @@ $(document).ready(function() {
         $("#dateList li").removeClass("selected");
         $("#theaterList ul").empty();
         $("#timeList ul").empty();
+        $("#roomresult").text("극장정보");
     });
 
     $(document).on("click", "#theaterList li", function() {
@@ -421,6 +509,7 @@ $(document).ready(function() {
         let movieId = $("#movieList li.selected").data("id");
         let date = $("#dateList li.selected").data("id");
         let roomId = $("#theaterList li.selected").text().split("-")[0];
+        let day = $("#dateList li.selected .day").text();
         console.log(movieId+"--"+date+"--"+roomId)
         $.ajax({
             url: "/times",
@@ -434,15 +523,20 @@ $(document).ready(function() {
                 });
             }
         });
+        $("#roomresult").text("");
+        let roomresult = $("#roomresult");
+        roomresult.append('<p>선택 극장 ' + roomId + '</p>');
+        roomresult.append('<p>일시 ' + date + ' ' + '(' +day+ ')' + '</p>');
     });
 
     $(document).on("click", "#dateList li", function() {
+    	$("#roomresult").text("극장정보");
         $("#dateList li").removeClass("selected");
         $(this).addClass("selected");
         let movieId = $("#movieList li.selected").data("id");
         let date = $(this).data("id");
+        let day = $("#dateList li.selected .day").text();
         $("#timeList ul").empty();
-        console.log(movieId+"----"+date);
         $.ajax({
             url: "/theaters",
             type: "GET",
@@ -455,11 +549,23 @@ $(document).ready(function() {
                 });
             }
         });
+        let roomresult = $("#roomresult");
+        roomresult.append('<p>일시 ' + date + ' ' + '(' +day+ ')' + '</p>');
     });
 
     $(document).on("click", "#timeList li", function() {
         $("#timeList li").removeClass("selected");
         $(this).addClass("selected");
+        $("#roomresult").text("");
+        
+        let date = $("#dateList li.selected").data("id");
+        let roomId = $("#theaterList li.selected").text().split("-")[0];
+        let day = $("#dateList li.selected .day").text();
+        let time = $("#timeList li.selected").data("id");
+        
+        let roomresult = $("#roomresult");
+        roomresult.append('<p>선택 극장 ' + roomId + '</p>');
+        roomresult.append('<p>일시 ' + date + ' ' + '(' +day+ ')' + time  + '</p>');
     });
 
     $("#btnclear").click(function(){
@@ -504,5 +610,7 @@ $(document).ready(function() {
     }
 
 });
+
+
 </script>
 </html>

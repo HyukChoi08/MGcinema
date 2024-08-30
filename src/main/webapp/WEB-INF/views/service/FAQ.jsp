@@ -6,217 +6,218 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${serviceHome.title}</title>
     <style>
-        /* 기본 스타일 */
+        /* 전체 body 스타일 설정 */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            background-color: #f4f4f4; /* 페이지 배경색 */
         }
-
-        #container {
-            width: 1000px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            overflow: hidden;
-            padding: 20px;
-        }
-
-        #contents {
-            display: flex;
-        }
-
-        .col-aside {
-            flex: 1;
-            max-width: 250px;
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-right: 1px solid #ddd;
-        }
-
-        .col-detail {
-            flex: 3;
-            padding: 20px;
-        }
-
-        header, footer {
-            background-color: #fff;
+        /* 상단 배너 스타일 */
+        .banner {
+            width: 100%;
+            background-color: #e50914; /* 배너 배경색 */
+            color: white;
             text-align: center;
             padding: 10px 0;
-            border-bottom: 1px solid #ddd;
-        }
-        .snb {
-            border: 1px solid black;
-            padding: 15px;
-            background-color: #fff;
-        }
-        .snb ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-        .snb ul li {
-            margin-bottom: 10px;
-        }
-        .snb ul li a {
-            text-decoration: none;
-            color: black;
-            font-size: 1em;
-        }
-        .snb ul li a:hover {
-            text-decoration: underline;
-        }
-        .snb ul li.on a {
+            font-size: 1.2em;
             font-weight: bold;
         }
-
+        
+        /* 메인 컨테이너 스타일 */
+        #container {
+            max-width: 1200px;
+            margin: 20px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        /* 컨텐츠 영역 스타일 */
+        #contents {
+            width: 100%;
+            display: flex;
+        }
+        /* 사이드바 스타일 */
+        .sidebar {
+            width: 20%; /* 사이드바 너비 */
+            padding: 15px;
+            background-color: #f7f7f7; /* 사이드바 배경색 */
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* 사이드바 그림자 효과 */
+            height: fit-content; /* 사이드바의 높이를 내용에 맞추기 */
+        }
+        /* 사이드바 내 리스트 스타일 */
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0; /* 기본 패딩 제거 */
+        }
+        .sidebar ul li {
+            margin-bottom: 15px;
+        }
+        .sidebar ul li a {
+            text-decoration: none; /* 링크 밑줄 제거 */
+            color: #333; /* 텍스트 색상 */
+            font-weight: bold; /* 텍스트 굵게 */
+        }
+        .sidebar ul li a:hover {
+            color: #e50914; /* 링크에 마우스 올렸을 때 색상 */
+        }
+        /* 메인 콘텐츠 스타일 */
+        .col-detail {
+            width: 75%;
+            padding: 15px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        /* 검색 영역 스타일 */
         .search_area {
             margin-bottom: 20px;
             display: flex;
             align-items: center;
         }
-
         .search_area input {
             padding: 10px;
-            width: calc(100% - 110px);
+            width: calc(100% - 120px); /* 버튼을 고려하여 폭 조정 */
             border: 1px solid #ccc;
             border-radius: 4px;
-            margin-right: 5px;
+            margin-right: 10px; /* 버튼과의 간격 조정 */
         }
-
         .search_area button {
             padding: 10px;
-            background-color: #007bff;
+            background-color: #e50914;
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            width: 100px; /* 버튼 너비 조정 */
+            font-size: 0.9em; /* 버튼 글씨 크기 조정 */
         }
-
         .search_area button:hover {
-            background-color: #0056b3;
+            background-color: #d10813;
         }
-
+        /* 탭 메뉴 스타일 */
         .c_tab_wrap {
             margin-bottom: 20px;
         }
-
         .c_tab_wrap ul {
             list-style-type: none;
             padding: 0;
             display: flex;
-            border-bottom: 2px solid #007bff;
+            border-bottom: 2px solid #e50914;
             margin: 0;
         }
-
         .c_tab_wrap li {
             margin: 0;
         }
-
         .c_tab_wrap a {
             display: block;
             padding: 10px;
             text-decoration: none;
             color: #333;
         }
-
         .c_tab_wrap a:hover {
             background-color: #f0f0f0;
         }
-
         .c_tab_wrap li.on a {
             font-weight: bold;
-            border-bottom: 2px solid #007bff;
+            border-bottom: 2px solid #e50914;
         }
-
+        /* 검색 결과 및 테이블 스타일 */
         .search_result {
             margin-bottom: 20px;
         }
-
         .tbl_area {
             margin-bottom: 20px;
         }
-
         .tbl_notice_list {
             width: 100%;
             border-collapse: collapse;
         }
-
         .tbl_notice_list th, .tbl_notice_list td {
             padding: 10px;
             border: 1px solid #ddd;
             text-align: left;
         }
-
         .tbl_notice_list th {
             background-color: #f0f0f0;
         }
-
+        /* 페이지네이션 스타일 */
         .paging {
             margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-
         .paging ul {
             list-style-type: none;
             padding: 0;
             display: flex;
             margin: 0;
         }
-
         .paging li {
             margin: 0 5px;
         }
-
         .paging a {
             text-decoration: none;
             color: #007bff;
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 4px;
+            font-size: 0.9em; /* 페이지네이션 버튼 글씨 크기 조정 */
         }
-
         .paging a:hover {
             background-color: #f0f0f0;
         }
-
         .paging .btn-paging {
-            background-color: #007bff;
+            background-color: #e50914;
             color: white;
             border: none;
             padding: 10px;
             border-radius: 4px;
             cursor: pointer;
+            font-size: 0.9em; /* 페이지네이션 버튼 글씨 크기 조정 */
+            margin: 0 10px; /* 버튼 사이 간격 조정 */
         }
-
         .paging .btn-paging:hover {
-            background-color: #0056b3;
+            background-color: #d10813;
+        }
+        /* 푸터 스타일 */
+        footer {
+            background-color: white;
+            text-align: center;
+            padding: 10px 0;
+            border-top: 1px solid #ddd;
         }
     </style>
+    <link rel="stylesheet" href="/Header_css/Header.css">    
 </head>
 <body>
+    <header class="header">
+        <nav class="navbar">
+            <h1><a href="/">MG Cinema</a></h1>
+            <ul class="nav-links">
+                <li><a href="/login">로그인</a></li>
+                <li><a href="/signup">회원가입</a></li>
+                <li><a href="/myhome">My페이지</a></li>
+                <li><a href="/serviceHome">고객센터</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <div id="container">
-        <header>
-            <!-- Header Content -->
-        </header>
-        
         <div id="contents">
-            <div class="col-aside">
-                <h2>고객센터 메뉴</h2>
+            <!-- 사이드바 -->
+            <div class="sidebar">
                 <div class="snb">
                     <ul>
                         <li><a href="serviceHome">고객센터 메인</a></li>
-                        <li class="on"><a href="faq" title="현재선택">자주찾는 질문</a></li>
+                        <li class="on"><a href="faq">자주찾는 질문</a></li>
                         <li><a href="news">공지/뉴스</a></li>
                         <li><a href="eaq">이메일 문의</a></li>
                     </ul>
                 </div>
             </div>
 
+            <!-- 메인 콘텐츠 -->
             <div class="col-detail">
                 <div class="customer_top">
                     <h2 class="tit">자주찾는 질문</h2>
@@ -224,7 +225,7 @@
                 </div>
                 <div class="search_area">
                     <label for="searchtext" class="hidden">검색어 입력</label>
-                    <input id="searchtext" type="text" class="c_input" title="검색어 입력" placeholder="검색어를 입력해 주세요">
+                    <input id="searchtext" type="text" title="검색어 입력" placeholder="검색어를 입력해 주세요">
                     <button type="button" class="round inblack" title="검색하기">검색하기</button>
                 </div>
                 <div class="c_tab_wrap">
@@ -242,53 +243,45 @@
                     </ul>
                 </div>
                 <div class="search_result">
-                    총<span class="num"> 0건</span>이 검색되었습니다.
+                    총<span class="num"> 0건</span>
                 </div>
                 <div class="tbl_area">
-                    <table cellspacing="0" cellpadding="0" class="tbl_notice_list">
-                        <caption>목록</caption>
-                        <colgroup>
-                            <col style="width:40px;">
-                            <col style="width:120px;">
-                            <col style="width:auto;">
-                            <col style="width:120px;">
-                        </colgroup>
+                    <table class="tbl_notice_list">
+                        <caption>자주찾는 질문</caption>
                         <thead>
                             <tr>
-                                <th>번호</th>
-                                <th>분류</th>
-                                <th>제목</th>
-                                <th>작성일</th>
+                                <th scope="col">번호</th>
+                                <th scope="col">제목</th>
+                                <th scope="col">등록일</th>
+                                <th scope="col">조회수</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- 데이터 반복 -->
-                            <c:forEach var="faq" items="${faqList}">
-                                <tr>
-                                    <td class="no">${faq.id}</td>
-                                    <td class="category">${faq.category}</td>
-                                    <td><a href="/support/faq/view.jsp?no=${faq.id}">${faq.title}</a></td>
-                                    <td class="date">${faq.date}</td>
-                                </tr>
-                            </c:forEach>
+                            <!-- 내용이 없을 때 -->
+                            <tr>
+                                <td colspan="4">검색된 결과가 없습니다.</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="paging">
+                    <button type="button" class="btn-paging">이전</button>
                     <ul>
-                        <li><a href="#" class="btn-paging">이전</a></li>
-                        <li><a href="#" class="btn-paging">1</a></li>
-                        <li><a href="#" class="btn-paging">2</a></li>
-                        <li><a href="#" class="btn-paging">3</a></li>
-                        <li><a href="#" class="btn-paging">다음</a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
                     </ul>
+                    <button type="button" class="btn-paging">다음</button>
                 </div>
             </div>
         </div>
-
-        <footer>
-            <!-- Footer Content -->
-        </footer>
     </div>
+
+    <footer>
+        <p>MG Cinema &copy; 2024</p>
+    </footer>
 </body>
 </html>
+
