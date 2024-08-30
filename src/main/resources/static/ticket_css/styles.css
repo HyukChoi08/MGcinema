@@ -259,3 +259,12 @@ img {
 #theaterInfo, #movieTime, #personInfo {
 	font-size: 12px;
 }
+
+#gochart {
+    color: black;
+    transition: color 0.3s ease;
+}
+
+#gochart:hover {
+    color: red;
+}

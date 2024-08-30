@@ -355,7 +355,7 @@ $(document).ready(function() {
             success: function(data) {
             	movieimage.empty();
             	movieimage.append('<img src="' + data + '" alt="영화 차트 이미지">');
-            	movieresult.append('<p>' + moviename + '</p>');
+            	movieresult.append('<p id="gochart">' + moviename + '</p>');
             	movieresult.append('<p>' + movieage + '</p>');
             }
         });
@@ -473,6 +473,11 @@ $(document).ready(function() {
             		+ dayName + '</span><span class="date">' + dateString[2] + '</span></div></li>');
         }
     }
+    
+    $(document).on("click","#gochart", function(){
+    	let movieId = $("#movieList li.selected").data("id");
+    	window.location.href = "/chartList1?id=" + movieId;
+    })
 
 });
 
