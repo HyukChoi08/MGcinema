@@ -19,12 +19,24 @@
     flex-direction: column; /* 세로 정렬 */
     align-items: center; /* 가운데 정렬 */
 }
+.vertical-container1 {
+    display: flex;
+    flex-direction: column; /* 세로 정렬 */
+    align-items: center; /* 가운데 정렬 */
+    width:1000px;
+}
+
 
 ol {
     display: flex; /* ul 요소를 플렉스 컨테이너로 설정 */
     padding: 0; /* 기본 패딩 제거 */
     margin: 0; /* 기본 마진 제거 */
     list-style-type: none; /* 숫자 지우는 것 */
+    
+}
+a {
+    text-decoration-line: none;
+    color:black;
 }
 </style>
 
@@ -33,7 +45,7 @@ ol {
 <div>
 	<div><h3>무비차트</h3></div>
 	<div><select size=1 style="width:100px;height:30px;" id="chartArray"></select><button id="list">Go</button></div>
-    <div class="vertical-container">
+    <div class="vertical-container1">
         <div class="vertical-container">
             <ol id="1">
             </ol>
@@ -43,7 +55,7 @@ ol {
             </ol>
         </div>
     </div>
-        <div class="vertical-container">
+        <div class="vertical-container1">
         <div class="vertical-container">
             <ol id="3">
             </ol>
@@ -72,9 +84,9 @@ $.ajax({
         $('#2').empty();
         for (let count = 0; count < data.length; count++) {
             if (count < 3) {
-                str1 += '<div class="vertical-container"><div><strong>No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><a href="asd">예매</a></div></div>';
+                str1 += '<div class="vertical-container"><div><strong>No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px" ></a></li></div><div><a href="chartList1?id='+data[count]['id']+'">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><a href="asd">예매</a></div></div>';
             } else if (count >= 3 && count < 7) {
-            	 str2 += '<div class="vertical-container"><div><strong>No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><a href="asd">예매</a></div></div>';
+            	 str2 += '<div class="vertical-container"><div><strong>No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><a href="asd">예매</a></div></div>';
             }
         }
         $('#1').append(str1);
@@ -124,13 +136,13 @@ $(document)
                 $('#4').empty();
                 for (let count = 0; count < data.length; count++) {
                     if (count < 3) {
-                    	 str1 += '<div class="vertical-container"><div><strong>No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><a href="asd">예매</a></div></div>';
+                    	 str1 += '<div class="vertical-container"><div><strong>No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><a href="asd">예매</a></div></div>';
                     } else if (count >= 3 && count < 7) {
-                    	 str2 += '<div class="vertical-container"><div><strong>No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><a href="asd">예매</a></div></div>';
+                    	 str2 += '<div class="vertical-container"><div><strong>No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><a href="asd">예매</a></div></div>';
                     } else if (count >= 7 && count < 10) {
-                    	 str3 += '<div class="vertical-container"><div><strong>No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><a href="asd">예매</a></div></div>';
+                    	 str3 += '<div class="vertical-container"><div><strong>No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><a href="asd">예매</a></div></div>';
                     } else if (count >= 10 && count < 14) {
-                    	 str4 += '<div class="vertical-container"><div><strong>No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><a href="asd">예매</a></div></div>';
+                    	 str4 += '<div class="vertical-container"><div><strong>No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><a href="asd">예매</a></div></div>';
                     }
                 }
                 $('#1').append(str1);
@@ -157,13 +169,13 @@ $(document)
 			        $('#4').empty();
 			        for (let count = 0; count < data.length; count++) {
 			            if (count < 3) {
-			            	 str1 += '<div class="vertical-container"><div><strong>No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><a href="asd">예매</a></div></div>';
+			            	 str1 += '<div class="vertical-container"><div><strong>No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><a href="asd">예매</a></div></div>';
 			            } else if (count >= 3 && count < 7) {
-			            	 str2 += '<div class="vertical-container"><div><strong>No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><a href="asd">예매</a></div></div>';
+			            	 str2 += '<div class="vertical-container"><div><strong>No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><a href="asd">예매</a></div></div>';
 			            } else if (count >= 7 && count < 10) {
-			            	 str3 += '<div class="vertical-container"><div><strong>No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><a href="asd">예매</a></div></div>';
+			            	 str3 += '<div class="vertical-container"><div><strong>No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><a href="asd">예매</a></div></div>';
 			            } else if (count >= 10 && count < 14) {
-			            	 str4 += '<div class="vertical-container"><div><strong>No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><a href="asd">예매</a></div></div>';
+			            	 str4 += '<div class="vertical-container"><div><strong>No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><a href="asd">예매</a></div></div>';
 			            }
 			        }
 			        $('#1').append(str1);
@@ -200,9 +212,9 @@ $(document)
                 $('#4').empty();
                 for (let count = 0; count < data.length; count++) {
                     if (count < 3) {
-                    	 str1 += '<div class="vertical-container"><div><strong>No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><a href="asd">예매</a></div></div>';
+                    	 str1 += '<div class="vertical-container"><div><strong>No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><a href="asd">예매</a></div></div>';
                     } else if (count >= 3 && count < 7) {
-                    	 str2 += '<div class="vertical-container"><div><strong>No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><a href="asd">예매</a></div></div>';
+                    	 str2 += '<div class="vertical-container"><div><strong>No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><a href="asd">예매</a></div></div>';
                     }
                 }
                 $('#1').append(str1);
@@ -227,9 +239,9 @@ $(document)
 			        $('#4').empty();
 			        for (let count = 0; count < data.length; count++) {
 			            if (count < 3) {
-			            	 str1 += '<div class="vertical-container"><div><strong>No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><a href="asd">예매</a></div></div>';
+			            	 str1 += '<div class="vertical-container"><div><strong>No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><a href="asd">예매</a></div></div>';
 			            } else if (count >= 3 && count < 7) {
-			            	 str2 += '<div class="vertical-container"><div><strong>No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><a href="asd">예매</a></div></div>';
+			            	 str2 += '<div class="vertical-container"><div><strong>No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><a href="asd">예매</a></div></div>';
 			            }
 			        }
 			        $('#1').append(str1);
