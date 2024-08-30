@@ -271,7 +271,7 @@
                 </div>               
                 <div class="paging">
                 <button type="button" class="btn-paging">이전</button>
-                <ul>
+                <ul> 
                         <li><a href="#">1</a></li>
                         <li><a href="#">2</a></li>
                         <li><a href="#">3</a></li>
