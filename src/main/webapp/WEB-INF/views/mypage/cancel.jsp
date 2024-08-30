@@ -196,7 +196,7 @@ form input[type="submit"]:hover {
 	<!-- 헤더 포함 -->
 	<!-- 프로필 섹션 -->
 	<div class="profile-section">
-		<img src="profile-placeholder.png" width="80" height="80">
+		<img src="/mypage_image/OO.png" alt="프로필이미지" width="80" height="80">
 		<div class="profile-info">
 			<h2 id="nickname">Hi_Movie님</h2>
 			<p>

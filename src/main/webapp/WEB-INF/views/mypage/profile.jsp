@@ -27,13 +27,13 @@ form input {
 }
 /* 프로필 섹션 스타일 */
 .profile-section {
-	display: flex; /* 이미지와 텍스트를 옆으로 배치 */
+ 	display: flex; /* 이미지와 텍스트를 옆으로 배치 */
 	align-items: center; /* 수직 중앙 정렬 */
 	padding: 20px;
 	background-color: white; /* 프로필 섹션 배경색 */
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 프로필 섹션 그림자 효과 */
 	width: 60%; /* 프로필 섹션의 너비 조정 */
-	margin: 0 auto;
+	margin: 10px auto;
 	border-radius: 10px; /* 모서리 둥글게 */
 }
 
@@ -123,7 +123,7 @@ form input {
 
 	<!-- 프로필 섹션 -->
 	<div class="profile-section">
-		<img src="profile-placeholder.png" width="80" height="80">
+		<img src="/mypage_image/OO.png" alt="프로필이미지" alt="프로필이미지" width="80" height="80">
 		<div class="profile-info">
 			<h2 id="nickname">님</h2>
 			<p>

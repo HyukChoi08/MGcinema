@@ -22,8 +22,8 @@ body {
 	background-color: white; /* 프로필 섹션 배경색 */
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 프로필 섹션 그림자 효과 */
 	width: 60%; /* 프로필 섹션의 너비 조정 */
-	margin: 0 auto;
-	border-radius: 10px; /* 모서리 둥글게 */	
+	margin: 10px auto;
+	border-radius: 10px; /* 모서리 둥글게 */
 }
 
 .profile-section img {
@@ -84,12 +84,12 @@ body {
 }
 /* 메인 콘텐츠 스타일 */
 .main-content {
-   width: 75%;
-   padding: 20px;
-   background-color: white; /* 메인 콘텐츠 배경색 */
-   margin-left: 20px; /* 사이드바와 메인 콘텐츠 사이 간격 */
-   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 메인 콘텐츠 섹션 그림자 효과 */
-   border-radius: 10px; /* 모서리 둥글게 */
+	width: 75%;
+	padding: 20px;
+	background-color: white; /* 메인 콘텐츠 배경색 */
+	margin-left: 20px; /* 사이드바와 메인 콘텐츠 사이 간격 */
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 메인 콘텐츠 섹션 그림자 효과 */
+	border-radius: 10px; /* 모서리 둥글게 */
 }
 
 /* 예매 내역과 문의 내역 섹션 스타일 */
@@ -107,7 +107,7 @@ body {
 	<!-- 헤더 포함 -->
 	<!-- 프로필 섹션 -->
 	<div class="profile-section">
-		<img src="profile-placeholder.png" width="80" height="80">
+		<img src="/mypage_image/OO.png" alt="프로필이미지" width="80" height="80">
 		<div class="profile-info">
 			<h2 id="nickname">Hi_Movie님</h2>
 			<p>
@@ -138,7 +138,8 @@ body {
 			<div>
 				<h3>나의 예매내역</h3>
 				<div class="my-history">
-					<button class="button" onclick="location.href='/ticket'">CGV 영화 예매 바로가기</button>
+					<button class="button" onclick="location.href='/ticket'">CGV
+						영화 예매 바로가기</button>
 				</div>
 			</div>
 

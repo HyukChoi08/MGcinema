@@ -21,8 +21,8 @@ body {
 	padding: 20px;
 	background-color: white; /* 프로필 섹션 배경색 */
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 프로필 섹션 그림자 효과 */
-	width: 61%; /* 프로필 섹션의 너비 조정 */
-	margin: 0 auto;
+	width: 60%; /* 프로필 섹션의 너비 조정 */
+	margin: 10px auto;
 	border-radius: 10px; /* 모서리 둥글게 */
 }
 
@@ -83,6 +83,16 @@ body {
 .sidebar ul li a:hover {
 	color: #e50914; /* 링크에 마우스 올렸을 때 색상 */
 }
+
+.link ul li a {
+	text-decoration: none; /* 링크 밑줄 제거 */
+	color: #333; /* 텍스트 색상 */
+	font-weight: bold; /* 텍스트 굵게 */
+}
+
+.link ul li a:hover {
+	color: #e50914; /* 링크에 마우스 올렸을 때 색상 */
+}
 /* 메인 콘텐츠 스타일 */
 .main-content {
 	width: 75%;
@@ -107,7 +117,7 @@ body {
 	<!-- 헤더 포함 -->
 	<!-- 프로필 섹션 -->
 	<div class="profile-section">
-		<img src="/src/main/resources/static/mypage_image/profile-placeholder.jpg" alt="Profile Placeholder" width="80" height="80"/>
+		<img src="/mypage_image/OO.png" alt="프로필이미지" width="80" height="80" />
 
 		<div class="profile-info">
 			<h2 id="nickname">Hi_Movie님</h2>
@@ -138,7 +148,8 @@ body {
 			<div>
 				<h3>나의 예매내역</h3>
 				<div class="my-history">
-					<button class="button" onclick="location.href='/cinema'">CGV 영화 예매 바로가기</button>
+					<button class="button" onclick="location.href='/cinema'">CGV
+						영화 예매 바로가기</button>
 				</div>
 			</div>
 
@@ -146,18 +157,19 @@ body {
 			<div>
 				<h3>예매 취소 내역</h3>
 				<div class="ask-section">
-					<button class="button" onclick="location.href='/cinema'">CGV 영화 예매 바로가기</button>
+					<button class="button" onclick="location.href='/cinema'">CGV
+						영화 예매 바로가기</button>
 				</div>
 			</div>
 			<!-- My CGV Home 섹션 -->
-			<div class="my-cgv-home">
+			<div class="link">
 				<ul>
 					<li><a href=/Movie>Movie Home</a></li>
 					<li><a href=/Movie>청소년 등급영화</a></li>
 					<li><a href=/ticket>상영중인 영화</a></li>
 					<li><a href=/serviceHome>고객센터 바로가기</a></li>
 					<li><a href=/store>스토어 바로가기</a></li>
-					
+
 				</ul>
 			</div>
 			<br> <br> <br>
@@ -174,23 +186,24 @@ body {
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
-$(document).ready(function() {
-    var userId = 1; // 테스트할 사용자 ID, 실제 상황에서는 동적으로 설정
+	$(document).ready(function() {
+		var userId = 1; // 테스트할 사용자 ID, 실제 상황에서는 동적으로 설정
 
-    $.ajax({
-        url: "/customerInfo",
-        method: "POST",
-        data: { id: userId },
-        success: function(data) {
-            // 서버에서 받아온 데이터로 프로필 섹션 업데이트
-            $('#nickname').text(data.nickname + "님");
-        },
-        error: function() {
-            $('#nickname').text("알수없음");
-            console.log("AJAX Error:", textStatus, errorThrown);
-        }
-    });
-});
-
+		$.ajax({
+			url : "/customerInfo",
+			method : "POST",
+			data : {
+				id : userId
+			},
+			success : function(data) {
+				// 서버에서 받아온 데이터로 프로필 섹션 업데이트
+				$('#nickname').text(data.nickname + "님");
+			},
+			error : function() {
+				$('#nickname').text("알수없음");
+				console.log("AJAX Error:", textStatus, errorThrown);
+			}
+		});
+	});
 </script>
 </html>
