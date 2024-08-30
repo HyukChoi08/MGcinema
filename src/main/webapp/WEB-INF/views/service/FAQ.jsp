@@ -265,7 +265,7 @@
                             </c:forEach>
                             <!-- FAQ 항목이 없을 때 -->
                             <c:if test="${empty faqList}">    
-                            </c:if>
+                           </c:if>
                         </tbody>
                     </table>
                 </div>               
