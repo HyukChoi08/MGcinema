@@ -213,7 +213,7 @@
             } else {
                 emailErrorMessage.style.display = 'none';
             }
-        });
+        }); 
     });
     </script>
 
