@@ -52,24 +52,24 @@
             <c:when test="${currentStep == 2}">
                 <form action="/signupPost" method="post">
                     <div class="form-group">
-                        <label for="username">실명</label>
-                        <input type="text" id="username" name="username" value="${formData.username}" placeholder="(필수)" required>
+                        <label for="realname">실명</label>
+                        <input type="text" id="realname" name="realname" value="${formData.realname}" placeholder="(필수)" required>
                     </div>
                     <div class="form-group">
                         <label for="email">이메일</label>
                         <input type="email" id="email" name="email" value="${formData.email}" placeholder="(필수)" required>
                     </div>
                     <div class="form-group">
-                        <label for="userid">아이디</label>
-                        <input type="text" id="userid" name="userid" value="${formData.userid}" placeholder="(필수)" required>
+                        <label for="uid">아이디</label>
+                        <input type="text" id="uid" name="uid" value="${formData.uid}" placeholder="(필수)" required>
                     </div>
                     <div class="form-group">
-                        <label for="password">비밀번호</label>
-                        <input type="password" id="password" name="password" value="${formData.password}" placeholder="(필수)" required>
+                        <label for="passwd">비밀번호</label>
+                        <input type="password" id="passwd" name="passwd" value="${formData.passwd}" placeholder="(필수)" required>
                     </div>
                     <div class="form-group">
-                        <label for="password2">비밀번호 확인</label>
-                        <input type="password" id="password2" name="password2" value="${formData.password2}" placeholder="(필수)" required>
+                        <label for="passwd2">비밀번호 확인</label>
+                        <input type="password" id="passwd2" name="passwd2" value="${formData.passwd2}" placeholder="(필수)" required>
                     </div>
                     <div class="form-group">
                         <label for="birthday">생년월일</label>
@@ -181,4 +181,40 @@
     </div>
 <%--     <%@ include file="/WEB-INF/views/footer/footer.jsp" %> --%>
 </body>
+
+ <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const emailInput = document.getElementById('email');
+        const emailErrorMessage = document.getElementById('email-error-message');
+
+        emailInput.addEventListener('blur', function() {
+            const email = emailInput.value.trim();
+
+            if (email) {
+                fetch('/checkEmail', { // 중복 체크를 위한 서버 엔드포인트
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email: email })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.exists) {
+                        emailErrorMessage.style.display = 'inline';
+                    } else {
+                        emailErrorMessage.style.display = 'none';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('서버 오류가 발생했습니다.');
+                });
+            } else {
+                emailErrorMessage.style.display = 'none';
+            }
+        });
+    });
+    </script>
+
 </html>

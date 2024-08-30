@@ -4,10 +4,14 @@
 	<select id="loginCheck" resultType="_int">
 	   select count(*) cnt from customer where uid=#{param1} and passwd=#{param2}
 	</select>
-	<insert id="insertCustomer">
+	<insert id="insertSignup">
 		insert into customer set 
 		realname=#{param1}, email=#{param2}, uid=#{param3}, 
 		passwd=#{param4}, birthday=#{param5}, mobile=#{param6}, 
-		region=#{param7}, nickname=#{param8}, favorite=#{param9}, tellecom=#{param10}
+		region=#{param7}, nickname=#{param8}, favorite=#{param9}, tellecom=#{param10},
+		created=now(), updated=now()
 	</insert>
+	<select id="checkUidExists" resultType="int">
+    	select count(*) from customer where uid = #{param1}
+	</select>
 </mapper>
