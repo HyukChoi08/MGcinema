@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <style>
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, 
+html, body, div, span, applet, object, iframe, h2, h3, h4, h5, h6, blockquote, pre, 
 a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, 
 small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label,
  legend, table, caption, tbody, tfoot, thead, tr, th{
@@ -17,6 +17,17 @@ small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form
     text-align:center;
     
 }
+.mname{
+	font-family: 'Noto Sans KR', 'CJONLYONENEW', '맑은 고딕', '돋움', Dotum, sans-serif;
+    font-size: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+    word-break: break-all;
+    text-align:center;
+    font-size:23px
+}
 .container {
             display: flex;
             flex-direction: column; /* 수직으로 쌓기 */
@@ -24,6 +35,7 @@ small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form
             gap: 0px; /* 요소 간 간격 */
             padding: 0px; /* 패딩 */
             border: 1px solid black; /* 테두리 */
+            
            
 }
 .notice{
@@ -72,6 +84,7 @@ small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form
 #contents {
 	clear: both;
     padding-bottom: 50px;
+
     position: relative;
     width: 1000px;
     margin: 0 auto;
@@ -337,7 +350,7 @@ function processData1(data) {
 	 let timelist = '';
 		for(x of data){	
 			console.log("영화이름",x['mname']);
-			timelist = '<div class=timelistdiv><table><tr><td>'+x['age']+'</td><td><h1 style=font-size:23px>'+x['mname']+'</h1></td><td>'+x['runningtime']+'</td></tr></table></div>';
+			timelist = '<div class=timelistdiv><table><tr><td>'+x['age']+'</td><td><h1 class=mname>'+x['mname']+'</h1></td><td>'+x['runningtime']+'</td></tr></table></div>';
 			$('#timelist').append(timelist);
 	 		 console.log('Processing data 1:', data);
 		}
@@ -345,7 +358,6 @@ function processData1(data) {
 function processData2(data) {
 	for(let i=0 ; i<$('#timelist div').length; i++){
 		let id = $('#timelist div').eq(i).find('tr td:eq(1)').text();
-		console.log("1111",id);
 		console.log(data); 
 		for(let x of data){
 			if(x['mname']==id){
@@ -368,7 +380,7 @@ function processData3(data) {
 	            	for(let x of data){
 	            		if (x['mname'] === id && x['Sname'] === room) {
 	                        console.log('최종', x['begintime']);
-	                        $(this).append('<td><a href=/ticket/?mname='+x['mname']+'&date='+$('#hiddendate').val()+'&room='+x['Sname']+'&time='+x['begintime']+'>'+x['begintime']+'</a></td>');
+	                        $(this).append('<td><a href=/ticket?mname='+x['mname']+'&date='+$('#hiddendate').val()+'&room='+x['Sname']+'&time='+x['begintime']+'>'+x['begintime']+'</a></td>');
 	                    }
 	            	}  	
 	        })

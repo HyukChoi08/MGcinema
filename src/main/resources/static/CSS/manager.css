@@ -3,15 +3,79 @@
 	border:1px solid black;
 	width:300px;
 	margin:15px;
+	height: 380px;
 }
 .movieinsert2{
 	border:1px solid black;
-	width:900px;
+	width:1000px;
 	margin:15px;
+	 height: 380px;
+     overflow-y: auto; 
+}
+.movieinsert3{
+	border:1px solid black;
+	width:300px;
+	margin:15px;
+	 height: 540px;
+     overflow-y: auto; 
+}
+.movieinsert4{
+	border:1px solid black;
+	margin:15px;
+	width:1500px;
+	 height: 540px;
+     overflow-y: auto; 
+}
+.iteminfo{
+	border:1px solid black;
+	margin:15px;
+	width:300px;
+	 height:480px;
+     overflow-y: auto; 
+}
+.itembox{
+	border:1px solid black;
+	margin:15px;
+	width:985px;
+	 height: 480px;
+     overflow-y: auto; 
+}
+.detailbox{
+	border:1px solid black;
+	margin:15px;
+	width:480px;
+	 height: 480px;
+     overflow-y: auto; 
 }
 .mselect{
 	width:180px
 }
-.container {
+.container{
     display: flex;
+    width:2000px;
+}
+thead tr{
+	position: sticky;
+	 top: 0; 
+     z-index: 10; 
+     background-color:white;
+     
+}
+#schedules tbody td,
+#movieinfo tbody td,
+#itemlist tbody td,
+#detaillist tbody td{
+	height:40px;
+}
+.movietext{
+	   max-width: 150px; 
+       max-height: 100px;
+       overflow: auto; 
+       white-space: nowrap; 
+}
+#schedules thead td,
+#movieinfo thead td,
+#itemlist thead td,
+#detaillist thead td{
+	border-bottom:2px solid black;
 }
