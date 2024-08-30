@@ -69,7 +69,7 @@
                     </div>
                     <div class="form-group">
                         <label for="passwd2">비밀번호 확인</label>
-                        <input type="password" id="passwd2" name="passwd2" value="${formData.passwd2}" placeholder="(필수)" required>
+                        <input type="password" id="passwd" name="passwd2" value="${formData.passwd2}" placeholder="(필수)" required>
                     </div>
                     <div class="form-group">
                         <label for="birthday">생년월일</label>
@@ -181,40 +181,4 @@
     </div>
 <%--     <%@ include file="/WEB-INF/views/footer/footer.jsp" %> --%>
 </body>
-
- <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const emailInput = document.getElementById('email');
-        const emailErrorMessage = document.getElementById('email-error-message');
-
-        emailInput.addEventListener('blur', function() {
-            const email = emailInput.value.trim();
-
-            if (email) {
-                fetch('/checkEmail', { // 중복 체크를 위한 서버 엔드포인트
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ email: email })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.exists) {
-                        emailErrorMessage.style.display = 'inline';
-                    } else {
-                        emailErrorMessage.style.display = 'none';
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('서버 오류가 발생했습니다.');
-                });
-            } else {
-                emailErrorMessage.style.display = 'none';
-            }
-        }); 
-    });
-    </script>
-
 </html>
