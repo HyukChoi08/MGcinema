@@ -33,8 +33,9 @@ input {
 	padding: 20px;
 	background-color: white; /* 프로필 섹션 배경색 */
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 프로필 섹션 그림자 효과 */
-	width: 80%; /* 프로필 섹션의 너비 조정 */
+	width: 60%; /* 프로필 섹션의 너비 조정 */
 	margin: 0 auto;
+	border-radius: 10px; /* 모서리 둥글게 */
 }
 
 .profile-section img {
@@ -127,7 +128,8 @@ input {
 </style>
 </head>
 <body>
-   <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
+	<%@ include file="/WEB-INF/views/header/header.jsp"%>
+	<!-- 헤더 포함 -->
 	<!-- 프로필 섹션 -->
 	<div class="profile-section">
 		<img src="profile-placeholder.png" width="80" height="80">
@@ -161,9 +163,10 @@ input {
 				<h3>회원 정보 확인을 위해 비밀번호를 입력해주세요.</h3>
 				<div>
 					<form action="/checkPasswd" method="post">
-						<input type="hidden" name="redirectUrl" value="${param.redirectUrl}"> 
-						<input type="hidden"name="id" id="id" value="1" readonly> 
-						<input type="password" id="passwd" name="passwd"><br>
+						<input type="hidden" name="redirectUrl"
+							value="${param.redirectUrl}"> <input type="hidden"
+							name="id" id="id" value="1" readonly> <input
+							type="password" id="passwd" name="passwd"><br>
 						<button class="button" type="submit">확인</button>
 					</form>
 					<c:if test="${not empty errorMessage}">
@@ -174,7 +177,8 @@ input {
 			</div>
 		</div>
 	</div>
-    <%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
+	<%@ include file="/WEB-INF/views/footer/footer.jsp"%>
+	<!-- 푸터 포함 -->
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
@@ -199,4 +203,3 @@ input {
 	});
 </script>
 </html>
- 

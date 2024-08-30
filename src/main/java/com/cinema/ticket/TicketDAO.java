@@ -9,6 +9,8 @@ import org.apache.ibatis.annotations.Param;
 public interface TicketDAO {
 	
 	List<movieDTO> getMovies();
+	
+	String getMovieimage(@Param("movieId") int movieId);
 
     List<theaterDTO> getTheaters(@Param("movieId") int movieId, @Param("date") String date);
 
@@ -25,4 +27,6 @@ public interface TicketDAO {
             @Param("time") String time);
     
     List<seatDTO> getSeats(@Param("theaterId") String theaterId);
+    
+    List<priceDTO> getTotalPrice(@Param("movieId") int movieId, @Param("roomId") String roomId, @Param("moviedate") String moviedate, @Param("begintime") String begintime );
 }

@@ -8,4 +8,5 @@ public class timesDTO {
 	public String endtime;
 	public int lestseat;
 	public int allseat;
+	public String timetype;
 }

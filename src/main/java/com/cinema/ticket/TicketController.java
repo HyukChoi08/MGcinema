@@ -32,6 +32,11 @@ public class TicketController {
 	public List<movieDTO> getMovies() {
 		return tdao.getMovies();
 	}
+	@GetMapping("/movieimage")
+	@ResponseBody
+	public String getMovieimage(@RequestParam("movieId") int movieId) {
+		return tdao.getMovieimage(movieId);
+	}
 
 	@GetMapping("/theaters")
 	@ResponseBody
@@ -91,4 +96,9 @@ public class TicketController {
         return response;
     }
 	
+	@GetMapping("/totalprice")
+	@ResponseBody
+	public List<priceDTO> getTotalPrice(@RequestParam("movieId") int movieId, @RequestParam("roomId") String roomId, @RequestParam("moviedate") String moviedate, @RequestParam("begintime") String begintime) {
+		return tdao.getTotalPrice(movieId, roomId, moviedate, begintime);
+	}
 }
