@@ -14,5 +14,5 @@ public class FAQDTO {
     private String title;           // 제목
     private String content;         // 내용
     private int viewCount;          // 조회수
-    private LocalDateTime createdAt; // 생성일자
+    private LocalDateTime created_at; // 생성일자
 }

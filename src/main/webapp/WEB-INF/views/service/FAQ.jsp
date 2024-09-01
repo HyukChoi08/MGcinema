@@ -259,7 +259,7 @@
                                 <tr>
                                     <td>${faq.id}</td>
                                     <td><a href="/FAQdetail?id=${faq.id}">${faq.title}</a></td>
-                                    <td>${faq.createdAt}</td>
+                                    <td>${faq.created_at}</td>
                                     <td>${faq.viewCount}</td>
                                 </tr>
                             </c:forEach>
