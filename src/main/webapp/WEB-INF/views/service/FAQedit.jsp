@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${faqDetail.title}</title>
+    <title>FAQ 수정</title>
     <style>
         /* 전체 body 스타일 설정 */
         body {
@@ -82,40 +82,37 @@
             color: #777;
             font-size: 0.9em;
         }
-        /* FAQ 내용 스타일 */
-        .view_area {
+        /* 폼 스타일 */
+        form {
             margin-top: 20px;
         }
-        .view_area p {
-            line-height: 1.6;
+        form label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
         }
-        /* 버튼 그룹 스타일 */
-        .btn-group {
-            text-align: center; /* 버튼 그룹을 중앙 정렬 */
-            margin-top: 20px;
+        form input, form textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
         }
-        .btn-group button {
+        form button {
             padding: 10px 15px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             font-size: 0.9em;
-            margin: 0 10px; /* 좌우 마진 추가 */
+            margin: 0 10px;
         }
-        .btn-edit {
-            background-color: #4CAF50; /* 수정 버튼 배경색 (초록색) */
+        .btn-save {
+            background-color: #4CAF50; /* 저장 버튼 배경색 (초록색) */
             color: white;
         }
-        .btn-delete {
-            background-color: #f44336; /* 삭제 버튼 배경색 (빨간색) */
+        .btn-cancel {
+            background-color: #2196F3; /* 취소 버튼 배경색 (파란색) */
             color: white;
-        }
-        .btn-list {
-            background-color: #2196F3; /* 목록 버튼 배경색 (파란색) */
-            color: white;
-        }
-        .btn-group button:hover {
-            opacity: 0.9;
         }
         /* 푸터 스타일 */
         footer {
@@ -125,7 +122,7 @@
             border-top: 1px solid #ddd;
         }
     </style>
-    <link rel="stylesheet" href="/Header_css/Header.css">
+     <link rel="stylesheet" href="/Header_css/Header.css">
 </head>
 <body>
     <header class="header">
@@ -157,20 +154,20 @@
             <!-- 메인 콘텐츠 -->
             <div class="col-detail">
                 <div class="customer_top">
-                    <h2 class="tit">${faqDetail.title}</h2>
-                    <p class="stit">작성일: ${faqDetail.createdAt}</p> <!-- LocalDateTime 그대로 출력 -->
+                    <h2 class="tit">FAQ 수정</h2>
+                    <p class="stit">작성일: ${faqDetail.createdAt}</p>
                 </div>
-                <div class="view_area">
-                    <p>${faqDetail.content}</p>
-                </div>
-                <p>조회수: ${faqDetail.views}</p>
-
-                <!-- 버튼 그룹 -->
-                <div class="btn-group">
-    <button class="btn-list" onclick="location.href='faq'">목록</button>
-    <button class="btn-edit" onclick="location.href='FAQedit?id=${faqDetail.id}'">수정</button>
-    <button class="btn-delete" onclick="if(confirm('정말 삭제하시겠습니까?')) location.href='FAQdelete?id=${faqDetail.id}'">삭제</button>
-</div>
+                <form action="FAQupdate" method="post">
+                    <input type="hidden" name="id" value="${faqDetail.id}">
+                    <label for="title">제목:</label>
+                    <input type="text" id="title" name="title" value="${faqDetail.title}" required>
+                    
+                    <label for="content">내용:</label>
+                    <textarea id="content" name="content" rows="6" required>${faqDetail.content}</textarea>
+                    
+                    <button type="submit" class="btn-save">저장</button>
+                    <button type="button" class="btn-cancel" onclick="location.href='faq'">취소</button>
+                </form>
             </div>
         </div>
     </div>

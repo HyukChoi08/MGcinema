@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${faqDetail.title}</title>
+    <title>FAQ 삭제</title>
     <style>
         /* 전체 body 스타일 설정 */
         body {
@@ -82,14 +82,12 @@
             color: #777;
             font-size: 0.9em;
         }
-        /* FAQ 내용 스타일 */
-        .view_area {
+        /* 확인 메시지 스타일 */
+        .confirm_area {
             margin-top: 20px;
+            text-align: center;
         }
-        .view_area p {
-            line-height: 1.6;
-        }
-        /* 버튼 그룹 스타일 */
+        /* 버튼 스타일 */
         .btn-group {
             text-align: center; /* 버튼 그룹을 중앙 정렬 */
             margin-top: 20px;
@@ -100,18 +98,14 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 0.9em;
-            margin: 0 10px; /* 좌우 마진 추가 */
+            margin: 0 10px;
         }
-        .btn-edit {
-            background-color: #4CAF50; /* 수정 버튼 배경색 (초록색) */
+        .btn-confirm {
+            background-color: #f44336; /* 확인 버튼 배경색 (빨간색) */
             color: white;
         }
-        .btn-delete {
-            background-color: #f44336; /* 삭제 버튼 배경색 (빨간색) */
-            color: white;
-        }
-        .btn-list {
-            background-color: #2196F3; /* 목록 버튼 배경색 (파란색) */
+        .btn-cancel {
+            background-color: #2196F3; /* 취소 버튼 배경색 (파란색) */
             color: white;
         }
         .btn-group button:hover {
@@ -157,20 +151,21 @@
             <!-- 메인 콘텐츠 -->
             <div class="col-detail">
                 <div class="customer_top">
-                    <h2 class="tit">${faqDetail.title}</h2>
-                    <p class="stit">작성일: ${faqDetail.createdAt}</p> <!-- LocalDateTime 그대로 출력 -->
+                    <h2 class="tit">FAQ 삭제 확인</h2>
                 </div>
-                <div class="view_area">
-                    <p>${faqDetail.content}</p>
-                </div>
-                <p>조회수: ${faqDetail.views}</p>
+                <div class="confirm_area">
+                    <p>${faqDetail.title}를 정말 삭제하시겠습니까?</p>
+                    <p>삭제하면 복구할 수 없습니다.</p>
 
-                <!-- 버튼 그룹 -->
-                <div class="btn-group">
-    <button class="btn-list" onclick="location.href='faq'">목록</button>
-    <button class="btn-edit" onclick="location.href='FAQedit?id=${faqDetail.id}'">수정</button>
-    <button class="btn-delete" onclick="if(confirm('정말 삭제하시겠습니까?')) location.href='FAQdelete?id=${faqDetail.id}'">삭제</button>
-</div>
+                    <!-- 버튼 그룹 -->
+                    <div class="btn-group">
+                        <form action="deleteFAQ" method="post">
+                            <input type="hidden" name="id" value="${faqDetail.id}">
+                            <button type="submit" class="btn-confirm">삭제</button>
+                            <button type="button" class="btn-cancel" onclick="location.href='faq'">취소</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

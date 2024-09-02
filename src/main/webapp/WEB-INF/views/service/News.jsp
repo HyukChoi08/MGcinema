@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -119,22 +120,9 @@
         }
         .paging {
             margin-top: 20px;
-        }
-        .paging ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-        .paging li {
-            display: inline;
-            margin-right: 5px;
-        }
-        .paging li a {
-            text-decoration: none;
-            color: #007bff;
-        }
-        .paging li a:hover {
-            text-decoration: underline;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .paging .btn-paging {
             padding: 5px 10px;
@@ -143,9 +131,30 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            margin: 0 5px;
         }
         .paging .btn-paging:hover {
             background-color: #0056b3;
+        }
+        .paging ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        .paging li {
+            margin: 0 5px;
+        }
+        .paging li a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .paging li a:hover {
+            text-decoration: underline;
+        }
+        .paging .active {
+            font-weight: bold;
         }
         footer { 
             background-color: white;
@@ -174,10 +183,10 @@
         <div class="sidebar">
             <div class="snb">
                 <ul>
-                    <li><a href="serviceHome">고객센터 메인<i></i></a></li>
-                    <li><a href="faq">자주찾는 질문<i></i></a></li>
-                    <li class="on"><a href="news">공지/뉴스<i></i></a></li>
-                    <li><a href="eaq">이메일 문의<i></i></a></li>
+                    <li><a href="/serviceHome">고객센터 메인<i></i></a></li>
+                    <li><a href="/faq">자주찾는 질문<i></i></a></li>
+                    <li class="on"><a href="/news">공지/뉴스<i></i></a></li>
+                    <li><a href="/eaq">이메일 문의<i></i></a></li>
                 </ul>
             </div>
         </div>
@@ -187,32 +196,9 @@
                 <h2 class="tit">공지/뉴스</h2>
                 <p class="stit">MG Cinema의 주요한 이슈 및 여러 가지 소식들을 확인하실 수 있습니다.</p>
             </div>
-            <div class="search_area">
-                <legend><label for="c_select">검색</label></legend>
-                <select name="selsearchfield" id="selsearchfield" class="c_select" style="width:100px;">
-                    <option value="0">제목</option>
-                    <option value="1">내용</option>
-                </select>
-                <label for="searchtext" class="hidden">검색어 입력</label>
-                <input id="searchtext" type="text" class="c_input" title="검색어 입력" placeholder="검색어를 입력해 주세요" style="width:185px;">
-                <button type="button" class="round inblack" title="검색하기" id="btn_search"><span>검색하기</span></button>
-            </div>
-            <div class="c_tab_wrap">
-                <ul class="c_tab">
-                    <li class="on"><a href="#">전체</a></li>
-                    <li><a href="#">시스템점검</a></li>
-                    <li><a href="#">극장</a></li>
-                    <li><a href="#">행사/이벤트</a></li>
-                    <li><a href="#">제휴이벤트</a></li>
-                    <li><a href="#">기타</a></li>
-                </ul>
-            </div>
-            <div class="search_result">
-                총<span class="num"> 99999건</span>이 검색되었습니다.               
-            </div><br>
-            <button class="add-button" title="추가하기">+</button>            
+            
             <div class="tbl_area">
-                <table cellspacing="0" cellpadding="0" class="tbl_notice_list"><br>
+                <table cellspacing="0" cellpadding="0" class="tbl_notice_list">
                     <colgroup>
                         <col style="width:70px;">
                         <col style="width:160px;">
@@ -227,33 +213,35 @@
                             <th scope="col" class="tit">내용</th>
                             <th scope="col">작성일</th>
                             <th scope="col">조회수</th>
-                            <th scope="col">관리</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- 데이터 반복 -->
-                        <!-- 예제 데이터 -->
-                        <tr>
-                            <td>1</td>
-                            <td>공지사항 제목</td>
-                            <td><a href="post_read.jsp?num=1">공지사항 내용</a></td>
-                            <td>2024-08-30 12:00:00</td>
-                            <td>123</td>
-                            <td>
-                                <button type="button" value="수정" onClick="location.href='post_modify.jsp?num=1'">수정</button>
-                                <button type="button" value="삭제" onClick="location.href='post_delete_send.jsp?num=1'">삭제</button>
-                            </td>
-                        </tr>
-                        <!-- 예제 데이터 끝 -->
+                        <c:forEach var="news" items="${newsList}">
+                            <tr>
+                                <td>${news.id}</td>
+                                <td>${news.title}</td>
+                                <td><a href="/newsDetail?id=${news.id}">${news.content}</a></td>
+                                <td>${news.created_at}</td>
+                                <td>${news.views}</td>
+                            </tr>
+                        </c:forEach>
                     </tbody>
                 </table>
             </div>
             <div class="paging">
+                <c:if test="${currentPage > 1}">
+                    <a href="/news?page=${currentPage - 1}&size=${size}" class="btn-paging">이전</a>
+                </c:if>
                 <ul>
-                    <li class="on"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
+                    <c:forEach var="i" begin="1" end="${totalPages}">
+                        <li>
+                            <a href="/news?page=${i}&size=${size}" class="${i == currentPage ? 'active' : ''}">${i}</a>
+                        </li>
+                    </c:forEach>
                 </ul>
-                <button class="btn-paging end" type="button" onclick="location.href='#'">끝</button>
+                <c:if test="${currentPage < totalPages}">
+                    <a href="/news?page=${currentPage + 1}&size=${size}" class="btn-paging">다음</a>
+                </c:if>
             </div>
         </div>
     </div>
