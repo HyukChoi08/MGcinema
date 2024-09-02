@@ -45,7 +45,7 @@
                     <br />
                     <form action="/signupPost" method="post">
                     <input type="hidden" name="currentStep" value="2">
-                        <button type="submit">다음 단계</button>
+                        <button id="zzz" type="submit">다음 단계</button>
                     </form>
                 </div>
             </c:when>
@@ -181,4 +181,17 @@
     </div>
 <%--     <%@ include file="/WEB-INF/views/footer/footer.jsp" %> --%>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document)
+.on('click','#zzz',function(){
+	if($('#agree').prop('checked')){
+	}else{
+		alert("체크해라")
+		event.preventDefault();
+		return "home/signup";
+	}
+	
+})
+</script>
 </html>

@@ -27,6 +27,9 @@ public class HomepageController {
 		System.out.println(id);
 		String Nickname = ldao.getNickname(id);
 		System.out.println(Nickname);
+		
+		s.setAttribute("Nick", Nickname);
+		
 		if(id == null || id.equals("")) {
 			linkstr = "<li><a href='/login'>로그인</a>&nbsp;&nbsp;&nbsp;"+
 					"<a href='/signup'>회원가입</a></li>";

@@ -1,51 +1,11 @@
-/* 헤더 여백 살아있을 때
+
+
+
+
+
+
+
  @charset "UTF-8";
-.header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-}
-
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.nav-links {
-    list-style-type: none; 기본 목록 스타일 제거
-    margin: 0; 기본 여백 제거
-    padding: 0; 기본 패딩 제거
-    display: flex; 가로 배치
-}
-
-.nav-links li {
-    margin-left: 20px; 각 항목 사이에 여백 추가
-}
-
-.nav-links li:first-child {
-    margin-left: 0; 첫 번째 항목은 여백 제거
-}
-
-.nav-links a {
-    color: #fff;
-    text-decoration: none; 링크 밑줄 제거
-    font-weight: bold;
-}
-
-.nav-links a:hover {
-    text-decoration: none;  underline; 링크에 마우스를 올렸을 때 밑줄 추가
-}
-
-.navbar h1 a, css에서 우선순위
-.nav-links a {
-    color: #fff; 링크 색상 흰색으로 설정
-    text-decoration: none; 링크 밑줄 제거
-} */
-
-
-
-@charset "UTF-8";
 
 
 .header {
@@ -54,12 +14,12 @@
     padding: 10px 0; /* 상하 패딩만 설정하여 좌우 여백 제거 */
     width: 100%; /* 전체 너비 설정 */
     box-sizing: border-box; /* 패딩을 포함한 전체 너비 계산 */
-    /*  position: fixed;  헤더를 화면 상단에 고정 */
+     position: fixed;  
     top: 0; /* 화면 상단에 위치 */
     left: 0; /* 화면 왼쪽에 위치 */
     z-index: 1000; /* 다른 요소들보다 위에 위치 */
+    
 }
-
 
 
 
@@ -73,21 +33,6 @@ html, body {
     box-sizing: border-box; /* 패딩을 포함한 전체 너비 계산 */
 }
 
-/*
-.header {
-    background-color: #333; 헤더 배경색
-    color: #fff; 글자 색상
-    padding: 10px 20px; 상하 및 좌우 패딩 설정
-    width: 100%; 전체 너비 설정
-    position: fixed; 헤더를 화면 상단에 고정
-    top: 0; 화면 상단에 위치
-    left: 0; 화면 왼쪽에 위치
-    z-index: 1000; 다른 요소들보다 위에 위치
-    height: 80px; 헤더의 높이 설정
-    display: flex;
-    align-items: center; 수직 중앙 정렬
-    justify-content: center; 수평 중앙 정렬
-} */
 
 /* 네비게이션 바 설정 */
 .navbar {
@@ -165,5 +110,3 @@ html, body {
     display: flex;
     align-items: center; /* 슬라이드 중앙 정렬 */
 }
-
-

@@ -151,3 +151,10 @@ button:hover {
 .tellecom-group-bottom input {
     margin-bottom: 5px; /* 라디오 버튼과 레이블 사이의 간격 */
 }
+
+/* .error-message {
+    color: red;
+    margin-top: 10px;
+    display: none; 기본적으로 숨김 상태
+}
+ */
