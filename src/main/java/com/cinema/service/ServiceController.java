@@ -89,7 +89,7 @@ public class ServiceController {
         NewsDTO newsDetail = newsDAO.getNewsById(id);
         model.addAttribute("newsDetail", newsDetail);
         return "service/Newsdetail";
-    } a
+    } 
     
     
 /////////////////////////////EAQ////////////////////////
