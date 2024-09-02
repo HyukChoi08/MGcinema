@@ -187,9 +187,9 @@ $(document)
 .on('click','#zzz',function(){
 	if($('#agree').prop('checked')){
 	}else{
-		alert("체크해라")
+		alert("약관에 동의를 해주세요")
 		event.preventDefault();
-		return "home/signup";
+		
 	}
 	
 })
