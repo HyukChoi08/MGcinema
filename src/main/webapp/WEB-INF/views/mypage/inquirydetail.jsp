@@ -192,7 +192,7 @@ form input[type="submit"]:hover {
 </style>
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/header/header.jsp"%>
+	<%-- <%@ include file="/WEB-INF/views/header/header.jsp"%> --%>
 	<!-- 헤더 포함 -->
 	<!-- 프로필 섹션 -->
 	<div class="profile-section">

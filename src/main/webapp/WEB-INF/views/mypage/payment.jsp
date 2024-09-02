@@ -98,10 +98,38 @@ body {
 	border: 1px solid #ddd; /* 테두리 색상 */
 	border-radius: 5px; /* 모서리 둥글게 */
 }
+
+/* 테이블 스타일 */
+table {
+	width: 100%;
+	border-collapse: collapse; /* 테이블 셀 간의 간격 제거 */
+	margin-top: 20px;
+	border-radius: 5px; /* 모서리 둥글게 */
+}
+
+thead th {
+	background-color: #e50914; /* 헤더 배경색 */
+	color: white; /* 헤더 텍스트 색상 */
+	padding: 2px;
+	text-align: left; /* 텍스트 왼쪽 정렬 */
+	border-bottom: 2px solid #ddd; /* 헤더 아래쪽에 테두리 추가 */
+	
+}
+
+tbody td {
+	padding: 10px;
+	border-bottom: 1px solid #ddd; /* 셀 아래쪽에 테두리 추가 */
+	text-align: left; /* 텍스트 왼쪽 정렬 */
+	
+}
+
+tbody tr:hover {
+	background-color: #f1f1f1; /* 마우스를 올렸을 때 배경색 */
+}
 </style>
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/header/header.jsp"%>
+	<%-- <%@ include file="/WEB-INF/views/header/header.jsp"%> --%>
 	<!-- 헤더 포함 -->
 	<!-- 프로필 섹션 -->
 	<div class="profile-section">
@@ -136,27 +164,30 @@ body {
 			<div>
 				<h3>영화 결제 내역</h3>
 				<div class="my-history">
-					<button>내역 조회하기</button>
+					<table>
+						<thead>
+							<tr>
+								<th>구매일</th>
+								<th>주문번호</th>
+								<th>상품명</th>
+								<th>결제금액</th>
+								<th>상태</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>-</td>
+								<td>-</td>
+								<td>-</td>
+								<td>-</td>
+								<td>-</td>
+							</tr>
+						</tbody>
+					</table>
+	
 				</div>
 			</div>
 			<div>
-				<thead>
-					<tr>
-						<th>구매일</th>
-						<th>주문번호</th>
-						<th>상품명</th>
-						<th>결제금액</th>
-						<th>상태</th>
-					</tr>
-					<br>
-					<tr>
-						<th>0</th>
-						<th>0</th>
-						<th>0</th>
-						<th>0</th>
-						<th>0</th>
-					</tr>
-				</thead>
 				<div class="ask-section">
 					<button class="button">CGV 영화 예매 바로가기</button>
 				</div>

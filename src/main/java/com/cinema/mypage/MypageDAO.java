@@ -9,6 +9,7 @@ public interface MypageDAO {
    CustomerDTO getCustomerInfo(int id);
    void updateCusInfo(CustomerDTO cusDTO);
    void deleteCustomer(int id);
+   CustomerDTO getCustomerInfoByUid(String uid);  // 새로 추가
    
    // 1:1 문의 관련
    ArrayList<InquiryDTO> getInquiryList(int customer_id); // 문의글 목록 가져오기
