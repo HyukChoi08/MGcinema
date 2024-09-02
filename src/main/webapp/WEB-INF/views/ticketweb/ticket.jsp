@@ -372,7 +372,11 @@ $(document).ready(function() {
             	movieimage.empty();
             	movieimage.append('<img src="' + data + '" alt="영화 차트 이미지">');
             	movieresult.append('<p id="gochart">' + moviename + '</p>');
-            	movieresult.append('<p>' + movieage + '</p>');
+            	if(movieage=="all") {
+            		movieresult.append('<p>전체 이용가</p>');
+            	} else {
+            		movieresult.append('<p>' + movieage + '세 이용가</p>');
+            	}
             }
         });
         
@@ -400,6 +404,7 @@ $(document).ready(function() {
                 $("#timeList li").each(function() {
                     if ($(this).data("id") === gettime) {
                         $(this).click();
+                        scrollToSelected("#timeList li");
                     }
                 });
             }
@@ -411,6 +416,10 @@ $(document).ready(function() {
     });
 
     $(document).on("click", "#dateList li", function() {
+    	if($("#movieList li.selected").data("id")==null) {
+        	alert("영화를 선택해주세요.");
+        	return;
+        }
     	$("#roomresult").text("극장정보");
         $("#dateList li").removeClass("selected");
         $(this).addClass("selected");
@@ -431,6 +440,7 @@ $(document).ready(function() {
                 $("#theaterList li").each(function(){
                 	if ($(this).data("rname") === getroom) {
                 		$(this).click();
+                		scrollToSelected("#theaterList li");
                 	}
                 });
             }
@@ -455,17 +465,9 @@ $(document).ready(function() {
         
     });
 
-//     $("#btnclear").click(function(){
-// 		$("#movieList ul").empty();
-// 		$("#dateList ul").empty();
-// 		$("#theaterList ul").empty();
-// 		$("#timeList ul").empty();
-// 		loadMovies();
-// 		loadDates();
-// 	});
-    $("#btnclear").click(function(){
-        location.reload();
-    });
+    $("#btnclear").click(function() {
+    	window.location.href = '/ticket';
+	});
     
     function loadMovies() {
     	$.ajax({
@@ -478,6 +480,7 @@ $(document).ready(function() {
                     movieList.append('<li data-name="' + movie.mname + '" data-id="' + movie.id + '" data-age="' + movie.age + '"><span class="age' + movie.age + '">' 
                     		+ movie.age + '</span>' + movie.mname + '</li>');
                 });
+                
             }
         });
     }
@@ -505,19 +508,7 @@ $(document).ready(function() {
     	let movieId = $("#movieList li.selected").data("id");
     	window.location.href = "/chartList1?id=" + movieId;
     })
-    
-//     function loadMovieData() {
-//         let mname = "${mname}".trim();
-//         let date = "${date}".trim();
 
-//         if (!mname || !date) {
-//             return;
-//         }
-
-//         console.log("받은 데이터: " + mname + " --- " + date + " --- " + room + " --- " + time);
-
-        
-//     }
 
     function loadMovieData() {
         if (!getmname || !getdate || !getroom || !gettime) {
@@ -538,11 +529,13 @@ $(document).ready(function() {
                 $("#movieList li").each(function() {
                     if ($(this).data("name") === getmname) {
                         $(this).click();
+                        scrollToSelected("#movieList li");
                     }
                 });
                 $("#dateList li").each(function() {
                     if ($(this).data("id") === getdate) {
                         $(this).click();
+                        scrollToSelected("#dateList li");
                     }
                 });
             }
@@ -550,7 +543,15 @@ $(document).ready(function() {
     }
 
     loadMovieData();
-
+	
+    function scrollToSelected(selector) {
+        $(selector).each(function() {
+            if ($(this).hasClass('selected')) {
+                $(this)[0].scrollIntoView({ behavior: 'auto', block: 'center' });
+                return false; // 첫 번째로 선택된 항목만 이동
+            }
+        });
+    }
 
 });
 
