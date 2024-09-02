@@ -37,6 +37,19 @@ public class ManagerController {
 		}
 		return Ty.toString();
 	}
+	@PostMapping("/deitemid")
+	@ResponseBody
+	public String deitemid() {
+		ArrayList<DeidDTO> a = mmdao.getdeid();
+		JSONArray Ty = new JSONArray();
+		for(DeidDTO Rdto : a) {
+			JSONObject T = new JSONObject();
+			T.put("id",Rdto.getId());
+			T.put("item_name",Rdto.getItem_name());
+			Ty.put(T);
+		}
+		return Ty.toString();
+	}
 	@PostMapping("/rlist")
 	@ResponseBody
 	public String rlist() {
@@ -108,6 +121,30 @@ public class ManagerController {
 		mmdao.moviedel(delid);
 		return "manager/manager";
 	}
+	@PostMapping("/itemdel")
+	@ResponseBody
+	public String itemdel(HttpServletRequest req,Model model) {
+		int delid = Integer.parseInt(req.getParameter("delid"));
+		System.out.println(delid);
+		mmdao.itemdel(delid);
+		return "manager/manager";
+	}
+	@PostMapping("/detaildel")
+	@ResponseBody
+	public String detaildel(HttpServletRequest req,Model model) {
+		int delid = Integer.parseInt(req.getParameter("delid"));
+		System.out.println(delid);
+		mmdao.detaildel(delid);
+		return "manager/manager";
+	}
+	@PostMapping("/inquirydel")
+	@ResponseBody
+	public String inquirydel(HttpServletRequest req,Model model) {
+		int delid = Integer.parseInt(req.getParameter("delid"));
+		System.out.println(delid);
+		mmdao.inquirydel(delid);
+		return "manager/manager";
+	}
 	@PostMapping("/showmovie")
 	@ResponseBody
 	public String showmovie(HttpServletRequest req,Model model) {
@@ -176,6 +213,15 @@ public class ManagerController {
 		mmdao.itemin(itemname, itemprice, disprice, conposition, origin, itemimage);
 		return "manager/manager";
 	}
+	@PostMapping("/detailin")
+	@ResponseBody
+	public String detailin(HttpServletRequest req,Model model) {
+		int deitemid = Integer.parseInt(req.getParameter("deitemid"));
+		String detname = req.getParameter("detname");
+		String period = req.getParameter("period");
+		mmdao.detailin(deitemid, detname, period);
+		return "manager/manager";
+	}
 	@PostMapping("/showdetail")
 	@ResponseBody
 	public String showdetail(HttpServletRequest req,Model model) {
@@ -190,5 +236,33 @@ public class ManagerController {
 			Ty.put(T);
 		}
 		return Ty.toString();
+	}
+	@PostMapping("/showinquiry")
+	@ResponseBody
+	public String showinquiry(HttpServletRequest req,Model model) {
+		ArrayList<InquiryDTO> a = mmdao.inquirylist();
+		JSONArray Ty = new JSONArray();
+		for(InquiryDTO Rdto : a) {
+			JSONObject T = new JSONObject();
+			T.put("id",Rdto.getId());
+			T.put("nickname",Rdto.getNickname());
+			T.put("title",Rdto.getTitle());
+			T.put("content",Rdto.getContent());
+			T.put("answer",Rdto.getAnswer());
+			T.put("current",Rdto.getCurrent());
+			T.put("created",Rdto.getCreated());
+			T.put("ancreated",Rdto.getAncreated());
+			Ty.put(T);
+		}
+		return Ty.toString();
+	}
+	@PostMapping("/inquiryup")
+	@ResponseBody
+	public String inquiryup(HttpServletRequest req,Model model) {
+		String answer = req.getParameter("answer");
+		int anid = Integer.parseInt(req.getParameter("anid"));
+	
+		mmdao.inquiryup(anid, answer);
+		return "manager/manager";
 	}
 }

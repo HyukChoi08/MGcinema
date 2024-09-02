@@ -78,8 +78,18 @@
 let totalTickets = 0;
 let adultTicketCount = 0;
 let youthTicketCount = 0;
+let getmname = "${mname}".trim();
+let getdate = "${date}".trim();
+let getroom = "${room}".trim();
+let gettime = "${time}".trim();
+console.log(gettime);
 
 $(document).ready(function() {
+// 	let takemname = "${mname}";
+// 	let takedate = "${date}";
+// 	let takeroom = "${room}";
+// 	let taketime = "${time}";
+// 	loadMovieData();
 	
 	$(document).on("click","#adultpernum li", function(){
 		let type = $(this).data("type");
@@ -348,6 +358,12 @@ $(document).ready(function() {
         let movieresult = $("#movieresult");
         let movieimage = $("#movieimage");
         let movieId = $("#movieList li.selected").data("id");
+        
+        let checkname = $("#movieList li.selected").data("name");
+        let checkid = $("#movieList li.selected").data("id");
+        let checkage = $("#movieList li.selected").data("age");
+        console.log(checkname+"-"+checkid+"-"+checkage);
+        
         $.ajax({
             url: "/movieimage",
             type: "GET",
@@ -356,7 +372,11 @@ $(document).ready(function() {
             	movieimage.empty();
             	movieimage.append('<img src="' + data + '" alt="영화 차트 이미지">');
             	movieresult.append('<p id="gochart">' + moviename + '</p>');
-            	movieresult.append('<p>' + movieage + '</p>');
+            	if(movieage=="all") {
+            		movieresult.append('<p>전체 이용가</p>');
+            	} else {
+            		movieresult.append('<p>' + movieage + '세 이용가</p>');
+            	}
             }
         });
         
@@ -378,8 +398,14 @@ $(document).ready(function() {
                 let timeList = $("#timeList ul");
                 timeList.empty();
                 $.each(data, function(index, times) {
-                    timeList.append('<li data-timetpye="' + times.timetype + '" data-alls="' + times.allseat + '" data-id="' + times.begintime + '" title="' + times.endtime + '">' +
+                    timeList.append('<li data-timetype="' + times.timetype + '" data-alls="' + times.allseat + '" data-id="' + times.begintime + '" title="' + times.endtime + '">' +
                     		times.begintime + '  ' + times.lestseat + '석'+ '  ' + times.timetype + '</li>');
+                });
+                $("#timeList li").each(function() {
+                    if ($(this).data("id") === gettime) {
+                        $(this).click();
+                        scrollToSelected("#timeList li");
+                    }
                 });
             }
         });
@@ -390,6 +416,10 @@ $(document).ready(function() {
     });
 
     $(document).on("click", "#dateList li", function() {
+    	if($("#movieList li.selected").data("id")==null) {
+        	alert("영화를 선택해주세요.");
+        	return;
+        }
     	$("#roomresult").text("극장정보");
         $("#dateList li").removeClass("selected");
         $(this).addClass("selected");
@@ -405,7 +435,13 @@ $(document).ready(function() {
                 let theaterList = $("#theaterList ul");
                 theaterList.empty();
                 $.each(data, function(index, theater) {
-                    theaterList.append('<li>' + theater.sname + "-" + theater.seatlevel + '</li>');
+                    theaterList.append('<li data-rname="' + theater.sname + '">' + theater.sname + "-" + theater.seatlevel + '</li>');
+                });
+                $("#theaterList li").each(function(){
+                	if ($(this).data("rname") === getroom) {
+                		$(this).click();
+                		scrollToSelected("#theaterList li");
+                	}
                 });
             }
         });
@@ -426,19 +462,12 @@ $(document).ready(function() {
         let roomresult = $("#roomresult");
         roomresult.append('<p>선택 극장 ' + roomId + '</p>');
         roomresult.append('<p>일시 ' + date + ' ' + '(' +day+ ')' + time  + '</p>');
+        
     });
 
-//     $("#btnclear").click(function(){
-// 		$("#movieList ul").empty();
-// 		$("#dateList ul").empty();
-// 		$("#theaterList ul").empty();
-// 		$("#timeList ul").empty();
-// 		loadMovies();
-// 		loadDates();
-// 	});
-    $("#btnclear").click(function(){
-        location.reload();
-    });
+    $("#btnclear").click(function() {
+    	window.location.href = '/ticket';
+	});
     
     function loadMovies() {
     	$.ajax({
@@ -451,6 +480,7 @@ $(document).ready(function() {
                     movieList.append('<li data-name="' + movie.mname + '" data-id="' + movie.id + '" data-age="' + movie.age + '"><span class="age' + movie.age + '">' 
                     		+ movie.age + '</span>' + movie.mname + '</li>');
                 });
+                
             }
         });
     }
@@ -478,6 +508,50 @@ $(document).ready(function() {
     	let movieId = $("#movieList li.selected").data("id");
     	window.location.href = "/chartList1?id=" + movieId;
     })
+
+
+    function loadMovieData() {
+        if (!getmname || !getdate || !getroom || !gettime) {
+            return;
+        }
+
+        $.ajax({
+            url: "/movies",
+            type: "GET",
+            success: function(data) {
+                let movieList = $("#movieList ul");
+                movieList.empty();
+                $.each(data, function(index, movie) {
+                    movieList.append('<li data-name="' + movie.mname + '" data-id="' + movie.id + '" data-age="' + movie.age + '">' +
+                        '<span class="age' + movie.age + '">' + movie.age + '</span>' + movie.mname + '</li>');
+                });
+
+                $("#movieList li").each(function() {
+                    if ($(this).data("name") === getmname) {
+                        $(this).click();
+                        scrollToSelected("#movieList li");
+                    }
+                });
+                $("#dateList li").each(function() {
+                    if ($(this).data("id") === getdate) {
+                        $(this).click();
+                        scrollToSelected("#dateList li");
+                    }
+                });
+            }
+        });
+    }
+
+    loadMovieData();
+	
+    function scrollToSelected(selector) {
+        $(selector).each(function() {
+            if ($(this).hasClass('selected')) {
+                $(this)[0].scrollIntoView({ behavior: 'auto', block: 'center' });
+                return false; // 첫 번째로 선택된 항목만 이동
+            }
+        });
+    }
 
 });
 

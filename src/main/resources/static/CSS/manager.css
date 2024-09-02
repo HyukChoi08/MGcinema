@@ -40,6 +40,20 @@
 	 height: 480px;
      overflow-y: auto; 
 }
+.answerbox{
+	border:1px solid black;
+	margin:15px;
+	width:700px;
+	 height: 560px;
+     overflow-y: auto; 
+}
+.inquirybox{
+	border:1px solid black;
+	margin:15px;
+	width:985px;
+	 height: 560px;
+     overflow-y: auto; 
+}
 .detailbox{
 	border:1px solid black;
 	margin:15px;
@@ -64,7 +78,8 @@ thead tr{
 #schedules tbody td,
 #movieinfo tbody td,
 #itemlist tbody td,
-#detaillist tbody td{
+#detaillist tbody td,
+#inquirylist thead td{
 	height:40px;
 }
 .movietext{
@@ -76,6 +91,7 @@ thead tr{
 #schedules thead td,
 #movieinfo thead td,
 #itemlist thead td,
-#detaillist thead td{
+#detaillist thead td,
+#inquirylist thead td{
 	border-bottom:2px solid black;
 }

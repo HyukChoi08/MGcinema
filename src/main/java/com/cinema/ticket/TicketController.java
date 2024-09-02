@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -64,12 +65,18 @@ public class TicketController {
 		return "Success";
 	}
 	
-	@PostMapping("/ticket/")
-	@ResponseBody
-	public String ticketdata(@RequestParam String mname, @RequestParam String date, @RequestParam String time, @RequestParam String room) {
-		
+	@GetMapping("/ticket/")
+	public String ticketdata(HttpServletRequest req, Model model) {
+		String mname = req.getParameter("mname");
+		String date = req.getParameter("date");
+		String time = req.getParameter("time");
+		String room = req.getParameter("room");
+		model.addAttribute("mname", mname);
+	    model.addAttribute("date", date);
+	    model.addAttribute("time", time);
+	    model.addAttribute("room", room);
 		System.out.println(mname + date + time + room);
-		return "";
+		return "ticketweb/ticket";
 	}
 	@SuppressWarnings("unchecked")
 	@PostMapping("/reserveSeats")

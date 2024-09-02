@@ -8,6 +8,7 @@
 <title>관리자 페이지</title>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
 <div class="container">
 	<div class="movieinsert1">
 		<h2>영화 상영정보 추가</h2>
@@ -26,10 +27,11 @@
 	</div>
 	<div class="movieinsert2">
 		<table id="schedules">
-			<thead>
-				<tr><td>상영일</td><td>영화제목</td><td>러닝타임</td><td>상영시간</td><td>종료시간</td><td>관이름</td><td>관등급</td><td>잔여좌석</td><td>연령</td><td>일반요금</td><td>청소년요금</td><td>요금타입</td></tr>
-			</thead>
-			<tbody></tbody>
+			<h3>상영리스트</h3>
+				<thead>
+					<tr><td>상영일</td><td>영화제목</td><td>러닝타임</td><td>상영시간</td><td>종료시간</td><td>관이름</td><td>관등급</td><td>잔여좌석</td><td>연령</td><td>일반요금</td><td>청소년요금</td><td>요금타입</td></tr>
+				</thead>
+				<tbody></tbody>
 		</table>
 	</div>
 </div>
@@ -56,10 +58,11 @@
 	</div>
 	<div class="movieinsert4">
 		<table id="movieinfo">
-			<thead>
-				<tr><td>영화제목</td><td>연령</td><td>예매율</td><td>러닝타임</td><td>이미지경로</td><td>감독</td><td>출연배우</td><td>장르</td><td>개봉일</td><td>영화소개</td></tr>
-			</thead>
-			<tbody></tbody>
+			<h3>영화리스트</h3>
+				<thead>
+					<tr><td>영화제목</td><td>연령</td><td>예매율</td><td>러닝타임</td><td>이미지경로</td><td>감독</td><td>출연배우</td><td>장르</td><td>개봉일</td><td>영화소개</td></tr>
+				</thead>
+				<tbody></tbody>
 		</table>
 	</div>
 </div>
@@ -77,7 +80,7 @@
 			</table>
 			<h2>상품상세</h2>
 			<table>
-				<tr><td>상품선택</td><td><select class="mselect" id="itemid"></select></td></tr>
+				<tr><td>상품선택</td><td><select class="mselect" id="deitemid"></select></td></tr>
 				<tr><td>이름</td><td><input type="text" id="detname"></td></tr>
 				<tr><td>유효기간</td><td><input type="text" id="period"></td></tr>
 				<tr><td colspan="2"><input type="button" id="dbtn" value="상세정보추가"></td></tr>
@@ -85,21 +88,47 @@
 	</div>
 	<div class="itembox">
 		<table id="itemlist">
-			<thead>
-				<tr><td>상품명</td><td>가격</td><td>할인가격</td><td>구성</td><td>원산지</td><td>이미지경로</td></tr>
-			</thead>
-			<tbody></tbody>
+			<h3>상품리스트</h3>
+				<thead>
+					<tr><td>상품명</td><td>가격</td><td>할인가격</td><td>구성</td><td>원산지</td><td>이미지경로</td></tr>
+				</thead>
+				<tbody></tbody>
 		</table>
 	</div>
 	<div class="detailbox">
 		<table id="detaillist">
-			<thead>
-				<tr><td>상품번호</td><td>이름</td><td>유효기간</td></tr>
-			</thead>
-			<tbody></tbody>
+			<h3>상품상세리스트</h3>
+				<thead>
+					<tr><td>상품번호</td><td>이름</td><td>유효기간</td></tr>
+				</thead>
+				<tbody></tbody>
 		</table>
 	</div>
 </div>
+<div class="container">
+	<div class="answerbox">
+		<h2>1:1문의답변</h2>
+			<table>
+				<tr><td><input type="hidden" id="anid" readonly></td></tr>
+				<tr><td>작성자</td><td><input type="text" id="writer" readonly></td></tr>
+				<tr><td>제목</td><td><input type="text" id="title" readonly></td></tr>
+				<tr><td>문의내용</td><td><textarea rows="10" cols="80" id="content" readonly></textarea></td></tr>
+				<tr><td>답변</td><td><textarea rows="10" cols="80" id="answer"></textarea></tr>
+				<tr><td>문의일시</td><td><input type="text" id="createt" readonly></td></tr>
+				<tr><td>답변일시</td><td><input type="text" id="answert" readonly></td></tr>
+				<tr><td colspan="2"><input type="button" id="abtn" value="답변등록"></td></tr>
+			</table>
+</div>
+	<div class="inquirybox">
+		<table id="inquirylist">
+			<h3>1:1문의목록</h3>
+				<thead>
+					<tr><td>작성자</td><td>제목</td><td>답변여부</td><td>등록일시</td><td>답변일시</td></tr>
+				</thead>
+				<tbody></tbody>
+		</table>
+</div>
+<%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
@@ -107,10 +136,12 @@ $(document)
 .ready(function(){
 	mlist();
 	rlist();
+	deitemid();
 	schedules();
 	showmovie();
 	showitem();
 	showdetail();
+	showinquiry();
 })
 .on('click','#sbtn',function(){
 	let rid = $('#roomnum').val().split(',');
@@ -172,6 +203,21 @@ $(document)
 	})
 
 })
+.on('click','#dbtn',function(){
+	let deitemid = $('#deitemid').val();
+	let detname = $('#detname').val();
+	let period = $('#period').val();
+
+
+	console.log(deitemid,detname,period);
+	clear();
+	
+	$.post('/detailin',{deitemid:deitemid,detname:detname,period:period},
+		function(data){
+			showdetail();
+	})
+ 
+}) 
 .on('change','#roomnum',function(){
 	aseat = $(this).val().split(',');
 	$('#seat').val(aseat[1]);
@@ -232,6 +278,63 @@ $(document)
 	})
 	
 })
+.on('click','#itemdel',function(){
+	let delid = $(this).closest('tr').find('td:eq(0)').text();
+	console.log($(this).closest('tr').find('td:eq(0)').text());
+	
+	$.post('/itemdel',{delid:delid},function(data){
+		showitem();
+	})
+	
+})
+.on('click','#detaildel',function(){
+	let delid = $(this).closest('tr').find('td:eq(0)').text();
+	console.log($(this).closest('tr').find('td:eq(0)').text());
+	
+	$.post('/detaildel',{delid:delid},function(data){
+		showdetail();
+	})
+})
+.on('click','#inquirydel',function(){
+	let delid = $(this).closest('tr').find('td:eq(0)').text();
+	console.log($(this).closest('tr').find('td:eq(0)').text());
+	
+	
+	$.post('/inquirydel',{delid:delid},function(data){
+		showinquiry();
+		clear();
+	})	
+})
+.on('click','#inquirylist tbody tr',function(){
+	let anid = $(this).find('td:eq(0)').text();
+	let content = $(this).find('td:eq(1)').text();
+	let answer = $(this).find('td:eq(2)').text();
+	let nickname = $(this).find('td:eq(3)').text();
+	let title = $(this).find('td:eq(4)').text();
+	let current = $(this).find('td:eq(5)').text();
+	let created = $(this).find('td:eq(6)').text();
+	let ancreated = $(this).find('td:eq(7)').text();
+	
+	console.log(anid,content,answer,nickname,title,current,created,ancreated);
+	
+	$('#anid').val(anid);
+	$('#writer').val(nickname);
+	$('#title').val(title);
+	$('#content').val(content);
+	$('#answer').val(answer);
+	$('#createt').val(created);
+	$('#answert').val(ancreated);
+})
+.on('click','#abtn',function(){
+	let answer = $('#answer').val();
+	let anid = $('#anid').val();
+	clear();
+	
+	$.post('/inquiryup',{answer:answer,anid:anid},function(data){
+		showinquiry();
+	})
+	
+})
 function mlist(){
 	$.post('/mlist',{},function(data){
 		console.log(data);
@@ -252,6 +355,16 @@ function rlist(){
 		}
 	},'json')
 }
+function deitemid(){
+	$.post('/deitemid',{},function(data){
+		console.log(data);
+		$('#deitemid').empty();
+		for(let x of data){
+			let str ='<option value='+x['id']+'>'+x['id']+', '+x['item_name']+'</option>';
+			$('#deitemid').append(str);
+		}
+	},'json')
+}
 function schedules(){
 	$.post('/schedules',{},function(data){
 		$('#schedules tbody').empty();
@@ -269,7 +382,8 @@ function schedules(){
 }
 function clear(){
 	$('#date,#stime,#etime,#mname,#runtime,#director,#cast,#genre,#minfo,#rdate,#itemname,#itemprice,'
-		+'#disprice,#conposition,#origin,#itemimage').val('');
+		+'#disprice,#conposition,#origin,#itemimage,#detname,#period,#anid,#writer,#title,'
+		+'#content,#answer,#createt,#answert').val('');
 	$('#image').val('/chartImage/.jpg');
 	$('#itemimage').val('/store_Images/.jpg');
 }
@@ -306,6 +420,17 @@ function showdetail(){
 			let str ='<tr><td style=display:none>'+x['id']+'</td><td>'+x['item_id']+'</td><td>'+x['name']+'</td><td>'+x['period']+'</td><td>'+
 			'</td><td><input type=button id=detaildel value=삭제></td></tr>'
 			$('#detaillist tbody').append(str);
+		}
+		
+	},'json')
+}
+function showinquiry(){
+	$.post('/showinquiry',{},function(data){
+		$('#inquirylist tbody').empty();
+		for( let x of data){
+			let str ='<tr><td style=display:none>'+x['id']+'</td><td style=display:none>'+x['content']+'</td><td style=display:none>'+x['answer']+'</td><td>'+x['nickname']+'</td><td>'+x['title']+'</td><td>'+
+			x['current']+'</td><td>'+x['created']+'</td><td>'+x['ancreated']+'</td><td>'+'</td><td><input type=button id=inquirydel value=삭제></td></tr>'
+			$('#inquirylist tbody').append(str);
 		}
 		
 	},'json')
