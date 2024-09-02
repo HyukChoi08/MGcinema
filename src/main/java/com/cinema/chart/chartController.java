@@ -17,6 +17,8 @@ import jakarta.servlet.http.HttpServletRequest;
 public class chartController {
 @Autowired chartDAO cdao;
 @Autowired chartArrayDAO cadao;	
+@Autowired commentArrayDAO commentadao;
+@Autowired chartPutCommentDAO cpcdao;
 
 @GetMapping("/chart")
 public String test() {
@@ -68,6 +70,22 @@ public String chartArray() {
 	}
 	return ja.toString();
 }
+@PostMapping("/commentArray")//select의 option넣는것
+@ResponseBody
+public String commentArray() {
+	ArrayList<commentArrayDTO> ar = commentadao.commentArray();
+	
+	JSONArray ja = new JSONArray();
+	for(commentArrayDTO cadto : ar) {
+		JSONObject jo =new JSONObject();
+		jo.put("id",cadto.getId());
+		jo.put("text",cadto.getText());
+				
+		ja.put(jo);
+	}
+	return ja.toString();
+}
+
 
 @PostMapping("/chartList11")
 @ResponseBody
@@ -89,4 +107,17 @@ public String chartList11() {
 	return ja.toString(); 
 }
 
+//리뷰 작성
+@PostMapping("/putcomment")
+@ResponseBody
+public String update (HttpServletRequest req, Model model) {
+	int moviechart = Integer.parseInt(req.getParameter("moviechart"));
+	
+	String content = req.getParameter("content");
+	
+	String writer = req.getParameter("writer");
+	
+	cpcdao.putcomment(moviechart, content, writer);
+	return "ok";
+}
 }

@@ -32,6 +32,20 @@ ol {
     margin: 0; /* 기본 마진 제거 */
     list-style-type: none; /* 숫자 지우는 것 */
 }
+.comment-list-container {
+    display: flex; /* 플렉스 레이아웃 활성화 */
+    flex-wrap: wrap; /* 아이템이 다음 줄로 넘어가도록 설정 */
+    gap: 16px; /* 각 아이템 사이의 간격 설정 */
+}
+
+.comment-list-container li {
+    flex: 1 1 calc(50% - 16px); /* 각 아이템의 너비를 50%로 설정 */
+    box-sizing: border-box; /* 패딩과 테두리를 포함하여 전체 너비를 계산 */
+    background-color: #f9f9f9; /* 배경색 설정 */
+    padding: 16px; /* 내부 여백 추가 */
+    border-radius: 8px; /* 모서리 둥글게 */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 그림자 추가 */
+}
 </style>
 <body>
 <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
@@ -51,9 +65,23 @@ ol {
 			</div>
 			<div style="width:670px">${chartList3.movieinfo}</div>
 			<div>평점/리뷰
-				<ul id="putcomment">
-				
-				</ul>
+				<span>
+					<div>
+						<p>
+							<span>
+								<em>평가자수"명의 실관람객이 평가해주셨습니다."</em>
+							</span>
+						</p>
+						<div><button id="review">리뷰작성</button>
+							 <ul id="addtextarea" data-id="${chartList3.id}"></ul>
+						</div>
+					</div>
+						<select size="1" style="width:100px;height:30px;" id="commentArray"></select>
+						<button  id="comment">Go</button>
+					<div>
+						<ul id="commentList" class="comment-list-container"></ul>
+					</div>
+				</span>
 			</div>
 		</div>
 	</div>
@@ -63,4 +91,51 @@ ol {
  <%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
+<script>
+//commentArray select에 넣는것
+$.ajax({
+	    url: '/commentArray',
+	    type: 'post',
+	    data: {},
+	    dataType: "json",
+	    success: function(data) {
+	        console.log(data);
+	    let str=''
+	    for(let i = 0;i<data.length;i++){
+	    str += '<option value="'+data[i]['id']+'">'+data[i]['text']+'</option>'	
+	    }
+	    $('#commentArray').append(str);
+	    }
+	        
+	    })
+
+$(document)
+.on('click','#review',function(){
+	
+	let chartId = $('#addtextarea').data('id');
+	console.log("chartList3Id",chartId)
+	let str ='';
+	$('#addtextarea').empty();
+	str ='<input type=hidden id="moviechart" value='+chartId+'><input type=text id="idcheck"><input type=hidden id="nickname"><textarea id="reviewcomment" style=width:350px;height:100px;></textarea><button id="putcomment">리뷰등록</button>'
+	$('#addtextarea').append(str);
+	let nick = '${sessionScope.Nick}'
+	$('#nickname').val(nick);
+})
+.on('click','#putcomment',function(){
+	let moviechart=$('#moviechart').val();
+	let content=$('#reviewcomment').val();
+	let writer=$('#nickname').val();
+	$.ajax({
+		url:'/putcomment',
+		type:'post',
+		data:{moviechart:moviechart,content:content,writer:writer},
+		success:function(data){
+			console.log(data);
+			$('#moviechart').val('');
+			$('#reviewcomment').val('');
+			$('#nickname').val('');
+		}
+	})
+})
+</script>
 </html>
