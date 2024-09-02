@@ -78,8 +78,18 @@
 let totalTickets = 0;
 let adultTicketCount = 0;
 let youthTicketCount = 0;
+let getmname = "${mname}".trim();
+let getdate = "${date}".trim();
+let getroom = "${room}".trim();
+let gettime = "${time}".trim();
+console.log(gettime);
 
 $(document).ready(function() {
+// 	let takemname = "${mname}";
+// 	let takedate = "${date}";
+// 	let takeroom = "${room}";
+// 	let taketime = "${time}";
+// 	loadMovieData();
 	
 	$(document).on("click","#adultpernum li", function(){
 		let type = $(this).data("type");
@@ -348,6 +358,12 @@ $(document).ready(function() {
         let movieresult = $("#movieresult");
         let movieimage = $("#movieimage");
         let movieId = $("#movieList li.selected").data("id");
+        
+        let checkname = $("#movieList li.selected").data("name");
+        let checkid = $("#movieList li.selected").data("id");
+        let checkage = $("#movieList li.selected").data("age");
+        console.log(checkname+"-"+checkid+"-"+checkage);
+        
         $.ajax({
             url: "/movieimage",
             type: "GET",
@@ -378,8 +394,13 @@ $(document).ready(function() {
                 let timeList = $("#timeList ul");
                 timeList.empty();
                 $.each(data, function(index, times) {
-                    timeList.append('<li data-timetpye="' + times.timetype + '" data-alls="' + times.allseat + '" data-id="' + times.begintime + '" title="' + times.endtime + '">' +
+                    timeList.append('<li data-timetype="' + times.timetype + '" data-alls="' + times.allseat + '" data-id="' + times.begintime + '" title="' + times.endtime + '">' +
                     		times.begintime + '  ' + times.lestseat + '석'+ '  ' + times.timetype + '</li>');
+                });
+                $("#timeList li").each(function() {
+                    if ($(this).data("id") === gettime) {
+                        $(this).click();
+                    }
                 });
             }
         });
@@ -405,7 +426,12 @@ $(document).ready(function() {
                 let theaterList = $("#theaterList ul");
                 theaterList.empty();
                 $.each(data, function(index, theater) {
-                    theaterList.append('<li>' + theater.sname + "-" + theater.seatlevel + '</li>');
+                    theaterList.append('<li data-rname="' + theater.sname + '">' + theater.sname + "-" + theater.seatlevel + '</li>');
+                });
+                $("#theaterList li").each(function(){
+                	if ($(this).data("rname") === getroom) {
+                		$(this).click();
+                	}
                 });
             }
         });
@@ -426,6 +452,7 @@ $(document).ready(function() {
         let roomresult = $("#roomresult");
         roomresult.append('<p>선택 극장 ' + roomId + '</p>');
         roomresult.append('<p>일시 ' + date + ' ' + '(' +day+ ')' + time  + '</p>');
+        
     });
 
 //     $("#btnclear").click(function(){
@@ -478,6 +505,52 @@ $(document).ready(function() {
     	let movieId = $("#movieList li.selected").data("id");
     	window.location.href = "/chartList1?id=" + movieId;
     })
+    
+//     function loadMovieData() {
+//         let mname = "${mname}".trim();
+//         let date = "${date}".trim();
+
+//         if (!mname || !date) {
+//             return;
+//         }
+
+//         console.log("받은 데이터: " + mname + " --- " + date + " --- " + room + " --- " + time);
+
+        
+//     }
+
+    function loadMovieData() {
+        if (!getmname || !getdate || !getroom || !gettime) {
+            return;
+        }
+
+        $.ajax({
+            url: "/movies",
+            type: "GET",
+            success: function(data) {
+                let movieList = $("#movieList ul");
+                movieList.empty();
+                $.each(data, function(index, movie) {
+                    movieList.append('<li data-name="' + movie.mname + '" data-id="' + movie.id + '" data-age="' + movie.age + '">' +
+                        '<span class="age' + movie.age + '">' + movie.age + '</span>' + movie.mname + '</li>');
+                });
+
+                $("#movieList li").each(function() {
+                    if ($(this).data("name") === getmname) {
+                        $(this).click();
+                    }
+                });
+                $("#dateList li").each(function() {
+                    if ($(this).data("id") === getdate) {
+                        $(this).click();
+                    }
+                });
+            }
+        });
+    }
+
+    loadMovieData();
+
 
 });
 
