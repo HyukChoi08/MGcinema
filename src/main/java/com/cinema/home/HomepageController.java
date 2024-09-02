@@ -37,7 +37,8 @@ public class HomepageController {
 			linkstr = "<li>사용자 ["+Nickname+"]&nbsp;&nbsp;&nbsp;"+
 					"<a href='/logout'>로그아웃</a></li>";
 		}
-		model.addAttribute("linkstr",linkstr);
+		//model.addAttribute("linkstr",linkstr);
+		s.setAttribute("linkstr", linkstr);
 		return "home/homepage";
 	}
 	
