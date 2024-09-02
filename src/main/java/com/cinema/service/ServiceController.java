@@ -90,7 +90,7 @@ public class ServiceController {
         model.addAttribute("newsDetail", newsDetail);
         return "service/Newsdetail";
     } 
-    
+    ㄱ
     
 /////////////////////////////EAQ////////////////////////
     @GetMapping("/eaq")
