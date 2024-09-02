@@ -1,33 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cinema.service.FAQDAO">
-
-    <!-- 모든 FAQ 목록 조회 -->
-    <select id="getAllFAQs" resultType="com.cinema.service.FAQDTO">
-        SELECT * FROM faq
+    <select id="getAllFAQs" parameterType="map" resultType="com.cinema.service.FAQDTO">
+        SELECT * FROM FAQ
+        LIMIT #{size} OFFSET #{offset}
     </select>
 
-    <!-- ID로 FAQ 조회 -->
-    <select id="getFAQById" parameterType="Long" resultType="com.cinema.service.FAQDTO">
-        SELECT * FROM faq WHERE id = #{id}
+    <select id="getTotalFAQCount" resultType="int">
+        SELECT COUNT(*) FROM FAQ
     </select>
 
-    <!-- 새로운 FAQ 추가 -->
+    <select id="getFAQById" parameterType="long" resultType="com.cinema.service.FAQDTO">
+        SELECT * FROM FAQ WHERE id = #{id}
+    </select>
+
     <insert id="addFAQ" parameterType="com.cinema.service.FAQDTO">
-        INSERT INTO faq (title, content, views)
-        VALUES (#{title}, #{content}, #{views})
+        INSERT INTO FAQ (title, content, created_at, views)
+        VALUES (#{title}, #{content}, #{createdAt}, #{views})
     </insert>
 
-    <!-- FAQ 수정 -->
     <update id="updateFAQ" parameterType="com.cinema.service.FAQDTO">
-        UPDATE faq
-        SET title = #{title}, content = #{content}, views = #{views}
+        UPDATE FAQ
+        SET title = #{title}, content = #{content}, created_at = #{createdAt}, views = #{views}
         WHERE id = #{id}
     </update>
 
-    <!-- ID로 FAQ 삭제 -->
-    <delete id="deleteFAQ" parameterType="Long">
-        DELETE FROM faq WHERE id = #{id}
+    <delete id="deleteFAQ" parameterType="long">
+        DELETE FROM FAQ WHERE id = #{id}
     </delete>
-
 </mapper>

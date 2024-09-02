@@ -147,7 +147,7 @@
     </style>
     <head>
     <title>고객센터홈</title>
-    <link rel="stylesheet" href="/Header_css/Header.css">
+  <!--  <link rel="stylesheet" href="/Header_css/Header.css">-->
     </head>
 	<body>
 	<header class="header">

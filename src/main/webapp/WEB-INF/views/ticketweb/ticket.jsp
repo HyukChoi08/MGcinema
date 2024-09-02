@@ -316,26 +316,17 @@ $(document).ready(function() {
         $(".seat.selected").each(function() {
             selectedSeats.push($(this).data("seat"));
         });
+
         let movieId = $("#movieList li.selected").data("id");
         let roomId = $("#theaterList li.selected").text().split("-")[0];
         let date = $("#dateList li.selected").data("id");
         let begin = $("#timeList li.selected").data("id");
+
         $.ajax({
-            type: "POST",
-            url: "/reserveSeats",
-            contentType: "application/json",
-            data: JSON.stringify({
-                seats: selectedSeats,
-                movieId: movieId,
-                theaterId: roomId,
-                date: date,
-                time: begin
-            }),
-            success: function(response) {
-                alert(response);
-            },
-            error: function(xhr, status, error) {
-                alert("예매 중 오류가 발생했습니다. 다시 시도해 주세요.");
+            url: "/checkout",
+            type: "GET",
+            success: function(data) {
+                   
             }
         });
     });

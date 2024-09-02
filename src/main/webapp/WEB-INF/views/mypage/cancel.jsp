@@ -192,7 +192,7 @@ form input[type="submit"]:hover {
 </style>
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/header/header.jsp"%>
+	<%-- <%@ include file="/WEB-INF/views/header/header.jsp"%> --%>
 	<!-- 헤더 포함 -->
 	<!-- 프로필 섹션 -->
 	<div class="profile-section">
@@ -257,6 +257,7 @@ form input[type="submit"]:hover {
 	<!-- 푸터 포함 -->
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
+
 <script>
 function passerror() {
     // 비밀번호와 비밀번호 확인 입력 필드 가져오기

@@ -112,7 +112,7 @@ form input {
 </style>
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/header/header.jsp"%>
+	<%-- <%@ include file="/WEB-INF/views/header/header.jsp"%> --%>
 	<!-- 헤더 포함 -->
 	<!-- DB 작업 실패 시 에러메세지 출력 -->
 	<c:if test="${not empty errorMessage}">

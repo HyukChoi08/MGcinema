@@ -113,7 +113,7 @@ body {
 </style>
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/header/header.jsp"%>
+	<%-- <%@ include file="/WEB-INF/views/header/header.jsp"%> --%>
 	<!-- 헤더 포함 -->
 	<!-- 프로필 섹션 -->
 	<div class="profile-section">
@@ -164,8 +164,8 @@ body {
 			<!-- My CGV Home 섹션 -->
 			<div class="link">
 				<ul>
-					<li><a href=/Movie>Movie Home</a></li>
-					<li><a href=/Movie>청소년 등급영화</a></li>
+					<li><a href=/chart>Movie Home</a></li>
+					<li><a href=/ageinfo>등급영화 보기</a></li>
 					<li><a href=/ticket>상영중인 영화</a></li>
 					<li><a href=/serviceHome>고객센터 바로가기</a></li>
 					<li><a href=/store>스토어 바로가기</a></li>
@@ -177,7 +177,7 @@ body {
 			<!-- 푸터 섹션 -->
 			<div class="footer-section">
 				<p>보고싶은 영화가 있나요?</p>
-				<a href="#" class="button">상영중인 영화 바로가기</a>
+				<a href="/chart" class="button">상영중인 영화 바로가기</a>
 			</div>
 		</div>
 	</div>
