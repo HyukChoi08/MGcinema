@@ -128,7 +128,7 @@
 				<tbody></tbody>
 		</table>
 </div>
-
+<%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
