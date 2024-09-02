@@ -32,7 +32,11 @@
 </head>
 <body>
     <footer class="footer">
-        <p>&copy; 2024 Movie Theater. All rights reserved.</p>
+        <p>
+        화성시 목성구 태양로 29 MG CINEMA 지구빌딩 1F
+		대표 이메일: korea@mgcinema.kr · 고객센터 1544-1234 (수신자 부담) 사업자등록번호 313-87-12345 · 통신판매업신고번호 2024-고양일산동-0123
+		대표이사: 김수동 · 개인정보 보호 책임자: 박수성 호스팅 제공자 토성이노베이트
+        &copy; 2024 Movie Theater. All rights reserved.</p>
     </footer>
 </body>
 </html>

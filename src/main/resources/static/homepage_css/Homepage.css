@@ -8,31 +8,6 @@
     padding-bottom: 60px;
 }
 
-/* 기존 navbar 스타일 */
-.navbar {
-    background-color: #333333;
-    padding: 10px;
-    margin-bottom: 20px;
-}
-
-.nav-links {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-}
-
-.nav-links a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.nav-links a:hover {
-    text-decoration: underline;
-}
-
 /* 슬라이더를 중앙에 배치하고, 컨테이너 너비 조정 */
 .promo-container {
     margin: 0 auto; /* 가운데 정렬 */
