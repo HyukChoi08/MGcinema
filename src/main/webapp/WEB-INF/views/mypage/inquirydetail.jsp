@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="com.cinema.mypage.CustomerDTO" %>
+<%
+    // 세션에서 cusrDTO 객체 가져오기
+    CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -198,7 +203,7 @@ form input[type="submit"]:hover {
 	<div class="profile-section">
 		<img src="/mypage_image/OO.png" alt="프로필이미지" width="80" height="80">
 		<div class="profile-info">
-			<h2 id="nickname">Hi_Movie님</h2>
+			<h2 id="nickname"><%= customer.getNickname() %>님</h2>
 			<p>
 				고객님은 <strong>일반</strong> 고객 입니다.
 			</p>
@@ -260,7 +265,7 @@ form input[type="submit"]:hover {
 							<h2>관리자 답변</h2>
 							답변내용: <br>
 							<textarea name="answer" rows="10" cols="50" readonly>${inquiry.answer}</textarea>
-							<br> 답변ㅁ일자: <br> <input type="text" name="ancreated"
+							<br> 답변일자: <br> <input type="text" name="ancreated"
 								value="${inquiry.ancreated}" readonly>
 						</div>
 					</c:if>

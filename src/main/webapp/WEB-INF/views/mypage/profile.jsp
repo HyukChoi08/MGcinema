@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="com.cinema.mypage.CustomerDTO" %>
+<%
+    // 세션에서 cusrDTO 객체 가져오기
+    CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -125,7 +130,7 @@ form input {
 	<div class="profile-section">
 		<img src="/mypage_image/OO.png" alt="프로필이미지" alt="프로필이미지" width="80" height="80">
 		<div class="profile-info">
-			<h2 id="nickname">님</h2>
+			<h2 id="nickname"><%= customer.getNickname() %>님</h2>
 			<p>
 				고객님은 <strong>일반</strong> 고객 입니다.
 			</p>
@@ -238,21 +243,19 @@ form input {
 			</div>
 		</div>
 	</div>
-	<%@ include file="/WEB-INF/views/footer/footer.jsp"%>
+	<%-- <%@ include file="/WEB-INF/views/footer/footer.jsp"%> --%>
 	<!-- 푸터 포함 -->
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
 $(document).ready(function() {
-    var userId = 1; // 테스트할 사용자 ID, 실제 상황에서는 동적으로 설정
 
     $.ajax({
         url: "/customerInfo",
         method: "POST",
-        data: { id: userId },
         success: function(data) {
             // 서버에서 받아온 데이터로 프로필 섹션 업데이트
-            $('#nickname').text(data.nickname + "님");
+            console.log("받아온 데이터 id: " + data.id);
             $('#id').val(data.id);
             $('#uid').val(data.uid);
             $('#passwd').val(data.passwd);

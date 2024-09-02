@@ -7,6 +7,12 @@
    where id=#{param1}
 </select>
 
+<select id="getCustomerInfoByUid" resultType="com.cinema.mypage.CustomerDTO">
+   select id, uid, passwd, realname, nickname, email, region, favorite, mobile, tellecom, created, updated, birthday
+   from customer
+   where uid=#{param1}
+</select>
+
 <update id="updateCusInfo" parameterType="com.cinema.mypage.CustomerDTO">
     UPDATE customer
     SET 

@@ -23,7 +23,16 @@ public class PageController {
 	MypageDAO mdao;
 
 	@GetMapping("/myhome") // 홈 페이지 매핑
-	public String myhome() { 
+	public String myhome(HttpSession session) { 
+		String uid = (String)session.getAttribute("uid");
+		
+		// uid가 null이 아닌 경우 세션에 cusDTO 저장
+		if (uid != null) {
+			CustomerDTO cusDTO = mdao.getCustomerInfoByUid(uid);
+			session.setAttribute("cusDTO", cusDTO);
+		} else {
+			return "redirect:/login";
+		}
 		return "mypage/myhome";
 	}
 
@@ -130,14 +139,18 @@ public class PageController {
 		return "mypage/passcheck";
 	}
 
-	// 회원 id로 정보 조회 및 세션 저장
+	
+	
+	// 프로필 수정 - 회원 id로 정보 조회 및 세션 저장
 	@PostMapping("/customerInfo")
 	@ResponseBody
-	public CustomerDTO getCustomerInfo(HttpServletRequest req) {
-		int id = Integer.parseInt(req.getParameter("id"));
-		CustomerDTO cusDTO = mdao.getCustomerInfo(id);
-		HttpSession session = req.getSession();
+	public CustomerDTO getCustomerInfo(HttpSession session) {
+		String uid = (String)session.getAttribute("uid");
+		System.out.println("uid: "+uid);
+		
+		CustomerDTO cusDTO = mdao.getCustomerInfoByUid(uid);
 		session.setAttribute("cusDTO", cusDTO);
+		
 		return cusDTO;
 	}
 
