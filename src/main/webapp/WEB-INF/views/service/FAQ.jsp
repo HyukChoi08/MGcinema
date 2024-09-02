@@ -6,9 +6,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${serviceHome.title}</title>
+    <title>자주 찾는 질문</title>
     <style>
-        /* 기존 스타일 유지 */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -132,6 +131,18 @@
         .tbl_notice_list th {
             background-color: #f0f0f0;
         }
+        .tbl_notice_list th:nth-child(1) {
+            width: 10%; /* 번호 열 */
+        }
+        .tbl_notice_list th:nth-child(2) {
+            width: 60%; /* 제목 열, 넓게 조정 */
+        }
+        .tbl_notice_list th:nth-child(3) {
+            width: 15%; /* 등록일 열, 좁게 조정 */
+        }
+        .tbl_notice_list th:nth-child(4) {
+            width: 15%; /* 조회수 열 */
+        }
         .paging {
             margin: 20px 0;
             display: flex;
@@ -190,7 +201,6 @@
             border-top: 1px solid #ddd;
         }
     </style>
-    <link rel="stylesheet" href="/Header_css/Header.css">    
 </head>
 <body>
     <header class="header">
@@ -212,7 +222,7 @@
                 <div class="snb">
                     <ul>
                         <li><a href="serviceHome">고객센터 메인</a></li>
-                        <li class="on"><a href="faq">자주찾는 질문</a></li>
+                        <li class="on"><a href="faq">자주 찾는 질문</a></li>
                         <li><a href="news">공지/뉴스</a></li>
                         <li><a href="eaq">이메일 문의</a></li>
                     </ul>
@@ -222,14 +232,14 @@
             <!-- 메인 콘텐츠 -->
             <div class="col-detail">
                 <div class="customer_top">
-                    <h2 class="tit">자주찾는 질문</h2>
-                    <p class="stit">회원님들께서 가장 자주하시는 질문을 모았습니다.</p>
+                    <h2 class="tit">자주 찾는 질문</h2>
+                    <p class="stit">회원님들께서 가장 자주 하시는 질문을 모았습니다.</p>
                 </div>
-                               
+
                 <div class="search_result">
                     총 <span class="num">${fn:length(faqList)}건</span>&nbsp;
                 </div>
-                
+
                 <div class="tbl_area">
                     <table class="tbl_notice_list">
                         <thead>
@@ -245,10 +255,11 @@
                                 <tr>
                                     <td>${faq.id}</td>
                                     <td><a href="/FAQdetail?id=${faq.id}">${faq.title}</a></td>
-                                    <td>${faq.createdAt}</td>
+                                    <td>${fn:replace(faq.createdAt, 'T', ' ')}</td>
                                     <td>${faq.views}</td>
                                 </tr>
                             </c:forEach>
+
                             <!-- FAQ 항목이 없을 때 -->
                             <c:if test="${empty faqList}">
                                 <tr>
@@ -258,7 +269,7 @@
                         </tbody>
                     </table>
                 </div>
-                
+
                 <div class="paging">
                     <c:if test="${currentPage > 1}">
                         <a href="/faq?page=${currentPage - 1}&size=${size}" class="btn-paging">이전</a>

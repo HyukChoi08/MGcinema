@@ -168,8 +168,8 @@
                 <!-- 버튼 그룹 -->
                 <div class="btn-group">
     <button class="btn-list" onclick="location.href='faq'">목록</button>
-    <button class="btn-edit" onclick="location.href='FAQedit?id=${faqDetail.id}'">수정</button>
-    <button class="btn-delete" onclick="if(confirm('정말 삭제하시겠습니까?')) location.href='FAQdelete?id=${faqDetail.id}'">삭제</button>
+ <!--    <button class="btn-edit" onclick="location.href='FAQedit?id=${faqDetail.id}'">수정</button>
+    <button class="btn-delete" onclick="if(confirm('정말 삭제하시겠습니까?')) location.href='FAQdelete?id=${faqDetail.id}'">삭제</button> -->
 </div>
             </div>
         </div>
