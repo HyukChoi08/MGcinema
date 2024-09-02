@@ -26,7 +26,6 @@ public class TicketController {
 	public String ticket() {
 		return "ticketweb/ticket";
 	}
-
 	
 	@GetMapping("/movies")
 	@ResponseBody
@@ -56,14 +55,6 @@ public class TicketController {
 	public List<timesDTO> getTimes(@RequestParam("movieId") int movieId, @RequestParam("date") String date, @RequestParam("roomId") String roomId) {
 		return tdao.getTimes(movieId, date, roomId);
 	}
-
-	@PostMapping("/reserve")
-	@ResponseBody
-	public String reserveTicket(@RequestParam int movieId, @RequestParam int theaterId, @RequestParam String date, @RequestParam String time) {
-		// 예매 처리 로직 추가
-		tdao.reserve(movieId, theaterId, date, time);
-		return "Success";
-	}
 	
 	@GetMapping("/ticket/")
 	public String ticketdata(HttpServletRequest req, Model model) {
@@ -78,21 +69,28 @@ public class TicketController {
 		System.out.println(mname + date + time + room);
 		return "ticketweb/ticket";
 	}
-	@SuppressWarnings("unchecked")
-	@PostMapping("/reserveSeats")
+    @PostMapping("/reserveSeats")
     @ResponseBody
-    public String reserveSeats(@RequestBody Map<String, Object> seatData) {
-        List<String> seats = (List<String>) seatData.get("seats");
-        int movieId = (int) seatData.get("movieId");
-        int theaterId = (int) seatData.get("theaterId");
-        String date = (String) seatData.get("date");
-        String time = (String) seatData.get("time");
+    public ResponseEntity<String> reserveSeats(@RequestBody Map<String, Object> seatData) {
+        try {
+            List<String> seats = (List<String>) seatData.get("seats");
+            int movieId = (int) seatData.get("movieId");
+            int theaterId = (int) seatData.get("theaterId");
+            String date = (String) seatData.get("date");
+            String time = (String) seatData.get("time");
 
-        // 예매 처리 로직 추가
-        tdao.reserveSeats(seats, movieId, theaterId, date, time);
-        
-        return "예매가 완료되었습니다.";
+            tdao.reserveSeats(seats, movieId, theaterId, date, time);
+            return ResponseEntity.ok("예매가 완료되었습니다.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("예매 처리 중 오류가 발생했습니다.");
+        }
     }
+	
+	@GetMapping("/checkout")
+	public String checkout() {
+	    
+	    return "ticketweb/checkout";
+	}
 	
 	@GetMapping("/seats")
     @ResponseBody
