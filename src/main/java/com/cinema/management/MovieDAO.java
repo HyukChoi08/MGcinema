@@ -13,8 +13,15 @@ public interface MovieDAO {
 	void schedel(int a);
 	ArrayList<MovieinfoDTO> getmovieinfo();
 	void moviedel(int a);
+	void itemdel(int a);
+	void detaildel(int a);
+	void inquirydel(int a);
 	void moviein(String a, String o, String i, String u, String y, String t, String r, String e, String w, float q );
 	ArrayList<ItemDTO> itemlist();
 	ArrayList<DetailDTO> detaillist();
+	ArrayList<InquiryDTO> inquirylist();
 	void itemin(String a,String b,String c,String d,String e,String f);
+	void detailin(int a,String b,String c);
+	void inquiryup(int a,String b);
+	ArrayList<DeidDTO> getdeid();
 }

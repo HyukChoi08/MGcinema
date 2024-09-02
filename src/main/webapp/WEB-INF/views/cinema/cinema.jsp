@@ -380,7 +380,7 @@ function processData3(data) {
 	            	for(let x of data){
 	            		if (x['mname'] === id && x['Sname'] === room) {
 	                        console.log('최종', x['begintime']);
-	                        $(this).append('<td><a href=/ticket?mname='+x['mname']+'&date='+$('#hiddendate').val()+'&room='+x['Sname']+'&time='+x['begintime']+'>'+x['begintime']+'</a></td>');
+	                        $(this).append('<td><a href=/ticket/?mname='+x['mname']+'&date='+$('#hiddendate').val()+'&room='+x['Sname']+'&time='+x['begintime']+'>'+x['begintime']+'</a></td>');
 	                    }
 	            	}  	
 	        })

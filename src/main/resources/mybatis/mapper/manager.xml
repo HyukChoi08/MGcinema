@@ -25,6 +25,15 @@
 <delete id="moviedel">
 	delete from movie where id=#{param1}
 </delete>
+<delete id="itemdel">
+	delete from item where id=#{param1}
+</delete>
+<delete id="detaildel">
+	delete from item_detail where id=#{param1}
+</delete>
+<delete id="inquirydel">
+	delete from inquiry where id=#{param1}
+</delete>
 <select id="getmovieinfo" resultType="com.cinema.management.MovieinfoDTO">
 	select * from movie order by id desc
 </select>
@@ -32,13 +41,27 @@
 	insert into movie set mname=#{param1}, age=#{param2}, runningtime=#{param3}, imagepath=#{param4}, director=#{param5},
 							cast=#{param6}, genre=#{param7}, releasedate=#{param8}, movieinfo=#{param9}, reservation=#{param10}
 </insert>
+<insert id="detailin">
+	insert into item_detail set item_id=#{param1}, name=#{param2}, period=#{param3}
+</insert>
 <select id="itemlist" resultType="com.cinema.management.ItemDTO">
 	select * from item order by id desc
 </select>
 <select id="detaillist" resultType="com.cinema.management.DetailDTO">
 	select * from item_detail order by id desc
 </select>
+<select id="inquirylist" resultType="com.cinema.management.InquiryDTO">
+	SELECT b.id,a.nickname,b.title,b.content,b.answer,b.created,b.ancreated,b.current
+	from customer a,inquiry b
+	where a.id=b.customer_id order by created desc
+</select>
 <insert id="itemin">
 	insert into item set item_name=#{param1}, price=#{param2}, discount_price=#{param3}, composition=#{param4}, origin=#{param5}, image_path=#{param6}
 </insert>
+<update id="inquiryup">
+	update inquiry set answer=#{param2}, current="답변완료", ancreated =now() where id=#{param1}
+</update>
+<select id="getdeid" resultType="com.cinema.management.DeidDTO">
+	select id,item_name from item
+</select>
 </mapper>
