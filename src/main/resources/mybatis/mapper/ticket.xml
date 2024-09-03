@@ -38,7 +38,7 @@
     </insert>
     
     <select id="getSeats" parameterType="String" resultType="com.cinema.ticket.seatDTO">
-    SELECT * FROM seatinfo WHERE sname = #{theaterId}
+    	SELECT * FROM seatinfo WHERE sname = #{theaterId}
 	</select>
 	
 	<select id="getTotalPrice" resultType="com.cinema.ticket.priceDTO">
@@ -48,5 +48,10 @@
 		and b.sname=#{roomId}
 		and a.moviedate=#{moviedate}
 		and a.begintime=#{begintime}
+	</select>
+	
+	<select id="getCustomer" resultType="com.cinema.ticket.customerDTO">
+		select id,uid, passwd, realname, nickname, email, mobile from customer
+		where uid = #{param1};
 	</select>
 </mapper>

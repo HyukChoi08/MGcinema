@@ -78,6 +78,7 @@
 let totalTickets = 0;
 let adultTicketCount = 0;
 let youthTicketCount = 0;
+let alltotal = 0;
 let getmname = "${mname}".trim();
 let getdate = "${date}".trim();
 let getroom = "${room}".trim();
@@ -148,6 +149,7 @@ $(document).ready(function() {
 	})
 	
 	$(document).on("click","#adultpernum li, #youthpernum li", function(){
+		alltotal = 0;
 		 $("#priceresult").text();
 	        let priceresult = $("#priceresult");
 	        let movieId = $("#movieList li.selected").data("id");
@@ -165,6 +167,7 @@ $(document).ready(function() {
 	                let yprice = data[0].y_price;
 	                let totala = (aprice*adultTicketCount);
 	                let totaly = (yprice*youthTicketCount);
+	                alltotal = totala + totaly;
 	                if(adultTicketCount != 0) {
 	                priceresult.append('<p data-id="' + ayid + '" data-price="' + aprice + '">일반' + aprice + 'X' + adultTicketCount + '</p>');
 	                priceresult.append('<p data-totala="' + totala + '">' + totala + '</p>');
@@ -312,23 +315,33 @@ $(document).ready(function() {
     }
 
     $(document).on("click", "#submitBtn", function() {
-        let selectedSeats = [];
-        $(".seat.selected").each(function() {
-            selectedSeats.push($(this).data("seat"));
-        });
+    	var sessionUid = '${sessionScope.uid}';
+    	if(!sessionUid || sessionUid.trim() === '') {
+    		window.location.href = '/login';
+    		return;
+    	}
+    	let moviename =$("#movieList li.selected").data("name");
+    	let Aticket = "일반 - " + adultTicketCount + "매";
+    	let Yticket = "청소년 - " + youthTicketCount + "매";
+    	let resultprice = alltotal;
+    	moviename = encodeURIComponent(moviename);
+        Aticket = encodeURIComponent(Aticket);
+        Yticket = encodeURIComponent(Yticket);
+        resultprice = encodeURIComponent(resultprice);
+    	
+    	var popupWidth = 600;
+        var popupHeight = 700;
 
-        let movieId = $("#movieList li.selected").data("id");
-        let roomId = $("#theaterList li.selected").text().split("-")[0];
-        let date = $("#dateList li.selected").data("id");
-        let begin = $("#timeList li.selected").data("id");
+        var leftPosition = (window.screen.width / 2) - (popupWidth / 2);
+        var topPosition = (window.screen.height / 2) - (popupHeight / 2);
 
-        $.ajax({
-            url: "/checkout",
-            type: "GET",
-            success: function(data) {
-                   
-            }
-        });
+        var url = '/ticketweb/checkout?moviename=' + moviename + '&Aticket=' + Aticket + '&Yticket=' + Yticket + '&resultprice=' +resultprice;
+
+        window.open(
+            url,
+            'CheckoutWindow',
+            'width=' + popupWidth + ', height=' + popupHeight + ', left=' + leftPosition + ', top=' + topPosition + ', resizable=yes, scrollbars=yes'
+        );
     });
     
     //예매

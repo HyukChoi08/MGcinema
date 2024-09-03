@@ -1,5 +1,6 @@
 package com.cinema.ticket;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -29,4 +30,6 @@ public interface TicketDAO {
     List<seatDTO> getSeats(@Param("theaterId") String theaterId);
     
     List<priceDTO> getTotalPrice(@Param("movieId") int movieId, @Param("roomId") String roomId, @Param("moviedate") String moviedate, @Param("begintime") String begintime );
+
+    customerDTO getCustomer(String uid);
 }

@@ -3,6 +3,7 @@ package com.cinema.ticket;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class TicketController {
@@ -69,28 +71,61 @@ public class TicketController {
 		System.out.println(mname + date + time + room);
 		return "ticketweb/ticket";
 	}
-    @PostMapping("/reserveSeats")
-    @ResponseBody
-    public ResponseEntity<String> reserveSeats(@RequestBody Map<String, Object> seatData) {
-        try {
-            List<String> seats = (List<String>) seatData.get("seats");
-            int movieId = (int) seatData.get("movieId");
-            int theaterId = (int) seatData.get("theaterId");
-            String date = (String) seatData.get("date");
-            String time = (String) seatData.get("time");
-
-            tdao.reserveSeats(seats, movieId, theaterId, date, time);
-            return ResponseEntity.ok("예매가 완료되었습니다.");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("예매 처리 중 오류가 발생했습니다.");
-        }
+	
+//    @PostMapping("/reserveSeats")
+//    @ResponseBody
+//    public ResponseEntity<String> reserveSeats(@RequestBody Map<String, Object> seatData) {
+//        try {
+//            List<String> seats = (List<String>) seatData.get("seats");
+//            int movieId = (int) seatData.get("movieId");
+//            int theaterId = (int) seatData.get("theaterId");
+//            String date = (String) seatData.get("date");
+//            String time = (String) seatData.get("time");
+//
+//            tdao.reserveSeats(seats, movieId, theaterId, date, time);
+//            return ResponseEntity.ok("예매가 완료되었습니다.");
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("예매 처리 중 오류가 발생했습니다.");
+//        }
+//    }
+	
+	@GetMapping("/ticketweb/checkout")
+    public String showCheckoutPage(@RequestParam("moviename") String moviename,
+            						@RequestParam("Aticket") String Aticket,
+            						@RequestParam("Yticket") String Yticket,
+            						@RequestParam("resultprice") String resultprice,
+            						HttpServletRequest req, Model model) {
+		HttpSession s =req.getSession();
+		String userid = (String) s.getAttribute("uid");
+		customerDTO customer = tdao.getCustomer(userid);
+		
+		model.addAttribute("id", customer.getId());
+        model.addAttribute("uid", customer.getUid());
+        model.addAttribute("passwd", customer.getPasswd());
+        model.addAttribute("realname", customer.getRealname());
+        model.addAttribute("nickname", customer.getNickname());
+        model.addAttribute("email", customer.getEmail());
+        model.addAttribute("mobile", customer.getMobile());
+        
+        model.addAttribute("moviename", moviename);
+        model.addAttribute("Aticket", Aticket);
+        model.addAttribute("Yticket", Yticket);
+        model.addAttribute("resultprice", resultprice);
+        
+        String orderId = UUID.randomUUID().toString();
+        model.addAttribute("orderId", orderId);
+        return "ticketweb/checkout";
     }
 	
-	@GetMapping("/checkout")
-	public String checkout() {
-	    
-	    return "ticketweb/checkout";
-	}
+	@GetMapping("/success")
+    public String paymentSuccess() {
+        return "ticketweb/success";
+    }
+
+    @GetMapping("/fail")
+    public String paymentFail() {
+        return "ticketweb/fail";
+    }
 	
 	@GetMapping("/seats")
     @ResponseBody
