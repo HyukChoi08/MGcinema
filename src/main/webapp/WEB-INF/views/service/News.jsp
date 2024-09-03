@@ -163,20 +163,21 @@
             border-top: 1px solid #ddd;
         }
     </style>
-    <link rel="stylesheet" href="/Header_css/Header.css">    
 </head>
 <body>
-<header class="header">
-    <nav class="navbar">
-        <h1><a href="/">MG Cinema</a></h1>
-        <ul class="nav-links">
-            <li><a href="/login">로그인</a></li>
-            <li><a href="/signup">회원가입</a></li>
-            <li><a href="/myhome">My페이지</a></li>
-            <li><a href="/serviceHome">고객센터</a></li>
-        </ul>
-    </nav>
-</header>   
+<%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
+    
+    <!--<header class="header">
+        <nav class="navbar">
+            <h1><a href="/">MG Cinema</a></h1>
+            <ul class="nav-links">
+                <li><a href="/login">로그인</a></li>
+                <li><a href="/signup">회원가입</a></li>
+                <li><a href="/myhome">My페이지</a></li>
+                <li><a href="/serviceHome">고객센터</a></li>
+            </ul>
+        </nav>
+    </header> -->
 
 <div id="container">
     <div id="contents">
@@ -248,7 +249,7 @@
 </div>
 
 <footer>
-    <p>MG Cinema &copy; 2024</p>
+    <%@ include file="/WEB-INF/views/footer/footer.jsp" %>
 </footer>
 </body>
 </html>

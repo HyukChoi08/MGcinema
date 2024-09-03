@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${serviceHome.title}</title>
+ 	
+ 	
+ 	<title>${serviceHome.title}</title>
     <style>
         /* 전체 body 스타일 설정 */
         body {
@@ -26,8 +28,7 @@
             padding: 10px 0;
             font-size: 1.2em;
             font-weight: bold;
-        }
-        
+        }     
         
         /* 메인 컨테이너 스타일 */
         #container {
@@ -73,14 +74,22 @@
             background-color: white;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-        /* 예매 내역과 문의 내역 섹션 스타일 */
-        .c_check_warp, .customer_notice_area {
-            margin-bottom: 20px;
-            padding: 10px;
-            background-color: #f7f7f7;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
+      	.c_check_warp {
+   			display: flex;
+   			flex-direction: row; /* 자식 요소들을 수평으로 배치 */
+   			flex-wrap: wrap; /* 자식 요소들이 컨테이너를 넘칠 경우 자동으로 줄바꿈 */
+   			gap: 20px; /* 자식 요소 사이의 간격 설정 */
+    		width: 100%; /* 전체 너비 사용 */
+		}
+
+		.c_box {
+    		flex: 1 1 30%; /* 각 박스가 30% 너비를 가짐 (반응형 디자인을 위한 비율 설정) */
+    		padding: 15px;
+    		box-sizing: border-box; /* 패딩과 보더를 포함하여 너비 계산 */
+    		background-color: #fff;
+    		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    		border-radius: 5px;
+		}
         /* 버튼 스타일 */
         .button {
             background-color: #e50914;
@@ -103,12 +112,22 @@
         .c_qu a:hover, .service_area .list a:hover, .notice_area a:hover, .shortcu_area .round:hover {
             text-decoration: underline;
         }
-        /* 고객센터 서비스 및 공지사항 영역 스타일 */
+        .customer_notice_area {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f7f7f7;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display : flex;
+            gap : 20px;
+        }       
         .service_area, .notice_area {
-            border: 1px solid black;
-            padding: 15px;
-            background-color: white;
-        }
+    		flex: 1; /* 두 요소가 동일한 비율로 공간을 차지하도록 설정 */
+    		padding: 15px;
+    		background-color: white;
+    		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    		border-radius: 5px;
+		}
         .service_area .tit, .notice_area .tit {
             font-size: 1.2em;
             margin-bottom: 10px;
@@ -144,14 +163,21 @@
         .shortcu_area .round.on {
             background-color: black;
         }
+        footer {
+            background-color: white;
+            text-align: center;
+            padding: 10px 0;
+            border-top: 1px solid #ddd;
+        }
     </style>
-    <head>
     <title>고객센터홈</title>
-  <!--  <link rel="stylesheet" href="/Header_css/Header.css">-->
+  	
     </head>
 	<body>
-	<header class="header">
-        <nav class="navbar">
+	
+	
+	<!-- <header class="header">
+        <nav class="navbar" >
             <h1><a href="/">MG Cinema</a></h1>
             <ul class="nav-links">
                 <li><a href="/login">로그인</li>
@@ -160,7 +186,7 @@
                 <li><a href="/serviceHome">고객센터</a></li>
             </ul>
         </nav>
-    </header>
+    </header> -->
 
     <div id="container">
         <div id="contents">
@@ -197,11 +223,6 @@
                             <a href="faq">취소</a>
                         </div>
                     </div>
-                  <!--  <div class="c_box talk_inquiry">
-                        <strong class="c_tit">상담톡 이용</strong>
-                        <span class="c_txt">상담 톡을 이용해보세요.</span>
-                        <a href="#">문의하기</a>
-                    </div> -->
                     <div class="c_box email_inquiry">
                         <strong class="c_tit">📧이메일 문의</strong>
                         <span class="c_txt">24시간 365일 언제든지 문의해주세요.</span>
@@ -220,9 +241,6 @@
                             <li><a href="#">신용카드<br>영수증출력</a></li>
                             <li><a href="#">아이디/<br>비밀번호 찾기</a></li>
                             <li><a href="#">예매/<br>취소내역 확인</a></li>
-                            <li><a href="#">비회원<br>예매/취소</a></li>
-                            <li><a href="#">멤버십포인트<br>사용안내</a></li>
-                            <li><a href="#">관람권<br>할인쿠폰 등록</a></li>
                         </ul>
                     </div>
                     <div class="notice_area">
@@ -234,14 +252,14 @@
                             <li><a href="#">공지4 </a><span class="day">2024.08.18</span></li>
                             <li><a href="#">공지5 </a><span class="day">2024.08.17</span></li>
                         </ul>
-                        <a class="more" href="#">더보기</a>
+                        <a class="more" href="news">더보기</a>
                     </div>
                 </div>                
             </div>
         </div>
     </div>
     <footer>
-        <p>MG Cinema &copy; 2024</p>
+        <%@ include file="/WEB-INF/views/footer/footer.jsp" %>
     </footer>
 </body>
 </html>

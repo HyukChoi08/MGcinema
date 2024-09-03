@@ -203,7 +203,9 @@
     </style>
 </head>
 <body>
-    <header class="header">
+<%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
+    
+    <!--<header class="header">
         <nav class="navbar">
             <h1><a href="/">MG Cinema</a></h1>
             <ul class="nav-links">
@@ -213,7 +215,7 @@
                 <li><a href="/serviceHome">고객센터</a></li>
             </ul>
         </nav>
-    </header>
+    </header> -->
 
     <div id="container">
         <div id="contents">
@@ -222,7 +224,7 @@
                 <div class="snb">
                     <ul>
                         <li><a href="serviceHome">고객센터 메인</a></li>
-                        <li class="on"><a href="faq">자주 찾는 질문</a></li>
+                        <li class="on"><a href="faq">자주찾는 질문</a></li>
                         <li><a href="news">공지/뉴스</a></li>
                         <li><a href="eaq">이메일 문의</a></li>
                     </ul>
@@ -232,7 +234,7 @@
             <!-- 메인 콘텐츠 -->
             <div class="col-detail">
                 <div class="customer_top">
-                    <h2 class="tit">자주 찾는 질문</h2>
+                    <h2 class="tit">자주찾는 질문</h2>
                     <p class="stit">회원님들께서 가장 자주 하시는 질문을 모았습니다.</p>
                 </div>
 
@@ -288,7 +290,7 @@
     </div>
 
     <footer>
-        <p>MG Cinema &copy; 2024</p>
+        <%@ include file="/WEB-INF/views/footer/footer.jsp" %>
     </footer>
 </body>
 </html>
