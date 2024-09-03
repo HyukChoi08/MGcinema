@@ -45,7 +45,7 @@
                     <br />
                     <form action="/signupPost" method="post">
                     <input type="hidden" name="currentStep" value="2">
-                        <button id="zzz" type="submit">다음 단계</button>
+                        <button id="agreed" type="submit">다음 단계</button>
                     </form>
                 </div>
             </c:when>
@@ -111,7 +111,7 @@
                     <div class="form-group">
                         <label for="mobile">전화번호</label>
                         <input
-                            type="text" id="mobile" name="mobile" value="${formData.mobile}" placeholder="01012345678 (필수)" required>
+                            type="text" id="mobile" name="mobile" value="${formData.mobile}" placeholder="(필수) 01012345678 형식으로 작성해주세요" required maxlength="11">
                     </div>
                     <div class="form-group">
                         <label for="region">지역</label>
@@ -162,7 +162,7 @@
                         </div>
                     </div>
                     <input type="hidden" name="currentStep" value="3">
-                    <button type="submit">회원가입</button>
+                    <button type="submit" id="signup" name="signup">회원가입</button>
                 </form>
             </c:when>
             <c:when test="${currentStep == 3}">
@@ -179,19 +179,17 @@
             <div class="error-message">${error}</div>
         </c:if>
     </div>
-<%--     <%@ include file="/WEB-INF/views/footer/footer.jsp" %> --%>
-</body>
+	<%@ include file="/WEB-INF/views/footer/footer.jsp" %>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-$(document)
-.on('click','#zzz',function(){
+ $(document)
+.on('click','#agreed',function(){
 	if($('#agree').prop('checked')){
 	}else{
 		alert("약관에 동의를 해주세요")
 		event.preventDefault();
 		
 	}
-	
 })
-</script>
+</script>    
 </html>

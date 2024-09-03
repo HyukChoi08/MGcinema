@@ -109,6 +109,10 @@ html, body {
     margin: 0; /* 브라우저 기본 여백 제거 */
     padding: 0; /* 브라우저 기본 패딩 제거 */
     width: 100%; /* 전체 너비 설정 */
+    line-height: 1.4; /* 줄 높이 조절 */
+    text-align: center;
+   
+
 }
 
 .footer {

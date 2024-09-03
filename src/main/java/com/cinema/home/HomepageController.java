@@ -31,11 +31,17 @@ public class HomepageController {
 		s.setAttribute("Nick", Nickname);
 		
 		if(id == null || id.equals("")) {
-			linkstr = "<li><a href='/login'>로그인</a>&nbsp;&nbsp;&nbsp;"+
-					"<a href='/signup'>회원가입</a></li>";
+			linkstr = "<li><a href='/login'>로그인</a></li>"+
+					"<li><a href='/signup'>회원가입</a></li>";
+			
+		} else if ("admin".equals(id)) {
+			linkstr = "<li>["+Nickname+"]</li>"+
+					"<li><a href='/logout'>로그아웃</a></li>"+
+		            "<li><a href='/manager'>관리</a></li>";
+		
 		}else {
-			linkstr = "<li>사용자 ["+Nickname+"]&nbsp;&nbsp;&nbsp;"+
-					"<a href='/logout'>로그아웃</a></li>";
+			linkstr = "<li>사용자 ["+Nickname+"]</li>"+
+					"<li><a href='/logout'>로그아웃</a></li>";
 		}
 		//model.addAttribute("linkstr",linkstr);
 		s.setAttribute("linkstr", linkstr);
@@ -139,7 +145,6 @@ public class HomepageController {
 	            ));
 	            return "home/signup";
 	        }
-	       
 	       
 	       ldao.insertSignup(realname, email, uid, passwd, birthday, mobile, region, nickname, favorite, tellecom);
 	   }

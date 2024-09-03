@@ -3,6 +3,7 @@
 .signup-page {
     padding: 20px;
     margin-top: 100px; /* 상단 여백 추가 ->> 이게 다른페이지들에 다 있으면 좋겠네! */
+    margin-bottom: 100px;
 }
 
 .form-group {
@@ -70,6 +71,8 @@ button:hover {
 /* 스텝 인디케이터 스타일 */
 .step-indicator {
     display: flex;
+    max-width: 1000px; /* 최대 너비를 1000px로 설정 */
+    margin: 0 auto; /* 중앙 정렬 */
     justify-content: space-between;
     margin-bottom: 20px;
     padding-bottom: 10px;
