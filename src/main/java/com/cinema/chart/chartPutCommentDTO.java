@@ -8,6 +8,6 @@ int id;
 int moviechart;
 String content;
 String writer;
-int created_at;
+String created_at;
 int liked;
 }

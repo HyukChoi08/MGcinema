@@ -8,4 +8,10 @@
 			<select id ="selectputcomment" resultType="com.cinema.chart.chartPutCommentDTO">
 	 select id,content,writer,created_at from review order by created_at desc
 	</select>
+	<update id="updatereview">
+	update review set created_at=NOW(), content=#{param2} where id=#{param1}
+	</update>
+	<delete id ="deletereview">
+	delete from review where id=#{param1}
+	</delete>
 </mapper>

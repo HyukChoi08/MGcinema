@@ -8,4 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface chartPutCommentDAO {
 void putcomment(int moviechart,String content,String writer);
 ArrayList<chartPutCommentDTO> selectputcomment();
+void updatereview(int id,String content);
+void deletereview(int id);
+
 }

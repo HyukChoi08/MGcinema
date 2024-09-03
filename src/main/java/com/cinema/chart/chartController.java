@@ -107,6 +107,26 @@ public String chartList11() {
 	return ja.toString(); 
 }
 
+@PostMapping("/insertselectcomment")//리뷰 리뷰란에 셀렉트
+@ResponseBody
+public String insertselectcomment() {
+	ArrayList<chartPutCommentDTO> ar = cpcdao.selectputcomment();
+	
+	
+	
+	JSONArray ja = new JSONArray();
+	for(chartPutCommentDTO cpcdto : ar) {
+		JSONObject jo =new JSONObject();
+		jo.put("id", cpcdto.getId());
+		jo.put("content",cpcdto.getContent());
+		jo.put("writer",cpcdto.getWriter());
+		jo.put("created_at", cpcdto.getCreated_at());
+		
+		ja.put(jo);
+	}
+	return ja.toString(); 
+}
+
 //리뷰 작성
 @PostMapping("/putcomment")
 @ResponseBody
@@ -118,6 +138,26 @@ public String update (HttpServletRequest req, Model model) {
 	String writer = req.getParameter("writer");
 	
 	cpcdao.putcomment(moviechart, content, writer);
+	return "ok";
+}
+//리뷰 수정
+@PostMapping("/updatereview")
+@ResponseBody
+public String updatereview (HttpServletRequest req, Model model) {
+	int id = Integer.parseInt(req.getParameter("id"));
+	
+	String content = req.getParameter("content");
+	
+	cpcdao.updatereview(id, content);
+	return "ok";
+}
+//리뷰 삭제
+@PostMapping("/deletereview")
+@ResponseBody
+public String deletereview (HttpServletRequest req, Model model) {
+	int id = Integer.parseInt(req.getParameter("id"));
+	
+	cpcdao.deletereview(id);
 	return "ok";
 }
 }
