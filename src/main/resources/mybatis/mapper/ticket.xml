@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cinema.ticket.TicketDAO">
 	<select id="getMovies" resultType="com.cinema.ticket.movieDTO">
-        SELECT id, mname, age, imagepath FROM movie
+        SELECT id, mname, age, imagepath, runningtime FROM movie
     </select>
     
     <select id="getMovieimage" resultType="java.lang.String">
@@ -53,5 +53,17 @@
 	<select id="getCustomer" resultType="com.cinema.ticket.customerDTO">
 		select id,uid, passwd, realname, nickname, email, mobile from customer
 		where uid = #{param1};
+	</select>
+	
+	<insert id="insertData">
+		insert into moviepay (random_id, customer_id, movie_name, room_name, totalprice, runningtime, seat, totalpeople, begintime, endtime)
+		values (#{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6}, #{param7}, #{param8}, #{param9}, #{param10})
+	</insert>
+	
+	<select id="getOccupiedSeats" resultType="String">
+		select seat from moviepay
+		where movie_name = #{param1}
+		and room_name = #{param2}
+		and begintime = #{param3}
 	</select>
 </mapper>

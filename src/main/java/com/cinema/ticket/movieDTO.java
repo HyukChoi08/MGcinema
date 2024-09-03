@@ -8,4 +8,5 @@ public class movieDTO {
     public String mname;
     public String age;
     public String imagepath;
+    public String runningtime;
 }

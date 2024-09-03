@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface TicketDAO {
@@ -32,4 +33,13 @@ public interface TicketDAO {
     List<priceDTO> getTotalPrice(@Param("movieId") int movieId, @Param("roomId") String roomId, @Param("moviedate") String moviedate, @Param("begintime") String begintime );
 
     customerDTO getCustomer(String uid);
+    
+    void insertData(String a,String b,String c,String d, String e, String f, String g , String h, String i, String j);
+
+    @Select("SELECT COUNT(*) FROM moviepay WHERE random_id = #{randomId}")
+    int checkIfExists(@Param("randomId") String randomId);
+    
+    List<String> getOccupiedSeats(@Param("moviename") String moviename,
+            @Param("roomname") String roomname,
+            @Param("begintime") String begintime);
 }

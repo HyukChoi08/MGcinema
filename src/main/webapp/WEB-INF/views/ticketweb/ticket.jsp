@@ -83,7 +83,7 @@ let getmname = "${mname}".trim();
 let getdate = "${date}".trim();
 let getroom = "${room}".trim();
 let gettime = "${time}".trim();
-console.log(gettime);
+let allseat = "";
 
 $(document).ready(function() {
 // 	let takemname = "${mname}";
@@ -191,6 +191,7 @@ $(document).ready(function() {
         let day = $("#dateList li.selected .day").text();
         let begintime = $("#timeList li.selected").text().split("  ")[0];
         let endtime = $("#timeList li.selected").attr("title");
+        let moviename = $("#movieList li.selected").data("name");
         if(mname == "") {
             alert("영화를 선택해주세요");
             return;
@@ -248,6 +249,16 @@ $(document).ready(function() {
                         $(".seat-selection").append(rowDiv);
                     }
                 });
+                $.ajax({
+                	type:"GET",
+                	url:"/occupiedSeats",
+                	data:{moviename:moviename,
+                		  roomname:roomId,
+                		  begintime:begintime},
+                	success:function(response) {
+                		console.log()
+                	}
+                });
                 initializeOccupiedSeats(["a1", "b2", "c3"]);
             },
             error: function(xhr, status, error) {
@@ -286,7 +297,7 @@ $(document).ready(function() {
     // 선택된 좌석 업데이트 함수
     function updateSelectedSeats() {
         let selectedSeats = [];
-        let allseat = "";
+        allseat= "";
         $(".seat.selected").each(function () {
             selectedSeats.push($(this).data("seat"));
         });
@@ -324,10 +335,23 @@ $(document).ready(function() {
     	let Aticket = "일반 - " + adultTicketCount + "매";
     	let Yticket = "청소년 - " + youthTicketCount + "매";
     	let resultprice = alltotal;
+    	let resultseat = allseat.trim();
+    	let roomname = $("#theaterList li.selected").text().split("-")[0];
+    	let people = totalTickets;
+    	let begintime = $("#timeList li.selected").data("id");
+    	let endtime = $("#timeList li.selected").attr("title");
+    	let runningtime = $("#movieList li.selected").data("time");
+    	
     	moviename = encodeURIComponent(moviename);
         Aticket = encodeURIComponent(Aticket);
         Yticket = encodeURIComponent(Yticket);
         resultprice = encodeURIComponent(resultprice);
+        resultseat = encodeURIComponent(resultseat);
+        roomname = encodeURIComponent(roomname);
+        people = encodeURIComponent(people);
+        begintime = encodeURIComponent(begintime);
+        endtime = encodeURIComponent(endtime);
+        runningtime = encodeURIComponent(runningtime);
     	
     	var popupWidth = 600;
         var popupHeight = 700;
@@ -335,13 +359,16 @@ $(document).ready(function() {
         var leftPosition = (window.screen.width / 2) - (popupWidth / 2);
         var topPosition = (window.screen.height / 2) - (popupHeight / 2);
 
-        var url = '/ticketweb/checkout?moviename=' + moviename + '&Aticket=' + Aticket + '&Yticket=' + Yticket + '&resultprice=' +resultprice;
+        var url = '/ticketweb/checkout?moviename=' + moviename + '&Aticket=' + Aticket + '&Yticket=' + Yticket + '&resultprice=' 
+        		+ resultprice + '&resultseat=' + resultseat + '&roomname=' + roomname + '&people=' + people + '&begintime=' + begintime +
+        		'&endtime=' + endtime + '&runningtime=' + runningtime;
 
         window.open(
             url,
             'CheckoutWindow',
             'width=' + popupWidth + ', height=' + popupHeight + ', left=' + leftPosition + ', top=' + topPosition + ', resizable=yes, scrollbars=yes'
         );
+        window.location.href = '/ticket';
     });
     
     //예매
@@ -481,7 +508,7 @@ $(document).ready(function() {
                 let movieList = $("#movieList ul");
                 movieList.empty();
                 $.each(data, function(index, movie) {
-                    movieList.append('<li data-name="' + movie.mname + '" data-id="' + movie.id + '" data-age="' + movie.age + '"><span class="age' + movie.age + '">' 
+                    movieList.append('<li data-time="' + movie.runningtime+ '" data-name="' + movie.mname + '" data-id="' + movie.id + '" data-age="' + movie.age + '"><span class="age' + movie.age + '">' 
                     		+ movie.age + '</span>' + movie.mname + '</li>');
                 });
                 
@@ -526,7 +553,7 @@ $(document).ready(function() {
                 let movieList = $("#movieList ul");
                 movieList.empty();
                 $.each(data, function(index, movie) {
-                    movieList.append('<li data-name="' + movie.mname + '" data-id="' + movie.id + '" data-age="' + movie.age + '">' +
+                    movieList.append('<li data-time="' + movie.runningtime + '" data-name="' + movie.mname + '" data-id="' + movie.id + '" data-age="' + movie.age + '">' +
                         '<span class="age' + movie.age + '">' + movie.age + '</span>' + movie.mname + '</li>');
                 });
 

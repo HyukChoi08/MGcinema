@@ -94,6 +94,12 @@ public class TicketController {
             						@RequestParam("Aticket") String Aticket,
             						@RequestParam("Yticket") String Yticket,
             						@RequestParam("resultprice") String resultprice,
+            						@RequestParam("resultseat") String resultseat,
+            						@RequestParam("roomname") String roomname,
+            						@RequestParam("people") String people,
+            						@RequestParam("begintime") String begintime,
+            						@RequestParam("endtime") String endtime,
+            						@RequestParam("runningtime") String runningtime,
             						HttpServletRequest req, Model model) {
 		HttpSession s =req.getSession();
 		String userid = (String) s.getAttribute("uid");
@@ -111,6 +117,12 @@ public class TicketController {
         model.addAttribute("Aticket", Aticket);
         model.addAttribute("Yticket", Yticket);
         model.addAttribute("resultprice", resultprice);
+        model.addAttribute("resultseat", resultseat);
+        model.addAttribute("roomname", roomname);
+        model.addAttribute("people", people);
+        model.addAttribute("begintime", begintime);
+        model.addAttribute("endtime", endtime);
+        model.addAttribute("runningtime", runningtime);
         
         String orderId = UUID.randomUUID().toString();
         model.addAttribute("orderId", orderId);
@@ -118,10 +130,54 @@ public class TicketController {
     }
 	
 	@GetMapping("/success")
-    public String paymentSuccess() {
-        return "ticketweb/success";
-    }
+	public String paymentSuccess(@RequestParam Map<String, String> params, Model model) {
+	    // 파라미터로 전달된 값을 모델에 추가
+	    model.addAttribute("orderId", params.get("orderId"));
+	    model.addAttribute("uid", params.get("uid"));
+	    model.addAttribute("moviename", params.get("moviename"));
+	    model.addAttribute("roomname", params.get("roomname"));
+	    model.addAttribute("resultprice", params.get("resultprice"));
+	    model.addAttribute("runningtime", params.get("runningtime"));
+	    model.addAttribute("resultseat", params.get("resultseat"));
+	    model.addAttribute("people", params.get("people"));
+	    model.addAttribute("begintime", params.get("begintime"));
+	    model.addAttribute("endtime", params.get("endtime"));
 
+	    return "ticketweb/success";
+	}
+	
+	@GetMapping("/saveData")
+	public String saveData(HttpServletRequest req) {
+	    String random_id = req.getParameter("random_id");
+	    String customer_id = req.getParameter("customer_id");
+	    String movie_name = req.getParameter("movie_name");
+	    String room_name = req.getParameter("room_name");
+	    String totalprice = req.getParameter("totalprice");
+	    String runningtime = req.getParameter("runningtime");
+	    String seat = req.getParameter("seat");
+	    String totalpeople = req.getParameter("totalpeople");
+	    String begintime = req.getParameter("begintime");
+	    String endtime = req.getParameter("endtime");
+	    
+	    int count = tdao.checkIfExists(random_id);
+	    if (count > 0) {
+	        return "home/homepage"; // Or some appropriate response
+	    }
+	    
+	    tdao.insertData(random_id, customer_id, movie_name, room_name, totalprice, runningtime, seat, totalpeople, begintime, endtime);
+	    return "home/homepage";
+	}
+	
+	 @GetMapping("/occupiedSeats")
+    public String getOccupiedSeats(@RequestParam String movieName,
+                                   @RequestParam String roomName,
+                                   @RequestParam String beginTime,
+                                   Model model) {
+        List<String> occupiedSeats = tdao.getOccupiedSeats(movieName, roomName, beginTime);
+        model.addAttribute("occupiedSeats", occupiedSeats);
+        return "seats";  // JSP 파일의 이름
+    }
+	
     @GetMapping("/fail")
     public String paymentFail() {
         return "ticketweb/fail";
