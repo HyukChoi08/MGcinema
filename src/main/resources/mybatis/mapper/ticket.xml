@@ -61,9 +61,10 @@
 	</insert>
 	
 	<select id="getOccupiedSeats" resultType="String">
-		select seat from moviepay
-		where movie_name = #{param1}
-		and room_name = #{param2}
-		and begintime = #{param3}
+	    SELECT seat FROM moviepay
+	    WHERE movie_name = #{movieName}
+	    AND room_name = #{roomName}
+	    AND begintime = #{beginTime}
 	</select>
+
 </mapper>

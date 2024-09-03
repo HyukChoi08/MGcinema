@@ -39,7 +39,11 @@ public interface TicketDAO {
     @Select("SELECT COUNT(*) FROM moviepay WHERE random_id = #{randomId}")
     int checkIfExists(@Param("randomId") String randomId);
     
-    List<String> getOccupiedSeats(@Param("moviename") String moviename,
-            @Param("roomname") String roomname,
-            @Param("begintime") String begintime);
+    
+    List<nowseatDTO> getOccupiedSeats(@Param("movieName") String movieName,
+                                  @Param("roomName") String roomName,
+                                  @Param("beginTime") String beginTime);
+
+
+
 }

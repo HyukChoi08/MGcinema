@@ -168,15 +168,20 @@ public class TicketController {
 	    return "home/homepage";
 	}
 	
-	 @GetMapping("/occupiedSeats")
-    public String getOccupiedSeats(@RequestParam String movieName,
-                                   @RequestParam String roomName,
-                                   @RequestParam String beginTime,
-                                   Model model) {
-        List<String> occupiedSeats = tdao.getOccupiedSeats(movieName, roomName, beginTime);
-        model.addAttribute("occupiedSeats", occupiedSeats);
-        return "seats";  // JSP 파일의 이름
-    }
+//	@GetMapping("/occupiedSeats")
+//	@ResponseBody
+//	public List<String> getOccupiedSeats(@RequestParam String movieName,
+//	                                      @RequestParam String roomName,
+//	                                      @RequestParam String beginTime) {
+//	    return tdao.getOccupiedSeats(movieName, roomName, beginTime);
+//	}
+	
+	@GetMapping("/occupiedSeats")
+	@ResponseBody
+	public List<nowseatDTO> getOccupiedSeats(@RequestParam("movieName") String movieName, @RequestParam("roomName") String roomName, @RequestParam("beginTime") String beginTime) {
+		return tdao.getOccupiedSeats(movieName, roomName, beginTime);
+	}
+
 	
     @GetMapping("/fail")
     public String paymentFail() {
