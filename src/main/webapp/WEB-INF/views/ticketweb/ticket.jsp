@@ -250,7 +250,6 @@ $(document).ready(function() {
                     $(".seat-selection").append(rowDiv);
                 }
             });
-            
             $.ajax({
                 type: "GET",
                 url: "/occupiedSeats",
