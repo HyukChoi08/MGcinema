@@ -39,6 +39,7 @@ dependencies {
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	implementation 'org.json:json:20210307'
     providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
 }
 
 tasks.named('test') {
