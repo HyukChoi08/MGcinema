@@ -139,7 +139,7 @@ $(document).ready(function() {
 	    
 	    if ($(".seat.selected").length > totalTickets) {
 	        alert("선택된 티켓 수만큼만 좌석을 선택할 수 있습니다.");
-	        // 마지막 선택을 해제하거나 추가 조치를 수행할 수 있음
+	        
 	        $(".seat.selected").removeClass("selected");
 	    }
 	    
