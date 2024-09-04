@@ -8,9 +8,6 @@
 <title>Movie Ticket Reservation</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/ticket_css/styles.css">
 </head>
-<style>
-
-</style>
 <body>
 <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
 <div class="maincontainer">

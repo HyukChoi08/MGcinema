@@ -1,19 +1,13 @@
 @charset "UTF-8";
 /* 일반 스타일 */
 
-* {
-	color:white;
-}
 
 body {
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
     background-color:black;
-/*     margin-top: 60px; */
-/*     margin-bottom: 40px; */
-/*     padding-top: 60px; */
-/*     padding-bottom: 40px; */
+    color:white;
 }
 
 .maincontainer {
@@ -52,7 +46,6 @@ header h1, footer p {
 
 h1 {
     font-size: 24px;
-    color::white;
     margin-bottom: 20px;
 }
 
@@ -100,19 +93,49 @@ button:hover {
 }
 
 .list-box ul {
+	max-height: 220px;
     list-style-type: none;
     padding: 0;
     margin: 0;
+    overflow-y: auto;
+}
+
+.list-box ul::-webkit-scrollbar {
+    width: 8px; /* 스크롤바 너비 설정 */
+}
+
+.list-box ul::-webkit-scrollbar-thumb {
+    background-color: white; /* 스크롤바 색상 */
+    border-radius: 4px; /* 스크롤바 모서리 둥글게 */
+}
+
+.list-box ul::-webkit-scrollbar-track {
+    background-color: transparent; /* 스크롤바 트랙 투명하게 설정 */
+}
+
+.list-box ul::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.8); /* 마우스 올렸을 때 스크롤바 색상 */
+}
+
+/* 스크롤바가 스크롤할 때만 나타나도록 설정 */
+.list-box ul::-webkit-scrollbar {
+    display: none;
+}
+
+.list-box ul:hover::-webkit-scrollbar {
+    display: block;
 }
 
 .list-box li {
     padding: 10px;
     cursor: pointer;
     border-bottom: 1px solid #ddd;
-    display: flex;
     justify-content: space-between;
     align-items: center;
     transition: background-color 0.3s;
+}
+#movieList li {
+	display: flex;
 }
 
 .list-box li:hover {
@@ -127,29 +150,28 @@ button:hover {
 .date-wrapper {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     margin-bottom: 10px;
 }
 
-.date-wrapper span {
-    width: 50%;
-    text-align: left;
-}
+/* .date-wrapper span { */
+/*     width: 50%; */
+/* } */
 
 .date-wrapper .day {
-    color: #666;
+    text-align: left !important;
 }
 
 .date-wrapper .date {
-    font-weight: bold;
+    font-weight: bold !important;
+    text-align: right !important;
 }
 
 .sunday {
-    color: #d9534f;
+    color: red;
 }
 
 .saturday {
-    color: #5bc0de;
+    color: blue;
 }
 
 #button {
