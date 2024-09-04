@@ -237,8 +237,8 @@
                         <span class="tit">즐겨찾는질문</span>
                         <ul class="list"><br>
                             <li><a href="#">아이디 <br>비밀번호 찾기</a></li><br>
-                            <li><a href="#">예매내역 확인</a><br>
-                            <br><li><a href="#">예매취소내역 확인</a></li>
+                            <li><a href="reservation">예매내역 <br>예매취소 확인</a><br>
+                            <br><li><a href="payment">결제 내역 확인</a></li>
                         </ul>
                     </div>
                     <div class="notice_area">
