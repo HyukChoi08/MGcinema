@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -150,7 +151,7 @@
                         <li><a href="serviceHome">고객센터 메인</a></li>
                         <li><a href="faq">자주찾는 질문</a></li>
                         <li><a href="news">공지/뉴스</a></li>
-                        <li><a href="eaq">이메일 문의</a></li>
+                        <li><a href="inquiry">이메일 문의</a></li>
                     </ul>
                 </div>
             </div>
@@ -158,6 +159,7 @@
             <!-- 메인 콘텐츠 -->
             <div class="col-detail">
                 <div class="customer_top">
+                	
                     <h2 class="tit">${faqDetail.title}</h2>
                     <p class="stit">작성일: ${faqDetail.createdAt}</p> <!-- LocalDateTime 그대로 출력 -->
                 </div>
@@ -169,8 +171,8 @@
                 <!-- 버튼 그룹 -->
                 <div class="btn-group">
     <button class="btn-list" onclick="location.href='faq'">목록</button>
- <!--    <button class="btn-edit" onclick="location.href='FAQedit?id=${faqDetail.id}'">수정</button>
-    <button class="btn-delete" onclick="if(confirm('정말 삭제하시겠습니까?')) location.href='FAQdelete?id=${faqDetail.id}'">삭제</button> -->
+ <button class="btn-edit" onclick="location.href='FAQedit?id=${faqDetail.id}'">수정</button>
+    <button class="btn-delete" onclick="if(confirm('정말 삭제하시겠습니까?')) location.href='FAQdelete?id=${faqDetail.id}'">삭제</button> 
 </div>
             </div>
         </div>

@@ -63,45 +63,54 @@
         }
         .search_area {
             margin-bottom: 20px;
+            display: flex;
+            align-items: center;
         }
-        .search_area input[type="text"] {
-            padding: 5px;
-            width: 185px;
-            border: 1px solid #ddd;
+        .search_area input {
+            padding: 10px;
+            width: calc(100% - 120px);
+            border: 1px solid #ccc;
             border-radius: 4px;
+            margin-right: 10px;
         }
         .search_area button {
-            padding: 5px 10px;
-            background-color: #007bff;
-            color: #fff;
+            padding: 10px;
+            background-color: #e50914;
+            color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            width: 100px;
+            font-size: 0.9em;
         }
         .search_area button:hover {
-            background-color: #0056b3;
+            background-color: #d10813;
         }
         .c_tab_wrap {
             margin-bottom: 20px;
         }
-        .c_tab {
+        .c_tab_wrap ul {
             list-style-type: none;
             padding: 0;
+            display: flex;
+            border-bottom: 2px solid #e50914;
             margin: 0;
         }
-        .c_tab li {
-            display: inline;
-            margin-right: 10px;
+        .c_tab_wrap li {
+            margin: 0;
         }
-        .c_tab li a {
+        .c_tab_wrap a {
+            display: block;
+            padding: 10px;
             text-decoration: none;
-            color: #007bff;
+            color: #333;
         }
-        .c_tab li.on a {
+        .c_tab_wrap a:hover {
+            background-color: #f0f0f0;
+        }
+        .c_tab_wrap li.on a {
             font-weight: bold;
-        }
-        .c_tab li a:hover {
-            text-decoration: underline;
+            border-bottom: 2px solid #e50914;
         }
         .tbl_area {
             margin-bottom: 20px;
@@ -111,73 +120,85 @@
             border-collapse: collapse;
         }
         .tbl_notice_list th, .tbl_notice_list td {
+            padding: 10px;
             border: 1px solid #ddd;
-            padding: 8px;
             text-align: left;
         }
         .tbl_notice_list th {
-            background-color: #f4f4f4;
+            background-color: #f0f0f0;
+        }
+        .tbl_notice_list th:nth-child(1) {
+            width: 10%; /* 번호 열 */
+        }
+        .tbl_notice_list th:nth-child(2) {
+            width: 10%; /* 구분 열 */
+        }
+        .tbl_notice_list th:nth-child(3) {
+            width: 50%; /* 제목 열 */
+        }
+        .tbl_notice_list th:nth-child(4) {
+            width: 15%; /* 등록일 열 */
+        }
+        .tbl_notice_list th:nth-child(5) {
+            width: 15%; /* 조회수 열 */
         }
         .paging {
-            margin-top: 20px;
+            margin: 20px 0;
             display: flex;
-            justify-content: center;
             align-items: center;
-        }
-        .paging .btn-paging {
-            padding: 5px 10px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin: 0 5px;
-        }
-        .paging .btn-paging:hover {
-            background-color: #0056b3;
+            justify-content: center;
         }
         .paging ul {
             list-style-type: none;
             padding: 0;
-            margin: 0;
             display: flex;
-            align-items: center;
+            margin: 0;
         }
         .paging li {
             margin: 0 5px;
         }
-        .paging li a {
+        .paging a {
             text-decoration: none;
             color: #007bff;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.9em;
         }
-        .paging li a:hover {
-            text-decoration: underline;
+        .paging a:hover {
+            background-color: #f0f0f0;
         }
-        .paging .active {
-            font-weight: bold;
+        .paging .btn-paging {
+            background-color: #e50914;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin: 0 5px;
         }
-        footer { 
-            background-color: white;
-            text-align: center;
-            padding: 10px 0;
-            border-top: 1px solid #ddd;
+        .paging .btn-paging:hover {
+            background-color: #d10813;
         }
+        .btn-add {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        .btn-add:hover {
+            background-color: #45a049;
+        }
+
+        
     </style>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
-    
-    <!--<header class="header">
-        <nav class="navbar">
-            <h1><a href="/">MG Cinema</a></h1>
-            <ul class="nav-links">
-                <li><a href="/login">로그인</a></li>
-                <li><a href="/signup">회원가입</a></li>
-                <li><a href="/myhome">My페이지</a></li>
-                <li><a href="/serviceHome">고객센터</a></li>
-            </ul>
-        </nav>
-    </header> -->
+<%@ include file="/WEB-INF/views/header/header.jsp" %>
 
 <div id="container">
     <div id="contents">
@@ -199,19 +220,12 @@
             </div>
             
             <div class="tbl_area">
-                <table cellspacing="0" cellpadding="0" class="tbl_notice_list">
-                    <colgroup>
-                        <col style="width:70px;">
-                        <col style="width:160px;">
-                        <col style="auto;">
-                        <col style="width:140px;">
-                        <col style="width:120px;">
-                    </colgroup>
+                <table class="tbl_notice_list">
                     <thead>
                         <tr>
                             <th scope="col">번호</th>
+                            <th scope="col">구분</th>
                             <th scope="col">제목</th>
-                            <th scope="col" class="tit">내용</th>
                             <th scope="col">작성일</th>
                             <th scope="col">조회수</th>
                         </tr>
@@ -249,7 +263,6 @@
 </div>
 
 <footer>
-    <%@ include file="/WEB-INF/views/footer/footer.jsp" %>
 </footer>
 </body>
 </html>

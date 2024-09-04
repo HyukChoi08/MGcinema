@@ -10,4 +10,5 @@ public class FAQDTO {
     private String content;
     private LocalDateTime createdAt;
     private int views;
+    private String selected;
 }

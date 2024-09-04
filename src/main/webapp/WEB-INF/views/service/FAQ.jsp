@@ -2,6 +2,8 @@
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -132,16 +134,19 @@
             background-color: #f0f0f0;
         }
         .tbl_notice_list th:nth-child(1) {
-            width: 10%; /* 번호 열 */
+            width: 10%; 
         }
         .tbl_notice_list th:nth-child(2) {
-            width: 60%; /* 제목 열, 넓게 조정 */
+            width: 20%; 
         }
         .tbl_notice_list th:nth-child(3) {
-            width: 15%; /* 등록일 열, 좁게 조정 */
+            width: 40%;
         }
         .tbl_notice_list th:nth-child(4) {
-            width: 15%; /* 조회수 열 */
+            width: 15%;
+        }
+        .tbl_notice_list th:nth-child(5){
+        	width : 15%	
         }
         .paging {
             margin: 20px 0;
@@ -203,7 +208,7 @@
     </style>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
+
     
     <!--<header class="header">
         <nav class="navbar">
@@ -226,7 +231,7 @@
                         <li><a href="serviceHome">고객센터 메인</a></li>
                         <li class="on"><a href="faq">자주찾는 질문</a></li>
                         <li><a href="news">공지/뉴스</a></li>
-                        <li><a href="eaq">이메일 문의</a></li>
+                        <li><a href="inquiry">이메일 문의</a></li>
                     </ul>
                 </div>
             </div>
@@ -239,6 +244,7 @@
                 </div>
 
                 <div class="search_result">
+				 <a href="/faqcreate" class="button-link">+</a>
                     총 <span class="num">${fn:length(faqList)}건</span>&nbsp;
                 </div>
 
@@ -247,6 +253,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">번호</th>
+                                <th scope="col">구분</th>
                                 <th scope="col">제목</th>
                                 <th scope="col">등록일</th>
                                 <th scope="col">조회수</th>
@@ -256,8 +263,9 @@
                             <c:forEach var="faq" items="${faqList}">
                                 <tr>
                                     <td>${faq.id}</td>
+                                    <td>${faq.selected}</td>
                                     <td><a href="/FAQdetail?id=${faq.id}">${faq.title}</a></td>
-                                    <td>${fn:replace(faq.createdAt, 'T', ' ')}</td>
+                                    <td>${fn:substring(faq.createdAt, 0, 10)}</td>
                                     <td>${faq.views}</td>
                                 </tr>
                             </c:forEach>
@@ -290,7 +298,7 @@
     </div>
 
     <footer>
-        <%@ include file="/WEB-INF/views/footer/footer.jsp" %>
+    
     </footer>
 </body>
 </html>
