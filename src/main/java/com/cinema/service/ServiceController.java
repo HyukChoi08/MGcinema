@@ -106,7 +106,7 @@ public class ServiceController {
     public String showNewsDetailPage(@RequestParam(value = "id") Long id, Model model) {
         newsDAO.incrementViewCount(id);
         NewsDTO newsDetail = newsDAO.getNewsById(id);
-        model.addAttribute("newsDetail", newsDetail);
+        model.addAttribute("newsDetail", newsDetail); 
         return "service/Newsdetail";
     }
 
