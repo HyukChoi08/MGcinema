@@ -20,7 +20,7 @@
                     <li><a href="/store">스토어</a></li>
                 </ul>
             </div>
-            <h1><a href="/">MG CINEMA</a></h1>
+            <h1><a href="/">HIII CINEMA</a></h1>
             <div class="navbar2">
                 <ul class="nav-links">
                 	${sessionScope.linkstr}

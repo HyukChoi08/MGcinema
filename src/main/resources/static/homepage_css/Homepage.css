@@ -1,10 +1,13 @@
 @charset "UTF-8";
 
+
 .home-page {
-    background-color: #f0f0f0;
+    background-color: black;;
     min-height: 100vh;
     box-sizing: border-box;
 }
+
+
 
 /* 슬라이더를 중앙에 배치하고, 컨테이너 너비 조정 */
 .promo-container {
@@ -18,6 +21,9 @@
     height: auto;
     border-radius: 10px;
     margin-top:100px;
+
+    border: 10px solid rgba(0, 0, 0, 0.3); /* 30% 투명도 */
+
 }
 
 /* slick-carousel 기본 스타일 */

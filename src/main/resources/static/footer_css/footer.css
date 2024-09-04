@@ -116,7 +116,10 @@ html, body {
 }
 
 .footer {
-    background-color: #333;
+background: linear-gradient(to bottom, 
+    #000000, /* 검정색 */
+    #475f77  /* 미드나잇 골드 */
+);
     color: white;
     text-align: center;
     padding: 10px 0; /* 상하 패딩만 설정하여 좌우 여백 제거 */
