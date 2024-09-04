@@ -5,11 +5,14 @@
     max-width: 400px;         /* 최대 너비 설정 */
     margin: 0 auto;           /* 중앙 정렬 */
     padding: 20px;            /* 여백 설정 */
+    
+    
+    
     background-color: #ffffff; /* 배경색 추가 */
     border-radius: 8px;       /* 모서리 둥글게 */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
-    margin-top: 150px;         /* 상단 여백 추가 ->> 이게 다른페이지들에 다 있으면 좋겠네! */
-    margin-bottom: 335px;
+    margin-top: 200px;         /* 상단 여백 추가 ->> 이게 다른페이지들에 다 있으면 좋겠네! */
+    margin-bottom: 300px;
 
 }
 
@@ -68,4 +71,15 @@ button:hover {
     .signup-page {
         padding-bottom: 0px;
     }
+}
+
+
+/* *{
+	 background-color: #000000; 배경색 설정
+} */
+
+body {
+background-color: #000000; 
+   
+
 }
