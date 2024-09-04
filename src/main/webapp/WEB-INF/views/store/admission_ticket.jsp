@@ -256,6 +256,7 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
         <div id="contents">
             <div class="category_wrap">
                 스토어
+             <input type="hidden" id="userid" value="${uid}">        
                 <div class="separator"></div> <!-- 선을 스토어 아래에 위치 -->
             </div>
             <div class="contegory_contents_wrap">
@@ -364,6 +365,19 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
 </script>
 <script>
 $(document)
+.ready(function() {
+ 	let customer_id= $('#userid').val();
+ 	console.log(customer_id);
+ 	
+ 	$.ajax({
+ 		url:'/countcart',type:'post',data:{customer_id:customer_id},dataType:'text',
+ 		success:function(data){
+ 			 $('#cart-count').text(data);
+ 			
+ 			}
+ })
+})
+
 .on('click','.category_content li',function(){
     let href = $(this).data('href'); 
         if (href) {

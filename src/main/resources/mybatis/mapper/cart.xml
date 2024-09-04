@@ -24,22 +24,27 @@ SELECT
 FROM  cart a
 JOIN item b ON a.item_id = b.id
 JOIN customer c ON a.customer_id = c.uid
-WHERE c.uid = 'rkd2'
+WHERE c.uid =#{param1}
 GROUP BY  a.item_id 
 order by item_id
 </select>
 <delete id='deletecart'>
 DELETE FROM cart
 WHERE item_id =#{param1} AND customer_id =#{param2}
+</delete>
+<delete id="deletecart1"> DELETE FROM cart WHERE item_id =#{param1} AND customer_id =#{param2}</delete>
+<select id="countcart" resultType="_int">
+select count(DISTINCT item_id) from cart where customer_id=#{param1}
+</select>
+<select id="selectitem" resultType="com.cinema.store.cartDTO">
+select id,price, discount_price, composition, item_name, image_path from item where id=#{param1}
+</select>
+<select id="checkitem" resultType="com.cinema.store.cartDTO">
+SELECT 
+    COUNT(DISTINCT item_id) AS item_count,
+    SUM(CASE WHEN item_id =#{param2} THEN qty ELSE 0 END) AS item_qty
+FROM cart
+WHERE customer_id =#{param1}
 
-</delete>
-<!-- 
- <delete id="deleteItems" parameterType="list">
-    DELETE FROM cart
-    WHERE item_id IN
-    <foreach item="itemId" collection="list" open="(" close=")" separator=",">
-        #{itemId}
-    </foreach>
-</delete>
--->
+</select>
 </mapper>

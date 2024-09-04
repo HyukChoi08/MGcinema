@@ -15,6 +15,9 @@ public class cartDTO {
 	String price;
 	String image_path;
 	String uid;
+	int itemIdInt;
+	int item_qty;
+	int item_count;
 	
 	
 
