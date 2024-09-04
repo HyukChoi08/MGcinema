@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="com.cinema.mypage.CustomerDTO"%>
+<%
+    // 세션에서 cusrDTO 객체 가져오기
+    CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +15,7 @@
 <style>
 /* 전체 body 스타일 설정 */
 body {
+	text-align: left !important;
 	font-family: Arial, sans-serif;
 	margin: 0;
 	padding: 0;
@@ -16,7 +23,7 @@ body {
 }
 /* 프로필 섹션 스타일 */
 .profile-section {
- 	display: flex; /* 이미지와 텍스트를 옆으로 배치 */
+	display: flex; /* 이미지와 텍스트를 옆으로 배치 */
 	align-items: center; /* 수직 중앙 정렬 */
 	padding: 20px;
 	background-color: white; /* 프로필 섹션 배경색 */
@@ -113,14 +120,12 @@ thead th {
 	padding: 2px;
 	text-align: left; /* 텍스트 왼쪽 정렬 */
 	border-bottom: 2px solid #ddd; /* 헤더 아래쪽에 테두리 추가 */
-	
 }
 
 tbody td {
 	padding: 10px;
 	border-bottom: 1px solid #ddd; /* 셀 아래쪽에 테두리 추가 */
 	text-align: left; /* 텍스트 왼쪽 정렬 */
-	
 }
 
 tbody tr:hover {
@@ -135,7 +140,8 @@ tbody tr:hover {
 	<div class="profile-section">
 		<img src="/mypage_image/OO.png" alt="프로필이미지" width="80" height="80">
 		<div class="profile-info">
-			<h2 id="nickname">Hi_Movie님</h2>
+			<h2 id="nickname"><%= customer.getNickname() %>님
+			</h2>
 			<p>
 				고객님은 <strong>일반</strong> 고객 입니다.
 			</p>
@@ -176,20 +182,28 @@ tbody tr:hover {
 						</thead>
 						<tbody>
 							<tr>
-								<td>-</td>
-								<td>-</td>
-								<td>-</td>
-								<td>-</td>
-								<td>-</td>
+								<c:forEach var="movie" items="${getMovies}">
+									<tr>
+										<td>${movie.movie_name}</td>
+										<td>${movie.room_name}</td>
+										<td>${movie.totalprice}</td>
+										<td>${movie.begintime}</td>
+										<td>${movie.endtime}</td>
+									</tr>
+								</c:forEach>
 							</tr>
 						</tbody>
 					</table>
-	
+					<c:if test="${empty getMovies}">
+						<p>No reservations found.</p>
+					</c:if>
+
 				</div>
 			</div>
 			<div>
 				<div class="ask-section">
-					<button class="button">CGV 영화 예매 바로가기</button>
+					<button class="button" onclick="location.href='/cinema'">CGV
+						영화 예매 바로가기</button>
 				</div>
 			</div>
 		</div>

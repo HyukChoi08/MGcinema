@@ -49,4 +49,10 @@
  	where id=#{param1}
  </select>
 
+<select id="getMovieList" parameterType="string" resultType="com.cinema.mypage.MovieGetDTO">
+    SELECT m.*
+    FROM moviepay m
+    JOIN customer c ON m.customer_id = c.uid
+    WHERE m.customer_id = #{customer_id)}
+</select>
 </mapper>

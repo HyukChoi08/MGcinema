@@ -243,13 +243,16 @@ form input[type="submit"]:hover {
 						<th>작성일</th>
 						<th>상태</th>
 					</tr>
+					 <c:set var="counter" value="1" />
 					<c:forEach var="inquiry" items="${inquiries}">
 						<tr>
-							<td>${inquiry.id}</td>
+							 <td><c:out value="${counter}" /></td>
+							<%-- <td>${inquiry.id}</td> --%>
 							<td><a href='/inquirydetail/${inquiry.id}'>${inquiry.title}</a></td>
 							<td>${inquiry.created}</td>
 							<td>${inquiry.current}</td>
 						</tr>
+						<c:set var="counter" value="${counter + 1}" />
 					</c:forEach>
 				</thead>
 			</table>

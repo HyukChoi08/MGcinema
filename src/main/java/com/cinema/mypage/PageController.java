@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpSession;
 
 
 @Controller
-public class PageController {
+public class PageController<MovieGetDTO> {
 	@Autowired
 	MypageDAO mdao;
 
@@ -45,7 +45,17 @@ public class PageController {
 	public String payment() {
 		return "mypage/payment";
 	}
-
+	
+	//예매 리스트 조회
+	@GetMapping("/movieGetlist")
+	public String movieGetList(HttpSession session, Model model) {
+	    MovieGetDTO movieDTO = (MovieGetDTO) session.getAttribute("movieDTO");
+	    System.out.println("movieDTO");
+	    String customerId = movieDTO.getId();  // 변수명 수정
+	    ArrayList<MovieGetDTO> arrmovieDTO = mdao.getMovieList(customerId);  // 변수명 수정
+	    model.addAttribute("getMovies", arrmovieDTO);
+	    return "mypage/reservation";
+	}
 	// 1:1문의 리스트 조회
 	@GetMapping("/inquiry") 
 	public String getInquiryList(HttpSession session, Model model) {

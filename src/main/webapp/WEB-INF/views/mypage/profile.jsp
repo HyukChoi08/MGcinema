@@ -15,6 +15,7 @@
 <style>
 /* 전체 body 스타일 설정 */
 body {
+  	text-align: left !important;
 	font-family: Arial, sans-serif;
 	margin: 0;
 	padding: 0;

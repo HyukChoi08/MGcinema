@@ -15,4 +15,7 @@ public interface MypageDAO {
    ArrayList<InquiryDTO> getInquiryList(int customer_id); // 문의글 목록 가져오기
    void inquiryWrite(InquiryDTO inqDTO); // 문의글 등록하기
    InquiryDTO getInquiryDetail(int id); // 문의글 상세내용 가져오기
+   
+   //예매 정보
+   ArrayList<MovieGetDTO> getMovieList(String customer_id); // 예매 목록 
 }

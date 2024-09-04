@@ -1,33 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="com.cinema.mypage.CustomerDTO" %>
 <%
     // 세션에서 cusrDTO 객체 가져오기
     CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 %>
+    <!-- 절대 경로로 CSS 파일 링크 -->
+    
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<link rel="stylesheet" href="/mypage_css/mypage.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My CGV</title>
 <style>
+@charset "UTF-8";
 /* 전체 body 스타일 설정 */
 body {
-	font-family: Arial, sans-serif;
-	margin: 0;
-	padding: 0;
+text-align: left !important;
+	font-family: Arial, sans-serif; /* 폰트 설정 */
+	margin: 0; /* 여백 제거 */
+	padding: 0; /* 패딩 제거 */
 	background-color: #f4f4f4; /* 페이지 배경색 */
 }
+
 /* 프로필 섹션 스타일 */
 .profile-section {
 	display: flex; /* 이미지와 텍스트를 옆으로 배치 */
 	align-items: center; /* 수직 중앙 정렬 */
-	padding: 20px;
+	padding: 20px; /* 패딩 설정 */
 	background-color: white; /* 프로필 섹션 배경색 */
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 프로필 섹션 그림자 효과 */
 	width: 60%; /* 프로필 섹션의 너비 조정 */
-	margin: 10px auto;
+	margin: 10px auto; /* 수직 중앙 정렬과 상하 여백 */
 	border-radius: 10px; /* 모서리 둥글게 */
 }
 
@@ -37,41 +44,44 @@ body {
 }
 
 .profile-section .profile-info {
-	flex-grow: 1; /* 프로필 정보의 너비를 남은 공간에 맞추기 */
+	flex-grow: 1; /* 남은 공간 차지 */
 }
 
 .button {
 	background-color: #e50914; /* 버튼 배경색 */
-	color: white;
-	padding: 5px 20px;
+	color: white; /* 텍스트 색상 */
+	padding: 10px 20px; /* 버튼 안쪽 여백 */
 	text-align: center; /* 텍스트 중앙 정렬 */
 	border-radius: 5px; /* 모서리 둥글게 */
 	text-decoration: none; /* 링크 밑줄 제거 */
-	display: inline-block;
-	margin-top: 10px;
+	display: inline-block; /* 인라인 블록 요소로 설정 */
+	margin-top: 10px; /* 위쪽 여백 */
+	transition: background-color 0.3s ease; /* 배경색 변경 시 애니메이션 추가 */
 }
 
 .button:hover {
 	background-color: #d10813; /* 버튼에 마우스 올렸을 때 색상 */
 }
+
 /* 메인 컨테이너 스타일 */
 .container {
 	display: flex; /* 사이드바와 메인 콘텐츠를 옆으로 배치 */
-	max-width: 1200px;
-	margin: 20px auto;
+	max-width: 1200px; /* 최대 너비 설정 */
+	margin: 20px auto; /* 중앙 정렬과 상하 여백 */
 }
+
 /* 사이드바 스타일 */
 .sidebar {
-	width: 20%; /* 사이드바 너비 */
-	padding: 15px;
+	width: 25%; /* 사이드바 너비 */
+	padding: 15px; /* 패딩 설정 */
 	background-color: #f7f7f7; /* 사이드바 배경색 */
 	box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* 사이드바 그림자 효과 */
-	height: fit-content; /* 사이드바의 높이를 내용에 맞추기 */
+	height: fit-content; /* 내용에 맞춘 높이 */
 	border-radius: 10px; /* 모서리 둥글게 */
 }
-/* 사이드바 내 리스트 스타일 */
+
 .sidebar ul {
-	list-style-type: none;
+	list-style-type: none; /* 리스트 스타일 제거 */
 	padding: 0; /* 기본 패딩 제거 */
 }
 
@@ -83,42 +93,27 @@ body {
 	text-decoration: none; /* 링크 밑줄 제거 */
 	color: #333; /* 텍스트 색상 */
 	font-weight: bold; /* 텍스트 굵게 */
+	transition: color 0.3s ease; /* 색상 변경 시 애니메이션 추가 */
 }
 
 .sidebar ul li a:hover {
 	color: #e50914; /* 링크에 마우스 올렸을 때 색상 */
 }
 
-.link ul li a {
-	text-decoration: none; /* 링크 밑줄 제거 */
-	color: #333; /* 텍스트 색상 */
-	font-weight: bold; /* 텍스트 굵게 */
-}
-
-.link ul li a:hover {
-	color: #e50914; /* 링크에 마우스 올렸을 때 색상 */
-}
 /* 메인 콘텐츠 스타일 */
 .main-content {
-	width: 75%;
-	padding: 15px;
-	background-color: white; /* 메인 콘텐츠 배경색 */
-	margin-left: 20px; /* 사이드바와 메인 콘텐츠 사이 간격 */
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 메인 콘텐츠 섹션 그림자 효과 */
+	width: 75%; /* 콘텐츠 영역 너비 */
+	padding: 20px; /* 패딩 설정 */
+	background-color: white; /* 배경색 */
+	margin-left: 20px; /* 사이드바와의 간격 */
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
 	border-radius: 10px; /* 모서리 둥글게 */
 }
-/* 예매 내역과 문의 내역 섹션 스타일 */
-.my-history, .ask-section {
-	margin-bottom: 20px;
-	padding: 10px;
-	background-color: #f7f7f7; /* 배경색 */
-	border: 1px solid #ddd; /* 테두리 색상 */
-	border-radius: 5px; /* 모서리 둥글게 */
-}
+
 </style>
 </head>
 <body>
-	<%-- <%@ include file="/WEB-INF/views/header/header.jsp"%> --%>
+ <%@ include file="/WEB-INF/views/header/header.jsp"%> 
 	<!-- 헤더 포함 -->
 	<!-- 프로필 섹션 -->
 	<div class="profile-section">
