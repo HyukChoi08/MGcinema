@@ -98,7 +98,7 @@ public class ServiceController {
         model.addAttribute("newsList", newsList);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPages);
-        model.addAttribute("size", size);
+        model.addAttribute("size", size); 
         return "service/News";
     }
 
