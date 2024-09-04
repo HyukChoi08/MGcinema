@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page import="com.cinema.mypage.CustomerDTO" %>
+<%@ page import="com.cinema.mypage.CustomerDTO"%>
 <%
-    // 세션에서 cusrDTO 객체 가져오기
-    CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
+// 세션에서 cusrDTO 객체 가져오기
+CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,8 +14,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>회원 탈퇴</title>
 <style>
-
-</style> 
+</style>
 </head>
 <body>
 	<%-- <%@ include file="/WEB-INF/views/header/header.jsp"%> --%>
@@ -24,7 +23,8 @@
 	<div class="profile-section">
 		<img src="/mypage_image/OO.png" alt="프로필이미지" width="80" height="80">
 		<div class="profile-info">
-			<h2 id="nickname"><%= customer.getNickname() %>님</h2>
+			<h2 id="nickname"><%=customer.getNickname()%>님
+			</h2>
 			<p>
 				고객님은 <strong>일반</strong> 고객 입니다.
 			</p>
@@ -85,19 +85,19 @@
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 
 <script>
-function passerror() {
-    // 비밀번호와 비밀번호 확인 입력 필드 가져오기
-    var passwd = document.getElementById('passwd').value;
-    var passwd1 = document.getElementById('passwd1').value;
+	function passerror() {
+		// 비밀번호와 비밀번호 확인 입력 필드 가져오기
+		var passwd = document.getElementById('passwd').value;
+		var passwd1 = document.getElementById('passwd1').value;
 
-    // 비밀번호가 일치하지 않으면 얼럿을 띄우고 false를 반환
-    if (passwd !== passwd1) {
-        alert('비밀번호가 일치하지 않습니다. 다시 입력해 주세요.');
-        return false;
-    }
-    // 비밀번호가 일치하면 true를 반환하여 폼 제출을 허용
-    return true;
-}
+		// 비밀번호가 일치하지 않으면 얼럿을 띄우고 false를 반환
+		if (passwd !== passwd1) {
+			alert('비밀번호가 일치하지 않습니다. 다시 입력해 주세요.');
+			return false;
+		}
+		// 비밀번호가 일치하면 true를 반환하여 폼 제출을 허용
+		return true;
+	}
 </script>
 </html>
 
