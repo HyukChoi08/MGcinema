@@ -1,11 +1,17 @@
 @charset "UTF-8";
 /* 일반 스타일 */
+
 body {
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
     background-color: #f0f0f0;
+/*     margin-top: 60px; */
+/*     margin-bottom: 40px; */
+/*     padding-top: 60px; */
+/*     padding-bottom: 40px; */
 }
+
 
 .maincontainer {
     width: 80%;
@@ -15,6 +21,10 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 60px;
+    margin-bottom: 40px;
+    padding-top: 60px;
+    padding-bottom: 40px;
 }
 
 header, footer {
@@ -267,4 +277,43 @@ img {
 
 #gochart:hover {
     color: red;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90px; /* 너비 설정 */
+    height: 90px; /* 높이 설정 */
+    background-color: #222;
+    border: 2px solid #d4af37; /* 황금색 테두리 */
+    border-radius: 12px; /* 모서리 둥글게 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* 그림자 */
+    position: relative;
+}
+
+.arrow-icon {
+    font-size: 60px; /* 화살표 크기 */
+    color: #d4af37; /* 황금색 화살표 */
+    transform: rotate(0deg);
+    line-height: 1; /* 텍스트 높이 줄이기 */
+}
+
+.button-text {
+    font-size: 20px; /* 텍스트 크기 */
+    color: #d4af37; /* 황금색 텍스트 */
+    margin-top: -5px; /* 화살표와 텍스트 간격 조정 */
+    line-height: 1; /* 텍스트 높이 줄이기 */
+}
+
+.button-container::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    bottom: -2px;
+    left: -2px;
+    border-radius: 12px;
+    border: 1px solid #d4af37; /* 외부 테두리 */
 }

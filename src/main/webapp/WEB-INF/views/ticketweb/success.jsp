@@ -16,6 +16,7 @@
         <p>상영 시간: ${param.runningtime}</p>
         <p>좌석: ${param.resultseat}</p>
         <p>인원 수: ${param.people}</p>
+        <p>상영 날짜: ${param.datetime}</p>
         <p>시작 시간: ${param.begintime}</p>
         <p>종료 시간: ${param.endtime}</p>
     </div>
@@ -40,6 +41,7 @@ $(document).ready(function() {
         let people = "${param.people}";
         let begintime = "${param.begintime}";
         let endtime = "${param.endtime}";
+        let datetime = "${param.datetime}";
 
         $.ajax({
             url: '/saveData',
@@ -54,7 +56,8 @@ $(document).ready(function() {
                 seat: seat,
                 totalpeople: people,
                 begintime: begintime,
-                endtime: endtime
+                endtime: endtime,
+                datetime: datetime
             },
             dataType: 'text',
             success: function(data) {
@@ -63,6 +66,18 @@ $(document).ready(function() {
                     return;
                 }
             }
+        });
+        
+        $.ajax({
+        	url: '/changeSeat',
+        	type: 'get',
+        	data: {
+        		movie_name: moviename,
+        		room_name: roomname,
+        		moviedate: datetime,
+        		begintime: begintime,
+        		people: people
+        	}
         });
     }
 });

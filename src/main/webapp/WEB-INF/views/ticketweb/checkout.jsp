@@ -28,6 +28,7 @@
 		<p>${people}</p>
 		<p>${begintime}</p>
 		<p>${endtime}</p>
+		<p>${datetime}</p>
 	</div>
     <script>
       main();
@@ -68,7 +69,8 @@
     	                  "&resultseat=" + encodeURIComponent("${resultseat}") +
     	                  "&people=" + encodeURIComponent("${people}") +
     	                  "&begintime=" + encodeURIComponent("${begintime}") +
-    	                  "&endtime=" + encodeURIComponent("${endtime}"),
+    	                  "&endtime=" + encodeURIComponent("${endtime}") +
+    	                  "&datetime=" + encodeURIComponent("${datetime}"),
     	      failUrl: window.location.origin + "/fail",
     	      customerEmail: "${email}",
     	      customerName: "${realname}",

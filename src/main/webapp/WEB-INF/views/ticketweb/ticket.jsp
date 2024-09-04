@@ -8,6 +8,9 @@
 <title>Movie Ticket Reservation</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/ticket_css/styles.css">
 </head>
+<style>
+
+</style>
 <body>
 <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
 <div class="maincontainer">
@@ -65,7 +68,10 @@
             <div id="roomresult">극장 정보</div>
             <div id="seatresult">좌석 선택</div>
             <div id="priceresult">결제 정보</div>
-            <div id="reserveBtn">좌석 선택</div>
+            <div id="reserveBtn" class="button-container">
+            	<div class="arrow-icon">➔</div>
+        		<div class="button-text">좌석선택</div>
+        	</div>
             <div id="submitBtn" style="display:none;">결제</div>
         </div>
     </div>
@@ -256,7 +262,8 @@ $(document).ready(function() {
                 data: {
                     movieName: moviename,
                     roomName: roomId,
-                    beginTime: begintime
+                    beginTime: begintime,
+                    dateTime: date
                 },
                 success: function(response) {
                     const occupiedSeats = response;
@@ -357,6 +364,7 @@ $(document).ready(function() {
     	let begintime = $("#timeList li.selected").data("id");
     	let endtime = $("#timeList li.selected").attr("title");
     	let runningtime = $("#movieList li.selected").data("time");
+    	let datetime = $("#dateList li.selected").data("id");
     	
     	moviename = encodeURIComponent(moviename);
         Aticket = encodeURIComponent(Aticket);
@@ -368,6 +376,7 @@ $(document).ready(function() {
         begintime = encodeURIComponent(begintime);
         endtime = encodeURIComponent(endtime);
         runningtime = encodeURIComponent(runningtime);
+        datetime = encodeURIComponent(datetime);
     	
     	var popupWidth = 600;
         var popupHeight = 700;
@@ -377,7 +386,7 @@ $(document).ready(function() {
 
         var url = '/ticketweb/checkout?moviename=' + moviename + '&Aticket=' + Aticket + '&Yticket=' + Yticket + '&resultprice=' 
         		+ resultprice + '&resultseat=' + resultseat + '&roomname=' + roomname + '&people=' + people + '&begintime=' + begintime +
-        		'&endtime=' + endtime + '&runningtime=' + runningtime;
+        		'&endtime=' + endtime + '&runningtime=' + runningtime + '&datetime=' + datetime;
 
         window.open(
             url,

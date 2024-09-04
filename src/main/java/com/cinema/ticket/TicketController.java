@@ -100,6 +100,7 @@ public class TicketController {
             						@RequestParam("begintime") String begintime,
             						@RequestParam("endtime") String endtime,
             						@RequestParam("runningtime") String runningtime,
+            						@RequestParam("datetime") String datetime,
             						HttpServletRequest req, Model model) {
 		HttpSession s =req.getSession();
 		String userid = (String) s.getAttribute("uid");
@@ -123,6 +124,7 @@ public class TicketController {
         model.addAttribute("begintime", begintime);
         model.addAttribute("endtime", endtime);
         model.addAttribute("runningtime", runningtime);
+        model.addAttribute("datetime", datetime);
         
         String orderId = UUID.randomUUID().toString();
         model.addAttribute("orderId", orderId);
@@ -142,6 +144,7 @@ public class TicketController {
 	    model.addAttribute("people", params.get("people"));
 	    model.addAttribute("begintime", params.get("begintime"));
 	    model.addAttribute("endtime", params.get("endtime"));
+	    model.addAttribute("datetime", params.get("datetime"));
 
 	    return "ticketweb/success";
 	}
@@ -158,28 +161,34 @@ public class TicketController {
 	    String totalpeople = req.getParameter("totalpeople");
 	    String begintime = req.getParameter("begintime");
 	    String endtime = req.getParameter("endtime");
+	    String datetime = req.getParameter("datetime");
 	    
 	    int count = tdao.checkIfExists(random_id);
 	    if (count > 0) {
 	        return "home/homepage"; // Or some appropriate response
 	    }
 	    
-	    tdao.insertData(random_id, customer_id, movie_name, room_name, totalprice, runningtime, seat, totalpeople, begintime, endtime);
+	    tdao.insertData(random_id, customer_id, movie_name, room_name, totalprice, runningtime, seat, totalpeople, begintime, endtime, datetime);
 	    return "home/homepage";
 	}
 	
-//	@GetMapping("/occupiedSeats")
-//	@ResponseBody
-//	public List<String> getOccupiedSeats(@RequestParam String movieName,
-//	                                      @RequestParam String roomName,
-//	                                      @RequestParam String beginTime) {
-//	    return tdao.getOccupiedSeats(movieName, roomName, beginTime);
-//	}
+	@GetMapping("/changeSeat")
+	public String changeSeat(HttpServletRequest req) {
+		String movie_name = req.getParameter("movie_name");
+		String room_name = req.getParameter("room_name");
+		String moviedate = req.getParameter("moviedate");
+		String begintime = req.getParameter("begintime");
+		int people = Integer.parseInt(req.getParameter("people"));
+		
+		tdao.updateSeat(movie_name, room_name, moviedate, begintime, people);
+		return "ok";
+	}
+	
 	
 	@GetMapping("/occupiedSeats")
 	@ResponseBody
-	public List<nowseatDTO> getOccupiedSeats(@RequestParam("movieName") String movieName, @RequestParam("roomName") String roomName, @RequestParam("beginTime") String beginTime) {
-		return tdao.getOccupiedSeats(movieName, roomName, beginTime);
+	public List<nowseatDTO> getOccupiedSeats(@RequestParam("movieName") String movieName, @RequestParam("roomName") String roomName, @RequestParam("beginTime") String beginTime, @RequestParam("dateTime") String dateTime) {
+		return tdao.getOccupiedSeats(movieName, roomName, beginTime, dateTime);
 	}
 
 	
