@@ -18,4 +18,13 @@ public interface MypageDAO {
    
    //예매 정보
    ArrayList<MovieGetDTO> getMovieList(String customer_id); // 예매 목록 
+   // 예매 정보 삭제
+   void deleteMovieReservation(int id);
+
+   // 예매 정보를 moviedelete 테이블로 이동
+   void moveToMovieDelete(int id);
+   
+// 취소된 예매 내역 조회
+   ArrayList<MovieGetDTO> getCanceledMovieList(String customer_id);
 }
+

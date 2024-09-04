@@ -182,7 +182,7 @@ tbody tr:hover {
 						</thead>
 						<tbody>
 							<tr>
-								<c:forEach var="movie" items="${getMovies}">
+								 <c:forEach var="reservation" items="${getMovies}">
 									<tr>
 										<td>${movie.movie_name}</td>
 										<td>${movie.room_name}</td>
