@@ -231,7 +231,7 @@
                         <br><a href="inquiry">문의내역 조회</a>
                     </div>
                 </div>
-
+<!--  -->
                 <div class="customer_notice_area">
                     <div class="service_area">
                         <span class="tit">즐겨찾는질문</span>
