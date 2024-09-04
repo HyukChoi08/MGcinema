@@ -228,7 +228,7 @@
                             <th scope="col">제목</th>
                             <th scope="col">작성일</th>
                             <th scope="col">조회수</th>
-                        </tr>ㅁㅁ
+                        </tr>
                     </thead>
                     <tbody>
                         <c:forEach var="news" items="${newsList}">
