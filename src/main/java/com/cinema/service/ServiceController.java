@@ -1,5 +1,6 @@
 package com.cinema.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,6 +41,19 @@ public class ServiceController {
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("size", size);
         return "service/FAQ";
+    }
+    @GetMapping("/faqcreate")
+    public String showFAQCreatePage(Model model) {
+        model.addAttribute("faqDTO", new FAQDTO()); // 빈 FAQDTO 객체를 모델에 추가하여 폼에 바인딩
+        return "service/FAQcreate"; // FAQ 생성 폼 JSP 페이지를 반환
+    }
+
+    @PostMapping("/FAQcreate")
+    public String createFAQ(@ModelAttribute FAQDTO faqDTO) {
+        faqDTO.setCreatedAt(LocalDateTime.now()); // 현재 시간을 생성일로 설정
+        faqDTO.setViews(0); // 기본 조회수 0으로 설정
+        faqDAO.addFAQ(faqDTO); // 데이터베이스에 저장
+        return "redirect:/faq"; // 저장 후 FAQ 목록 페이지로 리디렉션
     }
 
     @GetMapping("/FAQdetail")

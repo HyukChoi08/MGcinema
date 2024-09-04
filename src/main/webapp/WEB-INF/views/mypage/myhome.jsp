@@ -18,8 +18,9 @@
 <style>
 @charset "UTF-8";
 /* 전체 body 스타일 설정 */
-body {
-text-align: left !important;
+
+body {   	
+	text-align: left !important;
 	font-family: Arial, sans-serif; /* 폰트 설정 */
 	margin: 0; /* 여백 제거 */
 	padding: 0; /* 패딩 제거 */

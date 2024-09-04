@@ -197,10 +197,13 @@ form input {
 							</tr>
 							<tr>
 								<td><h4>통신사</h4></td>
-								<td><input type=radio name=tellecom value="LG U+"
-									id="radioLG">LG U+ <input type=radio name=tellecom
-									value=KT id="radioKT">KT <input type=radio
-									name=tellecom value=SKT id="radioSKT">SKT<br></td>
+								<td><input type=radio name=tellecom value="LG U+" id="radioLG">LG U+
+									<input type=radio name=tellecom value=KT id="radioKT">KT 
+									<input type=radio name=tellecom value=SKT id="radioSKT">SKT<br>
+									<input type=radio name=tellecom value=SKT-MVNO id="radioSKT-MVNO">SKT알뜰폰
+									<input type=radio name=tellecom value=KT-MVNO id="radioKT-MVNO">KT알뜰폰
+									<input type=radio name=tellecom value=LG-MVNO id="radioLG-MVNO">U+알뜰폰
+									<br></td>
 							</tr>
 							<tr>
 								<td><h4>휴대폰 번호</h4></td>
@@ -273,6 +276,12 @@ $(document).ready(function() {
             $('#radioKT').prop('checked', true);
             } else if (data.tellecom === "SKT") {
             $('#radioSKT').prop('checked', true);
+            } else if (data.tellecom === "SKT-MVNO") {
+            $('#radioSKT-MVNO').prop('checked', true);
+            } else if (data.tellecom === "KT-MVNO") {
+            $('#radioKT-MVNO').prop('checked', true);
+            }else if (data.tellecom === "LG-MVNO") {
+            $('#radioLG-MVNO').prop('checked', true);
             }
             
             $('#mobile').val(data.mobile);

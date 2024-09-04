@@ -16,5 +16,5 @@ public class MovieGetDTO {
      String begintime;
      String endtime;
      String datetime;
-     String cerated;
+     String created;
 }

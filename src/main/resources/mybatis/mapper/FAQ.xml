@@ -2,7 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cinema.service.FAQDAO">
-    <select id="getAllFAQs" parameterType="map" resultType="com.cinema.service.FAQDTO">
+
+    <resultMap id="FAQResultMap" type="com.cinema.service.FAQDTO">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+        <result property="views" column="views"/>
+        <result property="selected" column="selected"/>
+    </resultMap>
+
+    <select id="getAllFAQs" parameterType="map" resultMap="FAQResultMap">
         SELECT * FROM FAQ
         LIMIT #{size} OFFSET #{offset}
     </select>
@@ -11,22 +21,23 @@
         SELECT COUNT(*) FROM FAQ
     </select>
 
-    <select id="getFAQById" parameterType="long" resultType="com.cinema.service.FAQDTO">
+    <select id="getFAQById" parameterType="long" resultMap="FAQResultMap">
         SELECT * FROM FAQ WHERE id = #{id}
     </select>
 
     <insert id="addFAQ" parameterType="com.cinema.service.FAQDTO">
-        INSERT INTO FAQ (title, content, created_at, views)
-        VALUES (#{title}, #{content}, #{createdAt}, #{views})
+        INSERT INTO FAQ (title, content, created_at, views, selected)
+        VALUES (#{title}, #{content}, #{createdAt}, #{views}, #{selected})
     </insert>
 
     <update id="updateFAQ" parameterType="com.cinema.service.FAQDTO">
         UPDATE FAQ
-        SET title = #{title}, content = #{content}, created_at = #{createdAt}, views = #{views}
+        SET title = #{title}, content = #{content}, created_at = #{createdAt}, views = #{views}, selected = #{selected}
         WHERE id = #{id}
     </update>
 
     <delete id="deleteFAQ" parameterType="long">
         DELETE FROM FAQ WHERE id = #{id}
     </delete>
+
 </mapper>

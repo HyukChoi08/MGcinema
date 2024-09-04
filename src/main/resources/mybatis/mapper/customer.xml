@@ -39,20 +39,40 @@
  </select>
  
  <insert id="inquiryWrite" parameterType="com.cinema.mypage.InquiryDTO">
- 	insert into inquiry
- 	set customer_id=#{customer_id}, title=#{title}, content=#{content}
+    insert into inquiry
+    set customer_id=#{customer_id}, title=#{title}, content=#{content}
  </insert>
  
  <select id="getInquiryDetail" resultType="com.cinema.mypage.InquiryDTO">
- 	select title, content, answer, created, ancreated, current
- 	from inquiry
- 	where id=#{param1}
+    select title, content, answer, created, ancreated, current
+    from inquiry
+    where id=#{param1}
  </select>
 
 <select id="getMovieList" parameterType="string" resultType="com.cinema.mypage.MovieGetDTO">
-    SELECT m.*
-    FROM moviepay m
-    JOIN customer c ON m.customer_id = c.uid
-    WHERE m.customer_id = #{customer_id)}
+    SELECT *
+    FROM moviepay
+    WHERE customer_id = #{customer_id}
+</select>
+
+<!-- 예매 정보 삭제 -->
+<delete id="deleteMovieReservation" parameterType="int">
+    DELETE FROM moviepay
+    WHERE id = #{id}
+</delete>
+
+<!-- 예매 정보를 moviedelete 테이블로 이동 -->
+<insert id="moveToMovieDelete" parameterType="int">
+    INSERT INTO moviedelete (id, random_id, customer_id, movie_name, room_name, totalprice, runningtime, seat, totalpeople, begintime, endtime, datetime, created)
+    SELECT id, random_id, customer_id, movie_name, room_name, totalprice, runningtime, seat, totalpeople, begintime, endtime, datetime, created
+    FROM moviepay
+    WHERE id = #{id}
+</insert>
+
+<!-- 취소된 예매 내역 조회 -->
+<select id="getCanceledMovieList" parameterType="string" resultType="com.cinema.mypage.MovieGetDTO">
+    SELECT *
+    FROM moviedelete
+    WHERE customer_id = #{customer_id}
 </select>
 </mapper>

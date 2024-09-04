@@ -122,7 +122,6 @@
             border-top: 1px solid #ddd;
         }
     </style>
-     <link rel="stylesheet" href="/Header_css/Header.css">
 </head>
 <body>
     <header class="header">
@@ -159,6 +158,8 @@
                 </div>
                 <form action="FAQupdate" method="post">
                     <input type="hidden" name="id" value="${faqDetail.id}">
+                    <label for="selected">구분</label>
+                    <input type="text" id="selected" name="selected" value="${faqDetail.selected}" required>
                     <label for="title">제목:</label>
                     <input type="text" id="title" name="title" value="${faqDetail.title}" required>
                     
@@ -167,13 +168,13 @@
                     
                     <button type="submit" class="btn-save">저장</button>
                     <button type="button" class="btn-cancel" onclick="location.href='faq'">취소</button>
+               
                 </form>
             </div>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2024 MG Cinema</p>
     </footer>
 </body>
 </html>
