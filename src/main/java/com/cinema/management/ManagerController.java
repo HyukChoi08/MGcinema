@@ -136,13 +136,21 @@ public class ManagerController {
 		System.out.println(delid);
 		mmdao.detaildel(delid);
 		return "manager/manager";
-	}
+	} 
 	@PostMapping("/inquirydel")
 	@ResponseBody
 	public String inquirydel(HttpServletRequest req,Model model) {
 		int delid = Integer.parseInt(req.getParameter("delid"));
 		System.out.println(delid);
 		mmdao.inquirydel(delid);
+		return "manager/manager";
+	}
+	@PostMapping("/newsdel")
+	@ResponseBody
+	public String newsdel(HttpServletRequest req,Model model) {
+		int delid = Integer.parseInt(req.getParameter("delid"));
+		System.out.println(delid);
+		mmdao.newsdel(delid);
 		return "manager/manager";
 	}
 	@PostMapping("/showmovie")
@@ -213,6 +221,14 @@ public class ManagerController {
 		mmdao.itemin(itemname, itemprice, disprice, conposition, origin, itemimage);
 		return "manager/manager";
 	}
+	@PostMapping("/newsin")
+	@ResponseBody
+	public String newsin(HttpServletRequest req,Model model) {
+		String newstitle = req.getParameter("newstitle");
+		String newscontent = req.getParameter("newscontent");
+		mmdao.newsin(newstitle, newscontent);
+		return "manager/manager";
+	}
 	@PostMapping("/detailin")
 	@ResponseBody
 	public String detailin(HttpServletRequest req,Model model) {
@@ -264,5 +280,31 @@ public class ManagerController {
 	
 		mmdao.inquiryup(anid, answer);
 		return "manager/manager";
+	}
+	@PostMapping("/newsup")
+	@ResponseBody
+	public String newsup(HttpServletRequest req,Model model) {
+		String newstitle = req.getParameter("newstitle");
+		String newscontent = req.getParameter("newscontent");
+		int newsid = Integer.parseInt(req.getParameter("newsid"));
+	
+		mmdao.newsup(newsid, newstitle, newscontent);
+		return "manager/manager";
+	}
+	@PostMapping("/shownews")
+	@ResponseBody
+	public String shownews(HttpServletRequest req,Model model) {
+		ArrayList<NewsDTO> a = mmdao.newslist();
+		JSONArray Ty = new JSONArray();
+		for(NewsDTO Rdto : a) {
+			JSONObject T = new JSONObject();
+			T.put("id",Rdto.getId());
+			T.put("title",Rdto.getTitle());
+			T.put("content",Rdto.getContent());
+			T.put("create",Rdto.getCreated_at());
+			T.put("hit",Rdto.getViews());
+			Ty.put(T);
+		}
+		return Ty.toString();
 	}
 }

@@ -42,27 +42,14 @@ public class CinemaController {
 			T.put("mname",Mdto.getMname());
 			T.put("runningtime",Mdto.getRunningtime());
 			T.put("age",Mdto.getAge());
+			T.put("genre",Mdto.getGenre());
+			T.put("releasedate",Mdto.getReleasedate());
 			Mli.put(T);
 		}
 		return Mli.toString();
 	}
+
 	@PostMapping("/getroom")
-	@ResponseBody
-	public String getroom(HttpServletRequest req,Model model) {
-		String mdate = req.getParameter("mdate");
-		String mname = req.getParameter("mname");
-		ArrayList<RoominfoDTO> mlist = cdao.Roominfo(mdate,mname);
-		JSONArray Mli = new JSONArray();
-		for(RoominfoDTO Mdto : mlist) {
-			JSONObject T = new JSONObject();
-			T.put("Sname",Mdto.getSname());
-			T.put("seatlevel",Mdto.getSeatlevel());
-			T.put("allseat",Mdto.getAllseat());
-			Mli.put(T);
-		}
-		return Mli.toString();
-	}
-	@PostMapping("/getroom2")
 	@ResponseBody 
 	public String getroom2(HttpServletRequest req,Model model) {
 		String mdate = req.getParameter("mdate");
@@ -91,6 +78,7 @@ public class CinemaController {
 			T.put("Sname",Mdto.getSname());
 			T.put("begintime",Mdto.getBegintime());
 			T.put("mname",Mdto.getMname());
+			T.put("lestseat",Mdto.getLestseat());
 			Tli.put(T);
 		}
 		System.out.println("tttttttt"+mlist);
@@ -120,7 +108,7 @@ public class CinemaController {
 		}
 		return Mli.toString();
 	}
-	
+
 }
 
 

@@ -8,22 +8,22 @@
 	where a.movie_id=b.id and a.room_id=c.id and moviedate=#{param1}
 </select>
 <select id="Moviename" resultType="com.cinema.cinema.MovienameDTO">
-	SELECT DISTINCT b.mname,b.age,b.runningtime
+	SELECT DISTINCT b.mname,b.age,b.runningtime,b.genre,b.releasedate
 	from schedules a, movie b
 	where a.movie_id=b.id and moviedate=#{param1} order by mname
 </select>
-<select id="Roominfo" resultType="com.cinema.cinema.RoominfoDTO">
+<!-- <select id="Roominfo" resultType="com.cinema.cinema.RoominfoDTO">
 	SELECT DISTINCT c.Sname,c.seatlevel,c.allseat
 	from schedules a, movie b, room c
 	where a.movie_id=b.id and a.room_id=c.id and moviedate=#{param1} and b.mname=#{param2} order by Sname
-</select>
+</select> -->
 <select id="Roominfo2" resultType="com.cinema.cinema.Roominfo2DTO">
-	SELECT DISTINCT c.Sname,c.seatlevel,b.mname
-	from schedules a, movie b, room c
-	where a.movie_id=b.id and a.room_id=c.id and moviedate=#{param1} order by Sname;
+	SELECT DISTINCT c.Sname,c.seatlevel,b.mname,d.allseat
+	from schedules a, movie b, room c,seatinfo d
+	where a.movie_id=b.id and a.room_id=c.id and c.Sname=d.sname and moviedate=#{param1} order by Sname
 </select>
 <select id="gettime" resultType="com.cinema.cinema.TimeDTO">
-	SELECT a.begintime,b.mname,c.Sname
+	SELECT a.begintime,b.mname,c.Sname,a.lestseat
 	from schedules a, movie b, room c
 	where a.movie_id=b.id and a.room_id=c.id and moviedate=#{param1} order by begintime;
 </select>

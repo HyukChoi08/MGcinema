@@ -8,7 +8,8 @@
 <title>관리자 페이지</title>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
+<%@ include file="/WEB-INF/views/header/header.jsp" %>
+<div class="manager-page">
 <div class="container">
 	<div class="movieinsert1">
 		<h2>영화 상영정보 추가</h2>
@@ -127,8 +128,31 @@
 				</thead>
 				<tbody></tbody>
 		</table>
+	</div>
 </div>
-<%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
+<div class="container">
+	<div class="newsupbox">
+		<h2>공지등록</h2>
+			<table>
+				<tr><td><input type="hidden" id="newsid" readonly></td></tr>
+				<tr><td>제목</td><td><input type="text" id="newstitle" size="60"></td></tr>
+				<tr><td>공지내용</td><td><textarea rows="27" cols="80" id="newscontent"></textarea></td></tr>
+				<tr><td colspan="2"><input type="button" id="nbtn" value="공지등록">
+									<input type="button" id="nubtn" value="공지수정" disabled></td></tr>
+			</table>
+	</div>
+	<div class="newsbox">
+		<table id="newslist">
+			<h3>공지목록</h3>
+				<thead>
+					<tr><td>제목</td><td>등록일시</td><td>조회수</td></tr>
+				</thead>
+				<tbody></tbody>
+		</table>
+	</div>
+</div>
+</div>
+<%@ include file="/WEB-INF/views/footer/footer.jsp" %>
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
@@ -142,6 +166,7 @@ $(document)
 	showitem();
 	showdetail();
 	showinquiry();
+	shownews();
 })
 .on('click','#sbtn',function(){
 	let rid = $('#roomnum').val().split(',');
@@ -166,56 +191,86 @@ $(document)
 	
 })
 .on('click','#mbtn',function(){
-	let mname = $('#mname').val();
-	let age = $('#age').val();
-	let runtime = $('#runtime').val();
-	let image = $('#image').val();
-	let director = $('#director').val();
-	let cast = $('#cast').val();
-	let genre = $('#genre').val();
-	let rdate = $('#rdate').val();
-	let minfo = $('#minfo').val();
-	console.log(mname,age,runtime,image,director,cast,genre,rdate,minfo);
-	clear();
-	
-	$.post('/moviein',{mname:mname,age:age,runtime:runtime,image:image,director:director,cast:cast,
-		genre:genre,rdate:rdate,minfo:minfo},
-		function(data){
-			showmovie();
-	})
+	if($('#mname').val()=='' || $('#age').val()=='' || $('#runtime').val()=='' || $('#minfo').val()==''
+		|| $('#director').val()==''|| $('#cast').val()==''|| $('#genre').val()==''|| $('#rdate').val()==''){
+		alert("제대로")
+	}else{
+		let mname = $('#mname').val();
+		let age = $('#age').val();
+		let runtime = $('#runtime').val();
+		let image = $('#image').val();
+		let director = $('#director').val();
+		let cast = $('#cast').val();
+		let genre = $('#genre').val();
+		let rdate = $('#rdate').val();
+		let minfo = $('#minfo').val();
+		console.log(mname,age,runtime,image,director,cast,genre,rdate,minfo);
+		clear();
+		
+			$.post('/moviein',{mname:mname,age:age,runtime:runtime,image:image,director:director,cast:cast,
+				genre:genre,rdate:rdate,minfo:minfo},
+				function(data){
+					showmovie();
+			})
+	}
 
 })
 .on('click','#ibtn',function(){
-	let itemname = $('#itemname').val();
-	let itemprice = $('#itemprice').val();
-	let disprice = $('#disprice').val();
-	let conposition = $('#conposition').val();
-	let origin = $('#origin').val();
-	let itemimage = $('#itemimage').val();
-
-	console.log(itemname,itemprice,disprice,conposition,origin,itemimage);
-	clear();
+	if($('#itemname').val()=='' || $('#itemprice').val()=='' || $('#disprice').val()=='' || $('#conposition').val()==''
+		|| $('#origin').val()==''){
+		alert("제대로")
+	}else{
+		let itemname = $('#itemname').val();
+		let itemprice = $('#itemprice').val();
+		let disprice = $('#disprice').val();
+		let conposition = $('#conposition').val();
+		let origin = $('#origin').val();
+		let itemimage = $('#itemimage').val();
 	
-	$.post('/itemin',{itemname:itemname,itemprice:itemprice,disprice:disprice,conposition:conposition,
-		origin:origin,itemimage:itemimage},
-		function(data){
-			showitem();
-	})
-
+		console.log(itemname,itemprice,disprice,conposition,origin,itemimage);
+		clear();
+	
+			$.post('/itemin',{itemname:itemname,itemprice:itemprice,disprice:disprice,conposition:conposition,
+				origin:origin,itemimage:itemimage},
+				function(data){
+					showitem();
+			})
+	}
 })
 .on('click','#dbtn',function(){
-	let deitemid = $('#deitemid').val();
-	let detname = $('#detname').val();
-	let period = $('#period').val();
-
-
-	console.log(deitemid,detname,period);
-	clear();
+	if($('#deitemid').val()=='' || $('#detname').val()=='' || $('#period').val()==''){
+		alert("제대로")
+	}else{
+		let deitemid = $('#deitemid').val();
+		let detname = $('#detname').val();
+		let period = $('#period').val();
 	
-	$.post('/detailin',{deitemid:deitemid,detname:detname,period:period},
-		function(data){
-			showdetail();
-	})
+	
+		console.log(deitemid,detname,period);
+		clear();
+	
+			$.post('/detailin',{deitemid:deitemid,detname:detname,period:period},
+				function(data){
+					showdetail();
+			})
+	}
+})
+.on('click','#nbtn',function(){
+	if($('#newstitle').val()=='' || $('#newscontent').val()==''){
+		alert("제대로")
+	}else{
+		let newstitle = $('#newstitle').val();
+		let newscontent = $('#newscontent').val();
+	
+	
+		console.log(deitemid,detname,period);
+		clear();
+		
+			$.post('/newsin',{newstitle:newstitle,newscontent:newscontent},
+				function(data){
+					shownews();
+			})
+	}
  
 }) 
 .on('change','#roomnum',function(){
@@ -305,6 +360,15 @@ $(document)
 		clear();
 	})	
 })
+.on('click','#newsdel',function(){
+	let delid = $(this).closest('tr').find('td:eq(0)').text();
+	console.log($(this).closest('tr').find('td:eq(0)').text());
+		
+	$.post('/newsdel',{delid:delid},function(data){
+		shownews();
+		clear();
+	})	
+})
 .on('click','#inquirylist tbody tr',function(){
 	let anid = $(this).find('td:eq(0)').text();
 	let content = $(this).find('td:eq(1)').text();
@@ -324,6 +388,30 @@ $(document)
 	$('#answer').val(answer);
 	$('#createt').val(created);
 	$('#answert').val(ancreated);
+})
+.on('click','#newslist tbody tr',function(){
+	let newsid = $(this).find('td:eq(0)').text();
+	let newscontent = $(this).find('td:eq(1)').text();
+	let newstitle = $(this).find('td:eq(2)').text();
+	
+	$('#nbtn').prop('disabled', true);
+	$('#nubtn').prop('disabled', false);
+	
+	console.log(newsid,newstitle,newscontent);
+	
+	$('#newsid').val(newsid);
+	$('#newstitle').val(newstitle);
+	$('#newscontent').val(newscontent);
+})
+.on('click','#nubtn',function(){
+	let newsid = $('#newsid').val();
+	let newstitle = $('#newstitle').val();
+	let newscontent = $('#newscontent').val();
+	
+	clear();
+	$.post('/newsup',{newsid:newsid,newstitle:newstitle,newscontent:newscontent},function(data){
+		shownews();
+	})
 })
 .on('click','#abtn',function(){
 	let answer = $('#answer').val();
@@ -382,10 +470,12 @@ function schedules(){
 }
 function clear(){
 	$('#date,#stime,#etime,#mname,#runtime,#director,#cast,#genre,#minfo,#rdate,#itemname,#itemprice,'
-		+'#disprice,#conposition,#origin,#itemimage,#detname,#period,#anid,#writer,#title,'
-		+'#content,#answer,#createt,#answert').val('');
+		+'#disprice,#conposition,#origin,#itemimage,#detname,#period,#anid,#writer,#title,#newsid,'
+		+'#content,#answer,#createt,#answert,#newstitle,#newscontent').val('');
 	$('#image').val('/chartImage/.jpg');
 	$('#itemimage').val('/store_Images/.jpg');
+	$('#nubtn').prop('disabled', true);
+	$('#nbtn').prop('disabled', false);
 }
 function showmovie(){
 	$.post('/showmovie',{},function(data){
@@ -431,6 +521,16 @@ function showinquiry(){
 			let str ='<tr><td style=display:none>'+x['id']+'</td><td style=display:none>'+x['content']+'</td><td style=display:none>'+x['answer']+'</td><td>'+x['nickname']+'</td><td>'+x['title']+'</td><td>'+
 			x['current']+'</td><td>'+x['created']+'</td><td>'+x['ancreated']+'</td><td>'+'</td><td><input type=button id=inquirydel value=삭제></td></tr>'
 			$('#inquirylist tbody').append(str);
+		}
+		
+	},'json')
+}
+function shownews(){
+	$.post('/shownews',{},function(data){
+		$('#newslist tbody').empty();
+		for( let x of data){
+			let str ='<tr><td style=display:none>'+x['id']+'</td><td style=display:none>'+x['content']+'</td><td>'+x['title']+'</td><td>'+x['create']+'</td><td>'+x['hit']+'</td><td><input type=button id=newsdel value=삭제></td></tr>'
+			$('#newslist tbody').append(str);
 		}
 		
 	},'json')

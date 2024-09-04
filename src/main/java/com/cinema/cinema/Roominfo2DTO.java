@@ -8,4 +8,5 @@ public class Roominfo2DTO {
 	String seatlevel;
 	String allseat;
 	String mname;
+	
 }

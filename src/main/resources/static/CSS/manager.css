@@ -1,4 +1,8 @@
 @charset "UTF-8";
+.manager-page{
+	margin-top:120px;
+	margin-bottom:150px;
+}
 .movieinsert1{
 	border:1px solid black;
 	width:300px;
@@ -47,6 +51,20 @@
 	 height: 560px;
      overflow-y: auto; 
 }
+.newsupbox{
+	border:1px solid black;
+	margin:15px;
+	width:700px;
+	 height: 560px;
+     overflow-y: auto; 
+}
+.newsbox{
+	border:1px solid black;
+	margin:15px;
+	width:985px;
+	 height: 560px;
+     overflow-y: auto; 
+}
 .inquirybox{
 	border:1px solid black;
 	margin:15px;
@@ -79,7 +97,8 @@ thead tr{
 #movieinfo tbody td,
 #itemlist tbody td,
 #detaillist tbody td,
-#inquirylist thead td{
+#inquirylist thead td,
+#newslist thead td{
 	height:40px;
 }
 .movietext{
@@ -92,6 +111,7 @@ thead tr{
 #movieinfo thead td,
 #itemlist thead td,
 #detaillist thead td,
-#inquirylist thead td{
+#inquirylist thead td,
+#newslist thead td{
 	border-bottom:2px solid black;
 }

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <style>
-html, body, div, span, applet, object, iframe, h2, h3, h4, h5, h6, blockquote, pre, 
+html, body, div, applet, object, iframe, h2, h3, h4, h5, h6, blockquote, pre, 
 a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, 
 small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label,
  legend, table, caption, tbody, tfoot, thead, tr, th{
@@ -16,6 +16,17 @@ small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form
     word-break: break-all;
     text-align:center;
     
+}
+a:visited {
+            color: black;
+}
+a:link{
+	  color: black;
+	  text-decoration: none;
+	
+	 }
+span{
+	font-size:13px;
 }
 .mname{
 	font-family: 'Noto Sans KR', 'CJONLYONENEW', '맑은 고딕', '돋움', Dotum, sans-serif;
@@ -43,6 +54,10 @@ small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form
 	border:none;
 	width:1000px;
 	padding-bottom:20px;
+	padding-top:10px;
+	margin-right:20px;
+	text-align:right;
+	font-size:15px
 	
 }
 .container a{
@@ -50,6 +65,7 @@ small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form
 	 display: block;
 	 width: 100%;
      height: 100%;
+     text-align:left;
 }
 .container a:visited {
             color: white; /* 방문한 링크 색상 */
@@ -65,44 +81,43 @@ small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form
             
         }
 .item {		
-			line-height: 50px;
-			color: white;
-            width: 100px;
-            height: 50px;
-            background-color: black;
-           
-            transition: background-color 0.3s ease, transform 0.3s ease;
-             position: relative; /* 기본 위치 설정 */
-            z-index: 2; /* 배경 이미지보다 위로 위치 */
-          
-            
+		padding-left:10px;
+		border-left:7px solid #eef0a2b0;
+		line-height: 50px;
+		color: white;
+        width: 100px;
+        height: 50px;
+        background-color: black;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        position: relative; /* 기본 위치 설정 */
+        z-index: 2; /* 배경 이미지보다 위로 위치 */      
         }
- .item:hover {
-            background-color: black; /* 호버 시 배경색 변경 */
-            transform: scale(1.1); /* 호버 시 크기 확대 */
-        }    
+.item:hover {
+       background-color: black; /* 호버 시 배경색 변경 */
+       transform: scale(1.1); /* 호버 시 크기 확대 */
+}    
 #contents {
 	clear: both;
     padding-bottom: 50px;
-
     position: relative;
     width: 1000px;
-    margin: 0 auto;
-    border:1px solid black;
+    margin: auto;
+    margin-top:120px;
+	margin-bottom:150px;
     height:100%;
 }
 .info {
 	background-color:black;
 	width:1000px;
-	height:200px;
+	height:150px;
 	color:white;
 	/* position: absolute; */
 }
-.infoleft .title {
+.infoleft {
 	position: relative;
     float: left;
     font-size: 15px;
-    padding: 10px 0 0 20px;
+    padding: 30px 0 0 20px;
     width: 400px;
     color: white;
     text-overflow: initial;
@@ -112,15 +127,15 @@ small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form
 .inforight {
     position: relative;
     float: right;
+    font-size: 15px;
     width: 280px;
     height: 98px;
-    padding: 10px 0 0 20px;
+    padding: 30px 0 0 20px;
     border-left: 1px solid rgba(255, 255, 255, 0.2);
     overflow: hidden;
+    text-align:left;
     }
-.inforight h5 {
-	text-align:left;
-	}
+
 .link-more {
     display: inline-block;
     width: 20px;
@@ -152,9 +167,6 @@ small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form
     overflow: hidden;
     
 }
-
-
-
 .calendar-body {
     padding: 10px;
 }
@@ -170,9 +182,11 @@ small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form
     padding: 10px;
     border: 1px solid #ddd;
 }
-
-
-
+.td-link{
+ cursor: pointer;
+ width:70px;
+ border:1px solid black;
+}
 button {
     background: none;
     border: none;
@@ -189,11 +203,13 @@ button:focus {
 	border-bottom:1px solid black;
 	border-top:1px solid black;
 	margin-bottom:20px;
+	
 }
 .roomdiv {
 	height:60px;
 	border:none;
 	margin-left:20px;
+	margin-bottom:35px;
 }
 .timelistdiv a:visited{
 	 	color:black;
@@ -210,29 +226,27 @@ button:focus {
 <body>
 <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
 <div id="contents">
-	혹시나 다른거 들어갈 자리<input type="button" value="test" id="tsetbtn">
-	<div><h3><img src="https://img.cgv.co.kr/R2014/images/title/h3_theater.gif"></h3></div>
-	<div class="container" style="border: none;position: relative; width:1000px; height:500px;margin:auto;">
-		<img src="https://img.cgv.co.kr/R2014/images/sub/specialtheater/chungdam/main_chungdam.jpg" class="background-image" id="backgroundImage" alt="zzzz">
-	 	<div class="item" data-image="https://img.cgv.co.kr/R2014/images/sub/specialtheater/chungdam/main_chungdam.jpg"><a href="#">8F 일반</a></div>
-        <div class="item" data-image="https://img.cgv.co.kr/R2014/images/sub/specialtheater/chungdam/f10_02.jpg"><a href="#">7F 스위트</a></div>
-        <div class="item" data-image="https://img.cgv.co.kr/R2014/images/sub/specialtheater/chungdam/f12_01.jpg"><a href="#">스위트</a></div>
-        <div class="item" data-image="https://img.cgv.co.kr/R2014/images/sub/specialtheater/chungdam/f12_02.jpg"><a href="#">스위트</a></div>
-        <div class="item" data-image="https://img.cgv.co.kr/R2014/images/sub/specialtheater/chungdam/f12_03.jpg"><a href="#">스위트</a></div>
-        <div class="item" data-image="https://img.cgv.co.kr/R2014/images/sub/specialtheater/chungdam/f09_01.jpg"><a href="#">스위트</a></div>
-        <div class="item" data-image="https://img.cgv.co.kr/R2014/images/sub/specialtheater/chungdam/f09_02.jpg"><a href="#">스위트</a></div>        
+	<div class="container" style="border: none;position: relative; width:1000px; height:600px;margin:auto;">
+		<img src="room_image/로비2.jpeg" class="background-image" id="backgroundImage" alt="zzzz">
+	 	<div class="item" data-image="room_image/로비2.jpeg"><a href="#"><i>Lobby</i></a></div>
+	 	<div class="item" data-image="room_image/휴게소.jpeg"><a href="#"><i>Rest area</i></a></div>
+        <div class="item" data-image="room_image/프리미엄관.jpeg"><a href="#"><i>Premium</i></a></div>
+        <div class="item" data-image="room_image/입체음향.jpg"><a href="#"><i>Stereo</i></a></div>
+        <div class="item" data-image="room_image/우주관.jpeg"><a href="#"><i>Space</i></a></div>
+        <div class="item" data-image="room_image/야외가족관.jpeg"><a href="#"><i>Outdoor</i></a></div>
+        <div class="item" data-image="room_image/수족관.jpeg"><a href="#"><i>Aqua</i></a></div>
+        <div class="item" data-image="room_image/어린이01.jpg"><a href="#"><i>Child</i></a></div>        
 	</div>
 	<div class="info">
 		<div class="infoleft">
-			<strong class="title">주소를 적어주세여</strong>
+			주소: 화성시 목성구 태양로 29, 지구빌딩 1F<br>
+			고객센터 1544-1234<br>
+			여러가지 테마가 있는 어쩌구
 		</div>
 		<div class="inforight">
-			<h5>위치/주차안내</h5><a class="link-more" href="/park" target="_blank" title="새창 열림"></a>
+			위치 / 주차안내&nbsp;&nbsp;<a class="link-more" href="/park" target="_blank" title="새창 열림"></a><br>
+			공지사항&nbsp;&nbsp;<a class="link-more" href="/news" target="_blank" title="새창 열림"></a>
 		</div>
-	</div>
-	<div class="notice">
-		<h4>공지사항</h4><a class="link-more" href="/park" target="_blank" title="새창 열림"></a>
-		<h4><a href="#" onclick="openPopup(); return false;">관람등급안내</a></h4>
 	</div>
 <div class="sect-schedule">
 	<div class="calendar-container">
@@ -254,6 +268,9 @@ button:focus {
                 </thead>
             </table>
         </div>
+        	<div class="notice">
+				<a class="link-more" href="#" onclick="openPopup(); return false;"></a>&nbsp;&nbsp;관람등급안내
+			</div>
     </div>
     <div id="timelist">
     	
@@ -323,7 +340,7 @@ async function movielist(){
 	        processData1(response1);
 	        
 	        let response2 = await $.ajax({
-	            url: '/getroom2',
+	            url: '/getroom',
 	            method: 'POST',
 	            data: { mdate: mdate },
 	            dataType: 'json'
@@ -350,7 +367,7 @@ function processData1(data) {
 	 let timelist = '';
 		for(x of data){	
 			console.log("영화이름",x['mname']);
-			timelist = '<div class=timelistdiv><table><tr><td>'+x['age']+'</td><td><h1 class=mname>'+x['mname']+'</h1></td><td>'+x['runningtime']+'</td></tr></table></div>';
+			timelist = '<div class=timelistdiv><table><tr><td>'+x['age']+'</td><td><h1 class=mname>'+x['mname']+'</h1></td><td>'+x['runningtime']+' / </td><td>'+x['genre']+' / </td><td>'+x['releasedate']+' 개봉</td></tr></table></div>';
 			$('#timelist').append(timelist);
 	 		 console.log('Processing data 1:', data);
 		}
@@ -361,7 +378,7 @@ function processData2(data) {
 		console.log(data); 
 		for(let x of data){
 			if(x['mname']==id){
-			let room = '<div class=roomdiv><table><tr><td><h2 class=roomname>'+x['Sname']+'</h2></td><td style=width:65px>'+x['seatlevel']+'</td></tr></table></div>';
+			let room = '<div class=roomdiv><table><tr><td><h2 class=roomname>'+x['Sname']+'</h2></td><td style=width:65px>'+x['seatlevel']+'</td><td>'+x['allseat']+'석</td></tr></table></div>';
 			$('#timelist div').eq(i).append(room);
 			}
 		}
@@ -378,9 +395,15 @@ function processData3(data) {
 	            let room = $(this).find('tr').find('td').eq(0).text();
 	            console.log('관이름', room);
 	            	for(let x of data){
-	            		if (x['mname'] === id && x['Sname'] === room) {
-	                        console.log('최종', x['begintime']);
-	                        $(this).append('<td><a href=/ticket/?mname='+x['mname']+'&date='+$('#hiddendate').val()+'&room='+x['Sname']+'&time='+x['begintime']+'>'+x['begintime']+'</a></td>');
+	            		if (x['mname'] == id && x['Sname'] == room) {
+	            		
+	                        if (x['mname'].includes(' ')) {
+	                        	mname = x['mname'].replace(/\s+/g,'%20');
+	                        	console.log('last',mname);
+	                        	$(this).append('<td class=td-link><a href=/ticket/?mname='+mname+'&date='+$('#hiddendate').val()+'&room='+x['Sname']+'&time='+x['begintime']+'>'+x['begintime']+'<br><span>'+x['lestseat']+'석</i></span></td>');
+	                        }else{
+	                        	$(this).append('<td class=td-link><a href=/ticket/?mname='+x['mname']+'&date='+$('#hiddendate').val()+'&room='+x['Sname']+'&time='+x['begintime']+'>'+x['begintime']+'<br><span>'+x['lestseat']+'석</span></a></td>');
+	                        }
 	                    }
 	            	}  	
 	        })
