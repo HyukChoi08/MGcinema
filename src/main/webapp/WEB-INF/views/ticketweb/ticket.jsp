@@ -300,7 +300,13 @@ $(document).ready(function() {
         $("#reserveBtn").show();
         $("#submitBtn").hide();
         $(".seat").removeClass("selected");
-        $("#seatresult").text("좌석 선택")
+        $("#adultpernum li").removeClass("selected");
+        $("#youthpernum li").removeClass("selected");
+        totalTickets = 0;
+        adultTicketCount = 0;
+        youthTicketCount = 0;
+        $("#priceresult").text("결제 정보");
+        $("#seatresult").text("좌석 선택");
     });
 
 
