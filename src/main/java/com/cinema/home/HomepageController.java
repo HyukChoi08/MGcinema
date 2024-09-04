@@ -126,11 +126,12 @@ public class HomepageController {
 	       String favorite = req.getParameter("favorite");
 	       String tellecom = req.getParameter("tellecom");
 	       
-	       if (uid == null || uid.trim().isEmpty()) {
-	    	    throw new IllegalArgumentException("UID cannot be null or empty");
-	   
-	       } 	         
-	       
+			/*
+			 * if (uid == null || uid.trim().isEmpty()) { throw new
+			 * IllegalArgumentException("UID cannot be null or empty");
+			 * 
+			 * }
+			 */
 	       int uidCount = ldao.checkUidExists(uid);
 	        if (uidCount > 0) {
 	            model.addAttribute("error", "이미 사용 중인 아이디입니다.");

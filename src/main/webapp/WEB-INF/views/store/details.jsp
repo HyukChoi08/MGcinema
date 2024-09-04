@@ -319,7 +319,7 @@
                 <div>
                  	<c:forEach items="${arItem}" var="item">
         				<div>
-            				<strong class="category_title">${item.item_name}</strong><input type='hidden' id='hiddenid'><input type='hidden' id='userid'>
+            				<strong class="category_title">${item.item_name}</strong><input type='text' id='hiddenid' value='${item_id}'  ><input type='text' id='userid' value="${uid}">
             				
             					<div class="separator2"></div>
 					            <ul class="category_inner">
@@ -388,7 +388,10 @@
 	             
 	           </div>        
 	       </div>
-	   </div>    
+	   </div>
+	    <form id="payForm" action="/dostorepay" method="post" style="display:none;">
+    	<input type="hidden" id="productData" name="productData">
+		</form>     
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
@@ -396,7 +399,7 @@ $(document)
 .ready(function() {
 	let discount_price = $('#discount').text().trim(); // #discount 요소의 텍스트를 읽어옴
 	let original_price = $('#original').text().trim();
-	
+		
 	if(discount_price==original_price){
 		
 		 $('#original').text('');  // 빈 문자열을 설정합니다.
@@ -413,13 +416,16 @@ $(document)
                     <option value="5">50,000</option>
                 </select>  
                 `)
-      $('#totalprice').val('10,000');          
+   		$('#totalprice').val('10,000');
+        $('#btncart').hide();
     }
     else {
         // discount_price가 '금액충전형'이 아닌 경우 #discount에 '원'을 붙임
         $('#discount').text(discount_price + '원');
         $('#totalprice').val(discount_price);
+        $('#btncart').show();
     }
+    
  let original= $('#original').text().trim();
  console.log("111="+original);
  if (original !== null && original !== '') {
@@ -434,7 +440,6 @@ $(document)
  //if(currentUrl==targetUrl){
 //	 $('#btncart').hide();}
  
- 
  var queryString = window.location.search;
  var urlParams = new URLSearchParams(queryString);
  var id = urlParams.get('id');
@@ -442,13 +447,19 @@ $(document)
  // ID 값을 콘솔에 출력
  console.log('ID:', id);
  $('#hiddenid').val(id);
- $('#userid').val('rkd2');
-	let userid= $('#userid').val();
-console.log(userid);
- 
 
 
- 
+	let customer_id= $('#userid').val();
+	console.log(customer_id);
+	
+
+	$.ajax({
+		url:'/countcart',type:'post',data:{customer_id:customer_id},dataType:'text',
+		success:function(data){
+			 $('#cart-count').text(data);
+			
+			}
+})
 })
 .on('change','#cnt', function() { // 'change' 이벤트 사용
     let cnt = $('#cnt').val();
@@ -483,12 +494,25 @@ console.log(userid);
 })
 .on('click','#btnbuy',function(){
 	
-	  window.location.href = '/storepay'; // 클릭 시 페이지 이동
+
+	 if ($('#userid').val() == '') {
+	        alert("로그인 후 이용해주세요");
+	        
+	        return false;
+	 }
+			
+	window.location.href = '/storepay'; // 클릭 시 페이지 이동
 	
 	 	
 })
 .on('click','#btncart',function(){
 	
+		 if ($('#userid').val() == '') {
+	        alert("로그인 후 이용해주세요");
+	        
+	        return false;
+		 }
+			
 		let item_id=$('#hiddenid').val();
 		let customer_id=$('#userid').val();
 		let totalStr=$('#totalprice').val();
@@ -505,25 +529,83 @@ console.log(userid);
 				if(data=='ok'){
 					
 					window.location.href='/cart';
-				}
-				
-				
-			}
-		
-		
-		
-		
+				}				
+			}		
 		})	 	
 })
-.on('click','#btngift',function(){
+let selectedItems = []; // 전역 변수로 선언
 
-	  window.location.href = '/gift'; // 클릭 시 페이지 이동
-	  
-	  
-	  
-	  
-		 	
-})
+$('#btnbuy').on('click', function(e) {
+    e.preventDefault(); // 링크의 기본 동작을 방지
+    let item_id = $('#hiddenid').val();
+    console.log('item_id:', item_id);
+
+    $.ajax({
+        url: '/selectitem',
+        type: 'POST',
+        data: { item_id: item_id },
+        dataType: 'json',
+        success: function(data) {
+            console.log('Server Response:', data);
+
+            // 데이터가 배열일 경우 첫 번째 항목을 사용
+            if (Array.isArray(data) && data.length > 0) {
+                let item = data[0]; // 첫 번째 항목 사용
+
+                // 기본값을 설정하고 문자열을 정리
+                let discount_price = (item.discount_price || '0').replace(/원/g, '').replace(/,/g, '').trim();
+                let price = (item.price || '0').replace(/원/g, '').replace(/,/g, '').trim();
+
+                // 문자열을 숫자로 변환
+                let discountPriceNum = parseFloat(discount_price) || 0;
+                let PriceNum = parseFloat(price) || 0;
+
+                // itemData 객체 생성
+                let itemData = {
+                    item_id: item.id, // data 객체의 속성 이름이 정확해야 합니다.
+                    name: item.name,
+                    composition: item.composition,
+                    image_path: item.image_path,
+                    discount_price: discountPriceNum,
+                    cart_price: PriceNum,
+                    total: discountPriceNum*$('#cnt').val(), // 예시로 discount_price 사용
+                    qty:$('#cnt').val() 
+                };
+
+                selectedItems.push(itemData);
+					
+                console.log($('#cnt').val());
+                
+                let totalPrice =PriceNum*$('#cnt').val(); // cart_price 사용   
+                let discount1 =discountPriceNum*$('#cnt').val();
+                let totalDiscount = totalPrice - discount1; // 할인 계산
+                let finalPrice = totalPrice-totalDiscount; // 최종 가격 계산
+                
+                console.log(totalPrice);
+                console.log(totalDiscount);
+                console.log(finalPrice);
+
+                // 폼 데이터 설정
+                $('#productData').val(JSON.stringify({
+                    items: selectedItems,
+                    totalPrice: totalPrice,
+                    totalDiscount: totalDiscount,
+                    finalPrice: finalPrice
+                }));
+
+                console.log('Product data:', $('#productData').val()); // 디버깅: 전송할 데이터 출력
+
+                $('#payForm').submit(); // 폼 제출
+            } else {
+                console.error('No data received from server.');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('AJAX Error:', status, error);
+        }
+    });
+
+});
 
 
    

@@ -7,14 +7,22 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+
+
+
 #container {
     display: flex;
   	flex-direction: column; /* 자식 요소들을 수직으로 배치 */ 
     justify-content: center; 
     padding: 20px;
     width: 1000px; 
-    margin: 0 auto;   
+    margin: 0 auto;
+  	background-color:black;
+  	margin-bottom: 335px;
+  
 }
+
+
 .cart_step {
     list-style-type: none;
     padding: 0;
@@ -57,22 +65,26 @@
 }
 
 /* 마지막 항목의 화살표를 숨김 */
-.cart_step .step.step0,
-.cart_step .step.step0::after {
+.cart_step .step.step1,
+.cart_step .step.step1::after {
     color: red; /* step0 텍스트와 화살표 색상 */
 }
 
 .cart-item {
     display: flex;
-    align-items: center;
+     align-items: center; /* 세로 중앙 정렬 */
     background: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 10px;
     margin-bottom: 10px;
+    
 }
 
-
+.item-image {
+    max-width: 100px;
+    margin-right: 20px;
+}
    .cart-item {
         display: flex;
         align-items: center; /* 수직 정렬 */
@@ -89,7 +101,13 @@
         justify-content: space-between;
     }
     
-
+    .item-details div {
+        margin-right: 10px;
+    }
+    
+    .item-name, .discount, .price, .qty, .total {
+        width: 100px; /* Adjust as needed */
+    }
   .header {
     display: grid;
     grid-template-columns: 100px 1fr 1fr 1fr 100px 100px 100px 100px;
@@ -97,25 +115,20 @@
     font-weight: bold;
     margin-bottom: 10px;
 }
-.cartprice {
+.crossed-price {
     text-decoration: line-through; /* 취소선 추가 */
-    color: #888; /* 선택 사항: 취소선 색상 */     
-	font-size: 12px;
-    color: #888;
-    
-   
-text-decoration: line-through;
-    
-   
-margin-top: 4px;
-    
+    color: #888; /* 선택 사항: 취소선 색상 */
 }
 .separator {
-  
- 
-border-top: 2px solid #000; /* Adjust color and thickness as needed */
+ width: 100%; 
+ height: 2px;
+ margin: 0;
 }
-
+.separator {
+   
+    background-color: black; 
+    margin-bottom:20px;
+}
 .foottable {
     width: 100%; /* 테이블이 부모 요소의 너비를 100% 차지 */
     border-collapse: collapse; /* 테두리가 겹치지 않도록 설정 */
@@ -167,130 +180,79 @@ border-top: 2px solid #000; /* Adjust color and thickness as needed */
 .foottable tbody td {
     box-sizing: border-box; /* padding과 border를 너비에 포함 */
 }
-.totalprice {
-    position: relative;
-    left: 25px; /* 왼쪽으로 이동 */
-      /* 위쪽으로 이동 */
+.cartprice{
+	text-decoration: line-through;
+    color:grey; 
 
 }
-.finalprice{
-	position: relative;
-    left: -20px;
-     
-}
-.checkbox{
-	position: relative;
-    left: 10px; 
-  
-}
-.itemimage{
-	position: relative;
-    left: -32px; 
-    
-}
-
-.item-checkbox,.item-images,.item-details
- {
-    margin-right: 30px; 
-}
-.itemtotal{
-position: relative;
-    left:-15px; 
-      
-}
-.itemselect{
-	position: relative;
-    left:55px; 
-      
-}
-.itemprice{
-	position: relative;
-    left:25px;     
-}
-.itemname{
-position: relative;
-    left:-50px;     
-	width: 100px;
-
-}
-
-.header {
-    align-items: center; /* 수직 가운데 정렬 */
-    padding: 10px 0; /* 헤더 상하에 여백 추가 */
-}
-#alldelete{
-margin-bottom:40px;
-margin-top:40px;
-
-}
-.compo{
-font-size:11px;
-color:grey;
-}
-
-
-
 </style>
 </head>
 <body>
 <div id="container">
-    <div class="cart_step">
-       <div class="step step0 active"><span>STEP 01</span>&nbsp;<strong>장바구니</strong></div>
+ 	<div class="cart_step">
+       <div class="step step1 active"><span>STEP 01</span>&nbsp;<strong>장바구니</strong></div>
        <div class="step step2"><span>STEP 02</span>&nbsp;<strong>결제하기</strong></div>
        <div class="step step3"><span>STEP 03</span>&nbsp;<strong>결제완료</strong></div>
    </div>
     <div class="cart_details">
-        <div class="header">
-            <div class="checkbox"><input type="checkbox" id="allcheck"></div>
-		    <div class="itemimage">상품이미지</div>
-		    <div class="itemname">상품이름</div>
-		    <div class="itemprice">판매금액</div>
-		    <div class="itemqty">수량</div>
-		    <div class="itemtotal">구매금액</div>
-		    <div class="itemselect">선택</div>
-        </div>
-        <c:forEach items="${arCart}" var="cart">
-            <div class="cart-item">
-            	<div><input type="checkbox" class="item-checkbox"></div>
-            	<div class='item-images'>
-            	<input type="hidden" class="item_id" value="${cart.item_id}">
-       			<input type="hidden" id="gg">             
-                <img src="${cart.image_path}" id="imagepath" alt="${cart.item_id}">
-                </div>  
-                <div class="item-details">
-                    <div class="item_name">
-	                    <span>${cart.item_name}</span><br>
-	                    <span class='compo'>${cart.composition}</span>
-                    </div>  
-                    <div class="discount">
-               			<span class="discount_price">${cart.discount_price}원</span>
-			                <c:choose>
-			                    <c:when test="${cart.price ne cart.discount_price}">
-			                        <span class="cartprice">${cart.price}원</span>
-			                    </c:when>
-			                </c:choose>
-           			</div>
-	                <div class="qty">
-	            		<input type="number" class="qty-input" style="width:28px;" value="${cart.qty}">
-	       			</div>
-                    <div class="total">${cart.total}원</div>
-                    <div class="choice">
-                    <span><input type="button" id="btnpay" value="구매하기"></span>
-                    <span><input type="button" class="btndelete" value="삭제하기"></span>
-                    </div>
-                </div>
-            </div>
-        </c:forEach>
-       <input type="button" id='alldelete' value="선택상품삭제">
-   		<table class="foottable"> 
-    		<thead class="footthead">
+        <table class="cart-table">
+            <thead>
+                <tr class="header">
+                    <th><input type="checkbox" id="allcheck"></th>
+                    <th>상품이미지</th>
+                    <th>상품이름</th>       
+                    <th>판매금액</th>        
+                    <th>수량</th>
+                    <th>구매금액</th>
+                    <th>선택</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach items="${arCart}" var="cart">
+                    <tr class="cart-item">
+                        <td><input type="checkbox" class="item-checkbox"></td>
+                        <td>
+                            <input type="hidden" class="item_id" value="${cart.item_id}">
+                            <input type="text" id="gg" value="${uid}">             
+                            <img src="${cart.image_path}" id="imagepath" alt="${cart.item_id}">
+                        </td>  
+                        <td class="item-details">
+                            <div class="item_name">
+                                <span>${cart.item_name}</span><br>
+                                <span>${cart.composition}</span>
+                            </div>  
+                            <div class="discount">
+                                <span class="discount_price">${cart.discount_price}원</span>
+                                <c:choose>
+                                    <c:when test="${cart.price ne cart.discount_price}">
+                                        <span class="cartprice">${cart.price}원</span>
+                                    </c:when>
+                                </c:choose>
+                            </div>
+                        </td>
+                        <td class="qty">
+                            <input type="number"  min="1" class="qty-input" style="width:50px;" value="${cart.qty}">
+                        </td>
+                        <td class="total">${cart.total}</td>
+                        <td class="choice">
+                            <input type="button" id="btnpay" value="구매하기">
+                            <input type="button" class="btndelete" value="삭제하기">
+                        </td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+        <div class="separator"></div>
+        <input type="button" id='alldelete' value="선택상품삭제">
+        <table class="foottable"> 
+      	<thead class="footthead">
         		<tr>
 			        <th class="width-40">총 상품 금액</th>
 	                <th class="width-20">할인금액</th>
 	                <th class="width-40">총 결제 예정금액</th>
         		</tr>
 	    	</thead>
-	   		<tbody>
+        	 <tbody>
 		        <tr>
 		     		<td class="totalprice"></td>
 		     		<td class="minus">-</td>
@@ -298,149 +260,205 @@ color:grey;
 		         	<td class="equal">=</td>
 		            <td class="finalprice"></td>		            
 		        </tr>
-		      
 	    	</tbody>
 	    	 <tfoot>
-			    <tr class="separator"></tr>
-			  
+			    <tr class="separator"></tr>		  
 			 </tfoot>
-		</table>
-    </div>
+        </table>
+          <form id="payForm" action="/dostorepay" method="post">
+            <input type="hidden" id="productData" name="productData">
+            <button type="button" id="pay">결제하기</button>
+        </form>
+
+    </div> 
 </div>
+<%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
 </body>
+
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
 $(document).ready(function() {
-	
-
-	
-
     function formatNumber(number) {
-        return number.toLocaleString();   // 숫자를 쉼표로 포맷
+        return number.toLocaleString(); // 숫자를 쉼표로 포맷
     }
 
-    // 각 줄의 총합을 포맷하고 업데이트합니다.
-    function updateRowTotal(item) {
+    function calculateItemTotal(item) {
+        let qtyInput = item.find('.qty-input');
+        let qty = parseInt(qtyInput.val()) || 0;
         let discountPriceText = item.find('.discount_price').text().replace(/,/g, '').replace('원', '');
-        let qtyInput = item.find('.qty-input'); // 수량 입력 필드 선택
-        let qty = parseInt(qtyInput.val()) || 0; // 입력 필드에서 수량 값을 가져오기
+        let cartPriceText = item.find('.cartprice').text().replace(/,/g, '').replace('원', '');
 
-        // 숫자로 변환합니다.
-        let discountPrice = parseInt(discountPriceText) || 0; // 값이 없으면 0으로 설정
+        let discountPrice = parseInt(discountPriceText) || 0;
+        let cartPrice = parseInt(cartPriceText) || 0;
 
-        // 총 금액 계산
         let totalItemPrice = discountPrice * qty;
 
-        // 각 줄의 총합을 포맷하여 업데이트합니다.
+        // Update total price for this item
         item.find('.total').text(formatNumber(totalItemPrice) + '원');
     }
 
     function calculateTotal() {
         let totalPrice = 0;
         let totalDiscount = 0;
-        let totalPay = 0;
+        let finalPrice = 0;
 
         $('.cart-item').each(function() {
             let item = $(this);
+            let checkbox = item.find('.item-checkbox');
 
-            // 각 줄의 총합을 업데이트
-            updateRowTotal(item);
+            if (checkbox.is(':checked')) {
+                let discountPriceText = item.find('.discount_price').text().replace(/,/g, '').replace('원', '');
+                let cartPriceText = item.find('.cartprice').text().replace(/,/g, '').replace('원', '');
+                let qtyInput = item.find('.qty-input');
+                let qty = parseInt(qtyInput.val()) || 0;
 
-            // 가격과 수량을 가져옵니다.
-            let discountPriceText = item.find('.discount_price').text().replace(/,/g, '').replace('원', '');
-            let cartPriceText = item.find('.cartprice').text().replace(/,/g, '').replace('원', '');
-            let qtyInput = item.find('.qty-input'); // 수량 입력 필드 선택
-            let qty = parseInt(qtyInput.val()) || 0; // 입력 필드에서 수량 값을 가져오기
+                let discountPrice = parseInt(discountPriceText) || 0;
+                let cartPrice = parseInt(cartPriceText) || 0;
 
-            // 숫자로 변환합니다.
-            let discountPrice = parseInt(discountPriceText) || 0; // 값이 없으면 0으로 설정
-            let cartPrice = parseInt(cartPriceText) || 0; // 값이 없으면 0으로 설정
+                let totalItemPrice = discountPrice * qty;
+                let totalItemDiscount = cartPrice > discountPrice ? (cartPrice - discountPrice) * qty : 0;
 
-            // 총 금액과 할인 금액 계산
-            let totalItemPrice = discountPrice * qty;
-            let totalItemDiscount = cartPrice > discountPrice ? (cartPrice - discountPrice) * qty : 0;
-
-            totalPrice += totalItemPrice;
-            totalDiscount += totalItemDiscount;
-            totalPay += totalItemPrice;
+                totalPrice += totalItemPrice;
+                totalDiscount += totalItemDiscount;
+                finalPrice = totalPrice - totalDiscount; // 이 부분을 재확인
+            }
         });
 
-        // 테이블의 총합 업데이트
         $('.totalprice').text(formatNumber(totalPrice) + '원');
         $('.totaldiscount').text(formatNumber(totalDiscount) + '원');
-        $('.finalprice').text(formatNumber(totalPay) + '원'); // 총 결제 예정 금액
+        $('.finalprice').text(formatNumber(finalPrice) + '원');
+
+        return { totalPrice, totalDiscount, finalPrice };
     }
 
-    // 초기 계산
-    calculateTotal();
+    function formatExistingTotal() {
+        // 기존의 totalprice 값을 천 단위로 포맷
+        $('.total').each(function() {
+            let $this = $(this);
+            let text = $this.text().replace(/,/g, '').replace('원', ''); // '원' 및 기존 쉼표 제거
+            let number = parseInt(text, 10); // 숫자로 변환
+            if (!isNaN(number)) {
+                $this.text(formatNumber(number) + '원'); // 포맷 후 다시 텍스트로 설정
+            }
+        });
+    }
 
-    // 수량 입력 필드의 값이 변경될 때마다 총합 재계산
-    $(document).on('input', '.qty-input', function() {
+    formatExistingTotal(); // 추가된 부분
+
+    $(document).on('input change', '.qty-input, .item-checkbox', function() {
+        // Update item total
+        let item = $(this).closest('.cart-item');
+        calculateItemTotal(item);
+        
+        // Update overall total
         calculateTotal();
-    })
+    });
 
-})
+    $('#allcheck').on('click', function() {
+        let checked = $(this).is(':checked');
+        $('.item-checkbox').prop('checked', checked);
+        calculateTotal();
+    });
 
-.on('click','#allcheck',function(){
-	 let checked = $(this).is(':checked');     
-     // 모든 '.item-checkbox' 체크박스의 체크 상태를 '#allcheck' 체크박스의 상태와 동일하게 설정
-     $('.item-checkbox').prop('checked', checked);
-		
-})
-.on('click','#btnpay',function(){
-	
- 	
-	window.location.href='/storepay';
-})
-.on('click','.btndelete',function(){
-	  	let row = $(this).closest('.cart-item'); // 버튼이 속한 .cart-item div 찾기
+    $('#pay').on('click', function() {
+        let selectedItems = [];
+        let totals = calculateTotal(); // 총합 계산 및 반환
+
+        console.log('Calculated totals:', totals); // 디버깅: 총합 객체 출력
+
+        $('.cart-item').each(function() {
+            let item = $(this);
+            let checkbox = item.find('.item-checkbox');
+
+            if (checkbox.is(':checked')) {
+                let itemData = {
+                    item_id: parseInt(item.find('.item_id').val(), 10),
+                    name: item.find('.item_name span').first().text().trim(),
+                    composition: item.find('.item_name span').last().text().trim(),
+                    image_path: item.find('img').attr('src').trim(),
+                    discount_price: item.find('.discount_price').text().replace(/원/g, '').replace(/,/g, '').trim(),
+                    cart_price: item.find('.cartprice').text().replace(/원/g, '').replace(/,/g, '').trim(),
+                    total: item.find('.total').text().replace(/원/g, '').replace(/,/g, '').trim(),
+                    qty: parseInt(item.find('.qty-input').val(), 10)
+                };
+
+                selectedItems.push(itemData);
+            }
+        });
+
+        $('#productData').val(JSON.stringify({
+            items: selectedItems,
+            totalPrice: totals.totalPrice,
+            totalDiscount: totals.totalDiscount,
+            finalPrice: totals.finalPrice
+        }));
+
+        console.log('Product data:', $('#productData').val()); // 디버깅: 전송할 데이터 출력
+
+        $('#payForm').submit(); // 폼 제출
+    });
+
+    // 결제 버튼 클릭 시
+    $('#btnpay').on('click', function() {
+        window.location.href = '/storepay';
+    });
+
+    // 삭제 버튼 클릭 시
+    $(document).on('click', '.btndelete', function() {
+        let row = $(this).closest('.cart-item'); // 버튼이 속한 .cart-item div 찾기
         let checked = row.find('.item-checkbox').is(':checked'); // 체크박스 상태 확인
-		
+
         let item_id = row.find('.item_id').val(); // 숨겨진 입력 값 읽어오기
-        console.log("item_id"+item_id);
-        
-        let customer_id=$('#gg').val();   ////////// ====>>>실험용
-        
-        
-        
-        console.log(customer_id);
-       
-        
+        let custom_id = $('#gg').val(); // 실험용
+
         if (!checked) { 
             alert('체크박스가 선택되지 않았습니다.'); 
-        }else if(checked){
-        
-     	
-        if (confirm("정말로 삭제하시겠습니다?")) { // Corrected alert to confirm
-            $.ajax({
-                url: '/deletecart',
-                type: 'POST',
-                data: { item_id: item_id, customer_id: customer_id }, // Fixed typo
-                dataType: 'text',
-                success: function(data) {
-                    if (data === 'ok') {
-                    	window.location.reload();
-                    } 
-                }
-           
-            })
+        } else if (checked) {
+            if (confirm("정말로 삭제하시겠습니까?")) {
+                $.ajax({
+                    url: '/deletecart',
+                    type: 'POST',
+                    data: { item_id: item_id, customer_id: customer_id }, // Fixed typo
+                    dataType: 'text',
+                    success: function(data) {
+                        if (data === 'ok') {
+                            window.location.reload();
+                        } 
+                    }
+                });
+            }
         }
-      }   
-        	
-})
-.on('click', '#alldelete', function() {
-    let selectedItems = [];
-    $('.item-checkbox:checked').each(function() {
-        let itemId = $(this).closest('.cart-item').find('.item_id').val();
-        selectedItems.push(itemId);
     });
-    console.log('Selected item IDs:', selectedItems);
-    console.log('Selected item IDs:', selectedItems[1]);
 
-    
-    
+    // 전체 삭제 버튼 클릭 시
+    $('#alldelete').on('click', function() {
+        let selectedItems = [];
+        $('.item-checkbox:checked').each(function() {
+            let itemId = $(this).closest('.cart-item').find('.item_id').val();
+            selectedItems.push(itemId);
+        });
 
+        $.ajax({
+            url: 'choicedelete',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ item_id: selectedItems }),
+            success: function(data) {
+                alert('삭제가 성공되었습니다.');
+                window.location.reload();
+            }
+        });
+    });
 });
+
+
+
+
+
+
+
+
+
 
 
 </script>
