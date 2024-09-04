@@ -1,11 +1,9 @@
 @charset "UTF-8";
 
 .home-page {
-    padding: 20px;
     background-color: #f0f0f0;
     min-height: 100vh;
     box-sizing: border-box;
-    padding-bottom: 60px;
 }
 
 /* 슬라이더를 중앙에 배치하고, 컨테이너 너비 조정 */
@@ -19,6 +17,7 @@
     max-width: 100%; /* 부모 컨테이너의 최대 너비에 맞추기 */
     height: auto;
     border-radius: 10px;
+    margin-top:100px;
 }
 
 /* slick-carousel 기본 스타일 */

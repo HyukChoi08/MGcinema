@@ -56,7 +56,7 @@
                         <input type="text" id="realname" name="realname" value="${formData.realname}" placeholder="(필수)" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">이메일</label>
+                        <label for="email">e-mail</label>
                         <input type="email" id="email" name="email" value="${formData.email}" placeholder="(필수)" required>
                     </div>
                     <div class="form-group">
@@ -114,16 +114,16 @@
                             type="text" id="mobile" name="mobile" value="${formData.mobile}" placeholder="(필수) 01012345678 형식으로 작성해주세요" required maxlength="11">
                     </div>
                     <div class="form-group">
-                        <label for="region">지역</label>
+                        <label for="region">주소</label>
                         <input
                             type="text" id="region" name="region" value="${formData.region}" placeholder="(선택)">
                     </div>
                     <div class="form-group">
-                        <label for="nickname">별명</label>
+                        <label for="nickname">닉네임</label>
                         <input type="text" id="nickname" name="nickname" value="${formData.nickname}" placeholder="(필수)" required>
                     </div>
                     <div class="form-group">
-                        <label>선호 장르</label> <br />
+                        <label>관심분야</label> <br />
                         <div class="favorite-group">
                             <div class="favorite-group-top">
                                 <label>
@@ -188,8 +188,12 @@
 	}else{
 		alert("약관에 동의를 해주세요")
 		event.preventDefault();
-		
 	}
 })
-</script>    
+
+$(function() {
+    var today = new Date().toISOString().split('T')[0];
+    $('#birthday').attr('max', today);
+});
+ </script>   
 </html>

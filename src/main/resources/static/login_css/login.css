@@ -9,6 +9,8 @@
     border-radius: 8px;       /* 모서리 둥글게 */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
     margin-top: 150px;         /* 상단 여백 추가 ->> 이게 다른페이지들에 다 있으면 좋겠네! */
+    margin-bottom: 335px;
+
 }
 
 .login-page h2 {
@@ -59,4 +61,11 @@ button:hover {
     text-align: center;       /* 에러 메시지 중앙 정렬 */
     margin-top: 10px;         /* 에러 메시지와 상단 요소 간의 간격 설정 */
     font-size: 14px;          /* 에러 메시지 크기 설정 */
+}
+
+/* 웹 화면 여백 조정 */
+@media (min-width: 1024px) {
+    .signup-page {
+        padding-bottom: 0px;
+    }
 }

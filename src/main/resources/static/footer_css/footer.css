@@ -120,7 +120,7 @@ html, body {
     color: white;
     text-align: center;
     padding: 10px 0; /* 상하 패딩만 설정하여 좌우 여백 제거 */
-    position: fixed; 
+    /* position: fixed;  */
     bottom: 0;
     width: 100%; /* 전체 너비 설정 */
     box-sizing: border-box; /* 패딩을 포함한 전체 너비 계산 */
