@@ -480,8 +480,21 @@ $(document).ready(function() {
                 let timeList = $("#timeList ul");
                 timeList.empty();
                 $.each(data, function(index, times) {
-                    timeList.append('<li data-timetype="' + times.timetype + '" data-alls="' + times.allseat + '" data-id="' + times.begintime + '" title="' + times.endtime + '">' +
+                	let currentDate = new Date();
+                    let currentHours = currentDate.getHours();
+                    let currentMinutes = currentDate.getMinutes();
+                    
+                    let [begintimeHours, begintimeMinutes] = times.begintime.split(':').map(Number);
+                    let begintimeDate = new Date();
+                    begintimeDate.setHours(begintimeHours, begintimeMinutes, 0, 0);
+                    let isPast = currentDate > begintimeDate;
+                    
+                    let timeStatus = isPast ? ' (지나감)' : '';
+                    let listItemClass = isPast ? 'past-time' : '';
+                    
+                    timeList.append('<li class="' + listItemClass + '" data-timetype="' + times.timetype + '" data-alls="' + times.allseat + '" data-id="' + times.begintime + '" title="' + times.endtime + '">' +
                     		times.begintime + '  ' + times.lestseat + '석'+ '  ' + times.timetype + '</li>');
+                    
                 });
                 $("#timeList li").each(function() {
                     if ($(this).data("id") === gettime) {
@@ -582,11 +595,11 @@ $(document).ready(function() {
             let dateString = newDate.toISOString().split('T')[0].split('-');
             let dayClass = (dayName === "토") ? "saturday" : (dayName === "일") ? "sunday" : "";
 
-            dateList.append('<li data-id="'+ fulldate +'" class="' + dayClass + '"><div class="date-wrapper"><span class="day">' 
+            dateList.append('<li date-orgin="' + newDate + '" data-id="'+ fulldate +'" class="' + dayClass + '"><div class="date-wrapper"><span class="day">' 
             		+ dayName + '</span><span class="date">' + dateString[2] + '</span></div></li>');
         }
     }
-    
+
     $(document).on("click","#gochart", function(){
     	let movieId = $("#movieList li.selected").data("id");
     	window.location.href = "/chartList1?id=" + movieId;

@@ -380,3 +380,8 @@ img {
 #btnclear:hover {
     color: red;
 }
+.past-time {
+    color: gray;
+    text-decoration: line-through;
+    pointer-events: none;
+}
