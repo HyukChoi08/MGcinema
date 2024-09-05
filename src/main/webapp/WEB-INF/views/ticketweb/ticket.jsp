@@ -492,7 +492,7 @@ $(document).ready(function() {
                     let timeStatus = isPast ? ' (지나감)' : '';
                     let listItemClass = isPast ? 'past-time' : '';
                     
-                    timeList.append('<li class="' + listItemClass + '" data-timetype="' + times.timetype + '" data-alls="' + times.allseat + '" data-id="' + times.begintime + '" title="' + times.endtime + '">' +
+                    timeList.append('<li class="' + listItemClass + '" data-timetype="' + times.timetype + '" data-alls="' + times.allseat + '" data-id="' + times.begintime + '" title="종료시간:' + times.endtime + '">' +
                     		times.begintime + '  ' + times.lestseat + '석'+ '  ' + times.timetype + '</li>');
                     
                 });
@@ -544,7 +544,11 @@ $(document).ready(function() {
         roomresult.append('<p>일시 ' + date + ' ' + '(' +day+ ')' + '</p>');
     });
 
-    $(document).on("click", "#timeList li", function() {
+    $(document).on("click", "#timeList li", function(e) {
+    	if ($(this).hasClass('past-time')) {
+            e.preventDefault();
+            return false;
+        }
         $("#timeList li").removeClass("selected");
         $(this).addClass("selected");
         $("#roomresult").text("");

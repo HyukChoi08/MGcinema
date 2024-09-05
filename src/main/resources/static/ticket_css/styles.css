@@ -131,20 +131,39 @@ button:hover {
 
 .list-box li {
     padding: 10px;
-    cursor: pointer;
     border-bottom: 1px solid #475f77;
     justify-content: space-between;
     align-items: center;
     transition: background-color 0.3s;
 }
 #movieList li {
+	cursor: pointer;
 	display: flex;
 }
-
-.list-box li:hover {
-    background-color:#475f77 ;
+#dateList li {
+	cursor: pointer;
 }
-
+#theaterList li {
+	cursor: pointer;
+}
+#timeList li {
+	cursor: pointer;
+}
+#movieList li:hover {
+	background-color:#475f77 ;
+}
+#dateList li:hover {
+	background-color:#475f77 ;
+}
+#theaterList li:hover {
+	background-color:#475f77 ;
+}
+#timeList li:hover {
+	background-color:#475f77 ;
+}
+#timeList li.past-time:hover {
+    background-color: inherit;
+}
 .list-box li.selected {
     background-color: #475f77 ;
     color: #fff;
@@ -380,8 +399,8 @@ img {
 #btnclear:hover {
     color: red;
 }
-.past-time {
+#timeList li.past-time {
     color: gray;
     text-decoration: line-through;
-    pointer-events: none;
+    cursor: not-allowed;
 }
