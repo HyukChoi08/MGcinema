@@ -203,7 +203,6 @@ $(document).ready(function() {
 	    let roomId = $("#theaterList li.selected").text().split("-")[0];
 	    let date = $("#dateList li.selected").data("id");
 	    let begin = $("#timeList li.selected").data("id");
-	    console.log(begin);
 	    let lestseat = $("#timeList li.selected").text().split("  ")[1];
 	    let timetype = $("#timeList li.selected").text().split("  ")[2];
 	    let allseat = $("#timeList li.selected").data("alls");
