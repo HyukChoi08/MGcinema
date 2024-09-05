@@ -203,6 +203,7 @@ $(document).ready(function() {
 	    let roomId = $("#theaterList li.selected").text().split("-")[0];
 	    let date = $("#dateList li.selected").data("id");
 	    let begin = $("#timeList li.selected").data("id");
+	    console.log(begin);
 	    let lestseat = $("#timeList li.selected").text().split("  ")[1];
 	    let timetype = $("#timeList li.selected").text().split("  ")[2];
 	    let allseat = $("#timeList li.selected").data("alls");
@@ -211,19 +212,19 @@ $(document).ready(function() {
 	    let endtime = $("#timeList li.selected").attr("title");
 	    let moviename = $("#movieList li.selected").data("name");
 	    
-	    if (mname === "") {
+	    if (mname == "") {
 	        alert("영화를 선택해주세요");
 	        return;
 	    }
-	    if (date === "" || date === null) {
+	    if (date == "" || date == null) {
 	        alert("날짜를 선택해주세요");
 	        return;
 	    }
-	    if (roomId === "") {
+	    if (roomId == "") {
 	        alert("극장을 선택해주세요");
 	        return;
 	    }
-	    if (begin === "" || begin === null) {
+	    if (begin == "" || begin == null) {
 	        alert("시간을 선택해주세요");
 	        return;
 	    }
@@ -492,7 +493,7 @@ $(document).ready(function() {
                     let timeStatus = isPast ? ' (지나감)' : '';
                     let listItemClass = isPast ? 'past-time' : '';
                     
-                    timeList.append('<li class="' + listItemClass + '" data-timetype="' + times.timetype + '" data-alls="' + times.allseat + '" data-id="' + times.begintime + '" title="종료시간:' + times.endtime + '">' +
+                    timeList.append('<li class="' + listItemClass + '" data-timetype="' + times.timetype + '" data-alls="' + times.allseat + '" data-id="' + times.begintime + '" title="' + times.endtime + '">' +
                     		times.begintime + '  ' + times.lestseat + '석'+ '  ' + times.timetype + '</li>');
                     
                 });
