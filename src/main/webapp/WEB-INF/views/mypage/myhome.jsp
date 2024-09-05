@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <%@ page import="com.cinema.mypage.CustomerDTO"%>
 <%
 // 세션에서 cusrDTO 객체 가져오기
@@ -11,6 +12,7 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<script src="https://kit.fontawesome.com/3a115195d8.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/mypage_css/mypage.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,13 +29,24 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 			<img src="/mypage_image/OO.png" alt="프로필이미지" width="80" height="80" />
 
 			<div class="profile-info">
-				<h2 id="nickname"><%=customer.getNickname()%>님
+				
+				<h2>
+					<%=customer.getRealname()%> 님
 				</h2>
-				<p>
-					고객님은 <strong>일반</strong> 고객 입니다.
-				</p>
+				<div>
+					닉네임 :
+					
+					<%=customer.getNickname()%>
+					
+					<a href="/profile">_<i class="fa-solid fa-pen"></i></a>
+				</div>
+				<div>
+					아이디 :
+					<%=customer.getUid()%>
+				</div>
+				
 			</div>
-			<a href="/profile" class="button">닉네임 설정</a>
+			
 		</div>
 
 		<!-- 메인 컨테이너 -->
