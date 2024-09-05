@@ -29,19 +29,36 @@ public class ServiceController {
     public String showFAQPage(
             @RequestParam(value = "page", defaultValue = "1") int page,
             @RequestParam(value = "size", defaultValue = "10") int size,
+            @RequestParam(value = "search", defaultValue = "") String search,
+            @RequestParam(value = "selected", defaultValue = "") String selected, // 추가된 부분
             Model model) {
 
         int offset = (page - 1) * size;
-        List<FAQDTO> faqList = faqDAO.getAllFAQs(size, offset);
-        int totalFAQCount = faqDAO.getTotalFAQCount();
+        List<FAQDTO> faqList;
+        int totalFAQCount;
+
+        if (search.isEmpty() && selected.isEmpty()) {
+            faqList = faqDAO.getAllFAQs(size, offset);
+            totalFAQCount = faqDAO.getTotalFAQCount();
+        } else if (!search.isEmpty()) {
+            faqList = faqDAO.getFAQsByKeyword(search, size, offset);
+            totalFAQCount = faqDAO.getTotalFAQCountByKeyword(search);
+        } else {
+            faqList = faqDAO.getFAQsBySelected(selected, size, offset); // 선택된 항목으로 필터링
+            totalFAQCount = faqDAO.getTotalFAQCountBySelected(selected); // 선택된 항목으로 총 수 가져오기
+        }
+
         int totalPages = (int) Math.ceil((double) totalFAQCount / size);
 
         model.addAttribute("faqList", faqList);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("size", size);
+        model.addAttribute("search", search);
+        model.addAttribute("selected", selected); // 추가된 부분
         return "service/FAQ";
     }
+
     @GetMapping("/faqcreate")
     public String showFAQCreatePage(Model model) {
         model.addAttribute("faqDTO", new FAQDTO()); // 빈 FAQDTO 객체를 모델에 추가하여 폼에 바인딩

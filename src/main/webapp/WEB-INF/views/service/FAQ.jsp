@@ -65,30 +65,66 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         .search_area {
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-        }
-        .search_area input {
-            padding: 10px;
-            width: calc(100% - 120px);
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            margin-right: 10px;
-        }
-        .search_area button {
-            padding: 10px;
-            background-color: #e50914;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 100px;
-            font-size: 0.9em;
-        }
-        .search_area button:hover {
-            background-color: #d10813;
-        }
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center; /* 세로 중앙 정렬 */
+}
+
+.search_area input {
+    padding: 10px;
+    flex: 1; /* 버튼을 제외한 나머지 공간을 모두 차지하도록 설정 */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px; /* 버튼과의 간격 */
+}
+
+.search_area button {
+    padding: 10px;
+    background-color: #e50914;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100px;
+    font-size: 0.9em;
+}
+.searchtext {
+    margin-bottom: 20px;
+}
+
+.searchtext h3 {
+    margin-bottom: 1px;
+}
+
+.searchtext ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap; /* Wrap to the next line if space is insufficient */
+    gap: 1px; /* Space between the items */
+}
+
+.searchtext ul li {
+    margin: 0;
+}
+
+.searchtext ul li a {
+    display: block;
+    padding: 5px 10px;
+    background-color: #e50914;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    text-align: center;
+    width: 150px; /* Adjust width as needed */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.searchtext ul li a:hover {
+    background-color: black;
+}
+
         .c_tab_wrap {
             margin-bottom: 20px;
         }
@@ -146,7 +182,7 @@
             width: 15%;
         }
         .tbl_notice_list th:nth-child(5){
-        	width : 15%	
+            width : 15%;    
         }
         .paging {
             margin: 20px 0;
@@ -209,7 +245,6 @@
 </head>
 <body>
 
-    
     <!--<header class="header">
         <nav class="navbar">
             <h1><a href="/">MG Cinema</a></h1>
@@ -243,10 +278,30 @@
                     <p class="stit">회원님들께서 가장 자주 하시는 질문을 모았습니다.</p>
                 </div>
 
-                <div class="search_result">
-				 <a href="/faqcreate" class="button-link">+</a>
-                    총 <span class="num">${fn:length(faqList)}건</span>&nbsp;
+                <!-- 검색 영역 추가 -->
+                <div class="search_area">
+                    <form action="faq" method="get">
+                        <input type="text" name="search" placeholder="검색어를 입력하세요" value="${param.search}" />
+                        <button type="submit">검색</button>
+                    </form>
                 </div>
+
+                <div class="search_result">
+                    <a href="/faqcreate" class="btn-add">+</a>
+                   총 <span class="num">${totalFAQCount}건</span>&nbsp;
+                </div>
+                
+                <div class="searchtext">
+    <h3>관련 항목</h3>
+    <ul>
+        <li><a href="/faq?selected=홈페이지/모바일">홈페이지/모바일</a></li>
+        <li><a href="/faq?selected=예매/매표">예매/매표</a></li>
+        <li><a href="/faq?selected=결제수단">결제수단</a></li>
+        <li><a href="/faq?selected=영화관이용">영화관이용</a></li>
+        <li><a href="/faq?selected=특별관">특별관</a></li>
+    </ul>
+</div>
+
 
                 <div class="tbl_area">
                     <table class="tbl_notice_list">
@@ -273,7 +328,7 @@
                             <!-- FAQ 항목이 없을 때 -->
                             <c:if test="${empty faqList}">
                                 <tr>
-                                    <td colspan="4" style="text-align: center;">FAQ 항목이 없습니다.</td>
+                                    <td colspan="5" style="text-align: center;">FAQ 항목이 없습니다.</td>
                                 </tr>
                             </c:if>
                         </tbody>
@@ -282,15 +337,15 @@
 
                 <div class="paging">
                     <c:if test="${currentPage > 1}">
-                        <a href="/faq?page=${currentPage - 1}&size=${size}" class="btn-paging">이전</a>
+                        <a href="/faq?page=${currentPage - 1}&size=${size}&search=${param.search}" class="btn-paging">이전</a>
                     </c:if>
                     <ul>
                         <c:forEach var="i" begin="1" end="${totalPages}">
-                            <li><a href="/faq?page=${i}&size=${size}" class="${i == currentPage ? 'active' : ''}">${i}</a></li>
+                            <li><a href="/faq?page=${i}&size=${size}&search=${param.search}" class="${i == currentPage ? 'active' : ''}">${i}</a></li>
                         </c:forEach>
                     </ul>
                     <c:if test="${currentPage < totalPages}">
-                        <a href="/faq?page=${currentPage + 1}&size=${size}" class="btn-paging">다음</a>
+                        <a href="/faq?page=${currentPage + 1}&size=${size}&search=${param.search}" class="btn-paging">다음</a>
                     </c:if>
                 </div>
             </div>
