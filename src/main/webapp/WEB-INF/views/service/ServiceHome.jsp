@@ -271,8 +271,8 @@
                         <span class="tit">즐겨찾는질문</span>
                         <ul class="list"><br>
                             <li><a href="#">비밀번호 잃어버렸어요ㅋ</a></li>
-                            <li><a href="#">배고파요ㅋㅋ</a></li>
-                            <li><a href="#">집에보내주세요ㅋㅋ</a></li>
+                            <li><a href="#">팝콘에서 콩벌레나왔는데요?ㅋㅋ</a></li>
+                            <li><a href="#">우리애가 물건좀 슬쩍가져갈수있는거아니에요?맘카페에 퍼뜨릴게요</a></li>
                         </ul>
                     </div>
 
