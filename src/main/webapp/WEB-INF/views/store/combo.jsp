@@ -30,14 +30,15 @@ ul, li {
 }
 #container {
     display: flex;
-    flex-wrap: wrap;      /* 이미지 정렬을 위해 사용*/
-    justify-content: center; 
-    padding: 20px;
+    flex-wrap: wrap;      /* 이미지 정렬을 위해 사용 */
+    justify-content: center;  
     width: 1000px; 
     margin: 0 auto;   
-    /* 전체적인 컨테이너*/
+    background-color: black;
     margin-top: 150px; 
     margin-bottom: 335px;
+    border: 2px solid #808080; /* 회색 테두리 */
+    box-sizing: border-box; /* border와 padding을 포함한 너비 계산 */
 }
 #contents {
     flex: 1 1 200px; /* 유연한 크기 조정 */
@@ -72,7 +73,7 @@ ul, li {
     height: 1px; /* 선의 두께 설정 */
     width: 100%; /* 부모 요소의 전체 너비를 차지하도록 설정 */
     background-color:   grey; /* 선 색상 변경 */
-    margin-top: 3px; /* 상단 여백 추가 */
+    margin-top: 5px; /* 상단 여백 추가 */
     margin-bottom: 20px;
     position: relative; /* 상위 요소에 상대적으로 위치 */
 
@@ -267,7 +268,10 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
 .no-style-link:visited {
    color: inherit; /* 방문 후 색상 유지 */
 }
-
+ .li1{
+  margin-top:10px;
+  
+  }
 
     </style>
 </head>
@@ -296,7 +300,7 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
             <div class="separator1"></div> <!-- 선을 contegory_contents_wrap 아래에 위치 -->
             <div class="category_product_wrap">
                 <ul class="product_list">
-                    <li>
+                    <li class="li1">
                         <strong class="category_title">팝콘<strong class="category_dep">고소,달콤,짭짤한 맛까지, 다양하게 즐기세요.</strong><br>                                     
                         </strong> 
                         <div class="separator2"></div>

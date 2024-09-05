@@ -192,7 +192,11 @@ public class HomeController {
 	}
 	
     @PostMapping("/dostorepay")
-    public String dostorepay(@RequestParam("productData") String productData, Model model) {
+    public String dostorepay(@RequestParam("productData") String productData, Model model,HttpServletRequest req) {
+    	HttpSession session = req.getSession();
+  	    String customer_id = (String) session.getAttribute("uid");
+  	    System.out.println("cust"+customer_id);
+    	
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, Object> dataMap;
 
@@ -207,7 +211,7 @@ public class HomeController {
 
         // 변환된 데이터를 모델에 추가
     
-
+        model.addAttribute("uid",customer_id);
         model.addAttribute("items", dataMap.get("items"));
         model.addAttribute("totalPrice", dataMap.get("totalPrice"));
      

@@ -28,15 +28,15 @@ ul, li {
 
 #container {
     display: flex;
-    flex-wrap: wrap;      /* 이미지 정렬을 위해 사용*/
+    flex-wrap: wrap;      /* 이미지 정렬을 위해 사용 */
     justify-content: center; 
-    padding: 20px;
     width: 1000px; 
     margin: 0 auto;   
-    /* 전체적인 컨테이너*/
-    background-color:black;
+    background-color: black;
     margin-top: 150px; 
     margin-bottom: 335px;
+    border: 2px solid #808080; /* 회색 테두리 */
+    box-sizing: border-box; /* border와 padding을 포함한 너비 계산 */
 }
 #contents {
     flex: 1 1 200px; /* 유연한 크기 조정 */
@@ -66,12 +66,13 @@ ul, li {
     position: relative; /* 상위 요소에 상대적으로 위치 */
     margin-top: 20px; /* 간격 추가: .contegory_contents_wrap과의 간격 */
     background-color: grey;
+    height:2px;
 }
 .separator2{
     height: 1px; /* 선의 두께 설정 */
     width: 100%; /* 부모 요소의 전체 너비를 차지하도록 설정 */
     background-color:   grey; /* 선 색상 변경 */
-    margin-top: 3px; /* 상단 여백 추가 */
+    margin-top: 5px; /* 상단 여백 추가 */
     margin-bottom: 20px;
     position: relative; /* 상위 요소에 상대적으로 위치 */
 
@@ -359,7 +360,11 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
     cursor: default; /* 손가락 모양 커서를 기본 커서로 변경 */
     text-decoration: none; /* 링크의 기본 밑줄 제거 */
   }
-
+  .li1{
+  margin-top:10px;
+  
+  }
+ 
     </style>
 </head>
 <body>
@@ -387,7 +392,7 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
             <div class="separator1"></div> <!-- 선을 contegory_contents_wrap 아래에 위치 -->
             <div class="category_product_wrap">
                 <ul class="product_list">
-                    <li>
+                    <li class="li1">
                         <strong class="category_title">패키지<br>
                             <a href="/package" class="circle-button">+</a>
                         </strong> 
@@ -452,7 +457,7 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
                             </li>  
                         </ul>
                     </li>
-                    <li>
+                    <li class="li1">
                         <strong class="category_title">기프트 카드<br>
                             <a href="/giftcard" class="circle-button">+</a>
                         </strong>  
@@ -502,7 +507,7 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    <li class="li1">
                         <strong class="category_title">콤보<br>
                             <a href="/combo" class="circle-button">+</a>
                         </strong>
@@ -576,9 +581,10 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
 </script>
 <script>
 $(document).ready(function() {
+		
  	let customer_id= $('#userid').val();
  	console.log(customer_id);
- 	
+ 		
  	 function updateCartCount() {
          $.ajax({
              url: '/countcart',
@@ -590,8 +596,7 @@ $(document).ready(function() {
              }         
          })
      }
-
- 	 
+	 
  	 function checkItemInCart(item_id) {
          return $.ajax({
              url: '/checkitem', // 서버에서 장바구니에 아이템이 있는지 확인하는 엔드포인트
@@ -603,12 +608,19 @@ $(document).ready(function() {
  	 	 
      // 페이지 로드 시 카운트 업데이트
      updateCartCount();
-     
+                 
     	        $('.icon-left').on('click', function(event) {
     	            // 클릭 이벤트를 막고, 비동기 작업이 완료된 후 결과에 따라 결정합니다.
     	            event.preventDefault(); // 기본 동작을 막습니다.
     	            console.log('Icon left clicked');
 
+    	            if(customer_id==''){
+    	            	alert("로그인 후 이용해주세요")
+    	            	
+    	            	return false;
+    	            }
+    	            
+   	               	           	            
     	            var $productItem = $(this).closest('li.product');
     	            
     	            // li.product의 ID를 가져옵니다
@@ -697,9 +709,18 @@ let selectedItems = []; // 전역 변수로 선언
 
 $('.buyButton').on('click', function(e) {
     e.preventDefault(); // 링크의 기본 동작을 방지
+    
+    let customer_id=$('#userid').val();
+    
+    if(customer_id==''){
+    	alert("로그인 후 이용해주세요")
+    	
+    	return false;
+    }
+       
     let item_id = $(this).closest('.product').attr('id');
     console.log('item_id:', item_id);
-
+                           
     $.ajax({
         url: '/selectitem',
         type: 'POST',
