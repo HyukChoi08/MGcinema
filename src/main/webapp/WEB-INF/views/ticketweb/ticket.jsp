@@ -12,7 +12,7 @@
 <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
 <div class="maincontainer">
     <div class="container" id="selectionScreen">
-        <h1>영화 예매</h1> <button id="btnclear">초기화</button>
+        <h1>영화 예매</h1> <div id="btnclear">예매 초기화</div>
         <div class="list-container">
             <div class="list-box" id="movieList"><p>영화</p>
                 <ul></ul>
@@ -59,17 +59,23 @@
     
     <div class="foots">
         <div id="lastinfo" class="foots-container">
-            <div id="confirmBtn" style="display:none;">영화 선택 확인</div>
+            <div id="confirmBtn" style="display:none;" class="button-container">
+            	<div class="arrow-icon-b">➔</div>
+        		<div class="button-text">영화 선택</div>
+        	</div>
             <div id="movieimage"></div>
             <div id="movieresult">영화 정보</div>
             <div id="roomresult">극장 정보</div>
             <div id="seatresult">좌석 선택</div>
             <div id="priceresult">결제 정보</div>
             <div id="reserveBtn" class="button-container">
-            	<div class="arrow-icon">➔</div>
+            	<div class="arrow-icon-a">➔</div>
         		<div class="button-text">좌석선택</div>
         	</div>
-            <div id="submitBtn" style="display:none;">결제</div>
+            <div id="submitBtn" style="display:none;" class="button-container">
+            	<div class="arrow-icon-a">➔</div>
+        		<div class="button-text">결제이동</div>
+        	</div>
         </div>
     </div>
 </div>
@@ -523,10 +529,11 @@ $(document).ready(function() {
         roomresult.append('<p>일시 ' + date + ' ' + '(' +day+ ')' + time  + '</p>');
         
     });
-
-    $("#btnclear").click(function() {
+	
+    $(document).on("click", "#btnclear", function(){
     	window.location.href = '/ticket';
-	});
+    });
+
     
     function loadMovies() {
     	$.ajax({
