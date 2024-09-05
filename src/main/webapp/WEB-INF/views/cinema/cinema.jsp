@@ -17,6 +17,9 @@ small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form
     text-align:center;
     
 }
+body{
+	background-color:black;
+}
 a:visited {
             color: black;
 }
@@ -50,7 +53,7 @@ span{
            
 }
 .notice{
-	background-color:white;
+	background-color:black;
 	border:none;
 	width:1000px;
 	padding-bottom:20px;
@@ -81,8 +84,9 @@ span{
             
         }
 .item {		
+		 opacity: 0.9;
 		padding-left:10px;
-		border-left:7px solid #eef0a2b0;
+		border-left:7px solid #475f77;
 		line-height: 50px;
 		color: white;
         width: 100px;
@@ -100,25 +104,27 @@ span{
 	clear: both;
     padding-bottom: 50px;
     position: relative;
-    width: 1000px;
+    /* width: 1000px; */
     margin: auto;
-    margin-top:120px;
+    margin-top: 180px; 
 	margin-bottom:150px;
     height:100%;
 }
 .info {
+	margin:auto;
 	background-color:black;
-	width:1000px;
+	width:1500px;
 	height:150px;
 	color:white;
+	border-bottom:1px solid #808080;
 	/* position: absolute; */
 }
 .infoleft {
 	position: relative;
     float: left;
     font-size: 15px;
-    padding: 30px 0 0 20px;
-    width: 400px;
+    padding: 30px 20px 0 200px;
+    width: 600px;
     color: white;
     text-overflow: initial;
     white-space: initial;
@@ -128,9 +134,9 @@ span{
     position: relative;
     float: right;
     font-size: 15px;
-    width: 280px;
+    width: 500px;
     height: 98px;
-    padding: 30px 0 0 20px;
+    padding: 30px 0 0 30px;
     border-left: 1px solid rgba(255, 255, 255, 0.2);
     overflow: hidden;
     text-align:left;
@@ -169,6 +175,7 @@ span{
 }
 .calendar-body {
     padding: 10px;
+    background-color:black;
 }
 
 #calendar-table {
@@ -177,6 +184,7 @@ span{
 }
 
 #calendar-table th, #calendar-table td {
+	color:white;
     width: 14;
     text-align: center;
     padding: 10px;
@@ -185,8 +193,24 @@ span{
 .td-link{
  cursor: pointer;
  width:70px;
- border:1px solid black;
+ border:1px solid white;
+ 
 }
+.td-link a{
+ color:white;
+ 
+}
+.td-link:hover a{
+	background-color:#475f77;
+}
+.td-link:hover {
+    background-color:#475f77;
+ }
+#calendar-table thead th:hover {
+	cursor: pointer;
+	background-color:#475f77;
+}
+
 button {
     background: none;
     border: none;
@@ -200,9 +224,10 @@ button:focus {
 }
 .timelistdiv {
 
-	border-bottom:1px solid black;
-	border-top:1px solid black;
+	border-bottom:1px solid #808080;
+	border-top:1px solid #808080;
 	margin-bottom:20px;
+	color:white;
 	
 }
 .roomdiv {
@@ -212,7 +237,7 @@ button:focus {
 	margin-bottom:35px;
 }
 .timelistdiv a:visited{
-	 	color:black;
+	 	color:white;
 }
 .roomname {
 	font-size:15px;
@@ -226,57 +251,60 @@ button:focus {
 <body>
 <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
 <div id="contents">
-	<div class="container" style="border: none;position: relative; width:1000px; height:600px;margin:auto;">
-		<img src="room_image/로비2.jpeg" class="background-image" id="backgroundImage" alt="zzzz">
-	 	<div class="item" data-image="room_image/로비2.jpeg"><a href="#"><i>Lobby</i></a></div>
-	 	<div class="item" data-image="room_image/휴게소.jpeg"><a href="#"><i>Rest area</i></a></div>
-        <div class="item" data-image="room_image/프리미엄관.jpeg"><a href="#"><i>Premium</i></a></div>
-        <div class="item" data-image="room_image/입체음향.jpg"><a href="#"><i>Stereo</i></a></div>
-        <div class="item" data-image="room_image/우주관.jpeg"><a href="#"><i>Space</i></a></div>
-        <div class="item" data-image="room_image/야외가족관.jpeg"><a href="#"><i>Outdoor</i></a></div>
-        <div class="item" data-image="room_image/수족관.jpeg"><a href="#"><i>Aqua</i></a></div>
-        <div class="item" data-image="room_image/어린이01.jpg"><a href="#"><i>Child</i></a></div>        
+	<div class="container" style="border: none;position: relative; width:1500px; height:700px;margin:auto;">
+		<img src="room_image/로비5.jpg" class="background-image" id="backgroundImage" alt="zzzz">
+	 	<div class="item" data-image="room_image/로비5.jpg"><a href="#"><i>Lobby</i></a></div>
+	 	<div class="item" data-image="room_image/휴게소5.jpg"><a href="#"><i>Rest area</i></a></div>
+        <div class="item" data-image="room_image/프리미엄관5.jpg"><a href="#"><i>Premium</i></a></div>
+        <div class="item" data-image="room_image/판타지5.jpg"><a href="#"><i>Fantasy </i></a></div>
+        <div class="item" data-image="room_image/입체음향5.jpg"><a href="#"><i>Stereo</i></a></div>
+        <div class="item" data-image="room_image/스페이스5.jpg"><a href="#"><i>Space</i></a></div>
+        <div class="item" data-image="room_image/야외가족관5.jpg"><a href="#"><i>Outdoor</i></a></div>
+        <div class="item" data-image="room_image/수족관5.jpg"><a href="#"><i>Aqua</i></a></div>
+        <div class="item" data-image="room_image/어린이5.jpg"><a href="#"><i>Child</i></a></div>        
 	</div>
-	<div class="info">
-		<div class="infoleft">
-			주소: 화성시 목성구 태양로 29, 지구빌딩 1F<br>
-			고객센터 1544-1234<br>
-			여러가지 테마가 있는 어쩌구
-		</div>
-		<div class="inforight">
-			위치 / 주차안내&nbsp;&nbsp;<a class="link-more" href="/park" target="_blank" title="새창 열림"></a><br>
-			공지사항&nbsp;&nbsp;<a class="link-more" href="/news" target="_blank" title="새창 열림"></a>
-		</div>
-	</div>
-<div class="sect-schedule">
-	<div class="calendar-container">
-        <div class="calendar-body">
-            <table id="calendar-table">
-            	<input type="hidden" id="hiddendate">
-                <thead>
-                    <tr>
-                    	<td><button id="prev-month">&lt;</button></td>
-                        <th></th>
-                       	<th></th>
-                        <th></th>
-                        <th></th>
-                       	<th></th>
-                       	<th></th>
-                       	<th></th>
-                        <td><button id="next-month">&gt;</button></td>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-        	<div class="notice">
-				<a class="link-more" href="#" onclick="openPopup(); return false;"></a>&nbsp;&nbsp;관람등급안내
+		<div class="info">
+			<div class="infoleft">
+				여러분의 상상력을 자극하는 다양한 테마관으로 가득 찬 특별한 영화관입니다.<br><br>
+				주소: 화성시 목성구 태양로 29, 지구빌딩 1F<br>
+				고객센터 1544-1234<br>
+				총 18관 / 2000석 
 			</div>
-    </div>
-    <div id="timelist">
-    	
-    </div>
-</div>
-
+			<div class="inforight">
+				위치 / 주차안내&nbsp;&nbsp;<a class="link-more" href="/park" target="_blank" title="새창 열림"></a><br>
+				공지사항&nbsp;&nbsp;<a class="link-more" href="/news" target="_blank" title="새창 열림"></a>
+			</div>
+		</div>
+<div style="margin:auto; width:1000px">
+	<div class="sect-schedule">
+		<div class="calendar-container">
+	        <div class="calendar-body">
+	            <table id="calendar-table">
+	            	<input type="hidden" id="hiddendate">
+	                <thead>
+	                    <tr>
+	                    	<td><button id="prev-month">&lt;</button></td>
+	                        <th></th>
+	                       	<th></th>
+	                        <th></th>
+	                        <th></th>
+	                       	<th></th>
+	                       	<th></th>
+	                       	<th></th>
+	                        <td><button id="next-month">&gt;</button></td>
+	                    </tr>
+	                </thead>
+	            </table>
+	        </div>
+	        	<div class="notice">
+					<a class="link-more" href="#" onclick="openPopup(); return false;"></a>&nbsp;&nbsp;관람등급안내
+				</div>
+	    </div>
+	    <div id="timelist">
+	    	
+	    </div>
+	</div>
+	</div>
 </div>
 <%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
 </body>
