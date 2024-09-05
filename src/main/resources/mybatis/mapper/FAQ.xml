@@ -40,4 +40,34 @@
         DELETE FROM FAQ WHERE id = #{id}
     </delete>
 
+    <!-- 검색어를 기반으로 FAQ 목록을 가져오는 쿼리 -->
+    <select id="getFAQsByKeyword" parameterType="map" resultMap="FAQResultMap">
+        SELECT * FROM FAQ
+        WHERE title LIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY created_at DESC
+        LIMIT #{size} OFFSET #{offset}
+    </select>
+
+    <!-- 검색어를 기반으로 FAQ 총 개수를 가져오는 쿼리 -->
+    <select id="getTotalFAQCountByKeyword" parameterType="string" resultType="int">
+        SELECT COUNT(*)
+        FROM FAQ
+        WHERE title LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+    
+        <select id="getFAQsBySelected" resultType="com.cinema.service.FAQDTO">
+        SELECT *
+        FROM FAQ
+        WHERE selected = #{selected}
+        ORDER BY created_at DESC
+        LIMIT #{size} OFFSET #{offset}
+    </select>
+
+    <!-- 선택된 항목을 기반으로 FAQ 총 개수를 가져오는 쿼리 -->
+    <select id="getTotalFAQCountBySelected" resultType="int">
+        SELECT COUNT(*)
+        FROM FAQ
+        WHERE selected = #{selected}
+    </select>
+
 </mapper>

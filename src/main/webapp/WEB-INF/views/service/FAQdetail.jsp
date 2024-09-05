@@ -128,7 +128,7 @@
     </style>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
+<%--<%@ include file="/WEB-INF/views/header/header.jsp" %> --%> <!-- 헤더 포함 -->
     
     <!--<header class="header">
         <nav class="navbar">

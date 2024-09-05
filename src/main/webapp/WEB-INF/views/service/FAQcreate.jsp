@@ -69,6 +69,7 @@
     </style>
 </head>
 <body>
+
     <header>
         <h1>FAQ 생성</h1>
         <!-- FAQ 목록으로 돌아가기 링크 -->
@@ -82,7 +83,7 @@
             <option value="예매/매표">예매/매표</option>
             <option value="결제수단">결제수단</option>
             <option value="영화관이용">영화관이용</option>
-            <option value="기프트샵">기프트샵</option>
+            <option value="특별관">특별관</option>
             <option value="홈페이지/모바일">홈페이지/모바일</option>
         </select>
         

@@ -214,7 +214,7 @@
 </head>
 
 <body>
-<%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
+<%--<%@ include file="/WEB-INF/views/header/header.jsp" %> --%>
     
     <!--<header class="header">
         <nav class="navbar">

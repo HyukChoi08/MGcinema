@@ -115,7 +115,7 @@
     </style>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
+<%--<%@ include file="/WEB-INF/views/header/header.jsp" %> --%>
     
     <!--<header class="header">
         <nav class="navbar">
@@ -137,7 +137,7 @@
                         <li><a href="/serviceHome">고객센터 메인</a></li>
                         <li><a href="/faq">자주찾는 질문</a></li>
                         <li><a href="/news">공지/뉴스</a></li>
-                        <li><a href="/eaq">이메일 문의</a></li>
+                        <li><a href="inquiry">이메일 문의</a></li>
                     </ul>
                 </div>
             </div>
@@ -158,7 +158,6 @@
             </div>
         </div>
     </div>
-
     <footer>
         <%@ include file="/WEB-INF/views/footer/footer.jsp" %>
     </footer>

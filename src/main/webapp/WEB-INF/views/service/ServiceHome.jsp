@@ -13,10 +13,7 @@
             padding: 0;
             background-color: #f4f4f4; /* 페이지 배경색 */
         }
-        .profile-section img {
-            border-radius: 50%; /* 이미지 원형으로 만들기 */
-            margin-right: 15px; /* 이미지와 텍스트 사이 간격 */
-        }
+
         /* 상단 배너 스타일 */
         .banner {
             width: 100%;
@@ -36,35 +33,39 @@
             flex-direction: column;
             align-items: center;
         }
+
         /* 컨텐츠 영역 스타일 */
         #contents {
             width: 100%;
             display: flex;
         }
+
         /* 사이드바 스타일 */
         .sidebar {
-            width: 20%; /* 사이드바 너비 */
+            width: 20%;
             padding: 15px;
-            background-color: #f7f7f7; /* 사이드바 배경색 */
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* 사이드바 그림자 효과 */
-            height: fit-content; /* 사이드바의 높이를 내용에 맞추기 */
+            background-color: #f7f7f7;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            height: fit-content;
         }
+
         /* 사이드바 내 리스트 스타일 */
         .sidebar ul {
             list-style-type: none;
-            padding: 0; /* 기본 패딩 제거 */
+            padding: 0;
         }
         .sidebar ul li {
             margin-bottom: 15px;
         }
         .sidebar ul li a {
-            text-decoration: none; /* 링크 밑줄 제거 */
-            color: #333; /* 텍스트 색상 */
-            font-weight: bold; /* 텍스트 굵게 */
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
         }
         .sidebar ul li a:hover {
-            color: #e50914; /* 링크에 마우스 올렸을 때 색상 */
+            color: #e50914;
         }
+
         /* 메인 콘텐츠 스타일 */
         .col-detail {
             width: 75%;
@@ -72,67 +73,95 @@
             background-color: white;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
+
+        /* 검색 박스 스타일 */
+        .search_area {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .search_area input {
+            padding: 10px;
+            width: calc(100% - 120px);
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .search_area button {
+            padding: 10px;
+            background-color: #e50914;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100px;
+            font-size: 0.9em;
+        }
+        .search_area button:hover {
+            background-color: #d10813;
+        }
+
+        /* 체크박스 영역 */
         .c_check_warp {
             display: flex;
-            flex-direction: row; /* 자식 요소들을 수평으로 배치 */
-            flex-wrap: wrap; /* 자식 요소들이 컨테이너를 넘칠 경우 자동으로 줄바꿈 */
-            gap: 20px; /* 자식 요소 사이의 간격 설정 */
-            width: 100%; /* 전체 너비 사용 */
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 20px;
+            width: 100%;
         }
         .c_box {
-            flex: 1 1 30%; /* 각 박스가 30% 너비를 가짐 (반응형 디자인을 위한 비율 설정) */
+            flex: 1 1 30%;
             padding: 15px;
-            box-sizing: border-box; /* 패딩과 보더를 포함하여 너비 계산 */
+            box-sizing: border-box;
             background-color: #fff;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             border-radius: 5px;
-            align-items: flex-start; /* 수평 중앙 정렬에서 좌측 정렬로 변경 */
-            justify-content: flex-start; /* 수직 중앙 정렬에서 상단 정렬로 변경 */
-            text-align: left; /* 텍스트 좌측 정렬 */
+            align-items: flex-start;
+            justify-content: flex-start;
+            text-align: left;
         }
+
         /* 버튼 스타일 */
-        .button {
+        .button, .btn_add {
             background-color: #e50914;
             color: white;
-            padding: 5px 20px;
+            padding: 10px 15px;
             text-align: center;
-            border-radius: 5px;
+            border-radius: 4px;
             text-decoration: none;
             display: inline-block;
             margin-top: 10px;
         }
-        .button:hover {
+        .button:hover, .btn_add:hover {
             background-color: #d10813;
         }
+
         /* 텍스트 링크 스타일 */
-        .c_qu a, .service_area .list a, .notice_area a, .shortcu_area .round {
+        .c_qu a, .service_area .list a, .notice_area a {
             color: #007bff;
             text-decoration: none;
         }
-        .c_qu a:hover, .service_area .list a:hover, .notice_area a:hover, .shortcu_area .round:hover {
+        .c_qu a:hover, .service_area .list a:hover, .notice_area a:hover {
             text-decoration: underline;
         }
+
+        /* 고객 알림 영역 */
         .customer_notice_area {
             margin-bottom: 20px;
             padding: 10px;
             background-color: #f7f7f7;
             border: 1px solid #ddd;
             border-radius: 5px;
-            display : flex;
-            gap : 20px;
-        }
-        .customer_notice_area ul {
-            list-style-type: none; /* 기본 점 스타일 제거 */
-            padding: 0;
-            margin: 0;
+            display: flex;
+            gap: 20px;
         }
         .service_area, .notice_area {
-            flex: 1; /* 두 요소가 동일한 비율로 공간을 차지하도록 설정 */
+            flex: 1;
             padding: 15px;
             background-color: white;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             border-radius: 5px;
-            text-align: left; /* 텍스트 좌측 정렬 */
+            text-align: left;
         }
         .service_area .tit, .notice_area .tit {
             font-size: 1.2em;
@@ -147,6 +176,7 @@
         .notice_area .more:hover {
             text-decoration: underline;
         }
+
         /* 단축키 영역 스타일 */
         .shortcu_area ul {
             list-style-type: none;
@@ -169,9 +199,7 @@
         .shortcu_area .round.on {
             background-color: black;
         }
-        .c_tit .emoji {
-            font-size: 2em; /* 이모티콘 크기 조정 */
-        }
+
         footer {
             background-color: white;
             text-align: center;
@@ -207,7 +235,7 @@
                 <div class="c_check_warp">
                     <div class="c_box qna_search">
                         <strong class="c_tit"><span class="emoji">🔍<br></span>자주찾는 질문 빠른검색</strong>
-                        <div class="search_box">
+                        <div class="search_area">
                             <input id="searchtext" type="text" placeholder="검색어를 입력해 주세요." />
                             <button type="button" class="btn_search">검색</button>
                         </div>
@@ -223,12 +251,12 @@
                     <div class="c_box email_inquiry">
                         <strong class="c_tit"><span class="emoji">📧</span><br>이메일 문의</strong><br><br>
                         <span class="c_txt">24시간 365일 언제든지 문의해주세요.</span>
-                        <br><br><a href="inquirywrite">문의하기</a>
+                        <br><br><a href="inquirywrite" class="button">문의하기</a>
                     </div>
                     <div class="c_box my_advice">
                         <strong class="c_tit"><span class="emoji">🧐</span><br>내 상담 내역 확인</strong><br><br>
                         <span class="c_txt">이메일 문의 조회입니다.</span><br>
-                        <br><a href="inquiry">문의내역 조회</a>
+                        <br><a href="inquiry" class="button">문의내역 조회</a>
                     </div>
                 </div>
 
@@ -236,26 +264,37 @@
                     <div class="service_area">
                         <span class="tit">즐겨찾는질문</span>
                         <ul class="list"><br>
-                            <li><a href="#">아이디 <br>비밀번호 찾기</a></li><br>
-                            <li><a href="reservation">예매내역 <br>예매취소 확인</a><br>
-                            <br><li><a href="payment">결제 내역 확인</a></li>
+                            <li><a href="#">아이폰 비밀번호 잊어버린 경우</a></li>
+                            <li><a href="#">계정 잠금 해제 방법</a></li>
+                            <li><a href="#">해외 결제 관련 안내</a></li>
                         </ul>
                     </div>
+
                     <div class="notice_area">
-                          <span class="tit">공지/뉴스</span>
-                        <ul class="txt">
-                            <c:forEach var="news" items="${newsList}">
-                                <li><a href="#">${news.title}</a><span class="day">${news.createdAt}</span></li>
-                            </c:forEach>
+                        <span class="tit">공지사항</span>
+                        <ul class="list">
+                            <li><a href="#">9월 프로모션 안내</a></li>
+                            <li><a href="#">서버 점검 공지</a></li>
+                            <li><a href="#">고객센터 운영시간 변경 안내</a></li>
                         </ul>
-                        <a class="more" href="news">더보기</a>
+                        <a href="notice" class="more">더보기</a>
                     </div>
+                </div>
+
+                <div class="shortcu_area">
+                    <div class="tit_shortcut">단축키 안내</div>
+                    <ul>
+                        <li><a href="javascript:void(0);" class="round">F1</a> : 도움말</li>
+                        <li><a href="javascript:void(0);" class="round">F2</a> : 새로고침</li>
+                        <li><a href="javascript:void(0);" class="round">F3</a> : 검색</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
+
     <footer>
-        <%@ include file="/WEB-INF/views/footer/footer.jsp" %>
+        <!-- 푸터 내용 -->
     </footer>
 </body>
 </html>
