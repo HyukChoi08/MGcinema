@@ -30,6 +30,7 @@
 		and a.movie_id=#{movieId}
 		and a.moviedate=#{date}
 		and b.sname=#{roomId}
+		order by a.begintime
     </select>
 
     <insert id="reserve">
