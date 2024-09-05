@@ -187,6 +187,7 @@ button:hover {
 .seat-selection {
     display: none;
     width: 100%;
+    height: 450px;
     margin-top: 20px;
     background-color:black;
     padding: 5px;

@@ -11,12 +11,12 @@
     </select>
 
     <select id="getTheaters" resultType="com.cinema.ticket.theaterDTO">
-        select b.sname, b.seatlevel from schedules a, room b
+        select b.id, b.sname, b.seatlevel from schedules a, room b
 		where a.room_id = b.id
 		and movie_id=#{movieId}
 		and moviedate=#{date}
-		group by sname, seatlevel
-		order by b.sname
+		group by sname, seatlevel, b.id
+		order by b.id
     </select>
 
     <select id="getDates" resultType="string">
