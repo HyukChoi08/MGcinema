@@ -16,7 +16,7 @@
             padding: 0;
             background-color: #f4f4f4;
         }
-        .banner {
+        .banner {	
             width: 100%;
             background-color: #e50914;
             color: white;
@@ -46,6 +46,7 @@
         .sidebar ul {
             list-style-type: none;
             padding: 0;
+             text-align: left;
         }
         .sidebar ul li {
             margin-bottom: 15px;
@@ -92,39 +93,34 @@
     margin-bottom: 20px;
 }
 
-.searchtext h3 {
-    margin-bottom: 1px;
-}
-
 .searchtext ul {
     list-style-type: none;
     padding: 0;
     display: flex;
-    flex-wrap: wrap; /* Wrap to the next line if space is insufficient */
-    gap: 1px; /* Space between the items */
-}
-
-.searchtext ul li {
+    border-bottom: 2px solid #e50914;
     margin: 0;
 }
 
-.searchtext ul li a {
+.searchtext li {
+    margin: 0;
+}
+
+.searchtext a {
     display: block;
-    padding: 5px 10px;
-    background-color: #e50914;
-    color: white;
+    padding: 10px;
     text-decoration: none;
-    border-radius: 4px;
+    color: #333;
+}
+
+.searchtext a:hover {
+    background-color: #f0f0f0;
+}
+
+.searchtext li.on a {
     font-weight: bold;
-    text-align: center;
-    width: 150px; /* Adjust width as needed */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid #e50914;
 }
-
-.searchtext ul li a:hover {
-    background-color: black;
-}
-
+	
         .c_tab_wrap {
             margin-bottom: 20px;
         }
@@ -245,17 +241,6 @@
 </head>
 <body>
 
-    <!--<header class="header">
-        <nav class="navbar">
-            <h1><a href="/">MG Cinema</a></h1>
-            <ul class="nav-links">
-                <li><a href="/login">로그인</a></li>
-                <li><a href="/signup">회원가입</a></li>
-                <li><a href="/myhome">My페이지</a></li>
-                <li><a href="/serviceHome">고객센터</a></li>
-            </ul>
-        </nav>
-    </header> -->
 
     <div id="container">
         <div id="contents">
@@ -294,8 +279,9 @@
                 <div class="searchtext">
     <h3>관련 항목</h3>
     <ul>
+    	<li><a href="/faq">전체</a></li>
         <li><a href="/faq?selected=홈페이지/모바일">홈페이지/모바일</a></li>
-        <li><a href="/faq?selected=예매/매표">예매/매표</a></li>
+        <li><a href="/faq?selected=예매/환불">예매/환불</a></li>
         <li><a href="/faq?selected=결제수단">결제수단</a></li>
         <li><a href="/faq?selected=영화관이용">영화관이용</a></li>
         <li><a href="/faq?selected=특별관">특별관</a></li>
@@ -351,7 +337,6 @@
             </div>
         </div>
     </div>
-
     <footer>
     
     </footer>

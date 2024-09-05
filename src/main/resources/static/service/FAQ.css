@@ -1,0 +1,263 @@
+@charset "UTF-8";
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.banner {
+    width: 100%;
+    background-color: #e50914;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+#container {
+    max-width: 1200px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#contents {
+    width: 100%;
+    display: flex;
+}
+
+.sidebar {
+    width: 20%;
+    padding: 15px;
+    background-color: #f7f7f7;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 15px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.sidebar ul li a:hover {
+    color: #e50914;
+}
+
+.col-detail {
+    width: 75%;
+    padding: 15px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.search_area {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.search_area input {
+    padding: 10px;
+    flex: 1;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.search_area button {
+    padding: 10px;
+    background-color: #e50914;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100px;
+    font-size: 0.9em;
+}
+
+.searchtext {
+    margin-bottom: 20px;
+}
+
+.searchtext ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    border-bottom: 2px solid #e50914;
+    margin: 0;
+}
+
+.searchtext li {
+    margin: 0;
+}
+
+.searchtext a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.searchtext a:hover {
+    background-color: #f0f0f0;
+}
+
+.searchtext li.on a {
+    font-weight: bold;
+    border-bottom: 2px solid #e50914;
+}
+
+.c_tab_wrap {
+    margin-bottom: 20px;
+}
+
+.c_tab_wrap ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    border-bottom: 2px solid #e50914;
+    margin: 0;
+}
+
+.c_tab_wrap li {
+    margin: 0;
+}
+
+.c_tab_wrap a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.c_tab_wrap a:hover {
+    background-color: #f0f0f0;
+}
+
+.c_tab_wrap li.on a {
+    font-weight: bold;
+    border-bottom: 2px solid #e50914;
+}
+
+.search_result {
+    margin-bottom: 20px;
+}
+
+.tbl_area {
+    margin-bottom: 20px;
+}
+
+.tbl_notice_list {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tbl_notice_list th, .tbl_notice_list td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.tbl_notice_list th {
+    background-color: #f0f0f0;
+}
+
+.tbl_notice_list th:nth-child(1) {
+    width: 10%; 
+}
+
+.tbl_notice_list th:nth-child(2) {
+    width: 20%; 
+}
+
+.tbl_notice_list th:nth-child(3) {
+    width: 40%;
+}
+
+.tbl_notice_list th:nth-child(4) {
+    width: 15%;
+}
+
+.tbl_notice_list th:nth-child(5){
+    width : 15%;    
+}
+
+.paging {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.paging ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    margin: 0;
+}
+
+.paging li {
+    margin: 0 5px;
+}
+
+.paging a {
+    text-decoration: none;
+    color: #007bff;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.paging a:hover {
+    background-color: #f0f0f0;
+}
+
+.paging .btn-paging {
+    background-color: #e50914;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin: 0 5px;
+}
+
+.paging .btn-paging:hover {
+    background-color: #d10813;
+}
+
+.btn-add {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.btn-add:hover {
+    background-color: #45a049;
+}
+
+footer {
+    background-color: white;
+    text-align: center;
+    padding: 10px 0;
+    border-top: 1px solid #ddd;
+}

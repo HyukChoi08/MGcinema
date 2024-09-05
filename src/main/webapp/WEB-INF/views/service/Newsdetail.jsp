@@ -42,6 +42,7 @@
         .sidebar ul {
             list-style-type: none;
             padding: 0;
+             text-align: left;
         }
         .sidebar ul li {
             margin-bottom: 15px;
@@ -68,6 +69,7 @@
             font-size: 1.5em;
             font-weight: bold;
             margin: 0;
+             text-align: left;
         }
         .customer_top .stit {
             color: #777;
@@ -78,9 +80,13 @@
         }
         .view_area p {
             line-height: 1.6;
+            text-align: left; /* 텍스트 왼쪽 정렬 */
+        }
+        .col-detail p {
+            text-align: left; /* 조회수 왼쪽 정렬 */
         }
         .btn-group {
-            text-align: center;
+            text-align: center; /* 버튼 그룹을 중앙 정렬 */
             margin-top: 20px;
         }
         .btn-group button {
@@ -106,12 +112,7 @@
         .btn-group button:hover {
             opacity: 0.9;
         }
-        footer {
-            background-color: white;
-            text-align: center;
-            padding: 10px 0;
-            border-top: 1px solid #ddd;
-        }
+        
     </style>
 </head>
 <body>
@@ -137,7 +138,7 @@
                         <li><a href="/serviceHome">고객센터 메인</a></li>
                         <li><a href="/faq">자주찾는 질문</a></li>
                         <li><a href="/news">공지/뉴스</a></li>
-                        <li><a href="inquiry">이메일 문의</a></li>
+                        <li><a href="/inquiry">이메일 문의</a></li>
                     </ul>
                 </div>
             </div>

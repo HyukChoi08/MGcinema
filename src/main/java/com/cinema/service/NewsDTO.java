@@ -10,6 +10,6 @@ public class NewsDTO {
     private String content;
     private String created_at;
     private int views;
-    
+    private String selected;
     
 }

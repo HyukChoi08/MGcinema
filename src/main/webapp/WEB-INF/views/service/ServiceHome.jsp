@@ -234,18 +234,24 @@
             <div class="col-detail">
                 <div class="c_check_warp">
                     <div class="c_box qna_search">
-                        <strong class="c_tit"><span class="emoji">🔍<br></span>자주찾는 질문 빠른검색</strong>
-                        <div class="search_area">
-                            <input id="searchtext" type="text" placeholder="검색어를 입력해 주세요." />
-                            <button type="button" class="btn_search">검색</button>
-                        </div>
+    <strong class="c_tit">
+        <span class="emoji">🔍<br></span>자주찾는 질문 빠른검색
+    </strong>
+    <div class="search_area">
+        <form action="faq" method="get" style="display: flex; align-items: center; width: 100%;">
+            <input id="searchtext" type="text" name="search" placeholder="검색어를 입력해 주세요." style="flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+            <button type="submit" class="btn_search" style="margin-left: 8px; padding: 8px 16px; border: none; background-color: #007bff; color: #fff; border-radius: 4px; cursor: pointer;">
+                검색
+            </button>
+</div>
+
                         <br>
                         <div class="c_qu">
-                            <a href="faq">현금영수증</a>&nbsp;
-                            <a href="faq">관람권</a>&nbsp;
-                            <a href="faq">예매</a>&nbsp;
-                            <a href="faq">환불</a>&nbsp;
-                            <a href="faq">취소</a>
+                            <a href="faq">홈페이지/모바일</a>&nbsp;
+                            <a href="faq">예매/환불</a>&nbsp;
+                            <a href="faq">결제수단</a>&nbsp;
+                            <a href="faq">영화관이용</a>&nbsp;
+                            <a href="faq">특별관</a>
                         </div>
                     </div>
                     <div class="c_box email_inquiry">
@@ -264,9 +270,9 @@
                     <div class="service_area">
                         <span class="tit">즐겨찾는질문</span>
                         <ul class="list"><br>
-                            <li><a href="#">아이폰 비밀번호 잊어버린 경우</a></li>
-                            <li><a href="#">계정 잠금 해제 방법</a></li>
-                            <li><a href="#">해외 결제 관련 안내</a></li>
+                            <li><a href="#">비밀번호 잃어버렸어요ㅋ</a></li>
+                            <li><a href="#">배고파요ㅋㅋ</a></li>
+                            <li><a href="#">집에보내주세요ㅋㅋ</a></li>
                         </ul>
                     </div>
 
@@ -281,15 +287,7 @@
                     </div>
                 </div>
 
-                <div class="shortcu_area">
-                    <div class="tit_shortcut">단축키 안내</div>
-                    <ul>
-                        <li><a href="javascript:void(0);" class="round">F1</a> : 도움말</li>
-                        <li><a href="javascript:void(0);" class="round">F2</a> : 새로고침</li>
-                        <li><a href="javascript:void(0);" class="round">F3</a> : 검색</li>
-                    </ul>
-                </div>
-            </div>
+                
         </div>
     </div>
 
