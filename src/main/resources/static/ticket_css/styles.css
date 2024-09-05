@@ -18,7 +18,7 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 60px;
+    margin-top: 80px;
     margin-bottom: 40px;
     padding-top: 60px;
     padding-bottom: 40px;
@@ -299,6 +299,7 @@ img {
 }
 
 #theaterInfo, #movieTime, #personInfo {
+	height:8px;
 	font-size: 12px;
 }
 
