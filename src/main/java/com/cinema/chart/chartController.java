@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class chartController {
@@ -19,6 +20,7 @@ public class chartController {
 @Autowired chartArrayDAO cadao;	
 @Autowired commentArrayDAO commentadao;
 @Autowired chartPutCommentDAO cpcdao;
+@Autowired chartappearanceinfoDAO cainfodao;
 
 @GetMapping("/chart")
 public String test() {
@@ -27,16 +29,19 @@ public String test() {
 
 @GetMapping("/chartList1")
 public String chartList1(HttpServletRequest req, Model model) {
+	HttpSession session = req.getSession();
 	int id = Integer.parseInt(req.getParameter("id"));
+	session.setAttribute("dataId", id);
 	System.out.println("id"+id);
 	
 	String archart = cdao.chartList2(id);
 	model.addAttribute("chartList2",archart);
 	ArrayList<chartDTO> putchart = cdao.chartList3(id);
 	model.addAttribute("chartList3", putchart);
+	ArrayList<chartappearanceinfoDTO> putinfo =cainfodao.chartappearanceinfo();
+	model.addAttribute("cainfo", putinfo);
 	return "chart/chartList1";
 }
-
 @PostMapping("/chartList")//무비 차트 정렬시키는것
 @ResponseBody
 public String chartList() {
@@ -160,4 +165,5 @@ public String deletereview (HttpServletRequest req, Model model) {
 	cpcdao.deletereview(id);
 	return "ok";
 }
+
 }

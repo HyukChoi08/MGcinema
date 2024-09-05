@@ -33,7 +33,9 @@
             margin: 0; /* 기본 마진 제거 */
             list-style-type: none; /* 숫자 지우는 것 */
         }
-
+	#appearinfo{
+	display:none;
+	}
 .comment-list-container {
     display: flex; /* 플렉스 레이아웃 활성화 */
     flex-direction: column; /* 아이템을 세로로 정렬 */
@@ -80,13 +82,13 @@
                     <div>
                         <ul class="flex-container">
                             <li>상세정보|</li>
-                            <li>감독/출연|</li>
+                            <li id="apinfo"><a href="/chartList1?id=${sessionScope.dataId}#menu">감독/출연|</a></li>
                             <li>스틸컷|</li>
                             <li>평점/리뷰|</li>
                             <li>상영시간</li>
                         </ul>
                     </div>
-                    <div style="width:670px">${chartList3.movieinfo}</div>
+                    <div style="width:670px" id="movieinfo">${chartList3.movieinfo}</div>
                     <div>평점/리뷰
                         <span>
                             <div>
@@ -110,9 +112,17 @@
                     <div>
                         <ul id="paging"></ul>
                     </div>
+
                 </div>
             </div>
         </div>
+            
+    </c:forEach>
+    <c:forEach items="${cainfo}" var="cainfo">
+                        <div id="appearinfo">
+                    	${cainfo.prod}<img src=${cainfo.image_path}>
+                    	${cainfo.actor}
+                    </div>
     </c:forEach>
     
     <%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
@@ -243,7 +253,16 @@
                     }
                 });
             });
-
+        
+        $(document).on('click', '#apinfo', function() {
+            $('#review').hide();
+            $('#paging').hide();
+            $('#comment').hide();
+            $('#commentList').hide();
+            $('#commentArray').hide();
+            $('#movieinfo').hide();
+            $('#appearinfo').show();
+        });
         function loadreview(page = 1) {
             $.ajax({
                 url: '/insertselectcomment',
@@ -291,6 +310,7 @@
         $(document).ready(function() {
             loadreview();
         });
+        
     </script>
 </body>
 </html>
