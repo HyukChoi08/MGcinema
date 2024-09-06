@@ -590,7 +590,7 @@ $(document).ready(function() {
         dateList.empty();
         
         let currentDate = new Date();
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 7; i++) {
             let newDate = new Date(currentDate);
             newDate.setDate(currentDate.getDate() + i);
 

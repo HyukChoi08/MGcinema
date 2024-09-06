@@ -127,6 +127,7 @@ public class TicketController {
         model.addAttribute("datetime", datetime);
         
         String orderId = UUID.randomUUID().toString();
+        
         model.addAttribute("orderId", orderId);
         return "ticketweb/checkout";
     }
