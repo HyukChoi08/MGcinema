@@ -13,4 +13,7 @@ public interface logDAO {
     int checkUidExists(String uid); // 아이디 중복 체크
     
     String getNickname(String a);
+	String getFindId (String z, String a, String b);
+	
+	String getFindP (String z, String a, String b);
 }

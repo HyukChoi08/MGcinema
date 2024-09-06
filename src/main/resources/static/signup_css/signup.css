@@ -4,6 +4,7 @@
     padding: 20px;
     margin-top: 150px; /* 상단 여백 추가 ->> 이게 다른페이지들에 다 있으면 좋겠네! */
     margin-bottom: 0px;
+    background-color: #000000;
 }
 
 .form-group {
@@ -14,9 +15,13 @@ form {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    border: 1px solid #ddd;
+    border: 1px solid #808080;
     border-radius: 8px;
-    background-color: #f9f9f9;
+    background-color: black;
+}
+
+h2 {
+	color: white;
 }
 
 label {
@@ -24,6 +29,7 @@ label {
     margin-bottom: 5px;
     font-weight: bold;
     text-align: center;
+    color: white;
 }
 
 input {
@@ -34,6 +40,8 @@ input {
     border-radius: 4px;
     box-sizing: border-box;
     text-align: center;
+    
+    color: black; /* 입력 글자 색상 검은색으로 설정 */
 }
 
 .agree-checkbox {
@@ -44,6 +52,7 @@ input {
 .agree-checkbox input[type="checkbox"] {
     width: 20px;
     margin-right: 10px; /* 체크박스와 라벨 사이의 간격 */
+    
 }
 
 input::placeholder {
@@ -52,7 +61,7 @@ input::placeholder {
 
 button {
     padding: 10px 20px;
-    background-color: #000000;
+    background-color: #3a3d3f;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -60,9 +69,12 @@ button {
 }
 
 button:hover {
-    background-color: #3a3d3f;
+    background-color: #808080;
 }
 
+.form{
+	border:none;
+}
 .error-message {
     color: red;
     margin-top: 10px;
@@ -77,6 +89,7 @@ button:hover {
     margin-bottom: 20px;
     padding-bottom: 10px;
     border-bottom: 2px solid #ddd;
+    color: white;
 }
 
 .step {
@@ -86,11 +99,12 @@ button:hover {
     padding: 5px 0;
     cursor: pointer;
     transition: all 0.3s ease;
+
 }
 
 .step.active {
     border-bottom: 3px solid #000000;
-    color: #000000;
+    color: white;
 }
 
 /* 웹 화면 여백 조정 */
@@ -104,6 +118,7 @@ button:hover {
 .favorite-group {
     display: flex;
     flex-direction: column;
+    
 }
 
 .favorite-group-top,
@@ -162,3 +177,7 @@ button:hover {
     display: none; 기본적으로 숨김 상태
 }
  */
+ 
+ *{
+ color: white;
+ }

@@ -36,14 +36,14 @@
                     <h3>동의 거부 권리</h3>
                     <p>이용자는 개인정보 수집 및 이용에 대해 동의를 거부할 권리가 있으나, <br />
                     동의 거부 시 회원가입 및 회원전용서비스 (VOD) 이용이 제한됩니다.</p>
-
+                    
                     <div class="agree-checkbox">
                         <input type="checkbox" id="agree" name="agree">
                             ${agreed ? 'checked' : ''}
                         <label for="agree">위 약관에 동의합니다.</label>
                     </div>
-                    <br />
-                    <form action="/signupPost" method="post">
+                    
+                    <form class="form" action="/signupPost" method="post">
                     <input type="hidden" name="currentStep" value="2">
                         <button id="agreed" type="submit">다음 단계</button>
                     </form>
@@ -57,7 +57,7 @@
                     </div>
                     <div class="form-group">
                         <label for="email">e-mail</label>
-                        <input type="email" id="email" name="email" value="${formData.email}" placeholder="(필수)" required>
+                        <input type="email" id="email" name="email" value="${formData.email}" placeholder="(필수)" required autocomplete="email">
                     </div>
                     <div class="form-group">
                         <label for="uid">아이디</label>
@@ -65,18 +65,18 @@
                     </div>
                     <div class="form-group">
                         <label for="passwd">비밀번호</label>
-                        <input type="password" id="passwd" name="passwd" value="${formData.passwd}" placeholder="(필수)" required>
+                        <input type="password" id="passwd" name="passwd" value="${formData.passwd}" placeholder="(필수)" required autocomplete="new-password">
                     </div>
                     <div class="form-group">
                         <label for="passwd2">비밀번호 확인</label>
-                        <input type="password" id="passwd" name="passwd2" value="${formData.passwd2}" placeholder="(필수)" required>
+                        <input type="password" id="passwd2" name="passwd2" value="${formData.passwd2}" placeholder="(필수)" required autocomplete="new-password">
                     </div>
                     <div class="form-group">
                         <label for="birthday">생년월일</label>
                         <input type="date" id="birthday" name="birthday" value="${formData.birthday}" placeholder="생년월일 (필수)" required>
                     </div>
                     <div class="form-group">
-                        <label for="tellecom">통신사</label><br />
+                        <label>통신사</label><br />
                         <div class="tellecom-group">
                             <div class="tellecom-group-top">
                                 <label>
@@ -163,18 +163,20 @@
                     </div>
                     <input type="hidden" name="currentStep" value="3">
                     <button type="submit" id="signup" name="signup">회원가입</button>
-                </form>
+                </form>     
             </c:when>
+         
             <c:when test="${currentStep == 3}">
-                <div>
-                    회원가입이 성공적으로 완료되었습니다. <br /><br />
-                    <form action="/login">
+                <div style="height:700px;">
+                    회원가입이 성공적으로 완료되었습니다. <br />
+                    <form class="form" action="/login">
                         <button type="submit">로그인 페이지로 이동</button>
                     </form>
                 </div>
             </c:when>
+          
         </c:choose>
-
+	
         <c:if test="${not empty error}">
             <div class="error-message">${error}</div>
         </c:if>

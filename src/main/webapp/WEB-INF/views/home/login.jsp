@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,15 +19,16 @@
             </div>
             <div class="form-group">
                 <label for="password">비밀번호</label>
-                
                 <input type="password" id="password" name="passwd" placeholder="비밀번호를 입력하세요." required> <!-- JSP와 컨트롤러에서 사용하는 이름 일치 --> 
- 
-
             </div>
             <button type="submit">로그인</button>
             <c:if test="${not empty error}">
                 <p class="error-message">${error}</p>
             </c:if>
+            <div class="login-links">
+            	<a href="/findId">아이디 찾기</a> | 
+            	<a href="/findPassword">비밀번호 찾기</a>
+        	</div>
         </form>
     </div>
      <%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->

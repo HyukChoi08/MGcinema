@@ -18,4 +18,22 @@
         select nickname from customer
         where uid = #{param1}
 	</select>
+	
+	
+ 	 <select id="getFindId" resultType="String">
+        SELECT uid
+        FROM customer
+        WHERE realname = #{param1}
+          AND birthday = #{param2}
+          AND mobile = #{param3}
+     </select>
+     
+     <select id="getFindP" resultType="String">
+        SELECT passwd
+        FROM customer
+        WHERE uid = #{param1}
+          AND birthday = #{param2}
+          AND mobile = #{param3}
+    </select>
+ 	
 </mapper>
