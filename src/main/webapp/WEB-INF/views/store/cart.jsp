@@ -118,11 +118,13 @@ vertical-align: middle; /* 수직 중앙 정렬 */
     position: relative;
 }
 .cart_step div{
+   	margin-left: 90px; /* 좌측 여백 */
+    margin-right: 90px; /* 우측 여백 */
     display: block;
     font-size: 16px;
     color: #666;
     margin-bottom: 5px;
-    margin-right: 10px; /* STEP과 화살표 사이의 마진 */
+   
 }
 
 .cart_step li strong {
@@ -403,7 +405,7 @@ color:black;
                             </div>
                         </td>
                         <td class="qty">
-                            <input type="number"  min="1" class="qty-input" style="width:50px;" value="${cart.qty}">
+                            <input type="number"  min="1"  max="10" class="qty-input" style="width:50px;" value="${cart.qty}">
                         </td>
                         <td class="total">${cart.total}</td>
                         <td class="choice">
@@ -451,7 +453,6 @@ color:black;
 <script>
 $(document).ready(function() {
 	
-
 	 let customer_id=$('#gg').val();
 	
 	 function updateCartCount() {
@@ -477,10 +478,7 @@ $(document).ready(function() {
  	 	 
      // 페이지 로드 시 카운트 업데이트
      updateCartCount();
-    
- 
-
-																
+    																
     function formatNumber(number) {
         return number.toLocaleString(); // 숫자를 쉼표로 포맷
     }
@@ -563,6 +561,8 @@ $(document).ready(function() {
         $('.item-checkbox').prop('checked', checked);
         calculateTotal();
     });
+    
+    $('#allcheck').prop('checked', false).trigger('click');
 
     $('#pay').on('click', function() {
         let selectedItems = [];
@@ -651,9 +651,11 @@ $(document).ready(function() {
                 alert('삭제가 성공되었습니다.');
                 window.location.reload();
             }
-        });
-    });
-});
+        })
+    })
+    
+   
+})
 $('.qty-input').on('change', function() {
    	let min = parseInt($(this).attr('min'));
     let max = 10; // Set your desired max value here

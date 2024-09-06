@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cinema.ticket.customerDTO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -213,6 +215,11 @@ public class HomeController {
     
         model.addAttribute("uid",customer_id);
         model.addAttribute("items", dataMap.get("items"));
+        System.out.println(dataMap.get("items"));
+   
+        
+        
+        
         model.addAttribute("totalPrice", dataMap.get("totalPrice"));
      
         model.addAttribute("totalDiscount", dataMap.get("totalDiscount"));
@@ -274,5 +281,50 @@ public class HomeController {
 			}
 			return ja.toString();	   
 	   }
+//	   @GetMapping("/store/storecheck")
+//	    public String storeCheckoutPage(@RequestParam("moviename") String moviename,
+//	            						@RequestParam("Aticket") String Aticket,
+//	            						@RequestParam("Yticket") String Yticket,
+//	            						@RequestParam("resultprice") String resultprice,
+//	            						@RequestParam("resultseat") String resultseat,
+//	            						@RequestParam("roomname") String roomname,
+//	            						@RequestParam("people") String people,
+//	            						@RequestParam("begintime") String begintime,
+//	            						@RequestParam("endtime") String endtime,
+//	            						@RequestParam("runningtime") String runningtime,
+//	            						@RequestParam("datetime") String datetime,
+//	            						HttpServletRequest req, Model model) {
+//			HttpSession s =req.getSession();
+//			String userid = (String) s.getAttribute("uid");
+//			customerDTO customer = cartdao.getCustomer(userid);
+//			
+//			model.addAttribute("id", customer.getId());
+//	        model.addAttribute("uid", customer.getUid());
+//	        model.addAttribute("passwd", customer.getPasswd());
+//	        model.addAttribute("realname", customer.getRealname());
+//	        model.addAttribute("nickname", customer.getNickname());
+//	        model.addAttribute("email", customer.getEmail());
+//	        model.addAttribute("mobile", customer.getMobile());
+//	        
+//	        model.addAttribute("moviename", moviename);
+//	        model.addAttribute("Aticket", Aticket);
+//	        model.addAttribute("Yticket", Yticket);
+//	        model.addAttribute("resultprice", resultprice);
+//	        model.addAttribute("resultseat", resultseat);
+//	        model.addAttribute("roomname", roomname);
+//	        model.addAttribute("people", people);
+//	        model.addAttribute("begintime", begintime);
+//	        model.addAttribute("endtime", endtime);
+//	        model.addAttribute("runningtime", runningtime);
+//	        model.addAttribute("datetime", datetime);
+//	        
+//	        String orderId = UUID.randomUUID().toString();
+//	        model.addAttribute("orderId", orderId);
+//	        return "store/storecheck";
+//	    }
+//		
+	   
+	   
+	   
 	
 }

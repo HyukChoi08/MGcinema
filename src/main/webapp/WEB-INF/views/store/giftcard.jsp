@@ -402,14 +402,52 @@ $(document)
 .ready(function() {
  	let customer_id= $('#userid').val();
  	console.log(customer_id);
- 	
- 	$.ajax({
- 		url:'/countcart',type:'post',data:{customer_id:customer_id},dataType:'text',
- 		success:function(data){
- 			 $('#cart-count').text(data);
- 			
- 			}
- })
+	 	 		
+	 	function updateCartCount() {
+	        $.ajax({
+	            url: '/countcart',
+	            type: 'post',
+	            data: { customer_id: customer_id },
+	            dataType: 'text',
+	            cache: false, // 캐시 비활성화
+	            success: function(data) {
+	                $('#cart-count').text(data);
+	            }         
+	        })
+	    }
+	
+	    updateCartCount();
+	
+	
+	//페이지가 로드될 때 강제로 새로고침
+	$(window).on('pageshow', function(event) {
+	    if (event.originalEvent.persisted) {
+	        window.location.reload();
+	    } else {
+	        let customer_id = $('#gg').val();
+	
+	        function updateCartCount() {
+	            $.ajax({
+	                url: '/countcart',
+	                type: 'post',
+	                data: { customer_id: customer_id },
+	                dataType: 'text',
+	                cache: false, // 캐시 비활성화
+	                success: function(data) {
+	                    $('#cart-count').text(data);
+	                }         
+	            });
+	        }
+	
+	        updateCartCount();
+	    }
+	})
+	
+	$(window).on('popstate', function(event) {
+	    window.location.reload();
+	})
+	// 페이지가 로드될 때 강제로 새로고침
+
 })
 let selectedItems = []; // 전역 변수로 선언
 

@@ -377,17 +377,50 @@ $(document).ready(function() {
  	let customer_id= $('#userid').val();
  	console.log(customer_id);
  	
- 	 function updateCartCount() {
-         $.ajax({
-             url: '/countcart',
-             type: 'post',
-             data: { customer_id: customer_id },
-             dataType: 'text',
-             success: function(data) {
-                 $('#cart-count').text(data);
-             }         
-         })
-     }
+	 	function updateCartCount() {
+	        $.ajax({
+	            url: '/countcart',
+	            type: 'post',
+	            data: { customer_id: customer_id },
+	            dataType: 'text',
+	            cache: false, // 캐시 비활성화
+	            success: function(data) {
+	                $('#cart-count').text(data);
+	            }         
+	        })
+	    }
+	
+	    updateCartCount();
+	
+	
+	//페이지가 로드될 때 강제로 새로고침
+	$(window).on('pageshow', function(event) {
+	    if (event.originalEvent.persisted) {
+	        window.location.reload();
+	    } else {
+	        let customer_id = $('#gg').val();
+	
+	        function updateCartCount() {
+	            $.ajax({
+	                url: '/countcart',
+	                type: 'post',
+	                data: { customer_id: customer_id },
+	                dataType: 'text',
+	                cache: false, // 캐시 비활성화
+	                success: function(data) {
+	                    $('#cart-count').text(data);
+	                }         
+	            });
+	        }
+	
+	        updateCartCount();
+	    }
+	})
+	
+	$(window).on('popstate', function(event) {
+	    window.location.reload();
+	})
+	// 페이지가 로드될 때 강제로 새로고침
 
  	 
  	 function checkItemInCart(item_id) {
@@ -400,7 +433,7 @@ $(document).ready(function() {
      }
  	 	 
      // 페이지 로드 시 카운트 업데이트
-     updateCartCount();
+    
      
     	        $('.icon-left').on('click', function(event) {
     	            // 클릭 이벤트를 막고, 비동기 작업이 완료된 후 결과에 따라 결정합니다.

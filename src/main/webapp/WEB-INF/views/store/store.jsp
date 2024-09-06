@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -580,23 +580,48 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
 <script src="https://code.jquery.com/jquery-latest.js">
 </script>
 <script>
+function updateCartCount(customer_id) {
+    $.ajax({
+        url: '/countcart',
+        type: 'post',
+        data: { customer_id: customer_id },
+        dataType: 'text',
+        cache: false,
+        success: function(data) {
+            $('#cart-count').text(data);
+        }
+    });
+}
+
 $(document).ready(function() {
 		
  	let customer_id= $('#userid').val();
  	console.log(customer_id);
  		
- 	 function updateCartCount() {
-         $.ajax({
-             url: '/countcart',
-             type: 'post',
-             data: { customer_id: customer_id },
-             dataType: 'text',
-             success: function(data) {
-                 $('#cart-count').text(data);
-             }         
-         })
-     }
-	 
+    updateCartCount(customer_id);
+
+	//페이지가 로드될 때 강제로 새로고침
+
+        $(window).on('pageshow', function(event) {
+            if (event.originalEvent.persisted) {
+                window.location.reload();
+                updateCartCount(customer_id);
+            }
+        });
+
+        // 브라우저 히스토리 상태가 변경될 때 새로 고침 처리
+        $(window).on('popstate', function(event) {
+            // 이 부분은 필요에 따라 조정
+            // 페이지가 새로 고쳐질 필요가 없는 경우 주석 처리
+            window.location.reload();
+            updateCartCount(customer_id);
+        });
+
+ 	 
+ 	 
+ 	 
+ 	 
+ 	 
  	 function checkItemInCart(item_id) {
          return $.ajax({
              url: '/checkitem', // 서버에서 장바구니에 아이템이 있는지 확인하는 엔드포인트

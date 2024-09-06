@@ -112,14 +112,13 @@ vertical-align: middle; /* 수직 중앙 정렬 */
     margin-bottom: 30px;
    
 }
-
-
 .cart_step div {
+    margin-left: 90px; /* 좌측 여백 */
+    margin-right: 90px; /* 우측 여백 */
     display: block;
     font-size: 16px;
     color: #666;
-    margin-bottom: 5px;
-    margin-right: 10px; /* STEP과 화살표 사이의 마진 */
+    margin-bottom: 5px; /* 아래쪽 여백 */
 }
 .cart_step li strong {
     display: block;
@@ -275,6 +274,30 @@ position: relative;
     left:-20px; /* 원하는 위치로 이동 (음수 값으로 왼쪽으로 이동) */
 }
 
+#btnback {  
+   border-color: #0056b3;
+   font-size:20px;
+   position: relative; /* 버튼의 위치를 조정할 수 있게 함 */
+   left:150px;
+   
+}
+
+#btnpay {
+  padding: 10px 20px; /* 버튼의 여백 조정 */
+  font-size: 16px;    /* 글자 크기 조정 */
+  border: 1px solid #ccc; /* 테두리 추가 */
+  background-color: #f0f0f0; /* 배경색 조정 */
+  color: black;       /* 글자 색상 검정으로 설정 */
+  cursor: pointer;    /* 커서가 버튼 위에 있을 때 손 모양으로 변경 */
+  margin: 0 5px;      /* 버튼 간격 조정 */
+  position: relative; /* 버튼의 위치를 조정할 수 있게 함 */
+  left:500px;
+}
+.tol{
+ border: 2px solid white;
+
+}
+
 </style>
 </head>
 <body>
@@ -314,14 +337,14 @@ position: relative;
                 <c:forEach items="${items}" var="item">
                     <tr class="cart-item">
                         <td>
-                        	<input type="hidden" id="uid" value='${uid}'>
+                        	<input type="hidden" class="uid" value='${uid}'>
                             <input type="hidden" class="item_id" value="${item.item_id}">
                             <img src="${item.image_path}" id="imagepath" alt="${item.item_id}">
                         </td>
                         <td class="item-details">
                             <div class="item_name">
-                                <span>${item.name}</span><br>
-                                <span>${item.composition}</span>
+                                <span class="itemname">${item.name}</span><br>
+                                <span class="itemcompo">${item.composition}</span>
                             </div>
                         </td>
                         <td>
@@ -345,7 +368,7 @@ position: relative;
                     <th class="width-40">총 결제 예정금액</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="tol">
                 <tr>
                     <td class="totalprice">${totalPrice}원</td>
                     <td class="minus">-</td>
@@ -354,6 +377,12 @@ position: relative;
                     <td class="finalprice">${finalPrice}원</td>
                 </tr>
             </tbody>
+            <tr>
+               <td>
+					<a href="javascript:history.back()" id="btnback"> 뒤로가기</a>               
+               		<input type="button" id="btnpay" value="결제하기">              
+               </td>
+            </tr>	
             <tfoot>
                 <tr class="separator"></tr>
             </tfoot>
@@ -366,8 +395,10 @@ position: relative;
 <script>
 $(document).ready(function() {
 	
+	let allitem='';
+	
 		
- 	let customer_id= $('#uid').val();
+ 	let customer_id= $('.uid').val();
  	console.log(customer_id);
  	
  	 function updateCartCount() {
@@ -432,10 +463,70 @@ $(document).ready(function() {
        	if(cartPriceText == 0){
        	 	$cartPrice.hide();
        	}
-    })  
+    }) 
+ 
+})
+.on('click','#btnpay',function(){
+	
+	let str='';
+	
+	
+	let customer_id=$('.uid').val();	
+    let fin = $('.finalprice').text();
+	let finalprice = fin.replace(/[^0-9]/g, ''); // 숫자만 추출		
+	
+	   $('.itemname').each(function(index) {
+           let itemName = $(this).text().trim();
+           // 동일한 인덱스의 itemcompo 요소 선택
+           let itemCompo = $('.itemcompo').eq(index).text().trim();
 
-  
-});
+           // 문자열에 값 추가
+           str += itemName + '  ' + itemCompo + ',';
+       });
+
+       // 마지막 쉼표 제거
+       if (str.endsWith(',')) {
+           str = str.slice(0, -1);
+       }
+
+	
+	
+	
+	console.log(customer_id);
+	console.log(finalprice);
+	console.log(str);
+
+	customer_id=encodeURIComponent(customer_id);
+	finalprice=encodeURIComponent(finalprice);
+	
+	
+	
+	
+	
+	
+
+/*
+	var popupWidth = 600;
+        var popupHeight = 700;
+
+        var leftPosition = (window.screen.width / 2) - (popupWidth / 2);
+        var topPosition = (window.screen.height / 2) - (popupHeight / 2);
+
+        var url = '/store/storecheck?moviename=' + moviename + '&Aticket=' + Aticket + '&Yticket=' + Yticket + '&resultprice=' 
+        		+ resultprice + '&resultseat=' + resultseat + '&roomname=' + roomname + '&people=' + people + '&begintime=' + begintime +
+        		'&endtime=' + endtime + '&runningtime=' + runningtime + '&datetime=' + datetime;
+
+        window.open(
+            url,
+            'CheckoutWindow',
+            'width=' + popupWidth + ', height=' + popupHeight + ', left=' + leftPosition + ', top=' + topPosition + ', resizable=yes, scrollbars=yes'
+        );
+
+        encodeURIComponent(moviename)
+
+        */
+})
+
 </script>
 
 </html>
