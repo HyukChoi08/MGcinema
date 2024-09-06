@@ -17,7 +17,7 @@
     left: 0;
     z-index: 1000;
     height: 150px;
-} */
+} */  
         /* 전체 body 스타일 설정 */
         body {
             font-family: Arial, sans-serif;
