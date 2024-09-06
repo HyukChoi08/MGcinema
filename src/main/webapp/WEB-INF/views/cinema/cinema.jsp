@@ -19,6 +19,7 @@ small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form
 }
 body{
 	background-color:black;
+	color:white;
 }
 a:visited {
             color: black;
@@ -151,6 +152,7 @@ span{
     font: 0 / 0 a;
     zoom: 1;
 }
+
 .sect-schedule .slider {
     overflow: visible;
     position: relative;
@@ -194,11 +196,14 @@ span{
  cursor: pointer;
  width:70px;
  border:1px solid white;
- 
+}
+.td-out{
+ width:70px;
+ border: 1px solid #ddd;
+ background-color: #525355;
 }
 .td-link a{
  color:white;
- 
 }
 .td-link:hover a{
 	background-color:#475f77;
@@ -223,12 +228,15 @@ button:focus {
     outline: none;
 }
 .timelistdiv {
-
-	border-bottom:1px solid #808080;
 	border-top:1px solid #808080;
 	margin-bottom:20px;
 	color:white;
 	
+}
+.ldiv{
+	border-top:2px solid #808080;
+	text-align:left;
+	padding-top:15px;
 }
 .roomdiv {
 	height:60px;
@@ -242,6 +250,70 @@ button:focus {
 .roomname {
 	font-size:15px;
 }
+#hiddenDiv {
+   width:550px;
+   height:550px;		
+   display: none;
+   position: absolute;
+   background-color: black; 
+   padding: 20px;
+   border: 5px solid #384963;
+   z-index: 900; 
+   margin-left:330px;
+   margin-top:15px;
+   
+}
+
+#hiddenDiv span{
+	font-size:30px;
+	 font-weight: bold;
+}
+.agetop{
+	border-bottom:1px solid #808080;
+	margin-bottom:25px;
+	padding-bottom:20px;
+}
+#hiddenDiv table {
+        margin: auto;
+        border-collapse: collapse; 
+        vertical-align:middle;
+}
+#hiddenDiv table thead {
+	background-color:#575656;
+	height:30px;
+}
+ #hiddenDiv thead th:nth-child(1) {
+            width: 150px;
+            text-align: left;
+            padding: 0 0 0 10px;
+            vertical-align: middle;
+        }
+ #hiddenDiv thead th:nth-child(2) {
+            width: 350px;
+            text-align: left;
+            border-left:1px solid #808080;
+            padding: 0 0 0 10px;
+            vertical-align: middle;
+        }
+#hiddenDiv tbody td:nth-child(1) {
+            width: 150px;
+            text-align: left;
+        }
+ #hiddenDiv tbody td:nth-child(2) {
+            width: 350px;
+            text-align: left;
+            border-left:1px solid #808080;
+        }
+ #hiddenDiv tbody td{
+ 	border-top:1px solid #808080;
+ 	border-bottom:1px solid #808080;
+ 	padding: 10px 10px 10px 10px;
+ }
+.imgt{
+	 vertical-align: middle; /* 이미지의 수직 정렬을 중앙으로 설정 */
+     padding-right: 5px;
+}
+
 </style>
 <head>
 <meta charset="UTF-8">
@@ -268,11 +340,11 @@ button:focus {
 				여러분의 상상력을 자극하는 다양한 테마관으로 가득 찬 특별한 영화관입니다.<br><br>
 				주소: 화성시 목성구 태양로 29, 지구빌딩 1F<br>
 				고객센터 1544-1234<br>
-				총 18관 / 2000석 
+				총 15관 / 2726석 
 			</div>
 			<div class="inforight">
-				위치 / 주차안내&nbsp;&nbsp;<a class="link-more" href="/park" target="_blank" title="새창 열림"></a><br>
-				공지사항&nbsp;&nbsp;<a class="link-more" href="/news" target="_blank" title="새창 열림"></a>
+				위치 / 주차안내&nbsp;&nbsp;<img src="room_image/플러스2.png"  onclick="" class="imgt" style="cursor: pointer"><br>
+				공지사항&nbsp;&nbsp;<a href="/news"><img src="room_image/플러스2.png" class="imgt" style="cursor: pointer"></a>
 			</div>
 		</div>
 <div style="margin:auto; width:1000px">
@@ -297,7 +369,29 @@ button:focus {
 	            </table>
 	        </div>
 	        	<div class="notice">
-					<a class="link-more" href="#" onclick="openPopup(); return false;"></a>&nbsp;&nbsp;관람등급안내
+					<img src="room_image/플러스2.png"  onclick="showage()" class="imgt" style="cursor: pointer">관람등급안내
+					<div id="hiddenDiv">
+						<div class="agetop">
+							<div style="text-align:right"><img src="room_image/엑스1.png" onclick="closeage()" style="cursor: pointer"></div>
+								<span>관람등급안내</span>
+						</div>
+							<table>
+								<thead>
+									<tr><th>구분</th><th>설명</th></tr>
+								</thead>
+								<tbody>
+									<tr><td><img src="room_image/all.png" class="imgt">전체 관람가</td><td>모든 연령의 고객님께서 관람하실 수 있습니다.</td></tr>
+									<tr><td><img src="room_image/12.png" class="imgt">12세 관람가</td><td>만 12세 미만의 고객님은 보호자를 동반하셔야 관람하실 수 있습니다.</td></tr>
+									<tr><td><img src="room_image/15.png" class="imgt">15세 관람가</td><td>만 15세 미만의 고객님은 보호자를 동반하셔야 관람하실 수 있습니다.</td></tr>
+									<tr><td><img src="room_image/19.png" class="imgt">청소년관람불가</td><td>만 19세 미만(영/유아 포함)은 보호자가 동반하여도 관람이 불가합니다.<br>
+													(단, 만19세가 되는 해의 1월 1일을 맞이한 사람은 제외)<br>
+													- 입장 시 신분증을 꼭 지참하시기 바랍니다<br>
+													- 신분증(사진/캡쳐 불가)<br>
+													  주민등록증, 운전면허증, 여권, 모바일신분증(PASS, 정부24등)</td></tr>
+									<tr><td><img src="room_image/미정.png" class="imgt">미정</td><td>등급 미정 영화입니다.</td></tr>
+								</tbody>
+							</table>
+					</div>
 				</div>
 	    </div>
 	    <div id="timelist">
@@ -312,6 +406,7 @@ button:focus {
 <script>
 $(document)
 .ready(function(){
+	
 	let now = new Date();
 	let movied = [];
 	for(let j = 0;j < 7;j++){
@@ -349,6 +444,12 @@ $(document)
         // 이미지 요소의 src 속성을 새 URL로 업데이트
         $('#backgroundImage').attr('src', img);
     })
+function showage(){
+	$('#hiddenDiv').show();
+}
+function closeage(){
+	$('#hiddenDiv').hide();
+}
 function clear(){
 	$('#timelist').empty();
 	$('#moviename').text('');
@@ -395,10 +496,12 @@ function processData1(data) {
 	 let timelist = '';
 		for(x of data){	
 			console.log("영화이름",x['mname']);
-			timelist = '<div class=timelistdiv><table><tr><td>'+x['age']+'</td><td><h1 class=mname>'+x['mname']+'</h1></td><td>'+x['runningtime']+' / </td><td>'+x['genre']+' / </td><td>'+x['releasedate']+' 개봉</td></tr></table></div>';
+			timelist = '<div class=timelistdiv><table><tr><td><img src=room_image/'+x['age']+'.png>'+'</td><td><h1 class=mname>'+x['mname']+'</h1></td><td>'+x['runningtime']+' / </td><td>'+x['genre']+' / </td><td>'+x['releasedate']+' 개봉</td></tr></table></div>';
 			$('#timelist').append(timelist);
 	 		 console.log('Processing data 1:', data);
 		}
+		let lastdiv = '<div class=ldiv>[공지] 입장 지연에 따른 관람 불편을 최소화하기 위해 영화는 10분 후 상영이 시작됩니다.</div>'
+		$('#timelist').append(lastdiv);
 }
 function processData2(data) {
 	for(let i=0 ; i<$('#timelist div').length; i++){
@@ -406,7 +509,7 @@ function processData2(data) {
 		console.log(data); 
 		for(let x of data){
 			if(x['mname']==id){
-			let room = '<div class=roomdiv><table><tr><td><h2 class=roomname>'+x['Sname']+'</h2></td><td style=width:65px>'+x['seatlevel']+'</td><td>'+x['allseat']+'석</td></tr></table></div>';
+			let room = '<div class=roomdiv><table><tr><td><h2 class=roomname><img src=room_image/관화살표.png>'+x['Sname']+'</h2></td><td style=width:65px>'+x['seatlevel']+'</td><td>총 '+x['allseat']+'석</td></tr></table></div>';
 			$('#timelist div').eq(i).append(room);
 			}
 		}
@@ -424,22 +527,39 @@ function processData3(data) {
 	            console.log('관이름', room);
 	            	for(let x of data){
 	            		if (x['mname'] == id && x['Sname'] == room) {
-	            		
-	                        if (x['mname'].includes(' ')) {
-	                        	mname = x['mname'].replace(/\s+/g,'%20');
-	                        	console.log('last',mname);
-	                        	$(this).append('<td class=td-link><a href=/ticket/?mname='+mname+'&date='+$('#hiddendate').val()+'&room='+x['Sname']+'&time='+x['begintime']+'>'+x['begintime']+'<br><span>'+x['lestseat']+'석</i></span></td>');
-	                        }else{
-	                        	$(this).append('<td class=td-link><a href=/ticket/?mname='+x['mname']+'&date='+$('#hiddendate').val()+'&room='+x['Sname']+'&time='+x['begintime']+'>'+x['begintime']+'<br><span>'+x['lestseat']+'석</span></a></td>');
-	                        }
+	            			let date = new Date();
+	            			let hours = date.getHours();
+	            	        let minutes = date.getMinutes();
+	            	        
+	            	        hours = hours.toString().padStart(2, '0');
+	                        minutes = minutes.toString().padStart(2, '0');
+	                        
+	                        totalSeconds = (hours * 3600) + (minutes * 60);
+	                        nowtime = totalSeconds * 1000;
+	                        
+	                        let btime = x['begintime'];
+	                    	let [bhours, bminutes] = btime.split(':').map(Number);
+	                    	let totalbSeconds = (bhours * 3600) + (bminutes * 60);
+	                    	btime = totalbSeconds * 1000;
+	                    	
+	                    	console.log(nowtime,btime);
+	                    	
+	                    	if(btime<nowtime){
+	                    		$(this).append('<td class=td-out>'+x['begintime']+'<br><span>마감</span></a></td>');	
+	                    	}else{
+			                        if (x['mname'].includes(' ')) {
+			                        	mname = x['mname'].replace(/\s+/g,'%20');
+			                        	console.log('last',mname);
+			                        	$(this).append('<td class=td-link><a href=/ticket/?mname='+mname+'&date='+$('#hiddendate').val()+'&room='+x['Sname']+'&time='+x['begintime']+'>'+x['begintime']+'<br><span>'+x['lestseat']+'석</i></span></td>');
+			                        }else{
+			                        	$(this).append('<td class=td-link><a href=/ticket/?mname='+x['mname']+'&date='+$('#hiddendate').val()+'&room='+x['Sname']+'&time='+x['begintime']+'>'+x['begintime']+'<br><span>'+x['lestseat']+'석</span></a></td>');
+			                        }
+	                    	}
 	                    }
 	            	}  	
 	        })
 	})
     console.log('Processing data 3:', data);
-}
-function openPopup(){
-	 window.open('/ageinfo', 'popupWindow', 'width=600,height=400');
 }
 
 </script>
