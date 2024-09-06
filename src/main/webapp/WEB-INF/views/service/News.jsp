@@ -202,6 +202,11 @@
          .customer_top {
     	text-align: left; /* 텍스트를 왼쪽 정렬로 변경 */
 		}
+		.total-count {
+    text-align: left; /* 왼쪽 정렬 */
+    margin-bottom: 20px; /* 아래쪽 여백 추가 */
+}
+		
         
     </style>
 </head>
@@ -234,10 +239,12 @@
                     <button type="submit">검색</button>
                 </form>
             </div>
-            총 <span class="num">${totalNewsCount}건</span>
+            <div class="total-count">
+   			 총 <span class="num">${totalNewsCount}건</span>
+			</div>
 
             <div class="c_tab_wrap">
-    <ul>
+   	<ul>
         <li class="${empty selected ? 'on' : ''}">
             <a href="/news">전체</a>
         </li>

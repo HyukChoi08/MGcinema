@@ -94,7 +94,13 @@
 	/* FAQ 내용 스타일 */
 	.view_area {
     margin-top: 20px;
+    text-align: left; 
 	}
+	.view_area pre {
+	display: block; /* 기본 블록 레벨 요소로 설정 */
+    white-space: pre-wrap; /* 공백과 줄 바꿈 유지 */
+	}
+	
 	.view_area p {
     line-height: 1.6;
     text-align: left; /* 텍스트 왼쪽 정렬 */
@@ -169,7 +175,7 @@ footer {
                     <p class="stit">작성일: ${formattedDate}</p>
                 </div>  
                 <div class="view_area">
-                    <p>${faqDetail.content}</p>
+                    <pre>${faqDetail.content}</pre>
                 </div>
                 <p>조회수: ${faqDetail.views}</p>
 

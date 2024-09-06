@@ -275,8 +275,9 @@
                 </div>
 
                 <div class="search_result">
-                    <a href="/faqcreate" class="btn-add">+</a>
+                    
                    총&nbsp; <span class="num">${totalFAQCount}건</span>&nbsp;
+                   <a href="/faqcreate" class="btn-add">	+</a>
                 </div>
                 
                 <div class="searchtext">

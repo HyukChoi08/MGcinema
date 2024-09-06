@@ -251,11 +251,11 @@
 
                         <br>
                         <div class="c_qu">
-                            <a href="faq">홈페이지/모바일</a>&nbsp;
-                            <a href="faq">예매/환불</a>&nbsp;
-                            <a href="faq">결제수단</a>&nbsp;
-                            <a href="faq">영화관이용</a>&nbsp;
-                            <a href="faq">특별관</a>
+                            <a href="faq?selected=홈페이지/모바일">홈페이지/모바일</a>&nbsp;
+                            <a href="faq?selected=예매/매표">예매/매표</a>&nbsp;
+                            <a href="faq?selected=결제수단">결제수단</a>&nbsp;
+                            <a href="faq?selected=영화관이용">영화관이용</a>&nbsp;
+                            <a href="faq?selected=특별관">특별관</a>
                         </div>
                     </div>
                     <div class="c_box email_inquiry">
@@ -274,7 +274,7 @@
                     <div class="service_area">
                         <span class="tit">즐겨찾는질문</span>
                         <ul class="list"><br>
-                            <li><a href="#">비밀번호 잃어버렸어요ㅋ</a></li>
+                            <li><a href="FAQdetail?id=74">비밀번호 잃어버렸어요ㅋ</a></li>
                             <li><a href="#">팝콘에서 콩벌레나왔는데요?ㅋㅋ</a></li>
                             <li><a href="#">우리애가 물건좀 슬쩍가져갈수있는거아니에요?맘카페에 퍼뜨릴게요</a></li>
                         </ul>
