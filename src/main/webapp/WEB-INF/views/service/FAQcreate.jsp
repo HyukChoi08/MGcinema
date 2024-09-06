@@ -79,7 +79,7 @@
     <form action="<c:url value='/FAQcreate' />" method="post">
         <label for="selected">구분:</label>
         <select id="selected" name="selected" required>
-            <option value="" disabled selected>구분을 선택하세요</option>
+            <option value="" disabled selected>목록을 선택하세요</option>
             <option value="예매/매표">예매/매표</option>
             <option value="결제수단">결제수단</option>
             <option value="영화관이용">영화관이용</option>

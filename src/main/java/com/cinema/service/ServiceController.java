@@ -78,15 +78,26 @@ public class ServiceController {
     @GetMapping("/FAQdetail")
     public String showFAQDetailPage(@RequestParam(value = "id") Long id, Model model) {
         FAQDTO faqDetail = faqDAO.getFAQById(id);
-        faqDetail.setViews(faqDetail.getViews() + 1);
-        faqDAO.updateFAQ(faqDetail);
+        if (faqDetail != null) {
+            faqDetail.setViews(faqDetail.getViews() + 1);
+            faqDAO.updateFAQ(faqDetail);
+
+            // Convert LocalDateTime to String
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String formattedDate;
+            if (faqDetail.getCreatedAt() != null) {
+                formattedDate = faqDetail.getCreatedAt().format(formatter);
+            } else {
+                formattedDate = "날짜 정보 없음";  // null일 때의 기본값 설정
+            }
+
+            model.addAttribute("faqDetail", faqDetail);
+            model.addAttribute("formattedDate", formattedDate);  // Add formatted date as a separate attribute
+        } else {
+            // faqDetail이 null인 경우의 처리
+            model.addAttribute("error", "FAQ 항목을 찾을 수 없습니다.");
+        }
         
-        // Convert LocalDateTime to String
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String formattedDate = faqDetail.getCreatedAt().format(formatter);
-        
-        model.addAttribute("faqDetail", faqDetail);
-        model.addAttribute("formattedDate", formattedDate);  // Add formatted date as a separate attribute
         return "service/FAQdetail";
     }
 

@@ -31,10 +31,10 @@
     </insert>
 
     <update id="updateFAQ" parameterType="com.cinema.service.FAQDTO">
-        UPDATE FAQ
-        SET title = #{title}, content = #{content}, created_at = #{createdAt}, views = #{views}, selected = #{selected}
-        WHERE id = #{id}
-    </update>
+    UPDATE FAQ
+    SET title = #{title}, content = #{content}, views = views + 1, selected = #{selected}
+    WHERE id = #{id}
+</update>
 
     <delete id="deleteFAQ" parameterType="long">
         DELETE FROM FAQ WHERE id = #{id}

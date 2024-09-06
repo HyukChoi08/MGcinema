@@ -276,7 +276,7 @@
 
                 <div class="search_result">
                     <a href="/faqcreate" class="btn-add">+</a>
-                   총 <span class="num">${totalFAQCount}건</span>&nbsp;
+                   총&nbsp; <span class="num">${totalFAQCount}건</span>&nbsp;
                 </div>
                 
                 <div class="searchtext">
@@ -284,7 +284,7 @@
     <ul>
     	<li><a href="/faq">전체</a></li>
         <li><a href="/faq?selected=홈페이지/모바일">홈페이지/모바일</a></li>
-        <li><a href="/faq?selected=예매/환불">예매/환불</a></li>
+        <li><a href="/faq?selected=예매/매표">예매/매표</a></li>
         <li><a href="/faq?selected=결제수단">결제수단</a></li>
         <li><a href="/faq?selected=영화관이용">영화관이용</a></li>
         <li><a href="/faq?selected=특별관">특별관</a></li>

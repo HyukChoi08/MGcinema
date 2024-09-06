@@ -44,6 +44,7 @@
         .sidebar ul {
             list-style-type: none;
             padding: 0;
+            text-align: left;
         }
         .sidebar ul li {
             margin-bottom: 15px;
@@ -62,8 +63,10 @@
             background-color: white;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
+        
         .search_area {
             margin-bottom: 20px;
+            text-align:left;
             display: flex;
             align-items: center;
         }
@@ -87,7 +90,7 @@
         .search_area button:hover {
             background-color: #d10813;
         }
-
+		
         
         .c_tab_wrap {
             margin-bottom: 20px;
@@ -196,6 +199,9 @@
         .btn-add:hover {
             background-color: #45a049;
         }
+         .customer_top {
+    	text-align: left; /* 텍스트를 왼쪽 정렬로 변경 */
+		}
         
     </style>
 </head>
@@ -292,6 +298,8 @@
         </div>
     </div>
 </div>
-
+<footer>
+     <%@ include file="/WEB-INF/views/footer/footer.jsp" %>
+</footer>
 </body>
 </html>

@@ -124,16 +124,8 @@
     </style>
 </head>
 <body>
-    <header class="header">
-        <nav class="navbar">
-            <h1><a href="/">MG Cinema</a></h1>
-            <ul class="nav-links">
-                <li><a href="/login">로그인</a></li>
-                <li><a href="/signup">회원가입</a></li>
-                <li><a href="/myhome">My페이지</a></li>
-                <li><a href="/serviceHome">고객센터</a></li>
-            </ul>
-        </nav>
+    <header>
+       
     </header>
 
     <div id="container">
@@ -158,8 +150,16 @@
                 </div>
                 <form action="FAQupdate" method="post">
                     <input type="hidden" name="id" value="${faqDetail.id}">
-                    <label for="selected">구분</label>
-                    <input type="text" id="selected" name="selected" value="${faqDetail.selected}" required>
+                    
+                    <label for="selected">구분:</label>
+					<select id="selected" name="selected" required>
+ 		   				<option value="" disabled selected>목록을 선택하세요</option>
+    					<option value="예매/매표" ${faqDetail.selected == '예매/매표' ? 'selected' : ''}>예매/매표</option>
+    					<option value="결제수단" ${faqDetail.selected == '결제수단' ? 'selected' : ''}>결제수단</option>
+    					<option value="영화관이용" ${faqDetail.selected == '영화관이용' ? 'selected' : ''}>영화관이용</option>
+    					<option value="특별관" ${faqDetail.selected == '특별관' ? 'selected' : ''}>특별관</option>
+    					<option value="홈페이지/모바일" ${faqDetail.selected == '홈페이지/모바일' ? 'selected' : ''}>홈페이지/모바일</option>
+					</select>
                     <label for="title">제목:</label>
                     <input type="text" id="title" name="title" value="${faqDetail.title}" required>
                     
@@ -169,7 +169,7 @@
                     <button type="submit" class="btn-save">저장</button>
                     <button type="button" class="btn-cancel" onclick="location.href='faq'">취소</button>
                
-                </form>
+                </form>	
             </div>
         </div>
     </div>
