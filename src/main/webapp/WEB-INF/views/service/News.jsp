@@ -28,7 +28,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top : 150px;
+            margin-top : 200px;
         }
         #contents {
             width: 100%;

@@ -4,27 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%@ include file="/WEB-INF/views/header/header.jsp" %>
     <title>${serviceHome.title}</title>
     <style>
+    /*	header { 
+    color: #ffffff;
+    padding: 10px 0;
+    width: 100%;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    height: 150px;
+} */
         /* 전체 body 스타일 설정 */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f4; /* 페이지 배경색 */
-        	margin-top: 150px;
+        	margin-top: 100px;
         }
 
         /* 상단 배너 스타일 */
-        .banner {
-            width: 100%;
-            background-color: #e50914; /* 배너 배경색 */
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            font-size: 1.2em;
-            font-weight: bold;
-        }
+       
 
         /* 메인 컨테이너 스타일 */
         #container {
@@ -33,7 +37,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top : 150px;
+            margin-top : 200px;
         }
 
         /* 컨텐츠 영역 스타일 */
@@ -208,13 +212,19 @@
    			padding: 10px 0;
     		border-top: 1px solid #ddd;
 		}
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* 다른 요소 위에 위치하게 함 */
+}
 
        
     </style>
 </head>
 <body>
     <header>
-       <%@ include file="/WEB-INF/views/header/header.jsp" %>
+       
     </header>
 
     <div id="container">
