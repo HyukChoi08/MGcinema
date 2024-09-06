@@ -8,6 +8,16 @@
 <title>무비차트</title>
 </head>
 <style>
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    margin-top:250px;
+}
+
 .flex-container {
     display: flex;
     justify-content: space-around;

@@ -114,8 +114,9 @@ public String chartList11() {
 
 @PostMapping("/insertselectcomment")//리뷰 리뷰란에 셀렉트
 @ResponseBody
-public String insertselectcomment() {
-	ArrayList<chartPutCommentDTO> ar = cpcdao.selectputcomment();
+public String insertselectcomment(HttpServletRequest req, Model model) {
+	int id = Integer.parseInt(req.getParameter("id1"));
+	ArrayList<chartPutCommentDTO> ar = cpcdao.selectputcomment(id);
 	
 	
 	

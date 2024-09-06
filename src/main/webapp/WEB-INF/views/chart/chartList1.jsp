@@ -6,34 +6,42 @@
     <meta charset="UTF-8">
     <title>되나연</title>
     <style>
-        .flex-container {
-            display: flex;
-            justify-content: space-around;
-            list-style-type: none;
-        }
 
-        .vertical-container {
-            display: flex;
-            flex-direction: column; /* 세로 정렬 */
-            align-items: center; /* 가운데 정렬 */
-        }
+.vertical-container1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh; /* 또는 필요한 높이 설정 */
+    padding: 20px; /* 필요에 따라 패딩 추가 */
+    box-sizing: border-box;
+    margin-top:400px;
+    margin-bottom:335px;
+}
 
-        .vertical-container1 {
-            display: flex;
-            flex-direction: column; /* 세로 정렬 */
-            align-items: center; /* 가운데 정렬 */
-            width: 1000px;
-            margin-top: 200px;
-            margin-bottom: 335px;
-        }
+.vertical-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 800px;
+    max-width: 1000px; /* 필요에 따라 최대 너비 설정 */
+}
 
-        ol, ul {
-            display: flex; /* ul 요소를 플렉스 컨테이너로 설정 */
-            padding: 0; /* 기본 패딩 제거 */
-            margin: 0; /* 기본 마진 제거 */
-            list-style-type: none; /* 숫자 지우는 것 */
-        }
-	#appearinfo{
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 800px;
+}
+ol, ul {
+     display: flex; /* ul 요소를 플렉스 컨테이너로 설정 */
+     padding: 0; /* 기본 패딩 제거 */
+     margin: 0; /* 기본 마진 제거 */
+     list-style-type: none; /* 숫자 지우는 것 */
+}
+#appearinfo{
 	display:none;
 	}
 .comment-list-container {
@@ -59,7 +67,6 @@
 </head>
 <body>
     <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
-    
     <c:forEach items="${chartList3}" var="chartList3">
         <div class="vertical-container1">
             <div class="vertical-container">
@@ -88,7 +95,7 @@
                             <li>상영시간</li>
                         </ul>
                     </div>
-                    <div style="width:670px" id="movieinfo">${chartList3.movieinfo}</div>
+                    <div style="width:800px" id="movieinfo">${chartList3.movieinfo}</div>
                     <div>평점/리뷰
                         <span>
                             <div>
@@ -116,19 +123,24 @@
                 </div>
             </div>
         </div>
-            
     </c:forEach>
+    <div id="appearinfo">
+    <div style="display:flex;">
     <c:forEach items="${cainfo}" var="cainfo">
-                        <div id="appearinfo">
-                    	${cainfo.prod}<img src=${cainfo.image_path}>
-                    	${cainfo.actor}
+                        <div>
+                    	감독:${cainfo.prod}배우:${cainfo.actor}<img src=${cainfo.image_path}>
                     </div>
     </c:forEach>
     
+    </div>
+    </div>
     <%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
 
     <script src="https://code.jquery.com/jquery-latest.js"></script>
     <script>
+    
+    
+    
         //commentArray select에 넣는것
         $.ajax({
             url: '/commentArray',
@@ -144,12 +156,11 @@
                 $('#commentArray').append(str);
             }
         });
-
         //review를 select시키는 것
         $.ajax({
             url: '/insertselectcomment',
             type: 'post',
-            data: {},
+            data: {id1:${sessionScope.dataId}},
             dataType: 'JSON',
             success: function(data) {
                 let str = '';
@@ -158,6 +169,7 @@
                     str += '<li><div><ul><li id="reviewWriter" value="'+data[i]['id']+'">'+data[i]['writer']+'</li><li>'+data[i]['created_at']+'</li></ul></div><div><p>'+data[i]['content']+'</p></div></li>';
                 }
                 $('#commentList').append(str);
+              
             }
         });
 
@@ -190,7 +202,7 @@
                             $('#moviechart').val('');
                             $('#reviewcomment').val('');
                             $('#nickname').val('');
-                            loadreview();
+                           
                         }
                     });
                 }
@@ -199,7 +211,7 @@
                 $.ajax({
                     url: '/insertselectcomment',
                     type: 'post',
-                    data: {},
+                    data: {id1:${sessionScope.dataId}},
                     dataType: 'JSON',
                     success: function(data) {
                         let str = '';
@@ -208,6 +220,7 @@
                             str += '<li><div><ul><li id="reviewWriter" value="'+data[i]['id']+'">'+data[i]['writer']+'</li><li>'+data[i]['created_at']+'</li></ul></div><div><p>'+data[i]['content']+'</p></div></li>';
                         }
                         $('#commentList').append(str);
+                        loadreview();
                     }
                 });
             })
@@ -267,7 +280,7 @@
             $.ajax({
                 url: '/insertselectcomment',
                 type: 'post',
-                data: {},
+                data: {id1:${sessionScope.dataId}},
                 dataType: 'JSON',
                 success: function(data) {
                     let itemsPerPage = 4; // 한 페이지에 표시할 댓글 수
