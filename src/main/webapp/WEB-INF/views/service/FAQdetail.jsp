@@ -34,6 +34,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top:150px;
 	}
 
 	/* 컨텐츠 영역 스타일 */
@@ -146,7 +147,7 @@ footer {
     </style>
 </head>
 <body>
-    <!-- 헤더 포함 -->
+    <%@ include file="/WEB-INF/views/header/header.jsp" %>
     <div id="container">
         <div id="contents">
             <!-- 사이드바 -->

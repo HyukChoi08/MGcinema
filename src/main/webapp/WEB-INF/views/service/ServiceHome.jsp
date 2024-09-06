@@ -12,6 +12,7 @@
             margin: 0;
             padding: 0;
             background-color: #f4f4f4; /* 페이지 배경색 */
+        	margin-top: 150px;
         }
 
         /* 상단 배너 스타일 */
@@ -32,6 +33,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin-top : 150px;
         }
 
         /* 컨텐츠 영역 스타일 */
@@ -53,6 +55,7 @@
         .sidebar ul {
             list-style-type: none;
             padding: 0;
+            text-align: left;
         }
         .sidebar ul li {
             margin-bottom: 15px;
@@ -199,18 +202,19 @@
         .shortcu_area .round.on {
             background-color: black;
         }
-
         footer {
-            background-color: white;
-            text-align: center;
-            padding: 10px 0;
-            border-top: 1px solid #ddd;
-        }
+ 	   		background-color: white;
+   	 		text-align: center;
+   			padding: 10px 0;
+    		border-top: 1px solid #ddd;
+		}
+
+       
     </style>
 </head>
 <body>
     <header>
-        <!-- 상단 배너가 필요한 경우 여기에 추가 -->
+       <%@ include file="/WEB-INF/views/header/header.jsp" %>
     </header>
 
     <div id="container">
@@ -240,10 +244,10 @@
     <div class="search_area">
         <form action="faq" method="get" style="display: flex; align-items: center; width: 100%;">
             <input id="searchtext" type="text" name="search" placeholder="검색어를 입력해 주세요." style="flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
-            <button type="submit" class="btn_search" style="margin-left: 8px; padding: 8px 16px; border: none; background-color: #007bff; color: #fff; border-radius: 4px; cursor: pointer;">
+            <button type="submit" class="btn_search" style="margin-left: 8px; padding: 8px 16px; border: none; background-color: #e50914; color: white; border-radius: 4px; cursor: pointer;">
                 검색
             </button>
-</div>
+	</div>
 
                         <br>
                         <div class="c_qu">
@@ -283,7 +287,7 @@
                             <li><a href="#">서버 점검 공지</a></li>
                             <li><a href="#">고객센터 운영시간 변경 안내</a></li>
                         </ul>
-                        <a href="notice" class="more">더보기</a>
+                        <a href="news" class="more">더보기</a>
                     </div>
                 </div>
 
@@ -292,7 +296,7 @@
     </div>
 
     <footer>
-        <!-- 푸터 내용 -->
+        <%@ include file="/WEB-INF/views/footer/footer.jsp" %>
     </footer>
 </body>
 </html>

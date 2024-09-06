@@ -27,6 +27,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin-top: 150px;
         }
         #contents {
             width: 100%;
@@ -116,7 +117,7 @@
     </style>
 </head>
 <body>
-<%--<%@ include file="/WEB-INF/views/header/header.jsp" %> --%>
+<%@ include file="/WEB-INF/views/header/header.jsp" %>
     
     <!--<header class="header">
         <nav class="navbar">

@@ -31,6 +31,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin-top: 150px;
         }
         #contents {
             width: 100%;
@@ -148,8 +149,11 @@
             border-bottom: 2px solid #e50914;
         }
         .search_result {
-            margin-bottom: 20px;
-        }
+    margin-bottom: 20px;
+    text-align: left; /* 텍스트 왼쪽 정렬 */
+    display: flex;
+    align-items: center; /* 세로 정렬 */
+}
         .tbl_area {
             margin-bottom: 20px;
         }
@@ -231,16 +235,15 @@
         .btn-add:hover {
             background-color: #45a049;
         }
-        footer {
-            background-color: white;
-            text-align: center;
-            padding: 10px 0;
-            border-top: 1px solid #ddd;
-        }
+        .customer_top {
+    	text-align: left; /* 텍스트를 왼쪽 정렬로 변경 */
+		}
+        
+        
     </style>
 </head>
 <body>
-
+<%@ include file="/WEB-INF/views/header/header.jsp" %>
 
     <div id="container">
         <div id="contents">
@@ -277,7 +280,7 @@
                 </div>
                 
                 <div class="searchtext">
-    <h3>관련 항목</h3>
+    
     <ul>
     	<li><a href="/faq">전체</a></li>
         <li><a href="/faq?selected=홈페이지/모바일">홈페이지/모바일</a></li>
@@ -338,7 +341,7 @@
         </div>
     </div>
     <footer>
-    
+     <%@ include file="/WEB-INF/views/footer/footer.jsp" %>
     </footer>
 </body>
 </html>
