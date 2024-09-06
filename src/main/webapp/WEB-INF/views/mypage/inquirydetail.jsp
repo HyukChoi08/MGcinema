@@ -7,8 +7,9 @@
 CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
+<script src="https://kit.fontawesome.com/3a115195d8.js"	crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/mypage_css/mypage.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,20 +21,42 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 	<%@ include file="/WEB-INF/views/header/header.jsp"%>
 	<!-- 헤더 포함 -->
 	<!-- 프로필 섹션 -->
-	\
 	<div class="mainscreen">
 		<div class="profile-section">
-			<img src="/mypage_image/OO.png" alt="프로필이미지" width="80" height="80">
+			<img src="/mypage_image/OO.png" alt="프로필이미지" width="80" height="80" />
+
 			<div class="profile-info">
-				<h2 id="nickname"><%=customer.getNickname()%>님
+				<h2>
+					<%=customer.getRealname()%>
+					님
 				</h2>
-				<p>
-					고객님은 <strong>일반</strong> 고객 입니다.
-				</p>
+				<div>
+					닉네임 : <span id="nickname"><%=customer.getNickname()%></span>
+					<!-- 닉네임 수정 아이콘 클릭 시 모달 표시 -->
+					<a href="javascript:void(0)" id="editNicknameBtn">_<i
+						class="fa-solid fa-pen"></i></a>
+				</div>
+				<div>
+					아이디 :
+					<%=customer.getUid()%>
+				</div>
 			</div>
-			<a href="#" class="button">닉네임 설정</a>
 		</div>
 
+
+		<!-- 닉네임 변경하기 모달 -->
+		<div id="nicknameModal" class="modal">
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<h2>닉네임 변경</h2>
+				<form id="nicknameForm">
+					<label for="newNickname">새 닉네임:</label> 
+					<input type="text" id="newNickname" name="newNickname" placeholder="새 닉네임 입력">
+					<button type="button" id="saveNicknameBtn">저장</button>
+				</form>
+			</div>
+		</div>
+	
 		<!-- 메인 컨테이너 -->
 		<div class="container">
 			<!-- 사이드바 -->
@@ -120,10 +143,57 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 	</div>
 	<%@ include file="/WEB-INF/views/footer/footer.jsp"%>
 	<!-- 푸터 포함 -->
-	--%>
+	
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
-   
+document.addEventListener('DOMContentLoaded', function() {
+	const modal = document.getElementById('nicknameModal');
+	const editBtn = document.querySelector('.fa-pen');
+	const closeBtn = document.querySelector('.close');
+	const saveNicknameBtn = document.getElementById('saveNicknameBtn');
+
+	// 닉네임 수정 버튼 클릭 시 모달 창 열기
+	editBtn.addEventListener('click', function() {
+		modal.style.display = 'block';
+	});
+
+	// 닫기 버튼 클릭 시 모달 닫기
+	closeBtn.addEventListener('click', function() {
+		modal.style.display = 'none';
+	});
+
+	// 모달 밖을 클릭하면 닫히게 설정
+	window.addEventListener('click', function(event) {
+		if (event.target == modal) {
+			modal.style.display = 'none';
+		}
+	});
+
+	// 닉네임 저장 버튼 클릭 시 AJAX 요청
+	saveNicknameBtn.addEventListener('click', function() {
+		const newNickname = document.getElementById('newNickname').value;
+		if (newNickname) {
+			$.ajax({
+				url : '/updateNickname',
+				method : 'POST',
+				data : {
+					nickname : newNickname
+				},
+				success : function(response) {
+					alert(response); // 서버로부터 성공 메시지 받기
+					location.reload(); // 페이지 새로고침해서 닉네임 업데이트 반영
+				},
+				error : function() {
+					alert('닉네임 변경에 실패했습니다.');
+				}
+			});
+			modal.style.display = 'none';
+		} else {
+			alert('새 닉네임을 입력하세요.');
+		}
+	});
+});
+
 </script>
 </html>

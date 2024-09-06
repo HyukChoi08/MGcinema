@@ -1,18 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <%@ page import="com.cinema.mypage.CustomerDTO"%>
-<%
-// 세션에서 cusrDTO 객체 가져오기
-CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
-%>
-<!-- 절대 경로로 CSS 파일 링크 -->
 
+<%// 세션에서 cusrDTO 객체 가져오기
+CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");%>
+
+<%@ page import="com.cinema.mypage.MovieGetDTO"%>
+<%// 세션에서 MovieGetDTO 객체 가져오기
+String customer_id = (String) session.getAttribute("uid");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<script src="https://kit.fontawesome.com/3a115195d8.js"	crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/3a115195d8.js"
+	crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/mypage_css/mypage.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,76 +48,107 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 			</div>
 		</div>
 
+
 		<!-- 닉네임 변경하기 모달 -->
 		<div id="nicknameModal" class="modal">
 			<div class="modal-content">
 				<span class="close">&times;</span>
 				<h2>닉네임 변경</h2>
 				<form id="nicknameForm">
-					<label for="newNickname">새 닉네임:</label> 
-					<input type="text" id="newNickname" name="newNickname" placeholder="새 닉네임 입력">
+					<label for="newNickname">새 닉네임:</label> <input type="text"
+						id="newNickname" name="newNickname" placeholder="새 닉네임 입력">
 					<button type="button" id="saveNicknameBtn">저장</button>
 				</form>
 			</div>
 		</div>
-	
 
-	<!-- 메인 컨테이너 -->
-	<div class="container">
-		<!-- 사이드바 -->
-		<div class="sidebar">
-			<ul>
-				<li><a href="/myhome">MY HOME</a></li>
-				<li><a href="/reservation">나의 예매정보</a></li>
-				<li><a href="/payment">결제 내역</a></li>
-				<li><a href="/inquiry">1:1 문의</a></li>
-				<li><a href="/profile">개인 정보 변경</a></li>
-				<li><a href="/cancel">회원 탈퇴</a></li>
-			</ul>
-		</div>
 
-		<!-- 메인 콘텐츠 -->
-		<div class="main-content">
-			<!-- 예매 내역 섹션 -->
-			<div>
-				<h3>나의 예매내역</h3>
-				<div class="my-history">
-					<button class="button" onclick="location.href='/cinema'">CGV
-						영화 예매 바로가기</button>
-				</div>
-			</div>
-
-			<!-- 문의 내역 섹션 -->
-			<div>
-				<h3>예매 취소 내역</h3>
-				<div class="ask-section">
-					<button class="button" onclick="location.href='/cinema'">CGV
-						영화 예매 바로가기</button>
-				</div>
-			</div>
-			<!-- My CGV Home 섹션 -->
-			<div class="link">
+		<!-- 메인 컨테이너 -->
+		<div class="container">
+			<!-- 사이드바 -->
+			<div class="sidebar">
 				<ul>
-					<li><a href=/chart>Movie Home</a></li>
-					<li><a href=/ageinfo>등급영화 보기</a></li>
-					<li><a href=/ticket>상영중인 영화</a></li>
-					<li><a href=/serviceHome>고객센터 바로가기</a></li>
-					<li><a href=/store>스토어 바로가기</a></li>
-
+					<li><a href="/myhome">MY HOME</a></li>
+					<li><a href="/reservation">나의 예매정보</a></li>
+					<li><a href="/payment">결제 내역</a></li>
+					<li><a href="/inquiry">1:1 문의</a></li>
+					<li><a href="/profile">개인 정보 변경</a></li>
+					<li><a href="/cancel">회원 탈퇴</a></li>
 				</ul>
 			</div>
-			<br> <br> <br>
 
-			<!-- 푸터 섹션 -->
-			<div class="footer-section">
-				<p>보고싶은 영화가 있나요?</p>
-				<a href="/chart" class="button">상영중인 영화 바로가기</a>
+			<!-- 메인 콘텐츠 -->
+			<div class="main-content">
+				<!-- 예매 내역 섹션 -->
+				<div>
+					<h3>나의 예매내역</h3>
+					<div class="my-history">
+						<table>
+							<thead>
+								<tr>
+									<th>영화 이름</th>
+									<th>상영관 이름</th>
+									<th>예매인원</th>
+									<th>가격</th>
+									<th>상영일자</th>
+									<th>시작 시간</th>
+									<th>종료 시간</th>
+									<th>예매 시간</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:if test="${not empty getMovies}">
+									<c:forEach var="reservation" items="${getMovies}">
+										<tr>
+											<td>${reservation.movie_name}</td>
+											<td>${reservation.room_name}</td>
+											<td>${reservation.totalpeople}</td>
+											<td>${reservation.totalprice}</td>
+											<td>${reservation.datetime}</td>
+											<td>${reservation.begintime}</td>
+											<td>${reservation.endtime}</td>
+											<td>${reservation.created}</td>
+										</tr>
+									</c:forEach>
+								</c:if>
+								<c:if test="${empty getMovies}">
+									<p>예매 목록이 없습니다.</p>
+								</c:if>
+							</tbody>
+						</table>
+					</div>
+					<!-- 문의 내역 섹션 -->
+					<div>
+
+						<div class="ask-section">
+							<h3>예매 취소 내역</h3>
+							<button class="button" onclick="location.href='/cinema'">CGV
+								영화 예매 바로가기</button>
+						</div>
+					</div>
+					<!-- My CGV Home 섹션 -->
+					<div class="link">
+						<ul>
+							<li><a href=/chart>Movie Home</a></li>
+							<li><a href=/ageinfo>등급영화 보기</a></li>
+							<li><a href=/ticket>상영중인 영화</a></li>
+							<li><a href=/serviceHome>고객센터 바로가기</a></li>
+							<li><a href=/store>스토어 바로가기</a></li>
+
+						</ul>
+					</div>
+					<br> <br> <br>
+
+					<!-- 푸터 섹션 -->
+					<div class="footer-section">
+						<p>보고싶은 영화가 있나요?</p>
+						<a href="/chart" class="button">상영중인 영화 바로가기</a>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
-	<%@ include file="/WEB-INF/views/footer/footer.jsp"%>
-	<!-- 푸터 포함 -->
+		<%@ include file="/WEB-INF/views/footer/footer.jsp"%>
+		<!-- 푸터 포함 -->
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>

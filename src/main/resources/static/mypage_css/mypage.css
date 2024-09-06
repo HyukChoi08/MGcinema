@@ -4,12 +4,13 @@
 	/*  padding-top: 101px; */
 	background-color: black;
 	margin-top: 160px;
-	max-width: 80%;
+	max-width: 65%;
 	min-width: 50%;
 	padding: 0px 50px;
 	margin-left: auto;
 	margin-right: auto;
 }
+
 
 a {
 	text-decoration: none; /* 링크 밑줄 제거 */
@@ -20,8 +21,7 @@ a {
 
 /* 전체 body 스타일 설정 */
 body {
-	font-family: Arial, sans-serif; /* 폰트 설정 */
-	margin: 10; /* 여백 제거 */
+	color: white; /* 흰색 텍스트 (옵션) */
 	padding: 0; /* 패딩 제거 */
 	background-color: black; /* 페이지 배경색 */
 	margin: auto;
@@ -31,7 +31,7 @@ body {
 table {
 	width: 100%;
 	border-collapse: collapse; /* 테이블 셀 간의 간격 제거 */
-	margin-top: 20px;
+	
 	border-radius: 5px; /* 모서리 둥글게 */
 }
 
@@ -40,12 +40,12 @@ thead th {
 	color: white; /* 헤더 텍스트 색상 */
 	padding: 2px;
 	text-align: left; /* 텍스트 왼쪽 정렬 */
-	border-bottom: 2px solid #ddd; /* 헤더 아래쪽에 테두리 추가 */
+	border-bottom: 2px solid #808080; /* 헤더 아래쪽에 테두리 추가 */
 }
 
 tbody td {
-	padding: 10px;
-	border-bottom: 1px solid #ddd; /* 셀 아래쪽에 테두리 추가 */
+	padding: 1px;
+	border-bottom: 1px solid #808080; /* 셀 아래쪽에 테두리 추가 */
 	text-align: left; /* 텍스트 왼쪽 정렬 */
 }
 
@@ -89,6 +89,7 @@ form input[type="submit"] {
 
 form input[type="submit"]:hover {
 	background-color: #d10813; /* 마우스 올렸을 때 색상 */
+	
 }
 
 /* 프로필 섹션 스타일 */
@@ -116,11 +117,11 @@ form input[type="submit"]:hover {
 }
 
 .button {
-	background-color: #001579; /* 버튼 배경색 */
+	background-color: #808080; /* 버튼 배경색 */
 	color: white; /* 텍스트 색상 */
-	padding: 10px 20px; /* 버튼 안쪽 여백 */
+	padding: 1px 5px; /* 버튼 안쪽 여백 */
 	text-align: center; /* 텍스트 중앙 정렬 */
-	border-radius: 5px; /* 모서리 둥글게 */
+	border-radius: 3px; /* 모서리 둥글게 */
 	text-decoration: none; /* 링크 밑줄 제거 */
 	display: inline-block; /* 인라인 블록 요소로 설정 */
 	margin-top: 10px; /* 위쪽 여백 */
@@ -128,7 +129,7 @@ form input[type="submit"]:hover {
 }
 
 .button:hover {
-	background-color: #d10813; /* 버튼에 마우스 올렸을 때 색상 */
+	background-color: #3a3d3f; /* 버튼에 마우스 올렸을 때 색상 */
 }
 
 /* 메인 컨테이너 스타일 */
@@ -171,18 +172,24 @@ form input[type="submit"]:hover {
 }
 
 .sidebar ul li a:hover {
-	color: #e50914; /* 링크에 마우스 올렸을 때 색상 */
+	color: #3a3d3f; /* 링크에 마우스 올렸을 때 색상 */
+	
 }
+.sidebar li:hover{
+background-color: #f1f1f1; /* 마우스를 올렸을 때 배경색 */
 
+font-size:20px;
+}
 /* 메인 콘텐츠 스타일 */
 .main-content {
 	border: 2px solid #808080;
 	padding: 25px; /* 패딩 설정 */
-	background-color: white; /* 배경색 */
+/* 	background-color: white; 배경색 */
 	margin-left: 5px; /* 사이드바와의 간격 */
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
 	border-radius: 10px; /* 모서리 둥글게 */
 	flex: 1 1 80%; /* 전체 공간에서 70% 차지 */
+	margin-bottom: 300px;
 }
 
 /* 프로필 섹션 스타일 - 다른 부분 */
@@ -195,7 +202,7 @@ form input[type="submit"]:hover {
 .my-history, .ask-section, .section {
 	margin-bottom: 20px;
 	padding: 10px;
-	background-color: #f7f7f7; /* 배경색 */
+	/* background-color: #f7f7f7; 배경색 */
 	border: 1px solid #ddd; /* 테두리 색상 */
 	border-radius: 5px; /* 모서리 둥글게 */
 }
@@ -222,8 +229,8 @@ form input[type="submit"]:hover {
 /* 문의 내역 테이블 스타일 */
 .inquiry-table {
 	width: 100%;
-	border-collapse: collapse; /* 테이블 경계선 겹치기 */
-	margin-top: 40px;
+	 /* 테이블 경계선 겹치기 */
+	
 }
 
 .inquiry-table th, .inquiry-table td {
@@ -233,12 +240,12 @@ form input[type="submit"]:hover {
 }
 
 .inquiry-table th {
-	background-color: #f7f7f7;
+	/* background-color: #f7f7f7; */
 	font-weight: bold;
 }
 
 .inquiry-table tr:nth-child(even) {
-	background-color: #f9f9f9;
+	/* background-color: #f9f9f9; */
 }
 
 .status-complete {
@@ -267,7 +274,7 @@ form input[type="submit"]:hover {
 /* 모달 콘텐츠 스타일 */
 .modal-content {
   border-radius: 10px; /* 모서리 둥글게 */
-  background-color: #fff; /* 흰색 배경 */
+  background-color: black; /* 흰색 배경 */
   margin: 15% auto; /* 화면의 중앙에 위치 (상단 여백 15%) */
   padding: 20px; /* 내부 여백 (패딩) */
   border: 1px solid #888; /* 테두리 색상 (연한 회색) */
