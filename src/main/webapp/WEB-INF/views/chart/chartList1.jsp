@@ -126,11 +126,22 @@ ol, ul {
     </c:forEach>
     <div id="appearinfo">
     <div style="display:flex;">
-    <c:forEach items="${cainfo}" var="cainfo">
+    <ul class="flex-container">
+    <li>
+    <c:forEach items="${cainfoprod}" var="cainfoprod">
                         <div>
-                    	감독:${cainfo.prod}배우:${cainfo.actor}<img src=${cainfo.image_path}>
+                    	감독:${cainfoprod.prod}<img src=${cainfoprod.image_path}>
                     </div>
     </c:forEach>
+    </li>
+    <li>
+    <c:forEach items="${cainfoactor}" var="cainfoactor">
+                        <div>
+                    	배우:${cainfoactor.actor}<img src=${cainfoactor.image_path}>
+                    </div>
+    </c:forEach>
+    </li>
+    </ul>
     
     </div>
     </div>
@@ -164,11 +175,26 @@ ol, ul {
             dataType: 'JSON',
             success: function(data) {
                 let str = '';
+				let uid = '${sessionScope.uid}'
+				console.log(uid);
+
                 $('#commentList').empty();
                 for(let i = 0; i < data.length; i++) {
-                    str += '<li><div><ul><li id="reviewWriter" value="'+data[i]['id']+'">'+data[i]['writer']+'</li><li>'+data[i]['created_at']+'</li></ul></div><div><p>'+data[i]['content']+'</p></div></li>';
+                    
+                	console.log("uid = " + uid)
+                	console.log("data[i]['customer_uid'] = " + data[i]['customer_uid'])
+                	str += '<li><div><ul><li id="reviewWriter" value="'+data[i]['id']+'">'+data[i]['writer']+'</li><li>'+data[i]['created_at']+'</li></ul></div><div><p>'+data[i]['content']+'</p></div>';
+                	if(uid == data[i]['customer_uid']){
+                		
+                		console.log("123");
+                		
+                		str+='<textarea id="updetext"></textarea><button data-review-id="'+data[i]['id']+'"id="editcomment">수정</button><button id="deletecomment">삭제</button>';
+                	}
+                	str+= '</li>';
                 }
+                console.log(str)
                 $('#commentList').append(str);
+         
               
             }
         });
@@ -188,6 +214,7 @@ ol, ul {
                 let moviechart = $('#moviechart').val();
                 let content = $('#reviewcomment').val();
                 let writer = $('#nickname').val();
+                let uid = '${sessionScope.uid}'
                 if (!writer) {
                     alert('로그인이 필요합니다');
                     $('#reviewcomment').val('');
@@ -196,13 +223,14 @@ ol, ul {
                     $.ajax({
                         url: '/putcomment',
                         type: 'post',
-                        data: {moviechart: moviechart, content: content, writer: writer},
+                        data: {moviechart: moviechart, content: content, writer: writer ,uid:uid},
                         success: function(data) {
                             console.log(data);
                             $('#moviechart').val('');
                             $('#reviewcomment').val('');
                             $('#nickname').val('');
-                           
+                            loadreview();
+                            
                         }
                     });
                 }
@@ -215,38 +243,35 @@ ol, ul {
                     dataType: 'JSON',
                     success: function(data) {
                         let str = '';
+        				let uid = '${sessionScope.uid}'
+        				console.log(uid);
+
                         $('#commentList').empty();
                         for(let i = 0; i < data.length; i++) {
-                            str += '<li><div><ul><li id="reviewWriter" value="'+data[i]['id']+'">'+data[i]['writer']+'</li><li>'+data[i]['created_at']+'</li></ul></div><div><p>'+data[i]['content']+'</p></div></li>';
+                            
+                        	console.log("uid = " + uid)
+                        	console.log("data[i]['customer_uid'] = " + data[i]['customer_uid'])
+                        	str += '<li><div><ul><li id="reviewWriter" value="'+data[i]['id']+'">'+data[i]['writer']+'</li><li>'+data[i]['created_at']+'</li></ul></div><div><p>'+data[i]['content']+'</p></div>';
+                        	if(uid == data[i]['customer_uid']){
+                        		
+                        		console.log("123");
+                        		
+                        		str+='<textarea id="updetext"></textarea><button data-review-id="'+data[i]['id']+'"id="editcomment">수정</button><button id="deletecomment">삭제</button>';
+                        	}
+                        	str+= '</li>';
                         }
+                        console.log(str)
                         $('#commentList').append(str);
-                        loadreview();
                     }
                 });
             })
-            .on('click', '#reviewWriter', function() {
-                let writer = $(this).text();
-                let click = $(this);
-                let clickid = $(this).val(); // 여기서 value 속성을 가져옵니다.
-                console.log("writer", writer);
-                let nick = '${sessionScope.Nick}';
-                if (writer === nick) {
-                    let text = $('<input type="hidden" id="reviewupdeid">');
-                    let textarea = $('<textarea id="updetext"></textarea>');
-                    let editButton = $('<button id="editcomment">수정</button>');
-                    let deleteButton = $('<button id="deletecomment">삭제</button>');
-                    click.after(deleteButton).after(editButton).after(text).after(textarea);
-                    $('#reviewupdeid').val(clickid);
-                } else {
-                    alert('작성자와 닉네임이 일치하지 않습니다.');
-                    return false;
-                }
-            })
+
             .on('click', '#editcomment', function() { //리뷰수정
+            	let updeId=$(this).data('review-id');
                 $.ajax({
                     url: '/updatereview',
                     type: 'post',
-                    data: {id: $('#reviewupdeid').val(), content: $('#updetext').val()},
+                    data: {id:updeId, content: $('#updetext').val()},
                     dataType: 'text',
                     success: function(data) {
                         console.log(data);
@@ -255,10 +280,11 @@ ol, ul {
                 });
             })
             .on('click', '#deletecomment', function() { //리뷰삭제
+            	let updeId=$(this).data('review-id');
                 $.ajax({
                     url: '/deletereview',
                     type: 'post',
-                    data: {id: $('#reviewupdeid').val()},
+                    data: {id:updeId},
                     dataType: 'text',
                     success: function(data) {
                         console.log(data);
@@ -291,6 +317,11 @@ ol, ul {
                     let endPage = Math.min(currentGroup * pagesPerGroup, totalPages);
 
                     let str = '';
+    				let uid = '${sessionScope.uid}'
+    					console.log(uid);
+    	                let textarea = $('<textarea id="updetext"></textarea>');
+    	                let editButton = $('<button id="editcomment">수정</button>');
+    	                let deleteButton = $('<button id="deletecomment">삭제</button>')
                     $('#commentList').empty();
 
                     // 현재 페이지에 해당하는 댓글만 표시
@@ -298,9 +329,20 @@ ol, ul {
                     let end = start + itemsPerPage;
                     let pageData = data.slice(start, end);
 
-                    for (let i = 0; i < pageData.length; i++) {
-                        str += '<li><div><ul><li id="reviewWriter" value="'+pageData[i]['id']+'">'+pageData[i]['writer']+'</li><li>'+pageData[i]['created_at']+'</li></ul></div><div><p>'+pageData[i]['content']+'</p></div></li>';
+                    for(let i = 0; i < data.length; i++) {
+                        
+                    	console.log("uid = " + uid)
+                    	console.log("data[i]['customer_uid'] = " + data[i]['customer_uid'])
+                    	str += '<li><div><ul><li id="reviewWriter" value="'+data[i]['id']+'">'+data[i]['writer']+'</li><li>'+data[i]['created_at']+'</li></ul></div><div><p>'+data[i]['content']+'</p></div>';
+                    	if(uid == data[i]['customer_uid']){
+                    		
+                    		console.log("123");
+                    		
+                    		str+='<textarea id="updetext"></textarea><button data-review-id="'+data[i]['id']+'"id="editcomment">수정</button><button id="deletecomment">삭제</button>';
+                    	}
+                    	str+= '</li>';
                     }
+                    console.log(str)
                     $('#commentList').append(str);
 
                     // 페이징 버튼 생성
@@ -321,7 +363,7 @@ ol, ul {
 
         // 페이지 로드 시 첫 페이지 댓글 로드
         $(document).ready(function() {
-            loadreview();
+        	loadreview();
         });
         
     </script>

@@ -6,5 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface chartappearanceinfoDAO {
-	ArrayList<chartappearanceinfoDTO> chartappearanceinfo();
+	ArrayList<chartappearanceinfoDTO> chartappearanceinfo(String movieName);
+	ArrayList<chartappearanceinfoDTO> chartappearanceinfo1(String movieName);
 }

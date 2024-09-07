@@ -38,8 +38,10 @@ public String chartList1(HttpServletRequest req, Model model) {
 	model.addAttribute("chartList2",archart);
 	ArrayList<chartDTO> putchart = cdao.chartList3(id);
 	model.addAttribute("chartList3", putchart);
-	ArrayList<chartappearanceinfoDTO> putinfo =cainfodao.chartappearanceinfo();
-	model.addAttribute("cainfo", putinfo);
+	ArrayList<chartappearanceinfoDTO> putinfoprod =cainfodao.chartappearanceinfo(String.valueOf(id));
+	model.addAttribute("cainfoprod", putinfoprod);
+	ArrayList<chartappearanceinfoDTO> putinfoactor =cainfodao.chartappearanceinfo1(String.valueOf(id));
+	model.addAttribute("cainfoactor", putinfoactor);
 	return "chart/chartList1";
 }
 @PostMapping("/chartList")//무비 차트 정렬시키는것
@@ -127,7 +129,7 @@ public String insertselectcomment(HttpServletRequest req, Model model) {
 		jo.put("content",cpcdto.getContent());
 		jo.put("writer",cpcdto.getWriter());
 		jo.put("created_at", cpcdto.getCreated_at());
-		
+		jo.put("customer_uid",cpcdto.getCustomer_uid());
 		ja.put(jo);
 	}
 	return ja.toString(); 
@@ -142,8 +144,8 @@ public String update (HttpServletRequest req, Model model) {
 	String content = req.getParameter("content");
 	
 	String writer = req.getParameter("writer");
-	
-	cpcdao.putcomment(moviechart, content, writer);
+	String uid = req.getParameter("uid");
+	cpcdao.putcomment(moviechart, content, writer,uid);
 	return "ok";
 }
 //리뷰 수정
