@@ -126,7 +126,7 @@ ol, ul {
     </c:forEach>
     <div id="appearinfo">
     <div style="display:flex;">
-    <ul class="flex-container">
+    <ul class="vertical-container">
     <li>
     <c:forEach items="${cainfoprod}" var="cainfoprod">
                         <div>
@@ -134,7 +134,7 @@ ol, ul {
                     </div>
     </c:forEach>
     </li>
-    <li>
+    <li class="flex-container">
     <c:forEach items="${cainfoactor}" var="cainfoactor">
                         <div>
                     	배우:${cainfoactor.actor}<img src=${cainfoactor.image_path}>
@@ -194,6 +194,7 @@ ol, ul {
                 }
                 console.log(str)
                 $('#commentList').append(str);
+                loadreview();
          
               
             }
@@ -329,21 +330,19 @@ ol, ul {
                     let end = start + itemsPerPage;
                     let pageData = data.slice(start, end);
 
-                    for(let i = 0; i < data.length; i++) {
-                        
-                    	console.log("uid = " + uid)
-                    	console.log("data[i]['customer_uid'] = " + data[i]['customer_uid'])
-                    	str += '<li><div><ul><li id="reviewWriter" value="'+data[i]['id']+'">'+data[i]['writer']+'</li><li>'+data[i]['created_at']+'</li></ul></div><div><p>'+data[i]['content']+'</p></div>';
-                    	if(uid == data[i]['customer_uid']){
-                    		
-                    		console.log("123");
-                    		
-                    		str+='<textarea id="updetext"></textarea><button data-review-id="'+data[i]['id']+'"id="editcomment">수정</button><button id="deletecomment">삭제</button>';
-                    	}
-                    	str+= '</li>';
+                    for (let i = 0; i < pageData.length; i++) {
+                        console.log("uid = " + uid);
+                        console.log("pageData[i]['customer_uid'] = " + pageData[i]['customer_uid']);
+                        str += '<li><div><ul><li id="reviewWriter" value="' + pageData[i]['id'] + '">' + pageData[i]['writer'] + '</li><li>' + pageData[i]['created_at'] + '</li></ul></div><div><p>' + pageData[i]['content'] + '</p></div>';
+                        if (uid == pageData[i]['customer_uid']) {
+                            console.log("123");
+                            str += '<textarea id="updetext"></textarea><button data-review-id="' + pageData[i]['id'] + '" id="editcomment">수정</button><button id="deletecomment">삭제</button>';
+                        }
+                        str += '</li>';
                     }
-                    console.log(str)
+                    console.log(str);
                     $('#commentList').append(str);
+
 
                     // 페이징 버튼 생성
                     let pagingStr = '';
