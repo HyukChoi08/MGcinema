@@ -25,8 +25,9 @@ String customer_id = (String) session.getAttribute("uid");
 <body>
 	<%@ include file="/WEB-INF/views/header/header.jsp"%>
 	<!-- 헤더 포함 -->
-	<!-- 프로필 섹션 -->
+
 	<div class="mainscreen">
+		<!-- 프로필 섹션 -->
 		<div class="profile-section">
 			<img src="/mypage_image/OO.png" alt="프로필이미지" width="80" height="80" />
 
@@ -70,7 +71,7 @@ String customer_id = (String) session.getAttribute("uid");
 				<ul>
 					<li><a href="/myhome">MY HOME</a></li>
 					<li><a href="/reservation">나의 예매정보</a></li>
-					<li><a href="/payment">결제 내역</a></li>
+					<li><a href="/payment">스토어 결제 내역</a></li>
 					<li><a href="/inquiry">1:1 문의</a></li>
 					<li><a href="/profile">개인 정보 변경</a></li>
 					<li><a href="/cancel">회원 탈퇴</a></li>
@@ -81,14 +82,14 @@ String customer_id = (String) session.getAttribute("uid");
 			<div class="main-content">
 				<!-- 예매 내역 섹션 -->
 				<div>
-					<h3>나의 예매내역</h3>
+					<h3>최근 나의 예매내역 (최대 5건)</h3>
 					<div class="my-history">
 						<table>
 							<thead>
 								<tr>
 									<th>영화 이름</th>
-									<th>상영관 이름</th>
-									<th>예매인원</th>
+									<th>상영관</th>
+									<th>인원</th>
 									<th>가격</th>
 									<th>상영일자</th>
 									<th>시작 시간</th>
@@ -97,26 +98,39 @@ String customer_id = (String) session.getAttribute("uid");
 								</tr>
 							</thead>
 							<tbody>
-								<c:if test="${not empty getMovies}">
-									<c:forEach var="reservation" items="${getMovies}">
+								<c:choose>
+									<c:when test="${not empty recentMovies}">
+										<c:forEach var="reservation" items="${recentMovies}">
+											<tr>
+												<td>${reservation.movie_name}</td>
+												<td>${reservation.room_name}</td>
+												<td>${reservation.totalpeople}</td>
+												<td>${reservation.totalprice}</td>
+												<td>${reservation.datetime}</td>
+												<td>${reservation.begintime}</td>
+												<td>${reservation.endtime}</td>
+												<td>${reservation.created}</td>
+											</tr>
+										</c:forEach>
+										<c:if test="${totalMoviesCount > 5}">
+											<tr>
+												<td colspan="8" style="text-align: center; color: white;">
+													상세 정보는 예매정보 페이지에서 확인해 주세요.</td>
+											</tr>
+										</c:if>
+									</c:when>
+									<c:otherwise>
 										<tr>
-											<td>${reservation.movie_name}</td>
-											<td>${reservation.room_name}</td>
-											<td>${reservation.totalpeople}</td>
-											<td>${reservation.totalprice}</td>
-											<td>${reservation.datetime}</td>
-											<td>${reservation.begintime}</td>
-											<td>${reservation.endtime}</td>
-											<td>${reservation.created}</td>
+											<td colspan="8">예매 목록이 없습니다.</td>
 										</tr>
-									</c:forEach>
-								</c:if>
-								<c:if test="${empty getMovies}">
-									<p>예매 목록이 없습니다.</p>
-								</c:if>
+									</c:otherwise>
+								</c:choose>
 							</tbody>
 						</table>
+						<button class="button" onclick="location.href='/reservation'">
+							나의 예매이력 바로가기</button>
 					</div>
+
 					<!-- 문의 내역 섹션 -->
 					<div>
 
@@ -147,8 +161,9 @@ String customer_id = (String) session.getAttribute("uid");
 				</div>
 			</div>
 		</div>
-		<%@ include file="/WEB-INF/views/footer/footer.jsp"%>
-		<!-- 푸터 포함 -->
+	</div>
+	<%@ include file="/WEB-INF/views/footer/footer.jsp"%>
+	<!-- 푸터 포함 -->
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>

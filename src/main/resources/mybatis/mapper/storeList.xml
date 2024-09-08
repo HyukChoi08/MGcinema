@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cinema.mypage.MypageDAO">
+
+	<!-- 스토어 결제 내역 가져오기 -->
+	<!-- <select id="getStoreList" parameterType="String"
+		resultType="com.cinema.mypage.StoreListDTO">
+		SELECT id, customer_id, ramdom_id, item_name, totalprice, created, updated
+		FROM storepay
+		WHERE customer_id = #{customer_id}
+		ORDER BY created DESC
+	</select> -->
+
+	<!-- 총 결제 내역 수 가져오기 -->
+
+</mapper>

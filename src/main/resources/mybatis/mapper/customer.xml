@@ -3,7 +3,8 @@
 <mapper namespace="com.cinema.mypage.MypageDAO">
 	<select id="getCustomerInfo"
 		resultType="com.cinema.mypage.CustomerDTO">
-		select id, uid, passwd, realname, nickname, email, region, favorite, mobile,
+		select id, uid, passwd, realname, nickname, email, region,
+		favorite, mobile,
 		tellecom, created, updated, birthday
 		from customer
 		where id=#{param1}
@@ -11,7 +12,8 @@
 
 	<select id="getCustomerInfoByUid"
 		resultType="com.cinema.mypage.CustomerDTO">
-		select id, uid, passwd, realname, nickname, email, region, favorite, mobile,
+		select id, uid, passwd, realname, nickname, email, region,
+		favorite, mobile,
 		tellecom, created, updated, birthday
 		from customer
 		where uid=#{param1}
@@ -22,10 +24,12 @@
 		UPDATE customer
 		SET
 		passwd = #{passwd},
-		nickname = #{nickname},
+		nickname =
+		#{nickname},
 		email = #{email},
 		region = #{region},
-		favorite = #{favorite},
+		favorite =
+		#{favorite},
 		mobile = #{mobile},
 		tellecom = #{tellecom},
 		updated = NOW(),
@@ -39,7 +43,8 @@
 
 	<select id="getInquiryList"
 		resultType="com.cinema.mypage.InquiryDTO">
-		select id,customer_id, title, content, answer, created, ancreated, current
+		select id,customer_id, title, content, answer, created,
+		ancreated, current
 		from inquiry
 		where customer_id=#{param1}
 	</select>
@@ -47,7 +52,8 @@
 	<insert id="inquiryWrite"
 		parameterType="com.cinema.mypage.InquiryDTO">
 		insert into inquiry
-		set customer_id=#{customer_id}, title=#{title}, content=#{content}
+		set customer_id=#{customer_id},
+		title=#{title}, content=#{content}
 	</insert>
 
 	<select id="getInquiryDetail"
@@ -66,17 +72,21 @@
 
 	<!-- 예매 정보 삭제 -->
 	<delete id="deleteMovieReservation" parameterType="int">
-		DELETE FROM moviepay
+		DELETE FROM
+		moviepay
 		WHERE id = #{id}
 	</delete>
 
 	<!-- 예매 정보를 moviedelete 테이블로 이동 -->
 	<insert id="moveToMovieDelete" parameterType="int">
-		INSERT INTO moviedelete (id, random_id, customer_id, movie_name, room_name,
+		INSERT INTO
+		moviedelete (id, random_id, customer_id, movie_name, room_name,
 		totalprice, runningtime, seat, totalpeople, begintime, endtime,
 		datetime, created)
-		SELECT id, random_id, customer_id, movie_name, room_name, totalprice,
-		runningtime, seat, totalpeople, begintime, endtime, datetime, created
+		SELECT id, random_id, customer_id, movie_name,
+		room_name, totalprice,
+		runningtime, seat, totalpeople, begintime,
+		endtime, datetime, created
 		FROM moviepay
 		WHERE id = #{id}
 	</insert>
@@ -93,6 +103,44 @@
 	<update id="updateNickname">
 		UPDATE customer
 		SET nickname = #{nickname}
-		WHERE uid = #{uid}
+		WHERE uid =
+		#{uid}
 	</update>
+
+
+	<!-- 예매 목록을 페이징 및 최신순 정렬로 가져오기 -->
+	<select id="getMovieListWithPaging" parameterType="map"
+		resultType="com.cinema.mypage.MovieGetDTO">
+		SELECT *
+		FROM moviepay
+		WHERE customer_id = #{customer_id}
+		ORDER BY created DESC  <!-- 최신순 정렬 -->
+		LIMIT #{limit} OFFSET #{offset}  <!-- 페이징 처리 -->
+	</select>
+
+	<!-- 총 예매 수 구하기 -->
+	<select id="getTotalReservationCount" parameterType="string"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM moviepay
+		WHERE customer_id = #{customer_id}
+	</select>
+
+	<!-- 취소된 예매 내역을 페이징 및 최신순 정렬로 가져오기 -->
+	<select id="getCanceledMovieListWithPaging" parameterType="map"
+		resultType="com.cinema.mypage.MovieGetDTO">
+		SELECT * FROM moviedelete
+		WHERE customer_id = #{customer_id}
+		ORDER BY created DESC
+		LIMIT #{limit} OFFSET #{offset}
+	</select>
+
+	<!-- 총 취소 내역 수 구하기 -->
+	<select id="getTotalCanceledReservationCount"
+		parameterType="string" resultType="int">
+		SELECT COUNT(*)
+		FROM moviedelete
+		WHERE customer_id = #{customer_id}
+	</select>
+
 </mapper>

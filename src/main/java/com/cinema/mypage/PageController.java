@@ -1,6 +1,8 @@
 package com.cinema.mypage;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +26,7 @@ public class PageController {
 	@Autowired
 	MypageDAO mdao;
 
-	@GetMapping("/myhome") // 홈 페이지 매핑
+	@GetMapping("/myhome")
 	public String myhome(HttpSession session, Model model) { 
 		String uid = (String)session.getAttribute("uid");
 
@@ -35,14 +37,20 @@ public class PageController {
 
 			// 예매 목록 가져오기
 			ArrayList<MovieGetDTO> arrmovieDTO = mdao.getMovieList(uid);
-			model.addAttribute("getMovies", arrmovieDTO);  // 예매 목록을 Model에 추가
+			model.addAttribute("getMovies", arrmovieDTO);  // 전체 예매 목록을 Model에 추가
 
-			System.out.println(arrmovieDTO);  // cusDTO 값 출력
+			// 최근 5건의 예매 목록을 가져오기
+			List<MovieGetDTO> recentMovies = arrmovieDTO.size() > 5 ? arrmovieDTO.subList(0, 5) : arrmovieDTO;
+			model.addAttribute("recentMovies", recentMovies);
+			model.addAttribute("totalMoviesCount", arrmovieDTO.size());
+
+			/* System.out.println(arrmovieDTO); */ // cusDTO 값 출력
 		} else {
 			return "redirect:/login";
 		}
 		return "mypage/myhome";
 	}
+
 
 	//   @GetMapping("/reservation") // 나의 예매정보 페이지 매핑
 	//   public String reservation() {
@@ -65,23 +73,45 @@ public class PageController {
 		}
 	}
 
-	@GetMapping("/payment") // 결제 내역 페이지 매핑
-	public String payment() {
-		return "mypage/payment";
-	}
+	/*
+	 * @GetMapping("/payment") // 결제 내역 페이지 매핑 public String payment() { return
+	 * "mypage/payment"; }
+	 */
 
-	//예매 리스트 조회
+	// 예매 리스트 
 	@GetMapping("/reservation")
-	public String movieGetList(HttpSession session, Model model) {
-		String customer_id = (String)session.getAttribute("uid");
-		System.out.println(customer_id);
-		ArrayList<MovieGetDTO> arrmovieDTO = mdao.getMovieList(customer_id);
-		model.addAttribute("getMovies", arrmovieDTO);
-		System.out.println(arrmovieDTO); 
+	public String movieGetList(HttpSession session, Model model, 
+			@RequestParam(value = "page", defaultValue = "1") int page, 
+			@RequestParam(value = "canceledPage", defaultValue = "1") int canceledPage) {
 
-		// 취소된 예매 리스트 조회
-		ArrayList<MovieGetDTO> canceledMoviesDTO = mdao.getCanceledMovieList(customer_id);
+		String customer_id = (String) session.getAttribute("uid");
+
+		int limit = 10;  // 한 페이지에 10개씩
+		int offset = (page - 1) * limit;
+
+		// 페이징된 예매 리스트 가져오기
+		ArrayList<MovieGetDTO> arrmovieDTO = mdao.getMovieListWithPaging(customer_id, limit, offset);
+		model.addAttribute("getMovies", arrmovieDTO);
+
+		// 총 예매 수 구하기 (페이지네이션을 위해 필요)
+		int totalReservations = mdao.getTotalReservationCount(customer_id);
+		int listTotalPages = (int) Math.ceil((double) totalReservations / limit);
+
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPages", listTotalPages);
+
+		// 취소된 예매 리스트 조회 및 페이징
+		int canceledOffset = (canceledPage - 1) * limit;
+		ArrayList<MovieGetDTO> canceledMoviesDTO = mdao.getCanceledMovieListWithPaging(customer_id, limit, canceledOffset);
 		model.addAttribute("canceledMovies", canceledMoviesDTO);
+
+		// 총 취소된 예매 수 구하기 (페이지네이션을 위해 필요)
+		int totalCanceledReservations = mdao.getTotalCanceledReservationCount(customer_id);
+		int totalCanceledPages = (int) Math.ceil((double) totalCanceledReservations / limit);
+
+		model.addAttribute("currentCanceledPage", canceledPage);
+		model.addAttribute("totalCanceledPages", totalCanceledPages);
+
 		return "mypage/reservation";
 	}
 
@@ -253,5 +283,18 @@ public class PageController {
 
 		return "redirect:/cinema"; // 홈 페이지로 리다이렉트
 	}
-}
 
+
+	/*
+	 * //스토어 결제 목록
+	 * 
+	 * @GetMapping("/payment") public String getPaymentHistory(Model
+	 * model, @RequestParam(value = "customer_id", defaultValue = "") String
+	 * customerId) { System.out.println("Received customer_id: " + customerId); //
+	 * 확인 ArrayList<StoreListDTO> storeList = mdao.getStoreList(customerId);
+	 * model.addAttribute("storeList", storeList); System.out.println("Store List: "
+	 * + storeList); return "mypage/payment";
+	 * 
+	 * }
+	 */
+}

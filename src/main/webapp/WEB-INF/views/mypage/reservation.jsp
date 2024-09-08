@@ -9,7 +9,8 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<script src="https://kit.fontawesome.com/3a115195d8.js"	crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/3a115195d8.js"
+	crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/mypage_css/mypage.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +21,7 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 <body>
 	<%@ include file="/WEB-INF/views/header/header.jsp"%>
 	<!-- 프로필 섹션 -->
-		<div class="mainscreen">
+	<div class="mainscreen">
 		<div class="profile-section">
 			<img src="/mypage_image/OO.png" alt="프로필이미지" width="80" height="80" />
 
@@ -49,8 +50,8 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 				<span class="close">&times;</span>
 				<h2>닉네임 변경</h2>
 				<form id="nicknameForm">
-					<label for="newNickname">새 닉네임:</label> 
-					<input type="text" id="newNickname" name="newNickname" placeholder="새 닉네임 입력">
+					<label for="newNickname">새 닉네임:</label> <input type="text"
+						id="newNickname" name="newNickname" placeholder="새 닉네임 입력">
 					<button type="button" id="saveNicknameBtn">저장</button>
 				</form>
 			</div>
@@ -62,7 +63,7 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 				<ul>
 					<li><a href="/myhome">MY HOME</a></li>
 					<li><a href="/reservation">나의 예매정보</a></li>
-					<li><a href="/payment">결제 내역</a></li>
+					<li><a href="/payment">스토어 결제 내역</a></li>
 					<li><a href="/inquiry">1:1 문의</a></li>
 					<li><a href="/profile">개인 정보 변경</a></li>
 					<li><a href="/cancel">회원 탈퇴</a></li>
@@ -79,8 +80,8 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 							<thead>
 								<tr>
 									<th>영화 이름</th>
-									<th>상영관 이름</th>
-									<th>예매인원</th>
+									<th>상영관</th>
+									<th>인원</th>
 									<th>가격</th>
 									<th>상영일자</th>
 									<th>시작 시간</th>
@@ -99,13 +100,28 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 										<td>${reservation.begintime}</td>
 										<td>${reservation.endtime}</td>
 										<td>${reservation.created}</td>
-										<td><button class="button"
-												onclick="cancelReservation(${reservation.id})">예매
-												취소</button></td>
+										<td><c:choose>
+												<c:when test="${reservation.endtime gt currentTime}">
+													<button class="button"
+														onclick="cancelReservation(${reservation.id})">예매
+														취소</button>
+												</c:when>
+												<c:otherwise>
+													<span>상영 종료</span>
+												</c:otherwise>
+											</c:choose></td>
 									</tr>
 								</c:forEach>
 							</tbody>
+
 						</table>
+						<!-- 페이지 이동 버튼 -->
+						<div class="pagination">
+							<c:forEach begin="1" end="${totalPages}" var="i">
+								<a href="?page=${i}" class="${i == currentPage ? 'active' : ''}">${i}</a>
+							</c:forEach>
+						</div>
+
 					</div>
 
 					<!-- 예매 취소 내역 섹션 -->
@@ -126,6 +142,7 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 									</tr>
 								</thead>
 								<tbody>
+									<!-- 예매 취소에 페이징 기능 적용 필요 -->
 									<c:forEach var="cancellation" items="${canceledMovies}">
 										<tr>
 											<td>${cancellation.movie_name}</td>
@@ -138,8 +155,16 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 											<td>${cancellation.created}</td>
 										</tr>
 									</c:forEach>
+									
 								</tbody>
+								
 							</table>
+							<div class="pagination">
+										<c:forEach begin="1" end="${totalCanceledPages}" var="i">
+											<a href="?canceledPage=${i}"
+												class="${i == currentCanceledPage ? 'active' : ''}">${i}</a>
+										</c:forEach>
+									</div>
 						</div>
 					</div>
 				</div>
