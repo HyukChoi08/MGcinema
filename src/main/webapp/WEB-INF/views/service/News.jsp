@@ -107,7 +107,7 @@
             list-style-type: none;
             padding: 0;
             display: flex;
-            border-bottom: 2px solid #e50914;
+            border-bottom: 2px solid white;
             margin: 0;
         }
 
@@ -128,7 +128,7 @@
 
         .c_tab_wrap li.on a {
             font-weight: bold;
-            border-bottom: 2px solid #e50914;
+            border-bottom: 2px solid white;
         }
 
         .tbl_area {
