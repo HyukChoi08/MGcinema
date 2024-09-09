@@ -106,7 +106,14 @@ ol, ul {
                                 </p>
                                 <div>
                                    <!--   <button id="review">리뷰작성</button> -->
-                                    <ul id="addtextarea" data-id="${chartList3.id}"><li><input type="hidden" id="moviechart" value="'+chartId+'"><input type="hidden" id="idcheck"><input type="hidden" id="recommendid"><input type="hidden" id="idname"><textarea id="reviewcomment" style="width:700px;height:100px;"></textarea><button id="putcomment">리뷰등록</button></li></ul>
+                                    <ul id="addtextarea" data-id="${chartList3.id}">
+	                                    <li>
+		                                    <input type="hidden" id="moviechart" value="'+chartId+'">
+		                                    <input type="hidden" id="idcheck"><input type="hidden" id="recommendid">
+		                                    <input type="hidden" id="idname"><textarea id="reviewcomment" style="width:700px;height:100px;"></textarea>
+		                                    <button id="putcomment">리뷰등록</button>
+	                                    </li>
+                                    </ul>
                                 </div>
                             </div>
                             <select size="1" style="width:100px;height:30px;" id="commentArray"></select>
