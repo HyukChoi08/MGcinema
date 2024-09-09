@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>비밀번호 찾기</title>
     <link rel="stylesheet" href="newPassword_css/newPassword.css">
+
 </head>
 <body>
     <%@ include file="/WEB-INF/views/header/header.jsp" %>
@@ -13,37 +14,42 @@
     <div class="newPassword-page">
         <h2>비밀번호 변경</h2>
         <!-- 비밀번호 변경 폼 -->
-        <form method="post">            
-         	<input type="hidden" name="uid" value="${uid}">
-            <input type="hidden" name="birthday" value="${birthday}">
-            <input type="hidden" name="mobile" value="${mobile}">
+        <form method="post" action="newPassword" onsubmit="return validateForm()">            
+            <input type="hidden" name="uid" value="${uid}">
             
             <div class="form-group">
-            	<label for="passwd">비밀번호</label>
-                <input type="password" id="passwd" name="passwd" value="${formData.passwd}" placeholder="(필수)" required autocomplete="new-password">
+                <label for="passwd">비밀번호</label>
+                <input type="password" id="passwd" name="passwd" value="${formData.passwd}" placeholder="비밀번호를 입력해주세요." required autocomplete="new-password">
             </div>
             
             <div class="form-group">
-            	<label for="passwd2">비밀번호 확인</label>
-                <input type="password" id="passwd2" name="passwd2" value="${formData.passwd2}" placeholder="(필수)" required autocomplete="new-password">
+                <label for="passwd2">비밀번호 확인</label>
+                <input type="password" id="passwd2" name="passwd2" value="${formData.passwd2}" placeholder="비밀번호를 확인해주세요." required autocomplete="new-password">
             </div>
             
-            <button type="submit">본인 인증</button>
+            <button type="submit">비밀번호 변경</button>
         </form>
         
-        <%-- <!-- 메시지 표시 -->
+        <!-- 메시지 표시 -->
         <c:if test="${not empty errorMessage}">
             <div class="error">${errorMessage}</div>
         </c:if>
-        <c:if test="${not empty successMessage}">
-            <div class="success">${successMessage}</div>
-        </c:if> --%>
-</div>
+    </div>
     
     <%@ include file="/WEB-INF/views/footer/footer.jsp" %>
 </body>
-<!-- <script>
-let eid = ${errorMessage};
-let sid = ${successMessage};
-</script> -->
+<script>
+	function validateForm() {
+    	let passwd = document.getElementById('passwd').value;
+        let passwd2 = document.getElementById('passwd2').value;
+        	if (passwd !== passwd2) {
+            	alert("비밀번호가 일치하지 않습니다.");
+                return false;
+            } else{
+            	alert("비밀번호가 성공적으로 변경되었습니다.");
+            }
+            return true;
+	}
+</script>
 </html>
+

@@ -60,6 +60,7 @@ input::placeholder {
 }
 
 button {
+	width: 300px;
     padding: 10px 20px;
     background-color: #3a3d3f;
     color: #fff;
@@ -170,14 +171,16 @@ button:hover {
 .tellecom-group-bottom input {
     margin-bottom: 5px; /* 라디오 버튼과 레이블 사이의 간격 */
 }
-
-/* .error-message {
-    color: red;
-    margin-top: 10px;
-    display: none; 기본적으로 숨김 상태
-}
- */
  
  *{
  color: white;
  }
+ 
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="date"],
+input[type="tel"],
+input[type="hidden"]{
+	width: 400px;
+}

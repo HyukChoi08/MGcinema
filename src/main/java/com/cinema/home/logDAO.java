@@ -12,8 +12,12 @@ public interface logDAO {
     
     int checkUidExists(String uid); // 아이디 중복 체크
     
-    String getNickname(String a);
-	String getFindId (String z, String a, String b);
+    int checkNicknameExists(String nickname); // 아이디 중복 체크
+    
+    String getNickname(String a);	// 닉네임 찾기
+	String getFindId (String z, String a, String b);	//아이디 찾기 본인인증
 	
-	String getFindP (String z, String a, String b);
+	String getFindP (String z, String a, String b);	//비밀번호 찾기 전 본인 인증
+	void newPasswd (String z, String a);	//비밀번호 변경
+	
 }

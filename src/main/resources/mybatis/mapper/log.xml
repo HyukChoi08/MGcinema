@@ -14,26 +14,34 @@
 	<select id="checkUidExists" resultType="int">
     	select count(*) from customer where uid = #{param1}
 	</select>
+	
+	<select id="checkNicknameExists" resultType="int">
+    	select count(*) from customer where nickname = #{param1}
+	</select>
+	
 	<select id="getNickname" resultType="String">
-        select nickname from customer
-        where uid = #{param1}
+        select nickname from customer where uid = #{param1}
 	</select>
 	
 	
  	 <select id="getFindId" resultType="String">
-        SELECT uid
-        FROM customer
-        WHERE realname = #{param1}
-          AND birthday = #{param2}
-          AND mobile = #{param3}
+        select uid
+        from customer
+        where realname = #{param1}
+          and birthday = #{param2}
+          and mobile = #{param3}
      </select>
      
      <select id="getFindP" resultType="String">
-        SELECT passwd
-        FROM customer
-        WHERE uid = #{param1}
-          AND birthday = #{param2}
-          AND mobile = #{param3}
+        select passwd
+        from customer
+        where uid = #{param1}
+          and birthday = #{param2}
+          and mobile = #{param3}
     </select>
+    
+    <update id="newPasswd">
+	    update customer set passwd = #{param2} where uid = #{param1};
+	</update>
  	
 </mapper>

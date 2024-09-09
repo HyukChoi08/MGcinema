@@ -16,17 +16,17 @@
         <form action="doFindPassword" method="post">            
 			<div class="form-group">
             	<label for="uid">아이디</label>
-                <input type="text" id="uid" name="uid" value="${formData.uid}" placeholder="(필수)" required>
+                <input type="text" id="uid" name="uid" value="${formData.uid}" placeholder="아이디를 입력해주세요." required>
             </div>
             
             <div class="form-group">
                 <label for="birthday">생년월일</label>
-                <input type="text" id="birthday" name="birthday" placeholder="YYYY-MM-DD 형식으로 입력해주세요" required maxlength="10" pattern="\d{4}-\d{2}-\d{2}">
+                <input type="text" id="birthday" name="birthday" placeholder="YYYY-MM-DD 형식으로 입력해주세요." required maxlength="10" pattern="\d{4}-\d{2}-\d{2}">
             </div>
             
             <div class="form-group">
                 <label for="mobile">전화번호</label>
-                <input type="text" id="mobile" name="mobile" placeholder="01012345678 형식으로 작성해주세요" required maxlength="11">
+                <input type="text" id="mobile" name="mobile" placeholder="01012345678 형식으로 작성해주세요." required maxlength="11">
             </div>                          
             
             <button type="submit">본인 인증</button>
