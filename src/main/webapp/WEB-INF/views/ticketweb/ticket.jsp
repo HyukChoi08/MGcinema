@@ -480,21 +480,34 @@ $(document).ready(function() {
                 let timeList = $("#timeList ul");
                 timeList.empty();
                 $.each(data, function(index, times) {
-                	let currentDate = new Date();
-                    let currentHours = currentDate.getHours();
-                    let currentMinutes = currentDate.getMinutes();
-                    
-                    let [begintimeHours, begintimeMinutes] = times.begintime.split(':').map(Number);
-                    let begintimeDate = new Date();
-                    begintimeDate.setHours(begintimeHours, begintimeMinutes, 0, 0);
-                    let isPast = currentDate > begintimeDate;
-                    
-                    let timeStatus = isPast ? ' (지나감)' : '';
-                    let listItemClass = isPast ? 'past-time' : '';
-                    
-                    timeList.append('<li class="' + listItemClass + '" data-timetype="' + times.timetype + '" data-alls="' + times.allseat + '" data-id="' + times.begintime + '" title="' + times.endtime + '">' +
-                    		times.begintime + '  ' + times.lestseat + '석'+ '  ' + times.timetype + '</li>');
-                    
+                	   let currentDate = new Date(); // 현재 날짜와 시간
+                	    let currentYear = currentDate.getFullYear();
+                	    let currentMonth = currentDate.getMonth();
+                	    let currentDay = currentDate.getDate();
+                	    let currentHours = currentDate.getHours();
+                	    let currentMinutes = currentDate.getMinutes();
+                	    
+                	    // 선택된 날짜를 가져옴 (예: '2024-09-09' 형식)
+                	    let selectedDate = new Date(date); 
+                	    let selectedYear = selectedDate.getFullYear();
+                	    let selectedMonth = selectedDate.getMonth();
+                	    let selectedDay = selectedDate.getDate();
+                	    
+                	    let [begintimeHours, begintimeMinutes] = times.begintime.split(':').map(Number);
+                	    let begintimeDate = new Date(selectedYear, selectedMonth, selectedDay, begintimeHours, begintimeMinutes, 0, 0);
+                	    
+                	    // 오늘 날짜면 시간 비교, 오늘이 아니면 지나감 체크하지 않음
+                	    let isPast = false;
+                	    if (currentYear === selectedYear && currentMonth === selectedMonth && currentDay === selectedDay) {
+                	        isPast = currentDate > begintimeDate;
+                	    }
+
+                	    let timeStatus = isPast ? ' (지나감)' : '';
+                	    let listItemClass = isPast ? 'past-time' : '';
+                	    
+                	    timeList.append('<li class="' + listItemClass + '" data-timetype="' + times.timetype + '" data-alls="' + times.allseat + '" data-id="' + times.begintime + '" title="' + times.endtime + '">' +
+                	        times.begintime + '  ' + times.lestseat + '석'+ '  ' + times.timetype + '</li>');
+
                 });
                 $("#timeList li").each(function() {
                     if ($(this).data("id") === gettime) {
