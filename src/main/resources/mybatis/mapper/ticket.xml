@@ -9,6 +9,11 @@
     	select imagepath from movie
     	where id=#{movieId}
     </select>
+    
+    <select id="successimage" resultType="java.lang.String">
+    	select imagepath from movie
+    	where mname=#{movie_name}
+    </select>
 
     <select id="getTheaters" resultType="com.cinema.ticket.theaterDTO">
         select b.id, b.sname, b.seatlevel from schedules a, room b

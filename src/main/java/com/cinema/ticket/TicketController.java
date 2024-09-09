@@ -39,6 +39,11 @@ public class TicketController {
 	public String getMovieimage(@RequestParam("movieId") int movieId) {
 		return tdao.getMovieimage(movieId);
 	}
+	@GetMapping("/successimage")
+	@ResponseBody
+	public String successimage(@RequestParam("movie_name") String movie_name) {
+		return tdao.successimage(movie_name);
+	}
 
 	@GetMapping("/theaters")
 	@ResponseBody
@@ -68,26 +73,9 @@ public class TicketController {
 	    model.addAttribute("date", date);
 	    model.addAttribute("time", time);
 	    model.addAttribute("room", room);
-		System.out.println(mname + date + time + room);
 		return "ticketweb/ticket";
 	}
 	
-//    @PostMapping("/reserveSeats")
-//    @ResponseBody
-//    public ResponseEntity<String> reserveSeats(@RequestBody Map<String, Object> seatData) {
-//        try {
-//            List<String> seats = (List<String>) seatData.get("seats");
-//            int movieId = (int) seatData.get("movieId");
-//            int theaterId = (int) seatData.get("theaterId");
-//            String date = (String) seatData.get("date");
-//            String time = (String) seatData.get("time");
-//
-//            tdao.reserveSeats(seats, movieId, theaterId, date, time);
-//            return ResponseEntity.ok("예매가 완료되었습니다.");
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("예매 처리 중 오류가 발생했습니다.");
-//        }
-//    }
 	
 	@GetMapping("/ticketweb/checkout")
     public String showCheckoutPage(@RequestParam("moviename") String moviename,
@@ -163,6 +151,7 @@ public class TicketController {
 	    String begintime = req.getParameter("begintime");
 	    String endtime = req.getParameter("endtime");
 	    String datetime = req.getParameter("datetime");
+	    int people = Integer.parseInt(req.getParameter("people"));
 	    
 	    int count = tdao.checkIfExists(random_id);
 	    if (count > 0) {
@@ -170,21 +159,9 @@ public class TicketController {
 	    }
 	    
 	    tdao.insertData(random_id, customer_id, movie_name, room_name, totalprice, runningtime, seat, totalpeople, begintime, endtime, datetime);
+	    tdao.updateSeat(movie_name, room_name, datetime, begintime, people);
 	    return "home/homepage";
 	}
-	
-	@GetMapping("/changeSeat")
-	public String changeSeat(HttpServletRequest req) {
-		String movie_name = req.getParameter("movie_name");
-		String room_name = req.getParameter("room_name");
-		String moviedate = req.getParameter("moviedate");
-		String begintime = req.getParameter("begintime");
-		int people = Integer.parseInt(req.getParameter("people"));
-		
-		tdao.updateSeat(movie_name, room_name, moviedate, begintime, people);
-		return "ok";
-	}
-	
 	
 	@GetMapping("/occupiedSeats")
 	@ResponseBody

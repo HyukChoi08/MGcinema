@@ -13,6 +13,8 @@ public interface TicketDAO {
 	List<movieDTO> getMovies();
 	
 	String getMovieimage(@Param("movieId") int movieId);
+	
+	String successimage(@Param("movie_name") String movie_name);
 
     List<theaterDTO> getTheaters(@Param("movieId") int movieId, @Param("date") String date);
 

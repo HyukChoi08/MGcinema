@@ -95,11 +95,6 @@ let gettime = "${time}".trim();
 let allseat = "";
 
 $(document).ready(function() {
-// 	let takemname = "${mname}";
-// 	let takedate = "${date}";
-// 	let takeroom = "${room}";
-// 	let taketime = "${time}";
-// 	loadMovieData();
 	
 	$(document).on("click","#adultpernum li", function(){
 		let type = $(this).data("type");
