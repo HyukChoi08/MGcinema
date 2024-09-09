@@ -53,5 +53,5 @@ public class StoreListDTO {
         this.itemName = itemNameBuilder.toString(); // 최종 상품명
         this.composition = compositionBuilder.toString(); // 최종 구성
     }
-    
+
 }

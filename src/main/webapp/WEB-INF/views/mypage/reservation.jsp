@@ -84,9 +84,9 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 									<th>인원</th>
 									<th>가격</th>
 									<th>상영일자</th>
-									<th>시작 시간</th>
-									<th>종료 시간</th>
-									<th>예매 시간</th>
+									<th>시작</th>
+									<th>종료</th>
+									<th>예매시간</th>
 								</tr>
 							</thead>
 							<tbody>

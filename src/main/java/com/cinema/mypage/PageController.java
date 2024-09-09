@@ -101,7 +101,7 @@ public class PageController {
 		model.addAttribute("totalPages", listTotalPages);
 		// 현재 시간 추가
 		model.addAttribute("currentTime", LocalDateTime.now());
-		System.out.println(LocalDateTime.now());
+		/* System.out.println(LocalDateTime.now()); */
 
 		// 취소된 예매 리스트 조회 및 페이징
 		int canceledOffset = (canceledPage - 1) * limit;
@@ -290,32 +290,32 @@ public class PageController {
 
 
 	//스토어 결제내역 목록
-
 	@GetMapping("/payment")
 	public String getStoreList(HttpSession session, Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
-	    CustomerDTO cusDTO = (CustomerDTO) session.getAttribute("cusDTO");
+	    CustomerDTO cusDTO = (CustomerDTO) session.getAttribute("cusDTO"); // 세션에서 사용자 정보 가져옴
 	    if (cusDTO == null) {
-	        return "redirect:/login";
+	        return "redirect:/login"; // 로그인 정보가 없으면 로그인 페이지로 리다이렉트
 	    }
 
-	    String customerId = cusDTO.getUid();
-	    int limit = 10; // 한 페이지에 10개씩
-	    int offset = (page - 1) * limit;
+	    String customerId = cusDTO.getUid(); // 고객 ID 가져옴
+	    int limit = 5; // 한 페이지에 5개씩 출력되도록 변경
+	    int offset = (page - 1) * limit; // 페이지에 따른 offset 계산
+	   
+	    List<StoreListDTO> storeList = mdao.getStoreList(customerId, offset, limit); // 결제 내역 리스트 가져옴
 
-	    List<StoreListDTO> storeList = mdao.getStoreList(customerId, offset, limit);
-	    model.addAttribute("storeList", storeList);
+	    // item_name 필드를 분리하여 itemName과 composition에 값 할당
+	    for (StoreListDTO store : storeList) {
+	        store.parseItemName(store.getItem_name()); // item_name을 나누어서 itemName과 composition 설정
+	    }
 
-	    int totalCount = mdao.getTotalCount(customerId);
-	    int totalPages = (int) Math.ceil((double) totalCount / limit);
+	    model.addAttribute("storeList", storeList); // 뷰에 storeList 전달
+	  
+	    int totalCount = mdao.getTotalCount(customerId); // 총 결제 내역 수 가져옴
+	    int totalPages = (int) Math.ceil((double) totalCount / limit); // 전체 페이지 수 계산
+	    model.addAttribute("currentPage", page); // 현재 페이지를 모델에 추가
+	    model.addAttribute("totalPages", totalPages); // 전체 페이지 수를 모델에 추가
 
-	    model.addAttribute("currentPage", page);
-	    model.addAttribute("totalPages", totalPages);
-
-	    return "mypage/payment";
+	    return "mypage/payment"; // 결제 내역 페이지로 이동
 	}
-	
-	
-
-
 
 }
