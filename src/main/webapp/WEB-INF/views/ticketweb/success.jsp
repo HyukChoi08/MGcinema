@@ -4,25 +4,84 @@
 <head>
     <meta charset="utf-8" />
     <title>결제 성공</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+        }
+        h2 {
+            text-align: center;
+            color: #4CAF50;
+            font-size: 2em;
+        }
+        .success-icon {
+            text-align: center;
+            font-size: 50px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        .info {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        .info span {
+            font-weight: bold;
+            color: #333;
+        }
+        .btnclose {
+            display: block;
+            text-align: center;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor:pointer;
+        }
+        .btnclose:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-    <h2>결제 성공</h2>
-    <div>
-        <p>주문 ID: ${param.orderId}</p>
-        <p>UID: ${param.uid}</p>
-        <p>영화 이름: ${param.moviename}</p>
-        <p>상영관 이름: ${param.roomname}</p>
-        <p>결제 금액: ${param.resultprice}</p>
-        <p>상영 시간: ${param.runningtime}</p>
-        <p>좌석: ${param.resultseat}</p>
-        <p>인원 수: ${param.people}</p>
-        <p>상영 날짜: ${param.datetime}</p>
-        <p>시작 시간: ${param.begintime}</p>
-        <p>종료 시간: ${param.endtime}</p>
+    <div class="container">
+        <div class="success-icon">✔️</div>
+        <h2>결제 성공!</h2>
+<%--         <div class="info"><span>주문 ID:</span> ${param.orderId}</div> --%>
+        <div class="info"><span>UID:</span> ${param.uid}</div>
+        <div class="info"><span>영화 이름:</span> ${param.moviename}</div>
+        <div class="info"><span>상영관 이름:</span> ${param.roomname}</div>
+        <div class="info"><span>결제 금액:</span> ${param.resultprice} 원</div>
+        <div class="info"><span>상영 시간:</span> ${param.runningtime}</div>
+        <div class="info"><span>좌석:</span> ${param.resultseat}</div>
+        <div class="info"><span>인원 수:</span> ${param.people}</div>
+        <div class="info"><span>상영 날짜:</span> ${param.datetime}</div>
+        <div class="info"><span>시작 시간:</span> ${param.begintime}</div>
+        <div class="info"><span>종료 시간:</span> ${param.endtime}</div>
+        <div class="btnclose">화면 닫기</div>
     </div>
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
+$(document).on("click",".btnclose",function(){
+	window.close();
+})
+
 $(document).ready(function() {
     // Ensure saveData is called only once
     if (!window.dataSaved) {

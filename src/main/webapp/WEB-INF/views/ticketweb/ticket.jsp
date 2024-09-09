@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Movie Ticket Reservation</title>
+<title>영화예매</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/ticket_css/styles.css">
 </head>
 <body>
@@ -480,7 +480,7 @@ $(document).ready(function() {
                 let timeList = $("#timeList ul");
                 timeList.empty();
                 $.each(data, function(index, times) {
-                	   let currentDate = new Date(); // 현재 날짜와 시간
+                	   let currentDate = new Date();
                 	    let currentYear = currentDate.getFullYear();
                 	    let currentMonth = currentDate.getMonth();
                 	    let currentDay = currentDate.getDate();
