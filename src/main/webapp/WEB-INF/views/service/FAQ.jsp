@@ -134,37 +134,7 @@
     border-bottom: 2px solid #e50914;
 }
 
-.c_tab_wrap {
-    margin-bottom: 20px;
-}
 
-.c_tab_wrap ul {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    border-bottom: 2px solid #e50914;
-    margin: 0;
-}
-
-.c_tab_wrap li {
-    margin: 0;
-}
-
-.c_tab_wrap a {
-    display: block;
-    padding: 10px;
-    text-decoration: none;
-    color: white; /* 링크 색상 흰색으로 설정 */
-}
-
-.c_tab_wrap a:hover {
-    background-color: #333; /* 링크 hover 색상 검정으로 설정 */
-}
-
-.c_tab_wrap li.on a {
-    font-weight: bold;
-    border-bottom: 2px solid #e50914;
-}
 
 .search_result {
     margin-bottom: 20px;
@@ -328,17 +298,16 @@ a:hover {
                    <a href="/faqcreate" class="btn-add">	+</a>
                 </div>
                 
-                <div class="searchtext">
-    
-    <ul>
-    	<li><a href="/faq">전체</a></li>
-        <li><a href="/faq?selected=홈페이지/모바일">홈페이지/모바일</a></li>
-        <li><a href="/faq?selected=예매/매표">예매/매표</a></li>
-        <li><a href="/faq?selected=결제수단">결제수단</a></li>
-        <li><a href="/faq?selected=영화관이용">영화관이용</a></li>
-        <li><a href="/faq?selected=특별관">특별관</a></li>
-    </ul>
-</div>
+			<div class="searchtext">
+    		<ul>
+        		<li class="${param.selected == null ? 'on' : ''}"><a href="/faq">전체</a></li>
+        		<li class="${param.selected == '홈페이지/모바일' ? 'on' : ''}"><a href="/faq?selected=홈페이지/모바일">홈페이지/모바일</a></li>
+        		<li class="${param.selected == '예매/매표' ? 'on' : ''}"><a href="/faq?selected=예매/매표">예매/매표</a></li>
+        		<li class="${param.selected == '결제수단' ? 'on' : ''}"><a href="/faq?selected=결제수단">결제수단</a></li>
+        		<li class="${param.selected == '영화관이용' ? 'on' : ''}"><a href="/faq?selected=영화관이용">영화관이용</a></li>
+        		<li class="${param.selected == '특별관' ? 'on' : ''}"><a href="/faq?selected=특별관">특별관</a></li>
+    		</ul>
+			</div>
 
 
                 <div class="tbl_area">
