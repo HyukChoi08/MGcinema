@@ -279,7 +279,14 @@ font-size: 14px; /* 취소선 가격 크기 조정 */
   margin-top:10px;
   
   }
-  	
+#store-link {
+    text-decoration: none; /* 링크의 밑줄 제거 */
+    color: inherit; /* 부모 요소의 색상 상속 */
+}
+
+#store-link:hover {
+    text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
+} 	
 	
     </style>
 </head>
@@ -288,7 +295,7 @@ font-size: 14px; /* 취소선 가격 크기 조정 */
     <div id="container">
         <div id="contents">
             <div class="category_wrap">
-                스토어
+                 <a href="/store" id="store-link">스토어</a>
              <input type="hidden" id="userid" value="${uid}">         
                 <div class="separator"></div> <!-- 선을 스토어 아래에 위치 -->
             </div>

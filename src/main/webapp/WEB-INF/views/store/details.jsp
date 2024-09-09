@@ -85,6 +85,7 @@ color:white;
            align-items: center; 
            flex-wrap: wrap; 
            margin-bottom: 20px; 
+          
        }
        .contegory_contents_wrap a{
 
@@ -118,7 +119,7 @@ color:white;
 
        .category_title {
            display: inline-block;
-		margin-right: 10px;
+			margin-right: 10px;
            align-items: center;
             margin-right: 10px
          
@@ -188,12 +189,17 @@ color:white;
 	text-decoration: line-through; /* 가격에 취소선 추가 */
 	color: #999; /* 취소선 색상 설정 */
 	font-size: 25px; /* 취소선 가격 크기 조정 */
+	position: relative; 
+	left:-100px;
 	  
 	}
 	
 	#discount {
 	font-size: 30px;
 	margin-right: 20px;
+	position: relative;  
+   	left:-130px;
+	
 	}
 	  .separator3 {
            width:500px; /* 밑줄의 너비 설정 */
@@ -239,15 +245,19 @@ color:white;
        }
       #origin {
            margin-right: 20px; /* `origin`과 `description` 간의 여백 설정 */
+           
        }
-              #price {
-           text-align: right; /* 텍스트를 오른쪽으로 정렬 */
-           border: none; /* 기본 테두리 없음 */
-           width: 100px; /* 너비 조정 (필요에 따라) */
-           padding: 5px; /* 패딩 추가 (선택적) */
-           background-color: transparent; /* 배경 투명 (선택적) */
-       }
-       
+      #price {
+          text-align: right; /* 텍스트를 오른쪽으로 정렬 */
+          border: none; /* 기본 테두리 없음 */
+          width: 100px; /* 너비 조정 (필요에 따라) */
+          padding: 5px; /* 패딩 추가 (선택적) */
+          font-size:20px;
+          background-color: transparent; /* 배경 투명 (선택적) */
+          position: relative;
+          left:-10px; /* 원하는 위치로 이동 (음수 값으로 왼쪽으로 이동) */
+      }
+      
        #price:focus {
            outline: none; /* 포커스 시 외부 테두리 없음 */
        }
@@ -281,8 +291,9 @@ color:white;
 
 .total-container {
     display: flex;
-    align-items: center; /* 수직 가운데 정렬 */
-    gap: 5px; /* 요소 간 간격 조정 */
+    flex-direction: column; /* 요소들을 수직으로 나열 */
+    align-items: flex-end; /* 요소들을 오른쪽으로 정렬 */
+    margin: 20px; /* 전체 컨테이너의 여백 (필요에 따라 조정) */
 }
   #totalprice {
 	border: none; /* 테두리 제거 */
@@ -293,13 +304,14 @@ color:white;
 	text-indent: -5px; /* 텍스트를 왼쪽으로 이동 (필요에 따라 조정) */
 	font-size:24px;
 	color:red;
-          
+    display: flex; /* 버튼을 수평으로 배치합니다 */      
 }
 .bottom {
    	display: flex; /* 버튼을 수평으로 배치합니다 */
-   	gap: 50px; /* 버튼 사이에 일정한 간격을 줍니다 */
-   	margin-top:20px;
-	}
+   	gap: 40px; /* 버튼 사이에 일정한 간격을 줍니다 */
+   	position: relative;  
+   	left:-610px;
+}
 .no-style-link {
    text-decoration: none; /* 밑줄 제거 */
    color: inherit; /* 링크 색상 유지 */
@@ -309,107 +321,211 @@ color:white;
    color: inherit; /* 방문 후 색상 유지 */
 }
 #btncart, #btnbuy,#cnt  {
-    color: black; /* 텍스트 색상 설정 */
+    color: black; /* 텍스트 색상 설정 */    
+}
+#btncart,#btnbuy {
+	height:40px;
+	width:110px;
+
+}
+.quantity-container {
+    display: flex;
+    align-items: center; /* 수직 가운데 정렬 */
+    gap: 0; /* 버튼과 cnt 사이의 간격을 0으로 설정 */
+    position: relative; /* 상대 위치 지정 */
+    top: 25px; /* 원하는 만큼 아래로 이동 (양수 값) */
 }
 
+#cnt {
+	margin-top:20px;
+    text-align: center;
+    width: 30px; /* 너비 설정 */  
+    height:40px;
+    padding: 5px; /* 패딩 추가 (선택 사항) */
+    border: 1px solid #ccc; /* 테두리 설정 (선택 사항) */
+    box-sizing: border-box; /* 패딩과 테두리를 포함하여 너비 계산 */
+    /* margin-right: -100px; 제거 */
+}
+
+.quantity-buttons {
+    display: flex; /* flex를 사용하여 텍스트 중앙 정렬 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    flex-direction: column;
+    position: relative;
+    left:-100px; /* 원하는 위치로 이동 (음수 값으로 왼쪽으로 이동) */
+    bottom:-10px;
+}
+
+.quantity-button {
+ 	display: flex; /* flex를 사용하여 텍스트 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    width: 20px; /* 버튼 너비 설정 */
+    height: 21px; /* 버튼 높이 설정 */
+    background-color: #444; /* 배경색 설정 */
+    color: white; /* 텍스트 색상 설정 */
+    border: 2px solid #666; /* 테두리 색상 설정 */
+    font-size: 18px; /* 폰트 크기 설정 */
+    cursor: pointer; /* 마우스 커서 포인터로 변경 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+   
+    transition: background-color 0.3s, border-color 0.3s; /* 배경색과 테두리 색상의 전환 효과 */
+}
+
+.quantity-button:hover {
+    background-color: #555; /* 호버 시 배경색 */
+    border-color: #777; /* 호버 시 테두리 색상 */
+}
+.totalprice-container {
+    display: flex; /* Flexbox를 사용하여 수평 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+    justify-content: flex-end; /* 수평 정렬을 오른쪽으로 맞춤 */
+    margin-right: 20px; /* 오른쪽 여백 (필요에 따라 조정) */
+    position: relative;
+    left:-170px; /* 원하는 위치로 이동 (음수 값으로 왼쪽으로 이동) */
+    top:-35px;
+}
+.totalprice-container p {
+        margin: 0;
+        margin-right: 35px; /* 텍스트와 입력 필드 사이의 간격 조절 */
+}
+.expiry{
+	position: relative;
+    left:-10px; /* 원하는 위치로 이동 (음수 값으로 왼쪽으로 이동) */
+
+}
+#item-period{
+	position: relative;
+    left:-7px; /* 원하는 위치로 이동 (음수 값으로 왼쪽으로 이동) */
+
+}
+#info {
+   	
+    padding: 10px;
+    margin-top: -330px; /* #container와 #info 사이의 여백 */
+    position: absolute; /* 절대 위치 지정 */
+    right:370px;
+}
+select {
+    color: black; /* 텍스트 색상을 검정색으로 설정 */
+    background-color: white; /* 배경색을 흰색으로 설정 */
+    font-size:15px;
+}
+
+option {
+    color: black; /* 옵션 텍스트 색상을 검정색으로 설정 */
+}
+#giftprice{
+	position: relative;
+    top:2px; /* 원하는 위치로 이동 (음수 값으로 왼쪽으로 이동) */
+
+}
+.bottom input[type='button'] {
+    cursor: pointer; /* 버튼에 손 모양 커서 적용 */
+}
     </style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
-    <div id="container">
-        <div id="contents">
-            <div class="category_wrap">
-             
-                <div class="separator"></div>
-            </div>
-            <div class="contegory_contents_wrap">
-                <ul class="category_content">
-                    <li><a href="/package" class="no-underline">패키지</a></li>
-                    <li><a href="/giftcard" class="no-underline">기프트카드</a></li>
-                    <li><a href="/combo" class="no-underline">콤보</a></li>
-                    <li><a href="/popcorn" class="no-underline">팝콘</a></li>
-                    <li><a href="/drink" class="no-underline">음료</a></li>
-                    <li><a href="/snack" class="no-underline">스낵</a></li>
-                </ul>
-                <ul class="cart_content">
+ <div id="container">
+    <div id="contents">
+        <div class="category_wrap">
+            <div class="separator"></div>
+        </div>
+        <div class="contegory_contents_wrap">
+            <ul class="category_content">
+                <li><a href="/package" class="no-underline">패키지</a></li>
+                <li><a href="/giftcard" class="no-underline">기프트카드</a></li>
+                <li><a href="/combo" class="no-underline">콤보</a></li>
+                <li><a href="/popcorn" class="no-underline">팝콘</a></li>
+                <li><a href="/drink" class="no-underline">음료</a></li>
+                <li><a href="/snack" class="no-underline">스낵</a></li>
+            </ul>
+            <ul class="cart_content">
                 <li><a href="/cart" class="no-style-link">장바구니</a><span id="cart-count">0</span></li>
-                </ul>   
-            </div>
-            <div class="separator1"></div>
-            <div class="category_product_wrap">
+            </ul>   
+        </div>
+        <div class="separator1"></div>
+        <div class="category_product_wrap">
+            <c:forEach items="${arItem}" var="item">
                 <div>
-                 	<c:forEach items="${arItem}" var="item">
-        				<div>
-            				<strong class="category_title">${item.item_name}</strong><input type='hidden' id='hiddenid' value='${item_id}'><input type='hidden' id='userid' value="${uid}">
-            				
-            					<div class="separator2"></div>
-					            <ul class="category_inner">
-					                <li class="left" id="1">
-					                    <img src="${imagePath}" id="imagepath" alt="패키지1">
-					                </li>
-					                <li class="right">
-					                   	<span  id="discount">${item.discount_price}</span>
-					                   	
-					                   	<span  id="original">${item.price}</span>
-					                    	<div class="separator3"></div>
-					                    		<span id="composition"style="display: flex; align-items: center;" >
-					                    		<span style="margin-right: 14px; font-weight: bold;">상품구성</span>
-					                    		<span>${item.composition}</span>
-					                    		</span>
-					                		<ul class="item-list">
-						       						<c:forEach items="${arPackage}" var="pkg" varStatus="status">
-						           						<li>
-						              							<span class="item-text">
-						                  							<c:choose>
-						                       						<c:when test="${status.index == 0 and not empty pkg.period}">
-						                           				<span class="expiry">유효기간</span>
-						                       							</c:when>
-						                       						<c:otherwise>
-						                           				<span class="spacer"></span>
-						                       							</c:otherwise>
-						                   							</c:choose>
-						                   						<span id="item-period">${pkg.name}: ${pkg.period}</span>
-						               						</span>
-						           						</li>
-						       						</c:forEach>
-					   						</ul>
-					   					   <span id="origin" style="display: flex; align-items: center;">
-            									  <c:choose>
-     									
-											        <c:when test="${not empty item.origin}">
-											            <span style="margin-right: 32px; font-weight: bold;">원산지</span>
-											            <span>${item.origin}</span>
-											        </c:when>
-											       
-											        <c:otherwise>
-											           <span style="margin-right: 32px; font-weight: bold; visibility: hidden;">원산지</span>
-            										   <span style="visibility: hidden;"> </span> 
-											        </c:otherwise>
-											    </c:choose>
-        									</span>
-        									
-        								 <div class="right-align">
-        								 	<input type="number" id="cnt" min="1" max="10" value="1" style="width:50px; margin-right:100px;">
-									        <input type="text" id="price" value="${item.discount_price}원"  readonly ><br><br><br><br>
-									        	<div class="total-container">
-									            	<p>총 결제금액</p>
-									            	<input type="text" id="totalprice" style="border:none; text-align: right;" readonly>원
-									        	</div>
-									    </div>
-									  <div class='bottom'>
-									    <input type='button' id='btncart' value='장바구니'>									    
-									    <input type='button' id='btnbuy' value='구매하기'>
-									  </div>    
-					                </li>
-					               
-					            </ul>        
-				        </div>
-				    	</c:forEach>  
-	               </div>
-	             
-	           </div>        
-	       </div>
-	   </div>
+                    <strong class="category_title">${item.item_name}</strong>
+                    <input type='hidden' id='hiddenid' value='${item_id}'>
+                    <input type='hidden' id='userid' value="${uid}">
+                    <div class="separator2"></div>
+                    <ul class="category_inner">
+                        <li class="left" id="1">
+                            <img src="${imagePath}" id="imagepath" alt="패키지1">
+                        </li>
+                        <li class="right">
+                            <span id="discount">${item.discount_price}</span>
+                            <span id="original">${item.price}</span>
+                            <div class="separator3"></div>
+                            <span id="composition" style="display: flex; align-items: center;">
+                                <span style="margin-right: 14px; font-weight: bold;">상품구성</span>
+                                <span>${item.composition}</span>
+                            </span>
+                            <ul class="item-list">
+                                <c:forEach items="${arPackage}" var="pkg" varStatus="status">
+                                    <li>
+                                        <span class="item-text">
+                                            <c:choose>
+                                                <c:when test="${status.index == 0 and not empty pkg.period}">
+                                                    <span class="expiry">유효기간</span>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <span class="spacer"></span>
+                                                </c:otherwise>
+                                            </c:choose>
+                                            <span id="item-period">${pkg.name}: ${pkg.period}</span>
+                                        </span>
+                                    </li>
+                                </c:forEach>
+                            </ul>                                            
+                            <span id="origin" style="display: flex; align-items: center;">
+                                <c:choose>
+                                    <c:when test="${not empty item.origin}">
+                                        <span style="margin-right: 32px; font-weight: bold;">원산지</span>
+                                        <span>${item.origin}</span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span style="align-items: center; font-weight: bold; visibility: hidden;"></span>
+                                        <span id="aa">원산지</span>
+                                        <span style="visibility: hidden;"> </span> 
+                                    </c:otherwise>
+                                </c:choose>
+                            </span>                         
+                            <div class="right-align">
+                                <div class="quantity-container">
+                                    <input type="text" id="cnt" min="1" max="10" value="1" style="width:50px; margin-right:100px;">
+                                    <div class="quantity-buttons">
+                                        <button type="button" class="quantity-button" id="increase">+</button>
+                                        <button type="button" class="quantity-button" id="decrease">-</button>
+                                    </div>
+                                </div>  
+                                <input type="text" id="price" value="${item.discount_price} 원" readonly><br><br><br><br>
+                                <div class="total-container">
+                                    <div class="bottom">
+                                        <input type='button' id='btncart' value='장바구니'> 
+                                        <input type='button' id='btnbuy' value='구매하기'>
+                                    </div>  
+                                    <div class="totalprice-container">
+                                        <p>총 결제금액</p>
+                                        <input type="text" id="totalprice" style="border:none; text-align: right;" readonly>
+                                        <span class="currency">원</span>
+                                    </div>
+                                </div>
+                            </div>  
+                        </li>               
+                    </ul>        
+                </div>
+            </c:forEach>        
+        </div>      
+    </div>
+</div>
+ <div id="info">
+  ※구매할 수 있는 수량은 최대 10개 입니다.
+</div>   
 	    <form id="payForm" action="/dostorepay" method="post" style="display:none;">
     	<input type="hidden" id="productData" name="productData">
 		</form>     
@@ -435,6 +551,53 @@ function updateCartCount(customer_id) {
 
 $(document)
 .ready(function() {
+	
+	
+    // 수량 증가 버튼 클릭 이벤트
+    $('#increase').on('click', function() {
+        var $input = $('#cnt');
+        var currentValue = parseInt($input.val(), 10);
+        if (currentValue < $input.attr('max')) {
+            $input.val(currentValue + 1).change();
+        }
+    });
+
+    // 수량 감소 버튼 클릭 이벤트
+    $('#decrease').on('click', function() {
+        var $input = $('#cnt');
+        var currentValue = parseInt($input.val(), 10);
+        if (currentValue > $input.attr('min')) {
+            $input.val(currentValue - 1).change();
+        }
+    });
+
+    // 수량 입력 필드 변경 이벤트
+    $('#cnt').on('change', function() {
+        let cnt = $(this).val();
+
+        // 수량이 비어있거나 유효하지 않은 경우 기본값으로 1 설정
+        if (!cnt || isNaN(cnt)) {
+            cnt = 1;
+            $(this).val(cnt);
+        }
+
+        // 할인 가격을 텍스트에서 추출
+        let discountText = $('#discount').text();
+        let discount = parseInt(discountText.split('원')[0].replace(/,/g, '')); 
+        console.log("discount: " + discount);
+
+        // 총 가격 계산
+        let price = discount;   
+        let totalPrice = price * parseInt(cnt);
+        
+        // 총 가격 표시 업데이트
+        //$('#price').val(totalPrice.toLocaleString() + '원');
+        $('#totalprice').val(totalPrice.toLocaleString());
+    });
+
+    // 페이지 로드 시 초기 총 가격 계산
+    $('#cnt').change(); 
+	
 
 	let customer_id=$('#userid').val();
 	console.log(customer_id);
@@ -469,9 +632,6 @@ $(document)
     // updateCartCount();
 	
 	
-	
-	
-	
 	$('#cnt').focus();
 	
 	
@@ -496,6 +656,8 @@ $(document)
                 `)
    		$('#totalprice').val('10,000');
         $('#btncart').hide();
+        $('.quantity-buttons').hide();
+        $('#origin').hide();
     }
     else {
         // discount_price가 '금액충전형'이 아닌 경우 #discount에 '원'을 붙임
@@ -539,6 +701,7 @@ $(document)
 			}
 })
 })
+/*
 .on('change','#cnt', function() { // 'change' 이벤트 사용
     let cnt = $('#cnt').val();
     
@@ -560,6 +723,7 @@ $(document)
        
   
 })
+*/
 .on('change','#giftprice',function(){
 	let giftprice=$('#giftprice option:selected').text();
 	console.log(giftprice);
@@ -620,8 +784,8 @@ $(document)
             } else if (newQty > maxQty) {
                 let remainingQty = maxQty - itemQty;
                 console.log("Remaining Qty:", remainingQty);
+                alert('해당 품목의 장바구니 수량을 확인해주세요');
              
-                alert(`장바구니에 담을 수 있는 수량은 품목당 최대 10개입니다. 현재 ${remainingQty}개를 더 담을 수 있습니다.`);
             } else {
                 if (itemQty > 0) {
                     $.ajax({

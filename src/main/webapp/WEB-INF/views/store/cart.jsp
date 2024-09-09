@@ -88,17 +88,15 @@ vertical-align: middle; /* 수직 중앙 정렬 */
 
 #container {
     display: flex;
-  	flex-direction: column; /* 자식 요소들을 수직으로 배치 */ 
-    justify-content: center; 
+    flex-direction: column;
+    justify-content: center;
     padding: 20px;
-    width: 1000px; 
+    width: 1000px;
     margin: 0 auto;
-  	background-color:black;
-  	margin-bottom: 335px;
-  	background-color:black;
+    background-color:black;
     margin-top: 150px; 
     margin-bottom: 335px;
-  
+    border: 2px solid #808080;
 }
 
 
@@ -282,7 +280,9 @@ vertical-align: middle; /* 수직 중앙 정렬 */
 #alldelete{
 	position: relative;
     left:-440px; /* 원하는 위치로 이동 (음수 값으로 왼쪽으로 이동) */
-margin-bottom:30px;
+	margin-bottom:30px;
+	width:100px;
+	height:40px;
 }
 
 
@@ -398,8 +398,8 @@ margin-bottom:30px;
     font-size: 13px; /* 폰트 크기 설정 */
     padding: 0; /* 패딩을 0으로 설정 (높이에 맞게 조정) */
     cursor: pointer; /* 마우스 커서를 포인터로 변경 */
-    text-align: center; /* 텍스트 중앙 정렬 */
-  
+ 
+    width: 38px; /* 버튼 너비 자동 조정 */
     transition: background-color 0.3s, border-color 0.3s; /* 배경색과 테두리 색상의 전환 효과 */
     height: 40px; /* 버튼 높이 설정 */
     line-height: 20px; /* 텍스트를 수직 중앙에 배치 */
@@ -438,6 +438,30 @@ margin-bottom:30px;
     border-radius: 4px; /* 모서리 둥글게 설정 (선택 사항) */
     transition: background-color 0.3s, border-color 0.3s; /* 배경색과 테두리 색상의 전환 효과 */
    
+}
+#pay 
+{
+  padding: 10px 20px; /* 버튼의 여백 조정 */
+  font-size: 16px;    /* 글자 크기 조정 */
+  border: 1px solid #ccc; /* 테두리 추가 */
+  background-color: #f0f0f0; /* 배경색 조정 */
+  color: black;       /* 글자 색상 검정으로 설정 */
+  cursor: pointer;    /* 커서가 버튼 위에 있을 때 손 모양으로 변경 */
+  margin: 0 5px;      /* 버튼 간격 조정 */
+  position: relative; /* 버튼의 위치를 조정할 수 있게 함 */
+  left:160px;
+}
+#btnback {  
+   border-color: #0056b3;
+   font-size:20px;
+   position: relative; /* 버튼의 위치를 조정할 수 있게 함 */
+   left:-180px;
+   
+}
+.tol{
+ border: 2px solid white;
+ margin-bottom:30px;
+
 }
 
 </style>
@@ -533,7 +557,7 @@ margin-bottom:30px;
 	                <th class="width-40">총 결제 예정금액</th>
         		</tr>
 	    	</thead>
-        	 <tbody>
+        	 <tbody class="tol">
 		        <tr>
 		     		<td class="totalprice"></td>
 		     		<td class="minus">-</td>
@@ -541,13 +565,11 @@ margin-bottom:30px;
 		         	<td class="equal">=</td>
 		            <td class="finalprice"></td>		            
 		        </tr>
-	    	</tbody>
-	    	 <tfoot>
-			    <tr class="separator"></tr>		  
-			 </tfoot>
+	    	</tbody>	    	
         </table>
           <form id="payForm" action="/dostorepay" method="post">
             <input type="hidden" id="productData" name="productData">
+            <a href="javascript:history.back()" id="btnback"> 뒤로가기</a>
             <button type="button" id="pay">결제하기</button>
         </form>
 
@@ -879,32 +901,37 @@ $(document).ready(function() {
     });
 
     // 전체 삭제 버튼 클릭 시
-    $('#alldelete').on('click', function() {
+   $('#alldelete').on('click', function() {
+    // 선택된 체크박스가 있는지 확인
+    let checkedItems = $('.item-checkbox:checked');
+    if (checkedItems.length === 0) {
+        alert("삭제할 상품을 선택해주세요");
+        return;
+    }
 
-    	
-    	if($('.item-checkbox').prop('checked', false)){
-		alert("삭제할 상품을 선택해주세요");
-		return false;
-    	
-    	}
-    	
-        let selectedItems = [];
-        $('.item-checkbox:checked').each(function() {
-            let itemId = $(this).closest('.cart-item').find('.item_id').val();
-            selectedItems.push(itemId);
-        });
+    // 선택된 아이템의 ID를 수집
+    let selectedItems = [];
+    checkedItems.each(function() {
+        let itemId = $(this).closest('.cart-item').find('.item_id').val();
+        selectedItems.push(itemId);
+    });
 
-        $.ajax({
-            url: '/choicedelete', // URL 수정
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({ item_id: selectedItems }),
-            success: function(data) {
-                alert('삭제가 성공되었습니다.');
-                window.location.reload();
-            }
-        })
+    // AJAX 요청
+    $.ajax({
+        url: '/choicedelete', // 서버 URL
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ item_id: selectedItems }),
+        success: function(response) {
+            alert('삭제가 성공되었습니다.');
+            window.location.reload(); // 페이지 새로고침
+        },
+        error: function(xhr, status, error) {
+            console.error('AJAX 요청 실패:', status, error);
+            alert('삭제 요청에 실패했습니다.');
+        }
     })
+   })
 })
 	.on('click','.btnchange',function(){
     let row = $(this).closest('tr');	

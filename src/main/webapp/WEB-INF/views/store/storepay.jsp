@@ -174,12 +174,7 @@ vertical-align: middle; /* 수직 중앙 정렬 */
     font-weight: bold;
     margin-bottom: 10px;
 }
-.separator {
-    width: 100%;
-    height: 2px;
-    background-color: black;
-    margin-bottom: 20px;
-}
+
 .foottable {
     width: 100%;
     border-collapse: collapse;
@@ -295,6 +290,7 @@ position: relative;
 }
 .tol{
  border: 2px solid white;
+ margin-bottom:30px;
 
 }
 
@@ -383,9 +379,7 @@ position: relative;
                		<input type="button" id="btnpay" value="결제하기">              
                </td>
             </tr>	
-            <tfoot>
-                <tr class="separator"></tr>
-            </tfoot>
+          
         </table>
     </div>  
 </div>

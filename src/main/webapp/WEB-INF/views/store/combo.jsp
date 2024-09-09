@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -272,7 +272,14 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
   margin-top:10px;
   
   }
+#store-link {
+    text-decoration: none; /* 링크의 밑줄 제거 */
+    color: inherit; /* 부모 요소의 색상 상속 */
+}
 
+#store-link:hover {
+    text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
+} 
     </style>
 </head>
 <body>
@@ -280,7 +287,7 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
     <div id="container">
         <div id="contents">
             <div class="category_wrap">
-                스토어
+                 <a href="/store" id="store-link">스토어</a>
              <input type="hidden" id="userid" value="${uid}">       
                 <div class="separator"></div> <!-- 선을 스토어 아래에 위치 -->
             </div>

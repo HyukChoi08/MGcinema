@@ -371,8 +371,7 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
 <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
     <div id="container">
         <div id="contents">
-            <div class="category_wrap">
-                스토어
+            <div class="category_wrap">            
             <input type="hidden" id="userid" value="${uid}">    
                 <div class="separator"></div> <!-- 선을 스토어 아래에 위치 -->
             </div>
