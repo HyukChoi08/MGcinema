@@ -8,148 +8,135 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${faqDetail.title}</title>
     <style>
-    
-    body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4; /* 페이지 배경색 */
-	}
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black; /* 페이지 배경색을 검정으로 설정 */
+            color: white; /* 전체 글씨색을 흰색으로 설정 */
+        }
 
-	/* 상단 배너 스타일 */
-	.banner {
-    width: 100%;
-    background-color: #e50914; /* 배너 배경색 */
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    font-size: 1.2em;
-    font-weight: bold;
-	}
+        #container {
+            max-width: 1000px;
+            margin: 20px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 200px;
+        }
+        #contents {
+            width: 100%;
+            display: flex;
+        }
 
-	/* 메인 컨테이너 스타일 */
-	#container {
-    max-width: 1200px;
-    margin: 20px auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top:150px;
-	}
-
-	/* 컨텐츠 영역 스타일 */
-	#contents {
-    width: 100%;
-    display: flex;
-	}
-
-	/* 사이드바 스타일 */
-	.sidebar {
+        .sidebar {
             width: 20%;
             padding: 15px;
-            background-color: #f7f7f7;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            background-color: #333; /* 사이드바 배경색 */
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
             height: fit-content;
+            color: white; /* 사이드바 글씨색 */
         }
+
         .sidebar ul {
             list-style-type: none;
             padding: 0;
-             text-align: left;
+            text-align: left;
         }
+
         .sidebar ul li {
             margin-bottom: 15px;
         }
+
         .sidebar ul li a {
             text-decoration: none;
-            color: #333;
+            color: white; /* 사이드바 링크 글씨색 */
             font-weight: bold;
         }
+
         .sidebar ul li a:hover {
-            color: #e50914;
+            color: #e50914; /* 사이드바 링크 hover 색상 */
         }
 
-	/* 메인 콘텐츠 스타일 */
-	.col-detail {
-    width: 75%;
+        .col-detail {
+    width: 100%;
     padding: 15px;
-    background-color: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-	}
-
-	/* 고객센터 타이틀 스타일 */
-	.customer_top {
-    margin-bottom: 20px;
-	}
-	.customer_top .tit {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin: 0;
-     text-align: left;
-	}
-	.customer_top .stit {
-    color: #777;
-    font-size: 0.9em;
-	}
-
-	/* FAQ 내용 스타일 */
-	.view_area {
-    margin-top: 20px;
-    text-align: left; 
-	}
-	.view_area pre {
-	display: block; /* 기본 블록 레벨 요소로 설정 */
-    white-space: pre-wrap; /* 공백과 줄 바꿈 유지 */
-	}
-	
-	.view_area p {
-    line-height: 1.6;
-    text-align: left; /* 텍스트 왼쪽 정렬 */
-	}
-
-/* 조회수 스타일 */
-.col-detail p {
-    text-align: left; /* 조회수 왼쪽 정렬 */
+    background-color: black; /* 메인 콘텐츠 배경색 */
+    color: white; /* 메인 콘텐츠 글씨색 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border: 1px solid #fff; /* 메인 콘텐츠 테두리색 */
+    height: 600px; /* 고정 높이 설정 */
+    overflow-y: auto; /* 세로 스크롤 활성화 */
 }
 
-/* 버튼 그룹 스타일 */
-.btn-group {
-    text-align: center; /* 버튼 그룹을 중앙 정렬 */
-    margin-top: 20px;
-}
-.btn-group button {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9em;
-    margin: 0 10px; /* 좌우 마진 추가 */
-}
-.btn-edit {
-    background-color: #4CAF50; /* 수정 버튼 배경색 (초록색) */
-    color: white;
-}
-.btn-delete {
-    background-color: #f44336; /* 삭제 버튼 배경색 (빨간색) */
-    color: white;
-}
-.btn-list {
-    background-color: #2196F3; /* 목록 버튼 배경색 (파란색) */
-    color: white;
-}
-.btn-group button:hover {
-    opacity: 0.9;
-}
+        .customer_top {
+            margin-bottom: 20px;
+        }
 
-/* 푸터 스타일 */
-footer {
-    background-color: white;
-    text-align: center;
-    padding: 10px 0;
-    border-top: 1px solid #ddd;
-}
+        .customer_top .tit {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 0;
+            text-align: left;
+        }
 
+        .customer_top .stit {
+            color: #777;
+            font-size: 0.9em;
+        }
 
+        .view_area {
+            margin-top: 20px;
+            text-align: left;
+        }
 
+        .view_area pre {
+            display: block; /* 기본 블록 레벨 요소로 설정 */
+            white-space: pre-wrap; /* 공백과 줄 바꿈 유지 */
+        }
+
+        .view_area p {
+            line-height: 1.6;
+            text-align: left; /* 텍스트 왼쪽 정렬 */
+        }
+
+        .col-detail p {
+            text-align: left; /* 조회수 왼쪽 정렬 */
+        }
+
+        .btn-group {
+            margin-top: auto; /* 남은 공간을 차지하고 버튼을 하단으로 이동 */
+            text-align: center; /* 버튼을 중앙 정렬 */
+        }
+
+        .btn-group button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin: 0 10px; /* 좌우 마진 추가 */
+        }
+
+        .btn-edit {
+            background-color: #4CAF50; /* 수정 버튼 배경색 (초록색) */
+            color: white;
+        }
+
+        .btn-delete {
+            background-color: #f44336; /* 삭제 버튼 배경색 (빨간색) */
+            color: white;
+        }
+
+        .btn-list {
+            background-color: #2196F3; /* 목록 버튼 배경색 (파란색) */
+            color: white;
+        }
+
+        .btn-group button:hover {
+            opacity: 0.9;
+        }
+
+        
     </style>
 </head>
 <body>
@@ -172,12 +159,13 @@ footer {
             <div class="col-detail">
                 <div class="customer_top">
                     <h2 class="tit">${faqDetail.title}</h2>
-                    <p class="stit">작성일: ${formattedDate}</p>
+                    <p>작성일: ${formattedDate}</p>
+                     <p class="stit">조회수: ${faqDetail.views}</p>
                 </div>  
                 <div class="view_area">
                     <pre>${faqDetail.content}</pre>
                 </div>
-                <p>조회수: ${faqDetail.views}</p>
+                
 
                 <!-- 버튼 그룹 -->
                 <div class="btn-group">

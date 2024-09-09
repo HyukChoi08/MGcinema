@@ -239,7 +239,7 @@
                     <ul class="list">
                         <li><a href="FAQdetail?id=74">faq역기</a></li>
                         <li><a href="#">faq엮</a></li>
-                        <li><a href="#">우리애가 물건좀 슬쩍가져갈수있는거아니에요?맘카페에 퍼뜨릴게요</a></li>
+                        <li><a href="#">예매 좀 와서하세요</a></li>
                     </ul>
                 </div>
 

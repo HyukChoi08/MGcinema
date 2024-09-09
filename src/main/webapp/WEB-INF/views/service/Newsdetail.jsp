@@ -8,7 +8,6 @@
     <title>${newsDetail.title}</title>
     <style>
         body {
-            
             margin: 0;
             padding: 0;
             background-color: black; /* 기존 페이지와 일치하는 배경색 */
