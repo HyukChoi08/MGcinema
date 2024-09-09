@@ -488,33 +488,29 @@ $(document).ready(function() {
        if (str.endsWith(',')) {
            str = str.slice(0, -1);
        }
-
-	
-	
 	
 	console.log(customer_id);
-	console.log(finalprice);
-	console.log(str);
-
+	console.log("price"+finalprice);
+	console.log("name"+str);
+	
 	customer_id=encodeURIComponent(customer_id);
-	finalprice=encodeURIComponent(finalprice);
-	
-	
-	
+	totalprice=encodeURIComponent(finalprice);
+	itemname=encodeURIComponent(str);
 	
 	
 	
 
-/*
 	var popupWidth = 600;
         var popupHeight = 700;
 
         var leftPosition = (window.screen.width / 2) - (popupWidth / 2);
         var topPosition = (window.screen.height / 2) - (popupHeight / 2);
 
-        var url = '/store/storecheck?moviename=' + moviename + '&Aticket=' + Aticket + '&Yticket=' + Yticket + '&resultprice=' 
-        		+ resultprice + '&resultseat=' + resultseat + '&roomname=' + roomname + '&people=' + people + '&begintime=' + begintime +
-        		'&endtime=' + endtime + '&runningtime=' + runningtime + '&datetime=' + datetime;
+        var url = '/store/storecheck?itemname=' + itemname + '&totalprice=' + totalprice; 
+        		
+//        		+ '&Yticket=' + Yticket + '&resultprice=' 
+//        		+ resultprice + '&resultseat=' + resultseat + '&roomname=' + roomname + '&people=' + people + '&begintime=' + begintime +
+//       		'&endtime=' + endtime + '&runningtime=' + runningtime + '&datetime=' + datetime;
 
         window.open(
             url,
@@ -522,9 +518,9 @@ $(document).ready(function() {
             'width=' + popupWidth + ', height=' + popupHeight + ', left=' + leftPosition + ', top=' + topPosition + ', resizable=yes, scrollbars=yes'
         );
 
-        encodeURIComponent(moviename)
+        encodeURIComponent(itemname)
 
-        */
+      
 })
 
 </script>

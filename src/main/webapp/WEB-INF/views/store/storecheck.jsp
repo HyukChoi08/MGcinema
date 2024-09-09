@@ -20,15 +20,9 @@
 	<div id="successSave">
 		<p>${orderId}</p>
 		<p>${uid}</p>
-		<p>${moviename}</p>
-		<p>${roomname}</p>
-		<p>${resultprice}</p>
-		<p>${runningtime}</p>
-		<p>${resultseat}</p>
-		<p>${people}</p>
-		<p>${begintime}</p>
-		<p>${endtime}</p>
-		<p>${datetime}</p>
+		<p>${itemname}</p>
+		<p>${totalprice}</p>>
+
 	</div>
     <script>
       main();
@@ -59,19 +53,13 @@
     	  button.addEventListener("click", async function () {
     	    await widgets.requestPayment({
     	      orderId: "${orderId}",
-    	      orderName: "${moviename} ${Aticket} ${Yticket}",
-    	      successUrl: window.location.origin + "/success?orderId=" + encodeURIComponent("${orderId}") +
+    	      orderName: "${itemname} ",
+    	      successUrl: window.location.origin + "/storesuccess?orderId=" + encodeURIComponent("${orderId}") +
     	                  "&uid=" + encodeURIComponent("${uid}") +
-    	                  "&moviename=" + encodeURIComponent("${moviename}") +
-    	                  "&roomname=" + encodeURIComponent("${roomname}") +
-    	                  "&resultprice=" + encodeURIComponent("${resultprice}") +
-    	                  "&runningtime=" + encodeURIComponent("${runningtime}") +
-    	                  "&resultseat=" + encodeURIComponent("${resultseat}") +
-    	                  "&people=" + encodeURIComponent("${people}") +
-    	                  "&begintime=" + encodeURIComponent("${begintime}") +
-    	                  "&endtime=" + encodeURIComponent("${endtime}") +
-    	                  "&datetime=" + encodeURIComponent("${datetime}"),
-    	      failUrl: window.location.origin + "/fail",
+	  	                  "&itemname=" + encodeURIComponent("${itemname}") +
+    	                  "&totalprice=" + encodeURIComponent("${totalprice}"),
+//    	  
+    	      failUrl: window.location.origin + "/storefail",
     	      customerEmail: "${email}",
     	      customerName: "${realname}",
     	      customerMobilePhone: "${mobile}",

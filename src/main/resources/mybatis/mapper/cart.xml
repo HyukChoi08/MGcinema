@@ -45,6 +45,8 @@ SELECT
     SUM(CASE WHEN item_id =#{param2} THEN qty ELSE 0 END) AS item_qty
 FROM cart
 WHERE customer_id =#{param1}
-
 </select>
+<update id="updatecart">
+ UPDATE cart SET qty=#{param3} WHERE customer_id =#{param1} and item_id=#{param2}
+  </update>
 </mapper>

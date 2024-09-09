@@ -24,17 +24,18 @@ color:white;
            margin: 0; 
        }
 
-       #container {
-           display: flex;
-           flex-wrap: wrap;      
-           justify-content: center; 
-           padding: 20px;
-           width: 1000px; 
-           margin: 0 auto;   
-           background-color:black;
+	    #container {
+	    display: flex;
+	    flex-wrap: wrap;      /* 이미지 정렬을 위해 사용 */
+	    justify-content: center; 
+	    width: 1000px; 
+	    margin: 0 auto;   
+	    background-color: black;
 	    margin-top: 150px; 
 	    margin-bottom: 335px;
-       }
+	    border: 2px solid #808080; /* 회색 테두리 */
+	    box-sizing: border-box; /* border와 padding을 포함한 너비 계산 */
+		}
 
        #contents {
            flex: 1 1 200px; 
@@ -85,8 +86,12 @@ color:white;
            flex-wrap: wrap; 
            margin-bottom: 20px; 
        }
+       .contegory_contents_wrap a{
 
-       .category_content, .cart_content {
+		color:white;
+		}
+		
+        .category_content, .cart_content {
            display: flex; 
            flex-direction: row; 
            gap: 20px; 
@@ -314,7 +319,7 @@ color:white;
     <div id="container">
         <div id="contents">
             <div class="category_wrap">
-              
+             
                 <div class="separator"></div>
             </div>
             <div class="contegory_contents_wrap">
@@ -412,9 +417,61 @@ color:white;
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
+
+function updateCartCount(customer_id) {
+    $.ajax({
+        url: '/countcart',
+        type: 'post',
+        data: { customer_id: customer_id },
+        dataType: 'text',
+        cache: false,
+        success: function(data) {
+            $('#cart-count').text(data);
+        }
+    });
+}
+
+
+
 $(document)
 .ready(function() {
 
+	let customer_id=$('#userid').val();
+	console.log(customer_id);
+	
+	updateCartCount(customer_id);
+	
+	 $(window).on('pageshow', function(event) {
+         if (event.originalEvent.persisted) {
+             window.location.reload();
+             updateCartCount(customer_id);
+         }
+     });
+
+     // 브라우저 히스토리 상태가 변경될 때 새로 고침 처리
+     $(window).on('popstate', function(event) {
+         // 이 부분은 필요에 따라 조정
+         // 페이지가 새로 고쳐질 필요가 없는 경우 주석 처리
+         window.location.reload();
+         updateCartCount(customer_id);
+     });
+	 
+     function checkItemInCart(item_id) {
+         return $.ajax({
+             url: '/checkitem', // 서버에서 장바구니에 아이템이 있는지 확인하는 엔드포인트
+             type: 'post',
+             data: {item_id: item_id },
+             dataType: 'json'
+         });
+     }
+ 	 	 
+     // 페이지 로드 시 카운트 업데이트he
+    // updateCartCount();
+	
+	
+	
+	
+	
 	$('#cnt').focus();
 	
 	
@@ -470,7 +527,7 @@ $(document)
  $('#hiddenid').val(id);
 
 
-	let customer_id= $('#userid').val();
+	
 	console.log(customer_id);
 	
 
@@ -513,126 +570,113 @@ $(document)
 	$('#totalprice').val('');
 	$('#totalprice').val(giftprice ); // Set the value of the #totalprice field
 })
-.on('click','#btncart',function(){
-	
-	
-	  event.preventDefault(); // 기본 동작을 막습니다.
-	  let item_id=$('#hiddenid').val();
-	  let qty=$('#cnt').val();
-	  let totalStr=$('#totalprice').val();
-	  let total=parseInt(totalStr.replace(/,/g,''),10);
-	 
-	  
-      console.log('Icon left clicked');
-      if($('#userid').val()==''){
-      alert("로그인 후 이용해주세요")
-      	    	
-      	return false;
-      }
-            
-      $.ajax({
-          url: '/checkitem',
-          type: 'post',
-          data: { item_id: item_id },
-          dataType: 'json',
-          success: function(data) {
-              console.log('Server response:', data);
+.on('click', '#btncart', function(event) {
+    event.preventDefault(); // 기본 동작을 막습니다.
 
-              // 데이터의 타입 및 구조를 확인
-              console.log('Data type:', typeof data);
-              console.log('Data keys:', Object.keys(data));
+    let item_id = $('#hiddenid').val();
+    let qty = parseInt($('#cnt').val(), 10);
+    let totalStr = $('#totalprice').val();
+    let total = parseInt(totalStr.replace(/,/g, ''), 10);
+    let customer_id = $('#userid').val();
 
-              let distinctItemCount = 0;
-              let specificItemCount = 0;
+    console.log('Button clicked');
+    console.log('Item ID:', item_id);
+    console.log('Qty:', qty);
+    console.log('Total:', total);
+    console.log('Customer ID:', customer_id);
 
-              // 데이터가 배열일 경우 처리
-              if (Array.isArray(data)) {
-                  // 배열이 비어 있지 않다면 첫 번째 요소를 사용
-                  if (data.length > 0) {
-                      let item = data[0]; // 첫 번째 요소를 사용
-                      distinctItemCount = item.item_count || 0;
-                      specificItemCount = item.item_qty || 0;
-                  }
-              } else if (data && typeof data === 'object') {
-                  // 데이터가 객체일 경우 직접 접근
-                  distinctItemCount = data.item_count || 0;
-                  specificItemCount = data.item_qty || 0;
-              } else {
-                  console.error('Unexpected data format:', data);
-              }
+    if ($('#userid').val() === '') {
+        alert("로그인 후 이용해주세요");
+        return false;
+    }
 
-              console.log('Distinct item count:', distinctItemCount);
-              console.log('Specific item count:', specificItemCount);
+    $.ajax({
+        url: '/checkitem',
+        type: 'post',
+        data: { customer_id: customer_id, item_id: item_id },
+        dataType: 'json',
+        success: function(data) {
+            console.log('Server response:', data);
 
-              // 품목 종류가 10개 이상이고 특정 아이템이 장바구니에 없는 경우
-              if (distinctItemCount >= 10 && specificItemCount === 0) {
-                  alert('장바구니의 품목 종류가 10개 이상이므로 새로운 품목을 추가할 수 없습니다.');
-                  
-              } 
-              // 특정 아이템의 총 수량이 10개 이상인 경우
-              else if (specificItemCount + qty > 10) {
-                alert('장바구니에 이미 10개 이상의 수량이 있습니다. 추가할 수량을 확인해주세요.');
-                return false;
-            } 
-              else { 	                        	                 
-      
-             	$.ajax({
-         			url:'/insertcart',type:'post',data:{item_id:item_id,qty:qty,total: total},dataType:'text',
-         			success:function(data){
-         			if(data=='ok'){
-         			
-         				 window.location.href = '/cart'; // 클릭 시 페이지 이동
-         			}
-        			}
-        		
-        		}) 
-            	
-         	                        	                    	  	                    	
-              	                    
-              }
-          },
-          error: function(xhr, status, error) {
-              console.error('AJAX 요청 오류:', status, error);
-              alert('요청 중 오류가 발생했습니다.');
-          }
-      })	
+            // 응답 데이터가 배열이므로 첫 번째 요소에 접근합니다.
+            let itemData = data[0] || {}; // 첫 번째 요소를 가져옵니다.
+
+            // item_qty와 item_count를 추출합니다.
+            let itemQty = itemData.item_qty || 0; // 현재 장바구니에 있는 품목 수량
+            let itemCount = itemData.item_count || 0; // 장바구니에 있는 품목 종류 수
+
+            console.log('Item Qty:', itemQty);
+            console.log('Item Count:', itemCount);
+
+            // 총 수량을 계산합니다.
+            let newQty = itemQty + qty;
+            console.log('New Qty:', newQty);
+
+            // 최대 수량
+            const maxQty = 10;
+
+            if (itemCount >= 10 && itemQty === 0) {
+                alert('장바구니의 품목 종류가 10개 이상이므로 새로운 품목을 추가할 수 없습니다.');
+            } else if (newQty > maxQty) {
+                let remainingQty = maxQty - itemQty;
+                console.log("Remaining Qty:", remainingQty);
+             
+                alert(`장바구니에 담을 수 있는 수량은 품목당 최대 10개입니다. 현재 ${remainingQty}개를 더 담을 수 있습니다.`);
+            } else {
+                if (itemQty > 0) {
+                    $.ajax({
+                        url: '/updatecart',
+                        type: 'post',
+                        data: {
+                            customer_id: customer_id,
+                            item_id: item_id,
+                            qty: newQty // 기존 수량에 추가할 수량을 더한 값
+                        },
+                        dataType: 'text',
+                        success: function(response) {
+                            if (response === 'ok') {
+                                window.location.href = '/cart'; // 클릭 시 페이지 이동
+                            } else {
+                                alert('Error updating cart');
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('Update cart AJAX request error:', status, error);
+                            alert('Error updating cart');
+                        }
+                    });
+                } else {
+                    $.ajax({
+                        url: '/insertcart',
+                        type: 'post',
+                        data: {
+                            customer_id: customer_id,
+                            item_id: item_id,
+                            qty: qty, // 새 품목은 수량을 직접 설정
+                            total: total
+                        },
+                        dataType: 'text',
+                        success: function(response) {
+                            if (response === 'ok') {
+                                window.location.href = '/cart'; // 클릭 시 페이지 이동
+                            } else {
+                                alert('Error inserting into cart');
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('Insert cart AJAX request error:', status, error);
+                            alert('Error inserting into cart');
+                        }
+                    });
+                }
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Check item AJAX request error:', status, error);
+            alert('Error checking item');
+        }
+    })
 })
-
-
-
-
-
-
-/*
-.on('click','#btncart',function(){
-	
-		 if ($('#userid').val() == '') {
-	        alert("로그인 후 이용해주세요");
-	        
-	        return false;
-		 }
-			
-		let item_id=$('#hiddenid').val();
-		let customer_id=$('#userid').val();
-		let totalStr=$('#totalprice').val();
-		let total=parseInt(totalStr.replace(/,/g,''),10);
-		let qty=$('#cnt').val();
-		console.log("id"+item_id);
-		console.log("userid"+customer_id);
-		console.log(qty);
-		console.log(total);
-		
-		$.ajax({
-			url:'/insertcart',type:'post',data:{customer_id:customer_id,item_id:item_id,qty:qty,total:total},dataType:'text',
-			success:function(data){
-				if(data=='ok'){
-					
-					window.location.href='/cart';
-				}				
-			}		
-		})	 	
-})
-*/
 
 
 let selectedItems = []; // 전역 변수로 선언

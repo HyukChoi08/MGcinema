@@ -15,5 +15,6 @@ public interface cartDAO {
 	int countcart(String customer_id);
 	ArrayList<cartDTO> selectitem(int item_id);
 	ArrayList<cartDTO> checkitem(String customer_id,int item_id);
+	void updatecart(String customer_id,int item_id,int qty);
 }
 

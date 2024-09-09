@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cinema.ticket.customerDTO;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -29,6 +29,7 @@ public class HomeController {
 	
 	@Autowired storeDAO storedao;
 	@Autowired cartDAO cartdao;
+	@Autowired storecustomerDAO customerdao;
 	
 	
 
@@ -59,6 +60,7 @@ public class HomeController {
             model.addAttribute("uid", ""); // 또는 다른 기본값
         }
 		
+	    
 		model.addAttribute("arPackage",arPackage);
 		model.addAttribute("arItem",arItem);
 		model.addAttribute("imagePath", imagePath);
@@ -167,6 +169,18 @@ public class HomeController {
 		
 		return "ok";
 	}
+	@PostMapping("/updatecart")
+	@ResponseBody
+	public String updatecart(HttpServletRequest req) {
+		String customer_id=req.getParameter("customer_id");
+		int item_id=Integer.parseInt(req.getParameter("item_id"));
+		int qty=Integer.parseInt(req.getParameter("qty"));
+				
+		cartdao.updatecart(customer_id, item_id, qty);
+		
+		return "ok";
+	}
+	
 	@PostMapping("/choicedelete")
 	@ResponseBody
 	public String choicedelete(@RequestBody Map<String, List<String>> requestBody, HttpServletRequest req) {
@@ -281,48 +295,68 @@ public class HomeController {
 			}
 			return ja.toString();	   
 	   }
-//	   @GetMapping("/store/storecheck")
-//	    public String storeCheckoutPage(@RequestParam("moviename") String moviename,
-//	            						@RequestParam("Aticket") String Aticket,
-//	            						@RequestParam("Yticket") String Yticket,
-//	            						@RequestParam("resultprice") String resultprice,
-//	            						@RequestParam("resultseat") String resultseat,
-//	            						@RequestParam("roomname") String roomname,
-//	            						@RequestParam("people") String people,
-//	            						@RequestParam("begintime") String begintime,
-//	            						@RequestParam("endtime") String endtime,
-//	            						@RequestParam("runningtime") String runningtime,
-//	            						@RequestParam("datetime") String datetime,
-//	            						HttpServletRequest req, Model model) {
-//			HttpSession s =req.getSession();
-//			String userid = (String) s.getAttribute("uid");
-//			customerDTO customer = cartdao.getCustomer(userid);
-//			
-//			model.addAttribute("id", customer.getId());
-//	        model.addAttribute("uid", customer.getUid());
-//	        model.addAttribute("passwd", customer.getPasswd());
-//	        model.addAttribute("realname", customer.getRealname());
-//	        model.addAttribute("nickname", customer.getNickname());
-//	        model.addAttribute("email", customer.getEmail());
-//	        model.addAttribute("mobile", customer.getMobile());
-//	        
-//	        model.addAttribute("moviename", moviename);
-//	        model.addAttribute("Aticket", Aticket);
-//	        model.addAttribute("Yticket", Yticket);
-//	        model.addAttribute("resultprice", resultprice);
-//	        model.addAttribute("resultseat", resultseat);
-//	        model.addAttribute("roomname", roomname);
-//	        model.addAttribute("people", people);
-//	        model.addAttribute("begintime", begintime);
-//	        model.addAttribute("endtime", endtime);
-//	        model.addAttribute("runningtime", runningtime);
-//	        model.addAttribute("datetime", datetime);
-//	        
-//	        String orderId = UUID.randomUUID().toString();
-//	        model.addAttribute("orderId", orderId);
-//	        return "store/storecheck";
-//	    }
-//		
+	   @GetMapping("/store/storecheck")
+	    public String storeCheckoutPage(@RequestParam("itemname") String itemname,
+	            						@RequestParam("totalprice") String totalprice,
+
+	            						HttpServletRequest req, Model model) {
+			HttpSession s =req.getSession();
+			String userid= (String) s.getAttribute("uid");
+			storecustomerDTO arCustomer = customerdao.storecustomer(userid);
+		
+			model.addAttribute("id", arCustomer.getId());
+	        model.addAttribute("uid", arCustomer.getUid());
+	        model.addAttribute("passwd", arCustomer.getPasswd());
+	        model.addAttribute("realname", arCustomer.getRealname());
+	        model.addAttribute("nickname", arCustomer.getNickname());
+	        model.addAttribute("email", arCustomer.getEmail());
+	        model.addAttribute("mobile", arCustomer.getMobile());
+	        
+	        model.addAttribute("itemname", itemname);       	        
+	        model.addAttribute("totalprice", totalprice);
+
+	        String orderId = UUID.randomUUID().toString();
+	        model.addAttribute("orderId", orderId);
+	        
+	        System.out.println("toto1"+totalprice);
+	        return "store/storecheck";
+    }
+	   
+	@GetMapping("/storesuccess")
+	public String storesuccess(@RequestParam Map<String,String> params,Model model) {
+		
+		   model.addAttribute("orderId", params.get("orderId"));
+		   model.addAttribute("uid", params.get("uid"));
+		   model.addAttribute("itemname", params.get("itemname"));
+		   model.addAttribute("totalprice", params.get("totalprice"));	
+
+		
+		   System.out.println("toto2"+params.get("totalprice"));
+		return "store/storesuccess";
+	}
+	
+	@GetMapping("/storeData")
+	public String storeData(HttpServletRequest req) {
+		
+		String customer_id=req.getParameter("customer_id");
+		String random_id=req.getParameter("random_id");
+		String item_name=req.getParameter("item_name");
+		String totalprice=req.getParameter("totalprice");
+		
+		  int count =customerdao.checkIfExists(random_id);
+		    if (count > 0) {
+		        return "home/homepage"; // Or some appropriate response
+		    }
+		
+		
+		customerdao.insertStorepay(customer_id,random_id,item_name,totalprice);	
+		
+		
+		
+		return "ok";
+	}	
+
+	
 	   
 	   
 	   

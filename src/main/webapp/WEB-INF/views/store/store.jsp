@@ -580,6 +580,7 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
 <script src="https://code.jquery.com/jquery-latest.js">
 </script>
 <script>
+
 function updateCartCount(customer_id) {
     $.ajax({
         url: '/countcart',
@@ -616,12 +617,7 @@ $(document).ready(function() {
             window.location.reload();
             updateCartCount(customer_id);
         });
-
- 	 
- 	 
- 	 
- 	 
- 	 
+	 
  	 function checkItemInCart(item_id) {
          return $.ajax({
              url: '/checkitem', // 서버에서 장바구니에 아이템이 있는지 확인하는 엔드포인트
@@ -632,104 +628,105 @@ $(document).ready(function() {
      }
  	 	 
      // 페이지 로드 시 카운트 업데이트
-     updateCartCount();
+     //updateCartCount();
                  
-    	        $('.icon-left').on('click', function(event) {
-    	            // 클릭 이벤트를 막고, 비동기 작업이 완료된 후 결과에 따라 결정합니다.
-    	            event.preventDefault(); // 기본 동작을 막습니다.
-    	            console.log('Icon left clicked');
+     $('.icon-left').on('click', function(event) {
+    	    event.preventDefault(); // 기본 동작을 막습니다.
+    	    console.log('Icon left clicked');
 
-    	            if(customer_id==''){
-    	            	alert("로그인 후 이용해주세요")
-    	            	
-    	            	return false;
-    	            }
-    	            
-   	               	           	            
-    	            var $productItem = $(this).closest('li.product');
-    	            
-    	            // li.product의 ID를 가져옵니다
-    	            var item_id = $productItem.attr('id');
-    	            console.log('Item ID:', item_id);
+    	    if (customer_id === '') {
+    	        alert("로그인 후 이용해주세요");
+    	        return false;
+    	    }
 
-    	            // 원래 가격과 할인된 가격을 추출합니다
-    	            let originalPrice = $.trim($productItem.find('.original-price').text());
-    	            let discountedPrice = $.trim($productItem.find('.discounted-price').text());
-    	            let discount_price = parseInt(discountedPrice.replace(/[^\d]/g, ''), 10);
+    	    var $productItem = $(this).closest('li.product');
+    	    var item_id = $productItem.attr('id');
+    	    console.log('Item ID:', item_id);
 
-    	            // 가격을 확인합니다
-    	            console.log('Original Price:', originalPrice);
-    	            console.log('Discounted Price:', discount_price);
-    	          
-    	            
-    	            
-    	            $.ajax({
-    	                url: '/checkitem',
-    	                type: 'post',
-    	                data: { item_id: item_id },
-    	                dataType: 'json',
-    	                success: function(data) {
-    	                    console.log('Server response:', data);
+    	    let discountedPrice = $.trim($productItem.find('.discounted-price').text());
+    	    let discount_price = parseInt(discountedPrice.replace(/[^\d]/g, ''), 10);
+    	    console.log('Discounted Price:', discount_price);
 
-    	                    // 데이터의 타입 및 구조를 확인
-    	                    console.log('Data type:', typeof data);
-    	                    console.log('Data keys:', Object.keys(data));
+    	    $.ajax({
+    	        url: '/checkitem',
+    	        type: 'post',
+    	        data: { customer_id: customer_id, item_id: item_id },
+    	        dataType: 'json',
+    	        success: function(data) {
+    	            console.log('Server response:', data);
 
-    	                    let distinctItemCount = 0;
-    	                    let specificItemCount = 0;
+    	            // 응답 데이터가 배열이므로 첫 번째 요소에 접근합니다.
+    	            let itemData = data[0] || {}; // 첫 번째 요소를 가져옵니다.
 
-    	                    // 데이터가 배열일 경우 처리
-    	                    if (Array.isArray(data)) {
-    	                        // 배열이 비어 있지 않다면 첫 번째 요소를 사용
-    	                        if (data.length > 0) {
-    	                            let item = data[0]; // 첫 번째 요소를 사용
-    	                            distinctItemCount = item.item_count || 0;
-    	                            specificItemCount = item.item_qty || 0;
+    	            // item_qty와 item_count를 추출합니다.
+    	            let itemQty = itemData.item_qty || 0; // 특정 품목의 수량
+    	            let itemCount = itemData.item_count || 0; // 품목 종류 수
+
+    	            console.log('Item Qty:', itemQty);
+    	            console.log('Item Count:', itemCount);
+
+    	            if (itemCount >= 10 && itemQty === 0) {
+    	                alert('장바구니의 품목 종류가 10개 이상이므로 새로운 품목을 추가할 수 없습니다.');
+    	            } else if (itemQty >= 10) {
+    	                alert('장바구니에 이미 10개 이상의 수량이 있습니다.');
+    	            } else {
+    	                if (itemQty > 0) {
+    	                    $.ajax({
+    	                        url: '/updatecart',
+    	                        type: 'post',
+    	                        data: {
+    	                            customer_id: customer_id,
+    	                            item_id: item_id,
+    	                            qty: itemQty + 1, // 기존 수량에 1 추가
+    	                            total: discount_price
+    	                        },
+    	                        dataType: 'text',
+    	                        success: function(response) {
+    	                            if (response === 'ok') {
+    	                                window.location.href = '/cart'; // 클릭 시 페이지 이동
+    	                            } else {
+    	                                alert('Error updating cart');
+    	                            }
+    	                        },
+    	                        error: function(xhr, status, error) {
+    	                            console.error('Update cart AJAX request error:', status, error);
+    	                            alert('Error updating cart');
     	                        }
-    	                    } else if (data && typeof data === 'object') {
-    	                        // 데이터가 객체일 경우 직접 접근
-    	                        distinctItemCount = data.item_count || 0;
-    	                        specificItemCount = data.item_qty || 0;
-    	                    } else {
-    	                        console.error('Unexpected data format:', data);
-    	                    }
-
-    	                    console.log('Distinct item count:', distinctItemCount);
-    	                    console.log('Specific item count:', specificItemCount);
-
-    	                    // 품목 종류가 10개 이상이고 특정 아이템이 장바구니에 없는 경우
-    	                    if (distinctItemCount >= 10 && specificItemCount === 0) {
-    	                        alert('장바구니의 품목 종류가 10개 이상이므로 새로운 품목을 추가할 수 없습니다.');
-    	                    } 
-    	                    // 특정 아이템의 총 수량이 10개 이상인 경우
-    	                    else if (specificItemCount >= 10) {
-    	                        alert('장바구니에 이미 10개 이상의 수량이 있습니다.');
-    	                    } 
-    	                    else { 	                        	                 
-                    
-		                   	$.ajax({
-		               			url:'/insertcart',type:'post',data:{item_id:item_id,qty:1,total: discount_price},dataType:'text',
-		               			success:function(data){
-		               			if(data=='ok'){
-		               			
-		               				 window.location.href = '/cart'; // 클릭 시 페이지 이동
-		               			}
-  	                			}
-  	                		
-  	                		}) 
-  	                    	
-    	               	                        	                    	  	                    	
-    	                    	                    
-    	                    }
-    	                },
-    	                error: function(xhr, status, error) {
-    	                    console.error('AJAX 요청 오류:', status, error);
-    	                    alert('요청 중 오류가 발생했습니다.');
+    	                    });
+    	                } else {
+    	                    $.ajax({
+    	                        url: '/insertcart',
+    	                        type: 'post',
+    	                        data: {
+    	                            customer_id: customer_id,
+    	                            item_id: item_id,
+    	                            qty: 1, // 새 품목은 수량 1
+    	                            total: discount_price
+    	                        },
+    	                        dataType: 'text',
+    	                        success: function(response) {
+    	                            if (response === 'ok') {
+    	                                window.location.href = '/cart'; // 클릭 시 페이지 이동
+    	                            } else {
+    	                                alert('Error inserting into cart');
+    	                            }
+    	                        },
+    	                        error: function(xhr, status, error) {
+    	                            console.error('Insert cart AJAX request error:', status, error);
+    	                            alert('Error inserting into cart');
+    	                        }
+    	                    });
     	                }
-    	            })
-    	        })     
-    
-})
+    	            }
+    	        },
+    	        error: function(xhr, status, error) {
+    	            console.error('Check item AJAX request error:', status, error);
+    	            alert('Error checking item');
+    	        }
+    	    })
+    	})
+})    	
+    	
 let selectedItems = []; // 전역 변수로 선언
 
 $('.buyButton').on('click', function(e) {

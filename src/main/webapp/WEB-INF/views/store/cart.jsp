@@ -276,7 +276,7 @@ vertical-align: middle; /* 수직 중앙 정렬 */
     color:grey; 
 
 }
-#alldelete,#btndelete,#btnpay,#pay {
+#alldelete,#btndelete,.btnpay,#pay {
     color: black; /* 텍스트 색상 설정 */
 }
 #alldelete{
@@ -337,9 +337,107 @@ position: relative;
 margin-bottom:30px;
 
 }
-.qty-input{
+.qty{
+	position: relative;
+    left:-35px; /* 원하는 위치로 이동 (음수 값으로 왼쪽으로 이동) */
+  
+}
 
-color:black;
+.qty-container {
+    display: flex;
+    align-items: center;
+}
+
+.qty-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.qty-buttons button {
+    background-color: #444;
+    border: none;
+    color: white;
+    font-size: 18px; /* 폰트 크기 조정 */
+    padding: 0; /* 패딩 제거 */
+    width: 20px; /* 버튼 너비 설정 */
+    height: 20px; /* 버튼 높이 설정 */
+    display: flex; /* 플렉스 박스를 사용하여 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    cursor: pointer;
+}
+
+.qty-buttons button:hover {
+    background-color: #666;
+}
+
+.qty-input {
+    width: 30px;
+    height: 35px;
+    text-align: center;
+    font-size: 18px;
+    color:black;
+}
+.choice {
+    display: flex; /* 플렉스 박스를 사용하여 배치 */
+    flex-direction: column; /* 세로 방향으로 배치 */
+    align-items: center; /* 수평 중앙 정렬 (선택사항) */
+}
+.choice input[type="button"] {
+ 
+    width: 100px; /* 버튼 너비 설정 (필요에 따라 조정) */
+    height: 30px; /* 버튼 높이 설정 (필요에 따라 조정) */
+    position: relative;
+    left:90px; /* 원하는 위치로 이동 (음수 값으로 왼쪽으로 이동) */
+    
+}
+.btnchange {
+    background-color: #444; /* 배경색을 검정색으로 설정 */
+    color: white; /* 텍스트 색상을 하얀색으로 설정 */
+    border: 2px solid #666; /* 테두리 색상 및 두께 설정 */
+    font-size: 13px; /* 폰트 크기 설정 */
+    padding: 0; /* 패딩을 0으로 설정 (높이에 맞게 조정) */
+    cursor: pointer; /* 마우스 커서를 포인터로 변경 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+  
+    transition: background-color 0.3s, border-color 0.3s; /* 배경색과 테두리 색상의 전환 효과 */
+    height: 40px; /* 버튼 높이 설정 */
+    line-height: 20px; /* 텍스트를 수직 중앙에 배치 */
+    box-sizing: border-box; /* 패딩과 테두리를 포함하여 높이와 너비를 계산 */
+}
+
+.btnchange:hover {
+    background-color: #666; /* 호버 시 배경색 변경 */
+    border-color: #444; /* 호버 시 테두리 색상 변경 */
+}
+.discount{
+	position: relative;
+    left:-30px; /* 원하는 위치로 이동 (음수 값으로 왼쪽으로 이동) */
+}
+.total{
+	position: relative;
+    left:-30px; /* 원하는 위치로 이동 (음수 값으로 왼쪽으로 이동) */
+}
+.choice{
+	position: relative;
+    left:-110px; /* 원하는 위치로 이동 (음수 값으로 왼쪽으로 이동) */
+  
+  
+}
+.choice input[type="button"] {
+    margin: 10px 0; /* 위아래 간격 설정 (10px) */
+    width: 100px; /* 버튼 너비 설정 (필요에 따라 조정) */
+    height: 40px; /* 버튼 높이 설정 (필요에 따라 조정) */
+    background-color: #444; /* 배경색 설정 */
+  	color: white !important; /* 텍스트 색상 강제로 설정 */
+    border: 2px solid #666; /* 테두리 색상 및 두께 설정 */
+    font-size: 13px; /* 폰트 크기 설정 */
+    padding: 0; /* 패딩 제거 */
+    cursor: pointer; /* 마우스 커서를 포인터로 변경 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    border-radius: 4px; /* 모서리 둥글게 설정 (선택 사항) */
+    transition: background-color 0.3s, border-color 0.3s; /* 배경색과 테두리 색상의 전환 효과 */
+   
 }
 
 </style>
@@ -381,7 +479,7 @@ color:black;
             </thead>
             <tbody class="tb">
                 <c:forEach items="${arCart}" var="cart">
-                    <tr class="cart-item">                   
+                    <tr class="cart-item">                  	          
                         <td><input type="checkbox" class="item-checkbox"></td>
                         <td>
                             <input type="hidden" class="item_id" value="${cart.item_id}">
@@ -405,11 +503,20 @@ color:black;
                             </div>
                         </td>
                         <td class="qty">
-                            <input type="number"  min="1"  max="10" class="qty-input" style="width:50px;" value="${cart.qty}">
-                        </td>
+						    <div class="qty-container">
+						        <input type="text" min="1" max="10" readonly class="qty-input"  value="${cart.qty}">
+						        <div class="qty-buttons">
+						            <button class="increase-btn">+</button>
+						            <button class="decrease-btn">-</button>
+						        </div>
+						         <div class="changes"> 
+					            	<button class="btnchange">변경하기</button>
+					        	</div>
+						    </div>
+						</td>
                         <td class="total">${cart.total}</td>
                         <td class="choice">
-                            <input type="button" id="btnpay" value="구매하기">
+                            <input type="button" class="btnpay" value="구매하기">
                             <input type="button" id="btndelete" value="삭제하기">
                         </td>
                     </tr>
@@ -451,23 +558,50 @@ color:black;
 
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
+function updateCartCount() {
+    $.ajax({
+        url: '/countcart',
+        type: 'post',
+        data: { customer_id: $('#gg').val() },
+        dataType: 'text',
+        success: function(data) {
+            $('#cart-count').text(data);
+        }
+    });
+}
+
 $(document).ready(function() {
 	
-	 let customer_id=$('#gg').val();
+	 $('#allcheck').prop('checked', true);
+	 $('.item-checkbox').prop('checked', true);
+	 
+	 $('.item-checkbox').on('change', function() {
+	        var allChecked = $('.item-checkbox').length === $('.item-checkbox:checked').length;
+	        $('#allcheck').prop('checked', allChecked);
+	    });
 	
-	 function updateCartCount() {
-         $.ajax({
-             url: '/countcart',
-             type: 'post',
-             data: { customer_id: customer_id },
-             dataType: 'text',
-             success: function(data) {
-                 $('#cart-count').text(data);
-             }         
-         })
-     }
+	let customer_id = $('#gg').val();   
+    
+    updateCartCount(customer_id);
 
-	 function checkItemInCart(item_id) {
+	//페이지가 로드될 때 강제로 새로고침
+
+        $(window).on('pageshow', function(event) {
+            if (event.originalEvent.persisted) {
+                window.location.reload();
+                updateCartCount(customer_id);
+            }
+        });
+
+        // 브라우저 히스토리 상태가 변경될 때 새로 고침 처리
+        $(window).on('popstate', function(event) {
+            // 이 부분은 필요에 따라 조정
+            // 페이지가 새로 고쳐질 필요가 없는 경우 주석 처리
+            window.location.reload();
+            updateCartCount(customer_id);
+        });
+	 
+ 	 function checkItemInCart(item_id) {
          return $.ajax({
              url: '/checkitem', // 서버에서 장바구니에 아이템이 있는지 확인하는 엔드포인트
              type: 'post',
@@ -475,27 +609,24 @@ $(document).ready(function() {
              dataType: 'json'
          });
      }
- 	 	 
+	 	 
      // 페이지 로드 시 카운트 업데이트
-     updateCartCount();
-    																
+     //updateCartCount();
+
+  
+
     function formatNumber(number) {
-        return number.toLocaleString(); // 숫자를 쉼표로 포맷
+        return number.toLocaleString();
     }
-   
 
     function calculateItemTotal(item) {
         let qtyInput = item.find('.qty-input');
         let qty = parseInt(qtyInput.val()) || 0;
         let discountPriceText = item.find('.discount_price').text().replace(/,/g, '').replace('원', '');
-        let cartPriceText = item.find('.cartprice').text().replace(/,/g, '').replace('원', '');
-
         let discountPrice = parseInt(discountPriceText) || 0;
-        let cartPrice = parseInt(cartPriceText) || 0;
 
         let totalItemPrice = discountPrice * qty;
 
-        // Update total price for this item
         item.find('.total').text(formatNumber(totalItemPrice) + '원');
     }
 
@@ -522,7 +653,7 @@ $(document).ready(function() {
 
                 totalPrice += totalItemPrice;
                 totalDiscount += totalItemDiscount;
-                finalPrice = totalPrice - totalDiscount; // 이 부분을 재확인
+                finalPrice = totalPrice - totalDiscount;
             }
         });
 
@@ -533,42 +664,73 @@ $(document).ready(function() {
         return { totalPrice, totalDiscount, finalPrice };
     }
 
-    function formatExistingTotal() {
-        // 기존의 totalprice 값을 천 단위로 포맷
-        $('.total').each(function() {
-            let $this = $(this);
-            let text = $this.text().replace(/,/g, '').replace('원', ''); // '원' 및 기존 쉼표 제거
-            let number = parseInt(text, 10); // 숫자로 변환
-            if (!isNaN(number)) {
-                $this.text(formatNumber(number) + '원'); // 포맷 후 다시 텍스트로 설정
-            }
+    function updateCartItems() {
+        $('.cart-item').each(function() {
+            let item = $(this);
+            calculateItemTotal(item);
         });
     }
 
-    formatExistingTotal(); // 추가된 부분
+    // 페이지 로드 시 초기화
+    updateCartItems();
+    calculateTotal();
 
-    $(document).on('input change', '.qty-input, .item-checkbox', function() {
-        // Update item total
+    function adjustQuantity(button, increment) {
+        let qtyContainer = button.closest('.qty-container');
+        let qtyInput = qtyContainer.find('.qty-input');
+        let currentQty = parseInt(qtyInput.val(), 10) || 0;
+        let newQty = currentQty + increment;
+        let minQty = parseInt(qtyInput.attr('min')) || 1;
+        let maxQty = parseInt(qtyInput.attr('max')) || 10;
+
+        if (newQty < minQty) newQty = minQty;
+        if (newQty > maxQty) newQty = maxQty;
+
+        qtyInput.val(newQty);
+        calculateItemTotal(button.closest('.cart-item'));
+        calculateTotal(); // 전체 총합 재계산
+    }
+
+    // Increase quantity
+    $(document).on('click', '.increase-btn', function() {
+        adjustQuantity($(this), 1);
+    });
+
+    // Decrease quantity
+    $(document).on('click', '.decrease-btn', function() {
+        adjustQuantity($(this), -1);
+    });
+
+    // 수량 입력 값이 변경될 때마다 총합 재계산
+    $(document).on('input change', '.qty-input', function() {
         let item = $(this).closest('.cart-item');
         calculateItemTotal(item);
-        
-        // Update overall total
         calculateTotal();
     });
 
+    // 체크박스 상태가 변경될 때마다 전체 총합 재계산
+    $(document).on('change', '.item-checkbox', function() {
+        calculateTotal();
+    });
+
+    // 전체 선택 체크박스 클릭 시 모든 체크박스 상태 변경
     $('#allcheck').on('click', function() {
         let checked = $(this).is(':checked');
         $('.item-checkbox').prop('checked', checked);
         calculateTotal();
     });
     
-    $('#allcheck').prop('checked', false).trigger('click');
-
+    
+    
+    
+    
+    
+    // 결제 버튼 클릭 시
     $('#pay').on('click', function() {
         let selectedItems = [];
         let totals = calculateTotal(); // 총합 계산 및 반환
 
-        console.log('Calculated totals:', totals); // 디버깅: 총합 객체 출력
+        console.log('Calculated totals:', totals);
 
         $('.cart-item').each(function() {
             let item = $(this);
@@ -597,37 +759,119 @@ $(document).ready(function() {
             finalPrice: totals.finalPrice
         }));
 
-        console.log('Product data:', $('#productData').val()); // 디버깅: 전송할 데이터 출력
+        console.log('Product data:', $('#productData').val());
 
-        $('#payForm').submit(); // 폼 제출
+        $('#payForm').submit();
     });
+   
 
-    // 결제 버튼 클릭 시
-    $('#btnpay').on('click', function() {
-        window.location.href = '/storepay';
+  
+    $('.btnpay').on('click', function() {
+
+    	 let selectedItems = []; // 전역 변수로 선언
+
+    	 let row = $(this).closest('tr');
+  	 
+ 	   	 let item_id = row.find('.item_id').val();
+ 	   	 let qty = parseFloat(row.find('.qty-input').val()) 
+   	
+         console.log("Selected Item ID:", item_id);
+         console.log("qty"+qty);
+    
+        
+
+       
+   
+             // 체크박스가 체크된 경우
+        	   $.ajax({
+        	        url: '/selectitem',
+        	        type: 'POST',
+        	        data: { item_id: item_id },
+        	        dataType: 'json',
+        	        success: function(data) {
+        	            console.log('Server Response:', data);
+
+        	            // 데이터가 배열일 경우 첫 번째 항목을 사용
+        	            if (Array.isArray(data) && data.length > 0) {
+        	                let item = data[0]; // 첫 번째 항목 사용
+
+        	                // 기본값을 설정하고 문자열을 정리
+        	                let discount_price = (item.discount_price || '0').replace(/원/g, '').replace(/,/g, '').trim();
+        	                let price = (item.price || '0').replace(/원/g, '').replace(/,/g, '').trim();
+
+        	                // 문자열을 숫자로 변환
+        	                let discountPriceNum = parseFloat(discount_price) || 0;
+        	                let PriceNum = parseFloat(price) || 0;
+
+        	                // 금액충전형 조건
+        	                let isRechargeablePrice = (item.discount_price === '금액충전형') || (item.cart_price === '금액충전형');
+
+        	                // itemData 객체 생성
+        	                let itemData = {
+        	                    item_id: item.id, // data 객체의 속성 이름이 정확해야 합니다.
+        	                    name: item.name,
+        	                    composition: item.composition,
+        	                    image_path: item.image_path,
+        	                    discount_price: isRechargeablePrice ? 10000 : discountPriceNum,
+        	                    cart_price: (discountPriceNum === PriceNum) ? undefined : (isRechargeablePrice ? 10000 : PriceNum),
+        	                    total: discountPriceNum*qty,
+        	                    qty: qty
+        	                };
+
+        	                selectedItems.push(itemData);
+        	                console.log(itemData.discount_price);  //66000
+        	                console.log(itemData.cart_price);      //62000
+        	                
+        	                // totalPrice를 설정할 때 cart_price가 0이면 discount_price를 사용
+        	                let totalPrice = (itemData.cart_price === 0 || itemData.cart_price === undefined) ? itemData.discount_price : (itemData.cart_price || 0);
+        	                let totalDiscount = (totalPrice === itemData.discount_price) ? 0 : (totalPrice - itemData.discount_price); // 할인 계산
+        	                let finalPrice = totalPrice - totalDiscount; // 최종 가격 계산
+							
+        	                console.log("11"+totalPrice);
+        	                console.log("22"+totalDiscount);
+        	                console.log("33"+finalPrice);
+        	                // 폼 데이터 설정
+        	                $('#productData').val(JSON.stringify({
+        	                    items: selectedItems,
+        	                    totalPrice: totalPrice*qty,
+        	                    totalDiscount: totalDiscount*qty,
+        	                    finalPrice:(totalPrice * qty) - (totalDiscount * qty) 
+        	                }));
+
+        	                console.log('Product data:', $('#productData').val()); // 디버깅: 전송할 데이터 출력
+
+        	                $('#payForm').submit(); // 폼 제출
+        	            } else {
+        	                console.error('No data received from server.');
+        	            }
+        	        },
+        	        error: function(xhr, status, error) {
+        	            console.error('AJAX Error:', status, error);
+        	        }
+        	    });
+
     });
 
     // 삭제 버튼 클릭 시
     $(document).on('click', '#btndelete', function() {
-        let row = $(this).closest('.cart-item'); // 버튼이 속한 .cart-item div 찾기
-        let checked = row.find('.item-checkbox').is(':checked'); // 체크박스 상태 확인
+        let row = $(this).closest('.cart-item');
+        let checked = row.find('.item-checkbox').is(':checked');
 
-        let item_id = row.find('.item_id').val(); // 숨겨진 입력 값 읽어오기
-        let custom_id = $('#gg').val(); // 실험용
+        let item_id = row.find('.item_id').val();
 
-        if (!checked) { 
-            alert('체크박스가 선택되지 않았습니다.'); 
+        if (!checked) {
+            alert('체크박스가 선택되지 않았습니다.');
         } else if (checked) {
             if (confirm("정말로 삭제하시겠습니까?")) {
                 $.ajax({
                     url: '/deletecart',
                     type: 'POST',
-                    data: { item_id: item_id, customer_id: customer_id }, // Fixed typo
+                    data: { item_id: item_id, customer_id: customer_id },
                     dataType: 'text',
                     success: function(data) {
                         if (data === 'ok') {
                             window.location.reload();
-                        } 
+                        }
                     }
                 });
             }
@@ -636,6 +880,14 @@ $(document).ready(function() {
 
     // 전체 삭제 버튼 클릭 시
     $('#alldelete').on('click', function() {
+
+    	
+    	if($('.item-checkbox').prop('checked', false)){
+		alert("삭제할 상품을 선택해주세요");
+		return false;
+    	
+    	}
+    	
         let selectedItems = [];
         $('.item-checkbox:checked').each(function() {
             let itemId = $(this).closest('.cart-item').find('.item_id').val();
@@ -643,7 +895,7 @@ $(document).ready(function() {
         });
 
         $.ajax({
-            url: 'choicedelete',
+            url: '/choicedelete', // URL 수정
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({ item_id: selectedItems }),
@@ -653,25 +905,32 @@ $(document).ready(function() {
             }
         })
     })
-    
-   
 })
-$('.qty-input').on('change', function() {
-   	let min = parseInt($(this).attr('min'));
-    let max = 10; // Set your desired max value here
-    let value = parseInt($(this).val());
+	.on('click','.btnchange',function(){
+    let row = $(this).closest('tr');	
+    let item_id = row.find('.item_id').val();
+    let qty =row.find('.qty-input').val();
+    let customer_id=$('#gg').val();
+	
+	
+    	$.ajax({
+			url:'/updatecart',
+			type:'post',
+			data:{customer_id:customer_id,item_id:item_id,qty:qty},
+			dataType:'text',
+			success:function(data){
+				if(data=='ok'){
+				console.log(data);
+				alert("수량 변경이 되었습니다.");
+				 window.location.reload();
+				}								
+			}
+    	 	
+    	})
+    	
+	})
 
-    if (value > max) {
-        alert('장바구니의 수량을 ' + max + '개를 넘길 수 없습니다.');
-        $(this).val(max); // Optionally set value back to max
-        return false; // Prevent the change
-    } else if (value < min) {
-        $(this).val(min); // Optionally set value back to min
-    }
-});
-
-
-
+	
 
 
 
