@@ -10,63 +10,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>자주 찾는 질문</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        .banner {	
-            width: 100%;
-            background-color: #e50914;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-        #container {
-            max-width: 1200px;
-            margin: 20px auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 200px;
-        }
-        #contents {
-            width: 100%;
-            display: flex;
-        }
-        .sidebar {
-            width: 20%;
-            padding: 15px;
-            background-color: #f7f7f7;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-            height: fit-content;
-        }
-        .sidebar ul {
-            list-style-type: none;
-            padding: 0;
-             text-align: left;
-        }
-        .sidebar ul li {
-            margin-bottom: 15px;
-        }
-        .sidebar ul li a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-        }
-        .sidebar ul li a:hover {
-            color: #e50914;
-        }
-        .col-detail {
-            width: 75%;
-            padding: 15px;
-            background-color: white;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        .search_area {
+    	body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: black; /* 페이지 배경색을 검정으로 설정 */
+    color: white; /* 전체 글씨색을 흰색으로 설정 */
+}
+
+#container {
+    max-width: 1200px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 200px;
+}
+
+#contents {
+    width: 100%;
+    display: flex;
+}
+
+.sidebar {
+    width: 20%;
+    padding: 15px;
+    background-color: #333; /* 사이드바 배경색 */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    height: fit-content;
+    color: white; /* 사이드바 글씨색 */
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: left;
+}
+
+.sidebar ul li {
+    margin-bottom: 15px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: white; /* 사이드바 링크 글씨색 */
+    font-weight: bold;
+}
+
+.sidebar ul li a:hover {
+    color: #e50914; /* 사이드바 링크 hover 색상 */
+}
+
+.col-detail {
+    width: 75%;
+    padding: 15px;
+    background-color: black; /* 메인 콘텐츠 배경색 */
+    color: white; /* 메인 콘텐츠 글씨색 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border: 1px solid #fff; /* 메인 콘텐츠 테두리색 */
+}
+
+.search_area {
     margin-bottom: 20px;
     display: flex;
     align-items: center; /* 세로 중앙 정렬 */
@@ -75,9 +79,10 @@
 .search_area input {
     padding: 10px;
     flex: 1; /* 버튼을 제외한 나머지 공간을 모두 차지하도록 설정 */
-    border: 1px solid #ccc;
+    border: 1px solid #fff; /* 테두리 색상 흰색으로 설정 */
     border-radius: 4px;
     margin-right: 10px; /* 버튼과의 간격 */
+    color: black; /* 검색 박스 텍스트 색상 */
 }
 
 .search_area button {
@@ -90,6 +95,11 @@
     width: 100px;
     font-size: 0.9em;
 }
+
+.search_area button:hover {
+    background-color: black;
+}
+
 .searchtext {
     margin-bottom: 20px;
 }
@@ -110,134 +120,162 @@
     display: block;
     padding: 10px;
     text-decoration: none;
-    color: #333;
+    color: white; /* 링크 색상 흰색으로 설정 */
 }
 
 .searchtext a:hover {
-    background-color: #f0f0f0;
+    background-color: #333; /* 링크 hover 색상 검정으로 설정 */
 }
 
 .searchtext li.on a {
     font-weight: bold;
     border-bottom: 2px solid #e50914;
 }
-	
-        .c_tab_wrap {
-            margin-bottom: 20px;
-        }
-        .c_tab_wrap ul {
-            list-style-type: none;
-            padding: 0;
-            display: flex;
-            border-bottom: 2px solid #e50914;
-            margin: 0;
-        }
-        .c_tab_wrap li {
-            margin: 0;
-        }
-        .c_tab_wrap a {
-            display: block;
-            padding: 10px;
-            text-decoration: none;
-            color: #333;
-        }
-        .c_tab_wrap a:hover {
-            background-color: #f0f0f0;
-        }
-        .c_tab_wrap li.on a {
-            font-weight: bold;
-            border-bottom: 2px solid #e50914;
-        }
-        .search_result {
+
+.c_tab_wrap {
+    margin-bottom: 20px;
+}
+
+.c_tab_wrap ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    border-bottom: 2px solid #e50914;
+    margin: 0;
+}
+
+.c_tab_wrap li {
+    margin: 0;
+}
+
+.c_tab_wrap a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: white; /* 링크 색상 흰색으로 설정 */
+}
+
+.c_tab_wrap a:hover {
+    background-color: #333; /* 링크 hover 색상 검정으로 설정 */
+}
+
+.c_tab_wrap li.on a {
+    font-weight: bold;
+    border-bottom: 2px solid #e50914;
+}
+
+.search_result {
     margin-bottom: 20px;
     text-align: left; /* 텍스트 왼쪽 정렬 */
     display: flex;
     align-items: center; /* 세로 정렬 */
 }
-        .tbl_area {
-            margin-bottom: 20px;
-        }
-        .tbl_notice_list {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        .tbl_notice_list th, .tbl_notice_list td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-        .tbl_notice_list th {
-            background-color: #f0f0f0;
-        }
-        .tbl_notice_list th:nth-child(1) {
-            width: 10%; 
-        }
-        .tbl_notice_list th:nth-child(2) {
-            width: 20%; 
-        }
-        .tbl_notice_list th:nth-child(3) {
-            width: 40%;
-        }
-        .tbl_notice_list th:nth-child(4) {
-            width: 15%;
-        }
-        .tbl_notice_list th:nth-child(5){
-            width : 15%;    
-        }
-        .paging {
-            margin: 20px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .paging ul {
-            list-style-type: none;
-            padding: 0;
-            display: flex;
-            margin: 0;
-        }
-        .paging li {
-            margin: 0 5px;
-        }
-        .paging a {
-            text-decoration: none;
-            color: #007bff;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 0.9em;
-        }
-        .paging a:hover {
-            background-color: #f0f0f0;
-        }
-        .paging .btn-paging {
-            background-color: #e50914;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.9em;
-            margin: 0 5px;
-        }
-        .paging .btn-paging:hover {
-            background-color: #d10813;
-        }
-        .btn-add {
-            padding: 10px 15px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.9em;
-        }
-        .btn-add:hover {
-            background-color: #45a049;
-        }
-        .customer_top {
-    	text-align: left; /* 텍스트를 왼쪽 정렬로 변경 */
-		}
+
+.tbl_area {
+    margin-bottom: 20px;
+}
+
+.tbl_notice_list {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tbl_notice_list th, .tbl_notice_list td {
+    padding: 10px;
+    border: 1px solid #fff; /* 테두리 색상 흰색으로 설정 */
+    text-align: left;
+}
+
+.tbl_notice_list th {
+    background-color: #333; /* 헤더 배경색 검정으로 설정 */
+    color: white; /* 헤더 글씨색 흰색으로 설정 */
+}
+
+.tbl_notice_list th:nth-child(1),
+.tbl_notice_list th:nth-child(2),
+.tbl_notice_list th:nth-child(3),
+.tbl_notice_list th:nth-child(4),
+.tbl_notice_list th:nth-child(5) {
+    border-bottom: 2px solid #fff; /* 각 열의 하단에 흰색 선 추가 */
+}
+
+.paging {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.paging ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    margin: 0;
+}
+
+.paging li {
+    margin: 0 5px;
+}
+
+.paging a {
+    text-decoration: none;
+    color: #007bff;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.paging a:hover {
+    background-color: #f0f0f0;
+}
+
+.paging .btn-paging {
+    background-color: #e50914;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin: 0 5px;
+}
+
+.paging .btn-paging:hover {
+    background-color: #d10813;
+}
+
+.btn-add {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.btn-add:hover {
+    background-color: #45a049;
+}
+
+.customer_top {
+    text-align: left; /* 텍스트 왼쪽 정렬 */
+}
+a {
+    color:  white;	 /* 기본 링크 색상 흰색으로 설정 */
+    text-decoration: none; /* 링크 밑줄 제거 */
+}
+
+/* 링크에 마우스를 올렸을 때 스타일 */
+a:hover {
+    text-decoration: underline; /* 마우스를 올렸을 때 밑줄 추가 */
+}
+
+/* 테이블 내 링크에 대해 색상 설정 (이 부분은 선택 사항입니다) */
+.tbl_notice_list a {
+    color:  #C0C0C0 /* 테이블 내 링크 색상 흰색으로 설정 */
+}              
         
         
     </style>

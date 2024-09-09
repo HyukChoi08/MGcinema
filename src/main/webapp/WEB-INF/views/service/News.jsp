@@ -8,14 +8,15 @@
     <title>${serviceHome.title}</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: black; /* 페이지 배경색 */
+            color: white; /* 전체 글씨색 */
+            font-family: Arial, sans-serif;
         }
         .banner {
             width: 100%;
-            background-color: #e50914;
+            background-color: #e50914; /* 배너 배경색 */
             color: white;
             text-align: center;
             padding: 10px 0;
@@ -28,7 +29,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top : 200px;
+            margin-top: 200px;
         }
         #contents {
             width: 100%;
@@ -37,8 +38,8 @@
         .sidebar {
             width: 20%;
             padding: 15px;
-            background-color: #f7f7f7;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            background-color: #333; /* 사이드바 배경색 */
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
             height: fit-content;
         }
         .sidebar ul {
@@ -51,31 +52,34 @@
         }
         .sidebar ul li a {
             text-decoration: none;
-            color: #333;
+            color: white; /* 사이드바 링크 글씨색 */
             font-weight: bold;
         }
         .sidebar ul li a:hover {
-            color: #e50914;
+            color: #e50914; /* 사이드바 링크 hover 색상 */
         }
         .col-detail {
-            width: 75%;
-            padding: 15px;
-            background-color: white;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        
-        .search_area {
+    		width: 75%;
+    		padding: 15px;
+   	 		background-color: black; /* 메인 콘텐츠 배경색 */
+    		color: white; /* 메인 콘텐츠 글씨색 */
+    		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    		border: 1px solid #fff; /* 메인 콘텐츠 테두리색 */
+    		border-radius: 5px;
+		}
+		.search_area {
             margin-bottom: 20px;
-            text-align:left;
+            text-align: left;
             display: flex;
             align-items: center;
         }
         .search_area input {
             padding: 10px;
             flex: 1; /* 버튼을 제외한 나머지 공간을 모두 차지하도록 설정 */
-            border: 1px solid #ccc;
+            border: 1px solid #fff;
             border-radius: 4px;
             margin-right: 10px; /* 버튼과의 간격 */
+            color: black; /* 검색 박스 텍스트 색상 */
         }
         .search_area button {
             padding: 10px;
@@ -90,8 +94,6 @@
         .search_area button:hover {
             background-color: #d10813;
         }
-		
-        
         .c_tab_wrap {
             margin-bottom: 20px;
         }
@@ -109,10 +111,10 @@
             display: block;
             padding: 10px;
             text-decoration: none;
-            color: #333;
+            color: white; /* 탭 링크 색상 */
         }
         .c_tab_wrap a:hover {
-            background-color: #f0f0f0;
+            background-color: #333; /* 탭 링크 hover 색상 */
         }
         .c_tab_wrap li.on a {
             font-weight: bold;
@@ -127,26 +129,12 @@
         }
         .tbl_notice_list th, .tbl_notice_list td {
             padding: 10px;
-            border: 1px solid #ddd;
+            border: 1px solid #fff; /* 테두리 색상 */
             text-align: left;
+            color: white; /* 테이블 내 글씨색 */
         }
         .tbl_notice_list th {
-            background-color: #f0f0f0;
-        }
-        .tbl_notice_list th:nth-child(1) {
-            width: 10%; /* 번호 열 */
-        }
-        .tbl_notice_list th:nth-child(2) {
-            width: 10%; /* 구분 열 */
-        }
-        .tbl_notice_list th:nth-child(3) {
-            width: 50%; /* 제목 열 */
-        }
-        .tbl_notice_list th:nth-child(4) {
-            width: 15%; /* 작성일 열 */
-        }
-        .tbl_notice_list th:nth-child(5) {
-            width: 15%; /* 조회수 열 */
+            background-color: #333; /* 테이블 헤더 배경색 */
         }
         .paging {
             margin: 20px 0;
@@ -167,15 +155,15 @@
             text-decoration: none;
             color: #007bff;
             padding: 10px;
-            border: 1px solid #ddd;
+            border: 1px solid #fff; /* 페이지 네이션 테두리 색상 */
             border-radius: 4px;
             font-size: 0.9em;
         }
         .paging a:hover {
-            background-color: #f0f0f0;
+            background-color: #333; /* 페이지 네이션 hover 색상 */
         }
         .paging .btn-paging {
-            background-color: #e50914;
+            background-color: #333	;
             color: white;
             border: none;
             padding: 10px;
@@ -189,7 +177,7 @@
         }
         .btn-add {
             padding: 10px 15px;
-            background-color: #4CAF50;
+            background-color: #e50914; /* 버튼 배경색 */
             color: white;
             border: none;
             border-radius: 4px;
@@ -197,17 +185,30 @@
             font-size: 0.9em;
         }
         .btn-add:hover {
-            background-color: #45a049;
+            background-color: #d10813;
         }
-         .customer_top {
-    	text-align: left; /* 텍스트를 왼쪽 정렬로 변경 */
+        .customer_top {
+            text-align: left; /* 텍스트를 왼쪽 정렬로 변경 */
+        }
+        .total-count {
+            text-align: left; /* 왼쪽 정렬 */
+            margin-bottom: 20px; /* 아래쪽 여백 추가 */
+        }
+        /* 모든 링크에 대해 기본 색상을 흰색으로 설정 */
+		a {
+    		color:  white;	 /* 기본 링크 색상 흰색으로 설정 */
+    		text-decoration: none; /* 링크 밑줄 제거 */
 		}
-		.total-count {
-    text-align: left; /* 왼쪽 정렬 */
-    margin-bottom: 20px; /* 아래쪽 여백 추가 */
-}
-		
-        
+
+			/* 링크에 마우스를 올렸을 때 스타일 */
+		a:hover {
+    		text-decoration: underline; /* 마우스를 올렸을 때 밑줄 추가 */
+		}
+
+		/* 테이블 내 링크에 대해 색상 설정 (이 부분은 선택 사항입니다) */
+		.tbl_notice_list a {
+    	color:  #C0C0C0 /* 테이블 내 링크 색상 흰색으로 설정 */
+		}
     </style>
 </head>
 <body>
