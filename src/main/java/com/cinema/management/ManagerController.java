@@ -303,6 +303,7 @@ public class ManagerController {
 			T.put("content",Rdto.getContent());
 			T.put("create",Rdto.getCreated_at());
 			T.put("hit",Rdto.getViews());
+			T.put("selected",Rdto.getSelected());
 			Ty.put(T);
 		}
 		return Ty.toString();

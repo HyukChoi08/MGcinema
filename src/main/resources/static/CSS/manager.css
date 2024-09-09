@@ -7,13 +7,13 @@
 	border:1px solid black;
 	width:300px;
 	margin:15px;
-	height: 380px;
+	height: 400px;
 }
 .movieinsert2{
 	border:1px solid black;
 	width:1000px;
 	margin:15px;
-	 height: 380px;
+	 height: 400px;
      overflow-y: auto; 
 }
 .movieinsert3{
@@ -55,14 +55,14 @@
 	border:1px solid black;
 	margin:15px;
 	width:700px;
-	 height: 560px;
+	 height: 600px;
      overflow-y: auto; 
 }
 .newsbox{
 	border:1px solid black;
 	margin:15px;
 	width:985px;
-	 height: 560px;
+	 height: 600px;
      overflow-y: auto; 
 }
 .inquirybox{

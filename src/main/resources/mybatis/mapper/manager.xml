@@ -48,7 +48,7 @@
 	insert into item_detail set item_id=#{param1}, name=#{param2}, period=#{param3}
 </insert>
 <insert id="newsin">
-	insert into news set title=#{param1}, content=#{param2}, created_at=NOW()
+	insert into news set title=#{param1}, content=#{param2}, created_at=CURDATE()
 </insert>
 <select id="itemlist" resultType="com.cinema.management.ItemDTO">
 	select * from item order by id desc
@@ -71,7 +71,7 @@
 	update inquiry set answer=#{param2}, current="답변완료", ancreated =now() where id=#{param1}
 </update>
 <update id="newsup">
-	update news set title=#{param2}, content=#{param3}, created_at =now() where id=#{param1}
+	update news set title=#{param2}, content=#{param3}, created_at =CURDATE() where id=#{param1}
 </update>
 <select id="getdeid" resultType="com.cinema.management.DeidDTO">
 	select id,item_name from item

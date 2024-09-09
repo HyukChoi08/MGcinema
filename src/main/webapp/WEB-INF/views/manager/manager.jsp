@@ -18,6 +18,7 @@
 				<tr><td>관선택</td><td><select class="mselect" id="roomnum"></select></td></tr>
 				<tr><td>상영일</td><td><input type="date" id="date"></td></tr>
 				<tr><td>시작시간</td><td><input type="time" id="stime"></td></tr>
+				<tr><td><input type="hidden" id="totalrun"></td><td id="runtime"></td></tr>
 				<tr><td>종료시간</td><td><input type="time" id="etime"></td></tr>
 				<tr><td>좌석</td><td><input type="number" id="seat" readonly></td></tr>
 				<tr><td>성인요금</td><td><input type="number" id="aprice" readonly></td></tr>
@@ -46,6 +47,7 @@
 										<option value="12">12</option>
 										<option value="15">15</option>
 										<option value="19">19</option>
+										<option value="미정">미정</option>
 									</select></td></tr>
 				<tr><td>러닝타임</td><td><input type="text" id="runtime"></td></tr>
 				<tr><td>이미지경로</td><td><input type="text" id="image" value="/chartImage/.jpg"></td></tr>
@@ -135,6 +137,11 @@
 		<h2>공지등록</h2>
 			<table>
 				<tr><td><input type="hidden" id="newsid" readonly></td></tr>
+				<tr><td>구분</td><td><select>
+									<option value="시스템점검">시스템점검</option>
+									<option value="극장">극장</option>
+									<option value="기타">기타</option>
+									</select></tr>
 				<tr><td>제목</td><td><input type="text" id="newstitle" size="60"></td></tr>
 				<tr><td>공지내용</td><td><textarea rows="27" cols="80" id="newscontent"></textarea></td></tr>
 				<tr><td colspan="2"><input type="button" id="nbtn" value="공지등록">
@@ -145,7 +152,7 @@
 		<table id="newslist">
 			<h3>공지목록</h3>
 				<thead>
-					<tr><td>제목</td><td>등록일시</td><td>조회수</td></tr>
+					<tr><td>구분</td><td>제목</td><td>등록일시</td><td>조회수</td></tr>
 				</thead>
 				<tbody></tbody>
 		</table>
@@ -170,8 +177,9 @@ $(document)
 })
 .on('click','#sbtn',function(){
 	let rid = $('#roomnum').val().split(',');
+	let mid = $('#movienum').val().split(',');
 	
-	let movienum = $('#movienum').val();
+	let movienum = mid[0];
 	let roomnum = rid[0];
 	let date = $('#date').val();
 	let stime = $('#stime').val();
@@ -274,10 +282,16 @@ $(document)
  
 }) 
 .on('change','#roomnum',function(){
-	aseat = $(this).val().split(',');
+	let aseat = $(this).val().split(',');
 	$('#seat').val(aseat[1]);
 	$('#aprice').val(aseat[2]);
 	$('#yprice').val(aseat[3]);
+})
+.on('change','#movienum',function(){
+	let runtime = $(this).val().split(',');
+	let runminutes = parseInt(runtime[1].replace('분', ''));
+	$('#runtime').text('러닝타임: '+runtime[1]+' + 광고 10분');
+	$('#totalrun').val(runminutes+10);
 })
 .on('change','#stime',function(){
 	let stime = $('#stime').val();
@@ -313,6 +327,29 @@ $(document)
 		$('#yprice').val(fseat[3]);
 		$('#ptype').val("일반");
 	}
+	
+	
+	let srtime = $('#stime').val();
+	let [endhour, endminute] = srtime.split(':').map(Number);
+	console.log(endhour,endminute);
+	console.log($('#totalrun').val());
+	endminute += parseInt($('#totalrun').val());
+	console.log(endminute);
+	
+	if (endminute >= 60) {
+		endhour += Math.floor(endminute / 60);
+		endminute %= 60; 
+	}
+	if (endhour >= 24) {
+		endhour %= 24; 
+	}
+	
+	let formattedHour = endhour.toString().padStart(2, '0');
+	let formattedMinute = endminute.toString().padStart(2, '0');
+	
+	console.log(formattedHour,formattedMinute);
+	
+	$('#etime').val(formattedHour+':'+formattedMinute); 
 	
 })
 .on('click','#schedel',function(){
@@ -428,9 +465,13 @@ function mlist(){
 		console.log(data);
 		$('#movienum').empty();
 		for( let x of data){
-			let str ='<option value='+x['id']+'>'+x['id']+', '+x['mname']+', '+x['runningtime']+'</option>';
+			let str ='<option value='+x['id']+','+x['runningtime']+'>'+x['id']+', '+x['mname']+', '+x['runningtime']+'</option>';
 			$('#movienum').append(str);
 		}
+		let runt = $('#movienum').val().split(',');
+		let runminutes = parseInt(runt[1].replace('분', ''));
+		$('#runtime').text('러닝타임: '+runt[1]+' + 광고 10분');
+		$('#totalrun').val(runminutes+10);
 	},'json')
 }
 function rlist(){
@@ -441,6 +482,10 @@ function rlist(){
 			let str ='<option value='+x['id']+','+x['allseat']+','+x['adult_price']+','+x['young_price']+'>'+x['id']+', '+x['Sname']+', '+x['seatlevel']+', '+x['allseat']+'석</option>';
 			$('#roomnum').append(str);
 		}
+		fseat = $('#roomnum').val().split(',');
+		$('#seat').val(fseat[1]);
+		$('#aprice').val(fseat[2]);
+		$('#yprice').val(fseat[3]);
 	},'json')
 }
 function deitemid(){
@@ -462,10 +507,7 @@ function schedules(){
 						x['y_price']+'</td><td>'+x['timetype']+'</td><td><input type=button id=schedel value=삭제></td></tr>'
 			$('#schedules tbody').append(str);
 		}
-		fseat = $('#roomnum').val().split(',');
-		$('#seat').val(fseat[1]);
-		$('#aprice').val(fseat[2]);
-		$('#yprice').val(fseat[3]);
+	
 	},'json')
 }
 function clear(){
@@ -529,7 +571,7 @@ function shownews(){
 	$.post('/shownews',{},function(data){
 		$('#newslist tbody').empty();
 		for( let x of data){
-			let str ='<tr><td style=display:none>'+x['id']+'</td><td style=display:none>'+x['content']+'</td><td>'+x['title']+'</td><td>'+x['create']+'</td><td>'+x['hit']+'</td><td><input type=button id=newsdel value=삭제></td></tr>'
+			let str ='<tr><td style=display:none>'+x['id']+'</td><td style=display:none>'+x['content']+'</td><td>'+x['selected']+'</td><td>'+x['title']+'</td><td>'+x['create']+'</td><td>'+x['hit']+'</td><td><input type=button id=newsdel value=삭제></td></tr>'
 			$('#newslist tbody').append(str);
 		}
 		

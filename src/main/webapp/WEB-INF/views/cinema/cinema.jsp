@@ -436,6 +436,7 @@ $(document)
 	$('#hiddendate').val($(this).data('dbdate'));
 	clear();
 	movielist();
+	
 })
 .on('click','.container .item', function() {
         // 클릭된 div의 data-image 속성에서 이미지 URL을 가져옴
@@ -528,23 +529,27 @@ function processData3(data) {
 	            	for(let x of data){
 	            		if (x['mname'] == id && x['Sname'] == room) {
 	            			let date = new Date();
-	            			let hours = date.getHours();
-	            	        let minutes = date.getMinutes();
-	            	        
-	            	        hours = hours.toString().padStart(2, '0');
-	                        minutes = minutes.toString().padStart(2, '0');
+	            			let year = date.getFullYear();
+	            			let month = date.getMonth() + 1;
+	            			let day = date.getDate(); 
+	            			let hour = date.getHours();
+	            	        let minute = date.getMinutes();
+	            	        let dt = new Date(year, month, day, hour, minute);
+	            	        let nowtime = dt.getTime(); 
+	            	        console.log(nowtime);
 	                        
-	                        totalSeconds = (hours * 3600) + (minutes * 60);
-	                        nowtime = totalSeconds * 1000;
-	                        
+	                        let bdate = $('#hiddendate').val();
+	                        let [byear, bmonth, bday] = bdate.split('-').map(Number);
 	                        let btime = x['begintime'];
-	                    	let [bhours, bminutes] = btime.split(':').map(Number);
-	                    	let totalbSeconds = (bhours * 3600) + (bminutes * 60);
-	                    	btime = totalbSeconds * 1000;
+	                    	let [bhour, bminute] = btime.split(':').map(Number);
+	                    	let bdt = new Date(byear, bmonth, bday, bhour, bminute);
+	            	        let betime = bdt.getTime(); 
+	            	        console.log(betime);
 	                    	
-	                    	console.log(nowtime,btime);
+	                    	console.log('현재밀리초',nowtime,'선택밀리초',betime);
 	                    	
-	                    	if(btime<nowtime){
+	                    	
+	                    	if(betime<nowtime){
 	                    		$(this).append('<td class=td-out>'+x['begintime']+'<br><span>마감</span></a></td>');	
 	                    	}else{
 			                        if (x['mname'].includes(' ')) {
