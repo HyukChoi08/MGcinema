@@ -4,25 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>${serviceHome.title}</title>
     
+    <link rel="stylesheet" href="/Header_css/Header.css">    
     <style>
-        
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000; /* 다른 요소 위에 위치하게 함 */
-        }
+       
         body {
-            margin: 0;
-            padding: 0;
-            background-color: black; /* 페이지 배경색 */
-            color: white; /* 전체 글씨색 */
+        	margin: 0;
+    		padding: 0;
+    		background-color: black; /* 페이지 배경색을 검정으로 설정 */
+    		color: white; /* 전체 글씨색을 흰색으로 설정 */
         }
         #container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 20px auto;
             display: flex;
             flex-direction: column;
@@ -33,11 +27,11 @@
             width: 100%;
             display: flex;
         }
+        
         .sidebar {
             width: 20%;
             padding: 15px;
             background-color: #333; /* 사이드바 배경색 */
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
             height: fit-content;
             color: white; /* 사이드바 글씨색 */
         }
@@ -58,13 +52,15 @@
             color: #e50914; /* 사이드바 링크 hover 색상 */
         }
         .col-detail {
-            width: 75%;
-            padding: 15px;
-            background-color: black; /* 메인 콘텐츠 배경색 */
-            color: white; /* 메인 콘텐츠 글씨색 */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            border: 1px solid #fff; /* 메인 콘텐츠 테두리색 */
-        }
+    width: 100%;
+    padding: 15px;
+    background-color: black; /* 메인 콘텐츠 배경색 */
+    color: white; /* 메인 콘텐츠 글씨색 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border: 1px solid #fff; /* 메인 콘텐츠 테두리색 */
+    height: 600px; /* 고정 높이 설정 */
+    overflow-y: auto; /* 세로 스크롤 활성화 */
+}
         .search_area input {
             padding: 10px;
             width: calc(100% - 120px);
@@ -80,8 +76,8 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            width: 100px;
-            font-size: 0.9em;
+            width: 60px;
+            font-size: 0.5em;
         }
         .search_area button:hover {
             background-color: black;
@@ -150,7 +146,7 @@
         .notice_area .more {
             display: block;
             margin-top: 10px;
-            color: #007bff;
+            color: white; /* 링크 색상을 흰색으로 변경 */
             text-decoration: none;
         }
         .notice_area .more:hover {
@@ -177,102 +173,92 @@
         .shortcu_area .round.on {
             background-color: black;
         }
-           .notice_area .more {
-        display: block;
-        margin-top: 10px;
-        color: white; /* 링크 색상을 흰색으로 변경 */
-        text-decoration: none;
-    }
-    .notice_area .more:hover {
-        text-decoration: underline;
-    }
-    .service_area .list, .notice_area .list {
-    list-style-type: none; /* 점 제거 */
-        
-        
     </style>
 </head>
 <body>
+<header>
     <%@ include file="/WEB-INF/views/header/header.jsp" %>
+</header>
 
-    <div id="container">
-        <div id="contents">
-            <!-- 사이드바 -->
-            <div class="sidebar">
-                <div class="snb">
-                    <ul>
-                        <li class="on"><a href="serviceHome">고객센터 메인</a></li>
-                        <li><a href="faq">자주찾는 질문</a></li>
-                        <li><a href="news">공지/뉴스</a></li>
-                        <li><a href="inquiry">이메일 문의</a></li>
-                    </ul>
+<div id="container">
+    <div id="contents">
+        <!-- 사이드바 -->
+        <div class="sidebar">
+            <div class="snb">
+                <ul>
+                    <li class="on"><a href="serviceHome">고객센터 메인</a></li>
+                    <li><a href="faq">자주찾는 질문</a></li>
+                    <li><a href="news">공지/뉴스</a></li>
+                    <li><a href="inquiry">이메일 문의</a></li>
+                </ul>
+            </div>
+            <div class="ad-area">
+                <!-- 광고 공간 -->
+            </div>
+        </div>
+
+        <!-- 메인 콘텐츠 -->
+        <div class="col-detail">
+            <div class="c_check_warp">
+                <div class="c_box qna_search">
+                    <strong class="c_tit">
+                        <span class="emoji">🔍<br></span>자주찾는 질문 빠른검색
+                    </strong>
+                    <div class="search_area">
+                        <form action="faq" method="get" style="display: flex; align-items: center; width: 100%;">
+                            <input id="searchtext" type="text" name="search" placeholder="검색어를 입력해 주세요." />
+                            <button type="submit" class="btn_search">
+                                검색
+                            </button>
+                        </form>
+                    </div>
+                    <br>
+                    <div class="c_qu">
+                        <a href="faq?selected=홈페이지/모바일">홈페이지/모바일</a>&nbsp;
+                        <a href="faq?selected=예매/매표">예매/매표</a>&nbsp;<br>
+                        <a href="faq?selected=결제수단">결제수단</a>&nbsp;
+                        <a href="faq?selected=영화관이용">영화관이용</a>&nbsp;<br>
+                        <a href="faq?selected=특별관">특별관</a>
+                    </div>
                 </div>
-                <div class="ad-area">
-                    <!-- 광고 공간 -->
+                <div class="c_box email_inquiry">
+                    <strong class="c_tit"><span class="emoji">📧</span><br>이메일 문의</strong><br><br>
+                    <span class="c_txt">24시간 365일 언제든지 문의해주세요.</span>
+                    <br><br><a href="inquirywrite" class="button">문의하기</a>
+                </div>
+                <div class="c_box my_advice">
+                    <strong class="c_tit"><span class="emoji">🧐</span><br>내 상담 내역 확인</strong><br><br>
+                    <span class="c_txt">이메일 문의 조회입니다.</span><br>
+                    <br><a href="inquiry" class="button">문의내역 조회</a>
                 </div>
             </div>
 
-            <!-- 메인 콘텐츠 -->
-            <div class="col-detail">
-                <div class="c_check_warp">
-                    <div class="c_box qna_search">
-                        <strong class="c_tit">
-                            <span class="emoji">🔍<br></span>자주찾는 질문 빠른검색
-                        </strong>
-                        <div class="search_area">
-                            <form action="faq" method="get" style="display: flex; align-items: center; width: 100%;">
-                                <input id="searchtext" type="text" name="search" placeholder="검색어를 입력해 주세요." style="flex: 1; padding: 8px; border: 1px solid #fff; border-radius: 4px;" />
-                                <button type="submit" class="btn_search" style="margin-left: 8px; padding: 8px 16px; border: none; background-color: #e50914; color: white; border-radius: 4px; cursor: pointer;">
-                                    검색
-                                </button>
-                            </form>
-                        </div>
-                        <br>
-                        <div class="c_qu">
-                            <a href="faq?selected=홈페이지/모바일">홈페이지/모바일</a>&nbsp;
-                            <a href="faq?selected=예매/매표">예매/매표</a>&nbsp;<br>
-                            <a href="faq?selected=결제수단">결제수단</a>&nbsp;
-                            <a href="faq?selected=영화관이용">영화관이용</a>&nbsp;
-                            <a href="faq?selected=특별관">특별관</a>
-                        </div>
-                    </div>
-                    <div class="c_box email_inquiry">
-                        <strong class="c_tit"><span class="emoji">📧</span><br>이메일 문의</strong><br><br>
-                        <span class="c_txt">24시간 365일 언제든지 문의해주세요.</span>
-                        <br><br><a href="inquirywrite" class="button">문의하기</a>
-                    </div>
-                    <div class="c_box my_advice">
-                        <strong class="c_tit"><span class="emoji">🧐</span><br>내 상담 내역 확인</strong><br><br>
-                        <span class="c_txt">이메일 문의 조회입니다.</span><br>
-                        <br><a href="inquiry" class="button">문의내역 조회</a>
-                    </div>
+            <div class="customer_notice_area">
+                <div class="service_area">
+                    <span class="tit">즐겨찾는질문</span>
+                    <ul class="list">
+                        <li><a href="FAQdetail?id=74">faq역기</a></li>
+                        <li><a href="#">faq엮</a></li>
+                        <li><a href="#">우리애가 물건좀 슬쩍가져갈수있는거아니에요?맘카페에 퍼뜨릴게요</a></li>
+                    </ul>
                 </div>
 
-                <div class="customer_notice_area">
-                    <div class="service_area">
-                        <span class="tit">즐겨찾는질문</span>
-                        <ul class="list">
-                            <li><a href="FAQdetail?id=74">faq역기</a></li>
-                            <li><a href="#">faq엮</a></li>
-                            <li><a href="#">우리애가 물건좀 슬쩍가져갈수있는거아니에요?맘카페에 퍼뜨릴게요</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="notice_area">
-                        <span class="tit">공지사항</span>
-                        <ul class="list">
-                            <li><a href="#">9월 프로모션 안내</a></li>
-                            <li><a href="#">서버 점검 공지</a></li>
-                            <li><a href="#">고객센터 운영시간 변경 안내</a></li>
-                        </ul>
-                        <a href="news" class="more" >더보기</a>
-                    </div>
+                <div class="notice_area">
+                    <span class="tit">공지사항</span>
+                    <ul class="list">
+                        <li><a href="#">9월 프로모션 안내</a></li>
+                        <li><a href="#">서버 점검 공지</a></li>
+                        <li><a href="#">고객센터 운영시간 변경 안내</a></li>
+                    </ul>
+                    <a href="news" class="more">더보기</a>
                 </div>
             </div>
         </div>
     </div>
-    <footer> 
+</div>
+<footer> 
     <%@ include file="/WEB-INF/views/footer/footer.jsp" %>
-    </footer>
+</footer>
 </body>
 </html>
+				

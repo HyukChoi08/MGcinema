@@ -8,38 +8,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%@ include file="/WEB-INF/views/header/header.jsp" %>
+    	
     <title>자주 찾는 질문</title>
     <style>
     	body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: black; /* 페이지 배경색을 검정으로 설정 */
-    color: white; /* 전체 글씨색을 흰색으로 설정 */
-}
+    	
+    	margin: 0;
+    	padding: 0;
+    	background-color: black; /* 페이지 배경색을 검정으로 설정 */
+    	color: white; /* 전체 글씨색을 흰색으로 설정 */
+	}
 
-#container {
-    max-width: 1200px;
-    margin: 20px auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 200px;
-}
+	#container {
+   	 	max-width: 1000px;
+    	margin: 20px auto;
+    	display: flex;
+    	flex-direction: column;
+    	align-items: center;
+    	margin-top: 200px;
+	}
 
-#contents {
-    width: 100%;
-    display: flex;
-}
+	#contents {
+   		 width: 100%;
+    	display: flex;
+	}
 
-.sidebar {
-    width: 20%;
-    padding: 15px;
-    background-color: #333; /* 사이드바 배경색 */
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
-    height: fit-content;
-    color: white; /* 사이드바 글씨색 */
-}
+	.sidebar {
+    	width: 20%;
+    	padding: 15px;
+    	background-color: #333; /* 사이드바 배경색 */
+    	box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    	height: fit-content;
+    	color: white; /* 사이드바 글씨색 */
+	}
 
 .sidebar ul {
     list-style-type: none;
@@ -62,7 +64,7 @@
 }
 
 .col-detail {
-    width: 75%;
+    width: 100%;
     padding: 15px;
     background-color: black; /* 메인 콘텐츠 배경색 */
     color: white; /* 메인 콘텐츠 글씨색 */
@@ -199,51 +201,59 @@
     border-bottom: 2px solid #fff; /* 각 열의 하단에 흰색 선 추가 */
 }
 
-.paging {
-    margin: 20px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+   .paging {
+        margin: 20px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-.paging ul {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    margin: 0;
-}
+    .paging ul {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        margin: 0;
+    }
 
-.paging li {
-    margin: 0 5px;
-}
+    .paging li {
+        margin: 0 5px;
+    }
 
-.paging a {
-    text-decoration: none;
-    color: #007bff;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 0.9em;
-}
+    .paging a {
+        text-decoration: none;
+        color: #fff; /* 기본 링크 색상 */
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 0.9em;
+    }
 
-.paging a:hover {
-    background-color: #f0f0f0;
-}
+    .paging a:hover {
+        background-color: #f0f0f0;
+    }
 
-.paging .btn-paging {
-    background-color: #e50914;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9em;
-    margin: 0 5px;
-}
+    .paging .btn-paging {
+        background-color: #000; /* 검정색 배경 */
+        color: #fff; /* 흰색 글씨 */
+        border: 1px solid #fff; /* 흰색 테두리 */
+        padding: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9em;
+        margin: 0 5px;
+    }
 
-.paging .btn-paging:hover {
-    background-color: #d10813;
-}
+    .paging .btn-paging:hover {
+        background-color: #333; /* 호버 시 어두운 검정색 */
+        border: 1px solid #fff; /* 흰색 테두리 유지 */
+    }
+
+    .paging .active {
+        background-color: #e50914; /* 활성 페이지 버튼 색상 */
+        color: white;
+        border: 1px solid #e50914;
+        font-weight: bold;
+    }
 
 .btn-add {
     padding: 10px 15px;
@@ -281,7 +291,7 @@ a:hover {
     </style>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/header/header.jsp" %>
+<link rel="stylesheet" href="/Header_css/Header.css">
 
     <div id="container">
         <div id="contents">

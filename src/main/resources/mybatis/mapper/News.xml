@@ -18,7 +18,7 @@
             id,
             title,
             content,
-            DATE_FORMAT(created_at, '%Y-%m-%d %H:%i:%s') AS createdAt,
+            DATE_FORMAT(created_at, '%Y-%m-%d') AS createdAt,
             views,
             selected
         FROM news
@@ -37,7 +37,7 @@
             id,
             title,
             content,
-            DATE_FORMAT(created_at, '%Y-%m-%d %H:%i:%s') AS createdAt,
+            DATE_FORMAT(created_at, '%Y-%m-%d') AS createdAt,
             views,
             selected
         FROM news
@@ -59,7 +59,7 @@
             id,
             title,
             content,
-            DATE_FORMAT(created_at, '%Y-%m-%d %H:%i:%s') AS createdAt,
+            DATE_FORMAT(created_at, '%Y-%m-%d') AS createdAt,
             views,
             selected
         FROM news
@@ -104,7 +104,7 @@
             id,
             title,
             content,
-            DATE_FORMAT(created_at, '%Y-%m-%d %H:%i:%s') AS createdAt,
+            DATE_FORMAT(created_at, '%Y-%m-%d') AS createdAt,
             views,
             selected
         FROM news
