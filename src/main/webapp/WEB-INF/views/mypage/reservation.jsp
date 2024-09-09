@@ -100,11 +100,15 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 										<td>${reservation.begintime}</td>
 										<td>${reservation.endtime}</td>
 										<td>${reservation.created}</td>
-										<td><c:choose>
-												<c:when test="${reservation.endtime gt currentTime}">
+										<td>
+										<!-- 상영 시간지나면 예매취소불가 -->
+										<c:set var="endDateTime"
+										value="${reservation.datetime}T${reservation.endtime}:00" /> 	
+											<c:choose>
+												<c:when test="${endDateTime gt currentTime}">
 													<button class="button"
-														onclick="cancelReservation(${reservation.id})">예매
-														취소</button>
+														onclick="cancelReservation(${reservation.id})">
+														예매취소</button>
 												</c:when>
 												<c:otherwise>
 													<span>상영 종료</span>
@@ -155,16 +159,16 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 											<td>${cancellation.created}</td>
 										</tr>
 									</c:forEach>
-									
+
 								</tbody>
-								
+
 							</table>
 							<div class="pagination">
-										<c:forEach begin="1" end="${totalCanceledPages}" var="i">
-											<a href="?canceledPage=${i}"
-												class="${i == currentCanceledPage ? 'active' : ''}">${i}</a>
-										</c:forEach>
-									</div>
+								<c:forEach begin="1" end="${totalCanceledPages}" var="i">
+									<a href="?canceledPage=${i}"
+										class="${i == currentCanceledPage ? 'active' : ''}">${i}</a>
+								</c:forEach>
+							</div>
 						</div>
 					</div>
 				</div>

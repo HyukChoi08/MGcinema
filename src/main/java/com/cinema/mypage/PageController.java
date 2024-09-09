@@ -99,6 +99,9 @@ public class PageController {
 
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", listTotalPages);
+		// 현재 시간 추가
+		model.addAttribute("currentTime", LocalDateTime.now());
+		System.out.println(LocalDateTime.now());
 
 		// 취소된 예매 리스트 조회 및 페이징
 		int canceledOffset = (canceledPage - 1) * limit;
@@ -285,16 +288,34 @@ public class PageController {
 	}
 
 
-	/*
-	 * //스토어 결제 목록
-	 * 
-	 * @GetMapping("/payment") public String getPaymentHistory(Model
-	 * model, @RequestParam(value = "customer_id", defaultValue = "") String
-	 * customerId) { System.out.println("Received customer_id: " + customerId); //
-	 * 확인 ArrayList<StoreListDTO> storeList = mdao.getStoreList(customerId);
-	 * model.addAttribute("storeList", storeList); System.out.println("Store List: "
-	 * + storeList); return "mypage/payment";
-	 * 
-	 * }
-	 */
+
+	//스토어 결제내역 목록
+
+	@GetMapping("/payment")
+	public String getStoreList(HttpSession session, Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
+	    CustomerDTO cusDTO = (CustomerDTO) session.getAttribute("cusDTO");
+	    if (cusDTO == null) {
+	        return "redirect:/login";
+	    }
+
+	    String customerId = cusDTO.getUid();
+	    int limit = 10; // 한 페이지에 10개씩
+	    int offset = (page - 1) * limit;
+
+	    List<StoreListDTO> storeList = mdao.getStoreList(customerId, offset, limit);
+	    model.addAttribute("storeList", storeList);
+
+	    int totalCount = mdao.getTotalCount(customerId);
+	    int totalPages = (int) Math.ceil((double) totalCount / limit);
+
+	    model.addAttribute("currentPage", page);
+	    model.addAttribute("totalPages", totalPages);
+
+	    return "mypage/payment";
+	}
+	
+	
+
+
+
 }

@@ -80,7 +80,7 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 				<button class="button" onclick="location.href='/inquirywrite'">문의하기</button>
 				<!-- 나의 문의 내역 -->
 				<!-- 문의 목록을 보여주는 테이블 -->
-				<table border="1" class="inquiry-table">
+				<table class="inquiry-table">
 					<thead>
 						<tr>
 							<th>번호</th>

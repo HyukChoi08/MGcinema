@@ -1,6 +1,7 @@
 package com.cinema.mypage;
 import org.apache.ibatis.annotations.Param;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -19,7 +20,7 @@ public interface MypageDAO {
 
 	//예매 정보
 	ArrayList<MovieGetDTO> getMovieList(String customer_id); // 예매 목록 
-	
+
 	// 예매 정보 삭제
 	void deleteMovieReservation(int id);
 
@@ -28,26 +29,25 @@ public interface MypageDAO {
 
 	// 취소된 예매 내역 조회
 	ArrayList<MovieGetDTO> getCanceledMovieList(String customer_id);
-	
+
 	//예매 목록을 페이징과 정렬로 가져오기
 	ArrayList<MovieGetDTO> getMovieListWithPaging(@Param("customer_id") String customer_id, @Param("limit") int limit, @Param("offset") int offset);
 	// 총 예매 수 가져오기
 	int getTotalReservationCount(@Param("customer_id") String customer_id);
-	
+
 	// DAO에 취소된 예매 목록을 페이징 처리하는 메서드 추가
 	ArrayList<MovieGetDTO> getCanceledMovieListWithPaging(@Param("customer_id") String customer_id, @Param("limit") int limit, @Param("offset") int offset);
 
 	// 취소된 예매 총 개수 구하기 메서드 추가
 	int getTotalCanceledReservationCount(@Param("customer_id") String customer_id);
-	
 
-	/*
-	 * // 스토어 결제 목록을가져오기 ArrayList<StoreListDTO> getStoreList(@Param("customer_id")
-	 * String customer_id);
-	 * 
-	 * // 총 결제 내역 수 가져오기 int getTotalStoreList(@Param("customer_id") String
-	 * customer_id);
-	 */
-		
+	// 스토어 결제 목록을가져오기 
+	ArrayList<StoreListDTO> getStoreList(String customer_id);
+
+	// 페이징을 고려한 스토어 내역 조회 메소드
+    List<StoreListDTO> getStoreList(@Param("customerId") String customerId, @Param("offset") int offset, @Param("limit") int limit);
+
+    // 전체 데이터 수를 가져오는 메소드
+    int getTotalCount(@Param("customerId") String customerId);
 }
 
