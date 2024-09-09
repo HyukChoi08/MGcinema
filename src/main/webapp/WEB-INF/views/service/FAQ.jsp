@@ -110,7 +110,7 @@
     list-style-type: none;
     padding: 0;
     display: flex;
-    border-bottom: 2px solid #e50914;
+    border-bottom: 2px solid white;
     margin: 0;
 }
 
@@ -131,7 +131,7 @@
 
 .searchtext li.on a {
     font-weight: bold;
-    border-bottom: 2px solid #e50914;
+    border-bottom: 2px solid white;
 }
 
 
