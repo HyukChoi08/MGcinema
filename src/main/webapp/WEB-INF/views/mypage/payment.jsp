@@ -3,8 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="com.cinema.mypage.CustomerDTO"%>
 <%
-// 세션에서 cusrDTO 객체 가져오기
-CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
+    // 세션에서 customerDTO 객체 가져오기
+    CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -28,19 +28,18 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 		<div class="profile-section">
 			<img src="/mypage_image/OO.png" alt="프로필 이미지" width="80" height="80" />
 			<div class="profile-info">
-				<h2><%= customer.getRealname() %>
+				<h2><%=customer.getRealname()%>
 					님
 				</h2>
 				<div>
-					닉네임: <span id="nickname"><%= customer.getNickname() %></span>
+					닉네임 : <span id="nickname"><%=customer.getNickname()%>_</span>
 					<!-- 닉네임 수정 아이콘 클릭 시 모달 표시 -->
 					<a href="javascript:void(0)" id="editNicknameBtn"> <i
-						class="fa-solid fa-pen"></i>
-					</a>
+						class="fa-solid fa-pen"></i></a>
 				</div>
 				<div>
-					아이디:
-					<%= customer.getUid() %>
+					아이디 :
+					<%=customer.getUid()%>
 				</div>
 			</div>
 		</div>
@@ -96,16 +95,18 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 											<tr>
 												<td>${status.index + 1}</td>
 												<td>${getPlist.itemName}</td>
-												<td><c:out value="${getPlist.composition}"
-														escapeXml="false" /></td>
+												<td>${getPlist.composition}</td>
 												<td>${getPlist.totalprice}</td>
 												<td>${getPlist.created}</td>
+												<td>
+													<button class="cancel-btn" data-id="${getPlist.id}">취소</button>
+												</td>
 											</tr>
 										</c:forEach>
 									</c:when>
 									<c:otherwise>
 										<tr>
-											<td colspan="5">결제 내역이 없습니다.</td>
+											<td colspan="6">결제 내역이 없습니다.</td>
 										</tr>
 									</c:otherwise>
 								</c:choose>
@@ -134,87 +135,106 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 							</c:if>
 						</div>
 					</div>
+				</div>
 
-					
-				</div>
+				<!-- 스토어 결제 취소내역 섹션 -->
 				<h3>스토어 결제 취소내역</h3>
-				<div>
-				<thead>
-					<tr>
-						<th>주문번호</th>
-						<th>상품명</th>
-						<th>구성</th>
-						<th>결제금액</th>
-						<th>구매일</th>
-					</tr>
-				</thead>
-				<tbody>
-					<!-- 결제 취소 된 리스트 표출 창 -->
-				</tbody>
-				</div>
 				<div class="ask-section">
-					<button class="button" onclick="location.href='/store'">HIII
-						Store 바로가기</button>
+					<table>
+						<thead>
+							<tr>
+								<th>주문번호</th>
+								<th>상품명</th>
+								<th>구성</th>
+								<th>결제금액</th>
+								<th>구매일</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:choose>
+								<c:when test="${not empty canceledPayments}">
+									<c:forEach var="payment" items="${canceledPayments}">
+										<tr>
+											<td>${payment.id}</td>
+											<td>${payment.itemName}</td>
+											<td>${payment.composition}</td>
+											<td>${payment.totalprice}</td>
+											<td>${payment.created}</td>
+										</tr>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									<tr>
+										<td colspan="5">결제 취소 내역이 없습니다.</td>
+									</tr>
+								</c:otherwise>
+							</c:choose>
+						</tbody>
+					</table>
+					<button class="button" onclick="location.href='/store'">Store
+						바로가기</button>
 				</div>
 			</div>
-
 		</div>
 	</div>
 
 	<%@ include file="/WEB-INF/views/footer/footer.jsp"%>
 	<!-- 푸터 포함 -->
-
 	<script src="https://code.jquery.com/jquery-latest.js"></script>
 	<script>
-		document.addEventListener('DOMContentLoaded', function() {
-			const modal = document.getElementById('nicknameModal');
-			const editBtn = document.querySelector('.fa-pen');
-			const closeBtn = document.querySelector('.close');
-			const saveNicknameBtn = document.getElementById('saveNicknameBtn');
+        // 닉네임 변경 모달
+        var modal = document.getElementById("nicknameModal");
+        var btn = document.getElementById("editNicknameBtn");
+        var span = document.getElementsByClassName("close")[0];
+        var saveBtn = document.getElementById("saveNicknameBtn");
 
-			// 닉네임 수정 버튼 클릭 시 모달 창 열기
-			editBtn.addEventListener('click', function() {
-				modal.style.display = 'block';
-			});
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
 
-			// 닫기 버튼 클릭 시 모달 닫기
-			closeBtn.addEventListener('click', function() {
-				modal.style.display = 'none';
-			});
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
 
-			// 모달 밖을 클릭하면 닫히게 설정
-			window.addEventListener('click', function(event) {
-				if (event.target == modal) {
-					modal.style.display = 'none';
-				}
-			});
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
 
-			// 닉네임 저장 버튼 클릭 시 AJAX 요청
-			saveNicknameBtn.addEventListener('click',
-					function() {
-						const newNickname = document
-								.getElementById('newNickname').value;
-						if (newNickname) {
-							$.ajax({
-								url : '/updateNickname',
-								method : 'POST',
-								data : {
-									nickname : newNickname
-								},
-								success : function(response) {
-									alert(response); // 서버로부터 성공 메시지 받기
-									location.reload(); // 페이지 새로고침해서 닉네임 업데이트 반영
-								},
-								error : function() {
-									alert('닉네임 변경에 실패했습니다.');
-								}
-							});
-							modal.style.display = 'none';
-						} else {
-							alert('새 닉네임을 입력하세요.');
-						}
-					});
-		});
-	</script>
+        saveBtn.onclick = function() {
+            var newNickname = document.getElementById("newNickname").value;
+            if (newNickname) {
+                // 서버에 새로운 닉네임을 저장하도록 AJAX 요청을 보낼 수 있습니다.
+                alert("닉네임이 변경되었습니다.");
+                modal.style.display = "none";
+            }
+        }
+     // 결제 취소 버튼 클릭 시 AJAX 요청
+        $(document).ready(function() {
+            $(".cancel-btn").click(function() {
+                var paymentId = $(this).data("id"); // 버튼의 data-id 속성에서 결제 ID를 가져옴
+                if (confirm("정말로 결제를 취소하시겠습니까?")) {
+                    $.ajax({
+                        url: "/cancelPayment", // 요청할 URL
+                        type: "POST",
+                        data: { id: paymentId }, // 서버에 전달할 데이터
+                        success: function(response) {
+                            if (response === "success") {
+                                alert("결제가 성공적으로 취소되었습니다.");
+                                // 페이지 새로고침 또는 해당 결제 내역 행을 제거하는 방법
+                                location.reload(); // 전체 페이지 새로고침
+                            } else {
+                                alert("결제 취소에 실패했습니다.");
+                            }
+                        },
+                        error: function() {
+                            alert("에러가 발생했습니다. 다시 시도해주세요.");
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>

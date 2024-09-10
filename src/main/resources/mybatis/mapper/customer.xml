@@ -1,146 +1,132 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cinema.mypage.MypageDAO">
-	<select id="getCustomerInfo"
-		resultType="com.cinema.mypage.CustomerDTO">
-		select id, uid, passwd, realname, nickname, email, region,
-		favorite, mobile,
-		tellecom, created, updated, birthday
-		from customer
-		where id=#{param1}
-	</select>
 
-	<select id="getCustomerInfoByUid"
-		resultType="com.cinema.mypage.CustomerDTO">
-		select id, uid, passwd, realname, nickname, email, region,
-		favorite, mobile,
-		tellecom, created, updated, birthday
-		from customer
-		where uid=#{param1}
-	</select>
+    <!-- 고객 정보 조회 (ID 기반) -->
+    <select id="getCustomerInfo" resultType="com.cinema.mypage.CustomerDTO">
+        SELECT id, uid, passwd, realname, nickname, email, region,
+        favorite, mobile, tellecom, created, updated, birthday
+        FROM customer
+        WHERE id = #{param1}
+    </select>
 
-	<update id="updateCusInfo"
-		parameterType="com.cinema.mypage.CustomerDTO">
-		UPDATE customer
-		SET
-		passwd = #{passwd},
-		nickname =
-		#{nickname},
-		email = #{email},
-		region = #{region},
-		favorite =
-		#{favorite},
-		mobile = #{mobile},
-		tellecom = #{tellecom},
-		updated = NOW(),
-		birthday = #{birthday}
-		WHERE id = #{id}
-	</update>
+    <!-- 고객 정보 조회 (UID 기반) -->
+    <select id="getCustomerInfoByUid" resultType="com.cinema.mypage.CustomerDTO">
+        SELECT id, uid, passwd, realname, nickname, email, region,
+        favorite, mobile, tellecom, created, updated, birthday
+        FROM customer
+        WHERE uid = #{param1}
+    </select>
 
-	<delete id="deleteCustomer">
-		delete from customer where id=#{param1}
-	</delete>
+    <!-- 고객 정보 업데이트 -->
+    <update id="updateCusInfo" parameterType="com.cinema.mypage.CustomerDTO">
+        UPDATE customer
+        SET
+        passwd = #{passwd},
+        nickname = #{nickname},
+        email = #{email},
+        region = #{region},
+        favorite = #{favorite},
+        mobile = #{mobile},
+        tellecom = #{tellecom},
+        updated = NOW(),
+        birthday = #{birthday}
+        WHERE id = #{id}
+    </update>
 
-	<select id="getInquiryList"
-		resultType="com.cinema.mypage.InquiryDTO">
-		select id,customer_id, title, content, answer, created,
-		ancreated, current
-		from inquiry
-		where customer_id=#{param1}
-	</select>
+    <!-- 고객 삭제 -->
+    <delete id="deleteCustomer">
+        DELETE FROM customer WHERE id = #{param1}
+    </delete>
 
-	<insert id="inquiryWrite"
-		parameterType="com.cinema.mypage.InquiryDTO">
-		insert into inquiry
-		set customer_id=#{customer_id},
-		title=#{title}, content=#{content}
-	</insert>
+    <!-- 1:1 문의 목록 조회 (고객 ID 기반) -->
+    <select id="getInquiryList" resultType="com.cinema.mypage.InquiryDTO">
+        SELECT id, customer_id, title, content, answer, created,
+        ancreated, current
+        FROM inquiry
+        WHERE customer_id = #{param1}
+    </select>
 
-	<select id="getInquiryDetail"
-		resultType="com.cinema.mypage.InquiryDTO">
-		select title, content, answer, created, ancreated, current
-		from inquiry
-		where id=#{param1}
-	</select>
+    <!-- 1:1 문의 작성 -->
+    <insert id="inquiryWrite" parameterType="com.cinema.mypage.InquiryDTO">
+        INSERT INTO inquiry
+        SET customer_id = #{customer_id},
+        title = #{title}, content = #{content}
+    </insert>
 
-	<select id="getMovieList" parameterType="string"
-		resultType="com.cinema.mypage.MovieGetDTO">
-		SELECT *
-		FROM moviepay
-		WHERE customer_id = #{customer_id}
-	</select>
+    <!-- 1:1 문의 상세 조회 -->
+    <select id="getInquiryDetail" resultType="com.cinema.mypage.InquiryDTO">
+        SELECT title, content, answer, created, ancreated, current
+        FROM inquiry
+        WHERE id = #{param1}
+    </select>
 
-	<!-- 예매 정보 삭제 -->
-	<delete id="deleteMovieReservation" parameterType="int">
-		DELETE FROM
-		moviepay
-		WHERE id = #{id}
-	</delete>
+    <!-- 예매 목록 조회 (고객 ID 기반) -->
+    <select id="getMovieList" parameterType="string" resultType="com.cinema.mypage.MovieGetDTO">
+        SELECT *
+        FROM moviepay
+        WHERE customer_id = #{customer_id}
+    </select>
 
-	<!-- 예매 정보를 moviedelete 테이블로 이동 -->
-	<insert id="moveToMovieDelete" parameterType="int">
-		INSERT INTO
-		moviedelete (id, random_id, customer_id, movie_name, room_name,
-		totalprice, runningtime, seat, totalpeople, begintime, endtime,
-		datetime, created)
-		SELECT id, random_id, customer_id, movie_name,
-		room_name, totalprice,
-		runningtime, seat, totalpeople, begintime,
-		endtime, datetime, created
-		FROM moviepay
-		WHERE id = #{id}
-	</insert>
+    <!-- 예매 삭제 (ID 기반) -->
+    <delete id="deleteMovieReservation" parameterType="int">
+        DELETE FROM moviepay WHERE id = #{id}
+    </delete>
 
-	<!-- 취소된 예매 내역 조회 -->
-	<select id="getCanceledMovieList" parameterType="string"
-		resultType="com.cinema.mypage.MovieGetDTO">
-		SELECT *
-		FROM moviedelete
-		WHERE customer_id = #{customer_id}
-	</select>
+    <!-- 예매 정보를 moviedelete 테이블로 이동 -->
+    <insert id="moveToMovieDelete" parameterType="int">
+        INSERT INTO moviedelete (id, random_id, customer_id, movie_name, room_name,
+        totalprice, runningtime, seat, totalpeople, begintime, endtime,
+        datetime, created)
+        SELECT id, random_id, customer_id, movie_name, room_name, totalprice,
+        runningtime, seat, totalpeople, begintime, endtime, datetime, created
+        FROM moviepay
+        WHERE id = #{id}
+    </insert>
 
-	<!-- 닉네임 업데이트 -->
-	<update id="updateNickname">
-		UPDATE customer
-		SET nickname = #{nickname}
-		WHERE uid =
-		#{uid}
-	</update>
+    <!-- 취소된 예매 내역 조회 (고객 ID 기반) -->
+    <select id="getCanceledMovieList" parameterType="string" resultType="com.cinema.mypage.MovieGetDTO">
+        SELECT *
+        FROM moviedelete
+        WHERE customer_id = #{customer_id}
+    </select>
 
+    <!-- 닉네임 업데이트 -->
+    <update id="updateNickname">
+        UPDATE customer
+        SET nickname = #{nickname}
+        WHERE uid = #{uid}
+    </update>
 
-	<!-- 예매 목록을 페이징 및 최신순 정렬로 가져오기 -->
-	<select id="getMovieListWithPaging" parameterType="map"
-		resultType="com.cinema.mypage.MovieGetDTO">
-		SELECT *
-		FROM moviepay
-		WHERE customer_id = #{customer_id}
-		ORDER BY created DESC  <!-- 최신순 정렬 -->
-		LIMIT #{limit} OFFSET #{offset}  <!-- 페이징 처리 -->
-	</select>
+    <!-- 예매 목록을 페이징 및 최신순 정렬로 가져오기 -->
+    <select id="getMovieListWithPaging" parameterType="map" resultType="com.cinema.mypage.MovieGetDTO">
+        SELECT *
+        FROM moviepay
+        WHERE customer_id = #{customer_id}
+        ORDER BY datetime DESC  <!-- 최신순 정렬 -->
+        LIMIT #{limit} OFFSET #{offset}  <!-- 페이징 처리 -->
+    </select>
 
-	<!-- 총 예매 수 구하기 -->
-	<select id="getTotalReservationCount" parameterType="string"
-		resultType="int">
-		SELECT COUNT(*)
-		FROM moviepay
-		WHERE customer_id = #{customer_id}
-	</select>
+    <!-- 총 예매 수 구하기 -->
+    <select id="getTotalReservationCount" parameterType="string" resultType="int">
+        SELECT COUNT(*)
+        FROM moviepay
+        WHERE customer_id = #{customer_id}
+    </select>
 
-	<!-- 취소된 예매 내역을 페이징 및 최신순 정렬로 가져오기 -->
-	<select id="getCanceledMovieListWithPaging" parameterType="map"
-		resultType="com.cinema.mypage.MovieGetDTO">
-		SELECT * FROM moviedelete
-		WHERE customer_id = #{customer_id}
-		ORDER BY created DESC
-		LIMIT #{limit} OFFSET #{offset}
-	</select>
+    <!-- 취소된 예매 내역을 페이징 및 최신순 정렬로 가져오기 -->
+    <select id="getCanceledMovieListWithPaging" parameterType="map" resultType="com.cinema.mypage.MovieGetDTO">
+        SELECT * FROM moviedelete
+        WHERE customer_id = #{customer_id}
+        ORDER BY datetime DESC  <!-- 최신순 정렬 -->
+        LIMIT #{limit} OFFSET #{offset}  <!-- 페이징 처리 -->
+    </select>
 
-	<!-- 총 취소 내역 수 구하기 -->
-	<select id="getTotalCanceledReservationCount"
-		parameterType="string" resultType="int">
-		SELECT COUNT(*)
-		FROM moviedelete
-		WHERE customer_id = #{customer_id}
-	</select>
+    <!-- 총 취소 내역 수 구하기 -->
+    <select id="getTotalCanceledReservationCount" parameterType="string" resultType="int">
+        SELECT COUNT(*)
+        FROM moviedelete
+        WHERE customer_id = #{customer_id}
+    </select>
 
 </mapper>
