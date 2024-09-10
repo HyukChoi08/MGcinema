@@ -54,7 +54,7 @@
             color: white; /* 메인 콘텐츠 글씨색 */
             border: 1px solid #fff; /* 메인 콘텐츠 테두리색 */
             border-radius: 10px;
-            height: 650px; /* 고정 높이 설정 */
+            /*height: 650px; /* 고정 높이 설정 */
           
         }
         
