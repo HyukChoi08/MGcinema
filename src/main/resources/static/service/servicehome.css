@@ -149,7 +149,7 @@
             text-align: left; /* 텍스트 왼쪽 정렬 */
         }
         
-        .service_area .tit,{
+        .service_area .tit {
             font-size : 1.5em; /* 제목 폰트 크기 1.2em */
             margin-bottom : 10px; /* 하단 여백 10px */
         }
@@ -232,8 +232,8 @@
 }
 .emoji-email {
 	display: inline-block;
-	width:60px;
-	height:60px;
+	width:70px;
+	height:70px;
     background-image: url('/service/email.png'); /* 이미지 경로 */
     background-size: contain; /* 이미지 크기 조절 */
     background-repeat: no-repeat; /* 이미지 반복 방지 */
@@ -242,8 +242,8 @@
 }
 .emoji-center {
 	display: inline-block;
-	width:60px;
-	height:60px;
+	width:70px;
+	height:70px;
     background-image: url('/service/center.png'); /* 이미지 경로 */
     background-size: contain; /* 이미지 크기 조절 */
     background-repeat: no-repeat; /* 이미지 반복 방지 */
