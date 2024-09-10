@@ -1,5 +1,8 @@
 package com.cinema.management;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
@@ -10,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -210,15 +215,41 @@ public class ManagerController {
 		return Ty.toString();
 	}
 	@PostMapping("/itemin")
-	@ResponseBody
+	/* @ResponseBody */
 	public String itemin(HttpServletRequest req,Model model) {
-		String itemname = req.getParameter("itemname");
-		String itemprice = req.getParameter("itemprice");
-		String disprice = req.getParameter("disprice");
-		String conposition = req.getParameter("conposition");
-		String origin = req.getParameter("origin");
-		String itemimage = req.getParameter("itemimage");
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) req;
+		/*
+		 * String itemname = req.getParameter("itemname");
+		 * String itemprice = req.getParameter("itemprice");
+		 * String disprice = req.getParameter("disprice");
+		 * String conposition = req.getParameter("conposition");
+		 * String origin = req.getParameter("origin");
+		 * String itemimage = req.getParameter("itemimage");
+		 */
+		
+		 MultipartFile file = multipartRequest.getFile("itemfile");
+         String itemname = multipartRequest.getParameter("itemname");
+         String itemprice = multipartRequest.getParameter("itemprice");
+         String disprice = multipartRequest.getParameter("disprice");
+         String conposition = multipartRequest.getParameter("conposition");
+         String origin = multipartRequest.getParameter("origin");
+         String itemimage = multipartRequest.getParameter("itemimage");
+         
+         String uploadDir = "src/main/resources/static/store_images";
+         File uploadDirectory = new File(Paths.get(uploadDir).toAbsolutePath().normalize().toString());
+         File destinationFile = new File(uploadDirectory, file.getOriginalFilename());
+         try {
+			file.transferTo(destinationFile);
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+         
 		mmdao.itemin(itemname, itemprice, disprice, conposition, origin, itemimage);
+		System.out.println("아이템입니다"+itemname+itemprice+ disprice+ conposition+ origin+ itemimage);
 		return "manager/manager";
 	}
 	@PostMapping("/newsin")
@@ -226,7 +257,8 @@ public class ManagerController {
 	public String newsin(HttpServletRequest req,Model model) {
 		String newstitle = req.getParameter("newstitle");
 		String newscontent = req.getParameter("newscontent");
-		mmdao.newsin(newstitle, newscontent);
+		String newskat = req.getParameter("newskat");
+		mmdao.newsin(newstitle, newscontent,newskat);
 		return "manager/manager";
 	}
 	@PostMapping("/detailin")
@@ -286,9 +318,10 @@ public class ManagerController {
 	public String newsup(HttpServletRequest req,Model model) {
 		String newstitle = req.getParameter("newstitle");
 		String newscontent = req.getParameter("newscontent");
+		String newskat = req.getParameter("newskat");
 		int newsid = Integer.parseInt(req.getParameter("newsid"));
 	
-		mmdao.newsup(newsid, newstitle, newscontent);
+		mmdao.newsup(newsid, newstitle, newscontent,newskat);
 		return "manager/manager";
 	}
 	@PostMapping("/shownews")

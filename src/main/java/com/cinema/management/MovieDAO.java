@@ -23,9 +23,9 @@ public interface MovieDAO {
 	ArrayList<InquiryDTO> inquirylist();
 	ArrayList<NewsDTO> newslist();
 	void itemin(String a,String b,String c,String d,String e,String f);
-	void newsin(String a,String b);
+	void newsin(String a,String b,String c);
 	void detailin(int a,String b,String c);
 	void inquiryup(int a,String b);
-	void newsup(int a,String b,String c);
+	void newsup(int a,String b,String c,String d);
 	ArrayList<DeidDTO> getdeid();
 }
