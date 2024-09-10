@@ -143,7 +143,10 @@ public class HomepageController {
 			String mobile = req.getParameter("mobile");
 			String region = req.getParameter("region");
 			String nickname = req.getParameter("nickname");
-			String favorite = req.getParameter("favorite");
+			
+			String[] favorites = req.getParameterValues("favorite");
+	        String favorite = (favorites != null) ? String.join(",", favorites) : ""; // 배열을 쉼표로 구분된 문자열로 변환
+			
 			String tellecom = req.getParameter("tellecom");
 
 			/*

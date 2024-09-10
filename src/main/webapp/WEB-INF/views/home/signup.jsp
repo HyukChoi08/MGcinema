@@ -127,36 +127,44 @@
                         <div class="favorite-group">
                             <div class="favorite-group-top">
                                 <label>
-                                    <input type="checkbox" name="favorite" value="Action" ${formData.favorite.contains('Action') ? 'checked' : ''}>
+                                    <input type="checkbox" name="favorite" value="액션" ${formData.favorite.contains('액션') ? 'checked' : ''}>
                                     액션
                                 </label>
                                 <label>
-                                    <input type="checkbox" name="favorite" value="Thriller" ${formData.favorite.contains('Thriller') ? 'checked' : ''}>
+                                    <input type="checkbox" name="favorite" value="스릴러" ${formData.favorite.contains('스릴러') ? 'checked' : ''}>
                                     스릴러
                                 </label>
                                 <label>
-                                    <input type="checkbox" name="favorite" value="Science Fiction" ${formData.favorite.contains('Science Fiction') ? 'checked' : ''}>
+                                    <input type="checkbox" name="favorite" value="SF" ${formData.favorite.contains('SF') ? 'checked' : ''}>
                                     SF
                                 </label>
                             </div>
                             <div class="favorite-group-bottom">
                                 <label>
-                                    <input type="checkbox" name="favorite" value="Comedy" ${formData.favorite.contains('Comedy') ? 'checked' : ''}>
+                                    <input type="checkbox" name="favorite" value="코미디" ${formData.favorite.contains('코미디') ? 'checked' : ''}>
                                     코미디
                                 </label>
                                 <label>
-                                    <input type="checkbox" name="favorite" value="Romance" ${formData.favorite.contains('Romance') ? 'checked' : ''}>
-                                    멜로
+                                    <input type="checkbox" name="favorite" value="로맨스" ${formData.favorite.contains('로맨스') ? 'checked' : ''}>
+                                    로맨스
                                 </label>
                                 <label>
-                                    <input type="checkbox" name="favorite" value="Fantasy" ${formData.favorite.contains('Fantasy') ? 'checked' : ''}>
+                                    <input type="checkbox" name="favorite" value="판타지" ${formData.favorite.contains('판타지') ? 'checked' : ''}>
                                     판타지
                                 </label>
                             </div>
                             <div class="favorite-group-bottom">
                                 <label>
-                                    <input type="checkbox" name="favorite" value="Animation" ${formData.favorite.contains('Animation') ? 'checked' : ''}>
+                                    <input type="checkbox" name="favorite" value="애니메이션" ${formData.favorite.contains('애니메이션') ? 'checked' : ''}>
                                     애니메이션
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="favorite" value="가족" ${formData.favorite.contains('가족') ? 'checked' : ''}>
+                                    가족
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="favorite" value="기타" ${formData.favorite.contains('기타') ? 'checked' : ''}>
+                                    기타
                                 </label>
                             </div>
                         </div>
