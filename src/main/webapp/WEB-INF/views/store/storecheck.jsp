@@ -57,8 +57,9 @@
     	      successUrl: window.location.origin + "/storesuccess?orderId=" + encodeURIComponent("${orderId}") +
     	                  "&uid=" + encodeURIComponent("${uid}") +
 	  	                  "&itemname=" + encodeURIComponent("${itemname}") +
-    	                  "&totalprice=" + encodeURIComponent("${totalprice}"),
-//    	  
+    	                  "&totalprice=" + encodeURIComponent("${totalprice}")+
+    	                  "&source=" + encodeURIComponent("${source}"), // source 추가
+    	  
     	      failUrl: window.location.origin + "/storefail",
     	      customerEmail: "${email}",
     	      customerName: "${realname}",

@@ -345,7 +345,7 @@ position: relative;
                         </td>
                         <td>
                             <div class="discount">
-                                <span class="discount_price">${item.discount_price}원</span>
+                                <span class="discount_price">${item.discount_price}</span>
                                 <span class="cart_price">${item.cart_price}</span>
                             </div>
                         </td>
@@ -389,134 +389,125 @@ position: relative;
 <script>
 $(document).ready(function() {
 	
-	let allitem='';
+	let customer_id=$('.uid').val();
 	
-		
- 	let customer_id= $('.uid').val();
- 	console.log(customer_id);
- 	
- 	 function updateCartCount() {
-         $.ajax({
-             url: '/countcart',
-             type: 'post',
-             data: { customer_id: customer_id },
-             dataType: 'text',
-             success: function(data) {
-                 $('#cart-count').text(data);
-             }         
-         })
-     }
+	function updateCartCount() {
+        $.ajax({
+            url: '/countcart',
+            type: 'post',
+            data: { customer_id: customer_id },
+            dataType: 'text',
+            cache: false, // 캐시 비활성화
+            success: function(data) {
+                $('#cart-count').text(data);
+            }         
+        })
+    }
+	   // 페이지 로드 시 카운트 업데이트
+    updateCartCount();
 
- 	 
- 	 function checkItemInCart(item_id) {
-         return $.ajax({
-             url: '/checkitem', // 서버에서 장바구니에 아이템이 있는지 확인하는 엔드포인트
-             type: 'post',
-             data: {item_id: item_id },
-             dataType: 'json'
-         });
-     }
- 	 	 
-     // 페이지 로드 시 카운트 업데이트
-     updateCartCount();
-     
 	
-	
-    function formatNumber(number) {
-        return number.toLocaleString();
+    function formatNumber(num) {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
 
-    function removeCommas(value) {
-        return value.replace(/,/g, '');
+    function handlePriceComparison() {
+        let discountPriceText = $('.discount_price').text();
+        let cartPriceText = $('.cart_price').text();
+
+        // '금액충전형'일 경우 직접 비교
+        if (discountPriceText === '금액충전형' && cartPriceText === '금액충전형') {
+            $('.cart_price').hide();
+        } else {
+            // 숫자만 추출하고 비교
+            let discountPrice = discountPriceText.replace(/[^0-9]/g, '').trim();
+            let cartPrice = cartPriceText.replace(/[^0-9]/g, '').trim();
+
+            if (discountPrice === cartPrice) {
+                $('.cart_price').hide(); // 요소를 숨깁니다.
+            }
+        }
     }
 
-    // Format the numbers for display
+    // 페이지 로드 시 가격 비교 처리
+    handlePriceComparison();
+                      
+  
     $('.discount_price, .cart_price, .total, .totalprice, .totaldiscount, .finalprice').each(function() {
-        let $this = $(this);
-        let text = $this.text().replace('원', '').replace(/,/g, '');
-        let price = parseInt(text, 10);
-
-        if (!isNaN(price)) {
-            $this.text(formatNumber(price) + '원');
-        }
+        let text = $(this).text();
+        // '원' 단위를 제거하고 숫자만 추출
+        let number = text.replace(/[^0-9]/g, '');
+        // 숫자를 천 단위 쉼표를 포함하여 포맷
+        let formattedNumber = formatNumber(number);
+        // 포맷된 숫자와 '원' 단위를 다시 설정
+        $(this).text(formattedNumber + '원');
     });
+	
+	
+	
+	
+    // URL에서 source 파라미터를 읽어옴
+    let queryString = window.location.search;
+    let params = new URLSearchParams(queryString);
+    let source = params.get('source');
 
-    // Compare discount_price and cart_price and hide cart_price if they are the same
-    $('.cart-item').each(function() {
-        let $discountPrice = $(this).find('.discount_price');
-        let $cartPrice = $(this).find('.cart_price');
+    // URL에서 source 값이 없을 경우 경로에 따라 기본값 설정
+    if (!source) {
+        source = (window.location.pathname === '/cart') ? 'cart' : 'other';
+    }
 
-        // Get the text values and remove '원' and commas
-        let discountPriceText = removeCommas($discountPrice.text().replace('원', ''));
-        let cartPriceText = removeCommas($cartPrice.text().replace('원', ''));
+    console.log('source parameter:', source);
 
-        // Compare the prices
-        if (discountPriceText === cartPriceText) {
-            $cartPrice.hide(); // Hide cart price if they are the same
+    $(document).on('click', '#btnpay', function() {
+        let str = '';
+        let customer_id = $('.uid').val();    
+        let fin = $('.finalprice').text();
+        let finalprice = fin.replace(/[^0-9]/g, ''); // 숫자만 추출
+
+        $('.itemname').each(function(index) {
+            let itemName = $(this).text().trim();
+            let itemCompo = $('.itemcompo').eq(index).text().trim();
+            str += itemName + '  ' + itemCompo + ',';
+        });
+
+        // 마지막 쉼표 제거
+        if (str.endsWith(',')) {
+            str = str.slice(0, -1);
         }
-       	if(cartPriceText == 0){
-       	 	$cartPrice.hide();
-       	}
-    }) 
- 
-})
-.on('click','#btnpay',function(){
-	
-	let str='';
-	
-	
-	let customer_id=$('.uid').val();	
-    let fin = $('.finalprice').text();
-	let finalprice = fin.replace(/[^0-9]/g, ''); // 숫자만 추출		
-	
-	   $('.itemname').each(function(index) {
-           let itemName = $(this).text().trim();
-           // 동일한 인덱스의 itemcompo 요소 선택
-           let itemCompo = $('.itemcompo').eq(index).text().trim();
 
-           // 문자열에 값 추가
-           str += itemName + '  ' + itemCompo + ',';
-       });
+        console.log(customer_id);
+        console.log("price" + finalprice);
+        console.log("name" + str);
 
-       // 마지막 쉼표 제거
-       if (str.endsWith(',')) {
-           str = str.slice(0, -1);
-       }
-	
-	console.log(customer_id);
-	console.log("price"+finalprice);
-	console.log("name"+str);
-	
-	customer_id=encodeURIComponent(customer_id);
-	totalprice=encodeURIComponent(finalprice);
-	itemname=encodeURIComponent(str);
-	
-	
-	
+        customer_id = encodeURIComponent(customer_id);
+        let totalprice = encodeURIComponent(finalprice);
+        let itemname = encodeURIComponent(str);
 
-	var popupWidth = 600;
+        // Use the dynamically determined source
+        source = encodeURIComponent(source);
+        
+        var popupWidth = 600;
         var popupHeight = 700;
-
         var leftPosition = (window.screen.width / 2) - (popupWidth / 2);
         var topPosition = (window.screen.height / 2) - (popupHeight / 2);
 
-        var url = '/store/storecheck?itemname=' + itemname + '&totalprice=' + totalprice; 
-        		
-//        		+ '&Yticket=' + Yticket + '&resultprice=' 
-//        		+ resultprice + '&resultseat=' + resultseat + '&roomname=' + roomname + '&people=' + people + '&begintime=' + begintime +
-//       		'&endtime=' + endtime + '&runningtime=' + runningtime + '&datetime=' + datetime;
+        // URL 생성
+        let url = '/store/storecheck?itemname=' + itemname +
+              '&totalprice=' + totalprice +
+              '&source=' + source;
 
+        console.log("Generated URL: " + url);
+
+        // 팝업 창 열기
         window.open(
             url,
             'CheckoutWindow',
             'width=' + popupWidth + ', height=' + popupHeight + ', left=' + leftPosition + ', top=' + topPosition + ', resizable=yes, scrollbars=yes'
         );
+    });
 
-        encodeURIComponent(itemname)
-
-      
-})
-
+ 
+});
 </script>
 
 </html>

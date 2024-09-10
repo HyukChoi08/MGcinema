@@ -567,11 +567,11 @@ margin-bottom:30px;
 		        </tr>
 	    	</tbody>	    	
         </table>
-          <form id="payForm" action="/dostorepay" method="post">
-            <input type="hidden" id="productData" name="productData">
-            <a href="javascript:history.back()" id="btnback"> 뒤로가기</a>
-            <button type="button" id="pay">결제하기</button>
-        </form>
+        <form id="payForm" action="/dostorepay?source=cart" method="post">
+		    <input type="hidden" id="productData" name="productData">
+		    <a href="javascript:history.back()" id="btnback">뒤로가기</a>
+		    <button type="button" id="pay">결제하기</button>
+		</form>
 
     </div> 
 </div>
@@ -861,6 +861,12 @@ $(document).ready(function() {
         	                }));
 
         	                console.log('Product data:', $('#productData').val()); // 디버깅: 전송할 데이터 출력
+        	                
+        	                let formActionUrl = '/dostorepay?source=cart'; // 실제 소스 값으로 변경
+        	                $('#payForm').attr('action', formActionUrl);
+
+        	                console.log("Form action URL:", formActionUrl); // 디버깅: URL 확인
+        	                
 
         	                $('#payForm').submit(); // 폼 제출
         	            } else {

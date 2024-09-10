@@ -14,6 +14,7 @@ public class storeDTO {
 	String name;
 	String origin;
 	String image_path;
+	String item_type;
 	
 	
 	

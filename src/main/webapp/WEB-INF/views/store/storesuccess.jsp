@@ -68,31 +68,37 @@
         <div class="info"><span>UID:</span> ${param.uid}</div>
         <div class="info"><span>상품 이름:</span> ${param.itemname}</div>   
         <div class="info"><span>결제 금액:</span> ${param.totalprice} 원</div>
+       
         <div class="btnclose">화면 닫기</div>
     </div>
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
 $(document).ready(function() {
-    // Ensure saveData is called only once
+    // Ensure storeData is called only once
     if (!window.dataSaved) {
-       storeData();
+        storeData();
+        
         window.dataSaved = true;
     }
-    
 
     function storeData() {
-        let orderId = "${param.orderId}";
-        let uid = "${param.uid}";
-        let item_name = "${param.itemname}";
-        let totalprice = "${param.totalprice}";
+        // Extract URL parameters
+        let urlParams = new URLSearchParams(window.location.search);
+        let source = urlParams.get('source');
+        let orderId = urlParams.get('orderId');
+        let uid = urlParams.get('uid');
+        let item_name = urlParams.get('itemname');
+        let totalprice = urlParams.get('totalprice');
 
-        console.log("toto3"+totalprice);
-        
-        
+        console.log("totalprice: " + totalprice);
+        console.log("source: " + source);
+        console.log("uid: " + uid);
+
+        // Send store data
         $.ajax({
             url: '/storeData',
-            type: 'get',
+            type: 'GET', // Use GET method
             data: {
                 random_id: orderId,
                 customer_id: uid,
@@ -101,21 +107,43 @@ $(document).ready(function() {
             },
             dataType: 'text',
             success: function(data) {
-                if (data == 'ok') {        
-                    return;
-                }
-            }
-        });
-    }  	
-  })
-          
+                if (data === 'ok') {
+                    console.log('storeData 성공');
+                    
+                    
+                   } 
+            	} 
+                    
+            }) 
+                    // Clear cart if source is 'cart'
+             if (source === 'cart') {
+                 $.ajax({
+                     url: '/clearcart',
+                     type: 'POST',
+                     data: { customer_id: uid },
+                     dataType:'text',
+                     success: function(data) {
+                         if (data === "ok") {
+                             console.log('장바구니가 비워졌습니다.');
+                             // Redirect to storesuccess after clearing cart
+                             //window.location.href = '/storesuccess?' +
+                              //   'orderId=' + encodeURIComponent(orderId) +
+                               //  '&uid=' + encodeURIComponent(uid) +
+                               //  '&itemname=' + encodeURIComponent(item_name) +
+                               //  '&totalprice=' + encodeURIComponent(totalprice) +
+                                // '&source=' + encodeURIComponent(source);
+                         }
+                     }
+                  
+                 })
+             }                        
+       
+    }
+})
 
+    
 
-
-
-
-
-
-
+            
+            
 </script>
 </html>
