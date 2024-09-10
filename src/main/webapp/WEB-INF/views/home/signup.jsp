@@ -188,7 +188,7 @@
         <c:if test="${not empty error}">
             <div class="error-message">${error}</div>
         </c:if>
-    </div>
+    </div> 
 	<%@ include file="/WEB-INF/views/footer/footer.jsp" %>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>

@@ -153,7 +153,7 @@ public class HomepageController {
 			 * if (uid == null || uid.trim().isEmpty()) { throw new
 			 * IllegalArgumentException("UID cannot be null or empty");
 			 * 
-			 * }
+			 * } 
 			 */
 			int uidCount = ldao.checkUidExists(uid);
 			if (uidCount > 0) {
