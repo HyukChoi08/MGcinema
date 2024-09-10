@@ -49,12 +49,13 @@
                     
                 </div>
                 <div class="c_box email_inquiry">
-                    <strong class="c_tit"><span class="emoji">📧</span><br>이메일 문의</strong><br><br>
+                    <strong class="c_tit">
+    					<span class="emoji-email"></span></span><br>이메일 문의</strong><br><br>
                     <span class="c_txt">24시간 365일 언제든지 문의해주세요.</span>
                     <br><br><a href="inquirywrite" class="button">문의하기</a>
                 </div>
                 <div class="c_box my_advice">
-                    <strong class="c_tit"><span class="emoji">🧐</span><br>내 상담 내역 확인</strong><br><br>
+                    <strong class="c_tit"><span class="emoji-center">🧐</span><br>내 상담 내역 확인</strong><br><br>
                     <span class="c_txt">이메일 문의 조회입니다.</span><br>
                     <br><a href="inquiry" class="button">문의내역 조회</a>
                 </div>

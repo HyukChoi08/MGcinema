@@ -217,17 +217,36 @@
     text-decoration: none; /* 링크 밑줄 제거 */
 }
 
-.notice_area .list a.notice_list:hover {
+.notice_area .list a.notice_list:hov	er {
     text-decoration: underline; /* 링크 hover 시 밑줄 추가 */
 }
 .emoji-search {
     display: inline-block;
-    width: 30px; /* 이미지의 너비 */
-    height: 30px; /* 이미지의 높이 */
+    width: 70px; /* 이미지의 너비 */
+    height: 70px; /* 이미지의 높이 */
     background-image: url('/service/search.png'); /* 이미지 경로 */
     background-size: contain; /* 이미지 크기 조절 */
     background-repeat: no-repeat; /* 이미지 반복 방지 */
     vertical-align: middle; /* 텍스트와 이미지 정렬 */
-    background-color:black;
+    background-color:white;
 }
-
+.emoji-email {
+	display: inline-block;
+	width:60px;
+	height:60px;
+    background-image: url('/service/email.png'); /* 이미지 경로 */
+    background-size: contain; /* 이미지 크기 조절 */
+    background-repeat: no-repeat; /* 이미지 반복 방지 */
+    vertical-align: middle; /* 텍스트와 이미지 정렬 */
+   background-color:white;
+}
+.emoji-center {
+	display: inline-block;
+	width:60px;
+	height:60px;
+    background-image: url('/service/center.png'); /* 이미지 경로 */
+    background-size: contain; /* 이미지 크기 조절 */
+    background-repeat: no-repeat; /* 이미지 반복 방지 */
+    vertical-align: middle; /* 텍스트와 이미지 정렬 */
+   background-color:white;
+}
