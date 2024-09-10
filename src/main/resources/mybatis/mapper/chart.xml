@@ -3,7 +3,7 @@
 <mapper namespace="com.cinema.chart.chartDAO"><!--무비차트-->
 <select id ="chartList" resultType="com.cinema.chart.chartDTO">
 	 select id,imagepath ,reservation,mname,releasedate from movie order by releasedate 
-	</select>
+	</select> 
 	
 <select id ="chartList1" resultType="com.cinema.chart.chartDTO">
 	 select id,imagepath ,reservation,mname,releasedate from movie order by reservation desc

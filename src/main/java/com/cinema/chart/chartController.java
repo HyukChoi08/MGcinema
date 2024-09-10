@@ -139,7 +139,7 @@ public String insertselectcomment(HttpServletRequest req, Model model) {
 
 //리뷰 작성
 @PostMapping("/putcomment")
-@ResponseBody
+@ResponseBody 
 public String update (HttpServletRequest req, Model model) {
 	int moviechart = Integer.parseInt(req.getParameter("moviechart"));
 	

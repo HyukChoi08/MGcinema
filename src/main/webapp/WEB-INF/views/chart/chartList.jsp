@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>무비차트</title>
 </head>
-<style>
+<style> 
 
 body {
     display: flex;

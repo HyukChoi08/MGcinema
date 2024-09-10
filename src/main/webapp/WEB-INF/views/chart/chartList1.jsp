@@ -65,7 +65,7 @@ ol, ul {
     box-sizing: border-box; /* 패딩과 테두리를 포함하여 전체 너비를 계산 */
     background-color: #f9f9f9; /* 배경색 설정 */
     padding: 16px; /* 내부 여백 추가 */
-    border-radius: 8px; /* 모서리 둥글게 */
+    border-radius: 8px; /* 모서리 둥글게 */ 
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 그림자 추가 */
 }
 a {
