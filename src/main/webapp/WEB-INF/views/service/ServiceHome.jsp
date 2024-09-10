@@ -41,7 +41,7 @@
 					</strong>
                     <div class="search_area">
                         <form action="faq" method="get" style="display: flex; align-items: center; width: 100%;">
-                        <br>    <input id="searchtext" type="text" name="search" placeholder="검색어를 입력해 주세요." />
+                        <br><br><input id="searchtext" type="text" name="search" placeholder="검색어를 입력해 주세요." />
                             <button type="submit" class="btn_search">검색</button>
                         </form>
                     </div>
@@ -54,7 +54,7 @@
                     <span class="c_txt">24시간 365일 언제든지 문의해주세요.</span>
                     <br><br><a href="inquirywrite" class="button">문의하기</a>
                 </div>
-                <div class="c_box my_advice">
+                <div class="c_box my_advice">	
                     <strong class="c_tit"><span class="emoji-center"></span><br>내 상담 내역 확인</strong><br><br>
                     <span class="c_txt">이메일 문의 조회입니다.</span><br>
                     <br><a href="inquiry" class="button">문의내역 조회</a>
