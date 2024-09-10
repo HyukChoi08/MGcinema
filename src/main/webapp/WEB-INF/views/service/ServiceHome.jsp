@@ -159,53 +159,78 @@
             text-align: left; /* 텍스트 왼쪽 정렬 */
         }
         
-        .service_area .tit, .notice_area .tit {
-            font-size: 1.2em; /* 제목 폰트 크기 1.2em */
+        .service_area .tit,{
+            font-size: 1.5em; /* 제목 폰트 크기 1.2em */
             margin-bottom: 10px; /* 하단 여백 10px */
+        }
+        .notice_area .tit{
+        	font-size: 1.5em; /* 글씨 크기 조정 (원하는 크기로 변경) */
+   		 	margin-bottom: 10px; /* 하단 여백 조정 */
+    		list-style: none; /* 점 제거 */
         }
 
         .faq_button {
-    display: flex;
-    flex-wrap: wrap; /* 버튼이 여러 줄로 배치될 수 있도록 설정 */
-    gap: 10px; /* 버튼 간의 간격 조정 */
-    width: 100%;
+   			display: flex;
+    		flex-wrap: wrap; /* 버튼이 여러 줄로 배치될 수 있도록 설정 */
+    		gap: 10px; /* 버튼 간의 간격 조정 */
+    		width: 100%;
+		}
+
+		.button-link {
+    		flex: 1 1 calc(50% - 10px); /* 버튼 너비를 두 개씩 정렬하도록 설정 */
+    		padding: 25px 25px; /* 버튼 패딩 조정 */
+    		font-size: 1.0em; /* 폰트 크기 줄이기 */
+    		text-align: center; /* 텍스트 중앙 정렬 */
+    		box-sizing: border-box; /* 패딩과 테두리 포함 너비 계산 */
+    		margin-bottom: 10px; /* 하단 여백 10px */
+    		background-color: black; /* 버튼 배경색 검정으로 설정 */
+    		color: white; /* 버튼 글씨색 흰색 */
+    		border: 2px solid white; /* 버튼 테두리 흰색으로 설정 */
+    		border-radius: 5px; /* 버튼 모서리 둥글게 설정 */
+    		text-decoration: none; /* 링크 밑줄 제거 */
+		}
+
+		.button-link:hover {
+    		background-color: #d10813; /* 버튼 hover 시 배경색 변경 */
+    		border: 2px solid white; /* hover 시 테두리 색상 유지 */
+		}
+		.notice_more_btn {
+    		display: inline-block;
+    		padding: 1px 10px; /* 버튼의 패딩 설정 */
+    		font-size: 1.2em; /* 버튼의 폰트 크기 설정 */
+    		color: black; /* 버튼 글씨 색상 */
+    		background-color: black; /* 버튼 배경 색상 */
+    		text-align: center; /* 텍스트 중앙 정렬 */
+    		border-radius: 5px; /* 둥근 버튼을 위해 50% 설정 */
+    		border: 2px solid white; /* 흰색 테두리 설정 */
+    		text-decoration: none; /* 링크 밑줄 제거 */
+    		margin-left: 10px; /* 공지사항과의 간격 설정 */
+		}
+
+		.notice_more_btn:hover {
+    		background-color: white; /* 버튼 hover 시 배경색 변경 */
+    		border-color: white; /* hover 시 테두리 색상 변경 */
+		}
+		.notice_area .list {
+    list-style-type: none; /* 기본 점 제거 */
+    padding: 0; /* 기본 패딩 제거 */
+    margin: 0; /* 기본 마진 제거 */
 }
 
-.button-link {
-    flex: 1 1 calc(50% - 10px); /* 버튼 너비를 두 개씩 정렬하도록 설정 */
-    padding: 25px 25px; /* 버튼 패딩 조정 */
-    font-size: 1.0em; /* 폰트 크기 줄이기 */
-    text-align: center; /* 텍스트 중앙 정렬 */
-    box-sizing: border-box; /* 패딩과 테두리 포함 너비 계산 */
-    margin-bottom: 10px; /* 하단 여백 10px */
-    background-color: black; /* 버튼 배경색 검정으로 설정 */
-    color: white; /* 버튼 글씨색 흰색 */
-    border: 2px solid white; /* 버튼 테두리 흰색으로 설정 */
-    border-radius: 5px; /* 버튼 모서리 둥글게 설정 */
+.notice_area .list li {
+    margin-bottom: 10px; /* 항목 간의 간격 조정 */
+}
+
+.notice_area .list a.notice_list {
+    font-size: 1.0em; /* 글씨 크기 조정 (원하는 크기로 변경) */
+    color: white; /* 링크 글씨 색상 */
     text-decoration: none; /* 링크 밑줄 제거 */
 }
 
-.button-link:hover {
-    background-color: #d10813; /* 버튼 hover 시 배경색 변경 */
-    border: 2px solid white; /* hover 시 테두리 색상 유지 */
+.notice_area .list a.notice_list:hover {
+    text-decoration: underline; /* 링크 hover 시 밑줄 추가 */
 }
-.notice_more_btn {
-    display: inline-block;
-    padding: 10px 15px; /* 버튼의 패딩 설정 */
-    font-size: 1.2em; /* 버튼의 폰트 크기 설정 */
-    color: white; /* 버튼 글씨 색상 */
-    background-color: #e50914; /* 버튼 배경 색상 */
-    text-align: center; /* 텍스트 중앙 정렬 */
-    border-radius: 10px; /* 둥근 버튼을 위해 50% 설정 */
-    border: 2px solid white; /* 흰색 테두리 설정 */
-    text-decoration: none; /* 링크 밑줄 제거 */
-    margin-left: 10px; /* 공지사항과의 간격 설정 */
-}
-
-.notice_more_btn:hover {
-    background-color: black; /* 버튼 hover 시 배경색 변경 */
-    border-color: #e50914; /* hover 시 테두리 색상 변경 */
-}
+		
     </style>
 </head>
 <body>
@@ -269,20 +294,17 @@
                         <a href="faq?selected=특별관" class="button-link">특별관</a>
                         <a href="faq" class="button-link">더보기</a>
                     </div>
-                    <br>
-                 
                 </div>
-
                 <div class="notice_area">
-    <span class="tit">공지사항</span>
-    <!-- 버튼으로 변환된 링크 -->
-    <a href="news" class="notice_more_btn">+</a>
-    <ul class="list">
-        <c:forEach var="news" items="${newsList}">
-            <li><a href="newsDetail?id=${news.id}" class="notice_list">[${news.selected}]  ${news.title}</a></li>
-        </c:forEach>
-    </ul>
-</div>
+    			<span class="tit">공지사항</span>
+    			<!-- 버튼으로 변환된 링크 -->
+    			<a href="news" class="notice_more_btn">+</a>
+    			<ul class="list">
+        		<c:forEach var="news" items="${newsList}">
+            		<li><a href="newsDetail?id=${news.id}" class="notice_list">[${news.selected}]  ${news.title} ${news.created_at}</a></li>
+        		</c:forEach>
+    			</ul>
+				</div>
             </div>	
         </div>
     </div>
