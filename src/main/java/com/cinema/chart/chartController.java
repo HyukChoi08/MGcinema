@@ -56,6 +56,7 @@ public String chartList() {
 		jo.put("imagepath",cdto.getImagepath());
 		jo.put("reservation",cdto.getReservation());
 		jo.put("mname", cdto.getMname());
+		jo.put("releasedate", cdto.getReleasedate());
 				
 		ja.put(jo);
 	}
@@ -108,6 +109,7 @@ public String chartList11() {
 		jo.put("imagepath",cdto.getImagepath());
 		jo.put("reservation",cdto.getReservation());
 		jo.put("mname", cdto.getMname());
+		jo.put("releasedate", cdto.getReleasedate());
 		
 		ja.put(jo);
 	}

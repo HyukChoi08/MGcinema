@@ -7,16 +7,25 @@
     <title>되나연</title>
     <style>
 
+body {
+    display: flex;
+    flex-direction: column; /* 세로 방향으로 배치 */
+    justify-content: space-between; /* 푸터를 아래쪽으로 이동 */
+    align-items: center; /* 가운데 정렬 */
+    height: 100vh; /* 뷰포트 높이와 같게 설정 */
+    background-color: black;
+    color: white;
+}
 .vertical-container1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 1000px;
     height: 100vh; /* 또는 필요한 높이 설정 */
     padding: 20px; /* 필요에 따라 패딩 추가 */
     box-sizing: border-box;
-    margin-top:400px;
-    margin-bottom:335px;
+    margin-top:150px;
+    margin-bottom:100px;
 }
 
 .vertical-container {
@@ -41,6 +50,7 @@ ol, ul {
      margin: 0; /* 기본 마진 제거 */
      list-style-type: none; /* 숫자 지우는 것 */
 }
+
 #appearinfo{
 	display:none;
 	}
@@ -57,6 +67,10 @@ ol, ul {
     padding: 16px; /* 내부 여백 추가 */
     border-radius: 8px; /* 모서리 둥글게 */
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 그림자 추가 */
+}
+a {
+    text-decoration-line: none;
+    color:white;
 }
 
 /* 최대 4개의 아이템만 표시 */
@@ -76,7 +90,7 @@ ol, ul {
                         <div>${chartList3.mname}</div>
                         <div>예매율 ${chartList3.reservation} %</div>
                         <div>
-                            <dl>
+                            <dl style="text-align: left;">
                                 <dt>감독:&nbsp;${chartList3.director}</dt>
                                 <dt>배우 :&nbsp;${chartList3.cast}</dt>
                                 <dt>장르 : &nbsp;${chartList3.genre}/관람가:&nbsp;${chartList3.age}/상영시간:&nbsp;${chartList3.runningtime}</dt>
@@ -95,7 +109,7 @@ ol, ul {
                             <li>상영시간</li>
                         </ul>
                     </div>
-                    <div style="width:800px" id="movieinfo">${chartList3.movieinfo}</div>
+                    <div style="width:800px" id="movieinfo">${chartList3.movieinfo}</div><br><br>
                     <div>평점/리뷰
                         <span>
                             <div>
@@ -111,7 +125,7 @@ ol, ul {
 		                                    <input type="hidden" id="moviechart" value="'+chartId+'">
 		                                    <input type="hidden" id="idcheck"><input type="hidden" id="recommendid">
 		                                    <input type="hidden" id="idname"><textarea id="reviewcomment" style="width:700px;height:100px;"></textarea>
-		                                    <button id="putcomment">리뷰등록</button>
+		                                    <button id="putcomment" style="width: auto; padding: 8px 20px; background-color:#E6E6FA; color: greyblue; border: none; border-radius: 5px;">리뷰등록</button>
 	                                    </li>
                                     </ul>
                                 </div>
@@ -154,6 +168,8 @@ ol, ul {
     </div>
     <%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
 
+
+</body>
     <script src="https://code.jquery.com/jquery-latest.js"></script>
     <script>
     
@@ -394,5 +410,4 @@ ol, ul {
         });
         
     </script>
-</body>
 </html>

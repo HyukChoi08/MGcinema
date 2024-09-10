@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cinema.chart.chartDAO"><!--무비차트-->
 <select id ="chartList" resultType="com.cinema.chart.chartDTO">
-	 select id,imagepath ,reservation,mname from movie order by id 
+	 select id,imagepath ,reservation,mname,releasedate from movie order by releasedate 
 	</select>
 	
 <select id ="chartList1" resultType="com.cinema.chart.chartDTO">
-	 select id,imagepath ,reservation,mname from movie order by reservation desc
+	 select id,imagepath ,reservation,mname,releasedate from movie order by reservation desc
 	</select>
 	
 <select id ="chartList2" resultType="string" parameterType="int">
