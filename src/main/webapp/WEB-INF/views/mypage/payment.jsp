@@ -64,7 +64,7 @@
 				<ul>
 					<li><a href="/myhome">MY HOME</a></li>
 					<li><a href="/reservation">나의 예매정보</a></li>
-					<li><a href="/payment">스토어 결제 내역</a></li>
+					<li><a href="/payment">스토어 결제</a></li>
 					<li><a href="/inquiry">1:1 문의</a></li>
 					<li><a href="/profile">개인 정보 변경</a></li>
 					<li><a href="/cancel">회원 탈퇴</a></li>
@@ -80,11 +80,12 @@
 						<table>
 							<thead>
 								<tr>
-									<th>주문번호</th>
+									<th>번호</th>
 									<th>상품명</th>
 									<th>구성</th>
 									<th>결제금액</th>
 									<th>구매일</th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -99,7 +100,7 @@
 												<td>${getPlist.totalprice}</td>
 												<td>${getPlist.created}</td>
 												<td>
-													<button class="cancel-btn" data-id="${getPlist.id}">취소</button>
+													<button class="cancel-btn" data-id="${getPlist.id}">결제취소</button>
 												</td>
 											</tr>
 										</c:forEach>
@@ -143,7 +144,7 @@
 					<table>
 						<thead>
 							<tr>
-								<th>주문번호</th>
+								<th>번호</th>
 								<th>상품명</th>
 								<th>구성</th>
 								<th>결제금액</th>
@@ -153,9 +154,10 @@
 						<tbody>
 							<c:choose>
 								<c:when test="${not empty canceledPayments}">
-									<c:forEach var="payment" items="${canceledPayments}">
-										<tr>
-											<td>${payment.id}</td>
+									<c:forEach var="payment" items="${canceledPayments}"
+									varStatus="status1">
+											<tr>
+												<td>${status1.index + 1}</td>
 											<td>${payment.itemName}</td>
 											<td>${payment.composition}</td>
 											<td>${payment.totalprice}</td>

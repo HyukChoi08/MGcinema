@@ -71,7 +71,7 @@ String customer_id = (String) session.getAttribute("uid");
 				<ul>
 					<li><a href="/myhome">MY HOME</a></li>
 					<li><a href="/reservation">나의 예매정보</a></li>
-					<li><a href="/payment">스토어 결제 내역</a></li>
+					<li><a href="/payment">스토어 결제</a></li>
 					<li><a href="/inquiry">1:1 문의</a></li>
 					<li><a href="/profile">개인 정보 변경</a></li>
 					<li><a href="/cancel">회원 탈퇴</a></li>
@@ -132,25 +132,33 @@ String customer_id = (String) session.getAttribute("uid");
 					</div>
 
 					<!-- 문의 내역 섹션 -->
-					<div>
-
-						<div class="ask-section">
-							<h3>예매 취소 내역</h3>
-							<button class="button" onclick="location.href='/cinema'">CGV
-								영화 예매 바로가기</button>
-						</div>
-					</div>
-					<!-- My CGV Home 섹션 -->
-					<div class="link">
+					<div class="div2">
+				
+						<div class="div3" style= "border: 0px;">
+							<div class="link">
 						<ul>
-							<li><a href=/chart>Movie Home</a></li>
-							<li><a href=/ageinfo>등급영화 보기</a></li>
-							<li><a href=/ticket>상영중인 영화</a></li>
-							<li><a href=/serviceHome>고객센터 바로가기</a></li>
-							<li><a href=/store>스토어 바로가기</a></li>
+							<li><a href=/chart>Movie Home</a></li><br>
+							<li><a href=/ageinfo>등급영화 보기</a></li><br>
+							<li><a href=/ticket>상영중인 영화</a></li><br>
+							<li><a href=/serviceHome>고객센터 바로가기</a></li><br>
+							<li><a href=/store>스토어 바로가기</a></li><br>
 
 						</ul>
 					</div>
+							
+						</div>
+						<div class="div3">
+							<h3>1:1 문의 작성하기 <br></h3>
+							
+						</div>
+						<div class="div3">
+						<h3>최근 스토어 결제이력</h3>
+						</div>
+					</div>
+					
+					<!-- My CGV Home 섹션 -->
+					<button class="button" onclick="location.href='/cinema'">CGV
+								영화 예매 바로가기</button>
 					<br> <br> <br>
 
 					<!-- 푸터 섹션 -->

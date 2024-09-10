@@ -91,6 +91,10 @@ form input[type="submit"]:hover {
 	background-color: #d10813; /* 마우스 올렸을 때 색상 */
 	
 }
+.link{
+	margin-bottom: 15px; 
+	text-align: left;
+}
 
 /* 프로필 섹션 스타일 */
 .profile-section {
@@ -115,7 +119,17 @@ form input[type="submit"]:hover {
 .profile-section .profile-info {
 	flex-grow: 1; /* 남은 공간 차지 */
 }
-
+.cancel-btn button{
+	border: 1px solid black;	
+	background-color: black; 
+	color: white; /* 텍스트 색상 */
+	padding: 1px 5px; /* 버튼 안쪽 여백 */
+	text-align: center; /* 텍스트 중앙 정렬 */
+	border-radius: 3px; /* 모서리 둥글게 */
+	text-decoration: none; /* 링크 밑줄 제거 */
+	display: inline-block; /* 인라인 블록 요소로 설정 */
+	transition: background-color 0.3s ease; /* 배경색 변경 시 애니메이션 추가 */
+}
 .button {
 	background-color: #808080; /* 버튼 배경색 */
 	color: white; /* 텍스트 색상 */
@@ -124,12 +138,12 @@ form input[type="submit"]:hover {
 	border-radius: 3px; /* 모서리 둥글게 */
 	text-decoration: none; /* 링크 밑줄 제거 */
 	display: inline-block; /* 인라인 블록 요소로 설정 */
-	margin-top: 10px; /* 위쪽 여백 */
+	
 	transition: background-color 0.3s ease; /* 배경색 변경 시 애니메이션 추가 */
 }
 
 .button:hover {
-	background-color: #3a3d3f; /* 버튼에 마우스 올렸을 때 색상 */
+	background-color: #c3c3c3; /* 버튼에 마우스 올렸을 때 색상 */
 }
 
 /* 메인 컨테이너 스타일 */
@@ -152,7 +166,7 @@ form input[type="submit"]:hover {
 	box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* 사이드바 그림자 효과 */
 	height: fit-content; /* 내용에 맞춘 높이 */
 	border-radius: 10px; /* 모서리 둥글게 */
-	flex: 1 1 20%; /* 전체 공간에서 30% 차지 */
+	flex: 1 1 15%; /* 전체 공간에서 30% 차지 */
 }
 
 .sidebar ul {
@@ -189,10 +203,10 @@ font-size:20px;
 	border: 2px solid #808080;
 	padding: 25px; /* 패딩 설정 */
 /* 	background-color: white; 배경색 */
-	margin-left: 5px; /* 사이드바와의 간격 */
+	margin-left: -5px; /* 사이드바와의 간격 */
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
 	border-radius: 10px; /* 모서리 둥글게 */
-	flex: 1 1 80%; /* 전체 공간에서 70% 차지 */
+	flex: 1 1 85%; /* 전체 공간에서 70% 차지 */
 	margin-bottom: 300px;
 }
 
@@ -210,7 +224,22 @@ font-size:20px;
 	border: 1px solid #ddd; /* 테두리 색상 */
 	border-radius: 5px; /* 모서리 둥글게 */
 }
-
+/*마이페이지 홈 블럭*/
+.div2{
+	display: flex;
+	margin-bottom: 10px;
+	/* padding: 10px; */
+	/* background-color: #f7f7f7; 배경색 */
+	
+	border-radius: 5px; /* 모서리 둥글게 */
+}
+.div3{
+	width:30%;
+	margin: 5px;
+	padding: 10px;
+	border: 1px solid #ddd; /* 테두리 색상 */
+	border-radius: 5px; /* 모서리 둥글게 */
+}
 /* 관리자 응답 스타일 */
 .response {
 	margin-top: 40px;

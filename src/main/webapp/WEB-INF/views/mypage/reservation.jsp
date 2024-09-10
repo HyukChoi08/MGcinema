@@ -63,7 +63,7 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 				<ul>
 					<li><a href="/myhome">MY HOME</a></li>
 					<li><a href="/reservation">나의 예매정보</a></li>
-					<li><a href="/payment">스토어 결제 내역</a></li>
+					<li><a href="/payment">스토어 결제</a></li>
 					<li><a href="/inquiry">1:1 문의</a></li>
 					<li><a href="/profile">개인 정보 변경</a></li>
 					<li><a href="/cancel">회원 탈퇴</a></li>
@@ -87,6 +87,7 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 									<th>시작</th>
 									<th>종료</th>
 									<th>예매시간</th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody>
