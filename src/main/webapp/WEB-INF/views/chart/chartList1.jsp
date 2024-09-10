@@ -77,6 +77,9 @@ a {
 .comment-list-container li:nth-child(n+5) {
     display: none;
 }
+#commentList{
+color:black;
+}
     </style>
 </head>
 <body>
