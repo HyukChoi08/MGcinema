@@ -29,11 +29,13 @@
             <div class="customer_top">
                 <h2 class="tit">${newsDetail.title}</h2>
                 <p class="stit">작성일: ${newsDetail.created_at}</p>
+                <p class="click">조회수: ${newsDetail.views}</p>
             </div>
             <div class="view_area">
                 <p>${newsDetail.content}</p>
+           		
             </div>
-            <p>조회수: ${newsDetail.views}</p>
+           
 
             <div class="btn-group">
                 <button class="btn-list" onclick="location.href='/news'">목록</button>
