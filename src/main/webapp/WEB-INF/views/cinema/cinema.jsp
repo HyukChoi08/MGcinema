@@ -6,7 +6,7 @@
 html, body, div, applet, object, iframe, h2, h3, h4, h5, h6, blockquote, pre, 
 a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, 
 small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label,
- legend, table, caption, tbody, tfoot, thead, tr, th{
+ legend, table, caption{
     font-family: 'Noto Sans KR', 'CJONLYONENEW', '맑은 고딕', '돋움', Dotum, sans-serif;
     font-size: 100%;
     margin: 0;
@@ -174,15 +174,21 @@ span{
     border: none;
     overflow: hidden;
     
+    
 }
 .calendar-body {
     padding: 10px;
     background-color:black;
+    
+}
+td{
+	border-radius:6px;
 }
 
 #calendar-table {
     width: 100%;
     border-collapse: collapse;
+    
 }
 
 #calendar-table th, #calendar-table td {
@@ -191,7 +197,9 @@ span{
     text-align: center;
     padding: 10px;
     border: 1px solid #ddd;
+    
 }
+
 .td-link{
  cursor: pointer;
  width:70px;
@@ -439,10 +447,10 @@ $(document)
 	
 })
 .on('click','.container .item', function() {
-        // 클릭된 div의 data-image 속성에서 이미지 URL을 가져옴
+        
         var img = $(this).data('image');
         console.log(img);
-        // 이미지 요소의 src 속성을 새 URL로 업데이트
+        
         $('#backgroundImage').attr('src', img);
     })
 function showage(){

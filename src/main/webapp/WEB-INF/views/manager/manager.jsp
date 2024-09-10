@@ -10,7 +10,8 @@
 <body>
 <%@ include file="/WEB-INF/views/header/header.jsp" %>
 <div class="manager-page">
-<div class="container">
+<button id="schebtn">상영정보</button><button id="moviebtn">영화</button><button id="itembtn">스토어</button><button id="answerbtn">1:1문의</button><button id="newsbtn">공지</button>
+<div class="container" id="s">
 	<div class="movieinsert1">
 		<h2>영화 상영정보 추가</h2>
 			<table>
@@ -37,7 +38,7 @@
 		</table>
 	</div>
 </div>
-<div class="container">
+<div class="container" id="m">
 	<div class="movieinsert3">
 		<h2>영화추가</h2>
 			<table>
@@ -50,7 +51,7 @@
 										<option value="미정">미정</option>
 									</select></td></tr>
 				<tr><td>러닝타임</td><td><input type="text" id="runtime"></td></tr>
-				<!-- <tr><td>이미지</td><td><input type="file" id="itemfile" style="width:200px"></td></tr> -->
+				<tr><td>이미지</td><td><input type="file" id="moviefile" style="width:200px"></td></tr>
 				<tr><td>이미지경로</td><td><input type="text" id="image" value="/chartImage/.jpg"></td></tr>
 				<tr><td>감독</td><td><input type="text" id="director"></td></tr>
 				<tr><td>출연배우</td><td><input type="text" id="cast"></td></tr>
@@ -70,7 +71,7 @@
 		</table>
 	</div>
 </div>
-<div class="container">
+<div class="container" id="i">
 	<div class="iteminfo">
 		<h2>상품추가</h2>
 			<table>
@@ -110,7 +111,7 @@
 		</table>
 	</div>
 </div>
-<div class="container">
+<div class="container" id="a">
 	<div class="answerbox">
 		<h2>1:1문의답변</h2>
 			<table>
@@ -134,7 +135,7 @@
 		</table>
 	</div>
 </div>
-<div class="container">
+<div class="container" id="n">
 	<div class="newsupbox">
 		<h2>공지등록</h2>
 			<table>
@@ -161,7 +162,7 @@
 	</div>
 </div>
 </div>
-<%@ include file="/WEB-INF/views/footer/footer.jsp" %>
+<%-- <%@ include file="/WEB-INF/views/footer/footer.jsp" %> --%>
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
@@ -201,8 +202,8 @@ $(document)
 	
 })
 .on('click','#mbtn',function(){
-	if($('#mname').val()=='' || $('#age').val()=='' || $('#runtime').val()=='' || $('#minfo').val()==''
-		|| $('#director').val()==''|| $('#cast').val()==''|| $('#genre').val()==''|| $('#rdate').val()==''){
+	if($('#mname').val()=='' || $('#age').val()=='' || $('#runtime').val()=='' || $('#minfo').val()=='' ||
+		 $('#director').val()==''|| $('#cast').val()==''|| $('#genre').val()==''|| $('#rdate').val()==''){
 		alert("제대로")
 	}else{
 		let mname = $('#mname').val();
@@ -215,30 +216,42 @@ $(document)
 		let rdate = $('#rdate').val();
 		let minfo = $('#minfo').val();
 		console.log(mname,age,runtime,image,director,cast,genre,rdate,minfo);
-		clear();
 		
-			$.post('/moviein',{mname:mname,age:age,runtime:runtime,image:image,director:director,cast:cast,
-				genre:genre,rdate:rdate,minfo:minfo},
-				function(data){
-					showmovie();
-			})
+		let formData = new FormData();
+        formData.append('moviefile', $('#moviefile')[0].files[0]); // Add the file
+        formData.append('mname', $('#mname').val());
+        formData.append('age', $('#age').val());
+        formData.append('runtime', $('#runtime').val());
+        formData.append('image', $('#image').val());
+        formData.append('director', $('#director').val());
+        formData.append('cast', $('#cast').val());
+        formData.append('genre', $('#genre').val());
+        formData.append('rdate', $('#rdate').val());
+        formData.append('minfo', $('#minfo').val());
+		
+        clear();
+        
+        $.ajax({
+            url: '/moviein',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                
+                showmovie();
+            }
+        });
+		
 	}
-
+		
 })
 .on('click','#ibtn',function(){
 	if($('#itemname').val()=='' || $('#itemprice').val()=='' || $('#disprice').val()=='' || $('#conposition').val()==''
 		|| $('#origin').val()==''){
 		alert("제대로")
 	}else{
-	/*  	let itemname = $('#itemname').val();
-		let itemprice = $('#itemprice').val();
-		let disprice = $('#disprice').val();
-		let conposition = $('#conposition').val();
-		let origin = $('#origin').val();
-		let itemimage = $('#itemimage').val();  */
-		
-		/* console.log(itemname,itemprice,disprice,conposition,origin,itemimage); */
-		
+	
 		let formData = new FormData();
         formData.append('itemfile', $('#itemfile')[0].files[0]); // Add the file
         formData.append('itemname', $('#itemname').val());
@@ -249,11 +262,7 @@ $(document)
         formData.append('itemimage', $('#itemimage').val());
 		console.log(formData);
 		clear();
-			/* $.post('/itemin',{itemname:itemname,itemprice:itemprice,disprice:disprice,conposition:conposition,
-				origin:origin,itemimage:itemimage},
-				function(data){
-					showitem();
-			}) */
+		
         $.ajax({
             url: '/itemin',
             type: 'POST',
@@ -261,7 +270,7 @@ $(document)
             contentType: false,
             processData: false,
             success: function(data) {
-                $('#message').text('Upload successful!');
+              
                 showitem();
             }
         });
@@ -483,6 +492,26 @@ $(document)
 		showinquiry();
 	})
 	
+})
+.on('click','#schebtn',function(){
+	$('#s').addClass('visible');
+	$('#m,#i,#a,#n').removeClass('visible').addClass('container');
+})
+.on('click','#moviebtn',function(){
+	$('#m').addClass('visible');
+	$('#s,#i,#a,#n').removeClass('visible').addClass('container');
+})
+.on('click','#itembtn',function(){
+	$('#i').addClass('visible');
+	$('#m,#s,#a,#n').removeClass('visible').addClass('container');
+})
+.on('click','#answerbtn',function(){
+	$('#a').addClass('visible');
+	$('#m,#i,#s,#n').removeClass('visible').addClass('container');
+})
+.on('click','#newsbtn',function(){
+	$('#n').addClass('visible');
+	$('#m,#i,#a,#s').removeClass('visible').addClass('container');
 })
 function mlist(){
 	$.post('/mlist',{},function(data){

@@ -183,16 +183,32 @@ public class ManagerController {
 	@PostMapping("/moviein")
 	@ResponseBody
 	public String moviein(HttpServletRequest req,Model model) {
-		String mname = req.getParameter("mname");
-		String age = req.getParameter("age");
-		String runtime = req.getParameter("runtime");
-		String image = req.getParameter("image");
-		String director = req.getParameter("director");
-		String cast = req.getParameter("cast");
-		String genre = req.getParameter("genre");
-		String rdate = req.getParameter("rdate");
-		String minfo = req.getParameter("minfo");
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) req;
+		
+		MultipartFile file = multipartRequest.getFile("moviefile");
+		String mname = multipartRequest.getParameter("mname");
+		String age = multipartRequest.getParameter("age");
+		String runtime = multipartRequest.getParameter("runtime");
+		String image = multipartRequest.getParameter("image");
+		String director = multipartRequest.getParameter("director");
+		String cast = multipartRequest.getParameter("cast");
+		String genre = multipartRequest.getParameter("genre");
+		String rdate = multipartRequest.getParameter("rdate");
+		String minfo = multipartRequest.getParameter("minfo");
 		float reservation = 0.0f;
+		
+	     
+        String uploadDir = "src/main/resources/static/chartImage";
+        File uploadDirectory = new File(Paths.get(uploadDir).toAbsolutePath().normalize().toString());
+        File destinationFile = new File(uploadDirectory, file.getOriginalFilename());
+        try {
+			file.transferTo(destinationFile);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        
 		mmdao.moviein(mname, age, runtime, image, director, cast, genre, rdate, minfo, reservation);
 		return "manager/manager";
 	}
@@ -215,17 +231,9 @@ public class ManagerController {
 		return Ty.toString();
 	}
 	@PostMapping("/itemin")
-	/* @ResponseBody */
+	@ResponseBody
 	public String itemin(HttpServletRequest req,Model model) {
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) req;
-		/*
-		 * String itemname = req.getParameter("itemname");
-		 * String itemprice = req.getParameter("itemprice");
-		 * String disprice = req.getParameter("disprice");
-		 * String conposition = req.getParameter("conposition");
-		 * String origin = req.getParameter("origin");
-		 * String itemimage = req.getParameter("itemimage");
-		 */
 		
 		 MultipartFile file = multipartRequest.getFile("itemfile");
          String itemname = multipartRequest.getParameter("itemname");
@@ -241,15 +249,13 @@ public class ManagerController {
          try {
 			file.transferTo(destinationFile);
 		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
          
 		mmdao.itemin(itemname, itemprice, disprice, conposition, origin, itemimage);
-		System.out.println("아이템입니다"+itemname+itemprice+ disprice+ conposition+ origin+ itemimage);
+
 		return "manager/manager";
 	}
 	@PostMapping("/newsin")
