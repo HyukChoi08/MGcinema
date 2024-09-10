@@ -21,7 +21,7 @@
 	}
 
 	#container {
-   	 	max-width: 1000px;
+   	 	max-width: 1250px;
     	margin: 20px auto;
     	display: flex;
     	flex-direction: column;
@@ -35,12 +35,12 @@
 	}
 
 	.sidebar {
-    	width: 20%;
+    	width: 250px;
     	padding: 15px;
     	background-color: #333; /* 사이드바 배경색 */
-    	box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
     	height: fit-content;
     	color: white; /* 사이드바 글씨색 */
+    	float: left; /* 사이드바가 왼쪽에 배치되도록 설정 */
 	}
 
 .sidebar ul {
@@ -70,6 +70,7 @@
     color: white; /* 메인 콘텐츠 글씨색 */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     border: 1px solid #fff; /* 메인 콘텐츠 테두리색 */
+    border-radius:10px;
 }
 
 .search_area {
@@ -148,8 +149,9 @@
 }
 
 .tbl_notice_list {
-    width: 100%;
+    width: 1000px;
     border-collapse: collapse;
+   
 }
 
 .tbl_notice_list th, .tbl_notice_list td {
@@ -163,11 +165,7 @@
     color: white; /* 헤더 글씨색 흰색으로 설정 */
 }
 
-.tbl_notice_list th:nth-child(1),
-.tbl_notice_list th:nth-child(2),
-.tbl_notice_list th:nth-child(3),
-.tbl_notice_list th:nth-child(4),
-.tbl_notice_list th:nth-child(5) {
+ {
     border-bottom: 2px solid #fff; /* 각 열의 하단에 흰색 선 추가 */
 }
 

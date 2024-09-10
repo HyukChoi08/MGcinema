@@ -17,7 +17,7 @@
         }
         
         #container {
-            max-width: 1000px;
+            max-width: 1250px;
             margin: 20px auto;
             display: flex;
             flex-direction: column;
@@ -31,7 +31,7 @@
         }
 
         .sidebar {
-            width: 20%;
+            width: 250px;
             padding: 15px;
             background-color: #333; /* 사이드바 배경색 */
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
@@ -65,7 +65,7 @@
             color: white; /* 메인 콘텐츠 글씨색 */
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             border: 1px solid #fff; /* 메인 콘텐츠 테두리색 */
-            border-radius: 5px;
+            border-radius: 10px;
         }
 
         .search_area {
@@ -131,14 +131,14 @@
             border-bottom: 2px solid white;
         }
 
-        .tbl_area {
-            margin-bottom: 20px;
-        }
-
+      
         .tbl_notice_list {
-            width: 100%;
+            width: 1000px;
             border-collapse: collapse;
         }
+        .tbl_notice_list td.title {
+   			 width: 400px; /* 제목 칸의 너비를 50%로 설정 */
+		}
 
         .tbl_notice_list th, .tbl_notice_list td {
             padding: 10px;
@@ -306,14 +306,14 @@
                             <tr>
                                 <td>${news.id}</td>
                                 <td>${news.selected}</td>
-                               <td><a href="/newsDetail?id=${news.id}">${news.title}</a></td>
+                               <td class="title"><a href="/newsDetail?id=${news.id}">${news.title}</a></td>
                                 <td>${news.created_at}</td>
                                 <td>${news.views}</td>
                             </tr>
                         </c:forEach>
                     </tbody>
-                </table>
-            </div>
+                	</table>
+            	</div>
 
             <div class="paging">
     <c:if test="${currentPage > 1}">
