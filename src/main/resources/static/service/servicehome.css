@@ -222,12 +222,12 @@
 }
 .emoji-search {
     display: inline-block;
-    width: 24px; /* 이미지의 너비 */
-    height: 24px; /* 이미지의 높이 */
+    width: 30px; /* 이미지의 너비 */
+    height: 30px; /* 이미지의 높이 */
     background-image: url('/service/search.png'); /* 이미지 경로 */
     background-size: contain; /* 이미지 크기 조절 */
     background-repeat: no-repeat; /* 이미지 반복 방지 */
     vertical-align: middle; /* 텍스트와 이미지 정렬 */
-    background-color:white;
+    background-color:black;
 }
 
