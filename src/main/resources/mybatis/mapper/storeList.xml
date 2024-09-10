@@ -2,17 +2,53 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cinema.mypage.MypageDAO">
 
-   <!-- 결제 내역 리스트 -->
-    <select id="getStoreList" parameterType="map" resultType="com.cinema.mypage.StoreListDTO">
-        SELECT * 
-        FROM storepay 
-        WHERE customer_id = #{customerId} 
-        LIMIT #{offset}, #{limit}
-    </select>
+	<!-- 결제 내역 리스트 -->
+	<select id="getStoreList" parameterType="map"
+		resultType="com.cinema.mypage.StoreListDTO">
+		SELECT *
+		FROM storepay
+		WHERE customer_id = #{customerId}
+		ORDER BY created DESC
+		LIMIT #{offset}, #{limit}
+	</select>
 
-    <select id="getTotalCount" parameterType="String" resultType="int">
-        SELECT COUNT(*) 
-        FROM storepay 
+	<select id="getTotalCount" parameterType="String"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM storepay
+		WHERE customer_id =
+		#{customerId}
+	</select>
+
+	<!-- 결제 내역 조회 (id 기반) -->
+	<select id="getPaymentById" parameterType="int"
+		resultType="com.cinema.mypage.StoreListDTO">
+		SELECT * FROM storepay WHERE id = #{id}
+	</select>
+
+	<!-- 결제 취소 내역 삽입 -->
+	<insert id="insertCanceledPayment"
+		parameterType="com.cinema.mypage.StoreListDTO">
+		INSERT INTO storepaydelete (customer_id, id, item_name,
+		totalprice, created,
+		updated)
+		VALUES (#{customer_id}, #{id},
+		#{item_name}, #{totalprice}, #{created},
+		NOW())
+	</insert>
+
+	<!-- 결제 내역 삭제 (id 기반) -->
+	<delete id="deletePayment" parameterType="int">
+		DELETE FROM storepay
+		WHERE id = #{id}
+	</delete>
+	
+	<!-- 취소내역 불러오기 -->
+	 <select id="getCanceledPayments" parameterType="String" resultType="com.cinema.mypage.StoreListDTO">
+        SELECT *
+        FROM storepaydelete
         WHERE customer_id = #{customerId}
+        ORDER BY created DESC
     </select>
 </mapper>
+
