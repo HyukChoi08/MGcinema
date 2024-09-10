@@ -1,14 +1,6 @@
 @charset "UTF-8";
 
 
-.home-page {
-    background-color: black;;
-    min-height: 100vh;
-    box-sizing: border-box;
-}
-
-
-
 /* 슬라이더를 중앙에 배치하고, 컨테이너 너비 조정 */
 .promo-container {
     margin: 0 auto; /* 가운데 정렬 */

@@ -5,7 +5,6 @@
     max-width: 400px;         /* 최대 너비 설정 */
     margin: 0 auto;           /* 중앙 정렬 */
     padding: 20px;            /* 여백 설정 */
-    background-color: #000000; /* 배경색 설정 */
     border: 2px solid #808080;
     border-radius: 8px;       /* 모서리 둥글게 */
     margin-top: 200px;         /* 상단 여백 추가 -> 헤더와 간격 설정 */

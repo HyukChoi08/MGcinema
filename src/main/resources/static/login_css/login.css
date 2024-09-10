@@ -5,21 +5,7 @@
     max-width: 400px;         /* 최대 너비 설정 */
     margin: 0 auto;           /* 중앙 정렬 */
     padding: 20px;            /* 여백 설정 */
-    
-    
-    
-    /* background-color: #ffffff; */ /* 배경색 추가 */
-    
-    
-     background-color: #000000; /*  배경색 설정 */
-	 
-	 border: 2px solid #808080;
-	 
-	
-	 
-	 
-	 
-     
+	border: 2px solid #808080;
     border-radius: 8px;       /* 모서리 둥글게 */
    /*  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */ /* 그림자 추가 */
     margin-top: 200px;         /* 상단 여백 추가 ->> 이게 다른페이지들에 다 있으면 좋겠네! */
@@ -83,9 +69,6 @@ button:hover {
 
 
 
-
-
-
 /* 로그인 링크 스타일 */
 .login-links {
     margin-top: 40px;         /* 링크와 폼 간의 간격 설정 */
@@ -106,24 +89,9 @@ button:hover {
 }
 
 
-
-
-
-
 /* 웹 화면 여백 조정 */
 @media (min-width: 1024px) {
     .signup-page {
         padding-bottom: 0px;
     }
-}
-
-
-/* *{
-	 background-color: #000000; 배경색 설정
-} */
-
-body {
-background-color: #000000; 
-   
-
 }

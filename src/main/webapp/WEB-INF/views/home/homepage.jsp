@@ -14,16 +14,6 @@
 </head>
 <body>
     <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
-    <div class="home-page">
-       <!--  <nav class="navbar">
-            <ul class="nav-links">
-                <li><a href="/Movie">영화</a></li>
-                <li><a href="/cinema">극장</a></li>
-                <li><a href="/ticket">예매</a></li>
-                <li><a href="/store">스토어</a></li>
-            </ul>
-        </nav> -->
-
         <div class="promo-container">
             <div class="slider">
                 <div><img src="/homepage_image/image_02.jpg" alt="Promotion 2" class="image-slide" /></div>
@@ -31,15 +21,6 @@
                 <div><img src="/homepage_image/image_04.jpg" alt="Promotion 4" class="image-slide" /></div>
             </div>
         </div>
-
-<!--         <nav class="navbar">
-            <ul class="nav-links">
-                <li><a href="/Movie">무비차트</a></li>
-                <li><a href="/cinema">상영예정작</a></li>
-                <li><a href="/all-movies">전체보기</a></li>
-            </ul>
-        </nav> -->
-    </div>
 
     <%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
 
