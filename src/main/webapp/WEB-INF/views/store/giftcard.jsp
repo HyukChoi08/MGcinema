@@ -275,6 +275,9 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
 
 #store-link:hover {
     text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
+}
+.hidden {
+    display: none;
 }   
   
     </style>
@@ -309,90 +312,23 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
                         </strong> 
                         <div class="separator2"></div>
                         <ul class="category_inner">
-                          	<li class="product" id="7">
-                                <a href="/details?id=7" class="btn_category_product">
-                                    <img src="/store_images/기프트카드1.png"></a>
-                                     <div class="icon-container">                                                                                                                                               
-                                        <a href="/storepay" class="icon-item icon-right">
-                                            <img src="/store_images/구매하기.png" alt="Right Icon" class="buyButton">
-                                            <span class="hover-text">구매하기</span>                          
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <span class="product-name">기프트카드1</span><br>
-                                        <span class="giftcardtext">금액충전형</span>
-                                    </div>     
-                            </li>   
-                       		<li class="product" id="8">
-                                <a href="/details?id=8" class="btn_category_product">
-                                    <img src="/store_images/기프트카드2.png"></a>
-                                     <div class="icon-container">                                                                                                                                               
-                                        <a href="/storepay" class="icon-item icon-right">
-                                            <img src="/store_images/구매하기.png" alt="Right Icon" class="buyButton">
-                                            <span class="hover-text">구매하기</span>                          
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <span class="product-name">기프트카드2</span><br>
-                                        <span class="giftcardtext">금액충전형</span>
-                                    </div>     
-                            </li>
-                 			<li class="product" id="9">
-                                <a href="/details?id=9" class="btn_category_product">
-                                    <img src="/store_images/기프트카드3.png"></a>
-                                     <div class="icon-container">                                                                                                                                               
-                                        <a href="/storepay" class="icon-item icon-right">
-                                            <img src="/store_images/구매하기.png" alt="Right Icon" class="buyButton">
-                                            <span class="hover-text">구매하기</span>                          
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <span class="product-name">기프트카드3</span><br>
-                                        <span class="giftcardtext">금액충전형</span>
-                                    </div>     
-                            </li>
-                           	<li class="product" id="10">
-                                <a href="/details?id=10" class="btn_category_product">
-                                    <img src="/store_images/기프트카드4.png"></a>
-                                     <div class="icon-container">                                                                                                                                               
-                                        <a href="/storepay" class="icon-item icon-right">
-                                            <img src="/store_images/구매하기.png" alt="Right Icon" class="buyButton">
-                                            <span class="hover-text">구매하기</span>                          
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <span class="product-name">기프트카드4</span><br>
-                                        <span class="giftcardtext">금액충전형</span>
-                                    </div>     
-                            </li>
-                            	<li class="product" id="11">
-                                <a href="/details?id=11" class="btn_category_product">
-                                    <img src="/store_images/기프트카드5.png"></a>
-                                     <div class="icon-container">                                                                                                                                               
-                                        <a href="/storepay" class="icon-item icon-right">
-                                            <img src="/store_images/구매하기.png" alt="Right Icon" class="buyButton">
-                                            <span class="hover-text">구매하기</span>                          
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <span class="product-name">기프트카드5</span><br>
-                                        <span class="giftcardtext">금액충전형</span>
-                                    </div>     
-                            </li>
-                            	<li class="product" id="12">
-                                <a href="/details?id=12" class="btn_category_product">
-                                    <img src="/store_images/기프트카드6.png"></a>
-                                     <div class="icon-container">                                                                                                                                               
-                                        <a href="/storepay" class="icon-item icon-right">
-                                            <img src="/store_images/구매하기.png" alt="Right Icon" class="buyButton">
-                                            <span class="hover-text">구매하기</span>                          
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <span class="product-name">기프트카드6</span><br>
-                                        <span class="giftcardtext">금액충전형</span>
-                                    </div>     
-                            </li>
+                        	<c:forEach items="${arStore}" var="Store">
+	                          	<li class="product" id="${Store.id}">
+	                                <a href="/details?id=${Store.id}" class="btn_category_product">
+	                                    <img src="${Store.image_path}" alt="${Store.item_name}"></a>
+	                                     <div class="icon-container">                                                                                                                                               
+	                                        <a href="/storepay" class="icon-item icon-right">
+	                                            <img src="/store_images/구매하기.png" alt="Right Icon" class="buyButton">
+	                                            <span class="hover-text">구매하기</span>                          
+	                                        </a>
+	                                    </div>
+	                                    <div class="product-info">
+	                                        <span class="product-name">${Store.item_name}</span><br>
+                                            <span class="original-price">${Store.price}</span>
+                                        	<span class="discounted-price">${Store.discount_price}</span>
+	                                    </div>     
+	                            </li>
+	                        </c:forEach>                                                                                                                    
                         </ul>
                     </li>
                 </ul>
@@ -409,6 +345,21 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
 <script>
 $(document)
 .ready(function() {
+	
+	 $('.product-info').each(function() {
+         // Find the price elements within the current product
+         var originalPrice = $(this).find('.original-price').text();
+         var discountedPrice = $(this).find('.discounted-price').text();
+         
+         // Compare prices and hide the discounted price if they are equal
+         if (originalPrice === discountedPrice) {
+             $(this).find('.discounted-price').addClass('hidden'); //값이 같으면 히든클래스에 넣어서 값을 숨긴다.
+         }
+     })
+	
+	
+	
+	
  	let customer_id= $('#userid').val();
  	console.log(customer_id);
 	 	 		
@@ -461,10 +412,18 @@ $(document)
 let selectedItems = []; // 전역 변수로 선언
 
 $('.buyButton').on('click', function(e) {
-    e.preventDefault(); // 링크의 기본 동작을 방지
+  
     let item_id = $(this).closest('.product').attr('id');
     console.log('item_id:', item_id);
-
+    
+    let userid=$('#userid').val();
+    
+    if (!userid) {
+        e.preventDefault(); // 클릭 시 기본 동작 방지
+        alert('로그인 후 이용해주세요.');
+        return;
+    }
+        
     $.ajax({
         url: '/selectitem',
         type: 'POST',
@@ -525,8 +484,8 @@ $('.buyButton').on('click', function(e) {
         error: function(xhr, status, error) {
             console.error('AJAX Error:', status, error);
         }
-    });
-});
+    })
+})
 //해상 사이트 이동하는거
 
 </script>

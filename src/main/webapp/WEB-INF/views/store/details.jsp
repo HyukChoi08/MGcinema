@@ -489,15 +489,14 @@ option {
                                         <span>${item.origin}</span>
                                     </c:when>
                                     <c:otherwise>
-                                        <span style="align-items: center; font-weight: bold; visibility: hidden;"></span>
-                                        <span id="aa">원산지</span>
+                                        <span style="align-items: center; font-weight: bold; visibility: hidden;"></span>                                 
                                         <span style="visibility: hidden;"> </span> 
                                     </c:otherwise>
                                 </c:choose>
                             </span>                         
                             <div class="right-align">
                                 <div class="quantity-container">
-                                    <input type="text" id="cnt" min="1" max="10" value="1" style="width:50px; margin-right:100px;">
+                                    <input type="text" id="cnt" min="1" max="10" value="1" readonly style="width:50px; margin-right:100px;">
                                     <div class="quantity-buttons">
                                         <button type="button" class="quantity-button" id="increase">+</button>
                                         <button type="button" class="quantity-button" id="decrease">-</button>
@@ -535,6 +534,10 @@ option {
 <script>
 
 function updateCartCount(customer_id) {
+	
+	
+
+	
     $.ajax({
         url: '/countcart',
         type: 'post',
@@ -666,19 +669,15 @@ $(document)
         $('#btncart').show();
     }
     
+         
+    
  let original= $('#original').text().trim();
  console.log("111="+original);
  if (original !== null && original !== '') {
      $('#original').text(original + '원');
  }
 
-// let currentUrl = window.location.href;
 
- // 비교할 URL을 정의합니다.
- //let targetUrl = 'http://localhost:8081/details?id=7';
-	
- //if(currentUrl==targetUrl){
-//	 $('#btncart').hide();}
  
  var queryString = window.location.search;
  var urlParams = new URLSearchParams(queryString);
@@ -701,29 +700,7 @@ $(document)
 			}
 })
 })
-/*
-.on('change','#cnt', function() { // 'change' 이벤트 사용
-    let cnt = $('#cnt').val();
-    
-    if (!cnt) {
-        cnt = 1; // 수량이 비어있거나 유효하지 않은 경우 기본값으로 1 설정
-    }
 
-    console.log(cnt);
-  
-    let discountText = $('#discount').text();
-	let discount = parseInt(discountText.split('원')[0].replace(/,/g, '')); 
-	    console.log("discount: " + discount);
-	    // 초기 가격을 할인 가격으로 설정
-	   let price = discount;   
-	  
-        let totalPrice = price * parseInt(cnt);
-        let total=$('#price').val(totalPrice.toLocaleString() + '원'); // 총 가격 표시 업데이트
-        $('#totalprice').val(totalPrice.toLocaleString()  );
-       
-  
-})
-*/
 .on('change','#giftprice',function(){
 	let giftprice=$('#giftprice option:selected').text();
 	console.log(giftprice);

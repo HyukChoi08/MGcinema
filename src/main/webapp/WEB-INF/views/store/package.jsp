@@ -21,9 +21,7 @@ color:white;
 color:white;
 }    
     
-    
-    
-    
+       
 ul, li {      
     list-style-type: none; 
     padding: 0; 
@@ -286,8 +284,13 @@ font-size: 14px; /* 취소선 가격 크기 조정 */
 
 #store-link:hover {
     text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
+}
+.hidden {
+    display: none;
 } 	
-	
+.icon-item.icon-right,icon-item icon-left{
+cursor: pointer;
+}	
     </style>
 </head>
 <body>
@@ -319,64 +322,28 @@ font-size: 14px; /* 취소선 가격 크기 조정 */
                         <strong class="category_title">패키지<strong class="category_dep">패키지입니다.</strong><br>                       
                         </strong> 
                         <div class="separator2"></div>
-                        <ul class="category_inner">
-                           <li class="product" id="1">
-                                <a href="/details?id=1" class="btn_category_product">  
-                                    <img src="/store_images/패키지1.png" alt="패키지1"></a>
+                        <ul class="category_inner">                   
+                         <c:forEach items="${arStore}" var="Store">
+                           <li class="product" id="${Store.id}">
+                                <a href="/details?id=${Store.id}" class="btn_category_product">  
+                                    <img src="${Store.image_path}" alt="${Store.item_name}"></a>
                                     <div class="icon-container">
 										<div class="icon-item icon-left" id="cart-link">
    										<img src="/store_images/장바구니.png" alt="Left Icon">
 							 			<span class="hover-text">장바구니</span>
 										</div>                                                                                                                     
-                                        <div class="icon-item icon-right">
+                                        <div class="icon-item icon-right" data-product-id="${Store.id}">
                                             <img src="/store_images/구매하기.png" alt="Right Icon" class="buyButton">
                                             <span class="hover-text">구매하기</span>                          
                                         </div>
                                     </div>
                                 <div class="product-info">
-                                    <span class="product-name">패키지1</span><br>
-                                        <span class="original-price">66,000원</span>
-                                        <span class="discounted-price">62,000원</span>
+                                    <span class="product-name">${Store.item_name}</span><br>
+                                        <span class="original-price">${Store.price}원</span>
+                                        <span class="discounted-price">${Store.discount_price}원</span>
                                 </div>
-                            </li>   
-                                 <li class="product" id="2">
-                                <a href="/details?id=2" class="btn_category_product">  
-                                    <img src="/store_images/패키지2.png" alt="패키지2"></a>
-                                    <div class="icon-container">
-										<div class="icon-item icon-left" id="cart-link">
-   										<img src="/store_images/장바구니.png" alt="Left Icon">
-							 			<span class="hover-text">장바구니</span>
-										</div>                                                                                                                     
-                                        <div class="icon-item icon-right">
-                                            <img src="/store_images/구매하기.png" alt="Right Icon" class="buyButton">
-                                            <span class="hover-text">구매하기</span>                          
-                                        </div>
-                                    </div>
-                                <div class="product-info">
-                                    <span class="product-name">패키지2</span><br>
-                                        <span class="original-price">37,000원</span>
-                                        <span class="discounted-price">35,000원</span>
-                                </div>
-                            </li>  
-                                 <li class="product" id="3">
-                                <a href="/details?id=3" class="btn_category_product">  
-                                    <img src="/store_images/패키지3.png" alt="패키지3"></a>
-                                    <div class="icon-container">
-										<div class="icon-item icon-left" id="cart-link">
-   										<img src="/store_images/장바구니.png" alt="Left Icon">
-							 			<span class="hover-text">장바구니</span>
-										</div>                                                                                                                     
-                                        <div class="icon-item icon-right">
-                                            <img src="/store_images/구매하기.png" alt="Right Icon" class="buyButton">
-                                            <span class="hover-text">구매하기</span>                          
-                                        </div>
-                                    </div>
-                                <div class="product-info">
-                                    <span class="product-name">패키지3</span><br>
-                                        <span class="original-price">20,000원</span>
-                                        <span class="discounted-price">18,000원</span>
-                                </div>
-                            </li>                       
+                            </li>
+                           </c:forEach>                                  
                         </ul>
                     </li>
                 </ul>
@@ -455,10 +422,11 @@ $(document).ready(function() {
      updateCartCount();
      
      $('.icon-left').on('click', function(event) {
- 	    event.preventDefault(); // 기본 동작을 막습니다.
+ 	    
  	    console.log('Icon left clicked');
 
  	    if (customer_id === '') {
+ 	    	event.preventDefault(); // 기본 동작을 막습니다.
  	        alert("로그인 후 이용해주세요");
  	        return false;
  	    }
@@ -554,9 +522,20 @@ $(document).ready(function() {
 let selectedItems = []; // 전역 변수로 선언
 
 $('.buyButton').on('click', function(e) {
-    e.preventDefault(); // 링크의 기본 동작을 방지
+   
     let item_id = $(this).closest('.product').attr('id');
     console.log('item_id:', item_id);
+    
+    
+  	let userid=$('#userid').val();
+    
+    if (!userid) {
+        e.preventDefault(); // 클릭 시 기본 동작 방지
+        alert('로그인 후 이용해주세요.');
+        return;
+    }
+        
+    
 
     $.ajax({
         url: '/selectitem',
@@ -618,8 +597,8 @@ $('.buyButton').on('click', function(e) {
         error: function(xhr, status, error) {
             console.error('AJAX Error:', status, error);
         }
-    });
-});
+    })
+})
 
 
 </script>

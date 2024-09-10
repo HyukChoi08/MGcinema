@@ -16,6 +16,12 @@ select id,item_name,price,discount_price,composition,origin from item where id=#
 <select id="getImagePath" resultType="string" parameterType="int">
     SELECT image_path FROM item WHERE id =#{param1}
 </select>
+<select id="selectType" resultType="com.cinema.store.storeDTO">
+SELECT id, item_name, discount_price, price, image_path
+FROM item
+where item_type=#{param1}
+ORDER BY id
 
+</select>
 
 </mapper>

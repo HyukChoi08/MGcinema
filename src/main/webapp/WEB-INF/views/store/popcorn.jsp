@@ -278,6 +278,11 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
 #store-link:hover {
     text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
 } 
+.hidden {
+    display: none;
+}
+
+
 </style>
 </head>
 <body>
@@ -310,63 +315,27 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
                         </strong> 
                         <div class="separator2"></div>
                         <ul class="category_inner">
-                			<li class="product" id="21">
-                                <a href="/details?id=21" class="btn_category_product">  
-                                    <img src="/store_images/고소팝콘L.jpg" alt="고소팝콘L"></a>
-                                    <div class="icon-container">
-										<div class="icon-item icon-left" id="cart-link">
-   										<img src="/store_images/장바구니.png" alt="Left Icon">
-							 			<span class="hover-text">장바구니</span>
-										</div>                                                                                                                     
-                                        <div class="icon-item icon-right">
-                                            <img src="/store_images/구매하기.png" alt="Right Icon" class="buyButton">
-                                            <span class="hover-text">구매하기</span>                          
-                                        </div>
-                                    </div>
-                                <div class="product-info">
-                                    <span class="product-name">고소팝콘L</span><br>
-                                        <span class="discounted-price">10,000원</span>
-                                </div>
-                            </li> 
-                            <li class="product" id="22">
-                                <a href="/details?id=22" class="btn_category_product">  
-                                    <img src="/store_images/더블치즈팝콘L .jpg" alt="더블치즈팝콘L"></a>
-                                    <div class="icon-container">
-										<div class="icon-item icon-left" id="cart-link">
-   										<img src="/store_images/장바구니.png" alt="Left Icon">
-							 			<span class="hover-text">장바구니</span>
-										</div>                                                                                                                     
-                                        <div class="icon-item icon-right">
-                                            <img src="/store_images/구매하기.png" alt="Right Icon" class="buyButton">
-                                            <span class="hover-text">구매하기</span>                          
-                                        </div>
-                                    </div>
-                                <div class="product-info">
-                                    <span class="product-name">더블치즈팝콘L</span><br>
-                                        <span class="discounted-price">10,000원</span>
-                                </div>
-                            </li> 
-                            <li class="product" id="23">
-                                <a href="/details?id=23" class="btn_category_product">  
-                                    <img src="/store_images/카라멜팝콘L.jpg" alt="고소팝콘"></a>
-                                    <div class="icon-container">
-										<div class="icon-item icon-left" id="cart-link">
-   										<img src="/store_images/장바구니.png" alt="Left Icon">
-							 			<span class="hover-text">장바구니</span>
-										</div>                                                                                                                     
-                                        <div class="icon-item icon-right">
-                                            <img src="/store_images/구매하기.png" alt="Right Icon" class="buyButton">
-                                            <span class="hover-text">구매하기</span>                          
-                                        </div>
-                                    </div>
-                                <div class="product-info">
-                                    <span class="product-name">카라멜팝콘L</span><br>
-                                        <span class="discounted-price">10,000원</span>
-                                </div>
-                            </li> 
-                          
-                          
-                          
+                        	<c:forEach items="${arStore}" var="Store">                        
+	                			<li class="product" id="${Store.id}">
+	                                <a href="/details?id=${Store.id}" class="btn_category_product">  
+	                                    <img src="${Store.image_path}" alt="${Store.item_name}"></a>
+	                                    <div class="icon-container">
+											<div class="icon-item icon-left" id="cart-link">
+	   										<img src="/store_images/장바구니.png" alt="Left Icon">
+								 			<span class="hover-text">장바구니</span>
+											</div>                                                                                                                     
+	                                        <div class="icon-item icon-right">
+	                                            <img src="/store_images/구매하기.png" alt="Right Icon" class="buyButton">
+	                                            <span class="hover-text">구매하기</span>                          
+	                                        </div>
+	                                    </div>
+	                                <div class="product-info">
+	                                    <span class="product-name">${Store.item_name}</span><br>
+	                                        <span class="original-price">${Store.price}원</span>
+                                        	<span class="discounted-price">${Store.discount_price}원</span>	                                        
+	                                </div>
+	                            </li>
+	                        </c:forEach>                                                                                                                          
                         </ul>
                     </li>
                 </ul>
@@ -382,6 +351,19 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
 </script>
 <script>
 $(document).ready(function() {
+	
+	$('.product-info').each(function() {
+        // Find the price elements within the current product
+        var originalPrice = $(this).find('.original-price').text().replace('원', '').trim();
+        var discountedPrice = $(this).find('.discounted-price').text().replace('원', '').trim();
+        
+        // Compare prices and hide the discounted price if they are equal
+        if (originalPrice === discountedPrice) {
+            $(this).find('.discounted-price').addClass('hidden'); //값이 같으면 히든클래스에 넣어서 값을 숨긴다.
+        }
+    })
+	
+
  	let customer_id= $('#userid').val();
  	console.log(customer_id);
  	
@@ -445,8 +427,17 @@ $(document).ready(function() {
      
     	        $('.icon-left').on('click', function(event) {
     	            // 클릭 이벤트를 막고, 비동기 작업이 완료된 후 결과에 따라 결정합니다.
-    	            event.preventDefault(); // 기본 동작을 막습니다.
+    	          
     	            console.log('Icon left clicked');
+    	            
+    	            
+    	            if (customer_id === '') {
+    	            	event.preventDefault(); // 기본 동작을 막습니다.
+    	    	        alert("로그인 후 이용해주세요");
+    	    	        return false;
+    	    	    }
+    	            
+    	            
 
     	            var $productItem = $(this).closest('li.product');
     	            
@@ -535,9 +526,19 @@ $(document).ready(function() {
 let selectedItems = []; // 전역 변수로 선언
 
 $('.buyButton').on('click', function(e) {
-    e.preventDefault(); // 링크의 기본 동작을 방지
+    
     let item_id = $(this).closest('.product').attr('id');
     console.log('item_id:', item_id);
+    
+ 	let userid=$('#userid').val();
+    
+    if (!userid) {
+        e.preventDefault(); // 클릭 시 기본 동작 방지
+        alert('로그인 후 이용해주세요.');
+        return;
+    }
+    
+    
 
     $.ajax({
         url: '/selectitem',

@@ -72,48 +72,101 @@ public class HomeController {
 	    return "store/details";
 	}
 	@GetMapping("/drink")
-	public String drink(HttpServletRequest req) {
+	public String drink(HttpServletRequest req,Model model) {
 		
+		String item_type = "drink";
+		 
+		ArrayList<storeDTO> arStore=storedao.selectType(item_type);
+		
+		HttpSession s=req.getSession();
+		String uid=(String) s.getAttribute("uid");
+		System.out.println(uid);
+		
+		
+		model.addAttribute("arStore",arStore);
+		model.addAttribute("uid",uid);
+			
 		return "store/drink";
 	}
 	@GetMapping("/popcorn")
-	public String popcorn(HttpServletRequest req) {
+	public String popcorn(HttpServletRequest req,Model model) {
+		
+		String item_type = "popcorn";
+		 
+		ArrayList<storeDTO> arStore=storedao.selectType(item_type);
+		
+		HttpSession s=req.getSession();
+		String uid=(String) s.getAttribute("uid");
+		System.out.println(uid);
+		
+		
+		model.addAttribute("arStore",arStore);
+		model.addAttribute("uid",uid);
 		
 		return "store/popcorn";
 	}
 	@GetMapping("/giftcard")
-	public String giftcard(HttpServletRequest req) {
+	public String giftcard(HttpServletRequest req,Model model) {
 		
-		return "store/giftcard";
-	}
-	@GetMapping("/admissionticket")
-	public String addmissionticket(HttpServletRequest req) {
-		
-		return "store/admission_ticket";
-	}
-	@GetMapping("/package")
-	public String pack(HttpServletRequest req,Model model) {
+		String item_type = "giftcard";
+		 
+		ArrayList<storeDTO> arStore=storedao.selectType(item_type);
 		
 		HttpSession s=req.getSession();
 		String uid=(String) s.getAttribute("uid");
 		System.out.println(uid);
 		
 		model.addAttribute("uid",uid);
+		model.addAttribute("arStore",arStore);
+				
+		return "store/giftcard";
+	}
+	
+	@GetMapping("/package")
+	public String pack(HttpServletRequest req,Model model) {
+		 String item_type = "package";
+		 
+		ArrayList<storeDTO> arStore=storedao.selectType(item_type);
+		
+		HttpSession s=req.getSession();
+		String uid=(String) s.getAttribute("uid");
+		System.out.println(uid);
+		
+		model.addAttribute("uid",uid);
+		model.addAttribute("arStore",arStore);
 		return "store/package";
 	}
 	@GetMapping("/combo")
 	public String combo(HttpServletRequest req,Model model) {
+		 String item_type = "combo";
+		 
+		ArrayList<storeDTO> arStore=storedao.selectType(item_type);
+		
+				
 		HttpSession s=req.getSession();
 		String uid=(String) s.getAttribute("uid");
 		System.out.println(uid);
 		
 		model.addAttribute("uid",uid);
+		model.addAttribute("arStore",arStore);
 		
 		return "store/combo";
 	}
-	@GetMapping("/snack")
-	public String snack(HttpServletRequest req) {
+	@GetMapping("/snack")         //지금은 드링크로 되어있는데 이거 스낵으로 수정해야됌
+	public String snack(HttpServletRequest req,Model model) {
 		
+		String item_type = "drink";
+		 
+		ArrayList<storeDTO> arStore=storedao.selectType(item_type);
+		
+		HttpSession s=req.getSession();
+		String uid=(String) s.getAttribute("uid");
+		System.out.println(uid);
+		
+		
+		model.addAttribute("arStore",arStore);
+		model.addAttribute("uid",uid);
+										
 		return "store/snack";
 	}
 	@GetMapping("/storepay")
@@ -208,7 +261,8 @@ public class HomeController {
 	}
 	
     @PostMapping("/dostorepay")
-    public String dostorepay(@RequestParam("productData") String productData, Model model,HttpServletRequest req) {
+    public String dostorepay(@RequestParam("productData") String productData,
+    		  @RequestParam(value = "source", required = false) String source,Model model,HttpServletRequest req) {
     	HttpSession session = req.getSession();
   	    String customer_id = (String) session.getAttribute("uid");
   	    System.out.println("cust"+customer_id);
@@ -225,21 +279,26 @@ public class HomeController {
             dataMap = Map.of(); // 빈 Map으로 대체
         }
 
+        //String source = (String) dataMap.get("source");
+        
+        
+        
+        
         // 변환된 데이터를 모델에 추가
     
         model.addAttribute("uid",customer_id);
         model.addAttribute("items", dataMap.get("items"));
         System.out.println(dataMap.get("items"));
-   
-        
-        
-        
+         
         model.addAttribute("totalPrice", dataMap.get("totalPrice"));
      
         model.addAttribute("totalDiscount", dataMap.get("totalDiscount"));
         model.addAttribute("finalPrice", dataMap.get("finalPrice"));
+        model.addAttribute("source", source);
+        System.out.println("Source: " + source);
         
         System.out.println("Final Price: " + dataMap.get("finalPrice"));
+    
 
         // JSP 파일명 반환
         return "store/storepay";
@@ -298,6 +357,7 @@ public class HomeController {
 	   @GetMapping("/store/storecheck")
 	    public String storeCheckoutPage(@RequestParam("itemname") String itemname,
 	            						@RequestParam("totalprice") String totalprice,
+	            					    @RequestParam(value = "source", required = false) String source,
 
 	            						HttpServletRequest req, Model model) {
 			HttpSession s =req.getSession();
@@ -311,30 +371,51 @@ public class HomeController {
 	        model.addAttribute("nickname", arCustomer.getNickname());
 	        model.addAttribute("email", arCustomer.getEmail());
 	        model.addAttribute("mobile", arCustomer.getMobile());
+	        model.addAttribute("source", source); // source 값을 모델에 추가
 	        
 	        model.addAttribute("itemname", itemname);       	        
 	        model.addAttribute("totalprice", totalprice);
 
 	        String orderId = UUID.randomUUID().toString();
 	        model.addAttribute("orderId", orderId);
-	        
+	        System.out.println("Source1111: " + source); // source 값 확인
 	        System.out.println("toto1"+totalprice);
 	        return "store/storecheck";
     }
 	   
-	@GetMapping("/storesuccess")
-	public String storesuccess(@RequestParam Map<String,String> params,Model model) {
-		
-		   model.addAttribute("orderId", params.get("orderId"));
-		   model.addAttribute("uid", params.get("uid"));
-		   model.addAttribute("itemname", params.get("itemname"));
-		   model.addAttribute("totalprice", params.get("totalprice"));	
+//	@GetMapping("/storesuccess")
+//	public String storesuccess(@RequestParam Map<String,String> params,Model model) {
+//		
+//		   model.addAttribute("orderId", params.get("orderId"));
+//		   model.addAttribute("uid", params.get("uid"));
+//		   model.addAttribute("itemname", params.get("itemname"));
+//		   model.addAttribute("totalprice", params.get("totalprice"));	
+//		  	
+//		   System.out.println("toto2"+params.get("totalprice"));
+//		return "store/storesuccess";
+//	}
+//	
+	   @GetMapping("/storesuccess")
+	   public String storesuccess(@RequestParam Map<String, String> params, Model model) {
+	       // 파라미터 값 출력 (디버깅 용도)
+	       System.out.println("source: " + params.get("source"));
+	       System.out.println("orderId: " + params.get("orderId"));
+	       System.out.println("uid: " + params.get("uid"));
+	       System.out.println("itemname: " + params.get("itemname"));
+	       System.out.println("totalprice: " + params.get("totalprice"));
 
-		
-		   System.out.println("toto2"+params.get("totalprice"));
-		return "store/storesuccess";
-	}
-	
+	       // 모델에 데이터 추가
+	       model.addAttribute("orderId", params.get("orderId"));
+	       model.addAttribute("uid", params.get("uid"));
+	       model.addAttribute("itemname", params.get("itemname"));
+	       model.addAttribute("totalprice", params.get("totalprice"));
+	       model.addAttribute("source", params.get("source")); // source 추가
+
+	       return "store/storesuccess";
+	   }   
+	   
+	        
+	   
 	@GetMapping("/storeData")
 	public String storeData(HttpServletRequest req) {
 		
@@ -342,8 +423,8 @@ public class HomeController {
 		String random_id=req.getParameter("random_id");
 		String item_name=req.getParameter("item_name");
 		String totalprice=req.getParameter("totalprice");
-		
-		  int count =customerdao.checkIfExists(random_id);
+			
+		 int count =customerdao.checkIfExists(random_id);
 		    if (count > 0) {
 		        return "home/homepage"; // Or some appropriate response
 		    }
@@ -351,12 +432,20 @@ public class HomeController {
 		
 		customerdao.insertStorepay(customer_id,random_id,item_name,totalprice);	
 		
+			
+		return "store/store";
 		
+	}
+	@PostMapping("/clearcart")
+	@ResponseBody
+	public String clearcart(HttpServletRequest req) {
+		String customer_id=req.getParameter("customer_id");
+		System.out.println("Received customer_id: " + customer_id);
 		
-		return "ok";
-	}	
-
+		customerdao.clearcart(customer_id);
 	
+		return "ok";
+	}
 	   
 	   
 	   
