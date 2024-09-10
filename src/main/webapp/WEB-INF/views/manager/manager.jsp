@@ -50,6 +50,7 @@
 										<option value="미정">미정</option>
 									</select></td></tr>
 				<tr><td>러닝타임</td><td><input type="text" id="runtime"></td></tr>
+				<!-- <tr><td>이미지</td><td><input type="file" id="itemfile" style="width:200px"></td></tr> -->
 				<tr><td>이미지경로</td><td><input type="text" id="image" value="/chartImage/.jpg"></td></tr>
 				<tr><td>감독</td><td><input type="text" id="director"></td></tr>
 				<tr><td>출연배우</td><td><input type="text" id="cast"></td></tr>
@@ -78,6 +79,7 @@
 				<tr><td>할인가격</td><td><input type="text" id="disprice"></td></tr>
 				<tr><td>구성</td><td><input type="text" id="conposition"></td></tr>
 				<tr><td>원산지</td><td><input type="text" id="origin"></td></tr>
+				<tr><td>이미지</td><td><input type="file" id="itemfile" style="width:200px"></td></tr>
 				<tr><td>이미지경로</td><td><input type="text" id="itemimage" value="/store_Images/.jpg"></td></tr>
 				<tr><td colspan="2"><input type="button" id="ibtn" value="상품추가"></td></tr>
 			</table>
@@ -137,7 +139,7 @@
 		<h2>공지등록</h2>
 			<table>
 				<tr><td><input type="hidden" id="newsid" readonly></td></tr>
-				<tr><td>구분</td><td><select>
+				<tr><td>구분</td><td><select id="newskat">
 									<option value="시스템점검">시스템점검</option>
 									<option value="극장">극장</option>
 									<option value="기타">기타</option>
@@ -228,21 +230,41 @@ $(document)
 		|| $('#origin').val()==''){
 		alert("제대로")
 	}else{
-		let itemname = $('#itemname').val();
+	/*  	let itemname = $('#itemname').val();
 		let itemprice = $('#itemprice').val();
 		let disprice = $('#disprice').val();
 		let conposition = $('#conposition').val();
 		let origin = $('#origin').val();
-		let itemimage = $('#itemimage').val();
-	
-		console.log(itemname,itemprice,disprice,conposition,origin,itemimage);
+		let itemimage = $('#itemimage').val();  */
+		
+		/* console.log(itemname,itemprice,disprice,conposition,origin,itemimage); */
+		
+		let formData = new FormData();
+        formData.append('itemfile', $('#itemfile')[0].files[0]); // Add the file
+        formData.append('itemname', $('#itemname').val());
+        formData.append('itemprice', $('#itemprice').val());
+        formData.append('disprice', $('#disprice').val());
+        formData.append('conposition', $('#conposition').val());
+        formData.append('origin', $('#origin').val());
+        formData.append('itemimage', $('#itemimage').val());
+		console.log(formData);
 		clear();
-	
-			$.post('/itemin',{itemname:itemname,itemprice:itemprice,disprice:disprice,conposition:conposition,
+			/* $.post('/itemin',{itemname:itemname,itemprice:itemprice,disprice:disprice,conposition:conposition,
 				origin:origin,itemimage:itemimage},
 				function(data){
 					showitem();
-			})
+			}) */
+        $.ajax({
+            url: '/itemin',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                $('#message').text('Upload successful!');
+                showitem();
+            }
+        });
 	}
 })
 .on('click','#dbtn',function(){
@@ -269,12 +291,12 @@ $(document)
 	}else{
 		let newstitle = $('#newstitle').val();
 		let newscontent = $('#newscontent').val();
+		let newskat = $('#newskat').val();
 	
-	
-		console.log(deitemid,detname,period);
+		console.log(newstitle,newscontent,newskat);
 		clear();
 		
-			$.post('/newsin',{newstitle:newstitle,newscontent:newscontent},
+			$.post('/newsin',{newstitle:newstitle,newscontent:newscontent,newskat:newskat},
 				function(data){
 					shownews();
 			})
@@ -429,7 +451,8 @@ $(document)
 .on('click','#newslist tbody tr',function(){
 	let newsid = $(this).find('td:eq(0)').text();
 	let newscontent = $(this).find('td:eq(1)').text();
-	let newstitle = $(this).find('td:eq(2)').text();
+	let newstitle = $(this).find('td:eq(3)').text();
+	$('#newskat').val($(this).find('td:eq(2)').text());
 	
 	$('#nbtn').prop('disabled', true);
 	$('#nubtn').prop('disabled', false);
@@ -444,9 +467,10 @@ $(document)
 	let newsid = $('#newsid').val();
 	let newstitle = $('#newstitle').val();
 	let newscontent = $('#newscontent').val();
+	let newskat = $('#newskat').val();
 	
 	clear();
-	$.post('/newsup',{newsid:newsid,newstitle:newstitle,newscontent:newscontent},function(data){
+	$.post('/newsup',{newsid:newsid,newstitle:newstitle,newscontent:newscontent,newskat:newskat},function(data){
 		shownews();
 	})
 })
