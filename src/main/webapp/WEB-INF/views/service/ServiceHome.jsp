@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -188,6 +189,23 @@
     background-color: #d10813; /* 버튼 hover 시 배경색 변경 */
     border: 2px solid white; /* hover 시 테두리 색상 유지 */
 }
+.notice_more_btn {
+    display: inline-block;
+    padding: 10px 15px; /* 버튼의 패딩 설정 */
+    font-size: 1.2em; /* 버튼의 폰트 크기 설정 */
+    color: white; /* 버튼 글씨 색상 */
+    background-color: #e50914; /* 버튼 배경 색상 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    border-radius: 10px; /* 둥근 버튼을 위해 50% 설정 */
+    border: 2px solid white; /* 흰색 테두리 설정 */
+    text-decoration: none; /* 링크 밑줄 제거 */
+    margin-left: 10px; /* 공지사항과의 간격 설정 */
+}
+
+.notice_more_btn:hover {
+    background-color: black; /* 버튼 hover 시 배경색 변경 */
+    border-color: #e50914; /* hover 시 테두리 색상 변경 */
+}
     </style>
 </head>
 <body>
@@ -256,14 +274,16 @@
                 </div>
 
                 <div class="notice_area">
-                    <span class="tit">공지사항</span>
-                    <ul class="list">
-                        <li><a href="#" class="notice_list">9월 프로모션 안내</a></li>
-                        <li><a href="/newsDetail?id=${news.id}">${news.title}</a></td>
-                    </ul>
-                    <a href="news" class="more">더보기</a>
-                </div>
-            </div>
+    <span class="tit">공지사항</span>
+    <!-- 버튼으로 변환된 링크 -->
+    <a href="news" class="notice_more_btn">+</a>
+    <ul class="list">
+        <c:forEach var="news" items="${newsList}">
+            <li><a href="newsDetail?id=${news.id}" class="notice_list">[${news.selected}]  ${news.title}</a></li>
+        </c:forEach>
+    </ul>
+</div>
+            </div>	
         </div>
     </div>
 </div>

@@ -22,9 +22,16 @@ public class ServiceController {
     @GetMapping("/serviceHome")
     public String getServiceHome(@RequestParam(value = "id", defaultValue = "1") int id, Model model) {
         ServiceHomeDTO serviceHome = new ServiceHomeDTO("고객센터", "아직아직아직");
+        
+        // 뉴스 목록 가져오기
+        List<NewsDTO> newsList = newsDAO.getAllNews(5, 0); // 예시로 5개 뉴스 가져오기
+        model.addAttribute("newsList", newsList);
+
         model.addAttribute("serviceHome", serviceHome);
         return "service/ServiceHome";
     }
+
+    
 
     @GetMapping("/faq")
     public String showFAQPage(
