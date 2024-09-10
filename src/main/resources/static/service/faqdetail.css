@@ -68,6 +68,11 @@
             margin: 0;
             text-align: left;
         }
+        .customer_top .day {
+            color: white; /* 기존 페이지와 일치하는 색상 */
+            font-size: 0.9em;
+            text-align: left;
+        }
 
         .customer_top .stit {
             color: #777;

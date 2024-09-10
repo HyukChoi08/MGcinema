@@ -31,7 +31,7 @@
             <div class="col-detail">
                 <div class="customer_top">
                     <h2 class="tit">${faqDetail.title}</h2>
-                    <p>작성일: ${formattedDate}</p>
+                    <p class="day">작성일: ${formattedDate}</p>
                      <p class="stit">조회수: ${faqDetail.views}</p>
                 </div>  
                 <div class="view_area">
