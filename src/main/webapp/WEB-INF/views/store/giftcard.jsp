@@ -36,8 +36,9 @@ ul, li {
     background-color: black;
     margin-top: 150px; 
     margin-bottom: 335px;
-    border: 2px solid #808080; /* 회색 테두리 */
+    border: 3px solid #808080; /* 회색 테두리 */
     box-sizing: border-box; /* border와 padding을 포함한 너비 계산 */
+    border-radius: 15px; /* 테두리 둥글게 만들기 */
 }
 #contents {
     flex: 1 1 200px; /* 유연한 크기 조정 */

@@ -155,7 +155,7 @@ public class HomeController {
 	@GetMapping("/snack")         //지금은 드링크로 되어있는데 이거 스낵으로 수정해야됌
 	public String snack(HttpServletRequest req,Model model) {
 		
-		String item_type = "drink";
+		String item_type = "snack";
 		 
 		ArrayList<storeDTO> arStore=storedao.selectType(item_type);
 		

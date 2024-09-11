@@ -345,9 +345,18 @@ position: relative;
                         </td>
                         <td>
                             <div class="discount">
-                                <span class="discount_price">${item.discount_price}</span>
-                                <span class="cart_price">${item.cart_price}</span>
-                            </div>
+				                <!-- Check if discount price and cart price are equal and cart price is not zero -->
+				                <c:choose>
+				                    <c:when test="${item.discount_price == item.cart_price && item.cart_price > 0}">
+				                        <span class="discount_price">${item.discount_price}</span>
+				                        <!-- Hide the cart price -->
+				                    </c:when>
+				                    <c:otherwise>
+				                        <span class="discount_price">${item.discount_price}</span>
+				                        <span class="cart_price">${item.cart_price}</span>
+				                    </c:otherwise>
+				                </c:choose>
+				            </div>
                         </td>
                         <td class="qty">${item.qty}개</td>
                         <td class="total">${item.total}원</td>
@@ -411,26 +420,29 @@ $(document).ready(function() {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
 
-    function handlePriceComparison() {
-        let discountPriceText = $('.discount_price').text();
-        let cartPriceText = $('.cart_price').text();
+    $('.discount').each(function() {
+        let $discountPrice = $(this).find('.discount_price');
+        let $cartPrice = $(this).find('.cart_price');
+        
+        let discountPriceText = $discountPrice.text().replace(/[^0-9]/g, '');
+        let cartPriceText = $cartPrice.text().replace(/[^0-9]/g, '');
 
-        // '금액충전형'일 경우 직접 비교
-        if (discountPriceText === '금액충전형' && cartPriceText === '금액충전형') {
-            $('.cart_price').hide();
-        } else {
-            // 숫자만 추출하고 비교
-            let discountPrice = discountPriceText.replace(/[^0-9]/g, '').trim();
-            let cartPrice = cartPriceText.replace(/[^0-9]/g, '').trim();
+        let discountPrice = parseFloat(discountPriceText) || 0;
+        let cartPrice = parseFloat(cartPriceText) || 0;
 
-            if (discountPrice === cartPrice) {
-                $('.cart_price').hide(); // 요소를 숨깁니다.
-            }
+        // Format the numbers
+        let formattedDiscountPrice = formatNumber(discountPrice);
+        let formattedCartPrice = formatNumber(cartPrice);
+
+        // Set formatted text
+        $discountPrice.text(formattedDiscountPrice + '원');
+        $cartPrice.text(formattedCartPrice + '원');
+
+        // Hide cart_price if it is equal to discount_price or is 0
+        if (cartPrice === discountPrice || cartPrice === 0) {
+            $cartPrice.hide();
         }
-    }
-
-    // 페이지 로드 시 가격 비교 처리
-    handlePriceComparison();
+    });
                       
   
     $('.discount_price, .cart_price, .total, .totalprice, .totaldiscount, .finalprice').each(function() {
