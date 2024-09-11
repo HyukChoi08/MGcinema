@@ -43,34 +43,7 @@ public class HomepageController {
 		return "home/homepage";
 	}
 
-	/*
-	@GetMapping("/login")
-	public String login() {
-		return "home/login";
-	}
-
-	@PostMapping("/doLogin")
-	public String doLogin(HttpServletRequest req) {
-		String uid = req.getParameter("uid");
-		String passwd = req.getParameter("passwd");
-
-		if (uid == null || uid.equals(""))
-			return "redirect:/login";
-		if (passwd == null || passwd.equals(""))
-			return "redirect:/login";
-		int n = ldao.loginCheck(uid, passwd);
-		System.out.println("n= " + n);
-
-		if (n > 0) {
-			HttpSession s = req.getSession();
-			s.setAttribute("uid", uid);
-			return "redirect:/";
-		} else { // login 실패
-			return "redirect:/login";
-		}
-	}
-
-*/
+	
 	
 	@GetMapping("/login")
 	public String login() {
@@ -112,10 +85,6 @@ public class HomepageController {
 		return "redirect:/";
 	}
 
-	/*
-	 * @GetMapping("/signup") public String signup(HttpServletRequest req) {
-	 * return"home/signup"; }
-	 */
 
 	@GetMapping("/signup")
 	public String signup(HttpServletRequest req, Model model) {
@@ -149,12 +118,7 @@ public class HomepageController {
 			
 			String tellecom = req.getParameter("tellecom");
 
-			/*
-			 * if (uid == null || uid.trim().isEmpty()) { throw new
-			 * IllegalArgumentException("UID cannot be null or empty");
-			 * 
-			 * } 
-			 */
+			
 			int uidCount = ldao.checkUidExists(uid);
 			if (uidCount > 0) {
 				model.addAttribute("error", "이미 사용 중인 아이디입니다.");
@@ -229,34 +193,13 @@ public class HomepageController {
 			model.addAttribute("errorMessage", "입력하신 정보와 일치하는 회원 정보를 찾을 수 없습니다. 다시 입력해 주세요.");
 		} else {
 			model.addAttribute("uid", uid);
-			// model.addAttribute("birthday", birthday);
-			// model.addAttribute("mobile", mobile);
-
 			return "home/newPassword";
 		}
 		return "home/findPassword";
 	}
 
 	
-	/*
-	 * @PostMapping("/newPassword") public String newPassword(HttpServletRequest
-	 * req, Model model) { String uid = req.getParameter("uid");
-	 * 
-	 * String passwd = req.getParameter("passwd"); String passwd2 =
-	 * req.getParameter("passwd2");
-	 * 
-	 * System.out.println("updatePasswd" + uid+","+passwd);
-	 * 
-	 * if (passwd == null || passwd.equals("")) { model.addAttribute("errorMessage",
-	 * "비밀번호를 입력해주세요."); }
-	 * 
-	 * if (!passwd.equals(passwd2)) { model.addAttribute("errorMessage",
-	 * "비밀번호가 일치하지 않습니다.");
-	 * 
-	 * } else { model.addAttribute("uid", uid); return "home/newPassword"; } return
-	 * "home/newPassword"; }
-	 */
-
+	
 	
 	@PostMapping("/newPassword")
 	public String newPassword(HttpServletRequest req, Model model) {
@@ -267,7 +210,7 @@ public class HomepageController {
 
 	    // 비밀번호 변경 처리
 	    
-	    	ldao.newPasswd(uid, passwd);
+	    ldao.newPasswd(uid, passwd);
 	    
 
 	    return "home/login";
