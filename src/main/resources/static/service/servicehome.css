@@ -1,6 +1,5 @@
-@charset "UTF-8";
-
 body {
+    width: 1000px; /* 페이지 전체 폭을 1000px로 설정 */
     margin: 0;
     padding: 0;
     background-color: black; /* 페이지 배경색을 검정으로 설정 */
@@ -8,7 +7,7 @@ body {
 }
 
 #container {
-    max-width: 1250px; /* 최대 너비를 1250px로 설정 */
+    max-width: 1000px; /* 최대 너비를 1000px로 설정 */
     margin: 20px auto; /* 상하 여백 20px, 좌우 자동으로 중앙 배치 */
     display: flex;
     flex-direction: column;
@@ -24,9 +23,10 @@ body {
 .sidebar {
     width: 250px;
     padding: 15px;
-    background-color: #333; /* 사이드바 배경색 */
+    background-color: black; /* 사이드바 배경색 */
     height: fit-content;
     color: white; /* 사이드바 글씨색 */
+    border: 1px solid #fff;
 }
 
 .sidebar ul {
@@ -50,11 +50,8 @@ body {
 }
 
 .col-detail {
-   
     background-color: black; /* 메인 콘텐츠 배경색 */
     color: white; /* 메인 콘텐츠 글씨색 */
-  
-  
     border-radius: 10px; /* 모서리 둥글게 설정 */
 }
 
@@ -91,14 +88,13 @@ body {
 
 .c_check_warp {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* 박스가 여러 줄로 배치될 수 있도록 설정 */
     gap: 20px; /* 박스 간의 간격 20px */
-    width: 100%;
+    width: 100%; /* 전체 너비 설정 */
 }
 
 .c_box {
-    flex: 1 1 30%; /* 박스가 30% 너비를 가지도록 설정 */
+    flex: 1 1 calc(33.333% - 20px); /* 박스가 3열로 배치되도록 설정 */
     padding: 15px; /* 패딩 15px */
     box-sizing: border-box; /* 박스 모델을 테두리와 패딩을 포함하도록 설정 */
     background-color: black; /* 박스 배경색 */
@@ -155,25 +151,11 @@ body {
 
 .service_area {
     float: left; /* 왼쪽으로 플로트 */
-   
-    padding: 15px; /* 패딩 15px */
-    background-color: black; /* 서비스 영역 배경색 */
-    color: white; /* 서비스 영역 글씨색 */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 그림자 설정 */
-    border-radius: 5px; /* 모서리 둥글게 설정 */
-    text-align: left; /* 텍스트 왼쪽 정렬 */
-    margin-right: 10%; /* 오른쪽 여백 2% */
+    margin-right: 10%; /* 오른쪽 여백 10% */
 }
 
 .notice_area {
     float: right; /* 오른쪽으로 플로트 */
-   
-    padding: 15px; /* 패딩 15px */
-    background-color: black; /* 공지 사항 배경색 */
-    color: white; /* 공지 사항 글씨색 */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 그림자 설정 */
-    border-radius: 5px; /* 모서리 둥글게 설정 */
-    text-align: left; /* 텍스트 왼쪽 정렬 */
 }
 
 .service_area .tit {
@@ -197,9 +179,8 @@ body {
 .button-link {
     flex: 1 1 calc(50% - 10px); /* 버튼 너비를 두 개씩 정렬하도록 설정 */
     padding: 10px 10px; /* 버튼 패딩 조정 */
-    font-size: 1.0em; /* 폰트 크기 1.0em */
+    font-size: 0.9em; /* 폰트 크기 줄이기 */
     text-align: center; /* 텍스트 중앙 정렬 */
-    
     margin-bottom: 10px; /* 하단 여백 10px */
     background-color: black; /* 버튼 배경색 검정으로 설정 */
     color: white; /* 버튼 글씨색 흰색 */
@@ -251,35 +232,24 @@ body {
     text-decoration: underline; /* 링크 hover 시 밑줄 추가 */
 }
 
-.emoji-search {
+.emoji-search, .emoji-email, .emoji-center {
     display: inline-block;
     width: 70px; /* 이미지의 너비 */
     height: 70px; /* 이미지의 높이 */
-    background-image: url('/service/search.png'); /* 이미지 경로 */
     background-size: contain; /* 이미지 크기 조절 */
     background-repeat: no-repeat; /* 이미지 반복 방지 */
     vertical-align: middle; /* 텍스트와 이미지 정렬 */
     background-color: white;
+}
+
+.emoji-search {
+    background-image: url('/service/search.png'); /* 이미지 경로 */
 }
 
 .emoji-email {
-    display: inline-block;
-    width: 70px;
-    height: 70px;
     background-image: url('/service/email.png'); /* 이미지 경로 */
-    background-size: contain; /* 이미지 크기 조절 */
-    background-repeat: no-repeat; /* 이미지 반복 방지 */
-    vertical-align: middle; /* 텍스트와 이미지 정렬 */
-    background-color: white;
 }
 
 .emoji-center {
-    display: inline-block;
-    width: 70px;
-    height: 70px;
     background-image: url('/service/center.png'); /* 이미지 경로 */
-    background-size: contain; /* 이미지 크기 조절 */
-    background-repeat: no-repeat; /* 이미지 반복 방지 */
-    vertical-align: middle; /* 텍스트와 이미지 정렬 */
-    background-color: white;
 }
