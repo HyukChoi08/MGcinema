@@ -8,7 +8,6 @@
     <style>
 
 body {
-    display: flex;
     flex-direction: column; /* 세로 방향으로 배치 */
     justify-content: space-between; /* 푸터를 아래쪽으로 이동 */
     align-items: center; /* 가운데 정렬 */
@@ -27,6 +26,15 @@ body {
     margin-top:150px;
     margin-bottom:100px;
 }
+.vertical-container4 {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 가운데 정렬 */
+    justify-content: center; /* 수직 중앙 정렬 */
+    height: 150vh; /* 전체 뷰포트 높이 */
+    width: 100%; /* 전체 너비 */
+    padding: 20px; /* 적절한 여백 추가 */
+}
 
 .vertical-container {
     display: flex;
@@ -41,8 +49,16 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     width: 800px;
+}
+.flex-container3 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    width: 800px;
+    color:#c7b199;
 }
 ol, ul {
      display: flex; /* ul 요소를 플렉스 컨테이너로 설정 */
@@ -63,19 +79,46 @@ ol, ul {
 .comment-list-container li {
     width: 100%; /* 각 아이템의 너비를 100%로 설정 */
     box-sizing: border-box; /* 패딩과 테두리를 포함하여 전체 너비를 계산 */
-    background-color: #f9f9f9; /* 배경색 설정 */
+    background-color: #000000; /* 배경색 설정 */
     padding: 16px; /* 내부 여백 추가 */
     border-radius: 8px; /* 모서리 둥글게 */ 
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 그림자 추가 */
+    color:white;
+    border:1px solid #808080;
 }
 a {
     text-decoration-line: none;
-    color:white;
+    color:#c7b199;
+}
+.title {
+  margin-bottom: 10px; /* 원하는 만큼 상단으로 이동 */
+}
+.reviewupdete {
+  background-color: black;
+  border: none;
+  float: left; /* 버튼을 왼쪽으로 붙임 */
+}
+.left-aligned {
+    text-align: left;
+    margin: 0; /* 여백 제거 */
+    padding: 0; /* 패딩 제거 */
+    width: 55%; /* 부모 요소의 너비를 가득 채우게 설정 */
 }
 
+#putcomment{
+float: right;
+}
+#reviewcomment {
+  background-color: #333; /* 어두운 배경 색상 */
+  color: #eee;            /* 밝은 텍스트 색상 */
+  border: 1px solid #555; /* 테두리 색상 (선택 사항) */
+  padding: 10px;          /* 여백 추가 (선택 사항) */
+  border-radius: 5px;    /* 모서리 둥글기 (선택 사항) */
+}
 /* 최대 4개의 아이템만 표시 */
 .comment-list-container li:nth-child(n+5) {
     display: none;
+   
 }
 #commentList{
 color:black;
@@ -84,27 +127,29 @@ color:black;
 </head>
 <body>
     <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
+    <div class="vertical-container4">
     <c:forEach items="${chartList3}" var="chartList3">
         <div class="vertical-container1">
             <div class="vertical-container">
                 <div class="flex-container">
                     <img src="${chartList2}" height="400px">
                     <div class="vertical-container">
-                        <div>${chartList3.mname}</div>
-                        <div>예매율 ${chartList3.reservation} %</div>
+                        <div class="title"><h1>${chartList3.mname}</h1></div>
+                       <div class="left-aligned">예매율 ${chartList3.reservation} %</div>
                         <div>
                             <dl style="text-align: left;">
                                 <dt>감독:&nbsp;${chartList3.director}</dt>
                                 <dt>배우 :&nbsp;${chartList3.cast}</dt>
-                                <dt>장르 : &nbsp;${chartList3.genre}/관람가:&nbsp;${chartList3.age}/상영시간:&nbsp;${chartList3.runningtime}</dt>
+                                <dt>장르 :&nbsp;${chartList3.genre}/관람가:&nbsp;${chartList3.age}/상영시간:&nbsp;${chartList3.runningtime}</dt>
                                 <dt>개봉일:&nbsp;${chartList3.releasedate}</dt>
                             </dl>
                         </div>
                     </div>
                 </div>
                 <div>
+                <br><br><br>
                     <div>
-                        <ul class="flex-container">
+                        <ul class="flex-container3">
                             <li>상세정보|</li>
                             <li id="apinfo"><a href="/chartList1?id=${sessionScope.dataId}#menu">감독/출연|</a></li>
                             <li>스틸컷|</li>
@@ -112,13 +157,14 @@ color:black;
                             <li>상영시간</li>
                         </ul>
                     </div>
+                    <br><br><br>
                     <div style="width:800px" id="movieinfo">${chartList3.movieinfo}</div><br><br>
-                    <div>평점/리뷰
+                    <div>리뷰
                         <span>
                             <div>
                                 <p>
                                     <span>
-                                        <em>평가자수"명의 실관람객이 평가해주셨습니다."</em>
+                                        <em>${countreview} 명의 실관람객이 글을 남겨주셨습니다."</em>
                                     </span>
                                 </p>
                                 <div>
@@ -166,7 +212,7 @@ color:black;
     </c:forEach>
     </li>
     </ul>
-    
+    </div>
     </div>
     </div>
     <%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
@@ -378,7 +424,7 @@ color:black;
                         console.log("uid = " + uid);
                         console.log("pageData[i]['customer_uid'] = " + pageData[i]['customer_uid']);
                         if (uid == pageData[i]['customer_uid']) {
-                            str += '<li><div><ul><li id="reviewWriter" value="' + pageData[i]['id'] + '">' + pageData[i]['writer'] + '</li><li>' + pageData[i]['created_at'] + '</li></ul></div><div><p>' + pageData[i]['content'] + '</p></div><button class="reviewupdete">메뉴</button>';
+                            str += '<li><div><ul><li id="reviewWriter" value="' + pageData[i]['id'] + '">' + pageData[i]['writer'] + '</li><li>' + pageData[i]['created_at'] + '</li></ul></div><div><p>' + pageData[i]['content'] + '</p></div><button class="reviewupdete"><img src="/chartImage/더보기3.jpg"></button>';
                         } else {
                             str += '<li><div><ul><li id="reviewWriter" value="' + pageData[i]['id'] + '">' + pageData[i]['writer'] + '</li><li>' + pageData[i]['created_at'] + '</li></ul></div><div><p>' + pageData[i]['content'] + '</p></div>';
                         }

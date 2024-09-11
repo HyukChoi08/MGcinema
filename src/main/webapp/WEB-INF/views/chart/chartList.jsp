@@ -10,7 +10,6 @@
 <style> 
 
 body {
-    display: flex;
     flex-direction: column; /* 세로 방향으로 배치 */
     justify-content: space-between; /* 푸터를 아래쪽으로 이동 */
     align-items: center; /* 가운데 정렬 */
@@ -37,7 +36,15 @@ body {
     width:1000px;
     margin-top:150px;
 }
-
+.vertical-container4 {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 가운데 정렬 */
+    justify-content: center; /* 수직 중앙 정렬 */
+    height: 100vh; /* 전체 뷰포트 높이 */
+    width: 100%; /* 전체 너비 */
+    padding: 20px; /* 적절한 여백 추가 */
+}
 ol {
     display: flex; /* ul 요소를 플렉스 컨테이너로 설정 */
     padding: 0; /* 기본 패딩 제거 */
@@ -94,30 +101,32 @@ a {
 
 <body>
  <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
-<div class="vertical-container1">
-	<div><h1>무비차트</h1></div>
-	<div class="button-container"><select size=1 style="width:100px;height:30px;" id="chartArray"></select><button id="list">Go</button></div>
-    <div class="vertical-container">
-        <div class="vertical-container">
-            <ol id="1">
-            </ol>
-        </div>
-        <div class="vertical-container">
-            <ol id="2">
-            </ol>
-        </div>
-    </div>
-        <div class="vertical-container">
-        <div class="vertical-container">
-            <ol id="3">
-            </ol>
-        </div>
-        <div class="vertical-container">
-            <ol id="4">
-            </ol>
-        </div>
-    </div>
-    <div class="button-container"><button class="button-container button" id="plus">더보기</button></div>
+<div class="vertical-container4"> 
+	<div class="vertical-container1">
+		<div><h1>무비차트</h1></div>
+		<div class="button-container"><select size=1 style="width:100px;height:30px;" id="chartArray"></select><button id="list">Go</button></div>
+	    <div class="vertical-container">
+	        <div class="vertical-container">
+	            <ol id="1">
+	            </ol>
+	        </div>
+	        <div class="vertical-container">
+	            <ol id="2">
+	            </ol>
+	        </div>
+	    </div>
+	        <div class="vertical-container">
+	        <div class="vertical-container">
+	            <ol id="3">
+	            </ol>
+	        </div>
+	        <div class="vertical-container">
+	            <ol id="4">
+	            </ol>
+	        </div>
+	    </div>
+	    <div class="button-container"><button class="button-container button" id="plus">더보기</button></div>
+	</div>
 </div>
 <%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
 </body>

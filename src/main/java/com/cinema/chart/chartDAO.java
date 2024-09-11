@@ -11,5 +11,6 @@ ArrayList<chartDTO> chartList();
 ArrayList<chartDTO> chartList1();
 String chartList2(int id); 
 ArrayList<chartDTO> chartList3(int id);
+
 }
 

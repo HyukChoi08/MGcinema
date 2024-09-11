@@ -10,5 +10,5 @@ void putcomment(int moviechart,String content,String writer,String uid);
 ArrayList<chartPutCommentDTO> selectputcomment(int id);
 void updatereview(int id,String content);
 void deletereview(int id);
-
+int count(String moviename);
 }

@@ -14,4 +14,8 @@
 	<delete id ="deletereview">
 	delete from review where id=#{param1}
 	</delete>
+	
+	<select id="count" resultType="_int">
+	select count(*) from review where moviechart=#{param1}
+	</select>
 </mapper>

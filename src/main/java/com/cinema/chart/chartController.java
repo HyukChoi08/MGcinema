@@ -42,6 +42,8 @@ public String chartList1(HttpServletRequest req, Model model) {
 	model.addAttribute("cainfoprod", putinfoprod);
 	ArrayList<chartappearanceinfoDTO> putinfoactor =cainfodao.chartappearanceinfo1(String.valueOf(id));
 	model.addAttribute("cainfoactor", putinfoactor);
+	int countreview = cpcdao.count(String.valueOf(id));
+	model.addAttribute("countreview",countreview);
 	return "chart/chartList1";
 }
 @PostMapping("/chartList")//무비 차트 정렬시키는것
