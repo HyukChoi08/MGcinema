@@ -9,11 +9,11 @@
 }
 
 .image-slide {
-    max-width: 100%; /* 부모 컨테이너의 최대 너비에 맞추기 */
+    max-width: 1000px;
     height: auto;
     border-radius: 10px;
-    margin-top:100px;
-
+    margin-top:50px;
+	margin-bottom: 200px;
     border: 10px solid rgba(0, 0, 0, 0.3); /* 30% 투명도 */
 
 }

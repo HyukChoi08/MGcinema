@@ -11,19 +11,12 @@ background: linear-gradient(to bottom,
     color: white;
     text-align: center;
     padding: 10px 0; /* 상하 패딩만 설정하여 좌우 여백 제거 */
-    position: fixed;
+    /* position: fixed; */
     bottom: 0;
-    width: 100%; /* 전체 너비 설정 */
+	min-width: 1200px; /* 최소 너비 설정 */
     box-sizing: border-box; /* 패딩을 포함한 전체 너비 계산 */
     z-index: 1000; /* 다른 요소들보다 위에 위치 */
+ 	margin-top: 100px;
 }
 
-/* html, body {
-    margin: 0; 브라우저 기본 여백 제거
-    padding: 0; 브라우저 기본 패딩 제거
-    width: 100%; 전체 너비 설정
-    line-height: 1.4; 줄 높이 조절
-    text-align: center;
-   
 
-} */

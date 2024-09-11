@@ -39,6 +39,12 @@
           <%--       console.log(${successMessage}); --%>
             </c:if>
         </form>
+        
+        <div class="login-links">
+                <a href="/findPassword">비밀번호 찾기</a>
+                <a href="/login">로그인</a>
+                <a href="/signup">회원가입</a>
+        </div>
     </div>
     
     <%@ include file="/WEB-INF/views/footer/footer.jsp" %>

@@ -8,7 +8,7 @@
 	border: 2px solid #808080;
     border-radius: 8px;       /* 모서리 둥글게 */
    /*  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */ /* 그림자 추가 */
-    margin-top: 200px;         /* 상단 여백 추가 ->> 이게 다른페이지들에 다 있으면 좋겠네! */
+   	margin-top: 30px;          /* 상단 여백 추가 ->> 이게 다른페이지들에 다 있으면 좋겠네! */
     margin-bottom: 400px;
 
 }
