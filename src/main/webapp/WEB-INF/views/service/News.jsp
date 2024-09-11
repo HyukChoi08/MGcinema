@@ -5,11 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    	
     <title>${serviceHome.title}</title>
     <link rel="stylesheet" href="/service/notice.css">
-    <style>
-        
+    <style>      
     </style>
 </head>
 <body>

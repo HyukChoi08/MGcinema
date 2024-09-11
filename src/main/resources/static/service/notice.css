@@ -1,5 +1,5 @@
 @charset "UTF-8";
-body {
+		body {
             margin: 0;
             padding: 0;
             background-color: black; /* 페이지 배경색 */
@@ -20,11 +20,13 @@ body {
             display: flex;
         }
 
-        .sidebar {
-            width: 250px;
-            padding: 15px;
-            background-color: #333; /* 사이드바 배경색 */
-            height: fit-content;
+       .sidebar {
+    	width: 250px;
+    	padding: 15px;
+    	background-color: #333; /* 사이드바 배경색 */
+    	height: fit-content;
+    	color: white; /* 사이드바 글씨색 */
+    	float: left; /* 사이드바가 왼쪽에 배치되도록 설정 */
         }
 
         .sidebar ul {
@@ -52,14 +54,14 @@ body {
             padding: 15px;
             background-color: black; /* 메인 콘텐츠 배경색 */
             color: white; /* 메인 콘텐츠 글씨색 */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+          
             border: 1px solid #fff; /* 메인 콘텐츠 테두리색 */
             border-radius: 10px;
         }
 
         .search_area {
             margin-bottom: 20px;
-            text-align: left;
+           
             display: flex;
             align-items: center;
         }
@@ -80,7 +82,7 @@ body {
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            width: 100px;
+            width: 50px;
             font-size: 0.9em;
         }
 

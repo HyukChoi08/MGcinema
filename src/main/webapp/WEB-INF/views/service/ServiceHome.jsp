@@ -6,15 +6,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>고객센터</title>
-    <link rel="stylesheet" href="/service/servicehome.css"> 
+  	<link rel="stylesheet" href="/service/servicehome.css">    
     <style>     
     </style>
 </head>
-<body>
-<header>
-    <%@ include file="/WEB-INF/views/header/header.jsp" %>
-</header>
-
+<body>	
+<%@ include file="/WEB-INF/views/header/header.jsp" %>
 <div id="container">
     <div id="contents">
         <!-- 사이드바 -->
@@ -27,12 +24,7 @@
                     <li><a href="inquiry">이메일 문의</a></li>
                 </ul>
             </div>
-            <div class="ad-area">
-                <!-- 광고 공간 -->
-            </div>
         </div>
-
-        <!-- 메인 콘텐츠 -->
         <div class="col-detail">
             <div class="c_check_warp">
                 <div class="c_box qna_search">
@@ -77,7 +69,7 @@
     			<span class="tit">공지사항</span>
     			<!-- 버튼으로 변환된 링크 -->
     			<a href="news" class="notice_more_btn">+</a>
-    			<ul class="list">
+    			<ul class="list"><br>
         		<c:forEach var="news" items="${newsList}">
             		<li><a href="newsDetail?id=${news.id}" class="notice_list">[${news.selected}]  ${news.title} ${news.created_at}</a></li>
         		</c:forEach>
