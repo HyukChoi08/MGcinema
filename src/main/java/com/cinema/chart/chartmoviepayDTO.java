@@ -4,7 +4,5 @@ import lombok.Data;
 
 @Data
 public class chartmoviepayDTO {
-String movie_name;
-String totalpeople;
-String ratio;
+double ratio;
 }

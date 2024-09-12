@@ -228,12 +228,11 @@ color:black;
     	url:'/putreservation',
     	type:'post',
     	data:{getmname:getmname},
-    	dataType:"text",
         success: function(data) {
         	console.log(data)
         	let str = ''
         	$('#reservation').empty();
-			str=data['ratio'];
+			str="예매율:"+data;
 			console.log(str);
         	
             $('#reservation').append(str);
