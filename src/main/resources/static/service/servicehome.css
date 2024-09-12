@@ -16,12 +16,12 @@ body {
 }
 
 #contents {
-    width: 100%; /* 컨텐츠 영역의 너비를 100%로 설정 */
+    width: 1000px; /* 컨텐츠 영역의 너비를 100%로 설정 */
     display: flex; /* 자식 요소들을 왼쪽 정렬 */
 }
 
 .sidebar {
-    width: 250px;
+    width: 150px;
     padding: 15px;
     background-color: black; /* 사이드바 배경색 */
     height: fit-content;
@@ -51,36 +51,33 @@ body {
 
 .col-detail {
 	width:1000px;
+    padding: 15px;
     background-color: black; /* 메인 콘텐츠 배경색 */
-    color: white; /* 메인 콘텐츠 글씨색 */	
+    color: white; /* 메인 콘텐츠 글씨색 */
+    border: 1px solid #fff; /* 메인 콘텐츠 테두리색 */
+    border-radius: 10px; /* 모서리 둥글게 설정 */
    
 }
 
-.search_area {
-    margin-bottom: 20px; /* 하단 여백 20px */
-    text-align: left;
-    display: flex;
-    align-items: center;
-}
 
 .search_area input {
     padding: 10px; /* 패딩 10px */
-    flex: 1; /* 버튼을 제외한 나머지 공간을 모두 차지하도록 설정 */
     border: 1px solid #fff; /* 테두리 색상 흰색으로 설정 */
     border-radius: 4px; /* 모서리 둥글게 설정 */
-    margin-right: 10px; /* 버튼과의 간격 10px */
     color: black; /* 검색 박스 텍스트 색상 */
+    flex: 1; /* 가용 공간을 최대한 활용 */
 }
 
+
 .search_area button {
-    padding: 10px; /* 패딩 10px */
+    padding: 10px 15px;	 /* 패딩 10px */
     background-color: #e50914; /* 버튼 배경색 */
     color: white; /* 버튼 글씨색 */
     border: none; /* 테두리 없음 */
     border-radius: 4px; /* 모서리 둥글게 설정 */
     cursor: pointer; /* 커서 포인터로 변경 */
-    width: 60px; /* 버튼 너비 60px */
-    font-size: 0.8em; /* 폰트 크기 0.8em */
+    flex: 0; /* 버튼의 너비를 내용에 맞게 조정 */
+    font-size: 0.9em; /* 폰트 크기 0.8em */
 }
 
 .search_area button:hover {
@@ -89,13 +86,15 @@ body {
 
 .c_check_warp {
     display: flex;
+    justify-content: space-between; /* 좌우에 공간을 고르게 배치 */
+    gap: 20px; /* 박스 간의 간격 */
+    width: 100%;
     flex-wrap: wrap; /* 박스가 여러 줄로 배치될 수 있도록 설정 */
-    gap: 20px; /* 박스 간의 간격 20px */
-    width: 100%; /* 전체 너비 설정 */
 }
 
 .c_box {
-    flex: 1 1 calc(33.333% - 20px); /* 박스가 3열로 배치되도록 설정 */
+    flex: 1; /* 박스들이 동일한 너비를 가지도록 설정 */
+    min-width: 150px; /* 박스의 최소 너비를 설정 (필요에 따라 조절) */
     padding: 15px; /* 패딩 15px */
     box-sizing: border-box; /* 박스 모델을 테두리와 패딩을 포함하도록 설정 */
     background-color: black; /* 박스 배경색 */
@@ -103,6 +102,7 @@ body {
     border: 1px solid #fff; /* 박스 테두리색 */
     border-radius: 5px; /* 모서리 둥글게 설정 */
 }
+
 
 .button, .btn_add {
     background-color: #e50914; /* 버튼 배경색 */
