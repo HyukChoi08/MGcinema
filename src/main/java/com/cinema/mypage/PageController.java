@@ -1,5 +1,7 @@
 package com.cinema.mypage;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -72,7 +75,8 @@ public class PageController {
 			return "닉네임 변경에 실패했습니다.";
 		}
 	}
-
+	
+	
 	/*
 	 * @GetMapping("/payment") // 결제 내역 페이지 매핑 public String payment() { return
 	 * "mypage/payment"; }
