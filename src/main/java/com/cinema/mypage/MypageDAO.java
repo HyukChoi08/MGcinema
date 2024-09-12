@@ -51,4 +51,5 @@ public interface MypageDAO {
 	
 	//취소된 결제내역 가져오기 
 	List<StoreListDTO> getCanceledPayments(String customerId);
+	List<MovieGetDTO> getRecentMovies(String uid);
 }

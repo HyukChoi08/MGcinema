@@ -156,7 +156,7 @@ String customer_id = (String) session.getAttribute("uid");
 							<ul>
 								<li><a href=/chart>Movie Home</a></li>
 								<br>
-								<li><a href=/ageinfo>등급영화 보기</a></li>
+								<li><a href=/ageinfo>상영영화 예매율 순위</a></li>
 								<br>
 								<li><a href=/ticket>상영중인 영화</a></li>
 								<br>
