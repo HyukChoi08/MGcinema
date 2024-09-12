@@ -40,7 +40,7 @@ public class PageController {
 			model.addAttribute("getMovies", arrmovieDTO);  // 전체 예매 목록을 Model에 추가
 
 			// 최근 5건의 예매 목록을 가져오기
-			List<MovieGetDTO> recentMovies = arrmovieDTO.size() > 5 ? arrmovieDTO.subList(0, 5) : arrmovieDTO;
+			List<MovieGetDTO> recentMovies = mdao.getRecentMovies(uid);
 			model.addAttribute("recentMovies", recentMovies);
 			model.addAttribute("totalMoviesCount", arrmovieDTO.size());
 
@@ -134,6 +134,8 @@ public class PageController {
 	public String getInquiryList(HttpSession session, Model model) {
 		CustomerDTO cusDTO = (CustomerDTO) session.getAttribute("cusDTO");
 		int customer_id = cusDTO.getId(); 
+		
+		
 		ArrayList<InquiryDTO> arrInqDTO = mdao.getInquiryList(customer_id);
 		model.addAttribute("inquiries", arrInqDTO);
 		return "mypage/inquirylist";

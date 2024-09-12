@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<!-- JSTL Functions 태그 추가 -->
 <%@ page import="com.cinema.mypage.CustomerDTO"%>
 <%
 // 세션에서 cusrDTO 객체 가져오기
@@ -97,8 +99,15 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 								<td>${inquiry.created}</td>
 								<td>${inquiry.current}</td>
 							</tr>
-						<c:set var="counter" value="${counter + 1}" />
 						</c:forEach>
+						<!-- 내역이 5개 미만일 때 빈 줄 추가 -->
+						<c:forEach begin="${fn:length(inquiries) + 1}" end="5">
+							<tr>
+								<td colspan="8">&nbsp;</td>
+								<!-- 빈 칸 유지 -->
+							</tr>
+						</c:forEach>
+						<c:set var="counter" value="${counter + 1}" />
 					</thead>
 				</table>
 				<br>

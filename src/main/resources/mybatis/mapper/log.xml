@@ -22,6 +22,9 @@
 	<select id="getNickname" resultType="String">
         select nickname from customer where uid = #{param1}
 	</select>
+	<select id="getId" resultType="String">
+		select id from customer where uid = #{param1}
+	</select>
 	
 	
  	 <select id="getFindId" resultType="String">

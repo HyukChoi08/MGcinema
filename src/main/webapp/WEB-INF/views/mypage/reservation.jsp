@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page import="com.cinema.mypage.CustomerDTO"%>
 <%
 // 세션에서 cusrDTO 객체 가져오기
@@ -102,9 +103,8 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 										<td>${reservation.endtime}</td>
 										<td>${reservation.created}</td>
 										<td>
-										<!-- 상영 시간지나면 예매취소불가 -->
-										<c:set var="endDateTime"
-										value="${reservation.datetime}T${reservation.endtime}:00" /> 	
+											<!-- 상영 시간지나면 예매취소불가 --> <c:set var="endDateTime"
+												value="${reservation.datetime}T${reservation.endtime}:00" />
 											<c:choose>
 												<c:when test="${endDateTime gt currentTime}">
 													<button class="button"
@@ -114,7 +114,15 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 												<c:otherwise>
 													<span>상영 종료</span>
 												</c:otherwise>
-											</c:choose></td>
+											</c:choose>
+										</td>
+									</tr>
+								</c:forEach>
+								<!-- 내역이 5개 미만일 때 빈 줄 추가 -->
+								<c:forEach begin="${fn:length(getMovies) + 1}" end="5">
+									<tr>
+										<td colspan="9">&nbsp;</td>
+										<!-- 빈 칸 유지 -->
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -160,7 +168,13 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 											<td>${cancellation.created}</td>
 										</tr>
 									</c:forEach>
-
+									<!-- 내역이 5개 미만일 때 빈 줄 추가 -->
+									<c:forEach begin="${fn:length(canceledMovies) + 1}" end="5">
+										<tr>
+											<td colspan="8">&nbsp;</td>
+											<!-- 빈 칸 유지 -->
+										</tr>
+									</c:forEach>
 								</tbody>
 
 							</table>

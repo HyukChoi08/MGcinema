@@ -21,17 +21,18 @@ public class HomepageController {
 	public String home(HttpServletRequest req, Model model) {
 		String linkstr = "";
 		HttpSession s = req.getSession();
-		String id = (String) s.getAttribute("uid");
-		System.out.println(id);
-		String Nickname = ldao.getNickname(id);
-		System.out.println(Nickname);
+		String uid = (String) s.getAttribute("uid");
+		String Nickname = ldao.getNickname(uid);
+		String id = ldao.getId(uid);
 
 		s.setAttribute("Nick", Nickname);
+		s.setAttribute("id", id);
+		System.out.println(id);
 
-		if (id == null || id.equals("")) {
+		if (uid == null || uid.equals("")) {
 			linkstr = "<li><a href='/login'>로그인</a></li>" + "<li><a href='/signup'>회원가입</a></li>";
 
-		} else if ("admin".equals(id)) {
+		} else if ("admin".equals(uid)) {
 			linkstr = "<li>[" + Nickname + "]</li>" + "<li><a href='/logout'>로그아웃</a></li>"
 					+ "<li><a href='/manager'>관리</a></li>";
 

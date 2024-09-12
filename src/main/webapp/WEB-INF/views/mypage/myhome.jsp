@@ -1,13 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  <!-- JSTL Functions 태그 추가 -->
 <%@ page import="com.cinema.mypage.CustomerDTO"%>
 
-<%// 세션에서 cusrDTO 객체 가져오기
-CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");%>
+<%
+// 세션에서 cusrDTO 객체 가져오기
+CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
+%>
 
 <%@ page import="com.cinema.mypage.MovieGetDTO"%>
-<%// 세션에서 MovieGetDTO 객체 가져오기
+<%
+// 세션에서 MovieGetDTO 객체 가져오기
 String customer_id = (String) session.getAttribute("uid");
 %>
 <!DOCTYPE html>
@@ -82,8 +86,8 @@ String customer_id = (String) session.getAttribute("uid");
 			<div class="main-content">
 				<!-- 예매 내역 섹션 -->
 				<div>
-					<h3>최근 나의 예매내역 (최대 5건)</h3>
-					<div class="my-history">
+					<h3>최근 나의 예매내역</h3>
+					<div class="my-historyMain" onclick="location.href='/reservation'">
 						<table>
 							<thead>
 								<tr>
@@ -100,7 +104,8 @@ String customer_id = (String) session.getAttribute("uid");
 							<tbody>
 								<c:choose>
 									<c:when test="${not empty recentMovies}">
-										<c:forEach var="reservation" items="${recentMovies}">
+										<c:forEach var="reservation" items="${recentMovies}"
+											varStatus="status">
 											<tr>
 												<td>${reservation.movie_name}</td>
 												<td>${reservation.room_name}</td>
@@ -112,6 +117,13 @@ String customer_id = (String) session.getAttribute("uid");
 												<td>${reservation.created}</td>
 											</tr>
 										</c:forEach>
+										<!-- 예매 내역이 5개 미만일 때 빈 줄 추가 -->
+										<c:forEach begin="${fn:length(recentMovies) + 1}" end="5">
+											<tr>
+												<td colspan="8">&nbsp;</td>
+												<!-- 빈 칸 유지 -->
+											</tr>
+										</c:forEach>
 										<c:if test="${totalMoviesCount > 5}">
 											<tr>
 												<td colspan="8" style="text-align: center; color: white;">
@@ -120,6 +132,12 @@ String customer_id = (String) session.getAttribute("uid");
 										</c:if>
 									</c:when>
 									<c:otherwise>
+										<!-- 예매 내역이 없을 때 빈 줄 5개 표시 -->
+										<c:forEach begin="1" end="5">
+											<tr>
+												<td colspan="8">&nbsp;</td>
+											</tr>
+										</c:forEach>
 										<tr>
 											<td colspan="8">예매 목록이 없습니다.</td>
 										</tr>
@@ -127,48 +145,54 @@ String customer_id = (String) session.getAttribute("uid");
 								</c:choose>
 							</tbody>
 						</table>
-						<button class="button" onclick="location.href='/reservation'">
-							나의 예매이력 바로가기</button>
-					</div>
-
-					<!-- 문의 내역 섹션 -->
-					<div class="div2">
-				
-						<div class="div3" style= "border: 0px;">
-							<div class="link">
-						<ul>
-							<li><a href=/chart>Movie Home</a></li><br>
-							<li><a href=/ageinfo>등급영화 보기</a></li><br>
-							<li><a href=/ticket>상영중인 영화</a></li><br>
-							<li><a href=/serviceHome>고객센터 바로가기</a></li><br>
-							<li><a href=/store>스토어 바로가기</a></li><br>
-
-						</ul>
-					</div>
-							
-						</div>
-						<div class="div3">
-							<h3>1:1 문의 작성하기 <br></h3>
-							
-						</div>
-						<div class="div3">
-						<h3>최근 스토어 결제이력</h3>
-						</div>
-					</div>
 					
-					<!-- My CGV Home 섹션 -->
-					<button class="button" onclick="location.href='/cinema'">CGV
-								영화 예매 바로가기</button>
-					<br> <br> <br>
-
-					<!-- 푸터 섹션 -->
-					<div class="footer-section">
-						<p>보고싶은 영화가 있나요?</p>
-						<a href="/chart" class="button">상영중인 영화 바로가기</a>
 					</div>
+				</div>
+				<!-- 문의 내역 섹션 -->
+				<div class="div2">
+
+					<div class="div3" style="border: 0px;">
+						<div class="link">
+							<ul>
+								<li><a href=/chart>Movie Home</a></li>
+								<br>
+								<li><a href=/ageinfo>상영영화 예매율 순위</a></li>
+								<br>
+								<li><a href=/ticket>상영중인 영화</a></li>
+								<br>
+								<li><a href=/serviceHome>고객센터 바로가기</a></li>
+								<br>
+								<li><a href=/store>스토어 바로가기</a></li>
+								<br>
+
+							</ul>
+						</div>
+
+					</div>
+					<div class="div3">
+						<h3>
+							1:1 문의 작성하기 <br>
+						</h3>
+
+					</div>
+					<div class="div3">
+						<h3>최근 스토어 결제이력</h3>
+					</div>
+				</div>
+
+				<!-- My CGV Home 섹션 -->
+				<button class="button" onclick="location.href='/cinema'">CGV
+					영화 예매 바로가기</button>
+				<br> <br> <br>
+
+				<!-- 푸터 섹션 -->
+				<div class="footer-section">
+					<p>보고싶은 영화가 있나요?</p>
+					<a href="/chart" class="button">상영중인 영화 바로가기</a>
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 	<%@ include file="/WEB-INF/views/footer/footer.jsp"%>
 	<!-- 푸터 포함 -->
