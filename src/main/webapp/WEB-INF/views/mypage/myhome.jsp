@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  <!-- JSTL Functions 태그 추가 -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<!-- JSTL Functions 태그 추가 -->
 <%@ page import="com.cinema.mypage.CustomerDTO"%>
 
 <%
@@ -35,6 +36,7 @@ String customer_id = (String) session.getAttribute("uid");
 		<div class="profile-section">
 			<img src="/mypage_image/OO.png" alt="프로필이미지" width="80" height="80" />
 
+			<div id="result"></div>
 			<div class="profile-info">
 				<h2>
 					<%=customer.getRealname()%>
@@ -54,7 +56,7 @@ String customer_id = (String) session.getAttribute("uid");
 		</div>
 
 
-		<!-- 닉네임 변경하기 모달 -->
+		<!-- 닉네임, 프로필 이미지 변경하기 모달 -->
 		<div id="nicknameModal" class="modal">
 			<div class="modal-content">
 				<span class="close">&times;</span>
@@ -64,6 +66,7 @@ String customer_id = (String) session.getAttribute("uid");
 						id="newNickname" name="newNickname" placeholder="새 닉네임 입력">
 					<button type="button" id="saveNicknameBtn">저장</button>
 				</form>
+				
 			</div>
 		</div>
 
@@ -145,7 +148,7 @@ String customer_id = (String) session.getAttribute("uid");
 								</c:choose>
 							</tbody>
 						</table>
-					
+
 					</div>
 				</div>
 				<!-- 문의 내역 섹션 -->
@@ -244,7 +247,9 @@ String customer_id = (String) session.getAttribute("uid");
 			} else {
 				alert('새 닉네임을 입력하세요.');
 			}
+			
 		});
+		
 	});
 
 	/* 	$(document).ready(function() {

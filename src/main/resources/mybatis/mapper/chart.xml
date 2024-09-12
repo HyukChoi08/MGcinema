@@ -16,7 +16,7 @@
 <select id ="chartList3" resultType="com.cinema.chart.chartDTO">
 	 select id, mname, age, runningtime, reservation, imagepath, director, cast, genre, releasedate, movieinfo from movie where id=#{param1}
 	</select>
-	<select id ="putreservation" resultType="com.cinema.chart.chartmoviepayDTO">
+	<select id ="putreservation" parameterType="String" resultType="com.cinema.chart.chartmoviepayDTO">
 	     SELECT 
     ROUND(
         (SELECT SUM(totalpeople) 

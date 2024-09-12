@@ -175,11 +175,12 @@ public String deletereview (HttpServletRequest req, Model model) {
 
 @PostMapping("/putreservation")//예매율 계산
 @ResponseBody 
-public String putreservation (HttpServletRequest req, Model model) {
+public double putreservation (HttpServletRequest req, Model model) {
 	String getmname = req.getParameter("getmname");
 	
-	cdao.putreservation(getmname);
-	return "ok";
+	chartmoviepayDTO chartmoviepay = cdao.putreservation(getmname);
+	double ratio = chartmoviepay.getRatio();
+	return ratio;
 }
 
 }

@@ -21,156 +21,172 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 <body>
 	<%@ include file="/WEB-INF/views/header/header.jsp"%>
 	<!-- 헤더 포함 -->
-		<!-- DB 작업 실패 시 에러메세지 출력 -->
-		<c:if test="${not empty errorMessage}">
-			<script>
+	<!-- DB 작업 실패 시 에러메세지 출력 -->
+	<c:if test="${not empty errorMessage}">
+		<script>
 				alert('${errorMessage}');
 			</script>
-		</c:if>
+	</c:if>
 
-		<!-- 프로필 섹션 -->
-		<div class="mainscreen">
-			<div class="profile-section">
-				<img src="/mypage_image/OO.png" alt="프로필이미지" width="80" height="80" />
+	<!-- 프로필 섹션 -->
+	<div class="mainscreen">
+		<div class="profile-section">
+			<img src="/mypage_image/OO.png" alt="프로필이미지" width="80" height="80" />
 
-				<div class="profile-info">
-					<h2>
-						<%=customer.getRealname()%>
-						님
-					</h2>
-					<div>
-						닉네임 : <span id="nickname"><%=customer.getNickname()%></span>
-						<!-- 닉네임 수정 아이콘 클릭 시 모달 표시 -->
-						<a href="javascript:void(0)" id="editNicknameBtn">_<i
-							class="fa-solid fa-pen"></i></a>
-					</div>
-					<div>
-						아이디 :
-						<%=customer.getUid()%>
-					</div>
+			<div class="profile-info">
+				<h2>
+					<%=customer.getRealname()%>
+					님
+				</h2>
+				<div>
+					닉네임 : <span id="nickname"><%=customer.getNickname()%></span>
+					<!-- 닉네임 수정 아이콘 클릭 시 모달 표시 -->
+					<a href="javascript:void(0)" id="editNicknameBtn">_<i
+						class="fa-solid fa-pen"></i></a>
 				</div>
-			</div>
-
-			<!-- 닉네임 변경하기 모달 -->
-			<div id="nicknameModal" class="modal">
-				<div class="modal-content">
-					<span class="close">&times;</span>
-					<h2>닉네임 변경</h2>
-					<form id="nicknameForm">
-						<label for="newNickname">새 닉네임:</label> <input type="text"
-							id="newNickname" name="newNickname" placeholder="새 닉네임 입력">
-						<button type="button" id="saveNicknameBtn">저장</button>
-					</form>
-				</div>
-			</div>
-
-
-
-			<!-- 메인 컨테이너 -->
-			<div class="container">
-				<!-- 사이드바 -->
-				<div class="sidebar">
-					<ul>
-						<li><a href="/myhome">MY HOME</a></li>
-						<li><a href="/reservation">나의 예매정보</a></li>
-						<li><a href="/payment">스토어 결제</a></li>
-						<li><a href="/inquiry">1:1 문의</a></li>
-						<li><a href="/profile">개인 정보 변경</a></li>
-						<li><a href="/cancel">회원 탈퇴</a></li>
-					</ul>
-				</div>
-
-				<!-- 메인 콘텐츠 -->
-				<div class="main-content">
-					<div>
-						<div>
-							<h3>회원 정보 수정</h3>
-						</div>
-						<div>
-							<form method=post action='/profileUpdate'>
-								<table>
-									<tr>
-										<td></td>
-										<td><input type=hidden name=id id=id></td>
-									</tr>
-									<tr>
-										<td><h4>아이디</h4></td>
-										<td><input type=text name=uid id=uid readonly></td>
-									</tr>
-									<tr>
-										<td><h4>비밀번호</h4></td>
-										<td><input type=password name=passwd id=passwd></td>
-									</tr>
-									<!-- <tr><td>비밀번호확인</td><td><input type=password name=passwd1></td></tr> -->
-									<tr>
-										<td><h4>실명</h4></td>
-										<td><input type=text name=realname id=realname readonly></td>
-									</tr>
-									<tr>
-										<td><h4>닉네임</h4></td>
-										<td><input type="text" name="nickname" id=inputNickname></td>
-									</tr>
-									<tr>
-										<td><h4>e-mail</h4></td>
-										<td><input type=text name=email id=email></td>
-									</tr>
-									<tr>
-										<td><h4>주소</h4></td>
-										<td><input type=text name=region id=region></td>
-									</tr>
-									<tr>
-										<td><h4>생년월일</h4></td>
-										<td><input type="date" name=birthday id=birthday></td>
-									</tr>
-									<tr>
-										<td><h4>통신사</h4></td>
-										<td><input type=radio name=tellecom value="LG U+"id="radioLG">LG U+ 
-										<input type=radio name=tellecom	value=KT id="radioKT">KT 
-										<input type=radio name=tellecom value=SKT id="radioSKT">SKT<br> 
-										<input type=radio name=tellecom value=SKT-MVNO id="radioSKT-MVNO">SKT알뜰폰
-										<input type=radio name=tellecom value=KT-MVNO id="radioKT-MVNO">KT알뜰폰 
-										<input type=radio name=tellecom value=LG-MVNO id="radioLG-MVNO">U+알뜰폰 <br>
-										</td>
-									</tr>
-									<tr>
-										<td><h4>휴대폰 번호</h4></td>
-										<td><input type=text name=mobile id=mobile></td>
-									</tr>
-
-
-									<tr>
-										<td><h4>관심분야</h4></td>
-										<td>
-											<input type="checkbox" name="favorite"id="favoriteAction" value="액션">액션 
-											<input type="checkbox" name="favorite" id="favoriteComedy"value="코미디">코미디 
-											<input type="checkbox" name="favorite" id="favoriteDrama" value="드라마">드라마<br>
-											<input type="checkbox" name="favorite" id="favoriteSF"value="SF">SF 
-											<input type="checkbox" name="favorite"id="favoriteRomance" value="로맨스">로맨스 
-											<input type="checkbox" name="favorite" id="favoriteThriller"value="스릴러">스릴러<br> 
-											<input type="checkbox" name="favorite" id="favoriteHorror" value="공포">공포 
-											<input type="checkbox" name="favorite" id="favoriteAnimation" value="애니메이션">애니메이션 
-											<input type="checkbox" name="favorite" id="favoriteFantasy" value="판타지">판타지<br>
-											<input type="checkbox" name="favorite" id="favoriteFamily"value="가족">가족 
-											<input type="checkbox" name="favorite" id="favoriteAdventure" value="모험">모험 
-											<input type="checkbox" name="favorite" id="favoriteWar" value="전쟁">전쟁
-											<input type="checkbox" name="favorite" id="favoriteMusic"value="음악">음악</td>
-									</tr>
-									<tr>
-										<td colspan=2 style='text-align: center'><input
-											type="submit" value="수정" class="button">
-											<button class="button" onClick="location.href='/myhome'">취소</button>
-										</td>
-									</tr>
-								</table>
-							</form>
-
-						</div>
-
-					</div>
+				<div>
+					아이디 :
+					<%=customer.getUid()%>
 				</div>
 			</div>
 		</div>
-	
+
+		<!-- 닉네임 변경하기 모달 -->
+		<div id="nicknameModal" class="modal">
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<h2>닉네임 변경</h2>
+				<form id="nicknameForm">
+					<label for="newNickname">새 닉네임:</label> <input type="text"
+						id="newNickname" name="newNickname" placeholder="새 닉네임 입력">
+					<button type="button" id="saveNicknameBtn">저장</button>
+				</form>
+			</div>
+		</div>
+
+
+
+		<!-- 메인 컨테이너 -->
+		<div class="container">
+			<!-- 사이드바 -->
+			<div class="sidebar">
+				<ul>
+					<li><a href="/myhome">MY HOME</a></li>
+					<li><a href="/reservation">나의 예매정보</a></li>
+					<li><a href="/payment">스토어 결제</a></li>
+					<li><a href="/inquiry">1:1 문의</a></li>
+					<li><a href="/profile">개인 정보 변경</a></li>
+					<li><a href="/cancel">회원 탈퇴</a></li>
+				</ul>
+			</div>
+
+			<!-- 메인 콘텐츠 -->
+			<div class="main-content">
+				<div>
+					<div>
+						<h3>회원 정보 수정</h3>
+					</div>
+					<div>
+						<form method=post action='/profileUpdate'>
+							<table>
+								<tr>
+									<td></td>
+									<td><input type=hidden name=id id=id></td>
+								</tr>
+								<tr>
+									<td><h4>아이디</h4></td>
+									<td><input type=text name=uid id=uid readonly></td>
+								</tr>
+								<tr>
+									<td><h4>비밀번호</h4></td>
+									<td><input type=password name=passwd id=passwd></td>
+								</tr>
+								<!-- <tr><td>비밀번호확인</td><td><input type=password name=passwd1></td></tr> -->
+								<tr>
+									<td><h4>실명</h4></td>
+									<td><input type=text name=realname id=realname readonly></td>
+								</tr>
+								<tr>
+									<td><h4>닉네임</h4></td>
+									<td><input type="text" name="nickname" id=inputNickname></td>
+								</tr>
+								<tr>
+									<td><h4>e-mail</h4></td>
+									<td><input type=text name=email id=email></td>
+								</tr>
+								<tr>
+									<td><h4>주소</h4></td>
+									<td><input type=text name=region id=region></td>
+								</tr>
+								<tr>
+									<td><h4>생년월일</h4></td>
+									<td><input type="date" name=birthday id=birthday></td>
+								</tr>
+								<tr>
+									<td><h4>통신사</h4></td>
+									<td><input type=radio name=tellecom value="LG U+"
+										id="radioLG">LG U+ <input type=radio name=tellecom
+										value=KT id="radioKT">KT <input type=radio
+										name=tellecom value=SKT id="radioSKT">SKT<br> <input
+										type=radio name=tellecom value=SKT-MVNO id="radioSKT-MVNO">SKT알뜰폰
+										<input type=radio name=tellecom value=KT-MVNO
+										id="radioKT-MVNO">KT알뜰폰 <input type=radio
+										name=tellecom value=LG-MVNO id="radioLG-MVNO">U+알뜰폰 <br>
+									</td>
+								</tr>
+								<tr>
+									<td><h4>휴대폰 번호</h4></td>
+									<td><input type=text name=mobile id=mobile></td>
+								</tr>
+
+
+								<tr>
+									<td><h4>관심분야</h4></td>
+									<td><input type="checkbox" name="favorite"
+										id="favoriteAction" value="액션">액션 <input
+										type="checkbox" name="favorite" id="favoriteComedy"
+										value="코미디">코미디 <input type="checkbox" name="favorite"
+										id="favoriteDrama" value="드라마">드라마<br> <input
+										type="checkbox" name="favorite" id="favoriteSF" value="SF">SF
+										<input type="checkbox" name="favorite" id="favoriteRomance"
+										value="로맨스">로맨스 <input type="checkbox" name="favorite"
+										id="favoriteThriller" value="스릴러">스릴러<br> <input
+										type="checkbox" name="favorite" id="favoriteHorror" value="공포">공포
+										<input type="checkbox" name="favorite" id="favoriteAnimation"
+										value="애니메이션">애니메이션 <input type="checkbox"
+										name="favorite" id="favoriteFantasy" value="판타지">판타지<br>
+										<input type="checkbox" name="favorite" id="favoriteFamily"
+										value="가족">가족 <input type="checkbox" name="favorite"
+										id="favoriteAdventure" value="모험">모험 <input
+										type="checkbox" name="favorite" id="favoriteWar" value="전쟁">전쟁
+										<input type="checkbox" name="favorite" id="favoriteMusic"
+										value="음악">음악</td>
+								</tr>
+								<tr>
+									<td><h4>프로필 이미지</h4></td>
+									<td><h5>이미지변경</h5>
+									<form id="uploadForm" enctype="multipart/form-data">
+										<input type="file"
+											name="file" id="file" /><br>
+										<button type="button" id="uploadFileBtn">업로드</button>
+									</form></td>
+								</tr>
+								<tr>
+									<td colspan=2 style='text-align: center'><input
+										type="submit" value="수정" class="button">
+										<button class="button" onClick="location.href='/myhome'">취소</button>
+									</td>
+								</tr>
+							</table>
+						</form>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<%@ include file="/WEB-INF/views/footer/footer.jsp"%>
 	<!-- 푸터 포함 -->
 </body>
