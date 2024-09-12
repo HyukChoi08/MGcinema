@@ -36,7 +36,7 @@ public String chartList1(HttpServletRequest req, Model model) {
 	
 	String archart = cdao.chartList2(id);
 	model.addAttribute("chartList2",archart);
-	ArrayList<chartDTO> putchart = cdao.chartList3(id);
+	chartDTO putchart = cdao.chartList3(id);
 	model.addAttribute("chartList3", putchart);
 	ArrayList<chartappearanceinfoDTO> putinfoprod =cainfodao.chartappearanceinfo(String.valueOf(id));
 	model.addAttribute("cainfoprod", putinfoprod);
@@ -170,6 +170,15 @@ public String deletereview (HttpServletRequest req, Model model) {
 	int id = Integer.parseInt(req.getParameter("id"));
 	
 	cpcdao.deletereview(id);
+	return "ok";
+}
+
+@PostMapping("/putreservation")//예매율 계산
+@ResponseBody 
+public String putreservation (HttpServletRequest req, Model model) {
+	String getmname = req.getParameter("getmname");
+	
+	cdao.putreservation(getmname);
 	return "ok";
 }
 

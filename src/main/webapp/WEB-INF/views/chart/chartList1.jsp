@@ -128,14 +128,14 @@ color:black;
 <body>
     <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
     <div class="vertical-container4">
-    <c:forEach items="${chartList3}" var="chartList3">
+<%--     <c:forEach items="${chartList3}" var="chartList3"> --%>
         <div class="vertical-container1">
             <div class="vertical-container">
                 <div class="flex-container">
                     <img src="${chartList2}" height="400px">
                     <div class="vertical-container">
-                        <div class="title"><h1>${chartList3.mname}</h1></div>
-                       <div class="left-aligned">예매율 ${chartList3.reservation} %</div>
+                        <div class="title"><h1 id="getmname" data-mname="${chartList3.mname}">${chartList3.mname}</h1></div>
+                       <div class="left-aligned" id="reservation">예매율 ${chartList3.reservation} %</div>
                         <div>
                             <dl style="text-align: left;">
                                 <dt>감독:&nbsp;${chartList3.director}</dt>
@@ -151,7 +151,7 @@ color:black;
                     <div>
                         <ul class="flex-container3">
                             <li>상세정보|</li>
-                            <li id="apinfo"><a href="/chartList1?id=${sessionScope.dataId}#menu">감독/출연|</a></li>
+                            <li id="apinfo"><a href="/chartdetail?id=${sessionScope.dataId}">감독/출연|</a></li>
                             <li>스틸컷|</li>
                             <li>평점/리뷰|</li>
                             <li>상영시간</li>
@@ -193,7 +193,7 @@ color:black;
                 </div>
             </div>
         </div>
-    </c:forEach>
+    <%-- </c:forEach> --%>
     <div id="appearinfo">
     <div style="display:flex;">
     <ul class="vertical-container">
@@ -222,8 +222,23 @@ color:black;
     <script src="https://code.jquery.com/jquery-latest.js"></script>
     <script>
     
+    let getmname = $("#getmname").data("mname");
     
-    
+    $.ajax({
+    	url:'/putreservation',
+    	type:'post',
+    	data:{getmname:getmname},
+    	dataType:"text",
+        success: function(data) {
+        	console.log(data)
+        	let str = ''
+        	$('#reservation').empty();
+			str=data['ratio'];
+			console.log(str);
+        	
+            $('#reservation').append(str);
+        }
+    })
         //commentArray select에 넣는것
         $.ajax({
             url: '/commentArray',

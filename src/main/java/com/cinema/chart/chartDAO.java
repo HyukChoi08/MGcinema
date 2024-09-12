@@ -10,7 +10,7 @@ public interface chartDAO {
 ArrayList<chartDTO> chartList();
 ArrayList<chartDTO> chartList1();
 String chartList2(int id); 
-ArrayList<chartDTO> chartList3(int id);
-
+chartDTO chartList3(int id);
+ArrayList<chartmoviepayDTO> putreservation(String getmname);
 }
 
