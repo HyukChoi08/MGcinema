@@ -134,6 +134,8 @@ public class PageController {
 	public String getInquiryList(HttpSession session, Model model) {
 		CustomerDTO cusDTO = (CustomerDTO) session.getAttribute("cusDTO");
 		int customer_id = cusDTO.getId(); 
+		
+		
 		ArrayList<InquiryDTO> arrInqDTO = mdao.getInquiryList(customer_id);
 		model.addAttribute("inquiries", arrInqDTO);
 		return "mypage/inquirylist";
