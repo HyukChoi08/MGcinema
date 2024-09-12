@@ -29,12 +29,12 @@
             <div class="c_check_warp">
                 <div class="c_box qna_search">
                     <strong class="c_tit">
-    					<span class="emoji-search"></span><br>자주찾는 질문 빠른검색<Br><br>
+    					<span class="emoji-search"></span><br>자주찾는 질문 빠른검색
 					</strong>
                     <div class="search_area">
-                        <form action="faq" method="get" style="display: flex; align-items: center; width: 100%;">
-                        <br><br><input id="searchtext" type="text" name="search" placeholder="검색어를 입력해 주세요." />
-                            <button type="submit" class="btn_search">검색</button>
+                        <form action="faq" method="get"">
+                        <br><input id="searchtext" type="text"name="search" placeholder="검색어를 입력해 주세요."><br><br>
+                          <button type="submit" class="btn_search">검색</button>
                         </form>
                     </div>
                     <br>
@@ -43,7 +43,7 @@
                 <div class="c_box email_inquiry">
                     <strong class="c_tit">
     					<span class="emoji-email"></span></span><br>이메일 문의</strong><br><br>
-                    <span class="c_txt">24시간 365일 언제든지 문의해주세요.</span>
+                    <span class="c_txt">365일 언제든지 문의해주세요.</span>
                     <br><br><a href="inquirywrite" class="button">문의하기</a>
                 </div>
                 <div class="c_box my_advice">	
