@@ -55,7 +55,7 @@ public class ServiceController {
             faqList = faqDAO.getFAQsBySelected(selected, size, offset);
             totalFAQCount = faqDAO.getTotalFAQCountBySelected(selected);
         }
-
+        System.out.println(faqList+"123");
         int totalPages = (int) Math.ceil((double) totalFAQCount / size);
 
         model.addAttribute("faqList", faqList);
