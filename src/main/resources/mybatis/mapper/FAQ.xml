@@ -48,7 +48,7 @@
         LIMIT #{size} OFFSET #{offset}
     </select>
 
-    <!-- 검색어를 기반으로 FAQ 총 개수를 가져오는 쿼리 -->
+   
     <select id="getTotalFAQCountByKeyword" parameterType="string" resultType="int">
         SELECT COUNT(*)
         FROM FAQ
