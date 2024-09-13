@@ -109,6 +109,13 @@
 		SET nickname = #{nickname}
 		WHERE uid = #{uid}
 	</update>
+	 <!-- 이미지 업데이트 -->
+	 <update id="updateProfileImage">
+        UPDATE customer
+        SET profileimg = #{fileName} <!-- 프로필 이미지 컬럼 업데이트 -->
+        WHERE id = #{userId} <!-- 사용자 ID로 조건 설정 -->
+    </update>
+    
 
 	<!-- 예매 목록을 페이징 및 최신순 정렬로 가져오기 -->
 	<select id="getMovieListWithPaging" parameterType="map"
@@ -154,4 +161,12 @@
 		ORDER BY datetime DESC  <!-- 최신순 정렬 -->
 		LIMIT 5  <!-- 최근 5건만 가져오기 -->
 	</select>
+	<!-- 예매 탑3가져오기 -->
+	 <select id="getTop3MoviesByReservation" resultType="com.cinema.chart.chartDTO">
+        SELECT id, mname, imagepath, reservation
+        FROM movie
+        ORDER BY reservation DESC
+        LIMIT 3
+    </select>
+	
 </mapper>

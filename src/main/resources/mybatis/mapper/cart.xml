@@ -6,7 +6,7 @@
 <mapper namespace="com.cinema.store.cartDAO">
 
 <insert id='insertcart'>
-insert into cart set customer_id=#{param1}, item_id=#{param2}, qty=#{param3}, total=#{param4}
+insert into cart set customer_id=#{param1}, item_id=#{param2}, qty=#{param3}, total=#{param4},cust_id=#{param5}
 
 </insert>
 <select id='selectcart' resultType="com.cinema.store.cartDTO">
@@ -24,13 +24,13 @@ SELECT
 FROM  cart a
 JOIN item b ON a.item_id = b.id
 JOIN customer c ON a.customer_id = c.uid
-WHERE c.uid =#{param1}
+WHERE c.uid =#{param1} and a.cust_id=#{param2}
 GROUP BY  a.item_id 
 order by item_id
 </select>
 <delete id='deletecart'>
 DELETE FROM cart
-WHERE item_id =#{param1} AND customer_id =#{param2}
+WHERE item_id =#{param1} AND customer_id =#{param2} and cust_id=#{param3}
 </delete>
 <delete id="deletecart1"> DELETE FROM cart WHERE item_id =#{param1} AND customer_id =#{param2}</delete>
 <select id="countcart" resultType="_int">
@@ -47,6 +47,6 @@ FROM cart
 WHERE customer_id =#{param1}
 </select>
 <update id="updatecart">
- UPDATE cart SET qty=#{param3} WHERE customer_id =#{param1} and item_id=#{param2}
+ UPDATE cart SET qty=#{param3} WHERE customer_id =#{param1} and item_id=#{param2} and cust_id=#{param4}
   </update>
 </mapper>

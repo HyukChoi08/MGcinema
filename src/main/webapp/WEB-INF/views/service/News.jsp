@@ -43,21 +43,22 @@
 			</div>
 
             <div class="c_tab_wrap">
-   	<ul>
-        <li class="${empty selected ? 'on' : ''}">
-            <a href="/news">전체</a>
-        </li>
-        <li class="${selected == '시스템점검' ? 'on' : ''}">
-            <a href="/news?selected=시스템점검">시스템점검</a>
-        </li>
-        <li class="${selected == '극장' ? 'on' : ''}">
-            <a href="/news?selected=극장">극장</a>
-        </li>
-        <li class="${selected == '기타' ? 'on' : ''}">
-            <a href="/news?selected=기타">기타</a>
-        </li>
-    </ul>
-</div>
+   			<ul>
+        		<li class="${empty selected ? 'on' : ''}">
+            		<a href="/news">전체</a>
+        		</li>
+        		<li class="${selected == '시스템점검' ? 'on' : ''}">
+            		<a href="/news?selected=시스템점검">시스템점검</a>
+        		</li>
+        		<li class="${selected == '극장' ? 'on' : ''}">
+            		<a href="/news?selected=극장">극장</a>
+        		</li>
+        		<li class="${selected == '기타' ? 'on' : ''}">
+            		<a href="/news?selected=기타">기타</a>
+        		</li>
+    		</ul>
+			</div>
+			
             <div class="tbl_area">
                 <table class="tbl_notice_list">
                     <thead>

@@ -8,8 +8,11 @@ public class FAQDTO {
     private Long id;
     private String title;
     private String content;
-    private LocalDateTime createdAt;
+    private String created_at;
     private int views;
     private String selected;
-    
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
+    }
+  
 }

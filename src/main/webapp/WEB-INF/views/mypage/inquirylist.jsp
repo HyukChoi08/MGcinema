@@ -90,24 +90,27 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 							<th>작성일</th>
 							<th>상태</th>
 						</tr>
-						<c:set var="counter" value="1" />
-						<c:forEach var="inquiry" items="${inquiries}">
+						<!-- 목록 출력 -->
+						<c:forEach var="inquiry" items="${inquiries}" varStatus="status">
 							<tr>
-								<td><c:out value="${counter}" /></td>
-								<%-- <td>${inquiry.id}</td> --%>
+								<td><c:out value="${status.index + 1}" /></td>
+								<!-- 1부터 시작하는 인덱스 출력 -->
 								<td><a href='/inquirydetail/${inquiry.id}'>${inquiry.title}</a></td>
 								<td>${inquiry.created}</td>
 								<td>${inquiry.current}</td>
 							</tr>
 						</c:forEach>
+
 						<!-- 내역이 5개 미만일 때 빈 줄 추가 -->
-						<c:forEach begin="${fn:length(inquiries) + 1}" end="5">
-							<tr>
-								<td colspan="8">&nbsp;</td>
-								<!-- 빈 칸 유지 -->
-							</tr>
-						</c:forEach>
-						<c:set var="counter" value="${counter + 1}" />
+						<c:if test="${fn:length(inquiries) < 5}">
+							<c:forEach begin="${fn:length(inquiries) + 1}" end="5">
+								<tr>
+									<td colspan="4">&nbsp;</td>
+									<!-- 빈 칸 유지 -->
+								</tr>
+							</c:forEach>
+						</c:if>
+						
 					</thead>
 				</table>
 				<br>

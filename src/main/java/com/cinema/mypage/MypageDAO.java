@@ -1,5 +1,8 @@
 package com.cinema.mypage;
 import org.apache.ibatis.annotations.Param;
+
+import com.cinema.chart.chartDTO;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +16,8 @@ public interface MypageDAO {
 	CustomerDTO getCustomerInfoByUid(String uid);  // 새로 추가
 	// 닉네임 업데이트 메서드
 	void updateNickname(@Param("uid") String uid, @Param("nickname") String newNickname);
+
+	
 	// 1:1 문의 관련
 	ArrayList<InquiryDTO> getInquiryList(int customer_id); // 문의글 목록 가져오기
 	void inquiryWrite(InquiryDTO inqDTO); // 문의글 등록하기
@@ -52,4 +57,8 @@ public interface MypageDAO {
 	//취소된 결제내역 가져오기 
 	List<StoreListDTO> getCanceledPayments(String customerId);
 	List<MovieGetDTO> getRecentMovies(String uid);
+	
+	//영화 상위 가져오기
+	 List<chartDTO> getTop3MoviesByReservation();
+	
 }

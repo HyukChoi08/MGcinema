@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ServiceController {
 
-    @Autowired
+    private static final String String = null;
+	@Autowired
     private FAQDAO faqDAO;
     @Autowired
     private NewsDAO newsDAO;
@@ -38,7 +39,7 @@ public class ServiceController {
             @RequestParam(value = "page", defaultValue = "1") int page,
             @RequestParam(value = "size", defaultValue = "10") int size,
             @RequestParam(value = "search", defaultValue = "") String search,
-            @RequestParam(value = "selected", defaultValue = "") String selected, // 추가된 부분
+            @RequestParam(value = "selected", defaultValue = "") String selected,
             Model model) {
 
         int offset = (page - 1) * size;
@@ -52,10 +53,10 @@ public class ServiceController {
             faqList = faqDAO.getFAQsByKeyword(search, size, offset);
             totalFAQCount = faqDAO.getTotalFAQCountByKeyword(search);
         } else {
-            faqList = faqDAO.getFAQsBySelected(selected, size, offset); // 선택된 항목으로 필터링
-            totalFAQCount = faqDAO.getTotalFAQCountBySelected(selected); // 선택된 항목으로 총 수 가져오기
+            faqList = faqDAO.getFAQsBySelected(selected, size, offset);
+            totalFAQCount = faqDAO.getTotalFAQCountBySelected(selected);
         }
-
+        System.out.println(faqList+"123");
         int totalPages = (int) Math.ceil((double) totalFAQCount / size);
 
         model.addAttribute("faqList", faqList);
@@ -63,48 +64,59 @@ public class ServiceController {
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("size", size);
         model.addAttribute("search", search);
-        model.addAttribute("selected", selected); 
+        model.addAttribute("selected", selected);
         model.addAttribute("totalFAQCount", totalFAQCount);
         return "service/FAQ";
     }
 
     @GetMapping("/faqcreate")
     public String showFAQCreatePage(Model model) {
-        model.addAttribute("faqDTO", new FAQDTO()); // 빈 FAQDTO 객체를 모델에 추가하여 폼에 바인딩
-        return "service/FAQcreate"; // FAQ 생성 폼 JSP 페이지를 반환
+        model.addAttribute("faqDTO", new FAQDTO());
+        return "service/FAQcreate";
     }
 
     @PostMapping("/FAQcreate")
     public String createFAQ(@ModelAttribute FAQDTO faqDTO) {
-        faqDTO.setCreatedAt(LocalDateTime.now()); // 현재 시간을 생성일로 설정
-        faqDTO.setViews(0); // 기본 조회수 0으로 설정
-        faqDAO.addFAQ(faqDTO); // 데이터베이스에 저장
-        return "redirect:/faq"; // 저장 후 FAQ 목록 페이지로 리디렉션
+        // 현재 날짜와 시간 가져오기
+        LocalDateTime now = LocalDateTime.now();
+        
+        // 원하는 날짜와 시간 포맷 정의하기
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        
+        // LocalDateTime을 String으로 변환하기
+        String formattedDate = now.format(formatter);
+        
+        // created_at에 변환된 날짜 문자열 설정하기
+        faqDTO.setCreated_at(formattedDate);
+        
+        // 초기 조회수 설정하기
+        faqDTO.setViews(0);
+        
+        // FAQ를 데이터베이스에 추가하기
+        faqDAO.addFAQ(faqDTO);
+        
+        // FAQ 페이지로 리다이렉트하기
+        return "redirect:/faq";
     }
-
     @GetMapping("/FAQdetail")
     public String showFAQDetailPage(@RequestParam(value = "id") Long id, Model model) {
         FAQDTO faqDetail = faqDAO.getFAQById(id);
         if (faqDetail != null) {
+            // 조회수 증가 및 FAQ 업데이트
             faqDetail.setViews(faqDetail.getViews() + 1);
             faqDAO.updateFAQ(faqDetail);
 
-            // Convert LocalDateTime to String
+            // 날짜 포맷 설정
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            String formattedDate;
-            if (faqDetail.getCreatedAt() != null) {
-                formattedDate = faqDetail.getCreatedAt().format(formatter);
-            } else {
-                formattedDate = "날짜 정보 없음";  // null일 때의 기본값 설정
-            }
+            String formattedDate = (faqDetail.getCreated_at() != null) ? faqDetail.getCreated_at().formatted(formatter) : "날짜 정보 없음";
 
+            // 모델에 속성 추가
             model.addAttribute("faqDetail", faqDetail);
-            model.addAttribute("formattedDate", formattedDate);  // Add formatted date as a separate attribute
+            model.addAttribute("formattedDate", formattedDate);
         } else {
-            // faqDetail이 null인 경우의 처리
             model.addAttribute("error", "FAQ 항목을 찾을 수 없습니다.");
         }
-        
+
         return "service/FAQdetail";
     }
 
@@ -126,6 +138,7 @@ public class ServiceController {
         faqDAO.deleteFAQ(id);
         return "redirect:/faq";
     }
+    
 
     @GetMapping("/news")
     public String showNewsPage(

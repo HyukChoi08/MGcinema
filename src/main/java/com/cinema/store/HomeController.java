@@ -34,24 +34,28 @@ public class HomeController {
 	
 
 	@GetMapping("/store")
-
 	public String store(HttpServletRequest req,Model model) {
-	
+		HttpSession s=req.getSession();
+		String uid=(String) s.getAttribute("uid");
+		     									
+		ArrayList<storeDTO> arStore = storedao.selectbest();
+				
+		model.addAttribute("arStore",arStore);
 		return "store/store";
 	}
 	@GetMapping("/details")
 	public String details(HttpServletRequest req,Model model) {
 	    int id = Integer.parseInt(req.getParameter("id"));
-	    System.out.println(id);
-	    
-		ArrayList<storeDTO> arPackage = storedao.selectpackage(id);
-		System.out.println("item="+arPackage.size());
-		ArrayList<storeDTO> arItem = storedao.selectitem(id);
+	    System.out.println(id);	    
+	  	    
+		storeDTO arItem = storedao.selectitem(id);
 		
 		String imagePath = storedao.getImagePath(id);
 		
 		HttpSession s=req.getSession();
 		String uid=(String) s.getAttribute("uid");
+		
+		
 		System.out.println(uid);
 		
 	    if (uid != null) {
@@ -61,11 +65,10 @@ public class HomeController {
         }
 		
 	    
-		model.addAttribute("arPackage",arPackage);
+	
 		model.addAttribute("arItem",arItem);
 		model.addAttribute("imagePath", imagePath);
-		
-		System.out.println(arPackage);
+			
 		System.out.println(arItem);
 		System.out.println(imagePath);
 		
@@ -180,10 +183,12 @@ public class HomeController {
 
 		HttpSession s=req.getSession();
 		String uid=(String) s.getAttribute("uid");
+		String id1=(String) s.getAttribute("id");
+		int cust_id=Integer.parseInt(id1);
 		System.out.println(uid);
 		
 		
-		ArrayList<cartDTO> arCart=cartdao.selectcart(uid);
+		ArrayList<cartDTO> arCart=cartdao.selectcart(uid,cust_id);
 		
 		model.addAttribute("uid",uid);
 		model.addAttribute("arCart",arCart);
@@ -204,32 +209,47 @@ public class HomeController {
 		
 		String customer_id=(String) s.getAttribute("uid");
 		System.out.println(customer_id);
+		String id1=(String) s.getAttribute("id");
+		int cust_id= Integer.parseInt(id1);
+		
+		
 		int item_id=Integer.parseInt(req.getParameter("item_id"));
 		int qty=Integer.parseInt(req.getParameter("qty"));
 		String total=req.getParameter("total");
 		
 		
-		cartdao.insertcart(customer_id, item_id, qty, total);
+		cartdao.insertcart(customer_id, item_id, qty, total,cust_id);
 		return "ok";
 	}
 	@PostMapping("/deletecart")
 	@ResponseBody
 	public String deletecart(HttpServletRequest req) {
+		
+		HttpSession s=req.getSession();		
+		String id1=(String) s.getAttribute("id");
+		int cust_id= Integer.parseInt(id1);
+		
+		
 		int item_id=Integer.parseInt(req.getParameter("item_id"));
 		String customer_id=req.getParameter("customer_id");
 		
-		cartdao.deletecart(item_id, customer_id);
+		cartdao.deletecart(item_id, customer_id,cust_id);
 		
 		return "ok";
 	}
 	@PostMapping("/updatecart")
 	@ResponseBody
 	public String updatecart(HttpServletRequest req) {
+				
+		HttpSession s=req.getSession();
+		String id1=(String) s.getAttribute("id");
+		int cust_id=Integer.parseInt(id1);
+				
 		String customer_id=req.getParameter("customer_id");
 		int item_id=Integer.parseInt(req.getParameter("item_id"));
 		int qty=Integer.parseInt(req.getParameter("qty"));
-				
-		cartdao.updatecart(customer_id, item_id, qty);
+										
+		cartdao.updatecart(customer_id, item_id, qty,cust_id);
 		
 		return "ok";
 	}
@@ -239,6 +259,8 @@ public class HomeController {
 	public String choicedelete(@RequestBody Map<String, List<String>> requestBody, HttpServletRequest req) {
 	    HttpSession session = req.getSession();
 	    String customer_id = (String) session.getAttribute("uid");
+	    String id1=(String) session.getAttribute("id");
+	    int cust_id=Integer.parseInt(id1);
 	    if (customer_id == null) {
 	        return "User not logged in";
 	    }
@@ -251,7 +273,9 @@ public class HomeController {
 	    for (String itemId : itemIds) {
 	        try {
 	            int itemIdInt = Integer.parseInt(itemId);
-	            cartdao.deletecart(itemIdInt, customer_id); // 데이터베이스에서 항목 삭제
+	            
+	            
+	            cartdao.deletecart(itemIdInt, customer_id,cust_id); // 데이터베이스에서 항목 삭제
 	        } catch (NumberFormatException e) {
 	            return "Invalid item ID: " + itemId;
 	        }
@@ -280,10 +304,7 @@ public class HomeController {
         }
 
         //String source = (String) dataMap.get("source");
-        
-        
-        
-        
+                            
         // 변환된 데이터를 모델에 추가
     
         model.addAttribute("uid",customer_id);

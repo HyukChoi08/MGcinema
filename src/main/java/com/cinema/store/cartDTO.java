@@ -18,7 +18,7 @@ public class cartDTO {
 	int itemIdInt;
 	int item_qty;
 	int item_count;
-	
+	int cust_id;
 	
 
 }

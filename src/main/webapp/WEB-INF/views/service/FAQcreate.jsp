@@ -68,11 +68,10 @@
         }
     </style>
 </head>
-<body>
-
+<body>  
+	
     <header>
         <h1>FAQ 생성</h1>
-        <!-- FAQ 목록으로 돌아가기 링크 -->
         <a href="<c:url value='/faq' />">목록으로 돌아가기</a>
     </header>
     

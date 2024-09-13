@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+body {
+    background-color:black;
+    color:white;
+}
+
+.maincontainer {
+    width: 80%;
+    max-width: 1000px;
+    margin: 20px auto;
+    background-color:black;
+    padding: 20px;
+    border:none;
+    margin-top: 80px;
+    margin-bottom: 40px;
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+table {
+	width:1000px;
+}
+.imgcell {
+	width:200px;
+	height:260px;
+}
