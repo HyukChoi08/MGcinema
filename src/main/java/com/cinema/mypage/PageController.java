@@ -24,7 +24,6 @@ import com.cinema.chart.chartDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
-
 @Controller
 public class PageController {
 
@@ -32,8 +31,8 @@ public class PageController {
 	MypageDAO mdao;
 
 	@GetMapping("/myhome")
-	public String myhome(HttpSession session, Model model) { 
-		String uid = (String)session.getAttribute("uid");
+	public String myhome(HttpSession session, Model model) {
+		String uid = (String) session.getAttribute("uid");
 
 		// uid가 null이 아닌 경우 세션에 cusDTO 저장
 		if (uid != null) {
@@ -42,17 +41,17 @@ public class PageController {
 
 			// 예매 목록 가져오기
 			ArrayList<MovieGetDTO> arrmovieDTO = mdao.getMovieList(uid);
-			model.addAttribute("getMovies", arrmovieDTO);  // 전체 예매 목록을 Model에 추가
+			model.addAttribute("getMovies", arrmovieDTO); // 전체 예매 목록을 Model에 추가
 			/* System.out.println(arrmovieDTO); */
 			// 최근 5건의 예매 목록을 가져오기
 			List<MovieGetDTO> recentMovies = mdao.getRecentMovies(uid);
 			model.addAttribute("recentMovies", recentMovies);
 			model.addAttribute("totalMoviesCount", arrmovieDTO.size());
 
-			 // 상위 3개의 영화 가져오기
-	        List<chartDTO> topMovies = mdao.getTop3MoviesByReservation();
-	        model.addAttribute("topMovies", topMovies);
-	        System.out.println(topMovies);
+			// 상위 3개의 영화 가져오기
+			List<chartDTO> topMovies = mdao.getTop3MoviesByReservation();
+			model.addAttribute("topMovies", topMovies);
+			System.out.println(topMovies);
 			/* System.out.println(arrmovieDTO); */ // cusDTO 값 출력
 		} else {
 			return "redirect:/login";
@@ -60,12 +59,10 @@ public class PageController {
 		return "mypage/myhome";
 	}
 
-
-	//   @GetMapping("/reservation") // 나의 예매정보 페이지 매핑
-	//   public String reservation() {
-	//      return "mypage/reservation"; 
-	//   }
-
+	// @GetMapping("/reservation") // 나의 예매정보 페이지 매핑
+	// public String reservation() {
+	// return "mypage/reservation";
+	// }
 
 	// 닉네임 업데이트 처리
 	@PostMapping("/updateNickname")
@@ -82,27 +79,26 @@ public class PageController {
 		}
 	}
 
-
 	/*
 	 * @GetMapping("/payment") // 결제 내역 페이지 매핑 public String payment() { return
 	 * "mypage/payment"; }
 	 */
 
-	// 예매 리스트 
+	// 예매 리스트
 	@GetMapping("/reservation")
-	public String movieGetList(HttpSession session, Model model, 
-			@RequestParam(value = "page", defaultValue = "1") int page, 
+	public String movieGetList(HttpSession session, Model model,
+			@RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "canceledPage", defaultValue = "1") int canceledPage) {
 
 		String customer_id = (String) session.getAttribute("uid");
 
-		int limit = 10;  // 한 페이지에 10개씩
+		int limit = 10; // 한 페이지에 10개씩
 		int offset = (page - 1) * limit;
 
 		// 페이징된 예매 리스트 가져오기
 		ArrayList<MovieGetDTO> arrmovieDTO = mdao.getMovieListWithPaging(customer_id, limit, offset);
 		model.addAttribute("getMovies", arrmovieDTO);
-		
+
 		// 총 예매 수 구하기 (페이지네이션을 위해 필요)
 		int totalReservations = mdao.getTotalReservationCount(customer_id);
 		int listTotalPages = (int) Math.ceil((double) totalReservations / limit);
@@ -115,7 +111,8 @@ public class PageController {
 
 		// 취소된 예매 리스트 조회 및 페이징
 		int canceledOffset = (canceledPage - 1) * limit;
-		ArrayList<MovieGetDTO> canceledMoviesDTO = mdao.getCanceledMovieListWithPaging(customer_id, limit, canceledOffset);
+		ArrayList<MovieGetDTO> canceledMoviesDTO = mdao.getCanceledMovieListWithPaging(customer_id, limit,
+				canceledOffset);
 		model.addAttribute("canceledMovies", canceledMoviesDTO);
 
 		// 총 취소된 예매 수 구하기 (페이지네이션을 위해 필요)
@@ -139,28 +136,48 @@ public class PageController {
 
 		return "success";
 	}
+
 	// 1:1문의 리스트 조회
-	@GetMapping("/inquiry") 
-	public String getInquiryList(HttpSession session, Model model) {
-		CustomerDTO cusDTO = (CustomerDTO) session.getAttribute("cusDTO");
-		int customer_id = cusDTO.getId(); 
+	@GetMapping("/inquiry")
+	public String getInquiryList(@RequestParam(value="page", defaultValue="1") int page, HttpSession session, Model model) {
+	    // 세션에서 사용자 정보 가져오기
+	    CustomerDTO cusDTO = (CustomerDTO) session.getAttribute("cusDTO");
+	    int customer_id = cusDTO.getId(); 
 
+	    // 페이지당 항목 수와 시작 행 계산
+	    int pageSize = 5;
+	    int startRow = (page - 1) * pageSize;
 
-		ArrayList<InquiryDTO> arrInqDTO = mdao.getInquiryList(customer_id);
+	    // 페이징 처리된 문의 목록 가져오기
+	    List<InquiryDTO> inquiries = mdao.getInquiryList(customer_id, startRow);
+
+	    // 전체 문의 개수 조회
+	    int totalCount = mdao.getInquiryCount(customer_id);
+
+	    // 총 페이지 수 계산
+	    int totalPages = (int) Math.ceil((double) totalCount / pageSize);
+	    
+	    ArrayList<InquiryDTO> arrInqDTO = mdao.getInquiryList(customer_id);
 		model.addAttribute("inquiries", arrInqDTO);
-		return "mypage/inquirylist";
+	
+	    // 모델에 데이터 추가
+	    model.addAttribute("inquiries", inquiries);
+	    model.addAttribute("currentPage", page);
+	    model.addAttribute("totalPages", totalPages);
+
+	    return "mypage/inquirylist";
 	}
 
 	// 1:1문의 작성폼
 	@GetMapping("/inquirywrite")
 	public String getInquiryForm(Model model, HttpSession session) {
 		model.addAttribute("view", "inquirywrite");
-		CustomerDTO cusDTO = (CustomerDTO)(session.getAttribute("cusDTO"));
-		int customer_id = cusDTO.getId(); 
+		CustomerDTO cusDTO = (CustomerDTO) (session.getAttribute("cusDTO"));
+		int customer_id = cusDTO.getId();
 
-		//문의 목록 표출  HttpSession session) 세션에 정보를 담아서 페이지로 넘김 
+		// 문의 목록 표출 HttpSession session) 세션에 정보를 담아서 페이지로 넘김
 		ArrayList<InquiryDTO> arrInqDTO = mdao.getInquiryList(customer_id);
-		System.out.println("arrInqDTO size="+ arrInqDTO.size());
+		System.out.println("arrInqDTO size=" + arrInqDTO.size());
 		model.addAttribute("inquiries", arrInqDTO);
 		return "mypage/inquirydetail";
 	}
@@ -177,22 +194,27 @@ public class PageController {
 
 	// 1:1 문의글 상세 내용 확인
 	@GetMapping("/inquirydetail/{id}")
-	public String inquiryDetail(@PathVariable("id") int id, Model model,HttpSession session) {
-		InquiryDTO inqDTO = mdao.getInquiryDetail(id);
-		System.out.println("문의 title: " + inqDTO.getTitle());
+	public String inquiryDetail(@PathVariable("id") int id, Model model, HttpSession session) {
+	    InquiryDTO inqDTO = mdao.getInquiryDetail(id);
+	    System.out.println("문의 title: " + inqDTO.getTitle());
 
-		model.addAttribute("inquiry", inqDTO);
-		model.addAttribute("view", "inquirydetail");
-		//게시글 불러오는 부분을 복 붙
-		CustomerDTO cusDTO = (CustomerDTO)(session.getAttribute("cusDTO"));
-		int customer_id = cusDTO.getId(); 
-		ArrayList<InquiryDTO> arrInqDTO = mdao.getInquiryList(customer_id);
-		System.out.println("arrInqDTO size="+ arrInqDTO.size());
-		//모델에 문의 목록 추가 
-		model.addAttribute("inquiries", arrInqDTO);
-		return "mypage/inquirydetail";
-	} 
+	    model.addAttribute("inquiry", inqDTO);
+	    model.addAttribute("view", "inquirydetail");
+	    
+	    // 세션에서 사용자 정보 가져오기
+	    CustomerDTO cusDTO = (CustomerDTO) session.getAttribute("cusDTO");
+	    int customer_id = cusDTO.getId();
 
+	    // 전체 문의 목록 가져오기
+	    ArrayList<InquiryDTO> arrInqDTO = mdao.getInquiryList(customer_id);
+	    System.out.println(arrInqDTO);
+
+	    // 모델에 데이터 추가
+	    model.addAttribute("inquiries", arrInqDTO);
+
+	    return "mypage/inquirydetail";
+	}
+	
 
 	// 회원 정보 변경 페이지
 	@GetMapping("/profile")
@@ -234,14 +256,12 @@ public class PageController {
 		return "mypage/passcheck";
 	}
 
-
-
 	// 프로필 수정 - 회원 id로 정보 조회 및 세션 저장
 	@PostMapping("/customerInfo")
 	@ResponseBody
 	public CustomerDTO getCustomerInfo(HttpSession session) {
-		String uid = (String)session.getAttribute("uid");
-		System.out.println("uid: "+uid);
+		String uid = (String) session.getAttribute("uid");
+		System.out.println("uid: " + uid);
 
 		CustomerDTO cusDTO = mdao.getCustomerInfoByUid(uid);
 		session.setAttribute("cusDTO", cusDTO);
@@ -252,8 +272,7 @@ public class PageController {
 	// 패스워드 확인 후 리다이렉트
 	@PostMapping("/checkPasswd")
 	public ModelAndView checkPassword(@RequestParam("passwd") String passwd,
-			@RequestParam("redirectUrl") String redirectUrl,
-			HttpSession session) {
+			@RequestParam("redirectUrl") String redirectUrl, HttpSession session) {
 		ModelAndView modelAndView = new ModelAndView();
 
 		CustomerDTO cusDTO = (CustomerDTO) session.getAttribute("cusDTO");
@@ -270,10 +289,8 @@ public class PageController {
 
 	// 회원 탈퇴 처리
 	@PostMapping("/deleteCustomer")
-	public String deleteCustomer(HttpServletRequest req, 
-			@RequestParam("passwd") String passwd, 
-			@RequestParam("passwd1") String passwd1, 
-			RedirectAttributes redirectAttributes) {
+	public String deleteCustomer(HttpServletRequest req, @RequestParam("passwd") String passwd,
+			@RequestParam("passwd1") String passwd1, RedirectAttributes redirectAttributes) {
 		HttpSession session = req.getSession();
 
 		CustomerDTO cusDTO = (CustomerDTO) session.getAttribute("cusDTO");
@@ -299,11 +316,10 @@ public class PageController {
 		return "redirect:/cinema"; // 홈 페이지로 리다이렉트
 	}
 
-
-
-	//스토어 결제내역 목록
+	// 스토어 결제내역 목록
 	@GetMapping("/payment")
-	public String getStoreList(HttpSession session, Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
+	public String getStoreList(HttpSession session, Model model,
+			@RequestParam(value = "page", defaultValue = "1") int page) {
 		CustomerDTO cusDTO = (CustomerDTO) session.getAttribute("cusDTO"); // 세션에서 사용자 정보 가져옴
 		if (cusDTO == null) {
 			return "redirect:/login"; // 로그인 정보가 없으면 로그인 페이지로 리다이렉트
@@ -314,7 +330,7 @@ public class PageController {
 		int offset = (page - 1) * limit; // 페이지에 따른 offset 계산
 
 		// 결제 내역 리스트 가져옴
-		List<StoreListDTO> storeList = mdao.getStoreList(customerId, offset, limit); 
+		List<StoreListDTO> storeList = mdao.getStoreList(customerId, offset, limit);
 
 		// item_name 필드를 분리하여 itemName과 composition에 값 할당
 		for (StoreListDTO store : storeList) {
@@ -338,7 +354,7 @@ public class PageController {
 		return "mypage/payment"; // 결제 내역 페이지로 이동
 	}
 
-	//결제취소
+	// 결제취소
 	@PostMapping("/cancelPayment")
 	@ResponseBody
 	public String cancelPayment(@RequestParam("id") int id) {

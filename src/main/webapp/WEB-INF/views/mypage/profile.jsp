@@ -84,7 +84,7 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 			<div class="main-content">
 				<div>
 					<div>
-						<h3>회원 정보 수정</h3>
+						<h2>회원 정보 수정</h2><br>
 					</div>
 					<div>
 						<form method=post action='/profileUpdate'>
@@ -172,9 +172,10 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 									</form></td>
 								</tr>
 								<tr>
-									<td colspan=2 style='text-align: center'><input
-										type="submit" value="수정" class="button">
-										<button class="button" onClick="location.href='/myhome'">취소</button>
+									<td id=subutton colspan="2"  >
+									<button type="submit" class="button">수정</button>
+									<button type="button" class="button" 
+										onClick="location.href='/myhome'">취소</button>
 									</td>
 								</tr>
 							</table>

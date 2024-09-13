@@ -110,7 +110,6 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 								</tr>
 							</c:forEach>
 						</c:if>
-						
 					</thead>
 				</table>
 				<br>
