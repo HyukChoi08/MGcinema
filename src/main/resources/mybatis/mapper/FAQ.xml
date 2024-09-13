@@ -26,7 +26,7 @@
     </select>
 
     <insert id="addFAQ" parameterType="com.cinema.service.FAQDTO">
-        INSERT INTO FAQ (title, content, created_at, views, selected)
+        INSERT INTO FAQ (title, content, created_at, views, selected) 
         VALUES (#{title}, #{content}, #{created_at}, #{views}, #{selected})
     </insert>
 
