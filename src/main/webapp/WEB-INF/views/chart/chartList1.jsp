@@ -105,6 +105,7 @@ a {
     width: 55%; /* 부모 요소의 너비를 가득 채우게 설정 */
 }
 
+
 #putcomment{
 float: right;
 }
@@ -224,7 +225,7 @@ color:black;
     
     let getmname = $("#getmname").data("mname");
     
-    $.ajax({
+/*     $.ajax({
     	url:'/putreservation',
     	type:'post',
     	data:{getmname:getmname},
@@ -237,6 +238,14 @@ color:black;
         	
             $('#reservation').append(str);
         }
+    }) */
+    $.ajax({
+    	url:'/updatereservation',
+    	type:'post',
+    	data:{getmname:getmname},
+    	success: function(data){
+    		console.log("update",data)
+    	}
     })
         //commentArray select에 넣는것
         $.ajax({

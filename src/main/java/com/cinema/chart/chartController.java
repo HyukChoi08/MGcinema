@@ -173,14 +173,28 @@ public String deletereview (HttpServletRequest req, Model model) {
 	return "ok";
 }
 
-@PostMapping("/putreservation")//예매율 계산
-@ResponseBody 
-public double putreservation (HttpServletRequest req, Model model) {
+/*
+ * @PostMapping("/putreservation")//예매율 계산
+ * 
+ * @ResponseBody public double putreservation (HttpServletRequest req, Model
+ * model) { String getmname = req.getParameter("getmname");
+ * 
+ * chartmoviepayDTO chartmoviepay = cdao.putreservation(getmname); double ratio
+ * = chartmoviepay.getRatio(); return ratio; }
+ */
+@PostMapping("/updatereservation")//예매율 업데이트
+@ResponseBody
+public String updatereservation (HttpServletRequest req, Model model) {
 	String getmname = req.getParameter("getmname");
-	
-	chartmoviepayDTO chartmoviepay = cdao.putreservation(getmname);
-	double ratio = chartmoviepay.getRatio();
-	return ratio;
+	System.out.println(getmname);
+ cdao.updatereservation(getmname);
+ return "ok";
+}
+@PostMapping("/updaterenewal")//전체예매율 갱신
+@ResponseBody
+public String updaterenewal (HttpServletRequest req, Model model) {
+	cdao.updaterenewal();
+return "ok";	
 }
 
 }

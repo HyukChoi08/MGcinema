@@ -26,5 +26,20 @@
          FROM moviepay), 
         1
     ) AS ratio
-	</select>		
+	</select>	
+	<update id="updatereservation">
+	UPDATE movie a
+JOIN ( SELECT movie_name , ROUND(
+            (SUM(totalpeople) * 100.0 / (SELECT SUM(totalpeople) FROM moviepay)), 
+            1 ) AS ratio FROM moviepay GROUP BY movie_name) b ON a.mname = b.movie_name
+SET a.reservation = b.ratio WHERE a.mname = #{param1}
+	</update>
+	<update id="updaterenewal">
+	UPDATE movie
+JOIN ( SELECT movie_name, ROUND(
+            (SUM(totalpeople) * 100.0 / (SELECT SUM(totalpeople) FROM moviepay)), 
+            1) AS ratio FROM moviepay GROUP BY movie_name ) AS calculated_ratios
+ON movie.mname = calculated_ratios.movie_name
+SET movie.reservation = calculated_ratios.ratio
+	</update>	
 </mapper>

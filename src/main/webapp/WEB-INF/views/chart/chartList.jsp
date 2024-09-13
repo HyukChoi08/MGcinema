@@ -317,5 +317,43 @@ $(document)
 
 	
 })
+function loadchart(){
+	$.ajax({
+	    url: '/chartList',
+	    type: 'post',
+	    data: {},
+	    dataType: "json",
+	    success: function(data) {
+	        console.log(data);
+	        let str1 = '';
+	        let str2 = '';
+	        $('#1').empty();
+	        $('#2').empty();
+	        for (let count = 0; count < data.length; count++) {
+	            if (count < 3) {
+	                str1 += '<div class="vertical-container"><div><strong class="rank">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px" ></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><strong>'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
+	            } else if (count >= 3 && count < 7) {
+	            	 str2 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><strong>'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
+	            }
+	        }
+	        $('#1').append(str1);
+	        $('#2').append(str2);
+	    }
+	});
+}
+function updaterenewal(){
+	$.ajax({
+		url:'/updaterenewal',
+		type:'post',
+		data:{},
+		success:function(data){
+			console.log("updaterenewal",data)
+		}
+	});
+}
+$(document).ready(function() {
+	loadchart();
+	updaterenewal();
+});
 </script>
 </html>
