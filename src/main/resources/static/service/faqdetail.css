@@ -113,7 +113,7 @@ body {
             cursor: pointer;
             font-size: 0.9em;
             margin: 0 10px; /* 좌우 마진 추가 */
-        }
+        } 
 
         .btn-edit {
             background-color: #4CAF50; /* 수정 버튼 배경색 (초록색) */
