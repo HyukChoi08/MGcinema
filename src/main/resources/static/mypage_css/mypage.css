@@ -11,7 +11,6 @@
 	margin-right: auto;
 }
 
-
 a {
 	text-decoration: none; /* 링크 밑줄 제거 */
 	color: #ffffff; /* 텍스트 색상 */
@@ -31,12 +30,11 @@ body {
 table {
 	width: 100%;
 	border-collapse: collapse; /* 테이블 셀 간의 간격 제거 */
-	
 	border-radius: 5px; /* 모서리 둥글게 */
 }
 
 thead th {
-	background-color: #e50914; /* 헤더 배경색 */
+	background-color: #bdbdbd; /* 헤더 배경색 */
 	color: white; /* 헤더 텍스트 색상 */
 	padding: 2px;
 	text-align: left; /* 텍스트 왼쪽 정렬 */
@@ -89,10 +87,23 @@ form input[type="submit"] {
 
 form input[type="submit"]:hover {
 	background-color: #d10813; /* 마우스 올렸을 때 색상 */
-	
 }
-.link{
-	margin-bottom: 15px; 
+
+.divMovie {
+	display: flex; /* 이미지와 텍스트를 옆으로 배치 */
+	text-align: center;
+	border-bottom: 2px solid #808080; /* 아래쪽에 테두리 추가 */
+	border-top: 2px solid #808080; /* 윗줄에 테두리 추가 */
+	margin: 20px auto;
+	justify-content: center; /* 수평 중앙 정렬 */
+}
+
+.divMovie div {
+	padding: 10px;
+}
+
+.link {
+	margin-bottom: 15px;
 	text-align: left;
 }
 
@@ -119,9 +130,10 @@ form input[type="submit"]:hover {
 .profile-section .profile-info {
 	flex-grow: 1; /* 남은 공간 차지 */
 }
-.cancel-btn button{
-	border: 1px solid black;	
-	background-color: black; 
+
+.cancel-btn button {
+	border: 1px solid black;
+	background-color: black;
 	color: white; /* 텍스트 색상 */
 	padding: 1px 5px; /* 버튼 안쪽 여백 */
 	text-align: center; /* 텍스트 중앙 정렬 */
@@ -130,6 +142,7 @@ form input[type="submit"]:hover {
 	display: inline-block; /* 인라인 블록 요소로 설정 */
 	transition: background-color 0.3s ease; /* 배경색 변경 시 애니메이션 추가 */
 }
+
 .button {
 	background-color: #808080; /* 버튼 배경색 */
 	color: white; /* 텍스트 색상 */
@@ -138,7 +151,6 @@ form input[type="submit"]:hover {
 	border-radius: 3px; /* 모서리 둥글게 */
 	text-decoration: none; /* 링크 밑줄 제거 */
 	display: inline-block; /* 인라인 블록 요소로 설정 */
-	
 	transition: background-color 0.3s ease; /* 배경색 변경 시 애니메이션 추가 */
 }
 
@@ -174,11 +186,12 @@ form input[type="submit"]:hover {
 	list-style-type: none; /* 리스트 스타일 제거 */
 	padding: 5px; /* 기본 패딩 제거 */
 }
+
 .sidebar li {
-	height:35px;
+	height: 35px;
 }
+
 .sidebar ul li {
-	
 	margin-bottom: 15px; /* 리스트 간 간격 */
 }
 
@@ -191,18 +204,17 @@ form input[type="submit"]:hover {
 
 .sidebar ul li a:hover {
 	color: #3a3d3f; /* 링크에 마우스 올렸을 때 색상 */
-	
 }
-.sidebar li:hover{
-background-color: #808080; /* 마우스를 올렸을 때 배경색 */
 
-font-size:20px;
+.sidebar li:hover {
+	/* background-color: #808080; */ /* 마우스를 올렸을 때 배경색 */
+	font-size: 20px;
 }
 /* 메인 콘텐츠 스타일 */
 .main-content {
 	border: 2px solid #808080;
 	padding: 25px; /* 패딩 설정 */
-/* 	background-color: white; 배경색 */
+	/* 	background-color: white; 배경색 */
 	margin-left: -5px; /* 사이드바와의 간격 */
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
 	border-radius: 10px; /* 모서리 둥글게 */
@@ -218,36 +230,36 @@ font-size:20px;
 
 /* 예매 내역과 문의 내역 섹션 스타일 */
 .my-history, .ask-section, .section {
-	margin-bottom: 20px;	
+	margin-bottom: 20px;
 	padding: 10px;
 	/* background-color: #f7f7f7; 배경색 */
 	border: 1px solid #ddd; /* 테두리 색상 */
 	border-radius: 5px; /* 모서리 둥글게 */
-	
 }
-.my-historyMain{ /* myhome의 예매내역 란 */
+
+.my-historyMain { /* myhome의 예매내역 란 */
 	text-align: left;
 	border: 1px solid #ddd; /* 테두리 색상 */
 	margin-bottom: 20px;
 	padding: 10px;
 	border: 1px solid #ddd; /* 테두리 색상 */
 	border-radius: 5px; /* 모서리 둥글게 */
-	height:190px;
+	height: 190px;
 	/* 	border-left: 1px black solid; 옆선 제거 
 	border-right: 1px black solid; */
 	/* background-color: #f7f7f7; 배경색 */
 }
 /*마이페이지 홈 블럭*/
-.div2{
+.div2 {
 	display: flex;
 	margin-bottom: 10px;
 	/* padding: 10px; */
 	/* background-color: #f7f7f7; 배경색 */
-	
 	border-radius: 5px; /* 모서리 둥글게 */
 }
-.div3{
-	width:30%;
+
+.div3 {
+	width: 30%;
 	margin: 5px;
 	padding: 10px;
 	border: 1px solid #ddd; /* 테두리 색상 */
@@ -275,7 +287,7 @@ font-size:20px;
 /* 문의 내역 테이블 스타일 */
 .inquiry-table {
 	width: 100%;
-	 /* 테이블 경계선 겹치기 */
+	/* 테이블 경계선 겹치기 */
 	/* border: 1px solid black; 테두리 색상 */
 }
 
@@ -292,6 +304,7 @@ font-size:20px;
 
 .inquiry-table tr:nth-child(even) {
 	/* background-color: #f9f9f9; */
+	
 }
 
 .status-complete {
@@ -306,75 +319,75 @@ font-size:20px;
 
 /* 모달 창 스타일 */
 .modal {
-  display: none; /* 기본적으로 모달은 감춰져 있음 */
-  position: fixed; /* 화면에 고정된 위치 */
-  z-index: 1; /* 다른 요소들 위에 위치하도록 설정 */
-  left: 0; /* 왼쪽 끝에 위치 */
-  top: 0; /* 상단 끝에 위치 */
-  width: 100%; /* 화면 전체 너비 */
-  height: 100%; /* 화면 전체 높이 */
-  background-color: rgba(0, 0, 0, 0.4); /* 배경 어두운 색상 (투명도 0.4) */
-  overflow: auto; /* 내용이 많을 경우 스크롤 가능 */
+	display: none; /* 기본적으로 모달은 감춰져 있음 */
+	position: fixed; /* 화면에 고정된 위치 */
+	z-index: 1; /* 다른 요소들 위에 위치하도록 설정 */
+	left: 0; /* 왼쪽 끝에 위치 */
+	top: 0; /* 상단 끝에 위치 */
+	width: 100%; /* 화면 전체 너비 */
+	height: 100%; /* 화면 전체 높이 */
+	background-color: rgba(0, 0, 0, 0.4); /* 배경 어두운 색상 (투명도 0.4) */
+	overflow: auto; /* 내용이 많을 경우 스크롤 가능 */
 }
 
 /* 모달 콘텐츠 스타일 */
 .modal-content {
-  border-radius: 10px; /* 모서리 둥글게 */
-  background-color: black; /* 흰색 배경 */
-  margin: 15% auto; /* 화면의 중앙에 위치 (상단 여백 15%) */
-  padding: 20px; /* 내부 여백 (패딩) */
-  border: 1px solid #888; /* 테두리 색상 (연한 회색) */
-  width: 50%; /* 모달 너비의 50% */
-  max-width: 500px; /* 모달의 최대 너비 설정 */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 (부드러운 그림자) */
+	border-radius: 10px; /* 모서리 둥글게 */
+	background-color: black; /* 흰색 배경 */
+	margin: 15% auto; /* 화면의 중앙에 위치 (상단 여백 15%) */
+	padding: 20px; /* 내부 여백 (패딩) */
+	border: 1px solid #888; /* 테두리 색상 (연한 회색) */
+	width: 50%; /* 모달 너비의 50% */
+	max-width: 500px; /* 모달의 최대 너비 설정 */
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 (부드러운 그림자) */
 }
 
 /* 닫기 버튼 스타일 */
 .close {
-  color: #aaa; /* 닫기 버튼 색상 (연한 회색) */
-  float: right; /* 버튼을 오른쪽에 정렬 */
-  font-size: 28px; /* 글자 크기 */
-  font-weight: bold; /* 글자 두께 */
+	color: #aaa; /* 닫기 버튼 색상 (연한 회색) */
+	float: right; /* 버튼을 오른쪽에 정렬 */
+	font-size: 28px; /* 글자 크기 */
+	font-weight: bold; /* 글자 두께 */
 }
 
 .close:hover, .close:focus {
-  color: black; /* 호버 및 포커스 시 색상 변경 */
-  cursor: pointer; /* 커서를 포인터로 변경 */
+	color: black; /* 호버 및 포커스 시 색상 변경 */
+	cursor: pointer; /* 커서를 포인터로 변경 */
 }
 
 /* 폼 요소 스타일 */
 #nicknameForm {
-  display: flex; /* 플렉스 박스 레이아웃 사용 */
-  flex-direction: column; /* 세로 방향으로 정렬 */
-  gap: 15px; /* 폼 요소 간 간격 */
+	display: flex; /* 플렉스 박스 레이아웃 사용 */
+	flex-direction: column; /* 세로 방향으로 정렬 */
+	gap: 15px; /* 폼 요소 간 간격 */
 }
 
 /* 라벨 스타일 */
 #nicknameForm label {
-  font-size: 1.2em; /* 폰트 크기 조정 */
-  text-align: left; /* 텍스트 왼쪽 정렬 */
+	font-size: 1.2em; /* 폰트 크기 조정 */
+	text-align: left; /* 텍스트 왼쪽 정렬 */
 }
 
 /* 새 닉네임 입력 필드 스타일 */
 #newNickname {
-  padding: 12px; /* 내부 여백 (패딩) */
-  font-size: 1em; /* 폰트 크기 */
-  border-radius: 5px; /* 모서리 둥글게 */
-  border: 1px solid #ddd; /* 테두리 색상 (연한 회색) */
+	padding: 12px; /* 내부 여백 (패딩) */
+	font-size: 1em; /* 폰트 크기 */
+	border-radius: 5px; /* 모서리 둥글게 */
+	border: 1px solid #ddd; /* 테두리 색상 (연한 회색) */
 }
 
 /* 저장 버튼 스타일 */
 #saveNicknameBtn {
-  width: 20%; /* 버튼 너비 100% */
-  padding: 12px; /* 내부 여백 (패딩) */
-  font-size: 1em; /* 폰트 크기 */
-  border-radius: 5px; /* 모서리 둥글게 */
-  border: none; /* 테두리 제거 */
-  background-color: #001579; /* 버튼 배경색 (짙은 파랑) */
-  color: #fff; /* 버튼 텍스트 색상 (흰색) */
-  cursor: pointer; /* 커서를 포인터로 변경 */
+	width: 20%; /* 버튼 너비 100% */
+	padding: 12px; /* 내부 여백 (패딩) */
+	font-size: 1em; /* 폰트 크기 */
+	border-radius: 5px; /* 모서리 둥글게 */
+	border: none; /* 테두리 제거 */
+	background-color: #001579; /* 버튼 배경색 (짙은 파랑) */
+	color: #fff; /* 버튼 텍스트 색상 (흰색) */
+	cursor: pointer; /* 커서를 포인터로 변경 */
 }
 
 #saveNicknameBtn:hover {
-  background-color: #fa0107; /* 호버 시 배경색 변경 (빨간색) */
+	background-color: #fa0107; /* 호버 시 배경색 변경 (빨간색) */
 }

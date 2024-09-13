@@ -19,6 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.cinema.chart.chartDTO;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -41,12 +43,16 @@ public class PageController {
 			// 예매 목록 가져오기
 			ArrayList<MovieGetDTO> arrmovieDTO = mdao.getMovieList(uid);
 			model.addAttribute("getMovies", arrmovieDTO);  // 전체 예매 목록을 Model에 추가
-
+			/* System.out.println(arrmovieDTO); */
 			// 최근 5건의 예매 목록을 가져오기
 			List<MovieGetDTO> recentMovies = mdao.getRecentMovies(uid);
 			model.addAttribute("recentMovies", recentMovies);
 			model.addAttribute("totalMoviesCount", arrmovieDTO.size());
 
+			 // 상위 3개의 영화 가져오기
+	        List<chartDTO> topMovies = mdao.getTop3MoviesByReservation();
+	        model.addAttribute("topMovies", topMovies);
+	        System.out.println(topMovies);
 			/* System.out.println(arrmovieDTO); */ // cusDTO 값 출력
 		} else {
 			return "redirect:/login";
@@ -75,8 +81,8 @@ public class PageController {
 			return "닉네임 변경에 실패했습니다.";
 		}
 	}
-	
-	
+
+
 	/*
 	 * @GetMapping("/payment") // 결제 내역 페이지 매핑 public String payment() { return
 	 * "mypage/payment"; }
@@ -96,7 +102,7 @@ public class PageController {
 		// 페이징된 예매 리스트 가져오기
 		ArrayList<MovieGetDTO> arrmovieDTO = mdao.getMovieListWithPaging(customer_id, limit, offset);
 		model.addAttribute("getMovies", arrmovieDTO);
-
+		
 		// 총 예매 수 구하기 (페이지네이션을 위해 필요)
 		int totalReservations = mdao.getTotalReservationCount(customer_id);
 		int listTotalPages = (int) Math.ceil((double) totalReservations / limit);
@@ -138,8 +144,8 @@ public class PageController {
 	public String getInquiryList(HttpSession session, Model model) {
 		CustomerDTO cusDTO = (CustomerDTO) session.getAttribute("cusDTO");
 		int customer_id = cusDTO.getId(); 
-		
-		
+
+
 		ArrayList<InquiryDTO> arrInqDTO = mdao.getInquiryList(customer_id);
 		model.addAttribute("inquiries", arrInqDTO);
 		return "mypage/inquirylist";
@@ -298,38 +304,38 @@ public class PageController {
 	//스토어 결제내역 목록
 	@GetMapping("/payment")
 	public String getStoreList(HttpSession session, Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
-	    CustomerDTO cusDTO = (CustomerDTO) session.getAttribute("cusDTO"); // 세션에서 사용자 정보 가져옴
-	    if (cusDTO == null) {
-	        return "redirect:/login"; // 로그인 정보가 없으면 로그인 페이지로 리다이렉트
-	    }
+		CustomerDTO cusDTO = (CustomerDTO) session.getAttribute("cusDTO"); // 세션에서 사용자 정보 가져옴
+		if (cusDTO == null) {
+			return "redirect:/login"; // 로그인 정보가 없으면 로그인 페이지로 리다이렉트
+		}
 
-	    String customerId = cusDTO.getUid(); // 고객 ID 가져옴
-	    int limit = 5; // 한 페이지에 5개씩 출력되도록 변경
-	    int offset = (page - 1) * limit; // 페이지에 따른 offset 계산
+		String customerId = cusDTO.getUid(); // 고객 ID 가져옴
+		int limit = 5; // 한 페이지에 5개씩 출력되도록 변경
+		int offset = (page - 1) * limit; // 페이지에 따른 offset 계산
 
-	    // 결제 내역 리스트 가져옴
-	    List<StoreListDTO> storeList = mdao.getStoreList(customerId, offset, limit); 
+		// 결제 내역 리스트 가져옴
+		List<StoreListDTO> storeList = mdao.getStoreList(customerId, offset, limit); 
 
-	    // item_name 필드를 분리하여 itemName과 composition에 값 할당
-	    for (StoreListDTO store : storeList) {
-	        store.parseItemName(store.getItem_name()); // item_name을 나누어서 itemName과 composition 설정
-	    }
+		// item_name 필드를 분리하여 itemName과 composition에 값 할당
+		for (StoreListDTO store : storeList) {
+			store.parseItemName(store.getItem_name()); // item_name을 나누어서 itemName과 composition 설정
+		}
 
-	    model.addAttribute("storeList", storeList); // 뷰에 storeList 전달
+		model.addAttribute("storeList", storeList); // 뷰에 storeList 전달
 
-	    int totalCount = mdao.getTotalCount(customerId); // 총 결제 내역 수 가져옴
-	    int totalPages = (int) Math.ceil((double) totalCount / limit); // 전체 페이지 수 계산
-	    model.addAttribute("currentPage", page); // 현재 페이지를 모델에 추가
-	    model.addAttribute("totalPages", totalPages); // 전체 페이지 수를 모델에 추가
+		int totalCount = mdao.getTotalCount(customerId); // 총 결제 내역 수 가져옴
+		int totalPages = (int) Math.ceil((double) totalCount / limit); // 전체 페이지 수 계산
+		model.addAttribute("currentPage", page); // 현재 페이지를 모델에 추가
+		model.addAttribute("totalPages", totalPages); // 전체 페이지 수를 모델에 추가
 
-	    // 취소된 결제 내역 가져오기
-	    List<StoreListDTO> canceledPayments = mdao.getCanceledPayments(customerId);
-	    for (StoreListDTO payment : canceledPayments) {
-	        payment.parseItemName(payment.getItem_name());
-	    }
-	    model.addAttribute("canceledPayments", canceledPayments); // 취소된 결제 내역을 모델에 추가
+		// 취소된 결제 내역 가져오기
+		List<StoreListDTO> canceledPayments = mdao.getCanceledPayments(customerId);
+		for (StoreListDTO payment : canceledPayments) {
+			payment.parseItemName(payment.getItem_name());
+		}
+		model.addAttribute("canceledPayments", canceledPayments); // 취소된 결제 내역을 모델에 추가
 
-	    return "mypage/payment"; // 결제 내역 페이지로 이동
+		return "mypage/payment"; // 결제 내역 페이지로 이동
 	}
 
 	//결제취소
@@ -347,4 +353,4 @@ public class PageController {
 
 		return "success";
 	}
-	}
+}

@@ -161,4 +161,12 @@
 		ORDER BY datetime DESC  <!-- 최신순 정렬 -->
 		LIMIT 5  <!-- 최근 5건만 가져오기 -->
 	</select>
+	<!-- 예매 탑3가져오기 -->
+	 <select id="getTop3MoviesByReservation" resultType="com.cinema.chart.chartDTO">
+        SELECT id, mname, imagepath, reservation
+        FROM movie
+        ORDER BY reservation DESC
+        LIMIT 3
+    </select>
+	
 </mapper>

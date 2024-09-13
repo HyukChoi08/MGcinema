@@ -9,7 +9,8 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<script src="https://kit.fontawesome.com/3a115195d8.js"	crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/3a115195d8.js"
+	crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/mypage_css/mypage.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,13 +51,13 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 				<span class="close">&times;</span>
 				<h2>닉네임 변경</h2>
 				<form id="nicknameForm">
-					<label for="newNickname">새 닉네임:</label> 
-					<input type="text" id="newNickname" name="newNickname" placeholder="새 닉네임 입력">
+					<label for="newNickname">새 닉네임:</label> <input type="text"
+						id="newNickname" name="newNickname" placeholder="새 닉네임 입력">
 					<button type="button" id="saveNicknameBtn">저장</button>
 				</form>
 			</div>
 		</div>
-	
+
 		<!-- 메인 컨테이너 -->
 		<div class="container">
 			<!-- 사이드바 -->
@@ -128,9 +129,9 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 							<th>작성일</th>
 							<th>상태</th>
 						</tr>
-						<c:forEach var="inquiry" items="${inquiries}">
+						<c:forEach var="inquiry" items="${inquiries}" varStatus="status">
 							<tr>
-								<td>${inquiry.id}</td>
+								<td><c:out value="${status.index + 1}" /></td>
 								<td><a href='/inquirydetail/${inquiry.id}'>${inquiry.title}</a></td>
 								<td>${inquiry.created}</td>
 								<td>${inquiry.current}</td>
@@ -143,7 +144,7 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 	</div>
 	<%@ include file="/WEB-INF/views/footer/footer.jsp"%>
 	<!-- 푸터 포함 -->
-	
+
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>

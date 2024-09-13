@@ -170,6 +170,7 @@
 										<td colspan="5">결제 취소 내역이 없습니다.</td>
 									</tr>
 								</c:otherwise>
+								
 							</c:choose>
 						</tbody>
 					</table>
