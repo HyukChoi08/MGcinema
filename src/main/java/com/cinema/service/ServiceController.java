@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ServiceController {
 
-    @Autowired
+    private static final String String = null;
+	@Autowired
     private FAQDAO faqDAO;
     @Autowired
     private NewsDAO newsDAO;
@@ -76,22 +77,40 @@ public class ServiceController {
 
     @PostMapping("/FAQcreate")
     public String createFAQ(@ModelAttribute FAQDTO faqDTO) {
-        faqDTO.setCreatedAt(LocalDateTime.now());
+        // 현재 날짜와 시간 가져오기
+        LocalDateTime now = LocalDateTime.now();
+        
+        // 원하는 날짜와 시간 포맷 정의하기
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        
+        // LocalDateTime을 String으로 변환하기
+        String formattedDate = now.format(formatter);
+        
+        // created_at에 변환된 날짜 문자열 설정하기
+        faqDTO.setCreated_at(formattedDate);
+        
+        // 초기 조회수 설정하기
         faqDTO.setViews(0);
+        
+        // FAQ를 데이터베이스에 추가하기
         faqDAO.addFAQ(faqDTO);
+        
+        // FAQ 페이지로 리다이렉트하기
         return "redirect:/faq";
     }
-
     @GetMapping("/FAQdetail")
     public String showFAQDetailPage(@RequestParam(value = "id") Long id, Model model) {
         FAQDTO faqDetail = faqDAO.getFAQById(id);
         if (faqDetail != null) {
+            // 조회수 증가 및 FAQ 업데이트
             faqDetail.setViews(faqDetail.getViews() + 1);
             faqDAO.updateFAQ(faqDetail);
 
+            // 날짜 포맷 설정
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            String formattedDate = (faqDetail.getCreatedAt() != null) ? faqDetail.getCreatedAt().format(formatter) : "날짜 정보 없음";
+            String formattedDate = (faqDetail.getCreated_at() != null) ? faqDetail.getCreated_at().formatted(formatter) : "날짜 정보 없음";
 
+            // 모델에 속성 추가
             model.addAttribute("faqDetail", faqDetail);
             model.addAttribute("formattedDate", formattedDate);
         } else {

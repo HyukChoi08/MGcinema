@@ -48,7 +48,7 @@
                 <div class="search_result">
                     
                    총&nbsp; <span class="num">${totalFAQCount}건</span>&nbsp;
-                   <a href="/faqcreate" class="btn-add">+</a>
+                   <!--  <a href="/faqcreate" class="btn-add">+</a>-->
                 </div>
                 
 			<div class="searchtext">
@@ -80,7 +80,7 @@
                                     <td>${faq.id}</td>
                                     <td>${faq.selected}</td>
                                     <td><a href="/FAQdetail?id=${faq.id}">${faq.title}</a></td>
-                                    <td>${fn:substring(faq.createdAt, 0, 10)}</td>
+                                    <td>${fn:substring(faq.created_at, 0, 10)}</td>
                                     <td>${faq.views}</td>
                                 </tr>
                             </c:forEach>

@@ -1,61 +1,64 @@
 @charset "UTF-8";
- body {
-            margin: 0;
-            padding: 0;
-            background-color: black; /* 페이지 배경색을 검정으로 설정 */
-            color: white; /* 전체 글씨색을 흰색으로 설정 */
-        }
 
-        #container {
-            max-width: 1000px;
-            margin: 20px auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            
-        }
-        #contents {
-            width: 100%;
-            display: flex;
-        }
+body {
+	margin: 0;
+	padding: 0;
+	background-color: black; /* 페이지 배경색을 검정으로 설정 */
+	color: white; /* 전체 글씨색을 흰색으로 설정 */
+}
+
+#container {
+	max-width: 1000px;
+	margin: 20px auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+#contents {
+	width: 100%;
+	display: flex;
+}
 
 .sidebar {
-    width: 150px;
-    padding: 15px;
-    background-color: black; /* 사이드바 배경색 */
-    height: fit-content;
-    color: white; /* 사이드바 글씨색 */
-    border: 1px solid #fff;
+	background-color: black; /* 사이드바 배경색 */
+	color: white;
+	border: 2px solid #808080;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* 사이드바 그림자 효과 */
+    height: fit-content; /* 내용에 맞춘 높이 */
+	border-radius: 10px; /* 모서리 둥글게 */
+	flex: 1 1 15%; /* 전체 공간에서 30% 차지 */
 }
 
 .sidebar ul {
     list-style-type: none;
-    padding: 0;
-    text-align: left;
+    padding: 5px;
 }
 
 .sidebar ul li {
-    margin-bottom: 15px; /* 항목 간의 여백 15px */
+    margin-bottom: 20px; 
 }
 
 .sidebar ul li a {
     text-decoration: none;
-    color: white; /* 사이드바 링크 글씨색 */
+    color: #ffffff; /* 사이드바 링크 글씨색 */
     font-weight: bold;
+    transition: color 0.3s ease; /* 색상 변경 시 애니메이션 추가 */
 }
 
 .sidebar ul li a:hover {
-    color: #e50914; /* 사이드바 링크 hover 색상 */
+   color: #3a3d3f; /* 사이드바 링크 hover 색상 */
+   font-size:19px;
 }
 
 .col-detail {
-	width:1000px;
+    width: 1000px;
     padding: 15px;
     background-color: black; /* 메인 콘텐츠 배경색 */
     color: white; /* 메인 콘텐츠 글씨색 */
-    border: 1px solid #fff; /* 메인 콘텐츠 테두리색 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border: 2px solid #808080; /* 메인 콘텐츠 테두리색 */
     border-radius: 10px; /* 모서리 둥글게 설정 */
-   
+    margin-left: 10px;
 }
 
         .customer_top {

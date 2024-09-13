@@ -146,7 +146,7 @@
             <div class="col-detail">
                 <div class="customer_top">
                     <h2 class="tit">FAQ 수정</h2>
-                    <p class="stit">작성일: ${faqDetail.createdAt}</p>
+                    <p class="stit">작성일: ${faqDetail.created_at}</p>
                 </div>
                 <form action="FAQupdate" method="post">
                     <input type="hidden" name="id" value="${faqDetail.id}">

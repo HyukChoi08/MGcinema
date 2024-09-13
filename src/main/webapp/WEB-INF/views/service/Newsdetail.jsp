@@ -32,13 +32,13 @@
                 <p class="click">조회수: ${newsDetail.views}</p>
             </div>
             <div class="view_area">
-                <p>${newsDetail.content}</p>
+                <pre>${newsDetail.content}</pre>
            		
             </div>
            
 
             <div class="btn-group">
-                <button class="btn-list" onclick="location.href='/news'">목록</button>
+                <button class="btn-list" onclick="window.history.back()">목록</button>
             </div>
         </div>
     </div>
