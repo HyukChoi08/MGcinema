@@ -60,17 +60,16 @@ body {
     border-radius: 10px; /* 모서리 둥글게 설정 */
     margin-left: 10px;
 }
+.customer_top {
+	margin-bottom: 20px;
+}
 
-        .customer_top {
-            margin-bottom: 20px;
-        }
-
-        .customer_top .tit {
+.customer_top .tit {
             font-size: 1.5em;
             font-weight: bold;
             margin: 0;
             text-align: left;
-        }
+}
         .customer_top .day {
             color: white; /* 기존 페이지와 일치하는 색상 */
             font-size: 0.9em;

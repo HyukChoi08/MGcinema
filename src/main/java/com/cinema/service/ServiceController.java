@@ -138,6 +138,7 @@ public class ServiceController {
         faqDAO.deleteFAQ(id);
         return "redirect:/faq";
     }
+    
 
     @GetMapping("/news")
     public String showNewsPage(
