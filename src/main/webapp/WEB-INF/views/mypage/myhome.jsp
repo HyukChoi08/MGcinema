@@ -157,7 +157,7 @@ String customer_id = (String) session.getAttribute("uid");
 					<c:forEach var="movie" items="${topMovies}">
 						<div>
 							<h3>${movie.mname}</h3> 
-							<div><img src="${movie.imagepath}" alt="${movie.mname}" style="width: 200px; height: 300px;"></div>
+							<div><img src="${movie.imagepath}" alt="${movie.mname}" id="gochart" data-mid="${movie.id}" style="width: 200px; height: 300px;"></div>
 							<p>예매율: ${movie.reservation} %</p>
 						</div>
 					</c:forEach>
@@ -214,6 +214,13 @@ String customer_id = (String) session.getAttribute("uid");
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
+	
+	$(document).on("click","#gochart", function(){
+		let movieid = $(this).data("mid");
+		window.location.href = "chartList1?id="+movieid;
+	})
+
+
 	document.addEventListener('DOMContentLoaded', function() {
 		const modal = document.getElementById('nicknameModal');
 		const editBtn = document.querySelector('.fa-pen');
