@@ -5,12 +5,12 @@
 
 <mapper namespace="com.cinema.store.storeDAO">
 
-<select id="selectpackage" resultType="com.cinema.store.storeDTO">
+<!-- <select id="selectpackage" resultType="com.cinema.store.storeDTO">
 select name,period
 	from item_detail where item_id=#{param1}
-</select>
+</select> -->
 <select id="selectitem" resultType="com.cinema.store.storeDTO">
-select id,item_name,price,discount_price,composition,origin from item where id=#{param1}
+select id,item_name,price,discount_price,composition,origin,period from item where id=#{param1}
 
 </select>
 <select id="getImagePath" resultType="string" parameterType="int">
@@ -21,7 +21,11 @@ SELECT id, item_name, discount_price, price, image_path
 FROM item
 where item_type=#{param1}
 ORDER BY id
+</select>
+<select id="selectbest" resultType="com.cinema.store.storeDTO">
+SELECT id, item_name,price,discount_price,image_path
+FROM item
+WHERE best_id IS NOT NULL
 
 </select>
-
 </mapper>

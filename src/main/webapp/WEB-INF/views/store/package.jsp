@@ -283,9 +283,9 @@ font-size: 14px; /* 취소선 가격 크기 조정 */
     color: inherit; /* 부모 요소의 색상 상속 */
 }
 
-#store-link:hover {
+/* #store-link:hover {
     text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
-}
+} */
 .hidden {
     display: none;
 } 	
@@ -339,9 +339,9 @@ cursor: pointer;
                                         </div>
                                     </div>
                                 <div class="product-info">
-                                    <span class="product-name">${Store.item_name}</span><br>
-                                        <span class="original-price">${Store.price}원</span>
+                                    <span class="product-name">${Store.item_name}</span><br>                                       
                                         <span class="discounted-price">${Store.discount_price}원</span>
+                                        <span class="original-price">${Store.price}원</span>
                                 </div>
                             </li>
                            </c:forEach>                                  

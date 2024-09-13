@@ -366,6 +366,10 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
   margin-top:10px;
   
   }
+#store-link {
+    text-decoration: none; /* 링크의 밑줄 제거 */
+    color: inherit; /* 부모 요소의 색상 상속 */
+}
  
     </style>
 </head>
@@ -373,7 +377,8 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
 <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
     <div id="container">
         <div id="contents">
-            <div class="category_wrap">            
+            <div class="category_wrap">
+            <a href="/store" id="store-link">베스트 상품</a>            
             <input type="hidden" id="userid" value="${uid}">    
                 <div class="separator"></div> <!-- 선을 스토어 아래에 위치 -->
             </div>
@@ -393,180 +398,54 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
             <div class="separator1"></div> <!-- 선을 contegory_contents_wrap 아래에 위치 -->
             <div class="category_product_wrap">
                 <ul class="product_list">
+                
                     <li class="li1">
+                    
                         <strong class="category_title">패키지<br>
                             <a href="/package" class="circle-button">+</a>
                         </strong> 
                         <div class="separator2"></div>
                         <ul class="category_inner">
-                            <li class="product" id="1">
-                                <a href="/details?id=1" class="btn_category_product">  
-                                    <img src="/store_images/패키지1.png" alt="패키지1"></a>
-                                    <div class="icon-container">
-										<div class="icon-item icon-left" id="cart-link">
-   										<img src="/store_images/장바구니.png" alt="Left Icon">
-							 			<span class="hover-text">장바구니</span>
-										</div>                                                                                                                     
-                                        <div class="icon-item icon-right">
-                                            <img src="/store_images/구매하기.png" alt="Right Icon" class="buyButton">
-                                            <span class="hover-text">구매하기</span>                          
-                                        </div>
-                                    </div>
-                                <div class="product-info">
-                                    <span class="product-name">패키지1</span><br>
-                                        <span class="original-price">66,000원</span>
-                                        <span class="discounted-price">62,000원</span>
-                                </div>
-                            </li>   
-                           <li class="product" id="2">
-                                <a href="/details?id=2" class="btn_category_product">  
-                                    <img src="/store_images/패키지2.png" alt="패키지2"></a>
-                                    <div class="icon-container">
-										<div class="icon-item icon-left" id="cart-link">
-   										<img src="/store_images/장바구니.png" alt="Left Icon">
-							 			<span class="hover-text">장바구니</span>
-										</div>                                                                                                                     
-                                        <div class="icon-item icon-right">
-                                            <img src="/store_images/구매하기.png" alt="Right Icon" class="buyButton">
-                                            <span class="hover-text">구매하기</span>                          
-                                        </div>
-                                    </div>
-                                <div class="product-info">
-                                    <span class="product-name">패키지2</span><br>
-                                        <span class="original-price">37,000원</span>
-                                        <span class="discounted-price">35,000원</span>
-                                </div>
-                            </li>  
-                              <li class="product" id="3">
-                                <a href="/details?id=3" class="btn_category_product">  
-                                    <img src="/store_images/패키지3.png" alt="패키지3"></a>
-                                    <div class="icon-container">
-										<div class="icon-item icon-left" id="cart-link">
-   										<img src="/store_images/장바구니.png" alt="Left Icon">
-							 			<span class="hover-text">장바구니</span>
-										</div>                                                                                                                     
-                                        <div class="icon-item icon-right">
-                                            <img src="/store_images/구매하기.png" alt="Right Icon" class="buyButton">
-                                            <span class="hover-text">구매하기</span>                          
-                                        </div>
-                                    </div>
-                                <div class="product-info">
-                                    <span class="product-name">패키지3</span><br>
-                                        <span class="original-price">20,000원</span>
-                                        <span class="discounted-price">18,000원</span>
-                                </div>
-                            </li>  
-                        </ul>
-                    </li>
-                    <li class="li1">
-                        <strong class="category_title">기프트 카드<br>
-                            <a href="/giftcard" class="circle-button">+</a>
-                        </strong>  
-                        <div class="separator2"></div>
-                        <ul class="category_inner">
-                             <li class="product" id="7">
-                                <a href="/details?id=7" class="btn_category_product">  
-                                    <img src="/store_images/기프트카드1.png" alt="기프트카드1"></a>
-                                    <div class="icon-container">                                                                                                                  
-                                        <div class="icon-item icon-right">
-                                            <img src="/store_images/구매하기.png" alt="Right Icon" class="buyButton">
-                                            <span class="hover-text">구매하기</span>                          
-                                        </div>
-                                    </div>
-                                <div class="product-info">
-                                    <span class="product-name">기프트카드1</span><br>
-                                    <span class="giftcardtext">금액충전형</span>
-                                </div>
-                            </li>  
-                            <li class="product" id="8">
-                                <a href="/details?id=8" class="btn_category_product">
-                                    <img src="/store_images/기프트카드2.png"></a>
-                                     <div class="icon-container">                                                                                                              
-                                        <a href="/storepay" class="icon-item icon-right">
-                                            <img src="/store_images/구매하기.png" alt="Right Icon" class="buyButton">
-                                            <span class="hover-text">구매하기</span>                          
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <span class="product-name">기프트카드2</span><br>
-                                        <span class="giftcardtext">금액충전형</span>
-                                    </div>     
-                            </li>
-                                   <li class="product" id="9">
-                                <a href="/details?id=9" class="btn_category_product">
-                                    <img src="/store_images/기프트카드3.png"></a>
-                                     <div class="icon-container">                                                                                                                                               
-                                        <a href="/storepay" class="icon-item icon-right">
-                                            <img src="/store_images/구매하기.png" alt="Right Icon" class="buyButton">
-                                            <span class="hover-text">구매하기</span>                          
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <span class="product-name">기프트카드3</span><br>
-                                        <span class="giftcardtext">금액충전형</span>
-                                    </div>     
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="li1">
-                        <strong class="category_title">콤보<br>
-                            <a href="/combo" class="circle-button">+</a>
-                        </strong>
-                        <div class="separator2"></div> 
-                        <ul class="category_inner">
-                           <li class="product" id="17">
-                                <a href="/details?id=17" class="btn_category_product">  
-                                    <img src="/store_images/라지콤보.jpg" alt="라지콤보"></a>
-                                    <div class="icon-container">
-										<div class="icon-item icon-left" id="cart-link">
-   										<img src="/store_images/장바구니.png" alt="Left Icon">
-							 			<span class="hover-text">장바구니</span>
-										</div>                                                                                                                     
-                                        <div class="icon-item icon-right">
-                                            <img src="/store_images/구매하기.png" alt="Right Icon" class="buyButton">
-                                            <span class="hover-text">구매하기</span>                          
-                                        </div>
-                                    </div>
-                                <div class="product-info">
-                                    <span class="product-name">라지콤보</span><br>
-                                        <span class="discounted-price">33,000원</span>
-                                </div>
-                            </li>  
-                       		<li class="product" id="18">
-                                <a href="/details?id=18" class="btn_category_product">  
-                                    <img src="/store_images/더블콤보.jpg" alt="더블콤보"></a>
-                                    <div class="icon-container">
-										<div class="icon-item icon-left" id="cart-link">
-   										<img src="/store_images/장바구니.png" alt="Left Icon">
-							 			<span class="hover-text">장바구니</span>
-										</div>                                                                                                                     
-                                        <div class="icon-item icon-right">
-                                            <img src="/store_images/구매하기.png" alt="Right Icon" class="buyButton">
-                                            <span class="hover-text">구매하기</span>                          
-                                        </div>
-                                    </div>
-                                <div class="product-info">
-                                    <span class="product-name">더블콤보</span><br>
-                                        <span class="discounted-price">30,000원</span>
-                                </div>
-                            </li> 
-                                <li class="product" id="19">
-                                <a href="/details?id=19" class="btn_category_product">  
-                                    <img src="/store_images/MG콤보.jpg" alt="MG콤보"></a>
-                                    <div class="icon-container">
-										<div class="icon-item icon-left" id="cart-link">
-   										<img src="/store_images/장바구니.png" alt="Left Icon">
-							 			<span class="hover-text">장바구니</span>
-										</div>                                                                                                                     
-                                        <div class="icon-item icon-right">
-                                            <img src="/store_images/구매하기.png" alt="Right Icon" class="buyButton">
-                                            <span class="hover-text">구매하기</span>                          
-                                        </div>
-                                    </div>
-                                <div class="product-info">
-                                    <span class="product-name">MG콤보</span><br>
-                                        <span class="discounted-price">20,000원</span>
-                                </div>
+                        	
+                        	<c:forEach items="${arStore}" var="Store">
+	                            <li class="product" id="${Store.id}">
+	                                <a href="/details?id=${Store.id}" class="btn_category_product">  
+	                                    <img src="${Store.image_path}" alt="${Store.item_name}"></a>
+	                                    <div class="icon-container">
+											<div class="icon-item icon-left" id="cart-link">
+	   										<img src="/store_images/장바구니.png" alt="Left Icon">
+								 			<span class="hover-text">장바구니</span>
+											</div>                                                                                                                     
+	                                        <div class="icon-item icon-right">
+	                                            <img src="/store_images/구매하기.png" alt="Right Icon" class="buyButton">
+	                                            <span class="hover-text">구매하기</span>                          
+	                                        </div>
+	                                    </div>
+	                           		<div class="product-info">
+									    <span class="product-name">${Store.item_name}</span><br>
+									    <c:choose>
+									        <c:when test="${Store.price == Store.discount_price}">
+									            <!-- 가격이 할인 가격과 같을 경우 할인 가격만 표시 -->
+									            <span class="discounted-price">
+									                ${Store.discount_price}
+									                <c:if test="${Store.discount_price != '금액충전형'}">원</c:if>
+									            </span>
+									        </c:when>
+									        <c:otherwise>
+									            <!-- 가격이 할인 가격과 다른 경우 둘 다 표시 -->
+									            <span class="discounted-price">
+									                ${Store.discount_price}
+									                <c:if test="${Store.discount_price != '금액충전형'}">원</c:if>
+									            </span>
+									            <span class="original-price">
+									                ${Store.price}
+									                <c:if test="${Store.price != '금액충전형'}">원&nbsp;</c:if>
+									            </span>
+									        </c:otherwise>
+									    </c:choose>
+									</div>
+	                            </li>
+	                         </c:forEach>      	                         	                                             
                         </ul>
                     </li>
                 </ul>
@@ -596,6 +475,13 @@ function updateCartCount(customer_id) {
 }
 
 $(document).ready(function() {
+	
+
+	
+	
+	
+	
+	
 		
  	let customer_id= $('#userid').val();
  	console.log(customer_id);
