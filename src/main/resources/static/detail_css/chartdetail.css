@@ -6,21 +6,59 @@ body {
 }
 
 .maincontainer {
-    width: 80%;
-    max-width: 1000px;
-    margin: 20px auto;
+	width:auto;
+    margin: 0px;
     background-color:black;
-    padding: 20px;
-    border:none;
-    margin-top: 80px;
-    margin-bottom: 40px;
-    padding-top: 60px;
-    padding-bottom: 40px;
+    position: relative;
+    display: flex;
+    flex-direction: column; /* 수직 방향으로 정렬 */
+    align-items: center;
 }
-table {
+
+.top {
+	display:flex;
+	position: relative;
 	width:1000px;
+	height:400px;
 }
-.imgcell {
-	width:200px;
-	height:260px;
+.top img {
+    width: 300px;
+    height: 400px;
+    display: block;
+}
+.mid {
+	width:1000px;
+	height:150px;
+}
+.bot {
+	width:1000px;
+	height:1200px;
+}
+.allinfo {
+	display: flex;
+	width:500px;
+    flex-direction: column;
+    justify-content: flex-end;
+    
+}
+.inimg {
+	padding-left:60px;
+}
+.rescell, .actor, .thrinfo, .reldate, .goticket {
+	text-align:left;
+	padding-left:20px;
+	height:40px;
+}
+.mnamecell {
+	text-align:left;
+	padding-left:20px;
+	height:70px;
+	font-size:32px;
+	color:grey;
+}
+.emptya {
+	height:80px;
+}
+.emptyb {
+	height:40px;	
 }
