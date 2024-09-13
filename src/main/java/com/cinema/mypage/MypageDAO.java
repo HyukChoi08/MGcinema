@@ -1,5 +1,8 @@
 package com.cinema.mypage;
 import org.apache.ibatis.annotations.Param;
+
+import com.cinema.chart.chartDTO;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,5 +58,7 @@ public interface MypageDAO {
 	List<StoreListDTO> getCanceledPayments(String customerId);
 	List<MovieGetDTO> getRecentMovies(String uid);
 	
+	//영화 상위 가져오기
+	 List<chartDTO> getTop3MoviesByReservation();
 	
 }

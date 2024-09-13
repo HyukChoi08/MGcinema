@@ -66,7 +66,7 @@ String customer_id = (String) session.getAttribute("uid");
 						id="newNickname" name="newNickname" placeholder="새 닉네임 입력">
 					<button type="button" id="saveNicknameBtn">저장</button>
 				</form>
-				
+
 			</div>
 		</div>
 
@@ -151,13 +151,25 @@ String customer_id = (String) session.getAttribute("uid");
 
 					</div>
 				</div>
+				<div >
+				<h2>Top 3 Movies</h2>
+				<div class=divMovie>
+					<c:forEach var="movie" items="${topMovies}">
+						<div>
+							<h3>${movie.mname}</h3> 
+							<div><img src="${movie.imagepath}" alt="${movie.mname}" style="width: 200px; height: 300px;"></div>
+							<p>예매율: ${movie.reservation} %</p>
+						</div>
+					</c:forEach>
+				</div>
+				</div>
 				<!-- 문의 내역 섹션 -->
 				<div class="div2">
 
 					<div class="div3" style="border: 0px;">
 						<div class="link">
 							<ul>
-								<li><a href=/chart>Movie Home</a></li>
+								<li><a href=/chart>무비차트 보러가기</a></li>
 								<br>
 								<li><a href=/ageinfo>상영영화 예매율 순위</a></li>
 								<br>
