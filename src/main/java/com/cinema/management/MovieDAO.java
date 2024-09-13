@@ -14,18 +14,16 @@ public interface MovieDAO {
 	ArrayList<MovieinfoDTO> getmovieinfo();
 	void moviedel(int a);
 	void itemdel(int a);
-	void detaildel(int a);
 	void inquirydel(int a);
 	void newsdel(int a);
 	void moviein(String a, String o, String i, String u, String y, String t, String r, String e, String w, float q );
 	ArrayList<ItemDTO> itemlist();
-	ArrayList<DetailDTO> detaillist();
 	ArrayList<InquiryDTO> inquirylist();
 	ArrayList<NewsDTO> newslist();
-	void itemin(String a,String b,String c,String d,String e,String f);
+	void itemin(String a,String b,String c,String d,String e,String f,String g,String h);
 	void newsin(String a,String b,String c);
-	void detailin(int a,String b,String c);
 	void inquiryup(int a,String b);
 	void newsup(int a,String b,String c,String d);
-	ArrayList<DeidDTO> getdeid();
+	void roomup(int a,String b,String c,String d);
+	void itemup(int a,String b,String c,String d,String e,String f,String g,String h,String i);
 }

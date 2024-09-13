@@ -44,13 +44,12 @@ span{
     font-size:23px
 }
 .container {
-            display: flex;
-            flex-direction: column; /* 수직으로 쌓기 */
-            align-items: flex-start; /* 왼쪽으로 붙이기 */
-            gap: 0px; /* 요소 간 간격 */
-            padding: 0px; /* 패딩 */
-            border: 1px solid black; /* 테두리 */
-            
+    display: flex;
+    flex-direction: column; /* 수직으로 쌓기 */
+    align-items: flex-start; /* 왼쪽으로 붙이기 */
+    gap: 0px; /* 요소 간 간격 */
+    padding: 0px; /* 패딩 */
+    border: 1px solid black; /* 테두리 */
            
 }
 .notice{
@@ -105,9 +104,8 @@ span{
 	clear: both;
     padding-bottom: 50px;
     position: relative;
-    /* width: 1000px; */
     margin: auto;
-    margin-top: 180px; 
+    margin-top: 50px; 
 	margin-bottom:150px;
     height:100%;
 }
@@ -181,9 +179,9 @@ span{
     background-color:black;
     
 }
-td{
+/* td{
 	border-radius:6px;
-}
+} */
 
 #calendar-table {
     width: 100%;
@@ -258,6 +256,41 @@ button:focus {
 .roomname {
 	font-size:15px;
 }
+#parktext{
+	border-bottom:1px solid #808080;
+	padding-bottom:15px;
+	margin-bottom:15px;
+	text-align:left;
+}
+#addresslink{
+	text-align:right;
+}
+#adda{
+	width:130px;
+	display:inline;
+	border:2px solid #808080;
+	cursor:pointer;
+	padding:5px 5px 5px 5px;
+}
+#adda:hover{
+	background-color:#6a768a;
+}
+#hiddenDivp {
+   width:700px;
+   height:400px;		
+   display: none;
+   position: absolute;
+   background-color: black; 
+   padding: 20px;
+   border: 5px solid #384963;
+   z-index: 900; 
+   margin-left:230px;
+   margin-top:710px;
+   text-align:left;
+}
+#hiddenDivp a{
+	color:white;
+}
 #hiddenDiv {
    width:550px;
    height:550px;		
@@ -269,17 +302,21 @@ button:focus {
    z-index: 900; 
    margin-left:330px;
    margin-top:15px;
-   
 }
 
 #hiddenDiv span{
 	font-size:30px;
-	 font-weight: bold;
+	font-weight: bold;
 }
 .agetop{
 	border-bottom:1px solid #808080;
 	margin-bottom:25px;
 	padding-bottom:20px;
+}
+.parktop{
+	border-bottom:1px solid #808080;
+	margin-bottom:15px;
+	padding-bottom:10px;
 }
 #hiddenDiv table {
         margin: auto;
@@ -341,7 +378,28 @@ button:focus {
         <div class="item" data-image="room_image/스페이스5.jpg"><a href="#"><i>Space</i></a></div>
         <div class="item" data-image="room_image/야외가족관5.jpg"><a href="#"><i>Outdoor</i></a></div>
         <div class="item" data-image="room_image/수족관5.jpg"><a href="#"><i>Aqua</i></a></div>
-        <div class="item" data-image="room_image/어린이5.jpg"><a href="#"><i>Child</i></a></div>        
+        <div class="item" data-image="room_image/어린이5.jpg"><a href="#"><i>Child</i></a></div>  
+        <div id="hiddenDivp">
+			<div class="parktop">
+				<div style="text-align:right"><img src="room_image/엑스s.png" onclick="closepark()" style="cursor: pointer"></div>
+					주차 및 위치안내
+			</div>
+			<div id="parktext">
+			■ 건물 주차장 이용 시 (발렛)<br>
+			- 요금 : 3시간 12,000원 (발렛비 포함), 초과 시간 10분 당 1,000원<br>
+			- 결제 방식 : HIII CINEMA 1층 무인 정산기 이용 (카드만 가능)<br>
+			- 결제 시 자동 출차 요청 (사전 정산 불가)<br>
+			- 주변 교통 상황에 따라 입/출차가 지연될 수 있습니다.<br>
+			<br>
+			■ 외부(우주정거장) 주차장 이용 시 (셀프)<br>
+			- 요금 : 4시간 6,000원 (당일 티켓 지참 必), 초과 시간 10분 당 1,000원<br>
+			- 결제 방식 : CGV 8층 매표소 사전 할인 정산 必 (무인 정산기 할인 적용 불가)<br>
+			- 할인 적용 가능 시간 (입차 기준) : 주중 18 ~ 23시 / 주말(공휴일) 08 ~ 23시 (25시 30분 이후 출차 불가)<br>
+			- 원활한 운영을 위해 지하 4층을 이용해 주세요.
+			</div>
+			■ 주소: 화성시 목성구 태양로 29, 지구빌딩 1F
+			<div id="addresslink"><a id="adda" href="https://map.naver.com/p?c=15.00,0,0,0,dh" target="_black">실시간 빠른길 찾기</a></div>
+		</div>      
 	</div>
 		<div class="info">
 			<div class="infoleft">
@@ -351,8 +409,8 @@ button:focus {
 				총 15관 / 2726석 
 			</div>
 			<div class="inforight">
-				위치 / 주차안내&nbsp;&nbsp;<img src="room_image/플러스2.png"  onclick="" class="imgt" style="cursor: pointer"><br>
-				공지사항&nbsp;&nbsp;<a href="/news"><img src="room_image/플러스2.png" class="imgt" style="cursor: pointer"></a>
+				<img src="room_image/플러스2.png"  onclick="showpark()" class="imgt" style="cursor: pointer">&nbsp;위치 / 주차안내<br>
+				<a href="/news"><img src="room_image/플러스2.png" class="imgt" style="cursor: pointer"></a>&nbsp;공지사항
 			</div>
 		</div>
 <div style="margin:auto; width:1000px">
@@ -363,7 +421,7 @@ button:focus {
 	            	<input type="hidden" id="hiddendate">
 	                <thead>
 	                    <tr>
-	                    	<td><button id="prev-month">&lt;</button></td>
+	                    	<td><button id="prev-month" style="color:white;">&lt;</button></td>
 	                        <th></th>
 	                       	<th></th>
 	                        <th></th>
@@ -371,7 +429,7 @@ button:focus {
 	                       	<th></th>
 	                       	<th></th>
 	                       	<th></th>
-	                        <td><button id="next-month">&gt;</button></td>
+	                        <td><button id="next-month" style="color:white;">&gt;</button></td>
 	                    </tr>
 	                </thead>
 	            </table>
@@ -408,7 +466,7 @@ button:focus {
 	</div>
 	</div>
 </div>
-<%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
+<%-- <%@ include file="/WEB-INF/views/footer/footer.jsp" %> --%> <!-- 푸터 포함 -->
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
@@ -458,6 +516,12 @@ function showage(){
 }
 function closeage(){
 	$('#hiddenDiv').hide();
+}
+function showpark(){
+	$('#hiddenDivp').show();
+}
+function closepark(){
+	$('#hiddenDivp').hide();
 }
 function clear(){
 	$('#timelist').empty();

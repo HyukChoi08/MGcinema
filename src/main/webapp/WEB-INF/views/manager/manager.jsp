@@ -10,7 +10,13 @@
 <body>
 <%@ include file="/WEB-INF/views/header/header.jsp" %>
 <div class="manager-page">
-<button id="schebtn">상영정보</button><button id="moviebtn">영화</button><button id="itembtn">스토어</button><button id="answerbtn">1:1문의</button><button id="newsbtn">공지</button>
+<button id="schebtn" class="mainbutton">상영정보</button>
+<button id="moviebtn" class="mainbutton">영화</button>
+<button id="itembtn" class="mainbutton">스토어</button>
+<button id="answerbtn" class="mainbutton">1:1문의</button>
+<button id="newsbtn" class="mainbutton">공지</button>
+<button id="roombtn" class="mainbutton">상영관</button>
+
 <div class="container" id="s">
 	<div class="movieinsert1">
 		<h2>영화 상영정보 추가</h2>
@@ -19,7 +25,7 @@
 				<tr><td>관선택</td><td><select class="mselect" id="roomnum"></select></td></tr>
 				<tr><td>상영일</td><td><input type="date" id="date"></td></tr>
 				<tr><td>시작시간</td><td><input type="time" id="stime"></td></tr>
-				<tr><td><input type="hidden" id="totalrun"></td><td id="runtime"></td></tr>
+				<tr><td><input type="hidden" id="totalrun"></td><td id="runnigtime"></td></tr>
 				<tr><td>종료시간</td><td><input type="time" id="etime"></td></tr>
 				<tr><td>좌석</td><td><input type="number" id="seat" readonly></td></tr>
 				<tr><td>성인요금</td><td><input type="number" id="aprice" readonly></td></tr>
@@ -30,11 +36,11 @@
 	</div>
 	<div class="movieinsert2">
 		<table id="schedules">
-			<h3>상영리스트</h3>
-				<thead>
-					<tr><td>상영일</td><td>영화제목</td><td>러닝타임</td><td>상영시간</td><td>종료시간</td><td>관이름</td><td>관등급</td><td>잔여좌석</td><td>연령</td><td>일반요금</td><td>청소년요금</td><td>요금타입</td></tr>
-				</thead>
-				<tbody></tbody>
+			<caption><h3>상영리스트</h3></caption>
+			<thead>
+				<tr><td>상영일</td><td>영화제목</td><td>러닝타임</td><td>상영시간</td><td>종료시간</td><td>관이름</td><td>관등급</td><td>잔여좌석</td><td>연령</td><td>일반요금</td><td>청소년요금</td><td>요금타입</td><td>삭제</td></tr>
+			</thead>
+			<tbody></tbody>
 		</table>
 	</div>
 </div>
@@ -50,112 +56,135 @@
 										<option value="19">19</option>
 										<option value="미정">미정</option>
 									</select></td></tr>
-				<tr><td>러닝타임</td><td><input type="text" id="runtime"></td></tr>
-				<tr><td>이미지</td><td><input type="file" id="moviefile" style="width:200px"></td></tr>
+				<tr><td>러닝타임</td><td><input type="text" id="runningtime"></td></tr>
 				<tr><td>이미지경로</td><td><input type="text" id="image" value="/chartImage/.jpg"></td></tr>
 				<tr><td>감독</td><td><input type="text" id="director"></td></tr>
 				<tr><td>출연배우</td><td><input type="text" id="cast"></td></tr>
 				<tr><td>장르</td><td><input type="text" id="genre"></td></tr>
 				<tr><td>개봉일</td><td><input type="date" id="rdate"></td></tr>
-				<tr><td>영화소개</td><td><textarea rows="10" cols="25" id="minfo"></textarea></td></tr>
+				<tr><td>영화소개</td><td><textarea rows="4" cols="28" id="minfo"></textarea></td></tr>
 				<tr><td colspan="2"><input type="button" id="mbtn" value="영화추가"></td></tr>
+				<tr><td colspan="2"><h3>영화이미지추가</h3></td></tr>
+				    <tr><td>이미지</td><td><input type="file" id="moviefile" style="width:200px"></td></tr>
+				    <tr><td colspan="2"><input type="button" id="mimgbtn" value="이미지추가">
 			</table>
 	</div>
 	<div class="movieinsert4">
 		<table id="movieinfo">
-			<h3>영화리스트</h3>
+			<caption><h3>영화리스트</h3></caption>
 				<thead>
-					<tr><td>영화제목</td><td>연령</td><td>예매율</td><td>러닝타임</td><td>이미지경로</td><td>감독</td><td>출연배우</td><td>장르</td><td>개봉일</td><td>영화소개</td></tr>
+					<tr><td>영화제목</td><td>연령</td><td>예매율</td><td>러닝타임</td><td>이미지경로</td><td>감독</td><td>출연배우</td><td>장르</td><td>개봉일</td><td>영화소개</td><td>삭제</td></tr>
 				</thead>
 				<tbody></tbody>
 		</table>
 	</div>
 </div>
 <div class="container" id="i">
-	<div class="iteminfo">
-		<h2>상품추가</h2>
-			<table>
-				<tr><td>상품명</td><td><input type="text" id="itemname"></td></tr>
-				<tr><td>가격</td><td><input type="text" id="itemprice"></td></tr>
-				<tr><td>할인가격</td><td><input type="text" id="disprice"></td></tr>
-				<tr><td>구성</td><td><input type="text" id="conposition"></td></tr>
-				<tr><td>원산지</td><td><input type="text" id="origin"></td></tr>
-				<tr><td>이미지</td><td><input type="file" id="itemfile" style="width:200px"></td></tr>
-				<tr><td>이미지경로</td><td><input type="text" id="itemimage" value="/store_Images/.jpg"></td></tr>
-				<tr><td colspan="2"><input type="button" id="ibtn" value="상품추가"></td></tr>
-			</table>
-			<h2>상품상세</h2>
-			<table>
-				<tr><td>상품선택</td><td><select class="mselect" id="deitemid"></select></td></tr>
-				<tr><td>이름</td><td><input type="text" id="detname"></td></tr>
-				<tr><td>유효기간</td><td><input type="text" id="period"></td></tr>
-				<tr><td colspan="2"><input type="button" id="dbtn" value="상세정보추가"></td></tr>
-			</table>
-	</div>
+	<input type="hidden" id="itemid" readonly>
+		<div class="iteminfo">
+			<h2>상품추가/수정</h2>
+				<table>
+					<tr><td>상품명</td><td><input type="text" id="itemname"></td></tr>
+					<tr><td>타입</td><td><input type="text" id="itemtype"></td></tr>
+					<tr><td>가격</td><td><input type="text" id="itemprice"></td></tr>
+					<tr><td>할인가격</td><td><input type="text" id="disprice"></td></tr>
+					<tr><td>구성</td><td><input type="text" id="conposition"></td></tr>
+					<tr><td>원산지</td><td><input type="text" id="origin"></td></tr>
+					<tr><td>유효기간</td><td><textarea rows="5" cols="25" id="period"></textarea></td></tr>
+					<tr><td>이미지경로</td><td><input type="text" id="itemimage" value="/store_Images/.jpg"></td></tr>
+					<tr><td colspan="2"><input type="button" id="ibtn" value="상품추가">
+										<input type="button" id="iubtn" value="상품수정" disabled></td></tr>
+					<tr><td colspan="2"><h3>상품이미지추가</h3></td></tr>
+				    <tr><td>이미지</td><td><input type="file" id="itemfile" style="width:200px"></td></tr>
+				    <tr><td colspan="2"><input type="button" id="iimgbtn" value="이미지추가">
+				</table>
+		</div>
 	<div class="itembox">
 		<table id="itemlist">
-			<h3>상품리스트</h3>
+			<caption><h3>상품리스트</h3></caption>
 				<thead>
-					<tr><td>상품명</td><td>가격</td><td>할인가격</td><td>구성</td><td>원산지</td><td>이미지경로</td></tr>
+					<tr><td>상품명</td><td>타입</td><td>가격</td><td>할인가격</td><td>구성</td><td>원산지</td><td>이미지경로</td><td>유효기간</td><td>삭제</td></tr>
 				</thead>
 				<tbody></tbody>
 		</table>
 	</div>
-	<div class="detailbox">
-		<table id="detaillist">
-			<h3>상품상세리스트</h3>
+	<!-- <div class="bestbox">
+		<table id="bestlist">
 				<thead>
-					<tr><td>상품번호</td><td>이름</td><td>유효기간</td></tr>
+					<tr><td><h3>베스트상품변경</h3></td></tr>
 				</thead>
 				<tbody></tbody>
 		</table>
-	</div>
+	</div> -->
 </div>
 <div class="container" id="a">
-	<div class="answerbox">
-		<h2>1:1문의답변</h2>
-			<table>
-				<tr><td><input type="hidden" id="anid" readonly></td></tr>
-				<tr><td>작성자</td><td><input type="text" id="writer" readonly></td></tr>
-				<tr><td>제목</td><td><input type="text" id="title" readonly></td></tr>
-				<tr><td>문의내용</td><td><textarea rows="10" cols="80" id="content" readonly></textarea></td></tr>
-				<tr><td>답변</td><td><textarea rows="10" cols="80" id="answer"></textarea></tr>
-				<tr><td>문의일시</td><td><input type="text" id="createt" readonly></td></tr>
-				<tr><td>답변일시</td><td><input type="text" id="answert" readonly></td></tr>
-				<tr><td colspan="2"><input type="button" id="abtn" value="답변등록"></td></tr>
-			</table>
+	<input type="hidden" id="anid" readonly>
+		<div class="answerbox">
+			<h2>1:1문의답변</h2>
+				<table>
+					<tr><td>작성자</td><td class="tdleft"><input type="text" id="writer" readonly></td></tr>
+					<tr><td>제목</td><td class="tdleft"><input type="text" id="title" size="50" readonly></td></tr>
+					<tr><td>문의내용</td><td><textarea rows="8" cols="80" id="content" readonly></textarea></td></tr>
+					<tr><td>답변</td><td><textarea rows="8" cols="80" id="answer"></textarea></tr>
+					<tr><td>문의일시</td><td class="tdleft"><input type="text" id="createt" readonly></td></tr>
+					<tr><td>답변일시</td><td class="tdleft"><input type="text" id="answert" readonly></td></tr>
+					<tr><td colspan="2"><input type="button" id="abtn" value="답변등록"></td></tr>
+				</table>
 </div>
 	<div class="inquirybox">
 		<table id="inquirylist">
-			<h3>1:1문의목록</h3>
+			<caption><h3>1:1문의목록</h3></caption>
 				<thead>
-					<tr><td>작성자</td><td>제목</td><td>답변여부</td><td>등록일시</td><td>답변일시</td></tr>
+					<tr><td>작성자</td><td>제목</td><td>답변여부</td><td>등록일시</td><td>답변일시</td><td>삭제</td></tr>
 				</thead>
 				<tbody></tbody>
 		</table>
 	</div>
 </div>
 <div class="container" id="n">
-	<div class="newsupbox">
-		<h2>공지등록</h2>
-			<table>
-				<tr><td><input type="hidden" id="newsid" readonly></td></tr>
-				<tr><td>구분</td><td><select id="newskat">
-									<option value="시스템점검">시스템점검</option>
-									<option value="극장">극장</option>
-									<option value="기타">기타</option>
-									</select></tr>
-				<tr><td>제목</td><td><input type="text" id="newstitle" size="60"></td></tr>
-				<tr><td>공지내용</td><td><textarea rows="27" cols="80" id="newscontent"></textarea></td></tr>
-				<tr><td colspan="2"><input type="button" id="nbtn" value="공지등록">
-									<input type="button" id="nubtn" value="공지수정" disabled></td></tr>
-			</table>
+	<input type="hidden" id="newsid" readonly>
+		<div class="newsupbox">
+			<h2>공지등록/수정</h2>
+				<table>
+					<tr><td>구분</td><td class="tdleft"><select id="newskat" style="width:150px">
+										<option value="시스템점검">시스템점검</option>
+										<option value="극장">극장</option>
+										<option value="기타">기타</option>
+										</select></tr>
+					<tr><td>제목</td><td class="tdleft"><input type="text" id="newstitle" size="60"></td></tr>
+					<tr><td>공지내용</td><td><textarea rows="27" cols="80" id="newscontent"></textarea></td></tr>
+					<tr><td colspan="2"><input type="button" id="nbtn" value="공지등록">
+										<input type="button" id="nubtn" value="공지수정" disabled></td></tr>
+				</table>
 	</div>
 	<div class="newsbox">
 		<table id="newslist">
-			<h3>공지목록</h3>
+			<caption><h3>공지목록</h3></caption>
 				<thead>
-					<tr><td>구분</td><td>제목</td><td>등록일시</td><td>조회수</td></tr>
+					<tr><td>구분</td><td>제목</td><td>등록일시</td><td>조회수</td><td>삭제</td></tr>
+				</thead>
+				<tbody></tbody>
+		</table>
+	</div>
+</div>
+<div class="container" id="r">
+	<input type="hidden" id="roomid" readonly>
+		<div class="roomupbox">
+			<h2>상영관정보수정</h2>
+				<table>
+					<tr><td>관이름</td><td><input type="text" id="rname" readonly></td></tr>
+					<tr><td>구분</td><td><input type="text" id="rlevel"></td></tr>
+					<tr><td>일반요금</td><td><input type="number" id="adprice"></td></tr>
+					<tr><td>청소년요금</td><td><input type="number" id="yoprice"></td></tr>
+					<tr><td colspan="2" class="tdcenter"><input type="button" id="roomupbtn" value="정보수정"></td></tr>
+										
+				</table>
+	</div>
+	<div class="roombox">
+		<table id="roomlist">
+			<caption><h3>상영관</h3></caption>
+				<thead>
+					<tr><td>관이름</td><td>구분</td><td>일반요금</td><td>청소년요금</td><td>총좌석</td></tr>
 				</thead>
 				<tbody></tbody>
 		</table>
@@ -170,11 +199,9 @@ $(document)
 .ready(function(){
 	mlist();
 	rlist();
-	deitemid();
 	schedules();
 	showmovie();
 	showitem();
-	showdetail();
 	showinquiry();
 	shownews();
 })
@@ -202,98 +229,91 @@ $(document)
 	
 })
 .on('click','#mbtn',function(){
-	if($('#mname').val()=='' || $('#age').val()=='' || $('#runtime').val()=='' || $('#minfo').val()=='' ||
-		 $('#director').val()==''|| $('#cast').val()==''|| $('#genre').val()==''|| $('#rdate').val()==''){
+	if($('#mname').val()=='' || $('#age').val()=='' || $('#runningtime').val()=='' || $('#minfo').val()=='' || $('#director').val()==''||$('#cast').val()==''|| $('#genre').val()==''|| $('#rdate').val()==''){
 		alert("제대로")
 	}else{
 		let mname = $('#mname').val();
 		let age = $('#age').val();
-		let runtime = $('#runtime').val();
+		let runningtime = $('#runningtime').val();
 		let image = $('#image').val();
 		let director = $('#director').val();
 		let cast = $('#cast').val();
 		let genre = $('#genre').val();
 		let rdate = $('#rdate').val();
 		let minfo = $('#minfo').val();
-		console.log(mname,age,runtime,image,director,cast,genre,rdate,minfo);
-		
-		let formData = new FormData();
-        formData.append('moviefile', $('#moviefile')[0].files[0]); // Add the file
-        formData.append('mname', $('#mname').val());
-        formData.append('age', $('#age').val());
-        formData.append('runtime', $('#runtime').val());
-        formData.append('image', $('#image').val());
-        formData.append('director', $('#director').val());
-        formData.append('cast', $('#cast').val());
-        formData.append('genre', $('#genre').val());
-        formData.append('rdate', $('#rdate').val());
-        formData.append('minfo', $('#minfo').val());
+		console.log(mname,age,runningtime,image,director,cast,genre,rdate,minfo);
 		
         clear();
-        
-        $.ajax({
-            url: '/moviein',
-            type: 'POST',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function(data) {
-                
-                showmovie();
-            }
-        });
-		
+        $.post('/moviein',{mname:mname,age:age,runningtime:runningtime,image:image,director:director,cast:cast,genre:genre,rdate:rdate,minfo:minfo},
+    			function(data){
+    				showmovie();
+    				alert("영화가 추가되었습니다")
+    		})
 	}
-		
+})
+.on('click','#mimgbtn',function(){
+	if($('#moviefile').val()==''){
+		alert("업로드할 이미지를 선택해주세요")
+	}else{
+		let formData = new FormData();
+	    formData.append('moviefile', $('#moviefile')[0].files[0]); // Add the file
+	    clear();
+	    $.ajax({
+	        url: '/movieimage',
+	        type: 'POST',
+	        data: formData,
+	        contentType: false,
+	        processData: false,
+	        success: function(data) {
+	        	 alert("이미지 업로드가 완료되었습니다")
+	        }
+	    });
+	}
 })
 .on('click','#ibtn',function(){
 	if($('#itemname').val()=='' || $('#itemprice').val()=='' || $('#disprice').val()=='' || $('#conposition').val()==''
-		|| $('#origin').val()==''){
+		|| $('#origin').val()==''|| $('#itemtype').val()==''){
 		alert("제대로")
 	}else{
 	
-		let formData = new FormData();
-        formData.append('itemfile', $('#itemfile')[0].files[0]); // Add the file
-        formData.append('itemname', $('#itemname').val());
-        formData.append('itemprice', $('#itemprice').val());
-        formData.append('disprice', $('#disprice').val());
-        formData.append('conposition', $('#conposition').val());
-        formData.append('origin', $('#origin').val());
-        formData.append('itemimage', $('#itemimage').val());
-		console.log(formData);
-		clear();
-		
-        $.ajax({
-            url: '/itemin',
-            type: 'POST',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function(data) {
-              
-                showitem();
-            }
-        });
-	}
-})
-.on('click','#dbtn',function(){
-	if($('#deitemid').val()=='' || $('#detname').val()=='' || $('#period').val()==''){
-		alert("제대로")
-	}else{
-		let deitemid = $('#deitemid').val();
-		let detname = $('#detname').val();
+        let itemname = $('#itemname').val();
+		let itemtype = $('#itemtype').val();
+		let itemprice = $('#itemprice').val();
+		let disprice = $('#disprice').val();
+		let conposition = $('#conposition').val();
+		let origin = $('#origin').val();
 		let period = $('#period').val();
-	
-	
-		console.log(deitemid,detname,period);
+		let itemimage = $('#itemimage').val();
 		clear();
-	
-			$.post('/detailin',{deitemid:deitemid,detname:detname,period:period},
-				function(data){
-					showdetail();
-			})
+
+		$.post('/itemin',{itemname:itemname,itemtype:itemtype,itemprice:itemprice,disprice:disprice,conposition:conposition,origin:origin,period:period,itemimage:itemimage},
+			function(data){
+				showitem();
+				alert("상품이 추가되었습니다")
+		})
+		
 	}
 })
+.on('click','#iimgbtn',function(){
+	if($('#itemfile').val()==''){
+		alert("업로드할 이미지를 선택해주세요")
+	}else{
+		let formData = new FormData();
+		formData.append('itemfile', $('#itemfile')[0].files[0]);
+		clear();
+		  $.ajax({
+	          url: '/itemimage',
+	          type: 'POST',
+	          data: formData,
+	          contentType: false,
+	          processData: false,
+	          success: function(data) {
+	            alert("이미지 업로드가 완료되었습니다")
+	          }
+	      });
+	}
+})
+      
 .on('click','#nbtn',function(){
 	if($('#newstitle').val()=='' || $('#newscontent').val()==''){
 		alert("제대로")
@@ -407,16 +427,9 @@ $(document)
 	
 	$.post('/itemdel',{delid:delid},function(data){
 		showitem();
+		clear();
 	})
 	
-})
-.on('click','#detaildel',function(){
-	let delid = $(this).closest('tr').find('td:eq(0)').text();
-	console.log($(this).closest('tr').find('td:eq(0)').text());
-	
-	$.post('/detaildel',{delid:delid},function(data){
-		showdetail();
-	})
 })
 .on('click','#inquirydel',function(){
 	let delid = $(this).closest('tr').find('td:eq(0)').text();
@@ -437,6 +450,20 @@ $(document)
 		clear();
 	})	
 })
+.on('click','#roomlist tbody tr',function(){
+	let roomid = $(this).find('td:eq(0)').text();
+	let rname = $(this).find('td:eq(1)').text();
+	let rlevel = $(this).find('td:eq(2)').text();
+	let adprice = $(this).find('td:eq(3)').text();
+	let yoprice = $(this).find('td:eq(4)').text();
+	
+	$('#roomid').val(roomid);
+	$('#rname').val(rname);
+	$('#rlevel').val(rlevel);
+	$('#adprice').val(adprice);
+	$('#yoprice').val(yoprice);
+	
+})
 .on('click','#inquirylist tbody tr',function(){
 	let anid = $(this).find('td:eq(0)').text();
 	let content = $(this).find('td:eq(1)').text();
@@ -456,6 +483,52 @@ $(document)
 	$('#answer').val(answer);
 	$('#createt').val(created);
 	$('#answert').val(ancreated);
+})
+.on('click','#itemlist tbody tr',function(){
+	let itemid = $(this).find('td:eq(0)').text();
+	let itemname = $(this).find('td:eq(1)').text();
+	let itemtype = $(this).find('td:eq(2)').text();
+	let itemprice = $(this).find('td:eq(3)').text();
+	let disprice = $(this).find('td:eq(4)').text();
+	let conposition = $(this).find('td:eq(5)').text();
+	let origin = $(this).find('td:eq(6)').text();
+	let itemimage = $(this).find('td:eq(7)').text();
+	let period = $(this).find('td:eq(8)').text();
+	
+	
+	$('#ibtn').prop('disabled', true);
+	$('#iubtn').prop('disabled', false);
+	
+	console.log(newsid,newstitle,newscontent);
+	
+	$('#itemid').val(itemid);
+	$('#itemname').val(itemname);
+	$('#itemprice').val(itemprice);
+	$('#disprice').val(disprice);
+	$('#conposition').val(conposition);
+	$('#origin').val(origin);
+	$('#itemimage').val(itemimage);
+	$('#itemtype').val(itemtype);
+	$('#period').val(period);
+})
+.on('click','#iubtn',function(){
+	let itemid = $('#itemid').val();
+	let itemname = $('#itemname').val();
+	let itemtype = $('#itemtype').val();
+	let itemprice = $('#itemprice').val();
+	let disprice = $('#disprice').val();
+	let conposition = $('#conposition').val();
+	let origin = $('#origin').val();
+	let itemimage = $('#itemimage').val();
+	let period = $('#period').val();
+	
+	
+	clear();
+	$.post('/itemup',{itemid:itemid,itemname:itemname,itemtype:itemtype,itemprice:itemprice,disprice:disprice,conposition:conposition,origin:origin,
+						itemimage:itemimage,period:period},function(data){
+		showitem();
+		alert("상품수정이 완료되었습니다")
+	})
 })
 .on('click','#newslist tbody tr',function(){
 	let newsid = $(this).find('td:eq(0)').text();
@@ -483,35 +556,59 @@ $(document)
 		shownews();
 	})
 })
-.on('click','#abtn',function(){
-	let answer = $('#answer').val();
-	let anid = $('#anid').val();
+.on('click','#roomupbtn',function(){
+	let roomid = $('#roomid').val();
+	let rlevel = $('#rlevel').val();
+	let adprice = $('#adprice').val();
+	let yoprice = $('#yoprice').val();
+	
 	clear();
-	
-	$.post('/inquiryup',{answer:answer,anid:anid},function(data){
-		showinquiry();
+	$.post('/roomup',{roomid:roomid,rlevel:rlevel,adprice:adprice,yoprice:yoprice},function(data){
+		rlist();
 	})
-	
+})
+.on('click','#abtn',function(){
+	if($('#content').val()==''){
+		alert("문의를 선택해주세요")
+	}else{
+		let answer = $('#answer').val();
+		let anid = $('#anid').val();
+		clear();
+		
+		$.post('/inquiryup',{answer:answer,anid:anid},function(data){
+			showinquiry();
+		})
+	}
 })
 .on('click','#schebtn',function(){
 	$('#s').addClass('visible');
-	$('#m,#i,#a,#n').removeClass('visible').addClass('container');
+	$('#m,#i,#a,#n,#r').removeClass('visible').addClass('container');
+	clear();
 })
 .on('click','#moviebtn',function(){
 	$('#m').addClass('visible');
-	$('#s,#i,#a,#n').removeClass('visible').addClass('container');
+	$('#s,#i,#a,#n,#r').removeClass('visible').addClass('container');
+	clear();
 })
 .on('click','#itembtn',function(){
 	$('#i').addClass('visible');
-	$('#m,#s,#a,#n').removeClass('visible').addClass('container');
+	$('#m,#s,#a,#n,#r').removeClass('visible').addClass('container');
+	clear();
 })
 .on('click','#answerbtn',function(){
 	$('#a').addClass('visible');
-	$('#m,#i,#s,#n').removeClass('visible').addClass('container');
+	$('#m,#i,#s,#n,#r').removeClass('visible').addClass('container');
+	clear();
 })
 .on('click','#newsbtn',function(){
 	$('#n').addClass('visible');
-	$('#m,#i,#a,#s').removeClass('visible').addClass('container');
+	$('#m,#i,#a,#s,#r').removeClass('visible').addClass('container');
+	clear();
+})
+.on('click','#roombtn',function(){
+	$('#r').addClass('visible');
+	$('#m,#i,#a,#s,#n').removeClass('visible').addClass('container');
+	clear();
 })
 function mlist(){
 	$.post('/mlist',{},function(data){
@@ -531,26 +628,22 @@ function rlist(){
 	$.post('/rlist',{},function(data){
 		console.log(data);
 		$('#roomnum').empty();
+		$('#roomlist tbody').empty();
 		for(let x of data){
 			let str ='<option value='+x['id']+','+x['allseat']+','+x['adult_price']+','+x['young_price']+'>'+x['id']+', '+x['Sname']+', '+x['seatlevel']+', '+x['allseat']+'석</option>';
 			$('#roomnum').append(str);
-		}
+
+			let rstr ='<tr><td style=display:none>'+x['id']+'</td><td>'+x['Sname']+'</td><td>'+x['seatlevel']+'</td><td>'+x['adult_price']+'</td><td>'+x['young_price']+'</td><td>'+x['allseat']+'</td></tr>'
+			$('#roomlist tbody').append(rstr);
+			}
+		
 		fseat = $('#roomnum').val().split(',');
 		$('#seat').val(fseat[1]);
 		$('#aprice').val(fseat[2]);
 		$('#yprice').val(fseat[3]);
 	},'json')
 }
-function deitemid(){
-	$.post('/deitemid',{},function(data){
-		console.log(data);
-		$('#deitemid').empty();
-		for(let x of data){
-			let str ='<option value='+x['id']+'>'+x['id']+', '+x['item_name']+'</option>';
-			$('#deitemid').append(str);
-		}
-	},'json')
-}
+
 function schedules(){
 	$.post('/schedules',{},function(data){
 		$('#schedules tbody').empty();
@@ -564,9 +657,10 @@ function schedules(){
 	},'json')
 }
 function clear(){
-	$('#date,#stime,#etime,#mname,#runtime,#director,#cast,#genre,#minfo,#rdate,#itemname,#itemprice,'
-		+'#disprice,#conposition,#origin,#itemimage,#detname,#period,#anid,#writer,#title,#newsid,'
-		+'#content,#answer,#createt,#answert,#newstitle,#newscontent').val('');
+	$('#date,#stime,#etime,#mname,#runningtime,#director,#cast,#genre,#minfo,#rdate,#itemname,#itemprice,'
+		+'#disprice,#conposition,#origin,#itemimage,#period,#anid,#writer,#title,#newsid,'
+		+'#content,#answer,#createt,#answert,#newstitle,#newscontent,#itemfile,#moviefile,#roomid,'
+		+'#rname,#rlevel,#adprice,#yoprice,#itemtype').val('');
 	$('#image').val('/chartImage/.jpg');
 	$('#itemimage').val('/store_Images/.jpg');
 	$('#nubtn').prop('disabled', true);
@@ -578,8 +672,7 @@ function showmovie(){
 		for( let x of data){
 			let str ='<tr><td style=display:none>'+x['id']+'</td><td>'+x['mname']+'</td><td>'+x['age']+'</td><td>'+x['reservation']+'</td><td>'+x['runningtime']+'</td><td>'+
 						x['imagepath']+'</td><td>'+x['director']+'</td><td>'+x['cast']+'</td><td>'+x['genre']+'</td><td>'+x['releasedate']+'</td><td class=movietext>'+
-						x['movieinfo']+'</td><td>'+
-						'</td><td><input type=button id=moviedel value=삭제></td></tr>'
+						x['movieinfo']+'</td><td><input type=button id=moviedel value=삭제></td></tr>'
 			$('#movieinfo tbody').append(str);
 		}
 		
@@ -590,21 +683,9 @@ function showitem(){
 		console.log("aaaaaaa",data)
 		$('#itemlist tbody').empty();
 		for( let x of data){
-			let str ='<tr><td style=display:none>'+x['id']+'</td><td>'+x['item_name']+'</td><td>'+x['price']+'</td><td>'+x['discount_price']+'</td><td>'+x['composition']+'</td><td>'+
-						x['origin']+'</td><td>'+x['image_path']+'</td><td><input type=button id=itemdel value=삭제></td></tr>'
+			let str ='<tr><td style=display:none>'+x['id']+'</td><td>'+x['item_name']+'</td><td>'+x['item_type']+'</td><td>'+x['price']+'</td><td>'+x['discount_price']+'</td><td>'+x['composition']+'</td><td>'+
+						x['origin']+'</td><td>'+x['image_path']+'</td><td>'+x['period']+'</td><td><input type=button id=itemdel value=삭제></td></tr>'
 			$('#itemlist tbody').append(str);
-		}
-		
-	},'json')
-}
-function showdetail(){
-	$.post('/showdetail',{},function(data){
-		console.log("aaaaaaa",data)
-		$('#detaillist tbody').empty();
-		for( let x of data){
-			let str ='<tr><td style=display:none>'+x['id']+'</td><td>'+x['item_id']+'</td><td>'+x['name']+'</td><td>'+x['period']+'</td><td>'+
-			'</td><td><input type=button id=detaildel value=삭제></td></tr>'
-			$('#detaillist tbody').append(str);
 		}
 		
 	},'json')
@@ -614,7 +695,7 @@ function showinquiry(){
 		$('#inquirylist tbody').empty();
 		for( let x of data){
 			let str ='<tr><td style=display:none>'+x['id']+'</td><td style=display:none>'+x['content']+'</td><td style=display:none>'+x['answer']+'</td><td>'+x['nickname']+'</td><td>'+x['title']+'</td><td>'+
-			x['current']+'</td><td>'+x['created']+'</td><td>'+x['ancreated']+'</td><td>'+'</td><td><input type=button id=inquirydel value=삭제></td></tr>'
+			x['current']+'</td><td>'+x['created']+'</td><td>'+x['ancreated']+'</td><td><input type=button id=inquirydel value=삭제></td></tr>'
 			$('#inquirylist tbody').append(str);
 		}
 		
@@ -630,6 +711,7 @@ function shownews(){
 		
 	},'json')
 }
+
 
 </script>
 </html>

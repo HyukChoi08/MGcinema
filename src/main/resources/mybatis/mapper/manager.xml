@@ -28,9 +28,6 @@
 <delete id="itemdel">
 	delete from item where id=#{param1}
 </delete>
-<delete id="detaildel">
-	delete from item_detail where id=#{param1}
-</delete>
 <delete id="newsdel">
 	delete from news where id=#{param1}
 </delete>
@@ -44,17 +41,11 @@
 	insert into movie set mname=#{param1}, age=#{param2}, runningtime=#{param3}, imagepath=#{param4}, director=#{param5},
 							cast=#{param6}, genre=#{param7}, releasedate=#{param8}, movieinfo=#{param9}, reservation=#{param10}
 </insert>
-<insert id="detailin">
-	insert into item_detail set item_id=#{param1}, name=#{param2}, period=#{param3}
-</insert>
 <insert id="newsin">
 	insert into news set title=#{param1}, content=#{param2},selected=#{param3}, created_at=CURDATE()
 </insert>
 <select id="itemlist" resultType="com.cinema.management.ItemDTO">
 	select * from item order by id desc
-</select>
-<select id="detaillist" resultType="com.cinema.management.DetailDTO">
-	select * from item_detail order by id desc
 </select>
 <select id="newslist" resultType="com.cinema.management.NewsDTO">
 	select * from news order by id desc
@@ -65,7 +56,7 @@
 	where a.id=b.customer_id order by created desc
 </select>
 <insert id="itemin">
-	insert into item set item_name=#{param1}, price=#{param2}, discount_price=#{param3}, composition=#{param4}, origin=#{param5}, image_path=#{param6}
+	insert into item set item_name=#{param1}, price=#{param2}, discount_price=#{param3}, composition=#{param4}, origin=#{param5}, image_path=#{param6}, item_type=#{param7}, period=#{param8}
 </insert>
 <update id="inquiryup">
 	update inquiry set answer=#{param2}, current="답변완료", ancreated =now() where id=#{param1}
@@ -73,7 +64,10 @@
 <update id="newsup">
 	update news set title=#{param2}, content=#{param3},selected=#{param4}, created_at =CURDATE() where id=#{param1}
 </update>
-<select id="getdeid" resultType="com.cinema.management.DeidDTO">
-	select id,item_name from item
-</select>
+<update id="roomup">
+	update room set seatlevel=#{param2}, adult_price=#{param3}, young_price=#{param4} where id=#{param1}
+</update>
+<update id="itemup">
+	update item set item_name=#{param2}, item_type=#{param3}, price=#{param4}, discount_price=#{param5}, composition=#{param6}, origin=#{param7}, image_path=#{param8}, period=#{param9} where id=#{param1}
+</update>
 </mapper>

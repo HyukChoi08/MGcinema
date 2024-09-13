@@ -11,4 +11,6 @@ public class ItemDTO {
 	String composition;
 	String origin;
 	String image_path;
+	String item_type;
+	String period;
 }

@@ -3,31 +3,38 @@
 	color:white;
 } 
 .manager-page{
-	margin-top:170px;
 	margin-bottom:120px;
 	height:600px;
 	
+}
+.tdleft {
+	text-align:left;
+}
+.tdcenter {
+	text-align:center;
 }
 .movieinsert1{
 	border:1px solid white;
 	width:300px;
 	margin:15px;
-	height: 400px;
+	height: 500px;
 	border-radius:6px;
 }
 .movieinsert2{
 	border:1px solid white;
-	width:1000px;
+	width:1200px;
 	margin:15px;
-	 height: 400px;
+	 height: 500px;
      overflow-y: auto; 
      border-radius:6px;
+     display: flex;
+     justify-content: center;
 }
 .movieinsert3{
 	border:1px solid white;
-	width:300px;
+	width:310px;
 	margin:15px;
-	 height: 540px;
+	 height: 600px;
      overflow-y: auto; 
      border-radius:6px;
 }
@@ -35,15 +42,17 @@
 	border:1px solid white;
 	margin:15px;
 	width:1500px;
-	 height: 540px;
+	 height: 600px;
      overflow-y: auto; 
      border-radius:6px;
+     display: flex;
+     justify-content: center;
 }
 .iteminfo{
 	border:1px solid white;
 	margin:15px;
 	width:300px;
-	 height:500px;
+	 height:600px;
      overflow-y: auto; 
      border-radius:6px;
      border-radius:6px;
@@ -51,10 +60,12 @@
 .itembox{
 	border:1px solid white;
 	margin:15px;
-	width:985px;
-	 height: 500px;
+	width:1500px;
+	 height: 600px;
      overflow-y: auto; 
      border-radius:6px;
+          display: flex;
+     justify-content: center;
 }
 .answerbox{
 	border:1px solid white;
@@ -79,6 +90,26 @@
 	 height: 600px;
      overflow-y: auto; 
      border-radius:6px;
+          display: flex;
+     justify-content: center;
+}
+.roomupbox{
+	border:1px solid white;
+	margin:15px;
+	width:300px;
+	height: 250px;
+    overflow-y: auto; 
+    border-radius:6px;
+}
+.roombox{
+	border:1px solid white;
+	margin:15px;
+	width:500px;
+    height: 600px;
+    overflow-y: auto; 
+    border-radius:6px;
+    display: flex;
+    justify-content: center;
 }
 .inquirybox{
 	border:1px solid white;
@@ -87,23 +118,30 @@
 	 height: 560px;
      overflow-y: auto; 
      border-radius:6px;
+          display: flex;
+     justify-content: center;
 }
-.detailbox{
+.bestbox{
 	border:1px solid white;
 	margin:15px;
-	width:480px;
-	 height: 480px;
+	width:270px;
+	 height: 500px;
      overflow-y: auto; 
      border-radius:6px;
+          display: flex;
+     justify-content: center;
+    
+      
 }
 .mselect{
 	width:180px
 }
 .container{
     display: flex;
-    width:2000px;
     position: absolute;
-    top: 250px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 550px;
     visibility: hidden; /* 요소를 숨기지만 공간은 유지 */
    	opacity: 0;
    	
@@ -119,29 +157,54 @@ thead tr{
      background-color:white;
      
 }
+td{
+	height:30px;
+}
 #schedules tbody td,
 #movieinfo tbody td,
 #itemlist tbody td,
-#detaillist tbody td,
-#inquirylist thead td,
-#newslist thead td{
+#inquirylist tbody td,
+#newslist tbody td,
+#roomlist tbody td,
+#bestlist tbody td{
 	height:40px;
 }
+
 .movietext{
-	   max-width: 150px; 
-       max-height: 100px;
-       overflow: auto; 
-       white-space: nowrap; 
+	   max-width: 180px; 
+       max-height: 40px;
+       overflow: auto;
+       white-space: nomal;
+       text-overflow: ellipsis;
+       display:block;
+       
+  
 }
 #schedules thead td,
 #movieinfo thead td,
 #itemlist thead td,
-#detaillist thead td,
 #inquirylist thead td,
-#newslist thead td{
+#newslist thead td,
+#roomlist thead td,
+#bestlist thead td{
 	border-bottom:2px solid white;
 	background-color:black;
 }
 input,textarea,select{
 	border-radius:5px;
+}
+.mainbutton{
+	 background-color: black;
+            color: white;
+            border: none; 
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius:6px;
+            border:1px solid white;
+            margin:10px;
+}
+.mainbutton:hover{
+	 background-color: red;
+
 }

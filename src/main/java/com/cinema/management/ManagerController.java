@@ -42,19 +42,6 @@ public class ManagerController {
 		}
 		return Ty.toString();
 	}
-	@PostMapping("/deitemid")
-	@ResponseBody
-	public String deitemid() {
-		ArrayList<DeidDTO> a = mmdao.getdeid();
-		JSONArray Ty = new JSONArray();
-		for(DeidDTO Rdto : a) {
-			JSONObject T = new JSONObject();
-			T.put("id",Rdto.getId());
-			T.put("item_name",Rdto.getItem_name());
-			Ty.put(T);
-		}
-		return Ty.toString();
-	}
 	@PostMapping("/rlist")
 	@ResponseBody
 	public String rlist() {
@@ -134,14 +121,6 @@ public class ManagerController {
 		mmdao.itemdel(delid);
 		return "manager/manager";
 	}
-	@PostMapping("/detaildel")
-	@ResponseBody
-	public String detaildel(HttpServletRequest req,Model model) {
-		int delid = Integer.parseInt(req.getParameter("delid"));
-		System.out.println(delid);
-		mmdao.detaildel(delid);
-		return "manager/manager";
-	} 
 	@PostMapping("/inquirydel")
 	@ResponseBody
 	public String inquirydel(HttpServletRequest req,Model model) {
@@ -183,20 +162,26 @@ public class ManagerController {
 	@PostMapping("/moviein")
 	@ResponseBody
 	public String moviein(HttpServletRequest req,Model model) {
+		String mname = req.getParameter("mname");
+		String age = req.getParameter("age");
+		String runningtime = req.getParameter("runningtime");
+		String image = req.getParameter("image");
+		String director = req.getParameter("director");
+		String cast = req.getParameter("cast");
+		String genre = req.getParameter("genre");
+		String rdate = req.getParameter("rdate");
+		String minfo = req.getParameter("minfo");
+		float reservation = 0.0f;
+	
+		mmdao.moviein(mname, age, runningtime, image, director, cast, genre, rdate, minfo, reservation);
+		return "manager/manager";
+	}
+	@PostMapping("/movieimage")
+	@ResponseBody
+	public String movieimage(HttpServletRequest req,Model model) {
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) req;
 		
 		MultipartFile file = multipartRequest.getFile("moviefile");
-		String mname = multipartRequest.getParameter("mname");
-		String age = multipartRequest.getParameter("age");
-		String runtime = multipartRequest.getParameter("runtime");
-		String image = multipartRequest.getParameter("image");
-		String director = multipartRequest.getParameter("director");
-		String cast = multipartRequest.getParameter("cast");
-		String genre = multipartRequest.getParameter("genre");
-		String rdate = multipartRequest.getParameter("rdate");
-		String minfo = multipartRequest.getParameter("minfo");
-		float reservation = 0.0f;
-		
 	     
         String uploadDir = "src/main/resources/static/chartImage";
         File uploadDirectory = new File(Paths.get(uploadDir).toAbsolutePath().normalize().toString());
@@ -209,7 +194,6 @@ public class ManagerController {
 			e.printStackTrace();
 		}
         
-		mmdao.moviein(mname, age, runtime, image, director, cast, genre, rdate, minfo, reservation);
 		return "manager/manager";
 	}
 	@PostMapping("/showitem")
@@ -226,6 +210,8 @@ public class ManagerController {
 			T.put("composition",Rdto.getComposition());
 			T.put("origin",Rdto.getOrigin());
 			T.put("image_path",Rdto.getImage_path());
+			T.put("item_type",Rdto.getItem_type());
+			T.put("period",Rdto.getPeriod());
 			Ty.put(T);
 		}
 		return Ty.toString();
@@ -233,15 +219,26 @@ public class ManagerController {
 	@PostMapping("/itemin")
 	@ResponseBody
 	public String itemin(HttpServletRequest req,Model model) {
+		
+         String itemname = req.getParameter("itemname");
+         String itemtype = req.getParameter("itemtype");
+         String itemprice = req.getParameter("itemprice");
+         String disprice = req.getParameter("disprice");
+         String conposition = req.getParameter("conposition");
+         String origin = req.getParameter("origin");
+         String itemimage = req.getParameter("itemimage");
+         String period = req.getParameter("period");
+         
+		mmdao.itemin(itemname, itemprice, disprice, conposition, origin, itemimage, itemtype, period);
+
+		return "manager/manager";
+	}
+	@PostMapping("/itemimage")
+	@ResponseBody
+	public String itemimage(HttpServletRequest req,Model model) {
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) req;
 		
 		 MultipartFile file = multipartRequest.getFile("itemfile");
-         String itemname = multipartRequest.getParameter("itemname");
-         String itemprice = multipartRequest.getParameter("itemprice");
-         String disprice = multipartRequest.getParameter("disprice");
-         String conposition = multipartRequest.getParameter("conposition");
-         String origin = multipartRequest.getParameter("origin");
-         String itemimage = multipartRequest.getParameter("itemimage");
          
          String uploadDir = "src/main/resources/static/store_images";
          File uploadDirectory = new File(Paths.get(uploadDir).toAbsolutePath().normalize().toString());
@@ -253,8 +250,6 @@ public class ManagerController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-         
-		mmdao.itemin(itemname, itemprice, disprice, conposition, origin, itemimage);
 
 		return "manager/manager";
 	}
@@ -267,30 +262,7 @@ public class ManagerController {
 		mmdao.newsin(newstitle, newscontent,newskat);
 		return "manager/manager";
 	}
-	@PostMapping("/detailin")
-	@ResponseBody
-	public String detailin(HttpServletRequest req,Model model) {
-		int deitemid = Integer.parseInt(req.getParameter("deitemid"));
-		String detname = req.getParameter("detname");
-		String period = req.getParameter("period");
-		mmdao.detailin(deitemid, detname, period);
-		return "manager/manager";
-	}
-	@PostMapping("/showdetail")
-	@ResponseBody
-	public String showdetail(HttpServletRequest req,Model model) {
-		ArrayList<DetailDTO> a = mmdao.detaillist();
-		JSONArray Ty = new JSONArray();
-		for(DetailDTO Rdto : a) {
-			JSONObject T = new JSONObject();
-			T.put("id",Rdto.getId());
-			T.put("item_id",Rdto.getItem_id());
-			T.put("name",Rdto.getName());
-			T.put("period",Rdto.getPeriod());
-			Ty.put(T);
-		}
-		return Ty.toString();
-	}
+
 	@PostMapping("/showinquiry")
 	@ResponseBody
 	public String showinquiry(HttpServletRequest req,Model model) {
@@ -328,6 +300,33 @@ public class ManagerController {
 		int newsid = Integer.parseInt(req.getParameter("newsid"));
 	
 		mmdao.newsup(newsid, newstitle, newscontent,newskat);
+		return "manager/manager";
+	}
+	@PostMapping("/itemup")
+	@ResponseBody
+	public String itemup(HttpServletRequest req,Model model) {
+		String itemname = req.getParameter("itemname");
+		String itemtype = req.getParameter("itemtype");
+		String itemprice = req.getParameter("itemprice");
+		String disprice = req.getParameter("disprice");
+		String conposition = req.getParameter("conposition");
+		String origin = req.getParameter("origin");
+		String itemimage = req.getParameter("itemimage");
+		String period = req.getParameter("period");
+		int itemid = Integer.parseInt(req.getParameter("itemid"));
+	
+		mmdao.itemup(itemid, itemname, itemtype, itemprice, disprice, conposition, origin, itemimage, period);
+		return "manager/manager";
+	}
+	@PostMapping("/roomup")
+	@ResponseBody
+	public String roomup(HttpServletRequest req,Model model) {
+		String rlevel = req.getParameter("rlevel");
+		String adprice = req.getParameter("adprice");
+		String yoprice = req.getParameter("yoprice");
+		int roomid = Integer.parseInt(req.getParameter("roomid"));
+	
+		mmdao.roomup(roomid, rlevel, adprice,yoprice);
 		return "manager/manager";
 	}
 	@PostMapping("/shownews")
