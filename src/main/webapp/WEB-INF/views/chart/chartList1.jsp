@@ -60,6 +60,14 @@ body {
     width: 800px;
     color:#c7b199;
 }
+.flex-container3 li {
+    margin-right: 20px; /* 각 <li> 요소 사이의 간격 설정 */
+    font-size: 18px;    /* 글씨 크기 설정 */
+}
+
+.flex-container3 li:last-child {
+    margin-right: 0;    /* 마지막 <li> 요소의 오른쪽 간격 제거 */
+}
 ol, ul {
      display: flex; /* ul 요소를 플렉스 컨테이너로 설정 */
      padding: 0; /* 기본 패딩 제거 */
@@ -106,15 +114,30 @@ a {
 }
 
 
-#putcomment{
-float: right;
-}
 #reviewcomment {
-  background-color: #333; /* 어두운 배경 색상 */
-  color: #eee;            /* 밝은 텍스트 색상 */
-  border: 1px solid #555; /* 테두리 색상 (선택 사항) */
-  padding: 10px;          /* 여백 추가 (선택 사항) */
-  border-radius: 5px;    /* 모서리 둥글기 (선택 사항) */
+    background-color: #222; /* 배경 색상 (어두운 회색) */
+    color: #ddd;            /* 텍스트 색상 (밝은 회색) */
+    border: 1px solid #555; /* 테두리 색상 */
+    padding: 10px;          /* 여백 추가 */
+    border-radius: 5px;    /* 모서리 둥글게 */
+    width: 700px;
+    height: 100px;
+    resize: none;      /* 사용자가 세로 방향으로 크기를 조절할 수 있도록 설정 */
+}
+
+#putcomment {
+    background-color: #444; /* 버튼 배경 색상 (어두운 회색) */
+    color: #f808080;            /* 버튼 텍스트 색상 (밝은 회색) */
+    border: 1px solid #666; /* 버튼 테두리 색상 */
+    padding: 8px 20px;     /* 버튼 여백 */
+    border-radius: 5px;    /* 버튼 모서리 둥글게 */
+    cursor: pointer;        /* 클릭 시 커서 변경 */
+    float:right;
+}
+
+#putcomment:hover {
+    background-color: #555; /* 버튼 호버 시 배경 색상 */
+    color: #f808080;            /* 버튼 호버 시 텍스트 색상 */
 }
 /* 최대 4개의 아이템만 표시 */
 .comment-list-container li:nth-child(n+5) {
@@ -151,10 +174,10 @@ color:black;
                 <br><br><br>
                     <div>
                         <ul class="flex-container3">
-                            <li>상세정보|</li>
+                            <li id="detailinfo"><a href="#movieinfo">상세정보</a></li>
                             <li id="apinfo"><a href="/chartdetail?id=${sessionScope.dataId}">감독/출연|</a></li>
                             <li>스틸컷|</li>
-                            <li>평점/리뷰|</li>
+                            <li id="reviewrate"><a href="#paging">평점/리뷰|</a></li>
                             <li>상영시간</li>
                         </ul>
                     </div>

@@ -7,8 +7,7 @@
 <meta charset="UTF-8">
 <title>무비차트</title>
 </head>
-<style> 
-
+<style>
 body {
     flex-direction: column; /* 세로 방향으로 배치 */
     justify-content: space-between; /* 푸터를 아래쪽으로 이동 */
@@ -50,11 +49,10 @@ ol {
     padding: 0; /* 기본 패딩 제거 */
     margin: 0; /* 기본 마진 제거 */
     list-style-type: none; /* 숫자 지우는 것 */
-    
 }
 a {
     text-decoration-line: none;
-    color:white;
+    color: white;
 }
 .rank {
     display: inline-block; /* 요소를 블록처럼 취급하여 너비를 지정할 수 있게 함 */
@@ -87,16 +85,24 @@ a {
 .button-container button {
     width: auto; /* 버튼의 너비를 콘텐츠에 맞게 자동 조정 */
     padding: 8px 20px; /* 원하는 패딩 설정 */
- 
-    background-color:#E6E6FA;
-    color: greyblue;
+    background-color: #444; /* 검정색 배경에 적합한 어두운 회색 */
+    color: white; /* 흰색 텍스트 */
     border: none;
     border-radius: 5px; /* 둥근 모서리 설정 */
-}
-.mnamecolor{
-	color:#EF6C00;
+    font-size: 14px; /* 글자 크기 설정 */
 }
 
+.button-container button:hover {
+    background-color: #555; /* 마우스를 올렸을 때 색상 변경 */
+}
+
+.mnamecolor {
+    color: #FF5722; /* 색상 변경: 주황색으로 설정 */
+}
+
+.small-text {
+    font-size: 12px; /* 글자 크기 작게 설정 */
+}
 </style>
 
 <body>
@@ -147,9 +153,9 @@ $.ajax({
         $('#2').empty();
         for (let count = 0; count < data.length; count++) {
             if (count < 3) {
-                str1 += '<div class="vertical-container"><div><strong class="rank">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px" ></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><strong>'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
+                str1 += '<div class="vertical-container"><div><strong class="rank">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px" ></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
             } else if (count >= 3 && count < 7) {
-            	 str2 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><strong>'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
+            	 str2 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
             }
         }
         $('#1').append(str1);
@@ -199,13 +205,13 @@ $(document)
                 $('#4').empty();
                 for (let count = 0; count < data.length; count++) {
                     if (count < 3) {
-                    	 str1 += '<div class="vertical-container"><div><strong class="rank">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><strong>'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
+                    	 str1 += '<div class="vertical-container"><div><strong class="rank">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
                     } else if (count >= 3 && count < 7) {
-                    	 str2 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><strong>'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
+                    	 str2 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
                     } else if (count >= 7 && count < 11) {
-                    	 str3 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><strong>'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
+                    	 str3 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
                     } else if (count >= 11 && count < 15) {
-                    	 str4 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><strong>'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
+                    	 str4 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
                     }
                 }
                 $('#1').append(str1);
@@ -232,13 +238,13 @@ $(document)
 			        $('#4').empty();
 			        for (let count = 0; count < data.length; count++) {
 			            if (count < 3) {
-			            	 str1 += '<div class="vertical-container"><div><strong class="rank">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><strong>'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span><a href="asd">예매</a</span></div></div>';
-			            } else if (count >= 3 && count < 7) {
-			            	 str2 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><strong>'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
+			            	 str1 += '<div class="vertical-container"><div><strong class="rank">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';			            
+			           	} else if (count >= 3 && count < 7) {
+			            	 str2 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';			            
 			            } else if (count >= 7 && count < 11) {
-			            	 str3 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><strong>'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
+			            	 str3 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';			            
 			            } else if (count >= 11 && count < 15) {
-			            	 str4 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><strong>'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
+			            	 str4 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
 			            }
 			        }
 			        $('#1').append(str1);
@@ -275,10 +281,8 @@ $(document)
                 $('#4').empty();
                 for (let count = 0; count < data.length; count++) {
                     if (count < 3) {
-                    	 str1 += '<div class="vertical-container"><div><strong class="rank">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><strong>'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
-                    } else if (count >= 3 && count < 7) {
-                    	 str2 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><strong>'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
-                    }
+                    	 str1 += '<div class="vertical-container"><div><strong class="rank">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';                    } else if (count >= 3 && count < 7) {
+                    	 str2 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';                    }
                 }
                 $('#1').append(str1);
                 $('#2').append(str2);
@@ -302,10 +306,9 @@ $(document)
 			        $('#4').empty();
 			        for (let count = 0; count < data.length; count++) {
 			            if (count < 3) {
-			            	 str1 += '<div class="vertical-container"><div><strong class="rank">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><strong>'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
+			            	 str1 += '<div class="vertical-container"><div><strong class="rank">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';			            
 			            } else if (count >= 3 && count < 7) {
-			            	 str2 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><strong>'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
-			            }
+			            	 str2 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';			            }
 			        }
 			        $('#1').append(str1);
 			        $('#2').append(str2);
@@ -331,10 +334,10 @@ function loadchart(){
 	        $('#2').empty();
 	        for (let count = 0; count < data.length; count++) {
 	            if (count < 3) {
-	                str1 += '<div class="vertical-container"><div><strong class="rank">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px" ></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><strong>'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
-	            } else if (count >= 3 && count < 7) {
-	            	 str2 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><strong>'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
-	            }
+	                str1 += '<div class="vertical-container"><div><strong class="rank">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px" ></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
+	                } else if (count >= 3 && count < 7) {
+	            	 str2 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';			            
+	            	}
 	        }
 	        $('#1').append(str1);
 	        $('#2').append(str2);
