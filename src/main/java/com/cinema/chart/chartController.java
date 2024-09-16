@@ -30,7 +30,11 @@ public String test() {
 @GetMapping("/chartList1")
 public String chartList1(HttpServletRequest req, Model model) {
 	HttpSession session = req.getSession();
+	String userId = (String)session.getAttribute("uid");
 	int id = Integer.parseInt(req.getParameter("id"));
+	
+	chartPutCommentDTO movieReview = cpcdao.selectMovieReview(userId, id);
+	
 	session.setAttribute("dataId", id);
 	System.out.println("id"+id);
 	
@@ -38,12 +42,14 @@ public String chartList1(HttpServletRequest req, Model model) {
 	model.addAttribute("chartList2",archart);
 	chartDTO putchart = cdao.chartList3(id);
 	model.addAttribute("chartList3", putchart);
-	ArrayList<chartappearanceinfoDTO> putinfoprod =cainfodao.chartappearanceinfo(String.valueOf(id));
-	model.addAttribute("cainfoprod", putinfoprod);
-	ArrayList<chartappearanceinfoDTO> putinfoactor =cainfodao.chartappearanceinfo1(String.valueOf(id));
-	model.addAttribute("cainfoactor", putinfoactor);
+//	ArrayList<chartappearanceinfoDTO> putinfoprod =cainfodao.chartappearanceinfo(String.valueOf(id));
+//	model.addAttribute("cainfoprod", putinfoprod);
+//	ArrayList<chartappearanceinfoDTO> putinfoactor =cainfodao.chartappearanceinfo1(String.valueOf(id));
+//	model.addAttribute("cainfoactor", putinfoactor);
 	int countreview = cpcdao.count(String.valueOf(id));
 	model.addAttribute("countreview",countreview);
+	model.addAttribute("movieReview", movieReview);
+	model.addAttribute("movieAverageRate", cpcdao.selectMovieAverageRate(id));
 	return "chart/chartList1";
 }
 @PostMapping("/chartList")//무비 차트 정렬시키는것
@@ -134,6 +140,7 @@ public String insertselectcomment(HttpServletRequest req, Model model) {
 		jo.put("writer",cpcdto.getWriter());
 		jo.put("created_at", cpcdto.getCreated_at());
 		jo.put("customer_uid",cpcdto.getCustomer_uid());
+		jo.put("rate",cpcdto.getRate());
 		ja.put(jo);
 	}
 	return ja.toString(); 
@@ -144,23 +151,27 @@ public String insertselectcomment(HttpServletRequest req, Model model) {
 @ResponseBody 
 public String update (HttpServletRequest req, Model model) {
 	int moviechart = Integer.parseInt(req.getParameter("moviechart"));
-	
+
 	String content = req.getParameter("content");
-	
+
 	String writer = req.getParameter("writer");
 	String uid = req.getParameter("uid");
-	cpcdao.putcomment(moviechart, content, writer,uid);
+	int rate = Integer.parseInt(req.getParameter("rate"));
+	cpcdao.putcomment(moviechart, content, writer,uid, rate);
 	return "ok";
 }
 //리뷰 수정
 @PostMapping("/updatereview")
 @ResponseBody
 public String updatereview (HttpServletRequest req, Model model) {
+	HttpSession session = req.getSession();
+	String userId = (String)session.getAttribute("uid");
 	int id = Integer.parseInt(req.getParameter("id"));
-	
+	int rate = Integer.parseInt(req.getParameter("rate"));
+
 	String content = req.getParameter("content");
-	
-	cpcdao.updatereview(id, content);
+
+	cpcdao.updatereview(id, content, rate, userId);
 	return "ok";
 }
 //리뷰 삭제

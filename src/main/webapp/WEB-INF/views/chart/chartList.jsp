@@ -110,7 +110,12 @@ a {
 <div class="vertical-container4"> 
 	<div class="vertical-container1">
 		<div><h1>무비차트</h1></div>
-		<div class="button-container"><select size=1 style="width:100px;height:30px;" id="chartArray"></select><button id="list">Go</button></div>
+		<div class="button-container">
+			<select size=1 style="width:100px;height:30px;" id="sortCriteria">
+                <option value="releasedate desc">최신순</option>
+                <option value="reservation desc">예매율순</option>
+            </select>
+            <button id="list">Go</button></div>
 	    <div class="vertical-container">
 	        <div class="vertical-container">
 	            <ol id="1">
