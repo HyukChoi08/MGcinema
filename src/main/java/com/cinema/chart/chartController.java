@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -52,23 +53,37 @@ public String chartList1(HttpServletRequest req, Model model) {
 	model.addAttribute("movieAverageRate", cpcdao.selectMovieAverageRate(id));
 	return "chart/chartList1";
 }
+/*@RequestParam ( value = "front에서 보낸 parameter 명", required=필수값인지 defaultValue = 기본값 ) 변수타입 변수명*/
 @PostMapping("/chartList")//무비 차트 정렬시키는것
 @ResponseBody
-public String chartList() {
-	ArrayList<chartDTO> ar = cdao.chartList();
-	
+public String chartList(
+		@RequestParam(value = "selectedSortCriteria", required = false) String sortCriteria,
+		@RequestParam(value = "pageSize", required = false) Integer pageSize,
+		@RequestParam(value = "pageNumber", required = false, defaultValue = "0") int  pageNumber
+) {
+		pageNumber = getStartPageNumber(pageNumber, pageSize);
+
+	ArrayList<chartDTO> movieList = cdao.chartList(sortCriteria, pageSize, pageNumber);
+
 	JSONArray ja = new JSONArray();
-	for(chartDTO cdto : ar) {
+	for(chartDTO cdto : movieList) {
 		JSONObject jo =new JSONObject();
 		jo.put("id", cdto.getId());
 		jo.put("imagepath",cdto.getImagepath());
 		jo.put("reservation",cdto.getReservation());
 		jo.put("mname", cdto.getMname());
 		jo.put("releasedate", cdto.getReleasedate());
-				
+
 		ja.put(jo);
 	}
 	return ja.toString();
+}
+public int getStartPageNumber(int pageNumber, int pageSize) {
+	if (pageNumber == 0) {
+		return 0;
+	} else {
+		return 7 + ((pageNumber-1) * pageSize);
+	}
 }
 
 @PostMapping("/chartArray")//select의 option넣는것
