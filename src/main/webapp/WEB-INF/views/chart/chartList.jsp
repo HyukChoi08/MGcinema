@@ -116,7 +116,7 @@ a {
                 <option value="reservation desc">예매율순</option>
             </select>
             <button id="list">Go</button></div>
- <div class="vertical-container1" id="movieList">
+ 		<div class="vertical-container1" id="movieList">
         </div>
         <div class="vertical-container">
             <div class="vertical-container">
@@ -178,12 +178,12 @@ $(document)
                                         '<div>' +
                                             '<strong class="rank">No.'+(count+1)+'</strong>' +
                                             '<li>' +
-                                            '<a href="movieDetail?id='+data[count]['id']+'">' +
+                                            '<a href="chartList1?id='+data[count]['id']+'">' +
                                             '<img src=' + data[count]['imagepath'] +' height="400px" width="200px" ></a>' +
                                             '</li>' +
                                         '</div>' +
                                         '<div>' +
-                                            '<a href="movieDetail?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br>' +
+                                            '<a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br>' +
                                             '<div>' +
                                             '<strong>예매율<span>'+data[count]['reservation']+'%</span></strong>' +
                                             '</div>' +
@@ -204,7 +204,7 @@ $(document)
                         }
                         str1 += '<div class="vertical-container">' +
                             '<div><strong class="rank2">' +
-                            'No.'+(count+1)+'</strong><li><a href="movieDetail?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="movieDetail?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><strong>'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span>' +
+                            'No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><strong>'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span>' +
                             '<a href="/ticket?mname=' + data[count]['mname'] + '">예매</a></span>' +
                             '</div>' +
                             '</div>';
@@ -252,7 +252,7 @@ function addAllRestMovies(){
                 if (count == 0 || (count % 4 == 0)) {
                     str1 += '<ol>'
                 }
-                str1 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+8)+'</strong><li><a href="movieDetail?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="movieDetail?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><strong>'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span>' +
+                str1 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+8)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><strong>'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span>' +
                     '<a href="/ticket?mname=' + data[count]['mname'] + '">예매</a></span></div>' +
                     '</div>';
                 if (count == 3 || count % 4 == 3) {
