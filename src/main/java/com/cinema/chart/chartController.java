@@ -53,6 +53,22 @@ public String chartList1(HttpServletRequest req, Model model) {
 	model.addAttribute("movieAverageRate", cpcdao.selectMovieAverageRate(id));
 	return "chart/chartList1";
 }
+@GetMapping("/AverageRate")
+@ResponseBody
+public String Averagerate(HttpServletRequest req, Model model) {
+	HttpSession session = req.getSession();
+	int id = Integer.parseInt(req.getParameter("id"));
+	System.out.println("what?"+id);
+	double AverageRate =cpcdao.selectMovieAverageRate(id);
+	return String.valueOf(AverageRate);
+}
+
+
+private String AverageRate() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
 /*@RequestParam ( value = "front에서 보낸 parameter 명", required=필수값인지 defaultValue = 기본값 ) 변수타입 변수명*/
 @PostMapping("/chartList")//무비 차트 정렬시키는것
 @ResponseBody

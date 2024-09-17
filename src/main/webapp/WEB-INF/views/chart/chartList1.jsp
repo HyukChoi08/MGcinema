@@ -166,7 +166,7 @@ color:black;
                                 <dt>배우 :&nbsp;${chartList3.cast}</dt>
                                 <dt>장르 :&nbsp;${chartList3.genre}/관람가:&nbsp;${chartList3.age}/상영시간:&nbsp;${chartList3.runningtime}</dt>
                                 <dt>개봉일:&nbsp;${chartList3.releasedate}</dt>
-                                <dt>평점:&nbsp;${movieAverageRate}</dt>
+                                <div id="movieAverageRate"></div>
                             </dl>
                         </div>
                     </div>
@@ -280,6 +280,7 @@ color:black;
             $('#reservation').append(str);
         }
     }) */
+
     $.ajax({
     	url:'/updatereservation',
     	type:'post',
@@ -288,22 +289,6 @@ color:black;
     		console.log("update",data)
     	}
     })
-        //commentArray select에 넣는것
-        $.ajax({
-            url: '/commentArray',
-            type: 'post',
-            data: {},
-            dataType: "json",
-            success: function(data) {
-                console.log(data);
-                let str = '';
-                for(let i = 0; i < data.length; i++) {
-                    str += '<option value="'+data[i]['id']+'">'+data[i]['text']+'</option>';
-                }
-                $('#commentArray').append(str);
-            }
-        });
-
         $(document)
             .on('click', '#putcomment', function() { //리뷰 인서트
                 let chartId = $('#addtextarea').data('id');
@@ -331,6 +316,7 @@ color:black;
                             $('#reviewcomment').val('');
                             $('#idname').val('');
                             loadreview();
+                            AverageRate();
                             
                         }
                     });
@@ -377,6 +363,7 @@ color:black;
                     success: function(data) {
                         console.log(data);
                         loadreview();
+                        AverageRate();
                     }
                 });
             })
@@ -390,6 +377,7 @@ color:black;
                     success: function(data) {
                         console.log(data);
                         loadreview();
+                        AverageRate();
                     }
                 });
             });
@@ -424,6 +412,19 @@ color:black;
             $('#movieinfo').hide();
             $('#appearinfo').show();
         });
+        function AverageRate(){
+            $.ajax({
+            	url:'/AverageRate',
+            	type:'get',
+            	data:{id:'${chartList3.id}'},
+            	success:function(data){
+            		$('#movieAverageRate').empty();
+            		let str = '평점:'+ parseFloat(data);
+            		console.log("rate",str);
+            		$('#movieAverageRate').append(str);
+            	}
+            });
+        }
         function loadreview(page = 1) {
             $.ajax({
                 url: '/insertselectcomment',
@@ -486,6 +487,7 @@ color:black;
         // 페이지 로드 시 첫 페이지 댓글 로드
         $(document).ready(function() {
         	loadreview();
+        	AverageRate();
         });
         
     </script>
