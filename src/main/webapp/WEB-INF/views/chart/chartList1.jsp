@@ -218,7 +218,7 @@ color:black;
                                     </c:if>
                                 </div>
                             </div>
-                          <!--   <select size="1" style="width:100px;height:30px;" id="commentArray">
+<!--                             <select size="1" style="width:100px;height:30px;" id="commentArray">
                                 <option value="releasedate desc">최신순</option>
                                 <option value="rating desc">평점순</option>
                             </select>
@@ -235,8 +235,8 @@ color:black;
                 </div>
             </div>
         </div>
-    <%-- </c:forEach> --%>
-<%--     <div id="appearinfo">
+ <%--    <%-- </c:forEach> --%>
+    <div id="appearinfo">
     <div style="display:flex;">
     <ul class="vertical-container">
     <li>
