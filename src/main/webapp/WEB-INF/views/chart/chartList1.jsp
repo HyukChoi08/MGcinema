@@ -218,11 +218,11 @@ color:black;
                                     </c:if>
                                 </div>
                             </div>
-                            <select size="1" style="width:100px;height:30px;" id="commentArray">
+                          <!--   <select size="1" style="width:100px;height:30px;" id="commentArray">
                                 <option value="releasedate desc">최신순</option>
                                 <option value="rating desc">평점순</option>
                             </select>
-                            <button id="comment">Go</button>
+                            <button id="comment">Go</button> -->
                             <div>
                                 <ul id="commentList" class="comment-list-container"></ul>
                             </div>
@@ -236,7 +236,7 @@ color:black;
             </div>
         </div>
     <%-- </c:forEach> --%>
-    <div id="appearinfo">
+<%--     <div id="appearinfo">
     <div style="display:flex;">
     <ul class="vertical-container">
     <li>
@@ -255,7 +255,7 @@ color:black;
     </li>
     </ul>
     </div>
-    </div>
+    </div> --%>
     </div>
     <%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
 
@@ -456,10 +456,10 @@ color:black;
                         console.log("uid = " + uid);
                         console.log("pageData[i]['customer_uid'] = " + pageData[i]['customer_uid']);
                         if (uid == pageData[i]['customer_uid']) {
-                            str += '<li><div><ul><li id="reviewWriter" value="' + pageData[i]['id'] + '">' + pageData[i]['writer'] + '</li><li>'+pageData[i]['rate']+'</li><li>' + pageData[i]['created_at'] + '</li></ul></div><div>' +
+                            str += '<li><div><ul><li id="reviewWriter" value="' + pageData[i]['id'] + '">' + pageData[i]['writer'] + '</li><li>평점:'+pageData[i]['rate']+'</li><li>' + pageData[i]['created_at'] + '</li></ul></div><div>' +
                                 '<p>' + pageData[i]['content'] + '</p></div><button class="reviewupdete" data-content="' + pageData[i]['content'] + '" data-rate="' + pageData[i]['rate'] + '"><img src="/chartImage/더보기3.jpg"></button>';
                         } else {
-                            str += '<li><div><ul><li id="reviewWriter" value="' + pageData[i]['id'] + '">' + pageData[i]['writer'] + '</li><li>'+pageData[i]['rate']+'</li><li>' + pageData[i]['created_at'] + '</li></ul></div><div><p>' + pageData[i]['content'] + '</p></div>';
+                            str += '<li><div><ul><li id="reviewWriter" value="' + pageData[i]['id'] + '">' + pageData[i]['writer'] + '</li><li>평점:'+pageData[i]['rate']+'</li><li>' + pageData[i]['created_at'] + '</li></ul></div><div><p>' + pageData[i]['content'] + '</p></div>';
                         }
 
                         str += '</li>';
