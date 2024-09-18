@@ -110,27 +110,24 @@ a {
 <div class="vertical-container4"> 
 	<div class="vertical-container1">
 		<div><h1>무비차트</h1></div>
-		<div class="button-container"><select size=1 style="width:100px;height:30px;" id="chartArray"></select><button id="list">Go</button></div>
-	    <div class="vertical-container">
-	        <div class="vertical-container">
-	            <ol id="1">
-	            </ol>
-	        </div>
-	        <div class="vertical-container">
-	            <ol id="2">
-	            </ol>
-	        </div>
-	    </div>
-	        <div class="vertical-container">
-	        <div class="vertical-container">
-	            <ol id="3">
-	            </ol>
-	        </div>
-	        <div class="vertical-container">
-	            <ol id="4">
-	            </ol>
-	        </div>
-	    </div>
+		<div class="button-container">
+			<select size=1 style="width:100px;height:30px;" id="sortCriteria" onchange="changeEventOfSortFilter()">
+                <option value="releasedate desc">최신순</option>
+                <option value="reservation desc">예매율순</option>
+            </select>
+            <button id="list">Go</button></div>
+ 		<div class="vertical-container1" id="movieList">
+        </div>
+        <div class="vertical-container">
+            <div class="vertical-container">
+                <ol id="3">
+                </ol>
+            </div>
+            <div class="vertical-container">
+                <ol id="4">
+                </ol>
+            </div>
+        </div>
 	    <div class="button-container"><button class="button-container button" id="plus">더보기</button></div>
 	</div>
 </div>
@@ -139,211 +136,140 @@ a {
 
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
-// 차트 보이게하는거
-$.ajax({
-    url: '/chartList',
-    type: 'post',
-    data: {},
-    dataType: "json",
-    success: function(data) {
-        console.log(data);
-        let str1 = '';
-        let str2 = '';
-        $('#1').empty();
-        $('#2').empty();
-        for (let count = 0; count < data.length; count++) {
-            if (count < 3) {
-                str1 += '<div class="vertical-container"><div><strong class="rank">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px" ></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
-            } else if (count >= 3 && count < 7) {
-            	 str2 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
-            }
-        }
-        $('#1').append(str1);
-        $('#2').append(str2);
-    }
-});
-//chartArray select에 넣는것
-$.ajax({
-	    url: '/chartArray',
-	    type: 'post',
-	    data: {},
-	    dataType: "json",
-	    success: function(data) {
-	        console.log(data);
-	    let str=''
-	    for(let i = 0;i<data.length;i++){
-	    str += '<option value="'+data[i]['id']+'">'+data[i]['text']+'</option>'	
-	    }
-	    $('#chartArray').append(str);
-	    }
-	        
-	    })
+let isSelectedSortCriteriaChanged = false;
+let pageNumber = 0;
+
+
 	    // 더보기를 눌러서 차트 다시보이게 하는거
 $(document)
 .on('click','#plus',function(){
-    // select 요소를 가져옵니다.
-    let selectElement = document.getElementById('chartArray');
-
-    // 선택된 옵션의 id를 가져옵니다.
-    let selectedOptionId = selectElement.options[selectElement.selectedIndex].value;
-	console.log("id",selectedOptionId);
-    if (selectedOptionId == 1) {
-        $.ajax({
-            url: '/chartList',
-            type: 'post',
-            data: {},
-            dataType: "json",
-            success: function(data) {
-                console.log(data);
-                let str1 = '';
-                let str2 = '';
-                let str3 = '';
-                let str4 = '';
-                $('#1').empty();
-                $('#2').empty();
-                $('#3').empty();
-                $('#4').empty();
-                for (let count = 0; count < data.length; count++) {
-                    if (count < 3) {
-                    	 str1 += '<div class="vertical-container"><div><strong class="rank">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
-                    } else if (count >= 3 && count < 7) {
-                    	 str2 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
-                    } else if (count >= 7 && count < 11) {
-                    	 str3 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
-                    } else if (count >= 11 && count < 15) {
-                    	 str4 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
-                    }
-                }
-                $('#1').append(str1);
-                $('#2').append(str2);
-                $('#3').append(str3);
-                $('#4').append(str4);
-            }
-        });
-		}else if(selectedOptionId == 2){
-			$.ajax({
-			    url: '/chartList11',
-			    type: 'post',
-			    data: {},
-			    dataType: "json",
-			    success: function(data) {
-			        console.log(data);
-			        let str1 = '';
-			        let str2 = '';
-			        let str3 = '';
-			        let str4 = '';
-			        $('#1').empty();
-			        $('#2').empty();
-			        $('#3').empty();
-			        $('#4').empty();
-			        for (let count = 0; count < data.length; count++) {
-			            if (count < 3) {
-			            	 str1 += '<div class="vertical-container"><div><strong class="rank">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';			            
-			           	} else if (count >= 3 && count < 7) {
-			            	 str2 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';			            
-			            } else if (count >= 7 && count < 11) {
-			            	 str3 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';			            
-			            } else if (count >= 11 && count < 15) {
-			            	 str4 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
-			            }
-			        }
-			        $('#1').append(str1);
-			        $('#2').append(str2);
-			        $('#3').append(str3);
-			        $('#4').append(str4);
-			    }
-			});
-		}
+    if(isSelectedSortCriteriaChanged) {
+        firstLoadMovieList();
+    } else {
+        addAllRestMovies();
+    }
 })
 //go버튼을 눌렀을 때의 화면
 .on('click', '#list', function() {
-    // select 요소를 가져옵니다.
-    let selectElement = document.getElementById('chartArray');
-
-    // 선택된 옵션의 id를 가져옵니다.
-    let selectedOptionId = selectElement.options[selectElement.selectedIndex].value;
-	console.log("id",selectedOptionId);
-    if (selectedOptionId == 1) {
+            firstLoadMovieList();
+        })
+    function firstLoadMovieList(){
+        $('#movieList').empty();
         $.ajax({
             url: '/chartList',
             type: 'post',
-            data: {},
+            data: {pageSize:7,selectedSortCriteria:$("#sortCriteria").val()},
             dataType: "json",
             success: function(data) {
-                console.log(data);
+                pageNumber = 1;
+                isSelectedSortCriteriaChanged = false;
+
                 let str1 = '';
-                let str2 = '';
-                let str3 = '';
-                let str4 = '';
                 $('#1').empty();
                 $('#2').empty();
-                $('#3').empty();
-                $('#4').empty();
                 for (let count = 0; count < data.length; count++) {
-                    if (count < 3) {
-                    	 str1 += '<div class="vertical-container"><div><strong class="rank">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';                    } else if (count >= 3 && count < 7) {
-                    	 str2 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';                    }
+                    let isFirstLine = count < 3;
+                    if (isFirstLine) {
+                        if (count == 0) {
+                            str1 += '<ol>'
+                        }
+
+                        str1 += '<div class="vertical-container">' +
+                                        '<div>' +
+                                            '<strong class="rank">No.'+(count+1)+'</strong>' +
+                                            '<li>' +
+                                            '<a href="chartList1?id='+data[count]['id']+'">' +
+                                            '<img src=' + data[count]['imagepath'] +' height="400px" width="200px" ></a>' +
+                                            '</li>' +
+                                        '</div>' +
+                                        '<div>' +
+                                            '<a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br>' +
+                                            '<div>' +
+                                            '<strong>예매율<span>'+data[count]['reservation']+'%</span></strong>' +
+                                            '</div>' +
+                                            '<span><strong>'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span>' +
+                            '<a href="/ticket?mname=' + data[count]['mname'] + '">예매</a></span>'
+                            +
+                                        '</div>' +
+                                '</div>';
+
+                        if (count == 2) {
+                            str1 += '</ol>'
+                        }
+
+
+                    } else {
+                        if (count % 4 == 3) {
+                            str1 += '<ol>'
+                        }
+                        str1 += '<div class="vertical-container">' +
+                            '<div><strong class="rank2">' +
+                            'No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><strong>'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span>' +
+                            '<a href="/ticket?mname=' + data[count]['mname'] + '">예매</a></span>' +
+                            '</div>' +
+                            '</div>';
+                        if (count % 4 == 2) {
+                            str1 += '</ol>'
+                        }
+                    }
                 }
-                $('#1').append(str1);
-                $('#2').append(str2);
+
+                $('#movieList').append(str1);
+                
+                /*
+                * 
+                * <div class="vertical-container">
+                    <ol id="1">
+                    </ol>
+                </div>
+                <div class="vertical-container">
+                    <ol id="2">
+                    </ol>
+                </div>
+                * 
+                * 
+                * 
+                * */
             }
         });
-		}else if(selectedOptionId == 2){
-			$.ajax({
-			    url: '/chartList11',
-			    type: 'post',
-			    data: {},
-			    dataType: "json",
-			    success: function(data) {
-			        console.log(data);
-			        let str1 = '';
-			        let str2 = '';
-			        let str3 = '';
-			        let str4 = '';
-			        $('#1').empty();
-			        $('#2').empty();
-			        $('#3').empty();
-			        $('#4').empty();
-			        for (let count = 0; count < data.length; count++) {
-			            if (count < 3) {
-			            	 str1 += '<div class="vertical-container"><div><strong class="rank">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';			            
-			            } else if (count >= 3 && count < 7) {
-			            	 str2 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';			            }
-			        }
-			        $('#1').append(str1);
-			        $('#2').append(str2);
-			    }
-			});
-		}
-
-	
-
-	
-})
-function loadchart(){
-	$.ajax({
-	    url: '/chartList',
-	    type: 'post',
-	    data: {},
-	    dataType: "json",
-	    success: function(data) {
-	        console.log(data);
-	        let str1 = '';
-	        let str2 = '';
-	        $('#1').empty();
-	        $('#2').empty();
-	        for (let count = 0; count < data.length; count++) {
-	            if (count < 3) {
-	                str1 += '<div class="vertical-container"><div><strong class="rank">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px" ></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';
-	                } else if (count >= 3 && count < 7) {
-	            	 str2 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div class="small-text"><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span class="small-text"><strong>'+data[count]['releasedate']+'<span class="small-text">개봉</span></strong></span><br><span><a href="asd">예매</a></span></div></div>';			            
-	            	}
-	        }
-	        $('#1').append(str1);
-	        $('#2').append(str2);
-	    }
-	});
+    }
+    
+function addAllRestMovies(){
+    let selectedSortCriteria = $("#sortCriteria").val();
+    $.ajax({
+        url: '/chartList',
+        type: 'post',
+        data: {selectedSortCriteria:selectedSortCriteria, pageSize:2000, pageNumber},
+        dataType: "json",
+        success: function(data) {
+            $("#plus").hide();
+            let str1 = '';
+            $('#1').empty();
+            $('#2').empty();
+            $('#3').empty();
+            $('#4').empty();
+            for (let count = 0; count < data.length; count++) {
+                if (count == 0 || (count % 4 == 0)) {
+                    str1 += '<ol>'
+                }
+                str1 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+8)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><strong>'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span>' +
+                    '<a href="/ticket?mname=' + data[count]['mname'] + '">예매</a></span></div>' +
+                    '</div>';
+                if (count == 3 || count % 4 == 3) {
+                    str1 += '</ol>'
+                }
+            }
+            $('#movieList').append(str1);
+        }
+    });
 }
+
+function changeEventOfSortFilter(){
+    isSelectedSortCriteriaChanged = true;
+    pageNumber = 0;
+    $("#plus").show();
+}
+
 function updaterenewal(){
 	$.ajax({
 		url:'/updaterenewal',
@@ -354,9 +280,9 @@ function updaterenewal(){
 		}
 	});
 }
-$(document).ready(function() {
-	loadchart();
-	updaterenewal();
+$(document).ready(function () {
+    firstLoadMovieList();
+    updaterenewal();
 });
 </script>
 </html>

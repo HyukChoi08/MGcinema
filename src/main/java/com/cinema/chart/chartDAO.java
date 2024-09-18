@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface chartDAO {
 
-ArrayList<chartDTO> chartList();
+ArrayList<chartDTO> chartList(String sortCriteria, int pageSize, int pageNumber);
 ArrayList<chartDTO> chartList1();
 String chartList2(int id); 
 chartDTO chartList3(int id);

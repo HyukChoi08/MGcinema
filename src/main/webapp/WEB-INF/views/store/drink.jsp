@@ -177,6 +177,7 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
     display: none; /* 기본적으로 숨김 */
 }
 .icon-overlay {
+    
     position: absolute;
     top: 50%; /* 이미지 상단에서 중앙 위치 */
     left: 50%; /* 이미지 왼쪽에서 중앙 위치 */
@@ -188,44 +189,45 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
     width: 60px;
     height: 60px;
     text-align: center;
-    line-height: 40px;
-    font-size: 24px;
+    line-height: 60px;
+    font-size: 30px;
     font-weight: bold;
 }
-        .hover-text {
+    .hover-text {
     display: none; /* 기본적으로 숨김 */
     position: absolute; /* 아이콘에 대해 절대 위치 */
-    bottom: -50px; /* 아이콘 위에 위치하도록 조정 */
+   
     left: 50%; /* 아이콘의 중앙 정렬 */
     transform: translateX(-50%); /* 수평 중앙 정렬 */
     background-color: rgba(0, 0, 0, 0.8); /* 반투명 배경 */
     color: white; /* 글자 색상 */
     padding: 5px; /* 텍스트 주변 여백 */
     border-radius: 5px; /* 둥근 모서리 */
-    font-size: 14px; /* 텍스트 크기 조정 */
+    font-size: 20px; /* 텍스트 크기 조정 */
     white-space: nowrap; /* 텍스트가 줄 바꿈되지 않도록 설정 */
     z-index: 20; /* 텍스트가 다른 요소 위에 위치하도록 설정 */
+    line-height: 24px; /* 텍스트 수직 정렬을 위한 높이 조정 */
 }
 .product:hover .icon-container {
     display: flex; /* 호버 시 아이콘 표시 */
 }
 
-.icon-left, .icon-center, .icon-right {
+.icon-left,.icon-right {
     background-color: rgba(255, 255, 255, 0.8); /* 밝은 배경색으로 변경 */
     color: black; /* 아이콘 색상 */
     border-radius: 50%;
-    width: 30px; /* 아이콘 크기 */
-    height: 30px; /* 아이콘 크기 */
+    width: 50px; /* 아이콘 크기 */
+    height: 50px; /* 아이콘 크기 */
     text-align: center; /* 아이콘 텍스트 중앙 정렬 */
-    line-height: 30px; /* 아이콘 텍스트 수직 중앙 정렬 */
-    font-size: 16px; /* 아이콘 텍스트 크기 */
+    line-height: 50px; /* 아이콘 텍스트 수직 중앙 정렬 */
+    font-size: 24px; /* 아이콘 텍스트 크기 */
     font-weight: bold; /* 아이콘 텍스트 굵게 */
 }
 .icon-container {
     position: absolute; /* 이미지 내부에 절대 위치로 배치 */
     width: 100%; /* 이미지의 전체 너비를 차지하도록 설정 */
     height: 100%; /* 이미지의 전체 높이를 차지하도록 설정 */
-    top: 0; /* 이미지 상단에 맞춤 */
+    top: -30px; /* 이미지 상단에 맞춤 */
     left: 0; /* 이미지 왼쪽에 맞춤 */
     display: flex; /* flexbox 레이아웃을 사용하여 아이콘 정렬 */
     justify-content: center; /* 아이콘을 중앙에 배치 */
@@ -247,7 +249,7 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
 .icon-item {
     position: relative; /* 텍스트를 아이콘에 맞게 배치하기 위해 */
     pointer-events: auto; /* 아이콘의 클릭을 가능하게 함 */
-    margin: 0 40px; /* 아이콘 사이의 간격을 조정합니다 (좌우 여백) */
+    margin: 0 20px; /* 아이콘 사이의 간격을 조정합니다 (좌우 여백) */
 }
 .category_title strong {
     padding-right: 50px; /* 버튼 너비만큼 여백을 추가하여 텍스트가 버튼에 겹치지 않게 함 */
@@ -290,7 +292,8 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
         <div id="contents">
             <div class="category_wrap">
                 <a href="/store" id="store-link">스토어</a>
-              <input type="hidden" id="userid" value="${uid}">         
+              <input type="hidden" id="userid" value="${uid}">
+              <input type="text" id="age">       
                 <div class="separator"></div> <!-- 선을 스토어 아래에 위치 -->
             </div>
             <div class="contegory_contents_wrap">
@@ -349,8 +352,47 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
 <script src="https://code.jquery.com/jquery-latest.js">
 </script>
 <script>
+function updateCartCount(customer_id) {
+    $.ajax({
+        url: '/countcart',
+        type: 'post',
+        data: { customer_id: customer_id },
+        dataType: 'text',
+        cache: false,
+        success: function(data) {
+            $('#cart-count').text(data);
+        }
+    });
+}
+
+
 $(document).ready(function() {
+
 	
+	$.ajax({
+	    url: '/storeage',
+	    type: 'POST',
+	    dataType: 'json', // 응답 데이터 형식을 JSON으로 지정
+	    success: function(data) {
+	        console.log(data);        
+	        // 데이터가 객체로 전달됨
+	        let birthday = data.birthday; // 필드명이 실제 JSON 데이터와 일치하는지 확인
+            console.log('Birthday:', birthday);
+	        	        
+            let birthYear = new Date(birthday).getFullYear();
+            console.log('Birth Year:', birthYear);
+            
+            // 현재 연도 추출
+            let currentYear = new Date().getFullYear();
+            console.log('Current Year:', currentYear);
+            
+            let age = currentYear - birthYear;
+            console.log(age);
+            $('#age').val(age);
+	                
+	    }
+	});
+					
 	 $('.product-info').each(function() {
          // Find the price elements within the current product
          var originalPrice = $(this).find('.original-price').text().replace('원', '').trim();
@@ -366,21 +408,7 @@ $(document).ready(function() {
  	let customer_id= $('#userid').val();
  	console.log(customer_id);
  	
-	 	function updateCartCount() {
-	        $.ajax({
-	            url: '/countcart',
-	            type: 'post',
-	            data: { customer_id: customer_id },
-	            dataType: 'text',
-	            cache: false, // 캐시 비활성화
-	            success: function(data) {
-	                $('#cart-count').text(data);
-	            }         
-	        })
-	    }
-	
-	    updateCartCount();
-	
+    updateCartCount(customer_id);
 	
 	//페이지가 로드될 때 강제로 새로고침
 	$(window).on('pageshow', function(event) {
@@ -422,20 +450,28 @@ $(document).ready(function() {
      }
  	 	 
      // 페이지 로드 시 카운트 업데이트
-     
-     
+       
     	     $('.icon-left').on('click', function(event) {
     	   
     	    console.log('Icon left clicked');
 
-    	    if (customer_id === '') {
-    	    	event.preventDefault(); // 기본 동작을 막습니다.
-    	        alert("로그인 후 이용해주세요");
-    	        return false;
-    	    }
+			 if (customer_id === '') {
+    	        
+    	        let  userConfirmed = confirm("로그인 페이지로 이동하시겠습니까?");
+    	                
+    	         if ( userConfirmed) {
+    	             // 로그인 페이지로 리다이렉트
+    	             window.location.href = '/login';
+    	             
+    	             return false;
+    	         }else{
+    	        	    return false;
+    	         } 
+    	        	
+    	     }
 
-    	    var $productItem = $(this).closest('li.product');
-    	    var item_id = $productItem.attr('id');
+    	    let $productItem = $(this).closest('li.product');
+    	    let item_id = $productItem.attr('id');
     	    console.log('Item ID:', item_id);
 
     	    let discountedPrice = $.trim($productItem.find('.discounted-price').text());
@@ -525,17 +561,42 @@ $(document).ready(function() {
 let selectedItems = []; // 전역 변수로 선언
 
 $('.buyButton').on('click', function(e) {
+	 e.preventDefault(); // 클릭 시 기본 동작 방지
    
     let item_id = $(this).closest('.product').attr('id');
     console.log('item_id:', item_id);
     
    let userid=$('#userid').val();
     
-    if (!userid) {
-        e.preventDefault(); // 클릭 시 기본 동작 방지
-        alert('로그인 후 이용해주세요.');
-        return;
-    }
+   if (userid === '') {
+       
+       let  userConfirmed = confirm("로그인 페이지로 이동하시겠습니까?");
+               
+        if ( userConfirmed) {
+            // 로그인 페이지로 리다이렉트
+            window.location.href = '/login';
+            
+            return false;
+        }else{
+       	    return false;
+        } 
+       	
+  	  }
+   		    
+	   	let productName = $(this).closest('.product').find('.product-name').text().trim();
+	   	console.log('Clicked product name:', productName);
+   		
+	   	let age=$('#age').val();
+	    if (productName === '맥주') {
+          if (age < 20) {
+             // 나이가 20세 이상일 때 구매를 허용
+             alert('20살 이상만 구매할 수 있습니다.');
+             return false;
+               
+          }
+	    }
+   
+   
               
     $.ajax({
         url: '/selectitem',

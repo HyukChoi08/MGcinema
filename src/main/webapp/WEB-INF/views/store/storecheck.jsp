@@ -20,14 +20,47 @@
 	<div id="successSave">
 		<p>${orderId}</p>
 		<p>${uid}</p>
-		<p>${itemname}</p>
+		<p id="itemname">${itemname}</p>
 		<p>${totalprice}</p>>
+		 <input type="hidden" id="select" value="${select}">
 
 	</div>
     <script>
+  
       main();
 
       async function main() {
+
+    	    const itemname = document.getElementById("itemname").textContent.trim();
+    	    console.log("itemname:", itemname);
+
+    	    // 문자열을 쉼표로 나누어 배열로 변환
+    	    const items = itemname.split(',').map(item => item.trim());
+    	    console.log("items:", items); // 배열의 내용 확인
+
+    	    // 배열의 첫 번째 항목만 추출
+    	    const firstItem = items[0];
+    	    console.log("First Item:", firstItem);
+
+    	    // 나머지 상품들을 추출
+    	    const remainingItems = items.slice(1).map(item => item.trim()).join(', ');
+    	    console.log("Remaining Items:", remainingItems); // 나머지 항목 확인
+
+    	    // orderName 설정
+    	    let orderName;
+    	    if (remainingItems.trim().length > 0) {
+    	        orderName = firstItem + " + 그 외의 상품";
+    	    } else {
+    	        orderName = firstItem;
+    	    }
+    	    console.log("Order Name:", orderName);
+    	        	    
+    	    const select = document.getElementById("select").value.trim();
+    	    console.log("select:", select);
+    	    
+    	    
+    	    
+    	  
     	  const button = document.getElementById("payment-button");
     	  const clientKey = "test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm";
     	  const tossPayments = TossPayments(clientKey);
@@ -53,12 +86,13 @@
     	  button.addEventListener("click", async function () {
     	    await widgets.requestPayment({
     	      orderId: "${orderId}",
-    	      orderName: "${itemname} ",
+    	      orderName: orderName,
     	      successUrl: window.location.origin + "/storesuccess?orderId=" + encodeURIComponent("${orderId}") +
     	                  "&uid=" + encodeURIComponent("${uid}") +
 	  	                  "&itemname=" + encodeURIComponent("${itemname}") +
     	                  "&totalprice=" + encodeURIComponent("${totalprice}")+
-    	                  "&source=" + encodeURIComponent("${source}"), // source 추가
+    	                  "&source=" + encodeURIComponent("${source}")+// source 추가
+    	                  "&select=" + encodeURIComponent("${select}"),
     	  
     	      failUrl: window.location.origin + "/storefail",
     	      customerEmail: "${email}",
