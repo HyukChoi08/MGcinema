@@ -268,23 +268,24 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
     width: 60px;
     height: 60px;
     text-align: center;
-    line-height: 40px;
-    font-size: 24px;
+    line-height: 60px;
+    font-size: 30px;
     font-weight: bold;
 }
-        .hover-text {
+    .hover-text {
     display: none; /* 기본적으로 숨김 */
     position: absolute; /* 아이콘에 대해 절대 위치 */
-    bottom: -50px; /* 아이콘 위에 위치하도록 조정 */
+   
     left: 50%; /* 아이콘의 중앙 정렬 */
     transform: translateX(-50%); /* 수평 중앙 정렬 */
     background-color: rgba(0, 0, 0, 0.8); /* 반투명 배경 */
     color: white; /* 글자 색상 */
     padding: 5px; /* 텍스트 주변 여백 */
     border-radius: 5px; /* 둥근 모서리 */
-    font-size: 14px; /* 텍스트 크기 조정 */
+    font-size: 20px; /* 텍스트 크기 조정 */
     white-space: nowrap; /* 텍스트가 줄 바꿈되지 않도록 설정 */
     z-index: 20; /* 텍스트가 다른 요소 위에 위치하도록 설정 */
+    line-height: 24px; /* 텍스트 수직 정렬을 위한 높이 조정 */
 }
 .product:hover .icon-container {
     display: flex; /* 호버 시 아이콘 표시 */
@@ -294,18 +295,18 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
     background-color: rgba(255, 255, 255, 0.8); /* 밝은 배경색으로 변경 */
     color: black; /* 아이콘 색상 */
     border-radius: 50%;
-    width: 30px; /* 아이콘 크기 */
-    height: 30px; /* 아이콘 크기 */
+    width: 50px; /* 아이콘 크기 */
+    height: 50px; /* 아이콘 크기 */
     text-align: center; /* 아이콘 텍스트 중앙 정렬 */
-    line-height: 30px; /* 아이콘 텍스트 수직 중앙 정렬 */
-    font-size: 16px; /* 아이콘 텍스트 크기 */
+    line-height: 50px; /* 아이콘 텍스트 수직 중앙 정렬 */
+    font-size: 24px; /* 아이콘 텍스트 크기 */
     font-weight: bold; /* 아이콘 텍스트 굵게 */
 }
 .icon-container {
     position: absolute; /* 이미지 내부에 절대 위치로 배치 */
     width: 100%; /* 이미지의 전체 너비를 차지하도록 설정 */
     height: 100%; /* 이미지의 전체 높이를 차지하도록 설정 */
-    top: 0; /* 이미지 상단에 맞춤 */
+    top: -30px; /* 이미지 상단에 맞춤 */
     left: 0; /* 이미지 왼쪽에 맞춤 */
     display: flex; /* flexbox 레이아웃을 사용하여 아이콘 정렬 */
     justify-content: center; /* 아이콘을 중앙에 배치 */
@@ -328,7 +329,8 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
 .icon-item {
     position: relative; /* 텍스트를 아이콘에 맞게 배치하기 위해 */
     pointer-events: auto; /* 아이콘의 클릭을 가능하게 함 */
-    margin: 0 40px; /* 아이콘 사이의 간격을 조정합니다 (좌우 여백) */
+    margin: 0 20px; /* 아이콘 사이의 간격을 조정합니다 (좌우 여백) */
+    
 }
 .category_title strong {
     padding-right: 50px; /* 버튼 너비만큼 여백을 추가하여 텍스트가 버튼에 겹치지 않게 함 */
@@ -370,6 +372,7 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
     text-decoration: none; /* 링크의 밑줄 제거 */
     color: inherit; /* 부모 요소의 색상 상속 */
 }
+
  
     </style>
 </head>
@@ -397,16 +400,13 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
             </div>
             <div class="separator1"></div> <!-- 선을 contegory_contents_wrap 아래에 위치 -->
             <div class="category_product_wrap">
-                <ul class="product_list">
-                
-                    <li class="li1">
-                    
+                <ul class="product_list">           
+                    <li class="li1">                   
                         <strong class="category_title">패키지<br>
                             <a href="/package" class="circle-button">+</a>
                         </strong> 
                         <div class="separator2"></div>
-                        <ul class="category_inner">
-                        	
+                        <ul class="category_inner">                      	
                         	<c:forEach items="${arStore}" var="Store">
 	                            <li class="product" id="${Store.id}">
 	                                <a href="/details?id=${Store.id}" class="btn_category_product">  
@@ -427,19 +427,37 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
 									        <c:when test="${Store.price == Store.discount_price}">
 									            <!-- 가격이 할인 가격과 같을 경우 할인 가격만 표시 -->
 									            <span class="discounted-price">
-									                ${Store.discount_price}
-									                <c:if test="${Store.discount_price != '금액충전형'}">원</c:if>
+									                <c:choose>
+									                    <c:when test="${Store.discount_price == '금액충전형'}">
+									                        ${Store.discount_price}
+									                    </c:when>
+									                    <c:otherwise>
+									                        ${Store.discount_price}원
+									                    </c:otherwise>
+									                </c:choose>
 									            </span>
 									        </c:when>
 									        <c:otherwise>
 									            <!-- 가격이 할인 가격과 다른 경우 둘 다 표시 -->
 									            <span class="discounted-price">
-									                ${Store.discount_price}
-									                <c:if test="${Store.discount_price != '금액충전형'}">원</c:if>
+									                <c:choose>
+									                    <c:when test="${Store.discount_price == '금액충전형'}">
+									                        ${Store.discount_price}
+									                    </c:when>
+									                    <c:otherwise>
+									                        ${Store.discount_price}원
+									                    </c:otherwise>
+									                </c:choose>
 									            </span>
 									            <span class="original-price">
-									                ${Store.price}
-									                <c:if test="${Store.price != '금액충전형'}">원&nbsp;</c:if>
+									                <c:choose>
+									                    <c:when test="${Store.price == '금액충전형'}">
+									                        ${Store.price}
+									                    </c:when>
+									                    <c:otherwise>
+									                        ${Store.price}원
+									                    </c:otherwise>
+									                </c:choose>
 									            </span>
 									        </c:otherwise>
 									    </c:choose>
@@ -476,20 +494,22 @@ function updateCartCount(customer_id) {
 
 $(document).ready(function() {
 	
+    $('.product').each(function() {
+        // 현재 .product 요소 내의 .discounted-price 값을 가져옴
+        var discountedPrice = $(this).find('.discounted-price').text().trim();
 
-	
-	
-	
-	
-	
-		
+        // '금액충전형'인 경우 .icon-item.icon-left 요소 숨김
+        if (discountedPrice === '금액충전형') {
+            $(this).find('#cart-link').hide();
+        }
+    });
+    
  	let customer_id= $('#userid').val();
  	console.log(customer_id);
  		
     updateCartCount(customer_id);
 
 	//페이지가 로드될 때 강제로 새로고침
-
         $(window).on('pageshow', function(event) {
             if (event.originalEvent.persisted) {
                 window.location.reload();
@@ -513,21 +533,28 @@ $(document).ready(function() {
              dataType: 'json'
          });
      }
- 	 	 
-     // 페이지 로드 시 카운트 업데이트
-     //updateCartCount();
-                 
-     $('.icon-left').on('click', function(event) {
-    	    event.preventDefault(); // 기본 동작을 막습니다.
-    	    console.log('Icon left clicked');
+ 	 	                
+     $('.icon-left').on('click', function(e) {
+    	    e.preventDefault(); // 기본 동작을 막습니다.
+    	    
 
     	    if (customer_id === '') {
-    	        alert("로그인 후 이용해주세요");
-    	        return false;
-    	    }
+    	        
+    	        let  userConfirmed = confirm("로그인 페이지로 이동하시겠습니까?");
+    	                
+    	         if ( userConfirmed) {
+    	          
+    	             window.location.href = '/login';
+    	             
+    	             return false;
+    	         }else{
+    	        	    return false;
+    	         } 
+    	        	
+    	     }
 
-    	    var $productItem = $(this).closest('li.product');
-    	    var item_id = $productItem.attr('id');
+    	    let $productItem = $(this).closest('li.product');
+    	    let item_id = $productItem.attr('id');
     	    console.log('Item ID:', item_id);
 
     	    let discountedPrice = $.trim($productItem.find('.discounted-price').text());
@@ -571,14 +598,9 @@ $(document).ready(function() {
     	                        success: function(response) {
     	                            if (response === 'ok') {
     	                                window.location.href = '/cart'; // 클릭 시 페이지 이동
-    	                            } else {
-    	                                alert('Error updating cart');
-    	                            }
-    	                        },
-    	                        error: function(xhr, status, error) {
-    	                            console.error('Update cart AJAX request error:', status, error);
-    	                            alert('Error updating cart');
+    	                            } 
     	                        }
+    	                     
     	                    });
     	                } else {
     	                    $.ajax({
@@ -594,22 +616,13 @@ $(document).ready(function() {
     	                        success: function(response) {
     	                            if (response === 'ok') {
     	                                window.location.href = '/cart'; // 클릭 시 페이지 이동
-    	                            } else {
-    	                                alert('Error inserting into cart');
     	                            }
-    	                        },
-    	                        error: function(xhr, status, error) {
-    	                            console.error('Insert cart AJAX request error:', status, error);
-    	                            alert('Error inserting into cart');
     	                        }
+    	                      
     	                    });
     	                }
     	            }
-    	        },
-    	        error: function(xhr, status, error) {
-    	            console.error('Check item AJAX request error:', status, error);
-    	            alert('Error checking item');
-    	        }
+    	        }	      
     	    })
     	})
 })    	
@@ -621,10 +634,19 @@ $('.buyButton').on('click', function(e) {
     
     let customer_id=$('#userid').val();
     
-    if(customer_id==''){
-    	alert("로그인 후 이용해주세요")
-    	
-    	return false;
+    if (customer_id === '') {
+      
+       let  userConfirmed = confirm("로그인 페이지로 이동하시겠습니까?");
+               
+        if ( userConfirmed) {
+           
+            window.location.href = '/login';
+            
+            return false;
+        }else{
+       	    return false;
+        } 
+       	
     }
        
     let item_id = $(this).closest('.product').attr('id');

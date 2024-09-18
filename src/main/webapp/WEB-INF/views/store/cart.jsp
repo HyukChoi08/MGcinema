@@ -593,15 +593,25 @@ function updateCartCount() {
 }
 
 $(document).ready(function() {
-	
-	 $('#allcheck').prop('checked', true);
-	 $('.item-checkbox').prop('checked', true);
+
+
+    let length = $('.item-checkbox').length;
+
+    // item-checkbox가 하나도 없을 때 #allcheck 체크박스 해제
+    if (length === 0) {
+        $('#allcheck').prop('checked', false);
+    } else {
+        // item-checkbox가 있을 경우, #allcheck 체크박스와 item-checkbox를 모두 체크 상태로 설정
+        $('#allcheck').prop('checked', true);
+        $('.item-checkbox').prop('checked', true);
+    }
+	 
 	 
 	 $('.item-checkbox').on('change', function() {
-	        var allChecked = $('.item-checkbox').length === $('.item-checkbox:checked').length;
+	        let allChecked = $('.item-checkbox').length === $('.item-checkbox:checked').length;
 	        $('#allcheck').prop('checked', allChecked);
 	    });
-	
+	 	
 	let customer_id = $('#gg').val();   
     
     updateCartCount(customer_id);
@@ -754,36 +764,36 @@ $(document).ready(function() {
 
         console.log('Calculated totals:', totals);
 
-        $('.cart-item').each(function() {
-            let item = $(this);
-            let checkbox = item.find('.item-checkbox');
+     $('.cart-item').each(function() {
+         let item = $(this);
+         let checkbox = item.find('.item-checkbox');
 
-            if (checkbox.is(':checked')) {
-                let itemData = {
-                    item_id: parseInt(item.find('.item_id').val(), 10),
-                    name: item.find('.item_name span').first().text().trim(),
-                    composition: item.find('.item_name span').last().text().trim(),
-                    image_path: item.find('img').attr('src').trim(),
-                    discount_price: item.find('.discount_price').text().replace(/원/g, '').replace(/,/g, '').trim(),
-                    cart_price: item.find('.cartprice').text().replace(/원/g, '').replace(/,/g, '').trim(),
-                    total: item.find('.total').text().replace(/원/g, '').replace(/,/g, '').trim(),
-                    qty: parseInt(item.find('.qty-input').val(), 10)
-                };
+         if (checkbox.is(':checked')) {
+             let itemData = {
+                 item_id: parseInt(item.find('.item_id').val(), 10),
+                 name: item.find('.item_name span').first().text().trim(),
+                 composition: item.find('.item_name span').last().text().trim(),
+                 image_path: item.find('img').attr('src').trim(),
+                 discount_price: item.find('.discount_price').text().replace(/원/g, '').replace(/,/g, '').trim(),
+                 cart_price: item.find('.cartprice').text().replace(/원/g, '').replace(/,/g, '').trim(),
+                 total: item.find('.total').text().replace(/원/g, '').replace(/,/g, '').trim(),
+                 qty: parseInt(item.find('.qty-input').val(), 10)
+             };
 
-                selectedItems.push(itemData);
-            }
-        });
+             selectedItems.push(itemData);
+         }
+     });
 
-        $('#productData').val(JSON.stringify({
-            items: selectedItems,
-            totalPrice: totals.totalPrice,
-            totalDiscount: totals.totalDiscount,
-            finalPrice: totals.finalPrice
-        }));
+     $('#productData').val(JSON.stringify({
+         items: selectedItems,
+         totalPrice: totals.totalPrice,
+         totalDiscount: totals.totalDiscount,
+         finalPrice: totals.finalPrice
+     }));
 
-        console.log('Product data:', $('#productData').val());
+     console.log('Product data:', $('#productData').val());
 
-        $('#payForm').submit();
+     $('#payForm').submit();
     });
    
 
@@ -799,11 +809,7 @@ $(document).ready(function() {
    	
          console.log("Selected Item ID:", item_id);
          console.log("qty"+qty);
-    
-        
-
-       
-   
+            
              // 체크박스가 체크된 경우
         	   $.ajax({
         	        url: '/selectitem',
@@ -929,41 +935,43 @@ $(document).ready(function() {
         contentType: 'application/json',
         data: JSON.stringify({ item_id: selectedItems }),
         success: function(response) {
-            alert('삭제가 성공되었습니다.');
-            window.location.reload(); // 페이지 새로고침
-        },
-        error: function(xhr, status, error) {
-            console.error('AJAX 요청 실패:', status, error);
-            alert('삭제 요청에 실패했습니다.');
-        }
+            let userconfirm=confirm("정말로 삭제하시겠습니까?")
+            
+            if(userconfirm){
+				
+            	alert("삭제가 성공되었습니다.")
+            	window.location.reload(); // 페이지 새로고침
+            	
+            }else {				
+                
+            }
+                                    
+        }    
     })
    })
 })
-	.on('click','.btnchange',function(){
-    let row = $(this).closest('tr');	
-    let item_id = row.find('.item_id').val();
-    let qty =row.find('.qty-input').val();
-    let customer_id=$('#gg').val();
-	
-	
-    	$.ajax({
-			url:'/updatecart',
-			type:'post',
-			data:{customer_id:customer_id,item_id:item_id,qty:qty},
-			dataType:'text',
-			success:function(data){
-				if(data=='ok'){
-				console.log(data);
-				alert("수량 변경이 되었습니다.");
-				 window.location.reload();
-				}								
-			}
-    	 	
-    	})
-    	
-	})
+.on('click','.btnchange',function(){
+   let row = $(this).closest('tr');	
+   let item_id = row.find('.item_id').val();
+   let qty =row.find('.qty-input').val();
+   let customer_id=$('#gg').val();
 
 	
+   	$.ajax({
+		url:'/updatecart',
+		type:'post',
+		data:{customer_id:customer_id,item_id:item_id,qty:qty},
+		dataType:'text',
+		success:function(data){
+			if(data=='ok'){
+			console.log(data);
+			alert("수량 변경이 되었습니다.");
+			 window.location.reload();
+			}								
+		}
+   	 	
+   	})    	
+})	
 
 
 
