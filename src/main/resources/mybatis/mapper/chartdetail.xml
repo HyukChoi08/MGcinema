@@ -7,5 +7,21 @@
 		from movie
 		where id = #{param1}
 	</select>
+	
+	<select id="dirimg" resultType="string">
+		select image_path from appearance_info
+		where moviename = #{movieid}
+		and actor = #{dirn};
+	</select>
+	
+	<select id="getCastImages" resultType="com.cinema.chartsecond.castDTO">
+	    SELECT image_path, actor
+	    FROM appearance_info
+	    WHERE moviename = #{movieid}
+	    AND actor IN
+	    <foreach item="name" collection="castNames" open="(" separator="," close=")">
+	        #{name}
+	    </foreach>
+	</select>
 
 </mapper>

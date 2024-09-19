@@ -21,6 +21,22 @@ public class detailController {
 		model.addAttribute("movieid",movieid);
 		return "chart_second/chartdetail";
 	}
+	@GetMapping("/chartcut")
+	public String chartcut(HttpServletRequest req, Model model) {
+		String movieid = req.getParameter("id");
+		model.addAttribute("movieid",movieid);
+		return "chart_second/chartcut";
+	}
+	@GetMapping("/dirimg")
+	@ResponseBody
+	public String dirimg(@RequestParam("movieid") int movieid,@RequestParam("dirn") String dirn) {
+		return ddao.dirimg(movieid,dirn);
+	}
+	@GetMapping("/getCastImages")
+	@ResponseBody
+	public List<castDTO> getCastImages(@RequestParam("movieid") int movieid, @RequestParam("castNames") List<String> castNames) {
+		return ddao.getCastImages(movieid, castNames);
+	}
 	
 	@GetMapping("/detailmovies")
 	@ResponseBody

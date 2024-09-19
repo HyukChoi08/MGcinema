@@ -31,8 +31,33 @@ body {
 	height:150px;
 }
 .bot {
-	width:1000px;
-	height:1200px;
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    padding: 20px;
+}
+
+.director-section, .cast-section {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.director-section > div, .cast-section > div {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+#dirimg, #castimg {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.actorimg {
+    width: 150px;
+    height: 200px;
 }
 .allinfo {
 	display: flex;
@@ -44,7 +69,7 @@ body {
 .inimg {
 	padding-left:60px;
 }
-.rescell, .actor, .thrinfo, .reldate, .goticket {
+.rescell, .director, .cast, .thrinfo, .reldate, .goticket {
 	text-align:left;
 	padding-left:20px;
 	height:40px;
