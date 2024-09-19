@@ -9,10 +9,10 @@
 </head>
 <style>
 body {
+    display: flex;
     flex-direction: column; /* 세로 방향으로 배치 */
-    justify-content: space-between; /* 푸터를 아래쪽으로 이동 */
-    align-items: center; /* 가운데 정렬 */
-    height: 100vh; /* 뷰포트 높이와 같게 설정 */
+    justify-content: space-between; /* 헤더와 푸터 사이에 콘텐츠 공간 확보 */
+    min-height: 100vh; /* 최소 높이 설정 */
     background-color: black;
     color: white;
 }
@@ -36,13 +36,10 @@ body {
     margin-top:150px;
 }
 .vertical-container4 {
+    flex: 1; /* 콘텐츠 영역이 남은 공간을 차지하도록 설정 */
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* 세로 정렬 */
     align-items: center; /* 가운데 정렬 */
-    justify-content: center; /* 수직 중앙 정렬 */
-    height: 100vh; /* 전체 뷰포트 높이 */
-    width: 100%; /* 전체 너비 */
-    padding: 20px; /* 적절한 여백 추가 */
 }
 ol {
     display: flex; /* ul 요소를 플렉스 컨테이너로 설정 */
@@ -60,8 +57,8 @@ a {
     text-align: center;
     background-color: red;
     color: white;
-    margin-left: 20px; /* 좌측 간격 설정 */
-    margin-right: 20px; /* 우측 간격 설정 */
+    margin-left: 40px; /* 좌측 간격 설정 */
+    margin-right: 40px; /* 우측 간격 설정 */
     letter-spacing: 4px; /* 문자 간격 추가 */
 }
 
@@ -71,15 +68,18 @@ a {
     text-align: center;
     background-color: grey;
     color: white;
-    margin-left: 20px; /* 좌측 간격 설정 */
-    margin-right: 20px; /* 우측 간격 설정 */
+    margin-left: 40px; /* 좌측 간격 설정 */
+    margin-right: 40px; /* 우측 간격 설정 */
+    margin-top:40px;
     letter-spacing: 4px; /* 문자 간격 추가 */
+    
 }
 .button-container {
     display: flex;
     justify-content: flex-end; /* 버튼을 오른쪽으로 정렬 */
-    width: 100%; /* 컨테이너가 전체 너비를 차지하도록 설정 */
-    padding-right: 20px; /* 필요한 만큼 패딩 조정 */
+    width: 100%; /* 전체 너비를 차지하도록 설정 */
+    padding-right: 20px; /* 오른쪽 여백 추가 */
+    margin-top: auto; /* 푸터 위에 위치하도록 설정 */
 }
 
 .button-container button {
@@ -101,7 +101,14 @@ a {
 }
 
 .small-text {
-    font-size: 12px; /* 글자 크기 작게 설정 */
+    font-size: 13px; /* 글자 크기 작게 설정 */
+}
+.reservation-text {
+    font-size: 13px; /* 예매율 텍스트 크기 조절 */
+}
+
+.release-date {
+    font-size: 12px; /* 개봉 텍스트 크기 조절 */
 }
 </style>
 
@@ -185,9 +192,9 @@ $(document)
                                         '<div>' +
                                             '<a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br>' +
                                             '<div>' +
-                                            '<strong>예매율<span>'+data[count]['reservation']+'%</span></strong>' +
+                                            '<strong class="reservation-text">예매율<span>'+data[count]['reservation']+'%</span></strong>' +
                                             '</div>' +
-                                            '<span><strong>'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span>' +
+                                            '<span><strong class="release-date">'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span>' +
                             '<a href="/ticket?mname=' + data[count]['mname'] + '">예매</a></span>'
                             +
                                         '</div>' +
@@ -204,14 +211,16 @@ $(document)
                         }
                         str1 += '<div class="vertical-container">' +
                             '<div><strong class="rank2">' +
-                            'No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><strong>'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span>' +
+                            'No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div><strong class="reservation-text">예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><strong class="release-date">'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span>' +
                             '<a href="/ticket?mname=' + data[count]['mname'] + '">예매</a></span>' +
                             '</div>' +
                             '</div>';
                         if (count % 4 == 2) {
                             str1 += '</ol>'
+                          
                         }
                     }
+                    
                 }
 
                 $('#movieList').append(str1);
@@ -252,7 +261,7 @@ function addAllRestMovies(){
                 if (count == 0 || (count % 4 == 0)) {
                     str1 += '<ol>'
                 }
-                str1 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+8)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div><strong>예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><strong>'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span>' +
+                str1 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+8)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div><strong class="reservation-text">예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><strong class="release-date">'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span>' +
                     '<a href="/ticket?mname=' + data[count]['mname'] + '">예매</a></span></div>' +
                     '</div>';
                 if (count == 3 || count % 4 == 3) {
