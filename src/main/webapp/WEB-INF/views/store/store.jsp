@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -384,7 +385,7 @@ font-size:12px;
     <div id="container">
         <div id="contents">
             <div class="category_wrap">
-            <a href="/store" id="store-link">스토어</a>            
+            <a href="/store" id="store-link">베스트상품</a>            
             <input type="hidden" id="userid" value="${uid}">    
             <input type="hidden" id="age"> 
                 <div class="separator"></div> <!-- 선을 스토어 아래에 위치 -->
@@ -407,7 +408,7 @@ font-size:12px;
             <div class="category_product_wrap">
                 <ul class="product_list">           
                     <li class="li1">                   
-                        <strong class="category_title">베스트상품<br>
+                        <strong class="category_title">베스트 상품<br>
                             <!-- <a href="/package" class="circle-button">+</a> -->
                         </strong> 
                         <div class="separator2"></div>

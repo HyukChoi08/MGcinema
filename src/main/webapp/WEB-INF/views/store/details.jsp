@@ -160,7 +160,8 @@ td input[type="text"] {
 
 .container {
     display: flex; /* Flexbox 사용 */
-    align-items: center; /* 수직 중앙 정렬 */
+  
+     align-items: flex-end; /* 아래쪽 끝 정렬 */
 }
  input[type='button'] {
         height: 30px; /* 버튼의 높이 조정 */
@@ -316,6 +317,16 @@ td {
    
 }
 
+.separator-row {
+    height: 1px; /* 필요 시 높이 설정 */
+}
+
+.separator1 {
+    border-top: 2px solid grey; /* 선의 색상과 두께 */
+    width: 100%; /* 전체 너비 */
+    position: relative; /* 상대적 위치 설정 */
+    top: 13px; /* 위에서 50px 아래로 이동 */
+}
 </style>
 </head>
 <body>
@@ -401,6 +412,11 @@ td {
 						        </div>
 						    </td>         			
                 		</tr>
+                		<tr class="separator-row">
+						    <td colspan="3">
+						        <div class="separator1"></div>
+						    </td>
+						</tr>
                         <tr id="total-row">
                 			<td>총 결제금액:</td><td id="tol"><input type="text" style="font-size:16px; width:60px;" readonly id="totalprice" value="${arItem.discount_price}">원</td>
                 			<td></td>
@@ -576,6 +592,9 @@ $(document)
     function updateUIBasedOnDiscount() {
         var discountPrice = $('#discount').val().trim();
 
+        
+        $('#separator-row').show(); // 필요 시 보여줌
+        
         if (discountPrice === '금액충전형') {
             $('#replace').replaceWith(`
                 <tr id="replace1">

@@ -407,7 +407,7 @@ font-size:12px;
             <div class="category_product_wrap">
                 <ul class="product_list">           
                     <li class="li1">                   
-                        <strong class="category_title">베스트상품<br>
+                        <strong class="category_title">전체상품<br>
                             <!-- <a href="/package" class="circle-button">+</a> -->
                         </strong> 
                         <div class="separator2"></div>
