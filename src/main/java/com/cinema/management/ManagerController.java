@@ -30,7 +30,7 @@ public class ManagerController {
 	public String manager(HttpServletRequest req,Model model) {
 		HttpSession s = req.getSession();
 		String uid = (String)s.getAttribute("uid");
-		if(uid==null || uid.equals("")) {
+		if(uid==null || !uid.equals("admin")) {
 			return "home/homepage";
 		}else {
 			return "manager/manager";
