@@ -23,5 +23,9 @@
 	        #{name}
 	    </foreach>
 	</select>
+	
+	<select id="getCutimg" resultType="com.cinema.chartsecond.cutDTO">
+		select id, image_path from cutimage where movieid = #{movieid};
+	</select>
 
 </mapper>

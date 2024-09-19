@@ -31,7 +31,10 @@
 		<div id="goactor"><span class="actbtn">감독/출현</span></div>
 	</div>
 	<div class="bot">
-		<div>스틸컷</div>
+	    <div class="cut-section">
+	        <div>스틸컷</div>
+	        <div id="cutimg"></div>
+	    </div>
 	</div>
 </div>
 <%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
@@ -67,6 +70,18 @@ $(document).ready(function(){
 					$(".thrinfo").text("장르:" + movie.genre + " / 관람이용가:" + movie.age + " / 상영시간:" + movie.runningtime);
 					$(".reldate").text("개봉일:" + movie.releasedate);
 				})
+				let cutcell = $("#cutimg");
+				$.ajax({
+					url:"/cutimg",
+					type:"GET",
+					data:{movieid:movieid},
+					success:function(data){
+						cutcell.empty();
+						$.each(data, function(index,cut){
+							cutcell.append('<img src="' + cut.image_path + '" class="allcutimg" alt="스틸컷">');
+						})
+					}
+				});
 			}
 		});
 	}

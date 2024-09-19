@@ -32,6 +32,11 @@ public class detailController {
 	public String dirimg(@RequestParam("movieid") int movieid,@RequestParam("dirn") String dirn) {
 		return ddao.dirimg(movieid,dirn);
 	}
+	@GetMapping("/cutimg")
+	@ResponseBody
+	public List<cutDTO> cutimg(@RequestParam("movieid") int movieid) {
+		return ddao.getCutimg(movieid);
+	}
 	@GetMapping("/getCastImages")
 	@ResponseBody
 	public List<castDTO> getCastImages(@RequestParam("movieid") int movieid, @RequestParam("castNames") List<String> castNames) {
