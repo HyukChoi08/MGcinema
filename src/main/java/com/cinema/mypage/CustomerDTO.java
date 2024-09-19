@@ -16,5 +16,5 @@ public class CustomerDTO {
 	String created;
 	String updated;
 	String birthday;
-	String profileimge;
+	String profileimg;
 }

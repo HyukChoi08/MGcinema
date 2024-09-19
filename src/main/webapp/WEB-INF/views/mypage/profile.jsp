@@ -31,8 +31,8 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 	<!-- 프로필 섹션 -->
 	<div class="mainscreen">
 		<div class="profile-section">
-			<img src="/mypage_image/OO.png" alt="프로필이미지" width="80" height="80" />
-
+			<img id="profileImage" src="<%= customer.getProfileimg() != null ? customer.getProfileimg() : "/mypage_image/OO.png" %>" alt="프로필이미지" width="80" height="80" />
+			
 			<div class="profile-info">
 				<h2>
 					<%=customer.getRealname()%>
@@ -87,7 +87,7 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 						<h3>회원 정보 수정</h3>
 					</div>
 					<div>
-						<form method=post action='/profileUpdate'>
+						<form method=post action='/profileUpdate' enctype="multipart/form-data">
 							<table>
 								<tr>
 									<td></td>
@@ -165,11 +165,11 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 								<tr>
 									<td><h4>프로필 이미지</h4></td>
 									<td><h5>이미지변경</h5>
-									<form id="uploadForm" enctype="multipart/form-data">
-										<input type="file"
-											name="file" id="file" /><br>
-										<button type="button" id="uploadFileBtn">업로드</button>
-									</form></td>
+									<input type="file" id="profileImageInput" name="profileImage" accept="image/*" />
+							        <br/>
+							        <img id="imagePreview" src="#" alt="이미지 미리보기" style="display:none; width:100px; height:100px; margin-top:10px;" />
+    
+									</td>
 								</tr>
 								<tr>
 									<td colspan=2 style='text-align: center'><input
@@ -193,6 +193,7 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
 	$(document).ready(
+			
 
 			function() {
 
@@ -229,14 +230,16 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 						$('#mobile').val(data.mobile);
 
 						// favorite checkbox 설정
-						var favorites = data.favorite.split(',');
-
-						favorites.forEach(function(fav) {
-							fav = fav.trim(); // 공백 제거
-							// value 속성에 해당하는 checkbox를 찾아서 체크
-							$('input[name="favorite"][value="' + fav + '"]')
-									.prop('checked', true);
-						});
+						if (data.favorite != null) {
+							var favorites = data.favorite.split(',');
+	
+							favorites.forEach(function(fav) {
+								fav = fav.trim(); // 공백 제거
+								// value 속성에 해당하는 checkbox를 찾아서 체크
+								$('input[name="favorite"][value="' + fav + '"]')
+										.prop('checked', true);
+							});
+						}
 					},
 					error : function() {
 						$('#nickname').text("알수없음");
@@ -250,6 +253,24 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 		// #birthday 요소의 max 속성을 현재 날짜로 설정합니다.
 		$('#birthday').attr('max', today);
 	});
+	
+	// 이미지 미리보기 기능
+    document.getElementById('profileImageInput').addEventListener('change', function(event) {
+        const input = event.target;
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.getElementById('imagePreview');
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+                
+                // 프로필 이미지 업데이트 --- 여기서 구현되면 안됨
+                /* const profileImage = document.getElementById('profileImage');
+                profileImage.src = e.target.result; */
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    });
 	
 	document.addEventListener('DOMContentLoaded', function() {
 		const modal = document.getElementById('nicknameModal');

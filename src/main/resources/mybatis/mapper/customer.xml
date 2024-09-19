@@ -14,8 +14,7 @@
 	<!-- 고객 정보 조회 (UID 기반) -->
 	<select id="getCustomerInfoByUid"
 		resultType="com.cinema.mypage.CustomerDTO">
-		SELECT id, uid, passwd, realname, nickname, email, region,
-		favorite, mobile, tellecom, created, updated, birthday
+		SELECT *
 		FROM customer
 		WHERE uid = #{param1}
 	</select>
@@ -33,7 +32,8 @@
 		mobile = #{mobile},
 		tellecom = #{tellecom},
 		updated = NOW(),
-		birthday = #{birthday}
+		birthday = #{birthday},
+		profileimg = #{profileimg}
 		WHERE id = #{id}
 	</update>
 
@@ -46,12 +46,22 @@
 	</delete>
 
 	<!-- 1:1 문의 목록 조회 (고객 ID 기반) -->
-	<select id="getInquiryList"
+	<!-- <select id="getInquiryList"
 		resultType="com.cinema.mypage.InquiryDTO">
 		SELECT id, customer_id, title, content, answer, created,
 		ancreated, current
 		FROM inquiry
 		WHERE customer_id = #{param1}
+	</select> -->
+	
+	<!-- 페이징 기반 1:1 문의 목록 조회 -->
+	<select id="getInquiryList" parameterType="map"
+		resultType="com.cinema.mypage.InquiryDTO">
+		SELECT *
+		FROM inquiry
+		WHERE customer_id = #{customerId}
+		ORDER BY created DESC
+		LIMIT #{offset}, #{limit}
 	</select>
 
 	<!-- 1:1 문의 작성 -->
@@ -68,6 +78,15 @@
 		SELECT title, content, answer, created, ancreated, current
 		FROM inquiry
 		WHERE id = #{param1}
+	</select>
+	
+	<!-- 1:1 문의 페이징 -->
+	<select id="getTotalInquiryCount" parameterType="int"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM inquiry
+		WHERE customer_id =
+		#{customerId}
 	</select>
 
 	<!-- 예매 목록 조회 (고객 ID 기반) -->
