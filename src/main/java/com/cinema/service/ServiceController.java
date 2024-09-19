@@ -25,7 +25,7 @@ public class ServiceController {
         ServiceHomeDTO serviceHome = new ServiceHomeDTO();
         
         // 뉴스 목록 가져오기
-        List<NewsDTO> newsList = newsDAO.getAllNews(9, 0); // 예시로 5개 뉴스 가져오기
+        List<NewsDTO> newsList = newsDAO.getAllNews(10, 0); // 예시로 5개 뉴스 가져오기
         model.addAttribute("newsList", newsList);
 
         model.addAttribute("serviceHome", serviceHome);
