@@ -43,7 +43,7 @@ ul, li {
 .category_wrap {
     margin-bottom: 20px;
 }
-.separator, .separator1 {
+.separator {
     width: 100%;
     height: 2px;
     margin: 0;
@@ -53,19 +53,8 @@ ul, li {
     bottom: 0;
     background-color: #000;
 }
-.separator1 {
-    position: relative;
-    margin-top: 20px;
-    background-color: grey;
-}
-.separator2 {
-    height: 1px;
-    width: 950px;
-    background-color: grey;
-    margin-top: 3px;
-    margin-bottom: 20px;
-    position: relative;
-}
+
+
 .contegory_contents_wrap {
 display: flex; 
 flex-direction: row; 
@@ -234,7 +223,7 @@ margin-left: -20px; /* 버튼과 입력 필드 사이의 간격 */
 }
 #giftprice {
     position: absolute; /* 위치를 절대적으로 설정 */
-    top: 18px; /* 원하는 위치를 조정합니다 */
+    top: 15px; /* 원하는 위치를 조정합니다 */
    
     width: 200px;
     margin-right: 58px; /* 여백을 조정합니다 */
@@ -327,7 +316,6 @@ td {
    
 }
 
-
 </style>
 </head>
 <body>
@@ -413,7 +401,7 @@ td {
 						        </div>
 						    </td>         			
                 		</tr>
-                		<tr id="total-row">
+                        <tr id="total-row">
                 			<td>총 결제금액:</td><td id="tol"><input type="text" style="font-size:16px; width:60px;" readonly id="totalprice" value="${arItem.discount_price}">원</td>
                 			<td></td>
                 		<tr>
@@ -654,7 +642,7 @@ console.log(customer_id);
 			 $('#cart-count').text(data);
 			
 			}
-})
+	})
 })
 
 .on('change','#giftprice',function(){
@@ -667,11 +655,6 @@ console.log(customer_id);
 	$('#totalprice').val('');
 	$('#totalprice').val(giftprice ); // Set the value of the #totalprice field
 })
-
-
-
-
-
 
 .on('click', '#btncart', function(event) {
     event.preventDefault(); // 기본 동작을 막습니다.

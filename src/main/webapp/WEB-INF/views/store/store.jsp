@@ -372,7 +372,10 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
     text-decoration: none; /* 링크의 밑줄 제거 */
     color: inherit; /* 부모 요소의 색상 상속 */
 }
+.product-composition{
+font-size:12px;
 
+}
  
     </style>
 </head>
@@ -381,12 +384,14 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
     <div id="container">
         <div id="contents">
             <div class="category_wrap">
-            <a href="/store" id="store-link">베스트 상품</a>            
+            <a href="/store" id="store-link">스토어</a>            
             <input type="hidden" id="userid" value="${uid}">    
+            <input type="hidden" id="age"> 
                 <div class="separator"></div> <!-- 선을 스토어 아래에 위치 -->
             </div>
             <div class="contegory_contents_wrap">
                 <ul class="category_content"> <!-- ul로 변경 -->
+                	<li><a href="/storeall" class="no-underline">전체상품</a></li>
                   	<li><a href="/package" class="no-underline">패키지</a></li>
                     <li><a href="/giftcard" class="no-underline">기프트카드</a></li>
                     <li><a href="/combo" class="no-underline">콤보</a></li>
@@ -402,8 +407,8 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
             <div class="category_product_wrap">
                 <ul class="product_list">           
                     <li class="li1">                   
-                        <strong class="category_title">패키지<br>
-                            <a href="/package" class="circle-button">+</a>
+                        <strong class="category_title">베스트상품<br>
+                            <!-- <a href="/package" class="circle-button">+</a> -->
                         </strong> 
                         <div class="separator2"></div>
                         <ul class="category_inner">                      	
@@ -423,6 +428,7 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
 	                                    </div>
 	                           		<div class="product-info">
 									    <span class="product-name">${Store.item_name}</span><br>
+									     <span class="product-composition">${Store.composition}</span><br>
 									    <c:choose>
 									        <c:when test="${Store.price == Store.discount_price}">
 									            <!-- 가격이 할인 가격과 같을 경우 할인 가격만 표시 -->
@@ -494,6 +500,31 @@ function updateCartCount(customer_id) {
 
 $(document).ready(function() {
 	
+	
+	$.ajax({
+	    url: '/storeage',
+	    type: 'POST',
+	    dataType: 'json', // 응답 데이터 형식을 JSON으로 지정
+	    success: function(data) {
+	        console.log(data);        
+	        // 데이터가 객체로 전달됨
+	        let birthday = data.birthday; // 필드명이 실제 JSON 데이터와 일치하는지 확인
+            console.log('Birthday:', birthday);
+	        	        
+            let birthYear = new Date(birthday).getFullYear();
+            console.log('Birth Year:', birthYear);
+            
+            // 현재 연도 추출
+            let currentYear = new Date().getFullYear();
+            console.log('Current Year:', currentYear);
+            
+            let age = currentYear - birthYear;
+            console.log(age);
+            $('#age').val(age);
+	                
+	    }
+	});
+	
     $('.product').each(function() {
         // 현재 .product 요소 내의 .discounted-price 값을 가져옴
         var discountedPrice = $(this).find('.discounted-price').text().trim();
@@ -552,7 +583,20 @@ $(document).ready(function() {
     	         } 
     	        	
     	     }
-
+    	    
+    		    	     	     	    
+    	    let productName = $(this).closest('.product').find('.product-composition').text().trim();
+    	    console.log('Clicked product compos:', productName);
+				
+    	    let age = $('#age').val();
+    	    if (productName.includes('맥주') || productName.includes('샴페인')) {
+    	      if (age < 20) {
+    	        // 나이가 20세 이상일 때 구매를 허용
+    	        alert('20살 이상만 구매할 수 있습니다.');
+    	        return false;
+    	      }
+    	    }
+    	       	    
     	    let $productItem = $(this).closest('li.product');
     	    let item_id = $productItem.attr('id');
     	    console.log('Item ID:', item_id);
@@ -649,6 +693,18 @@ $('.buyButton').on('click', function(e) {
        	
     }
        
+    let productName = $(this).closest('.product').find('.product-composition').text().trim();
+    console.log('Clicked product compos:', productName);
+
+    let age = $('#age').val();
+    if (productName.includes('맥주') || productName.includes('샴페인')) {
+      if (age < 20) {
+        // 나이가 20세 이상일 때 구매를 허용
+        alert('20살 이상만 구매할 수 있습니다.');
+        return false;
+      }
+    }
+               
     let item_id = $(this).closest('.product').attr('id');
     console.log('item_id:', item_id);
                            

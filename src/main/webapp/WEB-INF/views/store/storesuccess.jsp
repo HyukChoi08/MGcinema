@@ -81,14 +81,6 @@ $(document).ready(function() {
         window.dataSaved = true;
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
     function storeData() {
         // Extract URL parameters
         let urlParams = new URLSearchParams(window.location.search);
@@ -149,10 +141,13 @@ $(document).ready(function() {
        
     }
 })
+.on('click', '.btnclose', function() {
+    // 팝업창을 닫기
+    window.close(); // 팝업창을 닫기
 
-    
-
-            
+    // 기존 페이지를 store로 이동
+    window.opener.location.href = '/store';
+});       
             
 </script>
 </html>

@@ -282,6 +282,9 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
 }
 .hidden {
     display: none;
+}
+.product-composition{
+font-size:12px;
 } 	
 	
     </style>
@@ -293,7 +296,7 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
             <div class="category_wrap">
                 <a href="/store" id="store-link">스토어</a>
               <input type="hidden" id="userid" value="${uid}">
-              <input type="text" id="age">       
+              <input type="hidden" id="age">       
                 <div class="separator"></div> <!-- 선을 스토어 아래에 위치 -->
             </div>
             <div class="contegory_contents_wrap">
@@ -333,6 +336,7 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
 	                                    </div>
 	                                <div class="product-info">
 	                                    <span class="product-name">${Store.item_name}</span><br>
+	                                     <span class="product-composition">${Store.composition}</span><br>
 	                                        <span class="original-price">${Store.price}원</span>
                                         	<span class="discounted-price">${Store.discount_price}원</span>
 	                                </div>
@@ -469,7 +473,20 @@ $(document).ready(function() {
     	         } 
     	        	
     	     }
-
+			 
+		  	let productName = $(this).closest('.product').find('.product-composition').text().trim();
+		   	console.log('Clicked product compos:', productName);
+	   		
+		   	let age=$('#age').val();
+		    if (productName.includes('맥주') || productName.includes('샴페인')) {
+	          if (age < 20) {
+	             // 나이가 20세 이상일 때 구매를 허용
+	             alert('20살 이상만 구매할 수 있습니다.');
+	             return false;
+	               
+	          }
+		    }
+			 			 			 		
     	    let $productItem = $(this).closest('li.product');
     	    let item_id = $productItem.attr('id');
     	    console.log('Item ID:', item_id);
@@ -582,22 +599,20 @@ $('.buyButton').on('click', function(e) {
         } 
        	
   	  }
-   		    
-	   	let productName = $(this).closest('.product').find('.product-name').text().trim();
-	   	console.log('Clicked product name:', productName);
-   		
-	   	let age=$('#age').val();
-	    if (productName === '맥주') {
-          if (age < 20) {
-             // 나이가 20세 이상일 때 구매를 허용
-             alert('20살 이상만 구매할 수 있습니다.');
-             return false;
-               
-          }
-	    }
-   
-   
-              
+	 		    
+	   let productName = $(this).closest('.product').find('.product-composition').text().trim();
+	  	console.log('Clicked product compos:', productName);
+			
+	  	let age=$('#age').val();
+	   if (productName.includes('맥주') || productName.includes('샴페인')) {
+	     if (age < 20) {
+	        // 나이가 20세 이상일 때 구매를 허용
+	        alert('20살 이상만 구매할 수 있습니다.');
+	        return false;
+	          
+	     }
+	   }
+                
     $.ajax({
         url: '/selectitem',
         type: 'POST',

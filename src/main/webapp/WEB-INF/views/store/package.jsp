@@ -293,6 +293,9 @@ font-size: 14px; /* 취소선 가격 크기 조정 */
 } 	
 .icon-item.icon-right,icon-item icon-left{
 cursor: pointer;
+}
+.product-composition{
+font-size:11px;
 }	
     </style>
 </head>
@@ -302,7 +305,8 @@ cursor: pointer;
         <div id="contents">
             <div class="category_wrap">
                  <a href="/store" id="store-link">스토어</a>
-             <input type="hidden" id="userid" value="${uid}">         
+             <input type="hidden" id="userid" value="${uid}"> 
+             <input type="hidden" id="age">          
                 <div class="separator"></div> <!-- 선을 스토어 아래에 위치 -->
             </div>
             <div class="contegory_contents_wrap">
@@ -341,7 +345,8 @@ cursor: pointer;
                                         </div>
                                     </div>
                                 <div class="product-info">
-                                    <span class="product-name">${Store.item_name}</span><br>                                       
+                                    <span class="product-name">${Store.item_name}</span><br>
+                                     <span class="product-composition">${Store.composition}</span><br>                                         
                                         <span class="discounted-price">${Store.discount_price}원</span>
                                         <span class="original-price">${Store.price}원</span>
                                 </div>
@@ -382,6 +387,31 @@ $(document).ready(function() {
 
  	 updateCartCount(customer_id);
 
+ 	 
+ 	$.ajax({
+	    url: '/storeage',
+	    type: 'POST',
+	    dataType: 'json', // 응답 데이터 형식을 JSON으로 지정
+	    success: function(data) {
+	        console.log(data);        
+	        // 데이터가 객체로 전달됨
+	        let birthday = data.birthday; // 필드명이 실제 JSON 데이터와 일치하는지 확인
+            console.log('Birthday:', birthday);
+	        	        
+            let birthYear = new Date(birthday).getFullYear();
+            console.log('Birth Year:', birthYear);
+            
+            // 현재 연도 추출
+            let currentYear = new Date().getFullYear();
+            console.log('Current Year:', currentYear);
+            
+            let age = currentYear - birthYear;
+            console.log(age);
+            $('#age').val(age);
+	                
+	    }
+	});
+	
 
 	//페이지가 로드될 때 강제로 새로고침
 	$(window).on('pageshow', function(event) {
@@ -445,7 +475,21 @@ $(document).ready(function() {
  	         } 
  	        	
  	     }
-
+ 	    
+ 		let productName = $(this).closest('.product').find('.product-composition').text().trim();
+	   	console.log('Clicked product compos:', productName);
+   		
+	   	let age=$('#age').val();
+	    if (productName.includes('맥주') || productName.includes('샴페인')) {
+          if (age < 20) {
+             // 나이가 20세 이상일 때 구매를 허용
+             alert('20살 이상만 구매할 수 있습니다.');
+             return false;
+               
+          }
+	    }
+ 	    
+ 	    
  	    let $productItem = $(this).closest('li.product');
  	    let item_id = $productItem.attr('id');
  	    console.log('Item ID:', item_id);
@@ -545,6 +589,19 @@ $('.buyButton').on('click', function(e) {
 	         } 
 	        	
 	     }
+    
+    let productName = $(this).closest('.product').find('.product-composition').text().trim();
+   	console.log('Clicked product compos:', productName);
+		
+   	let age=$('#age').val();
+    if (productName.includes('맥주') || productName.includes('샴페인')) {
+      if (age < 20) {
+         // 나이가 20세 이상일 때 구매를 허용
+         alert('20살 이상만 구매할 수 있습니다.');
+         return false;
+           
+      }
+    }
     
     $.ajax({
         url: '/selectitem',

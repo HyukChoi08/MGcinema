@@ -285,7 +285,9 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
 .hidden {
     display: none;
 }
-
+.product-composition{
+font-size:11px;
+}
 
 </style>
 </head>
@@ -335,8 +337,9 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
 	                                    </div>
 	                                <div class="product-info">
 	                                    <span class="product-name">${Store.item_name}</span><br>
-	                                        <span class="original-price">${Store.price}원</span>
-                                        	<span class="discounted-price">${Store.discount_price}원</span>	                                        
+	                                    <span class="product-composition">${Store.composition}</span><br>
+                                        <span class="original-price">${Store.price}원</span>
+                                       	<span class="discounted-price">${Store.discount_price}원</span>	                                        
 	                                </div>
 	                            </li>
 	                        </c:forEach>                                                                                                                          

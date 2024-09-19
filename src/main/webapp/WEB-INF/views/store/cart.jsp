@@ -485,8 +485,7 @@ margin-bottom:30px;
     <div class="separator1"></div> <!-- 선을 contegory_contents_wrap 아래에 위치 -->
  	<div class="cart_step">
        <div class="step step1 active"><span>STEP 01</span>&nbsp;<strong>장바구니</strong></div>
-       <div class="step step2"><span>STEP 02</span>&nbsp;<strong>결제하기</strong></div>
-       <div class="step step3"><span>STEP 03</span>&nbsp;<strong>결제완료</strong></div>
+       <div class="step step2"><span>STEP 02</span>&nbsp;<strong>결제하기</strong></div>     
    </div>
     <div class="cart_details">
         <table class="cart-table">

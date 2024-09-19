@@ -12,5 +12,6 @@ public interface storeDAO {
 	String getImagePath(int id);
 	ArrayList<storeDTO> selectType(String item_type);
 	ArrayList<storeDTO> selectbest();
+	ArrayList<storeDTO> storeall();
 	
 }

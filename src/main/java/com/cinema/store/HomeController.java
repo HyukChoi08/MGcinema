@@ -33,7 +33,19 @@ public class HomeController {
 	@Autowired storecustomerDAO customerdao;
 	
 	
-
+	
+	@GetMapping("/storeall")
+	public String storeall(HttpServletRequest req,Model model) {
+		HttpSession s=req.getSession();
+		String uid=(String) s.getAttribute("uid");
+	
+		ArrayList<storeDTO> arStore = storedao.storeall();
+		
+			
+		model.addAttribute("arStore",arStore);
+		return "store/storeall";
+	}
+	
 	@GetMapping("/store")
 	public String store(HttpServletRequest req,Model model) {
 		HttpSession s=req.getSession();
@@ -42,6 +54,7 @@ public class HomeController {
 		ArrayList<storeDTO> arStore = storedao.selectbest();
 				
 		model.addAttribute("arStore",arStore);
+		model.addAttribute("uid",uid);
 		return "store/store";
 	}
 	@GetMapping("/details")
