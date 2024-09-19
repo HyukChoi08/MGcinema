@@ -68,7 +68,7 @@
 				<div class="notice_area">
     			<span class="tit">공지사항</span>
     			<a href="news" class="notice_more_btn">+</a>
-    			<ul class="list">
+    			<ul class="list"><br>
     				<c:forEach var="news" items="${newsList}">
         		<li class="notice_item">
             		<a href="newsDetail?id=${news.id}" class="notice_list">[${news.selected}] ${news.title}

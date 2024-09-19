@@ -76,8 +76,9 @@
                                 <td class="id">${news.id}</td>
                                 <td class="select">${news.selected}</td>
                               	<td class="title">
-    <a href="/newsDetail?id=${news.id}&page=${currentPage}&selected=${news.selected}">${news.title}</a>
-</td>
+   								<a href="/newsDetail?id=${news.id}&page=${currentPage}&selected=${news.selected}">${news.title}
+   								</a>
+								</td>
                                 <td class="created">${news.created_at}</td>
                                 <td class="view">${news.views}</td>
                             </tr>

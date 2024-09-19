@@ -44,7 +44,7 @@
             onclick="location.href='/faq?page=${currentPage}&size=${size}&search=${param.search}&selected=${faqDetail.selected}'">
         목록
     </button>
-    <button class="btn-edit" onclick="location.href='FAQedit?id=${faqDetail.id}'">수정</button>
+   <!--  <button class="btn-edit" onclick="location.href='FAQedit?id=${faqDetail.id}'">수정</button> -->
     <!-- <button class="btn-delete" onclick="if(confirm('정말 삭제하시겠습니까?')) location.href='FAQdelete?id=${faqDetail.id}'">삭제</button> -->
 </div>
 
