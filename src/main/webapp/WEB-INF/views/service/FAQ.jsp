@@ -79,7 +79,7 @@
                                 <tr>
                                     <td>${faq.id}</td>
                                     <td>${faq.selected}</td>
-                                    <td><a href="/FAQdetail?id=${faq.id}">${faq.title}</a></td>
+                                    <td><a href="/FAQdetail?id=${faq.id}&page=${currentPage}">${faq.title}</a></td>
                                     <td>${fn:substring(faq.created_at, 0, 10)}</td>
                                     <td>${faq.views}</td>
                                 </tr>

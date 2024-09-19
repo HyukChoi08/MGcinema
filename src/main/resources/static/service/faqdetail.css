@@ -82,9 +82,13 @@ body {
         }
 
         .view_area {
+        width: 800px;
+        height: 550px; 
             margin-top: 20px;
             text-align: left;
-        }
+            overflow: auto; /* 내용이 넘칠 경우 스크롤 추가 */
+}
+        
 
         .view_area pre {
             display: block; /* 기본 블록 레벨 요소로 설정 */
