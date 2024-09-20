@@ -60,6 +60,14 @@ body {
     width: 800px;
     color:#c7b199;
 }
+.flex-container3 li {
+    margin-right: 20px; /* 각 <li> 요소 사이의 간격 설정 */
+    font-size: 18px;    /* 글씨 크기 설정 */
+}
+
+.flex-container3 li:last-child {
+    margin-right: 0;    /* 마지막 <li> 요소의 오른쪽 간격 제거 */
+}
 ol, ul {
      display: flex; /* ul 요소를 플렉스 컨테이너로 설정 */
      padding: 0; /* 기본 패딩 제거 */
@@ -98,22 +106,33 @@ a {
   border: none;
   float: left; /* 버튼을 왼쪽으로 붙임 */
 }
-.left-aligned {
-    text-align: left;
-    margin: 0; /* 여백 제거 */
-    padding: 0; /* 패딩 제거 */
-    width: 55%; /* 부모 요소의 너비를 가득 채우게 설정 */
+
+
+
+#reviewcomment {
+    background-color: #222; /* 배경 색상 (어두운 회색) */
+    color: #ddd;            /* 텍스트 색상 (밝은 회색) */
+    border: 1px solid #555; /* 테두리 색상 */
+    padding: 10px;          /* 여백 추가 */
+    border-radius: 5px;    /* 모서리 둥글게 */
+    width: 700px;
+    height: 100px;
+    resize: none;      /* 사용자가 세로 방향으로 크기를 조절할 수 있도록 설정 */
 }
 
-#putcomment{
-float: right;
+#putcomment {
+    background-color: #444; /* 버튼 배경 색상 (어두운 회색) */
+    color: #f808080;            /* 버튼 텍스트 색상 (밝은 회색) */
+    border: 1px solid #666; /* 버튼 테두리 색상 */
+    padding: 8px 20px;     /* 버튼 여백 */
+    border-radius: 5px;    /* 버튼 모서리 둥글게 */
+    cursor: pointer;        /* 클릭 시 커서 변경 */
+    float:right;
 }
-#reviewcomment {
-  background-color: #333; /* 어두운 배경 색상 */
-  color: #eee;            /* 밝은 텍스트 색상 */
-  border: 1px solid #555; /* 테두리 색상 (선택 사항) */
-  padding: 10px;          /* 여백 추가 (선택 사항) */
-  border-radius: 5px;    /* 모서리 둥글기 (선택 사항) */
+
+#putcomment:hover {
+    background-color: #555; /* 버튼 호버 시 배경 색상 */
+    color: #f808080;            /* 버튼 호버 시 텍스트 색상 */
 }
 /* 최대 4개의 아이템만 표시 */
 .comment-list-container li:nth-child(n+5) {
@@ -123,6 +142,72 @@ float: right;
 #commentList{
 color:black;
 }
+
+#rate{
+    background-color: #444; /* 배경 색상 (어두운 회색) */
+    color: #ddd;            /* 글자 색상 (밝은 회색) */
+    border: 1px solid #666; /* 테두리 색상 */
+    border-radius: 5px;     /* 모서리 둥글게 */
+    padding: 5px;           /* 내부 여백 */
+    width: 60px;            /* 너비 100%로 설정 */
+    height: 60px;
+    appearance: none;       /* 기본 스타일 제거 (브라우저에 따라 다를 수 있음) */
+}
+#rateSelectBox {
+    background-color: #444; /* 배경 색상 (어두운 회색) */
+    color: #ddd;            /* 글자 색상 (밝은 회색) */
+    border: 1px solid #666; /* 테두리 색상 */
+    border-radius: 5px;     /* 모서리 둥글게 */
+    padding: 5px;           /* 내부 여백 */
+    width: 60px;            /* 너비 100%로 설정 */
+    appearance: none;       /* 기본 스타일 제거 (브라우저에 따라 다를 수 있음) */
+}
+
+#rateSelectBox {
+    padding: 5px;           /* 내부 여백 추가 */
+}
+
+/* 호버 시 스타일 */
+#rate:hover,
+#rateSelectBox:hover {
+    background-color: #555; /* 호버 시 배경 색상 */
+    color: #fff;            /* 호버 시 글자 색상 */
+}
+#editcomment, #deletecomment {
+    background-color: #444; /* 배경 색상 (어두운 회색) */
+    color: #ddd; /* 텍스트 색상 (밝은 회색) */
+    border: 1px solid #666; /* 테두리 색상 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    padding: 8px 16px; /* 버튼 여백 */
+    cursor: pointer; /* 클릭 시 커서 변경 */
+    margin-left: 10px; /* 버튼 간 간격 */
+}
+
+#editcomment:hover, #deletecomment:hover {
+    background-color: #555; /* 호버 시 배경 색상 */
+    color: #fff; /* 호버 시 텍스트 색상 */
+}
+#updetext{
+    background-color: #222; /* 배경 색상 (어두운 회색) */
+    color: #ddd;            /* 텍스트 색상 (밝은 회색) */
+    border: 1px solid #555; /* 테두리 색상 */
+    padding: 10px;          /* 여백 추가 */
+    border-radius: 5px;    /* 모서리 둥글게 */
+    width:300px;
+    height:100px;
+    resize: none;      /* 사용자가 세로 방향으로 크기를 조절할 수 있도록 설정 */
+}
+.textPosition {
+    margin-right: 100px; /* 상단 마진을 줄이기 */
+}
+.left-aligned {
+    text-align: left;
+    margin: 0; /* 여백 제거 */
+    padding: 0; /* 패딩 제거 */
+    width: 73%; /* 부모 요소의 너비를 가득 채우게 설정 */
+}
+
+
     </style>
 </head>
 <body>
@@ -132,16 +217,17 @@ color:black;
         <div class="vertical-container1">
             <div class="vertical-container">
                 <div class="flex-container">
-                    <img src="${chartList2}" height="400px">
+                    <img src="${chartList2}" height="400px" class="movieImage">
                     <div class="vertical-container">
                         <div class="title"><h1 id="getmname" data-mname="${chartList3.mname}">${chartList3.mname}</h1></div>
                        <div class="left-aligned" id="reservation">예매율 ${chartList3.reservation} %</div>
                         <div>
-                            <dl style="text-align: left;">
+                            <dl style="text-align: left;" class="textPosition">
                                 <dt>감독:&nbsp;${chartList3.director}</dt>
                                 <dt>배우 :&nbsp;${chartList3.cast}</dt>
                                 <dt>장르 :&nbsp;${chartList3.genre}/관람가:&nbsp;${chartList3.age}/상영시간:&nbsp;${chartList3.runningtime}</dt>
                                 <dt>개봉일:&nbsp;${chartList3.releasedate}</dt>
+                                <div id="movieAverageRate"></div>
                             </dl>
                         </div>
                     </div>
@@ -150,10 +236,10 @@ color:black;
                 <br><br><br>
                     <div>
                         <ul class="flex-container3">
-                            <li>상세정보|</li>
-                            <li id="apinfo"><a href="/chartdetail?id=${sessionScope.dataId}">감독/출연|</a></li>
-                            <li>스틸컷|</li>
-                            <li>평점/리뷰|</li>
+                            <li><a href="#movieAverageRate">상세정보</a></li>
+                            <li id="apinfo"><a href="/chartdetail?id=${sessionScope.dataId}">감독/출연</a></li>
+                            <li>스틸컷</li>
+                            <li><a href="#commentList">평점/리뷰</a></li>
                             <li>상영시간</li>
                         </ul>
                     </div>
@@ -164,11 +250,10 @@ color:black;
                             <div>
                                 <p>
                                     <span>
-                                        <em>${countreview} 명의 실관람객이 글을 남겨주셨습니다."</em>
+                                        <em>"${countreview} 명의 실관람객이 글을 남겨주셨습니다."</em>
                                     </span>
                                 </p>
                                 <div>
-<<<<<<< HEAD
                                     <c:if test="${movieReview == null}">
                                         <!--   <button id="review">리뷰작성</button> -->
                                         <ul id="addtextarea" data-id="${chartList3.id}">
@@ -192,21 +277,8 @@ color:black;
                                             </li>
                                         </ul>
                                     </c:if>
-=======
-                                   <!--   <button id="review">리뷰작성</button> -->
-                                    <ul id="addtextarea" data-id="${chartList3.id}">
-	                                    <li>
-		                                    <input type="hidden" id="moviechart" value="'+chartId+'">
-		                                    <input type="hidden" id="idcheck"><input type="hidden" id="recommendid">
-		                                    <input type="hidden" id="idname"><textarea id="reviewcomment" style="width:700px;height:100px;"></textarea>
-		                                    <button id="putcomment" style="width: auto; padding: 8px 20px; background-color:#E6E6FA; color: greyblue; border: none; border-radius: 5px;">리뷰등록</button>
-	                                    </li>
-                                    </ul>
->>>>>>> branch 'master' of https://github.com/HyukChoi08/MGcinema.git
                                 </div>
                             </div>
-                            <select size="1" style="width:100px;height:30px;" id="commentArray"></select>
-                            <button id="comment">Go</button>
                             <div>
                                 <ul id="commentList" class="comment-list-container"></ul>
                             </div>
@@ -219,27 +291,7 @@ color:black;
                 </div>
             </div>
         </div>
-    <%-- </c:forEach> --%>
-    <div id="appearinfo">
-    <div style="display:flex;">
-    <ul class="vertical-container">
-    <li>
-    <c:forEach items="${cainfoprod}" var="cainfoprod">
-                        <div>
-                    	감독:${cainfoprod.prod}<img src=${cainfoprod.image_path}>
-                    </div>
-    </c:forEach>
-    </li>
-    <li class="flex-container">
-    <c:forEach items="${cainfoactor}" var="cainfoactor">
-                        <div>
-                    	배우:${cainfoactor.actor}<img src=${cainfoactor.image_path}>
-                    </div>
-    </c:forEach>
-    </li>
-    </ul>
-    </div>
-    </div>
+
     </div>
     <%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
 
@@ -250,80 +302,16 @@ color:black;
     
     let getmname = $("#getmname").data("mname");
     
+
     $.ajax({
-    	url:'/putreservation',
+    	url:'/updatereservation',
     	type:'post',
     	data:{getmname:getmname},
-        success: function(data) {
-        	console.log(data)
-        	let str = ''
-        	$('#reservation').empty();
-			str="예매율:"+data;
-			console.log(str);
-        	
-            $('#reservation').append(str);
-        }
+    	success: function(data){
+    		console.log("update",data)
+    	}
     })
-        //commentArray select에 넣는것
-        $.ajax({
-            url: '/commentArray',
-            type: 'post',
-            data: {},
-            dataType: "json",
-            success: function(data) {
-                console.log(data);
-                let str = '';
-                for(let i = 0; i < data.length; i++) {
-                    str += '<option value="'+data[i]['id']+'">'+data[i]['text']+'</option>';
-                }
-                $('#commentArray').append(str);
-            }
-        });
-        //review를 select시키는 것
-//        $.ajax({
-//            url: '/insertselectcomment',
-//            type: 'post',
-//            data: {id1:${sessionScope.dataId}},
-//            dataType: 'JSON',
-//            success: function(data) {
-//                let str = '';
-//				let uid = '${sessionScope.uid}'
-//				console.log(uid);
-
-//                $('#commentList').empty();
-//                for(let i = 0; i < data.length; i++) {
-//                 	if(uid == data[i]['customer_uid']){
-//                	console.log("uid = " + uid)
-//               	console.log("data[i]['customer_uid'] = " + data[i]['customer_uid']);
-//                	
-//                	str += '<li><div><ul><li id="reviewWriter" value="'+data[i]['id']+'">'+data[i]['writer']+'</li><li>'+data[i]['created_at']+'</li></ul></div><div><p>'+data[i]['content']+'</p></div><button id="reviewbtn">메뉴</button>';
-//                 	}else {
-//                 		str += '<li><div><ul><li id="reviewWriter" value="'+data[i]['id']+'">'+data[i]['writer']+'</li><li>'+data[i]['created_at']+'</li></ul></div><div><p>'+data[i]['content']+'</p></div>'
-//                 	}
-                 		//	console.log("123");
-                		
-                	//	str+='<textarea id="updetext"></textarea><button data-review-id="'+data[i]['id']+'"id="editcomment">수정</button><button id="deletecomment">삭제</button>';
-                	
-//                	str+= '</li>';
-//                }
-//                console.log(str)
-//                $('#commentList').append(str);
-//                loadreview();
-         
-              
-//            }
-//        });
-
         $(document)
-/*             .on('click', '#review', function() { //리뷰란
-            	let chartId = $('#addtextarea').data('id');
-               console.log("chartList3Id", chartId);
-
-                let str = '';
-                $('#addtextarea').empty();
-                str = '<input type="hidden" id="moviechart" value="'+chartId+'"><input type="hidden" id="idcheck"><input type="hidden" id="recommendid"><input type="hidden" id="idname"><textarea id="reviewcomment" style="width:350px;height:100px;"></textarea><button id="putcomment">리뷰등록</button>';
-                $('#addtextarea').append(str);
-           })  */
             .on('click', '#putcomment', function() { //리뷰 인서트
                 let chartId = $('#addtextarea').data('id');
                 console.log("chartList3Id", chartId);
@@ -332,6 +320,7 @@ color:black;
                 let content = $('#reviewcomment').val();
                 let uid = '${sessionScope.uid}';
                 let nick = '${sessionScope.Nick}';
+                let rate = $("[name='rate']").val();
                 console.log("uid",uid);
                $('#idname').val(uid);
                 if (uid==null||uid==='') {
@@ -342,13 +331,14 @@ color:black;
                     $.ajax({
                         url: '/putcomment',
                         type: 'post',
-                        data: {moviechart: moviechart, content: content, writer: nick ,uid:uid},
+                        data: {moviechart: moviechart, content: content, writer: nick ,uid:uid, rate:rate},
                         success: function(data) {
                             console.log(data);
                             $('#moviechart').val('');
                             $('#reviewcomment').val('');
                             $('#idname').val('');
                             loadreview();
+                            AverageRate();
                             
                         }
                     });
@@ -390,11 +380,12 @@ color:black;
                 $.ajax({
                     url: '/updatereview',
                     type: 'post',
-                    data: {id:updeId, content: $('#updetext').val()},
+                    data: {id:updeId, content: $('#updetext').val(), rate: $("[name='rate']").val()},
                     dataType: 'text',
                     success: function(data) {
                         console.log(data);
                         loadreview();
+                        AverageRate();
                     }
                 });
             })
@@ -408,31 +399,45 @@ color:black;
                     success: function(data) {
                         console.log(data);
                         loadreview();
+                        AverageRate();
                     }
                 });
             });
         $(document).on('click', '.reviewupdete', function() {
             let reviewId = $(this).siblings('div').find('#reviewWriter').attr('value');
+
             
             // 기존에 추가된 요소 제거
-            $(this).parent().find('#updetext, #editcomment, #deletecomment').remove();
-            
-            let textarea = '<textarea id="updetext"></textarea>';
+            $(this).parent().find('#updetext, #editcomment, #deletecomment,#rateSelectBox').remove();
+            let rate = $(this).data("rate");
+            let textarea = '<textarea id="updetext">' + $(this).data("content") + '</textarea>';
             let editButton = '<button data-review-id="' + reviewId + '" id="editcomment">수정</button>';
             let deleteButton = '<button data-review-id="' + reviewId + '" id="deletecomment">삭제</button>';
+
+
+            let rateSelectBox = '<select id="rateSelectBox" name="rate"><option value="1">평점:1</option><option value="2">평점:2</option><option value="3">평점:3</option><option value="4">평점:4</option><option value="5">평점:5</option><option value="6">평점:6</option><option value="7">평점:7</option><option value="8">평점:8</option><option value="9">평점:9</option><option value="10">평점:10</option></select>';
+            for(let i = 1; i <= 10; i++) {
+                if(i == rate) {
+                    rateSelectBox = rateSelectBox.replace('value="' + i + '"', 'value="' + i + '" selected');
+                }
+            }
             
-            $(this).parent().append(textarea + editButton + deleteButton);
+            $(this).parent().append(textarea + rateSelectBox + editButton + deleteButton);
         });
         
-        $(document).on('click', '#apinfo', function() {
-            $('#review').hide();
-            $('#paging').hide();
-            $('#comment').hide();
-            $('#commentList').hide();
-            $('#commentArray').hide();
-            $('#movieinfo').hide();
-            $('#appearinfo').show();
-        });
+        function AverageRate(){
+            $.ajax({
+            	url:'/AverageRate',
+            	type:'get',
+            	data:{id:'${chartList3.id}'},
+            	success:function(data){
+            		$('#movieAverageRate').empty();
+            		let str = '평점:'+ parseFloat(data);
+            		console.log("rate",str);
+            		$('#movieAverageRate').append(str);
+            	}
+            });
+        }
         function loadreview(page = 1) {
             $.ajax({
                 url: '/insertselectcomment',
@@ -464,13 +469,12 @@ color:black;
                         console.log("uid = " + uid);
                         console.log("pageData[i]['customer_uid'] = " + pageData[i]['customer_uid']);
                         if (uid == pageData[i]['customer_uid']) {
-                            str += '<li><div><ul><li id="reviewWriter" value="' + pageData[i]['id'] + '">' + pageData[i]['writer'] + '</li><li>' + pageData[i]['created_at'] + '</li></ul></div><div><p>' + pageData[i]['content'] + '</p></div><button class="reviewupdete"><img src="/chartImage/더보기3.jpg"></button>';
+                            str += '<li><div><ul><li id="reviewWriter" value="' + pageData[i]['id'] + '">' + pageData[i]['writer'] + '</li><li>평점:'+pageData[i]['rate']+'</li><li>' + pageData[i]['created_at'] + '</li></ul></div><div>' +
+                                '<p>' + pageData[i]['content'] + '</p></div><button class="reviewupdete" data-content="' + pageData[i]['content'] + '" data-rate="' + pageData[i]['rate'] + '"><img src="/chartImage/더보기3.jpg"></button>';
                         } else {
-                            str += '<li><div><ul><li id="reviewWriter" value="' + pageData[i]['id'] + '">' + pageData[i]['writer'] + '</li><li>' + pageData[i]['created_at'] + '</li></ul></div><div><p>' + pageData[i]['content'] + '</p></div>';
+                            str += '<li><div><ul><li id="reviewWriter" value="' + pageData[i]['id'] + '">' + pageData[i]['writer'] + '</li><li>평점:'+pageData[i]['rate']+'</li><li>' + pageData[i]['created_at'] + '</li></ul></div><div><p>' + pageData[i]['content'] + '</p></div>';
                         }
-                       //     console.log("123");
-                       //     str += '<textarea id="updetext"></textarea><button data-review-id="' + pageData[i]['id'] + '" id="editcomment">수정</button><button id="deletecomment">삭제</button>';
-                        
+
                         str += '</li>';
                     }
                     console.log(str);
@@ -496,6 +500,7 @@ color:black;
         // 페이지 로드 시 첫 페이지 댓글 로드
         $(document).ready(function() {
         	loadreview();
+        	AverageRate();
         });
         
     </script>
