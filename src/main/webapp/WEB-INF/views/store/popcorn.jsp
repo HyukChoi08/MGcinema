@@ -176,6 +176,7 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
     display: none; /* 기본적으로 숨김 */
 }
 .icon-overlay {
+    
     position: absolute;
     top: 50%; /* 이미지 상단에서 중앙 위치 */
     left: 50%; /* 이미지 왼쪽에서 중앙 위치 */
@@ -187,44 +188,45 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
     width: 60px;
     height: 60px;
     text-align: center;
-    line-height: 40px;
-    font-size: 24px;
+    line-height: 60px;
+    font-size: 30px;
     font-weight: bold;
 }
-        .hover-text {
+    .hover-text {
     display: none; /* 기본적으로 숨김 */
     position: absolute; /* 아이콘에 대해 절대 위치 */
-    bottom: -50px; /* 아이콘 위에 위치하도록 조정 */
+   
     left: 50%; /* 아이콘의 중앙 정렬 */
     transform: translateX(-50%); /* 수평 중앙 정렬 */
     background-color: rgba(0, 0, 0, 0.8); /* 반투명 배경 */
     color: white; /* 글자 색상 */
     padding: 5px; /* 텍스트 주변 여백 */
     border-radius: 5px; /* 둥근 모서리 */
-    font-size: 14px; /* 텍스트 크기 조정 */
+    font-size: 20px; /* 텍스트 크기 조정 */
     white-space: nowrap; /* 텍스트가 줄 바꿈되지 않도록 설정 */
     z-index: 20; /* 텍스트가 다른 요소 위에 위치하도록 설정 */
+    line-height: 24px; /* 텍스트 수직 정렬을 위한 높이 조정 */
 }
 .product:hover .icon-container {
     display: flex; /* 호버 시 아이콘 표시 */
 }
 
-.icon-left, .icon-center, .icon-right {
+.icon-left,.icon-right {
     background-color: rgba(255, 255, 255, 0.8); /* 밝은 배경색으로 변경 */
     color: black; /* 아이콘 색상 */
     border-radius: 50%;
-    width: 30px; /* 아이콘 크기 */
-    height: 30px; /* 아이콘 크기 */
+    width: 50px; /* 아이콘 크기 */
+    height: 50px; /* 아이콘 크기 */
     text-align: center; /* 아이콘 텍스트 중앙 정렬 */
-    line-height: 30px; /* 아이콘 텍스트 수직 중앙 정렬 */
-    font-size: 16px; /* 아이콘 텍스트 크기 */
+    line-height: 50px; /* 아이콘 텍스트 수직 중앙 정렬 */
+    font-size: 24px; /* 아이콘 텍스트 크기 */
     font-weight: bold; /* 아이콘 텍스트 굵게 */
 }
 .icon-container {
     position: absolute; /* 이미지 내부에 절대 위치로 배치 */
     width: 100%; /* 이미지의 전체 너비를 차지하도록 설정 */
     height: 100%; /* 이미지의 전체 높이를 차지하도록 설정 */
-    top: 0; /* 이미지 상단에 맞춤 */
+    top: -30px; /* 이미지 상단에 맞춤 */
     left: 0; /* 이미지 왼쪽에 맞춤 */
     display: flex; /* flexbox 레이아웃을 사용하여 아이콘 정렬 */
     justify-content: center; /* 아이콘을 중앙에 배치 */
@@ -234,6 +236,7 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
     display: none; /* 기본적으로 숨김 */
     pointer-events: none; /* 아이콘의 클릭을 막고 이미지의 클릭을 가능하게 함 */
 }
+
 
 .icon-item img {
     width: 20px; /* 아이콘 크기 조정 */
@@ -247,7 +250,7 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
 .icon-item {
     position: relative; /* 텍스트를 아이콘에 맞게 배치하기 위해 */
     pointer-events: auto; /* 아이콘의 클릭을 가능하게 함 */
-    margin: 0 40px; /* 아이콘 사이의 간격을 조정합니다 (좌우 여백) */
+    margin: 0 20px; /* 아이콘 사이의 간격을 조정합니다 (좌우 여백) */
 }
 .category_title strong {
     padding-right: 50px; /* 버튼 너비만큼 여백을 추가하여 텍스트가 버튼에 겹치지 않게 함 */
@@ -282,7 +285,9 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
 .hidden {
     display: none;
 }
-
+.product-composition{
+font-size:11px;
+}
 
 </style>
 </head>
@@ -297,6 +302,7 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
             </div>
             <div class="contegory_contents_wrap">
                 <ul class="category_content"> <!-- ul로 변경 -->
+                	<li><a href="/storeall" class="no-underline">전체상품</a></li>
                     <li><a href="/package" class="no-underline">패키지</a></li>
                     <li><a href="/giftcard" class="no-underline">기프트카드</a></li>
                     <li><a href="/combo" class="no-underline">콤보</a></li>
@@ -332,8 +338,9 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
 	                                    </div>
 	                                <div class="product-info">
 	                                    <span class="product-name">${Store.item_name}</span><br>
-	                                        <span class="original-price">${Store.price}원</span>
-                                        	<span class="discounted-price">${Store.discount_price}원</span>	                                        
+	                                    <span class="product-composition">${Store.composition}</span><br>
+                                        <span class="original-price">${Store.price}원</span>
+                                       	<span class="discounted-price">${Store.discount_price}원</span>	                                        
 	                                </div>
 	                            </li>
 	                        </c:forEach>                                                                                                                          
@@ -351,6 +358,19 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
 <script src="https://code.jquery.com/jquery-latest.js">
 </script>
 <script>
+function updateCartCount(customer_id) {
+    $.ajax({
+        url: '/countcart',
+        type: 'post',
+        data: { customer_id: customer_id },
+        dataType: 'text',
+        cache: false,
+        success: function(data) {
+            $('#cart-count').text(data);
+        }
+    });
+}
+
 $(document).ready(function() {
 	
 	$('.product-info').each(function() {
@@ -368,20 +388,9 @@ $(document).ready(function() {
  	let customer_id= $('#userid').val();
  	console.log(customer_id);
  	
-	 	function updateCartCount() {
-	        $.ajax({
-	            url: '/countcart',
-	            type: 'post',
-	            data: { customer_id: customer_id },
-	            dataType: 'text',
-	            cache: false, // 캐시 비활성화
-	            success: function(data) {
-	                $('#cart-count').text(data);
-	            }         
-	        })
-	    }
+    updateCartCount(customer_id);
 	
-	    updateCartCount();
+
 	
 	
 	//페이지가 로드될 때 강제로 새로고침
@@ -424,26 +433,30 @@ $(document).ready(function() {
      }
  	 	 
      // 페이지 로드 시 카운트 업데이트
- 
-     
-    	        $('.icon-left').on('click', function(event) {
+    	        $('.icon-left').on('click', function(e) {
     	            // 클릭 이벤트를 막고, 비동기 작업이 완료된 후 결과에 따라 결정합니다.
-    	          
-    	            console.log('Icon left clicked');
-    	            
+    	              e.preventDefault(); 	       
     	            
     	            if (customer_id === '') {
-    	            	event.preventDefault(); // 기본 동작을 막습니다.
-    	    	        alert("로그인 후 이용해주세요");
-    	    	        return false;
-    	    	    }
-    	            
+    	                
+    	                let  userConfirmed = confirm("로그인 페이지로 이동하시겠습니까?");
+    	                        
+    	                 if ( userConfirmed) {
+    	                     // 로그인 페이지로 리다이렉트
+    	                     window.location.href = '/login';
+    	                     
+    	                     return false;
+    	                 }else{
+    	                	    return false;
+    	                 } 
+    	                	
+    	             }
     	            
 
-    	            var $productItem = $(this).closest('li.product');
+    	            let $productItem = $(this).closest('li.product');
     	            
     	            // li.product의 ID를 가져옵니다
-    	            var item_id = $productItem.attr('id');
+    	            let item_id = $productItem.attr('id');
     	            console.log('Item ID:', item_id);
 
     	            // 원래 가격과 할인된 가격을 추출합니다
@@ -453,9 +466,7 @@ $(document).ready(function() {
 
     	            // 가격을 확인합니다
     	            console.log('Original Price:', originalPrice);
-    	            console.log('Discounted Price:', discount_price);
-    	          
-    	            
+    	            console.log('Discounted Price:', discount_price);   	            	            
     	            
     	            $.ajax({
     	                url: '/checkitem',
@@ -511,15 +522,9 @@ $(document).ready(function() {
   	                			}
   	                		
   	                		}) 
-  	                    	
-    	               	                        	                    	  	                    	
-    	                    	                    
+  	                    	    	               	                        	                    	  	                       	                    	                    
     	                    }
-    	                },
-    	                error: function(xhr, status, error) {
-    	                    console.error('AJAX 요청 오류:', status, error);
-    	                    alert('요청 중 오류가 발생했습니다.');
-    	                }
+    	                }  	               
     	            })
     	        })     
     
@@ -527,18 +532,27 @@ $(document).ready(function() {
 let selectedItems = []; // 전역 변수로 선언
 
 $('.buyButton').on('click', function(e) {
+	e.preventDefault();
     
     let item_id = $(this).closest('.product').attr('id');
     console.log('item_id:', item_id);
     
  	let userid=$('#userid').val();
     
-    if (!userid) {
-        e.preventDefault(); // 클릭 시 기본 동작 방지
-        alert('로그인 후 이용해주세요.');
-        return;
-    }
-    
+   if (userid === '') {
+        
+        let  userConfirmed = confirm("로그인 페이지로 이동하시겠습니까?");
+                
+         if ( userConfirmed) {
+             // 로그인 페이지로 리다이렉트
+             window.location.href = '/login';
+             
+             return false;
+         }else{
+        	    return false;
+         } 
+        	
+     }
     
 
     $.ajax({

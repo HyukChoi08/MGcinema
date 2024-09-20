@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -59,7 +58,7 @@ ul, li {
     height: 2px;
     margin: 0;
 }
-/* 밑줄*/
+
 .separator {
     position: relative; /* 상위 요소에 상대적으로 위치 */
     bottom: 0; /* 부모 요소의 하단에 위치 */
@@ -153,6 +152,7 @@ vertical-align: middle; /* 수직 중앙 정렬 */
     display: flex;
     align-items: center; /* 수직 정렬 */
     gap: 20px; /* 텍스트와 버튼 사이의 간격 조정 */
+    font-size: 20px;
 }
 
 .category_inner {
@@ -237,8 +237,7 @@ img {
 .product {
 position: relative; /* 이 부분을 추가하여 아이콘 위치 조정 */
 overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도록 설정 */
-}
-
+        }
 .hidden-icon {
     display: none; /* 기본적으로 숨김 */
     position: absolute;
@@ -378,18 +377,7 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
 font-size:12px;
 
 }
-
-.best-label {
-
-}
-.image-container {
-    position: relative;
-    display: inline-block; /* 이미지와 문구를 함께 묶음 */
-}
-
-.image-container img {
-    display: block; /* 이미지가 블록 요소로 처리되게 함 */
-}
+ 
     </style>
 </head>
 <body>
@@ -397,7 +385,7 @@ font-size:12px;
     <div id="container">
         <div id="contents">
             <div class="category_wrap">
-            <a href="/store" id="store-link">베스트상품</a>            
+            <a href="/store" id="store-link">스토어</a>            
             <input type="hidden" id="userid" value="${uid}">    
             <input type="hidden" id="age"> 
                 <div class="separator"></div> <!-- 선을 스토어 아래에 위치 -->
@@ -420,19 +408,15 @@ font-size:12px;
             <div class="category_product_wrap">
                 <ul class="product_list">           
                     <li class="li1">                   
-                        <strong class="category_title">베스트 상품<br>
+                        <strong class="category_title">전체상품<br>
                             <!-- <a href="/package" class="circle-button">+</a> -->
                         </strong> 
                         <div class="separator2"></div>
                         <ul class="category_inner">                      	
                         	<c:forEach items="${arStore}" var="Store">
 	                            <li class="product" id="${Store.id}">
-										<a href="/details?id=${Store.id}" class="btn_category_product">  
-										    <span class="image-container">
-										        <img src="${Store.image_path}" alt="${Store.item_name}">
-										        <span class="best-label">Best</span>
-										    </span>
-										</a>
+	                                <a href="/details?id=${Store.id}" class="btn_category_product">  
+	                                    <img src="${Store.image_path}" alt="${Store.item_name}"></a>
 	                                    <div class="icon-container">
 											<div class="icon-item icon-left" id="cart-link">
 	   										<img src="/store_images/장바구니.png" alt="Left Icon">

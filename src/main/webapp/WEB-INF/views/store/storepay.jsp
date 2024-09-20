@@ -315,8 +315,7 @@ position: relative;
     <div class="separator1"></div> <!-- 선을 contegory_contents_wrap 아래에 위치 -->
     <div class="cart_step">
         <div class="step step1"><span>STEP 01</span>&nbsp;<strong>장바구니</strong></div>
-        <div class="step step2 active"><span>STEP 02</span>&nbsp;<strong>결제하기</strong></div>
-        <div class="step step3"><span>STEP 03</span>&nbsp;<strong>결제완료</strong></div>             
+        <div class="step step2 active"><span>STEP 02</span>&nbsp;<strong>결제하기</strong></div>              
     </div>
     <div class="cart_details">
         <table class="cart-table">
@@ -396,24 +395,26 @@ position: relative;
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
+function updateCartCount(customer_id) {
+    $.ajax({
+        url: '/countcart',
+        type: 'post',
+        data: { customer_id: customer_id },
+        dataType: 'text',
+        cache: false,
+        success: function(data) {
+            $('#cart-count').text(data);
+        }
+    });
+}
+
+
 $(document).ready(function() {
 	
 	let customer_id=$('.uid').val();
 	
-	function updateCartCount() {
-        $.ajax({
-            url: '/countcart',
-            type: 'post',
-            data: { customer_id: customer_id },
-            dataType: 'text',
-            cache: false, // 캐시 비활성화
-            success: function(data) {
-                $('#cart-count').text(data);
-            }         
-        })
-    }
-	   // 페이지 로드 시 카운트 업데이트
-    updateCartCount();
+	
+	updateCartCount(customer_id);
 
 	
     function formatNumber(num) {
@@ -443,8 +444,7 @@ $(document).ready(function() {
             $cartPrice.hide();
         }
     });
-                      
-  
+                       
     $('.discount_price, .cart_price, .total, .totalprice, .totaldiscount, .finalprice').each(function() {
         let text = $(this).text();
         // '원' 단위를 제거하고 숫자만 추출
@@ -454,10 +454,7 @@ $(document).ready(function() {
         // 포맷된 숫자와 '원' 단위를 다시 설정
         $(this).text(formattedNumber + '원');
     });
-	
-	
-	
-	
+		
     // URL에서 source 파라미터를 읽어옴
     let queryString = window.location.search;
     let params = new URLSearchParams(queryString);
@@ -490,10 +487,27 @@ $(document).ready(function() {
         console.log(customer_id);
         console.log("price" + finalprice);
         console.log("name" + str);
+        
+        let select=''
 
+        // 숨겨진 input 필드들 선택
+        $('.item_id').each(function() {
+        // 현재 input 필드의 값을 문자열로 추가
+        select += $(this).val() + ',';
+        });
+
+		
+        if (select.endsWith(',')) {
+            select = select.slice(0, -1);
+        }
+     
+        // 콘솔에 결과 출력 (디버깅용)
+        console.log(select);
+        
         customer_id = encodeURIComponent(customer_id);
         let totalprice = encodeURIComponent(finalprice);
         let itemname = encodeURIComponent(str);
+       
 
         // Use the dynamically determined source
         source = encodeURIComponent(source);
@@ -506,7 +520,8 @@ $(document).ready(function() {
         // URL 생성
         let url = '/store/storecheck?itemname=' + itemname +
               '&totalprice=' + totalprice +
-              '&source=' + source;
+              '&source=' + source+
+              '&select=' + encodeURIComponent(select);
 
         console.log("Generated URL: " + url);
 
