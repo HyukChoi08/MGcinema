@@ -61,7 +61,7 @@
         <div id="lastinfo" class="foots-container">
             <div id="confirmBtn" style="display:none;" class="button-container">
             	<div class="arrow-icon-b">➔</div>
-        		<div class="button-text">영화 선택</div>
+        		<div class="button-text-b">영화 선택</div>
         	</div>
             <div id="movieimage"></div>
             <div id="movieresult">영화 정보</div>
@@ -70,11 +70,11 @@
             <div id="priceresult">결제 정보</div>
             <div id="reserveBtn" class="button-container">
             	<div class="arrow-icon-a">➔</div>
-        		<div class="button-text">좌석선택</div>
+        		<div class="button-text-a">좌석선택</div>
         	</div>
             <div id="submitBtn" style="display:none;" class="button-container">
             	<div class="arrow-icon-a">➔</div>
-        		<div class="button-text">결제이동</div>
+        		<div class="button-text-a">결제이동</div>
         	</div>
         </div>
     </div>

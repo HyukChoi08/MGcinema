@@ -358,7 +358,13 @@ img {
     line-height: 1; /* 텍스트 높이 줄이기 */
 }
 
-.button-text {
+.button-text-a {
+    font-size: 20px;
+    color: #d4af37;
+    margin-top: -5px; /* 화살표와 텍스트 간격 조정 */
+    line-height: 2.1; /* 텍스트 높이 줄이기 */
+}
+.button-text-b {
     font-size: 20px;
     color: #d4af37;
     margin-top: -5px; /* 화살표와 텍스트 간격 조정 */
