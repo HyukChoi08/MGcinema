@@ -25,6 +25,7 @@ body {
     box-sizing: border-box;
     margin-top:150px;
     margin-bottom:100px;
+    
 }
 .vertical-container4 {
     display: flex;
@@ -58,7 +59,9 @@ body {
     justify-content: center;
     align-items: flex-start;
     width: 800px;
-    color:#c7b199;
+    color: #c7b199;
+    border-top: 2px solid #c7b199; /* 윗줄 보더 추가 */
+    border-bottom: 2px solid #c7b199; /* 아랫줄 보더 추가 */
 }
 .flex-container3 li {
     margin-right: 20px; /* 각 <li> 요소 사이의 간격 설정 */
@@ -98,6 +101,14 @@ a {
     text-decoration-line: none;
     color:#c7b199;
 }
+#buyMovieTicket a {
+	color: #BE2E22;
+}
+#buyMovieTicket a:hover{
+    background-color: #555;
+    color: #F808080;
+}
+
 .title {
   margin-bottom: 10px; /* 원하는 만큼 상단으로 이동 */
 }
@@ -149,8 +160,8 @@ color:black;
     border: 1px solid #666; /* 테두리 색상 */
     border-radius: 5px;     /* 모서리 둥글게 */
     padding: 5px;           /* 내부 여백 */
-    width: 60px;            /* 너비 100%로 설정 */
-    height: 60px;
+    width: 55px;            /* 너비 100%로 설정 */
+    height: 35px;
     appearance: none;       /* 기본 스타일 제거 (브라우저에 따라 다를 수 있음) */
 }
 #rateSelectBox {
@@ -206,8 +217,32 @@ color:black;
     padding: 0; /* 패딩 제거 */
     width: 73%; /* 부모 요소의 너비를 가득 채우게 설정 */
 }
-
-
+.text-size {
+    font-size: 24px; /* 원하는 글씨 크기로 설정 */
+    border-top: 2px solid #c7b199; /* 위쪽 경계선 */
+    border-bottom: 2px solid #c7b199; /* 아래쪽 경계선 */
+    padding: 10px 0; /* 상하 여백 추가 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+}
+#putcomment {
+    padding: 8px 20px; /* 여백 설정 */
+    background-color: #E6E6FA; /* 배경색 설정 */
+    color: greyblue; /* 글자색 설정 */
+    border: none; /* 테두리 제거 */
+    border-radius: 5px; /* 둥글게 설정 */
+}
+.comment-input-container {
+    display: flex; /* 수평으로 배치 */
+    align-items: flex-end; /* 아래쪽으로 정렬 */
+}
+.rate-button-container {
+    display: flex; /* 수평으로 배치 */
+    align-items: flex-end; /* 아래쪽 정렬 */
+}
+.flex-container3 li:hover {
+    background-color: #555; /* 원하는 배경색으로 설정 */
+    cursor: pointer; /* 마우스 커서 변경 */
+}
     </style>
 </head>
 <body>
@@ -228,6 +263,7 @@ color:black;
                                 <dt>장르 :&nbsp;${chartList3.genre}/관람가:&nbsp;${chartList3.age}/상영시간:&nbsp;${chartList3.runningtime}</dt>
                                 <dt>개봉일:&nbsp;${chartList3.releasedate}</dt>
                                 <div id="movieAverageRate"></div>
+                                <div id="buyMovieTicket"><a href="/ticket?mname=${chartList3.mname}">예매하기</a></div>
                             </dl>
                         </div>
                     </div>
@@ -238,14 +274,14 @@ color:black;
                         <ul class="flex-container3">
                             <li><a href="#movieAverageRate">상세정보</a></li>
                             <li id="apinfo"><a href="/chartdetail?id=${sessionScope.dataId}">감독/출연</a></li>
-                            <li>스틸컷</li>
+                            <li><a href="/chartcut?id=${sessionScope.dataId}">스틸컷</a></li>
                             <li><a href="#commentList">평점/리뷰</a></li>
                             <li>상영시간</li>
                         </ul>
                     </div>
                     <br><br><br>
                     <div style="width:800px" id="movieinfo">${chartList3.movieinfo}</div><br><br>
-                    <div>리뷰
+                    <div><div class="text-size">리뷰</div>
                         <span>
                             <div>
                                 <p>
@@ -260,25 +296,31 @@ color:black;
                                             <li>
                                                 <input type="hidden" id="moviechart" value="'+chartId+'">
                                                 <input type="hidden" id="idcheck"><input type="hidden" id="recommendid">
-                                                <input type="hidden" id="idname"><textarea id="reviewcomment" style="width:660px;height:100px;"></textarea>
-                                                <select id="rate"name="rate">
-                                                    <option value="1">평점:1</option>
-                                                    <option value="2">평점:2</option>
-                                                    <option value="3">평점:3</option>
-                                                    <option value="4">평점:4</option>
-                                                    <option value="5">평점:5</option>
-                                                    <option value="6">평점:6</option>
-                                                    <option value="7">평점:7</option>
-                                                    <option value="8">평점:8</option>
-                                                    <option value="9">평점:9</option>
-                                                    <option value="10">평점:10</option>
-                                                </select>
-                                                <button id="putcomment" style="width: auto; padding: 8px 20px; background-color:#E6E6FA; color: greyblue; border: none; border-radius: 5px;">리뷰등록</button>
+                                                <input type="hidden" id="idname">
+												 <div class="comment-input-container">
+												    <textarea id="reviewcomment" style="width: 630px; height: 100px;"></textarea>
+												    <div class="rate-button-container">
+												        <select id="rate" name="rate">
+												            <option value="1">평점: 1</option>
+												            <option value="2">평점: 2</option>
+												            <option value="3">평점: 3</option>
+												            <option value="4">평점: 4</option>
+												            <option value="5">평점: 5</option>
+												            <option value="6">평점: 6</option>
+												            <option value="7">평점: 7</option>
+												            <option value="8">평점: 8</option>
+												            <option value="9">평점: 9</option>
+												            <option value="10">평점: 10</option>
+												        </select>
+												        <button id="putcomment">리뷰등록</button>
+												    </div>
+												</div>
                                             </li>
                                         </ul>
                                     </c:if>
                                 </div>
                             </div>
+                            <br><br>
                             <div>
                                 <ul id="commentList" class="comment-list-container"></ul>
                             </div>
