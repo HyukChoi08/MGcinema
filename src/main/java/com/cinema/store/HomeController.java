@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -33,19 +32,7 @@ public class HomeController {
 	@Autowired storecustomerDAO customerdao;
 	
 	
-	
-	@GetMapping("/storeall")
-	public String storeall(HttpServletRequest req,Model model) {
-		HttpSession s=req.getSession();
-		String uid=(String) s.getAttribute("uid");
-	
-		ArrayList<storeDTO> arStore = storedao.storeall();
-		
-			
-		model.addAttribute("arStore",arStore);
-		return "store/storeall";
-	}
-	
+
 	@GetMapping("/store")
 	public String store(HttpServletRequest req,Model model) {
 		HttpSession s=req.getSession();
@@ -54,7 +41,6 @@ public class HomeController {
 		ArrayList<storeDTO> arStore = storedao.selectbest();
 				
 		model.addAttribute("arStore",arStore);
-		model.addAttribute("uid",uid);
 		return "store/store";
 	}
 	@GetMapping("/details")
@@ -393,7 +379,6 @@ public class HomeController {
 	    public String storeCheckoutPage(@RequestParam("itemname") String itemname,
 	            						@RequestParam("totalprice") String totalprice,
 	            					    @RequestParam(value = "source", required = false) String source,
-	            					    @RequestParam(value = "select", required = false) String select, // select 파라미터를 문자열로 받음
 
 	            						HttpServletRequest req, Model model) {
 			HttpSession s =req.getSession();
@@ -408,17 +393,14 @@ public class HomeController {
 	        model.addAttribute("email", arCustomer.getEmail());
 	        model.addAttribute("mobile", arCustomer.getMobile());
 	        model.addAttribute("source", source); // source 값을 모델에 추가
-	        model.addAttribute("select", select);
 	        
 	        model.addAttribute("itemname", itemname);       	        
 	        model.addAttribute("totalprice", totalprice);
-	        
 
 	        String orderId = UUID.randomUUID().toString();
 	        model.addAttribute("orderId", orderId);
 	        System.out.println("Source1111: " + source); // source 값 확인
 	        System.out.println("toto1"+totalprice);
-	        System.out.println("select"+select);
 	        return "store/storecheck";
     }
 	   
@@ -442,7 +424,6 @@ public class HomeController {
 	       System.out.println("uid: " + params.get("uid"));
 	       System.out.println("itemname: " + params.get("itemname"));
 	       System.out.println("totalprice: " + params.get("totalprice"));
-	       System.out.println("select: " + params.get("select"));
 
 	       // 모델에 데이터 추가
 	       model.addAttribute("orderId", params.get("orderId"));
@@ -450,7 +431,6 @@ public class HomeController {
 	       model.addAttribute("itemname", params.get("itemname"));
 	       model.addAttribute("totalprice", params.get("totalprice"));
 	       model.addAttribute("source", params.get("source")); // source 추가
-	       model.addAttribute("select", params.get("select"));
 
 	       return "store/storesuccess";
 	   }   
@@ -481,43 +461,14 @@ public class HomeController {
 	@ResponseBody
 	public String clearcart(HttpServletRequest req) {
 		String customer_id=req.getParameter("customer_id");
-		String select = req.getParameter("select");
-		
 		System.out.println("Received customer_id: " + customer_id);
-		System.out.println("Received select: " + select);
 		
-		String[] selectArray = select.split(",");
-		 
-		int[] itemIds = new int[selectArray.length];
-		 
-	    for (int i = 0; i < selectArray.length; i++) {
-	            // 문자열을 int로 변환
-	            itemIds[i] = Integer.parseInt(selectArray[i].trim());
-	         
-	    }
-		    
-		 for (int item_id : itemIds) {
-		        System.out.println("item_id" + item_id);
-		        // 여기에 itemId를 사용하여 필요한 처리를 수행합니다.
-		        // 예: 장바구니에서 특정 아이템 제거
-				customerdao.clearcart(customer_id, item_id);
-		 }
-		
+		customerdao.clearcart(customer_id);
+	
 		return "ok";
 	}
-	@PostMapping("/storeage")
-	@ResponseBody
-	public storecustomerDTO storeage(HttpServletRequest req) throws Exception {
-	    HttpSession s = req.getSession();
-	    String customer_id = (String) s.getAttribute("uid");
-	    String id1 = (String) s.getAttribute("id");
-	    int cust_id = Integer.parseInt(id1);
-	    
-	    storecustomerDTO arAge = customerdao.storeage(customer_id, cust_id);
-	    
-	    // JSON으로 변환
-	    return arAge; // Spring이 자동으로 JSON으로 변환하여 반환합니다.
-	}
+	   
+	   
 	   
 	
 }

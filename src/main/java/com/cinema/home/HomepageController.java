@@ -111,16 +111,14 @@ public class HomepageController {
 			String passwd = req.getParameter("passwd");
 			String birthday = req.getParameter("birthday");
 			String mobile = req.getParameter("mobile");
-			String userPostCode = req.getParameter("userPostCode");
-			String userAddr1 = req.getParameter("userAddr1");
-			String userAddr2 = req.getParameter("userAddr2");
+			String region = req.getParameter("region");
 			String nickname = req.getParameter("nickname");
 			
 			String[] favorites = req.getParameterValues("favorite");
 	        String favorite = (favorites != null) ? String.join(",", favorites) : ""; // 배열을 쉼표로 구분된 문자열로 변환
 			
 			String tellecom = req.getParameter("tellecom");
-			
+
 			
 			int uidCount = ldao.checkUidExists(uid);
 			if (uidCount > 0) {
@@ -128,7 +126,8 @@ public class HomepageController {
 				req.setAttribute("currentStep", "2"); // 다시 Step 2로 이동
 				// 폼 데이터 유지
 				model.addAttribute("formData", Map.of("realname", realname, "email", email, "uid", uid, "passwd", passwd, 
-						"birthday", birthday, "mobile", mobile,"nickname", nickname, "favorite", favorite, "tellecom", tellecom
+						"birthday", birthday, "mobile", mobile, "region", region, "nickname", nickname, "favorite", favorite, "tellecom", tellecom
+
 				));
 				return "home/signup";
 			}
@@ -139,12 +138,13 @@ public class HomepageController {
 				req.setAttribute("currentStep", "2"); // 다시 Step 2로 이동
 				// 폼 데이터 유지
 				model.addAttribute("formData", Map.of("realname", realname, "email", email, "uid", uid, "passwd", passwd, 
-						"birthday", birthday, "mobile", mobile,"nickname", nickname, "favorite", favorite, "tellecom", tellecom
+						"birthday", birthday, "mobile", mobile, "region", region, "nickname", nickname, "favorite", favorite, "tellecom", tellecom
+
 				));
 				return "home/signup";
 			}
 			
-			ldao.insertSignup(realname, email, uid, passwd, birthday, mobile, userAddr1, nickname, favorite, tellecom,userAddr2,userPostCode);
+			ldao.insertSignup(realname, email, uid, passwd, birthday, mobile, region, nickname, favorite, tellecom);
 		}
 
 		// 다음 단계로 이동하기 위해 JSP에 currentStep 전달

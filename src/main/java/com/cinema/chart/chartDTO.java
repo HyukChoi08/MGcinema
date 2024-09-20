@@ -15,6 +15,5 @@ String director;
 String cast;
 String genre;
 String releasedate;
-String movieinfo;
-String getmname;
+String movieinfo; 
 }

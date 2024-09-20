@@ -130,9 +130,9 @@
                     
                     <div class="addr-wrap">
             			<label for="#userAddr1">주소</label>
-            			<input type="text" id="userPostCode" name="userPostCode" placeholder="우편번호" readonly>
+            			<input type="text" id="userPostCode" name="userPostCode" placeholder="우편번호" disabled>
             			<button type="button" onclick="searchAddr();">주소찾기</button>
-            			<input type="text" id="userAddr1" name="userAddr1" placeholder="주소" readonly>
+            			<input type="text" id="userAddr1" name="userAddr1" placeholder="우편번호" readonly>
             			<input type="text" id="userAddr2" name="userAddr2" placeholder="상세 주소 입력" required>
        				</div>
 

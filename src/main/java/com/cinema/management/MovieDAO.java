@@ -16,7 +16,7 @@ public interface MovieDAO {
 	void itemdel(int a);
 	void inquirydel(int a);
 	void newsdel(int a);
-	void moviein(String a, String o, String i, String u, String y, String t, String r, String e, String w, float q, float s);
+	void moviein(String a, String o, String i, String u, String y, String t, String r, String e, String w, float q );
 	ArrayList<ItemDTO> itemlist();
 	ArrayList<InquiryDTO> inquirylist();
 	ArrayList<NewsDTO> newslist();
@@ -26,6 +26,4 @@ public interface MovieDAO {
 	void newsup(int a,String b,String c,String d);
 	void roomup(int a,String b,String c,String d);
 	void itemup(int a,String b,String c,String d,String e,String f,String g,String h,String i);
-	void bestzero();
-	void bestitems(int a, int b);
 }

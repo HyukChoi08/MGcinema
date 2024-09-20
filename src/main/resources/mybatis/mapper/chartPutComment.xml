@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cinema.chart.chartPutCommentDAO"><!-- select의옵션 -->
 	<insert id ="putcomment">
-		insert into review set moviechart=#{param1}, content=#{param2}, writer=#{param3},customer_uid=#{param4}, rate=${param5}
-	</insert>
+		insert into review set moviechart=#{param1}, content=#{param2}, writer=#{param3},customer_uid=#{param4}
+		</insert>
 		
-	<select id="selectputcomment" resultType="com.cinema.chart.chartPutCommentDTO">
-	 select id,content,writer,created_at,customer_uid,rate from review where moviechart=#{param1} order by created_at desc
+			<select id ="selectputcomment" resultType="com.cinema.chart.chartPutCommentDTO">
+	 select id,content,writer,created_at,customer_uid from review where moviechart=#{param1} order by created_at desc
 	</select>
 	<update id="updatereview">
-	update review set  content=#{param2}, rate=${param3} where id=#{param1} and customer_uid=#{param4}
+	update review set  content=#{param2} where id=#{param1}
 	</update>
 	<delete id ="deletereview">
 	delete from review where id=#{param1}
@@ -17,18 +17,5 @@
 	
 	<select id="count" resultType="_int">
 	select count(*) from review where moviechart=#{param1}
-	</select>
-	
-		<select id="selectMovieReview" resultType="com.cinema.chart.chartPutCommentDTO">
-		SELECT * FROM REVIEW
-		WHERE
-		MOVIECHART = #{param2}
-		AND CUSTOMER_UID = #{param1}
-	</select>
-
-	<select id="selectMovieAverageRate" resultType="java.lang.Double">
-		SELECT ROUND(IFNULL(AVG(rate), 0), 1)
-		FROM review
-		WHERE moviechart = ${param1}
 	</select>
 </mapper>

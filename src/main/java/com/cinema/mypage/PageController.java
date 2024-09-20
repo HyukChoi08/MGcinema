@@ -270,8 +270,9 @@ public class PageController {
 			redirectAttributes.addFlashAttribute("message", "수정되었습니다");
 			return "redirect:/myhome";
 		} catch (Exception e) {
-			redirectAttributes.addFlashAttribute("errorMessage", "다시 시도해주세요");
-			session.setAttribute("passwordChecked", true);
+			e.printStackTrace(); // 예외 스택 트레이스를 콘솔에 출력
+		    redirectAttributes.addFlashAttribute("errorMessage", "다시 시도해주세요");
+		    session.setAttribute("passwordChecked", true);
 			return "redirect:/profile";
 		}
 	}
