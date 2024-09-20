@@ -16,7 +16,8 @@ public interface MypageDAO {
 	CustomerDTO getCustomerInfoByUid(String uid);  // 새로 추가
 	// 닉네임 업데이트 메서드
 	void updateNickname(@Param("uid") String uid, @Param("nickname") String newNickname);
-
+	// 기존 프로필 이미지 가져오기
+	String getProfileImage(@Param("id") int id);
 	
 	// 1:1 문의 관련
 	ArrayList<InquiryDTO> getInquiryList(int customer_id); // 문의글 목록 가져오기
