@@ -8,8 +8,8 @@
 		insert into customer set 
 		realname=#{param1}, email=#{param2}, uid=#{param3}, 
 		passwd=#{param4}, birthday=#{param5}, mobile=#{param6}, 
-		address=#{param7}, nickname=#{param8}, favorite=#{param9}, tellecom=#{param10},
-		created=now(), updated=now(),fulladdress=#{param11}, post=#{param12}
+		region=#{param7}, nickname=#{param8}, favorite=#{param9}, tellecom=#{param10},
+		created=now(), updated=now()
 	</insert>
 	<select id="checkUidExists" resultType="int">
     	select count(*) from customer where uid = #{param1}

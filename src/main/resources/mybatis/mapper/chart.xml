@@ -1,26 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cinema.chart.chartDAO"><!--무비차트-->
-	<select id="chartList" resultType="com.cinema.chart.chartDTO">
-         select
-             id,
-             imagepath,
-             reservation,
-             mname,
-             releasedate
-         from
-             movie
-         order by
-         <choose>
-             <when test="param1 == null">
-                 releasedate DESC
-             </when>
-             <when test="param1 != null">
-                 ${param1}
-             </when>
-         </choose>
-         limit ${param3}, ${param2}
-	</select>
+<select id ="chartList" resultType="com.cinema.chart.chartDTO">
+	 select id,imagepath ,reservation,mname,releasedate from movie order by releasedate desc
+	</select> 
 	
 <select id ="chartList1" resultType="com.cinema.chart.chartDTO">
 	 select id,imagepath ,reservation,mname,releasedate from movie order by reservation desc
@@ -43,20 +26,5 @@
          FROM moviepay), 
         1
     ) AS ratio
-	</select>	
-	<update id="updatereservation">
-	UPDATE movie a
-JOIN ( SELECT movie_name , ROUND(
-            (SUM(totalpeople) * 100.0 / (SELECT SUM(totalpeople) FROM moviepay)), 
-            1 ) AS ratio FROM moviepay GROUP BY movie_name) b ON a.mname = b.movie_name
-SET a.reservation = b.ratio WHERE a.mname = #{param1}
-	</update>
-	<update id="updaterenewal">
-	UPDATE movie
-JOIN ( SELECT movie_name, ROUND(
-            (SUM(totalpeople) * 100.0 / (SELECT SUM(totalpeople) FROM moviepay)), 
-            1) AS ratio FROM moviepay GROUP BY movie_name ) AS calculated_ratios
-ON movie.mname = calculated_ratios.movie_name
-SET movie.reservation = calculated_ratios.ratio
-	</update>	
+	</select>		
 </mapper>

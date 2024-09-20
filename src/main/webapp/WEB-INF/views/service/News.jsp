@@ -73,36 +73,33 @@
                     <tbody>
                         <c:forEach var="news" items="${newsList}">
                             <tr>
-                                <td class="id">${news.id}</td>
-                                <td class="select">${news.selected}</td>
-                              	<td class="title">
-   								<a href="/newsDetail?id=${news.id}&page=${currentPage}&selected=${news.selected}">${news.title}
-   								</a>
-								</td>
-                                <td class="created">${news.created_at}</td>
-                                <td class="view">${news.views}</td>
+                                <td>${news.id}</td>
+                                <td>${news.selected}</td>
+                               <td class="title"><a href="/newsDetail?id=${news.id}">${news.title}</a></td>
+                                <td>${news.created_at}</td>
+                                <td>${news.views}</td>
                             </tr>
                         </c:forEach>
                     </tbody>
                 	</table>
             	</div>
 
-<div class="paging">
+            <div class="paging">
     <c:if test="${currentPage > 1}">
-    <a href="/news?page=${currentPage - 1}&size=${size}&search=${search}" class="btn-paging">이전</a>
-</c:if>
-<ul>
-    <c:forEach var="i" begin="1" end="${totalPages}">
-        <li>
-            <a href="/news?page=${i}&size=${size}&search=${search}" class="${i == currentPage ? 'active' : ''}">
-                ${i}
-            </a>    
-        </li>
-    </c:forEach>
-</ul>
-<c:if test="${currentPage < totalPages}">
-    <a href="/news?page=${currentPage + 1}&size=${size}&search=${search}" class="btn-paging">다음</a>
-</c:if>
+        <a href="/news?page=${currentPage - 1}&size=${size}&search=${search}" class="btn-paging">이전</a>
+    </c:if>
+    <ul>
+        <c:forEach var="i" begin="1" end="${totalPages}">
+            <li>
+                <a href="/news?page=${i}&size=${size}&search=${search}" class="${i == currentPage ? 'active' : ''}">
+                    ${i}
+                </a>	
+            </li>
+        </c:forEach>
+    </ul>
+    <c:if test="${currentPage < totalPages}">
+        <a href="/news?page=${currentPage + 1}&size=${size}&search=${search}" class="btn-paging">다음</a>
+    </c:if>
 </div>
         </div>
     </div>

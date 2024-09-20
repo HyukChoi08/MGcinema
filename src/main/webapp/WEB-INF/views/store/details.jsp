@@ -43,7 +43,7 @@ ul, li {
 .category_wrap {
     margin-bottom: 20px;
 }
-.separator {
+.separator, .separator1 {
     width: 100%;
     height: 2px;
     margin: 0;
@@ -53,8 +53,19 @@ ul, li {
     bottom: 0;
     background-color: #000;
 }
-
-
+.separator1 {
+    position: relative;
+    margin-top: 20px;
+    background-color: grey;
+}
+.separator2 {
+    height: 1px;
+    width: 950px;
+    background-color: grey;
+    margin-top: 3px;
+    margin-bottom: 20px;
+    position: relative;
+}
 .contegory_contents_wrap {
 display: flex; 
 flex-direction: row; 
@@ -160,8 +171,7 @@ td input[type="text"] {
 
 .container {
     display: flex; /* Flexbox 사용 */
-  
-     align-items: flex-end; /* 아래쪽 끝 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
 }
  input[type='button'] {
         height: 30px; /* 버튼의 높이 조정 */
@@ -184,23 +194,19 @@ td input[type="text"] {
 .button-container {
     display: flex; /* 버튼들을 수직으로 정렬하기 위해 Flexbox 사용 */
     flex-direction: column; /* 버튼들을 수직으로 정렬 */
-    align-items: center; /* 버튼을 중앙 정렬 */ 
+    align-items: center; /* 버튼을 중앙 정렬 */
+  	
     margin-top: 15px; /* 필요에 따라 상단 마진 조정 */
 
 }
 .button-container button {	
-   background-color: #444;
-    border: none;
-    color: white;
-    font-size: 18px; /* 폰트 크기 조정 */
-    padding: 0; /* 패딩 제거 */
-    width: 20px; /* 버튼 너비 설정 */
-    height: 20px; /* 버튼 높이 설정 */
-    display: flex; /* 플렉스 박스를 사용하여 중앙 정렬 */
-    align-items: center; /* 수직 중앙 정렬 */
-    justify-content: center; /* 수평 중앙 정렬 */
-    cursor: pointer;
-     margin: 0; /* 버튼 간 마진 제거 */
+    height: 18px; /* 버튼의 높이 조정 */
+    width: 40px; /* 버튼의 너비 조정 */
+    margin: 0; /* 버튼 사이의 마진 제거 */
+    box-sizing: border-box; /* 패딩과 테두리를 너비와 높이에 포함 */
+    display: flex; /* 버튼 텍스트 중앙 정렬 */
+    align-items: center; /* 버튼 텍스트 수직 중앙 정렬 */
+    justify-content: center; /* 버튼 텍스트 수평 중앙 정렬 */
 }
 
 button {
@@ -224,7 +230,7 @@ margin-left: -20px; /* 버튼과 입력 필드 사이의 간격 */
 }
 #giftprice {
     position: absolute; /* 위치를 절대적으로 설정 */
-    top: 15px; /* 원하는 위치를 조정합니다 */
+    top: 18px; /* 원하는 위치를 조정합니다 */
    
     width: 200px;
     margin-right: 58px; /* 여백을 조정합니다 */
@@ -285,14 +291,11 @@ vertical-align: top; /* 수직 정렬을 위쪽으로 맞춤 */
     color:grey;
 }
 #cnt {
-    margin-top: 15px;
+	margin-top:15px;
     background-color: white;
-    height: 28px;
-    width: 28px;
+    height:25px;
+    width: 25px;
     margin-left: 0px; /* 오른쪽으로 이동시키기 위해 마진 자동 조정 */
-    text-align: center; /* 텍스트 중앙 정렬 */
-    line-height: 28px; /* 텍스트 수직 중앙 정렬 */
-    border: 1px solid #ccc; /* 입력 필드의 테두리 추가 (선택 사항) */
 }
 
 .right td {
@@ -317,16 +320,7 @@ td {
    
 }
 
-.separator-row {
-    height: 1px; /* 필요 시 높이 설정 */
-}
 
-.separator1 {
-    border-top: 2px solid grey; /* 선의 색상과 두께 */
-    width: 100%; /* 전체 너비 */
-    position: relative; /* 상대적 위치 설정 */
-    top: 13px; /* 위에서 50px 아래로 이동 */
-}
 </style>
 </head>
 <body>
@@ -412,12 +406,7 @@ td {
 						        </div>
 						    </td>         			
                 		</tr>
-                		<tr class="separator-row">
-						    <td colspan="3">
-						        <div class="separator1"></div>
-						    </td>
-						</tr>
-                        <tr id="total-row">
+                		<tr id="total-row">
                 			<td>총 결제금액:</td><td id="tol"><input type="text" style="font-size:16px; width:60px;" readonly id="totalprice" value="${arItem.discount_price}">원</td>
                 			<td></td>
                 		<tr>
@@ -468,39 +457,26 @@ $(document)
 	            cnt = parseInt($input.data('min'), 10);
 	            $input.val(cnt);
 	        }
-	           
-	        
+
 	        // 할인가격을 숨겨진 필드에서 추출
-	       	let discountText = $('#discount-price').text();
+	        var discountText = $('#discount').val();
 	        console.log("Discount Text:", discountText); // 값 확인
 	        
-	        
-	        if(discountText==='금액충전형'){
+	        // 쉼표 제거 후 숫자로 변환
+	        var discount = parseInt(discountText.replace(/,/g, ''), 10);
+	        console.log("Parsed Discount:", discount); // 값 확인
 
-	       	let selectedValue = $('#giftprice').val();
-	        	
-	       	$('#totalprice').val(selectedValue);
-	        	
+	        // 할인 가격이 유효하지 않은 경우 기본값으로 0 설정
+	        if (isNaN(discount)) {
+	            discount = 0;
 	        }
-	        
-	        
-	        else{
 
-       	    var discount = parseInt(discountText.replace(/,/g, ''), 10);
- 	        console.log("Parsed Discount:", discount); // 값 확인
-	  	        
-	  	        	  	          	          	        
- 	  
- 	        // 총 가격 계산
- 	        var totalPrice = discount * cnt;
+	        // 총 가격 계산
+	        var totalPrice = discount * cnt;
 
- 	        // 총 가격 표시 업데이트
- 	        $('#totalprice').val(totalPrice.toLocaleString());
-       
-       
-       	}
-		}
-	  	 
+	        // 총 가격 표시 업데이트
+	        $('#totalprice').val(totalPrice.toLocaleString());
+	    }
 
 	    // 수량 증가 버튼 클릭 이벤트
 	    $('#increase').on('click', function() {
@@ -592,9 +568,6 @@ $(document)
     function updateUIBasedOnDiscount() {
         var discountPrice = $('#discount').val().trim();
 
-        
-        $('#separator-row').show(); // 필요 시 보여줌
-        
         if (discountPrice === '금액충전형') {
             $('#replace').replaceWith(`
                 <tr id="replace1">
@@ -661,7 +634,7 @@ console.log(customer_id);
 			 $('#cart-count').text(data);
 			
 			}
-	})
+})
 })
 
 .on('change','#giftprice',function(){
@@ -674,6 +647,11 @@ console.log(customer_id);
 	$('#totalprice').val('');
 	$('#totalprice').val(giftprice ); // Set the value of the #totalprice field
 })
+
+
+
+
+
 
 .on('click', '#btncart', function(event) {
     event.preventDefault(); // 기본 동작을 막습니다.
@@ -843,8 +821,7 @@ $('#btnbuy').on('click', function(e) {
 
                 if (isDiscountPriceSpecial) {
                     // '금액충전형'일 때
-                    let priceInputValue = $('#totalprice').val().replace(/원/g, '').replace(/,/g, '').trim();
-                    console.log("priceInputValue"+priceInputValue);
+                    let priceInputValue = $('#price').val().replace(/원/g, '').replace(/,/g, '').trim();
                     let priceNumFromInput = parseFloat(priceInputValue) || 0;
                     itemData.total = priceNumFromInput * qty; // '금액충전형'일 때 price 값을 사용하여 total 계산
                     itemData.discount_price=priceNumFromInput;

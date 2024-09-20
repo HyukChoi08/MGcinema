@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -13,13 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 
 
 
@@ -27,14 +24,8 @@ import jakarta.servlet.http.HttpSession;
 public class ManagerController {
 	@Autowired MovieDAO mmdao;
 	@GetMapping("/manager")
-	public String manager(HttpServletRequest req,Model model) {
-		HttpSession s = req.getSession();
-		String uid = (String)s.getAttribute("uid");
-		if(uid==null || !uid.equals("admin")) {
-			return "home/homepage";
-		}else {
-			return "manager/manager";
-		}
+	public String manager() {
+		return "manager/manager";
 	}
 	
 	@PostMapping("/mlist")
@@ -181,9 +172,8 @@ public class ManagerController {
 		String rdate = req.getParameter("rdate");
 		String minfo = req.getParameter("minfo");
 		float reservation = 0.0f;
-		float avgrate = 0.0f;
 	
-		mmdao.moviein(mname, age, runningtime, image, director, cast, genre, rdate, minfo, reservation, avgrate);
+		mmdao.moviein(mname, age, runningtime, image, director, cast, genre, rdate, minfo, reservation);
 		return "manager/manager";
 	}
 	@PostMapping("/movieimage")
@@ -355,17 +345,5 @@ public class ManagerController {
 			Ty.put(T);
 		}
 		return Ty.toString();
-	}
-	@PostMapping("/bestitem")
-	@ResponseBody
-	public String bestitem(@RequestBody List<String> bestItems) {
-	  mmdao.bestzero();
-	  
-	  for (int i = 0; i < bestItems.size() ; i++) {
-		  int itemid = Integer.parseInt(bestItems.get(i));
-		  mmdao.bestitems(i+1, itemid);
-		    
-	  }
-		return "manager/manager";
 	}
 }

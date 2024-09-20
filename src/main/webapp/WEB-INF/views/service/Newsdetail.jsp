@@ -37,11 +37,9 @@
             </div>
            
 
-<div class="btn-group">
-    <button class="btn-list" onclick="window.location.href='/news?page=${currentPage}&size=${size}&search=${search}&selected=${newsDetail.selected}'">목록</button>
-</div>
-
-
+            <div class="btn-group">
+                <button class="btn-list" onclick="window.history.back()">목록</button>
+            </div>
         </div>
     </div>
 </div>

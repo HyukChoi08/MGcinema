@@ -112,7 +112,6 @@
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
-let moviename = "${param.moviename}";
 $(document).on("click",".btnclose",function(){
 	window.close();
 })
@@ -121,28 +120,7 @@ $(document).ready(function() {
 	getImage();
     if (!window.dataSaved) {
         saveData();
-        updaterenewal();
         window.dataSaved = true;
-    }
-
-    function updaterenewal(){
-    	
-    	$.ajax({
-        	url:'/updatereservation',
-        	type:'post',
-        	data:{getmname:moviename},
-        	success: function(data){
-        		$.ajax({
-            		url:'/updaterenewal',
-            		type:'post',
-            		data:{},
-            		success:function(data){
-            			console.log("updaterenewal",data)
-            		}
-            	});
-        	}
-        });
-    	
     }
 
     function saveData() {

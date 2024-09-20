@@ -86,7 +86,7 @@
 									<th>구성</th>
 									<th>결제금액</th>
 									<th>구매일</th>
-									<th></th>
+									<th>상태</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -150,6 +150,7 @@
 								<th>구성</th>
 								<th>결제금액</th>
 								<th>구매일</th>
+								
 							</tr>
 						</thead>
 						<tbody>
@@ -175,6 +176,27 @@
 							</c:choose>
 						</tbody>
 					</table>
+					<!-- 페이징 처리 -->
+						<div class="pagination">
+							<c:if test="${currentPage > 1}">
+								<a href="?page=${currentPage - 1}">이전</a>
+							</c:if>
+
+							<c:forEach var="i" begin="1" end="${totalPages}">
+								<c:choose>
+									<c:when test="${i == currentPage}">
+										<span>${i}</span>
+									</c:when>
+									<c:otherwise>
+										<a href="?page=${i}">${i}</a>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+
+							<c:if test="${currentPage < totalPages}">
+								<a href="?page=${currentPage + 1}">다음</a>
+							</c:if>
+						</div>
 					<button class="button" onclick="location.href='/store'">Store
 						바로가기</button>
 				</div>

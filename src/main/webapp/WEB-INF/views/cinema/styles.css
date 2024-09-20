@@ -1,0 +1,64 @@
+@charset "UTF-8";
+div {
+	border: 1px solid black;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.calendar-container {
+    width:1000px;
+    background-color: white;
+    border: none;
+    overflow: hidden;
+    
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: black;
+    color: white;
+   
+}
+
+.calendar-body {
+    padding: 10px;
+}
+
+#calendar-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#calendar-table th, #calendar-table td {
+    width: 14;
+    text-align: center;
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+#calendar-table thead {
+    background-color: #f2f2f2;
+}
+
+button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+button:focus {
+    outline: none;
+}

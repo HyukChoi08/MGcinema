@@ -31,8 +31,10 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 	<!-- 프로필 섹션 -->
 	<div class="mainscreen">
 		<div class="profile-section">
-			<img id="profileImage" src="<%= customer.getProfileimg() != null ? customer.getProfileimg() : "/mypage_image/OO.png" %>" alt="프로필이미지" width="80" height="80" />
-			
+			<img id="profileImage"
+				src="<%= customer.getProfileimg() != null ? customer.getProfileimg() : "/mypage_image/OO.png" %>"
+				alt="프로필이미지" width="80" height="80" />
+
 			<div class="profile-info">
 				<h2>
 					<%=customer.getRealname()%>
@@ -87,7 +89,8 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 						<h3>회원 정보 수정</h3>
 					</div>
 					<div>
-						<form method=post action='/profileUpdate' enctype="multipart/form-data">
+						<form method=post action='/profileUpdate'
+							enctype="multipart/form-data">
 							<table>
 								<tr>
 									<td></td>
@@ -143,14 +146,14 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 								<tr>
 									<td><h4>관심분야</h4></td>
 									<td><input type="checkbox" name="favorite"
-										id="favoriteAction" value="액션">액션 <input
+										id="favoriteAction" value="액션">액션 <input type="checkbox" name="favorite"
+										id="favoriteThriller" value="스릴러">스릴러
+										<input
 										type="checkbox" name="favorite" id="favoriteComedy"
 										value="코미디">코미디 <input type="checkbox" name="favorite"
-										id="favoriteDrama" value="드라마">드라마<br> <input
-										type="checkbox" name="favorite" id="favoriteSF" value="SF">SF
+										id="favoriteDrama" value="드라마">드라마<br> 
 										<input type="checkbox" name="favorite" id="favoriteRomance"
-										value="로맨스">로맨스 <input type="checkbox" name="favorite"
-										id="favoriteThriller" value="스릴러">스릴러<br> <input
+										value="로맨스">로맨스  <input
 										type="checkbox" name="favorite" id="favoriteHorror" value="공포">공포
 										<input type="checkbox" name="favorite" id="favoriteAnimation"
 										value="애니메이션">애니메이션 <input type="checkbox"
@@ -164,11 +167,11 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 								</tr>
 								<tr>
 									<td><h4>프로필 이미지</h4></td>
-									<td><h5>이미지변경</h5>
-									<input type="file" id="profileImageInput" name="profileImage" accept="image/*" />
-							        <br/>
-							        <img id="imagePreview" src="#" alt="이미지 미리보기" style="display:none; width:100px; height:100px; margin-top:10px;" />
-    
+									<td><h5>이미지변경</h5> <input type="file"
+										id="profileImageInput" name="profileImage" accept="image/*" />
+										<br /> <img id="imagePreview" src="#" alt="이미지 미리보기"
+										style="display: none; width: 100px; height: 100px; margin-top: 10px;" />
+
 									</td>
 								</tr>
 								<tr>
