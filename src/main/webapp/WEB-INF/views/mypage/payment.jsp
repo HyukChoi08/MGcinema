@@ -100,7 +100,7 @@
 												<td>${getPlist.composition}</td>
 												<td>${getPlist.totalprice}</td>
 												<td>${getPlist.created}</td>
-												<td>
+												<td class="retd">
 													<button class="cancel-btn" data-id="${getPlist.id}">결제취소</button>
 												</td>
 											</tr>

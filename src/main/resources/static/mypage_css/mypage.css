@@ -29,7 +29,7 @@ body {
 /* 테이블 스타일 */
 table {
 	width: 100%;
-	border-collapse: collapse; /* 테이블 셀 간의 간격 제거 */
+	border-collapse: collapse; /* 테이블 셀 간의 간격 제거 */ 
 	border-radius: 5px; /* 모서리 둥글게 */
 }
 
@@ -45,7 +45,7 @@ thead th {
 }
 
 tbody td {
-	padding: 1px;
+	padding: 2px;
 	border-bottom: 1px solid #808080; /* 셀 아래쪽에 테두리 추가 */
 	text-align: left; /* 텍스트 왼쪽 정렬 */
 }
@@ -140,16 +140,39 @@ form input[type="submit"]:hover {
 	flex-grow: 1; /* 남은 공간 차지 */
 }
 
-.cancel-btn button {
-	border: 1px solid black;
+.retd{ /* 예매상태 td칸  */
+	 text-align: center; /* 가로 중앙 정렬 */
+  vertical-align: middle; /* 세로 중앙 정렬 */
+}
+.reservationbutton{
+	font-size: 16px;
 	background-color: black;
 	color: white; /* 텍스트 색상 */
-	padding: 1px 5px; /* 버튼 안쪽 여백 */
+	padding: 0px 10px; /* 버튼 안쪽 여백 */
 	text-align: center; /* 텍스트 중앙 정렬 */
 	border-radius: 3px; /* 모서리 둥글게 */
 	text-decoration: none; /* 링크 밑줄 제거 */
 	display: inline-block; /* 인라인 블록 요소로 설정 */
 	transition: background-color 0.3s ease; /* 배경색 변경 시 애니메이션 추가 */
+}
+
+.reservationbutton:hover{
+	background-color: #c3c3c3; /* 버튼에 마우스 올렸을 때 색상 */
+		
+}
+.cancel-btn{ /* 스토어 결제 취소버튼*/
+	font-size: 16px;
+	background-color: black;
+	color: white; /* 텍스트 색상 */
+	padding: 0px 10px; /* 버튼 안쪽 여백 */
+	text-align: center; /* 텍스트 중앙 정렬 */
+	border-radius: 3px; /* 모서리 둥글게 */
+	text-decoration: none; /* 링크 밑줄 제거 */
+	display: inline-block; /* 인라인 블록 요소로 설정 */
+	transition: background-color 0.3s ease; /* 배경색 변경 시 애니메이션 추가 */
+}
+.cancel-btn:hover{
+	background-color: #c3c3c3; /* 버튼에 마우스 올렸을 때 색상 */
 }
 
 .button {
