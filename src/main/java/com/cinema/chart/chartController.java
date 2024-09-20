@@ -21,7 +21,7 @@ public class chartController {
 @Autowired chartArrayDAO cadao;	
 @Autowired commentArrayDAO commentadao;
 @Autowired chartPutCommentDAO cpcdao;
-@Autowired chartappearanceinfoDAO cainfodao;
+
 
 @GetMapping("/chart")
 public String test() {

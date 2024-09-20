@@ -260,7 +260,7 @@ color:black;
                                             <li>
                                                 <input type="hidden" id="moviechart" value="'+chartId+'">
                                                 <input type="hidden" id="idcheck"><input type="hidden" id="recommendid">
-                                                <input type="hidden" id="idname"><textarea id="reviewcomment" style="width:700px;height:100px;"></textarea>
+                                                <input type="hidden" id="idname"><textarea id="reviewcomment" style="width:660px;height:100px;"></textarea>
                                                 <select id="rate"name="rate">
                                                     <option value="1">평점:1</option>
                                                     <option value="2">평점:2</option>
