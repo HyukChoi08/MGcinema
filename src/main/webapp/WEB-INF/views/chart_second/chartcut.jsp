@@ -29,7 +29,11 @@
 		</div>
 	</div>
 	<div class="mid">
-		<div id="goactor"><span class="actbtn">감독/출현</span></div>
+		<div id="gobtn"><span class="Listonbtn">상세정보</span></div>
+		<div id="gobtn"><span class="actbtn">감독/출현</span></div>
+		<div id="gobtn"><span class="nowbtn">스틸컷</span></div>
+		<div id="gobtn"><span class="revbtn">평점/리뷰</span></div>
+		<div id="gobtn"><span class="thebtn">상영시간</span></div>
 	</div>
 	<div class="bot">
 	    <div class="cut-section">
@@ -54,6 +58,21 @@ $(document).ready(function(){
 	$(document).on("click",".actbtn", function(){
 		window.location.href = "chartdetail?id=" +movieid.trim();
 	})
+	$(document).on("click",".Listonbtn", function(){
+		window.location.href = "chartList1?id=" + movieid.trim();
+	})
+	$(document).on("click",".revbtn", function(){
+		window.location.href = "chartList1?id=" + movieid.trim() + "#commentList";
+	})
+	$(document).on("click",".thebtn", function(){
+		window.location.href = "cinema";
+	})
+	$(document).on("click", ".nowbtn", function() {
+	    document.querySelector('.bot').scrollIntoView({
+	        behavior: 'smooth'
+	    });
+	});
+	
 	
 	function loadMovied(){
 		let movieimg = $(".imgcell"); 
