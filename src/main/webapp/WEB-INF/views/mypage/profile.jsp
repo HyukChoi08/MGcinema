@@ -228,6 +228,7 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 						$('#birthday').val(data.birthday);
 						$('#fulladdress').val(data.fulladdress);
 						$('#post').val(data.post);
+						$('')
 
 						// tellecom radio 체크 설정
 						if (data.tellecom === "LG U+") {
