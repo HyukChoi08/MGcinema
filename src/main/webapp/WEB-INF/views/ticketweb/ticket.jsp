@@ -83,7 +83,6 @@
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
-
 let totalTickets = 0;
 let adultTicketCount = 0;
 let youthTicketCount = 0;
@@ -92,6 +91,7 @@ let getmname = "${mname}".trim();
 let getdate = "${date}".trim();
 let getroom = "${room}".trim();
 let gettime = "${time}".trim();
+let callmovie = "${movieid}".trim();
 let allseat = "";
 
 $(document).ready(function() {
@@ -652,6 +652,33 @@ $(document).ready(function() {
 
     loadMovieData();
 	
+    function loadChartData() {
+        if (!callmovie) {
+            return;
+        }
+
+        $.ajax({
+            url: "/movies",
+            type: "GET",
+            success: function(data) {
+                let movieList = $("#movieList ul");
+                movieList.empty();
+                $.each(data, function(index, movie) {
+                    movieList.append('<li data-time="' + movie.runningtime + '" data-name="' + movie.mname + '" data-id="' + movie.id + '" data-age="' + movie.age + '">' +
+                        '<span class="age' + movie.age + '">' + movie.age + '</span>' + movie.mname + '</li>');
+                });
+
+                $("#movieList li").each(function() {
+                    if ($(this).data("id") == callmovie) {
+                        $(this).click();
+                        scrollToSelected("#movieList li");
+                    }
+                });
+            }
+        });
+    }
+    loadChartData();
+    
     function scrollToSelected(selector) {
         $(selector).each(function() {
             if ($(this).hasClass('selected')) {

@@ -6,8 +6,9 @@ body {
 }
 
 .maincontainer {
-	width:auto;
-    margin: 0px;
+    width: 80%;
+    max-width: 1000px;
+    margin: auto;
     background-color:black;
     position: relative;
     display: flex;
