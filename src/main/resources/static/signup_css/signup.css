@@ -43,6 +43,17 @@ input {
     color: black; /* 입력 글자 색상 검은색으로 설정 */
 }
 
+
+.addr-wrap{
+	width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    
+    color: black; /* 입력 글자 색상 검은색으로 설정 */
+}
+
 .agree-checkbox {
     display: flex;
     justify-content: center; /* 수직 정렬을 중앙으로 맞춤 */
@@ -66,6 +77,8 @@ button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    margin-bottom: 20px;
+    margin-top: 10px;
 }
 
 button:hover {

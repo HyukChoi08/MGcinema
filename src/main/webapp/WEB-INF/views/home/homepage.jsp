@@ -16,10 +16,17 @@
     <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
         <div class="promo-container">
             <div class="slider">
+     		<!--
                 <div><img src="/homepage_image/image_02.jpg" alt="Promotion 2" class="image-slide" /></div>
                 <div><img src="/homepage_image/image_03.jpg" alt="Promotion 3" class="image-slide" /></div>
                 <div><img src="/homepage_image/image_04.jpg" alt="Promotion 4" class="image-slide" /></div>
-            </div>
+            -->
+                
+                <div><img src="/homepage_image/image_05.jpg" alt="Promotion 5" class="image-slide" /></div>
+                <div><img src="/homepage_image/image_06.jpg" alt="Promotion 6" class="image-slide" /></div>
+                <div><img src="/homepage_image/로비5.jpg" alt="Promotion 7" class="image-slide" /></div>
+                <div><img src="/homepage_image/image_08.jpg" alt="Promotion 8" class="image-slide" /></div>
+         	</div>
         </div>
 
     <%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->

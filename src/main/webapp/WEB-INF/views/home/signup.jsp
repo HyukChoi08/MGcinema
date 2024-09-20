@@ -129,9 +129,10 @@
                     
                     
                     <div class="addr-wrap">
-            			<label for="#userAddr1">주소</label>
-            			<input type="text" id="userPostCode" name="userPostCode" placeholder="우편번호" readonly>
+            			<label for="userAddr1">주소</label>
             			<button type="button" onclick="searchAddr();">주소찾기</button>
+            			<input type="text" id="userPostCode" name="userPostCode" placeholder="우편번호" readonly>
+            			
             			<input type="text" id="userAddr1" name="userAddr1" placeholder="주소" readonly>
             			<input type="text" id="userAddr2" name="userAddr2" placeholder="상세 주소 입력" required>
        				</div>
@@ -145,7 +146,7 @@
                     
                     <div class="form-group">
                         <label for="nickname">닉네임</label>
-                        <input type="text" id="nickname" name="nickname" value="${formData.nickname}" placeholder="(필수)" required>
+                        <input type="text" id="nickname" name="nickname" value="${formData.nickname}" placeholder="(필수)" required maxlength="10">
                     </div>
                     <div class="form-group">
                         <label>관심분야</label> <br />
