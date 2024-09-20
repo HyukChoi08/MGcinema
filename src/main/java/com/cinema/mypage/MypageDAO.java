@@ -20,12 +20,14 @@ public interface MypageDAO {
 	
 	// 1:1 문의 관련
 	ArrayList<InquiryDTO> getInquiryList(int customer_id); // 문의글 목록 가져오기
+	// 페이징을 고려한 스토어 내역 조회 메소드
+	List<InquiryDTO> getInquiryList(@Param("customerId") int customerId, @Param("offset") int offset, @Param("limit") int limit);	
 	void inquiryWrite(InquiryDTO inqDTO); // 문의글 등록하기
 	InquiryDTO getInquiryDetail(int id); // 문의글 상세내용 가져오기
-	//1:1문의 페이징
-	List<InquiryDTO> getInquiryList(@Param("customer_id") int customer_id, @Param("startRow") int startRow);
-	int getInquiryCount(@Param("customer_id") int customer_id); // 문의 총 개수 가져오는 메서드
-
+	// 전체 데이터 수를 가져오는 메소드
+	int getTotalInquiryCount(@Param("customerId") int customerId);	
+	
+	
 	//예매 정보
 	ArrayList<MovieGetDTO> getMovieList(String customer_id); // 예매 목록 
 	// 예매 정보 삭제
@@ -63,7 +65,5 @@ public interface MypageDAO {
 	
 	//영화 상위 가져오기
 	 List<chartDTO> getTop3MoviesByReservation();
-	 
-	 
 	
 }

@@ -24,7 +24,8 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 	<!-- 프로필 섹션 -->
 	<div class="mainscreen">
 		<div class="profile-section">
-			<img src="/mypage_image/OO.png" alt="프로필이미지" width="80" height="80" />
+			<img id="profileImage" src="<%= customer.getProfileimg() != null ? customer.getProfileimg() : "/mypage_image/OO.png" %>" alt="프로필이미지" width="80" height="80" />
+			<!-- <img src="/mypage_image/OO.png" alt="프로필이미지" width="80" height="80" /> -->
 
 			<div class="profile-info">
 				<h2>
@@ -139,6 +140,29 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 						</c:forEach>
 					</thead>
 				</table>
+				
+				<!-- 페이징 처리 -->
+				<div class="pagination">
+					<c:if test="${currentPage > 1}">
+						<a href="?page=${currentPage - 1}">이전</a>
+					</c:if>
+
+					<c:forEach var="i" begin="1" end="${totalPages}">
+						<c:choose>
+							<c:when test="${i == currentPage}">
+								<span>${i}</span>
+							</c:when>
+							<c:otherwise>
+								<a href="?page=${i}">${i}</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+
+					<c:if test="${currentPage < totalPages}">
+						<a href="?page=${currentPage + 1}">다음</a>
+					</c:if>
+				</div>
+				
 			</div>
 		</div>
 	</div>
