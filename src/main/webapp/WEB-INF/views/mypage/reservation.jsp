@@ -103,12 +103,12 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 										<td>${reservation.begintime}</td>
 										<td>${reservation.endtime}</td>
 										<td>${reservation.created}</td>
-										<td>
+										<td class="retd">
 											<!-- 상영 시간지나면 예매취소불가 --> <c:set var="endDateTime"
 												value="${reservation.datetime}T${reservation.endtime}:00" />
 											<c:choose>
 												<c:when test="${endDateTime gt currentTime}">
-													<button class="button"
+													<button class="reservationbutton"
 														onclick="cancelReservation(${reservation.id})">
 														예매취소</button>
 												</c:when>

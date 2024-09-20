@@ -79,9 +79,6 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 			<div class="main-content">
 				<h2>1:1 문의 게시판</h2>
 
-				<!-- 문의 폼 -->
-				<button class="button" onclick="location.href='/inquirywrite'">문의하기</button>
-				<!-- 나의 문의 내역 -->
 				<!-- 문의 목록을 보여주는 테이블 -->
 				<table class="inquiry-table">
 					<thead>
@@ -136,7 +133,9 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 						<a href="?page=${currentPage + 1}">다음</a>
 					</c:if>
 				</div>
-				
+					<!-- 문의 폼 -->
+				<button class="button" onclick="location.href='/inquirywrite'">문의하기</button>
+				<!-- 나의 문의 내역 -->
 				
 				<br>
 

@@ -23,9 +23,12 @@ where item_type=#{param1}
 ORDER BY id
 </select>
 <select id="selectbest" resultType="com.cinema.store.storeDTO">
-SELECT id, item_name,price,discount_price,image_path
-FROM item
-WHERE best_id IS NOT NULL
-
+    SELECT id, item_name, price, discount_price, image_path, composition
+    FROM item
+    WHERE best_id &lt;&gt; 0
+    ORDER BY best_id
+</select>
+<select id="storeall" resultType="com.cinema.store.storeDTO"> 
+select id,item_name,price,discount_price, image_path,composition from item 
 </select>
 </mapper>

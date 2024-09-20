@@ -52,10 +52,10 @@ public class PageController {
 			model.addAttribute("recentMovies", recentMovies);
 			model.addAttribute("totalMoviesCount", arrmovieDTO.size());
 
-			 // 상위 3개의 영화 가져오기
-	        List<chartDTO> topMovies = mdao.getTop3MoviesByReservation();
-	        model.addAttribute("topMovies", topMovies);
-	        System.out.println(topMovies);
+			// 상위 3개의 영화 가져오기
+			List<chartDTO> topMovies = mdao.getTop3MoviesByReservation();
+			model.addAttribute("topMovies", topMovies);
+			/* System.out.println(topMovies); */
 			/* System.out.println(arrmovieDTO); */ // cusDTO 값 출력
 		} else {
 			return "redirect:/login";
@@ -105,7 +105,7 @@ public class PageController {
 		// 페이징된 예매 리스트 가져오기
 		ArrayList<MovieGetDTO> arrmovieDTO = mdao.getMovieListWithPaging(customer_id, limit, offset);
 		model.addAttribute("getMovies", arrmovieDTO);
-		
+
 		// 총 예매 수 구하기 (페이지네이션을 위해 필요)
 		int totalReservations = mdao.getTotalReservationCount(customer_id);
 		int listTotalPages = (int) Math.ceil((double) totalReservations / limit);
@@ -147,14 +147,14 @@ public class PageController {
 	public String getInquiryList(HttpSession session, Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
 		CustomerDTO cusDTO = (CustomerDTO) session.getAttribute("cusDTO");
 		int customer_id = cusDTO.getId(); 
-		
+
 		int limit = 5; // 한 페이지에 5개씩 출력되도록 변경
 		int offset = (page - 1) * limit; // 페이지에 따른 offset 계산
 
 
 		List<InquiryDTO> arrInqDTO = mdao.getInquiryList(customer_id, offset, limit);
 		model.addAttribute("inquiries", arrInqDTO);
-		
+
 
 		int totalCount = mdao.getTotalInquiryCount(customer_id); // 총 문의 내역 수 가져옴
 		int totalPages = (int) Math.ceil((double) totalCount / limit); // 전체 페이지 수 계산
@@ -170,7 +170,7 @@ public class PageController {
 
 		int limit = 5; // 한 페이지에 5개씩 출력되도록 변경
 		int offset = (page - 1) * limit; // 페이지에 따른 offset 계산
-		
+
 		model.addAttribute("view", "inquirywrite");
 		CustomerDTO cusDTO = (CustomerDTO)(session.getAttribute("cusDTO"));
 		int customer_id = cusDTO.getId(); 
@@ -202,20 +202,20 @@ public class PageController {
 	@GetMapping("/inquirydetail/{id}")
 	public String inquiryDetail(@PathVariable("id") int id, Model model,HttpSession session, @RequestParam(value = "page", defaultValue = "1") int page) {
 		InquiryDTO inqDTO = mdao.getInquiryDetail(id);
-		System.out.println("문의 title: " + inqDTO.getTitle());
+		/* System.out.println("문의 title: " + inqDTO.getTitle()); */
 
 		model.addAttribute("inquiry", inqDTO);
 		model.addAttribute("view", "inquirydetail");
-		
+
 		//게시글 불러오는 부분을 복 붙
 		CustomerDTO cusDTO = (CustomerDTO)(session.getAttribute("cusDTO"));
 		int customer_id = cusDTO.getId(); 
-		
+
 		int limit = 5; // 한 페이지에 5개씩 출력되도록 변경
 		int offset = (page - 1) * limit; // 페이지에 따른 offset 계산
-		
+
 		List<InquiryDTO> arrInqDTO = mdao.getInquiryList(customer_id, offset, limit);
-		System.out.println("arrInqDTO size="+ arrInqDTO.size());
+		/* System.out.println("arrInqDTO size="+ arrInqDTO.size()); */
 		//모델에 문의 목록 추가 
 		model.addAttribute("inquiries", arrInqDTO);
 
@@ -223,7 +223,7 @@ public class PageController {
 		int totalPages = (int) Math.ceil((double) totalCount / limit); // 전체 페이지 수 계산
 		model.addAttribute("currentPage", page); // 현재 페이지를 모델에 추가
 		model.addAttribute("totalPages", totalPages); // 전체 페이지 수를 모델에 추가
-		
+
 		return "mypage/inquirydetail";
 	} 
 
@@ -237,49 +237,53 @@ public class PageController {
 		session.removeAttribute("passwordChecked");
 		return "mypage/profile";
 	}
-
 	// 회원 정보 변경 처리
 	@PostMapping("/profileUpdate")
 	public String profileUpdate(CustomerDTO cusDTO, @RequestParam("profileImage") MultipartFile profileImage, HttpSession session, RedirectAttributes redirectAttributes) {
 	    try {
-	        // 기존 프로필 이미지 경로 가져오기
-	        String existingProfileImage = cusDTO.getProfileimg(); // 기존 이미지 경로
-
-	        // 프로필 이미지 처리
-	        if (!profileImage.isEmpty()) {
-	            // 파일 저장 경로 설정
+	        // 프로필 이미지가 업로드되지 않은 경우 처리
+	        if (profileImage.isEmpty()) {
+	            // 이미지가 업로드되지 않으면 기존 이미지를 데이터베이스에서 가져옴
+	            String existingImage = mdao.getProfileImage(cusDTO.getId());
+	            cusDTO.setProfileimg(existingImage); // 기존 이미지 경로를 다시 설정
+	        } else {
+	            // 새 이미지가 업로드된 경우
 	            String uploadDir = "src/main/resources/static/mypage_image/";
 	            File uploadDirectory = new File(uploadDir);
 	            if (!uploadDirectory.exists()) {
-	                uploadDirectory.mkdirs();
+	                uploadDirectory.mkdirs(); // 디렉토리가 없으면 생성
 	            }
 
 	            // 파일 이름 중복 방지를 위해 UUID 사용
 	            String originalFilename = profileImage.getOriginalFilename();
 	            String fileExtension = originalFilename.substring(originalFilename.lastIndexOf("."));
 	            String newFilename = UUID.randomUUID().toString() + fileExtension;
-	            System.out.println("파일명: " + originalFilename + ", 확장자명: " + fileExtension + ", UUID: " + newFilename);
 	            Path filePath = Paths.get(uploadDir, newFilename);
-	            
-	            // 파일 저장
+
+	            // 파일을 지정한 경로에 저장
 	            Files.copy(profileImage.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-	            
-	            // 프로필 이미지 경로 설정 (웹 접근 가능한 경로)
+
+	            // 웹에서 접근 가능한 경로로 설정 (프로필 이미지 URL)
 	            String profileImagePath = "/mypage_image/" + newFilename;
-	            cusDTO.setProfileimg(profileImagePath);
-	        } else {
-	            // 이미지가 업로드되지 않은 경우 기존 이미지 경로 유지
-	            cusDTO.setProfileimg(existingProfileImage);
+	            cusDTO.setProfileimg(profileImagePath); // DTO에 새 이미지 경로 설정
 	        }
 
-	        // 나머지 프로필 정보 업데이트 로직 추가
-	        // ...
+	        // 고객 정보 업데이트
+	        mdao.updateCusInfo(cusDTO);
 
+	        // 성공 메시지를 설정하고 마이홈 페이지로 리다이렉트
+	        redirectAttributes.addFlashAttribute("message", "수정되었습니다");
+	        return "redirect:/myhome";
 	    } catch (Exception e) {
-	        // 예외 처리 로직 추가
+	        e.printStackTrace(); // 에러 발생 시 콘솔에 출력
+
+	        // 에러 메시지를 설정하고 프로필 페이지로 리다이렉트
+	        redirectAttributes.addFlashAttribute("errorMessage", "다시 시도해주세요");
+	        session.setAttribute("passwordChecked", true);
+	        return "redirect:/profile";
 	    }
-	    return "redirect:/profile"; // 리다이렉트할 URL
 	}
+
 
 	// 회원 탈퇴 페이지
 	@GetMapping("/cancel")

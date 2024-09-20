@@ -99,7 +99,9 @@ a {
 .mnamecolor {
     color: #FF5722; /* 색상 변경: 주황색으로 설정 */
 }
-
+.mnamecolor:hover{
+ background-color: #555; /* 마우스를 올렸을 때 색상 변경 */
+}
 .small-text {
     font-size: 13px; /* 글자 크기 작게 설정 */
 }
@@ -110,6 +112,12 @@ a {
 .release-date {
     font-size: 12px; /* 개봉 텍스트 크기 조절 */
 }
+.buyticket{
+color: #BE2E22;
+}
+.buyticket:hover{
+ background-color: #555; /* 마우스를 올렸을 때 색상 변경 */
+ }
 </style>
 
 <body>
@@ -195,7 +203,7 @@ $(document)
                                             '<strong class="reservation-text">예매율<span>'+data[count]['reservation']+'%</span></strong>' +
                                             '</div>' +
                                             '<span><strong class="release-date">'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span>' +
-                            '<a href="/ticket?mname=' + data[count]['mname'] + '">예매</a></span>'
+                            '<a href="/ticket?mname=' + data[count]['mname'] + '" class="buyticket">예매하기</a></span>'
                             +
                                         '</div>' +
                                 '</div>';
@@ -212,7 +220,7 @@ $(document)
                         str1 += '<div class="vertical-container">' +
                             '<div><strong class="rank2">' +
                             'No.'+(count+1)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div><strong class="reservation-text">예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><strong class="release-date">'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span>' +
-                            '<a href="/ticket?mname=' + data[count]['mname'] + '">예매</a></span>' +
+                            '<a href="/ticket?mname=' + data[count]['mname'] + '" class="buyticket">예매하기</a></span>' +
                             '</div>' +
                             '</div>';
                         if (count % 4 == 2) {
@@ -247,7 +255,7 @@ function addAllRestMovies(){
                     str1 += '<ol>'
                 }
                 str1 += '<div class="vertical-container"><div><strong class="rank2">No.'+(count+8)+'</strong><li><a href="chartList1?id='+data[count]['id']+'"><img src=' + data[count]['imagepath'] +' height="400px" width="200px"></a></li></div><div><a href="chartList1?id='+data[count]['id']+'"class="mnamecolor">'+data[count]['mname']+'</a><br><div><strong class="reservation-text">예매율<span>'+data[count]['reservation']+'%</span></strong></div><span><strong class="release-date">'+data[count]['releasedate']+'<span>개봉</span></strong></span><br><span>' +
-                    '<a href="/ticket?mname=' + data[count]['mname'] + '">예매</a></span></div>' +
+                    '<a href="/ticket?mname=' + data[count]['mname'] + '" class="buyticket">예매하기</a></span></div>' +
                     '</div>';
                 if (count == 3 || count % 4 == 3) {
                     str1 += '</ol>'
