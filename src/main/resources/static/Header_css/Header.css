@@ -1,64 +1,81 @@
 /* 기본 스타일 설정 */
-
 html, body {
-    margin: 0; /* 브라우저 기본 여백 제거 */
-    padding: 0; /* 브라우저 기본 패딩 제거 */
-
-    line-height: 1.4; /* 줄 높이 조절 */
+    margin: 0;
+    padding: 0;
+    line-height: 1.4;
     text-align: center;
-    box-sizing: border-box; /* 패딩을 포함한 전체 너비 계산 */
-    background-color: #000000; 
-} 
-
-/* .nav-links li{
-	width:70px;
+    box-sizing: border-box;
+    background-color: #000000;
 }
- */
+
 /* 헤더 설정 */
 .header {
     background: linear-gradient(to top, 
-        #000000, /* 검정색 */
-        #475f77  /* 미드나잇 블루 */
+        #000000, 
+        #475f77 
     );
     color: #ffffff;
-    padding: 10px 0; /* 상하 패딩만 설정하여 좌우 여백 제거 */
-
     min-width: 1200px; /* 최소 너비 설정 */
-    margin: 0 auto; /* 중앙 정렬 유지 */
-    box-sizing: border-box; /* 패딩을 포함한 전체 너비 계산 */
-    /*  position: fixed;   */ 
-    top: 0; /* 화면 상단에 위치 */
-    left: 0; /* 화면 왼쪽에 위치 */
-    z-index: 1000; /* 다른 요소들보다 위에 위치 */
-    height: 150px;
+    margin: 0 auto;
+    height: auto; /* 높이를 자동으로 설정 */
+    padding-top: 40px; /* 위아래 여백 추가 */
     display: flex;
-    align-items: center;
-    justify-content: center; /* 중앙 정렬 */
-}
-
-/* 내비게이션 바 설정 */
-.navbar {
-    display: flex;
-    align-items: center; /* 수직 중앙 정렬 */
-    width: 100%; /* 화면 너비에 맞게 조정 */
-    max-width: 1200px; /* 최대 너비 설정 */
+    flex-direction: column; /* 세로 방향으로 정렬 */
+    align-items: center; /* 중앙 정렬 */
     position: relative;
 }
 
-/* 내비게이션 바의 절대 위치 설정 */
-.navbar1, .navbar2 {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+/* HIII CINEMA 고정 */
+.logo {
+    position: absolute; /* 절대 위치 */
+    left: 50%; /* 화면의 50% 위치 */
+    transform: translateX(-50%); /* 중앙 정렬 */
+    margin: 0;
+    font-size: 45px;
+    color: #ffffff; /* 하얀색으로 변경 */
+    text-align: center; /* 중앙 정렬 */
 }
 
-.navbar1 {
-    left: 20px; /* 왼쪽 여백 조절 */
+.logo a {
+    color: #ffffff; /* 하얀색으로 변경 */
+    text-decoration: none; /* 링크의 밑줄 제거 */
+}
+
+/* 내비게이션 바 설정 */
+.header-container {
+	
+    display: flex;
+    align-items: center; /* 수직 중앙 정렬 */
+    justify-content: space-between; /* 양쪽 정렬 */
+    width: 100%;
+    padding: 0 20px; /* 좌우 여백 추가 */
+    position: relative; /* 자식 요소의 절대 위치를 위해 추가 */
 }
 
 .navbar2 {
-    right: 20px; /* 오른쪽 여백 조절 */
+	width: 100%;
+    padding-left:1250px;
+    display: flex;
+    margin-top: 30px;
+	justify-content: center;
 }
+
+/* navbar1은 아래쪽 중앙 정렬 */
+.navbar1 {
+    width: 100%; /* 전체 너비 */
+    display: flex;
+    justify-content: center; /* 중앙 정렬 */
+    margin-top: 70px; /* 위쪽 여백 추가 */
+}
+
+
+/* .nav-links2 {
+    list-style-type: none;
+    margin: 0;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+} */
 
 /* 내비게이션 링크 설정 */
 .nav-links {
@@ -71,67 +88,21 @@ html, body {
 
 .nav-links li {
     margin: 0 15px; /* 각 항목 사이에 좌우 여백 추가 */
+
+}
+.navbar1 .nav-links li {
+    padding-left:25px; /* 각 항목 사이에 좌우 여백 추가 */
+    padding-right:25px;
+    font-size:20px;
 }
 
 .nav-links a {
-    color: #fff;
-    text-decoration: none; /* 링크 기본 스타일 제거 */
+    color: #ffffff; /* 링크 색상 하얀색으로 변경 */
+    text-decoration: none;
     font-weight: bold;
 }
 
 .nav-links a:hover {
-    text-decoration: none; /* 호버 상태에서도 밑줄 제거 */
-}
-
-.header h1 {
-    margin: 0;
-    color: #fff;
-    font-size: 2rem; /* 글자 크기 상대 단위로 설정 */
-    text-align: center;
-    flex-grow: 1; /* 남는 공간을 차지하여 중앙 정렬 유지 */
-}
-
-.header h1 a {
-    color: #ffffff;
-    text-decoration: none; /* 제목 링크의 밑줄 제거 */
-}
-
-/* 페이지 내용 설정 */
-.home-page {
-    padding: 20px; /* 좌우 패딩 설정 */
-    min-height: 100vh; /* 화면 전체 높이 설정 */
-    max-width: 1000px; /* 최대 너비 설정 */
-    width: 100%; /* 화면 너비에 맞게 조정 */
-    margin: 0 auto; /* 중앙 정렬 */
-    box-sizing: border-box; /* 패딩을 포함한 전체 너비 계산 */
-    padding-top: 150px; /* 헤더 높이만큼 여백 추가 */
-}
-
-/* 슬라이더 설정 */
-.promo-container {
-    margin: 0 auto; /* 가운데 정렬 */
-    max-width: 1000px; /* 최대 너비 설정 */
-    overflow: hidden; /* 슬라이더가 컨테이너를 넘어서지 않도록 설정 */
-}
-
-.image-slide {
-    max-width: 100%; /* 부모 컨테이너의 최대 너비에 맞추기 */
-    height: auto;
-    border-radius: 10px;
-}
-
-/* slick-carousel 기본 스타일 */
-.slick-slide {
-    display: flex;
-    justify-content: center; /* 슬라이드 내용 중앙 정렬 */
-}
-
-.slick-track {
-    display: flex;
-    align-items: center; /* 슬라이드 중앙 정렬 */
-}
-
-/* 최소 너비 설정 */
-body {
-    min-width: 1000px; /* 최소 너비 설정 */
+	text-decoration: none; /* 링크의 밑줄 제거 */
+    /* text-decoration: underline;  *//* 호버 시 밑줄 추가 */
 }
