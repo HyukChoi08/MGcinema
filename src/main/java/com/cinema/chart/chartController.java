@@ -38,10 +38,6 @@ public String chartList1(HttpServletRequest req, Model model) {
 	model.addAttribute("chartList2",archart);
 	chartDTO putchart = cdao.chartList3(id);
 	model.addAttribute("chartList3", putchart);
-	ArrayList<chartappearanceinfoDTO> putinfoprod =cainfodao.chartappearanceinfo(String.valueOf(id));
-	model.addAttribute("cainfoprod", putinfoprod);
-	ArrayList<chartappearanceinfoDTO> putinfoactor =cainfodao.chartappearanceinfo1(String.valueOf(id));
-	model.addAttribute("cainfoactor", putinfoactor);
 	int countreview = cpcdao.count(String.valueOf(id));
 	model.addAttribute("countreview",countreview);
 	return "chart/chartList1";
