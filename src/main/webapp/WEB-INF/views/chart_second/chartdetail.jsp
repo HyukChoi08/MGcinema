@@ -5,7 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/detail_css/chartdetail.css">
+
+<link rel="stylesheet" href="/detail_css/chartdetail.css?v=<%= System.currentTimeMillis() %>">
 <%-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/detail_css/chartdetail.css"> --%>
 </head>
 <style>
