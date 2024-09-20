@@ -5,8 +5,8 @@
 	<!-- 고객 정보 조회 (ID 기반) -->
 	<select id="getCustomerInfo"
 		resultType="com.cinema.mypage.CustomerDTO">
-		SELECT id, uid, passwd, realname, nickname, email, region,
-		favorite, mobile, tellecom, created, updated, birthday
+		SELECT id, uid, passwd, realname, nickname, email, address,
+		favorite, mobile, tellecom, created, updated, birthday , fulladdress, post
 		FROM customer
 		WHERE id = #{param1}
 	</select>
@@ -27,13 +27,15 @@
 		passwd = #{passwd},
 		nickname = #{nickname},
 		email = #{email},
-		fulladdress = #{region},
+		address= #{address},
+		fulladdress = #{fulladdress},
 		favorite = #{favorite},
 		mobile = #{mobile},
 		tellecom = #{tellecom},
 		updated = NOW(),
 		birthday = #{birthday},
-		profileimg = #{profileimg}
+		profileimg = #{profileimg},
+		post = #{post}
 		WHERE id = #{id}
 	</update>
 

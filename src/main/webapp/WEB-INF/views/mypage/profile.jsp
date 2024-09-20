@@ -11,6 +11,8 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 <head>
 <script src="https://kit.fontawesome.com/3a115195d8.js"
 	crossorigin="anonymous"></script>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link rel="stylesheet" href="/mypage_css/mypage.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,17 +26,15 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 	<!-- DB 작업 실패 시 에러메세지 출력 -->
 	<c:if test="${not empty errorMessage}">
 		<script>
-				alert('${errorMessage}');
-			</script>
+			alert('${errorMessage}');
+		</script>
 	</c:if>
 
 	<!-- 프로필 섹션 -->
 	<div class="mainscreen">
 		<div class="profile-section">
-			<img id="profileImage"
-				src="<%= customer.getProfileimg() != null ? customer.getProfileimg() : "/mypage_image/OO.png" %>"
-				alt="프로필이미지" width="80" height="80" />
-
+				<img id="profileImage" src="<%= customer.getProfileimg() != null ? customer.getProfileimg() : "/mypage_image/OO.png" %>" alt="프로필이미지" width="80" height="80" />
+			<!-- <img src="/mypage_image/OO.png" alt="프로필이미지" width="80" height="80" /> -->
 			<div class="profile-info">
 				<h2>
 					<%=customer.getRealname()%>
@@ -119,7 +119,25 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 								</tr>
 								<tr>
 									<td><h4>주소</h4></td>
-									<td><input type=text name=region id=region></td>
+									<td>
+										<div class="addr-wrap">
+										<!-- 우편번호 및 주소 검색 버튼 -->
+									<form>
+									    <label for="post">우편번호:</label>
+									    <input type="text" id="post" name=post readonly placeholder="우편번호를 입력하세요">
+									    <button type="button" onclick="searchAddr()">주소 검색</button>
+									    <br><br>
+									    
+									    <label for="address">주소:</label>
+									    <input type="text" id="address" name="address" readonly placeholder="주소를 입력하세요">
+									    <br><br>
+									    
+									    <label for="fulladdress">상세 주소:</label>
+									    <input type="text" id="fulladdress" name="fulladdress" placeholder="상세 주소를 입력하세요">
+									    <br><br>
+									</form>
+									</div>
+									</td>
 								</tr>
 								<tr>
 									<td><h4>생년월일</h4></td>
@@ -146,24 +164,19 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 								<tr>
 									<td><h4>관심분야</h4></td>
 									<td><input type="checkbox" name="favorite"
-										id="favoriteAction" value="액션">액션 <input type="checkbox" name="favorite"
-										id="favoriteThriller" value="스릴러">스릴러
-										<input
+										id="favoriteAction" value="액션">액션 <input
+										type="checkbox" name="favorite" id="favoriteThriller"
+										value="스릴러">스릴러 <input type="checkbox" name="favorite"
+										id="favoriteSF" value="코미디">SF<br> <input
 										type="checkbox" name="favorite" id="favoriteComedy"
 										value="코미디">코미디 <input type="checkbox" name="favorite"
-										id="favoriteDrama" value="드라마">드라마<br> 
-										<input type="checkbox" name="favorite" id="favoriteRomance"
-										value="로맨스">로맨스  <input
-										type="checkbox" name="favorite" id="favoriteHorror" value="공포">공포
-										<input type="checkbox" name="favorite" id="favoriteAnimation"
-										value="애니메이션">애니메이션 <input type="checkbox"
-										name="favorite" id="favoriteFantasy" value="판타지">판타지<br>
+										id="favoriteRomance" value="로맨스">로맨스 <input
+										type="checkbox" name="favorite" id="favoriteFantasy"
+										value="판타지">판타지<br> <input type="checkbox"
+										name="favorite" id="favoriteAnimation" value="애니메이션">애니메이션
 										<input type="checkbox" name="favorite" id="favoriteFamily"
 										value="가족">가족 <input type="checkbox" name="favorite"
-										id="favoriteAdventure" value="모험">모험 <input
-										type="checkbox" name="favorite" id="favoriteWar" value="전쟁">전쟁
-										<input type="checkbox" name="favorite" id="favoriteMusic"
-										value="음악">음악</td>
+										id="favoriteEtc" value="기타">기타</td>
 								</tr>
 								<tr>
 									<td><h4>프로필 이미지</h4></td>
@@ -196,7 +209,6 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
 	$(document).ready(
-			
 
 			function() {
 
@@ -212,8 +224,10 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 						$('#realname').val(data.realname);
 						$('#inputNickname').val(data.nickname);
 						$('#email').val(data.email);
-						$('#region').val(data.region);
+						$('#address').val(data.address);
 						$('#birthday').val(data.birthday);
+						$('#fulladdress').val(data.fulladdress);
+						$('#post').val(data.post);
 
 						// tellecom radio 체크 설정
 						if (data.tellecom === "LG U+") {
@@ -235,13 +249,16 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 						// favorite checkbox 설정
 						if (data.favorite != null) {
 							var favorites = data.favorite.split(',');
-	
-							favorites.forEach(function(fav) {
-								fav = fav.trim(); // 공백 제거
-								// value 속성에 해당하는 checkbox를 찾아서 체크
-								$('input[name="favorite"][value="' + fav + '"]')
-										.prop('checked', true);
-							});
+
+							favorites
+									.forEach(function(fav) {
+										fav = fav.trim(); // 공백 제거
+										// value 속성에 해당하는 checkbox를 찾아서 체크
+										$(
+												'input[name="favorite"][value="'
+														+ fav + '"]').prop(
+												'checked', true);
+									});
 						}
 					},
 					error : function() {
@@ -256,25 +273,29 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 		// #birthday 요소의 max 속성을 현재 날짜로 설정합니다.
 		$('#birthday').attr('max', today);
 	});
-	
+
 	// 이미지 미리보기 기능
-    document.getElementById('profileImageInput').addEventListener('change', function(event) {
-        const input = event.target;
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const preview = document.getElementById('imagePreview');
-                preview.src = e.target.result;
-                preview.style.display = 'block';
-                
-                // 프로필 이미지 업데이트 --- 여기서 구현되면 안됨
-                /* const profileImage = document.getElementById('profileImage');
-                profileImage.src = e.target.result; */
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
-    });
-	
+	document.getElementById('profileImageInput')
+			.addEventListener(
+					'change',
+					function(event) {
+						const input = event.target;
+						if (input.files && input.files[0]) {
+							const reader = new FileReader();
+							reader.onload = function(e) {
+								const preview = document
+										.getElementById('imagePreview');
+								preview.src = e.target.result;
+								preview.style.display = 'block';
+
+								// 프로필 이미지 업데이트 --- 여기서 구현되면 안됨
+								/* const profileImage = document.getElementById('profileImage');
+								profileImage.src = e.target.result; */
+							}
+							reader.readAsDataURL(input.files[0]);
+						}
+					});
+
 	document.addEventListener('DOMContentLoaded', function() {
 		const modal = document.getElementById('nicknameModal');
 		const editBtn = document.querySelector('.fa-pen');
@@ -323,5 +344,31 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 		});
 	});
 
+	//kakad map api
+	function searchAddr() {
+		new daum.Postcode({
+			oncomplete : function(data) {
+				// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성
+
+				// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+				// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+				var addr = ''; // 주소 변수
+
+				//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+				if (data.userSelectedType === 'R') {
+					// 사용자가 도로명 주소를 선택했을 경우
+					addr = data.roadAddress;
+				} else {
+					// 사용자가 지번 주소를 선택했을 경우(J)
+					addr = data.jibunAddress;
+				}
+				// 우편번호와 주소 정보를 해당 필드에 넣는다.
+				$("#post").val(data.zonecode);
+				$("#address").val(addr);
+				// 커서를 상세주소 필드로 이동한다.
+				$("#fulladdress").focus();
+			}
+		}).open();
+	}
 </script>
 </html>

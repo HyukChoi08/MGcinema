@@ -241,40 +241,44 @@ public class PageController {
 	// 회원 정보 변경 처리
 	@PostMapping("/profileUpdate")
 	public String profileUpdate(CustomerDTO cusDTO, @RequestParam("profileImage") MultipartFile profileImage, HttpSession session, RedirectAttributes redirectAttributes) {
-		try {
-			// 프로필 이미지 처리
-            if (!profileImage.isEmpty()) {
-                // 파일 저장 경로 설정
-                String uploadDir = "src/main/resources/static/mypage_image/";
-                File uploadDirectory = new File(uploadDir);
-                if (!uploadDirectory.exists()) {
-                    uploadDirectory.mkdirs();
-                }
+	    try {
+	        // 기존 프로필 이미지 경로 가져오기
+	        String existingProfileImage = cusDTO.getProfileimg(); // 기존 이미지 경로
 
-                // 파일 이름 중복 방지를 위해 UUID 사용
-                String originalFilename = profileImage.getOriginalFilename();
-                String fileExtension = originalFilename.substring(originalFilename.lastIndexOf("."));
-                String newFilename = UUID.randomUUID().toString() + fileExtension;
-                System.out.println("파일명: " + originalFilename + ", 확장자명: " + fileExtension + ", UUID: " + newFilename);
-                Path filePath = Paths.get(uploadDir, newFilename);
-                
-                // 파일 저장
-                Files.copy(profileImage.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-                
-                // 프로필 이미지 경로 설정 (웹 접근 가능한 경로)
-                String profileImagePath = "/mypage_image/" + newFilename;
-                cusDTO.setProfileimg(profileImagePath);
-            }
-			
-			mdao.updateCusInfo(cusDTO);
-			redirectAttributes.addFlashAttribute("message", "수정되었습니다");
-			return "redirect:/myhome";
-		} catch (Exception e) {
-			e.printStackTrace(); // 예외 스택 트레이스를 콘솔에 출력
-		    redirectAttributes.addFlashAttribute("errorMessage", "다시 시도해주세요");
-		    session.setAttribute("passwordChecked", true);
-			return "redirect:/profile";
-		}
+	        // 프로필 이미지 처리
+	        if (!profileImage.isEmpty()) {
+	            // 파일 저장 경로 설정
+	            String uploadDir = "src/main/resources/static/mypage_image/";
+	            File uploadDirectory = new File(uploadDir);
+	            if (!uploadDirectory.exists()) {
+	                uploadDirectory.mkdirs();
+	            }
+
+	            // 파일 이름 중복 방지를 위해 UUID 사용
+	            String originalFilename = profileImage.getOriginalFilename();
+	            String fileExtension = originalFilename.substring(originalFilename.lastIndexOf("."));
+	            String newFilename = UUID.randomUUID().toString() + fileExtension;
+	            System.out.println("파일명: " + originalFilename + ", 확장자명: " + fileExtension + ", UUID: " + newFilename);
+	            Path filePath = Paths.get(uploadDir, newFilename);
+	            
+	            // 파일 저장
+	            Files.copy(profileImage.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+	            
+	            // 프로필 이미지 경로 설정 (웹 접근 가능한 경로)
+	            String profileImagePath = "/mypage_image/" + newFilename;
+	            cusDTO.setProfileimg(profileImagePath);
+	        } else {
+	            // 이미지가 업로드되지 않은 경우 기존 이미지 경로 유지
+	            cusDTO.setProfileimg(existingProfileImage);
+	        }
+
+	        // 나머지 프로필 정보 업데이트 로직 추가
+	        // ...
+
+	    } catch (Exception e) {
+	        // 예외 처리 로직 추가
+	    }
+	    return "redirect:/profile"; // 리다이렉트할 URL
 	}
 
 	// 회원 탈퇴 페이지

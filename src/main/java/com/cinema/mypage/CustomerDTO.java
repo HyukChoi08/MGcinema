@@ -9,7 +9,7 @@ public class CustomerDTO {
 	String realname;
 	String nickname;
 	String email;
-	String region;
+	String address;//region 
 	String favorite;
 	String mobile;
 	String tellecom;
@@ -17,4 +17,6 @@ public class CustomerDTO {
 	String updated;
 	String birthday;
 	String profileimg;
+	String fulladdress;
+	String post;
 }
