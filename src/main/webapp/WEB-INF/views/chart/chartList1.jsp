@@ -260,7 +260,7 @@ color:black;
                                             <li>
                                                 <input type="hidden" id="moviechart" value="'+chartId+'">
                                                 <input type="hidden" id="idcheck"><input type="hidden" id="recommendid">
-                                                <input type="hidden" id="idname"><textarea id="reviewcomment" style="width:700px;height:100px;"></textarea>
+                                                <input type="hidden" id="idname"><textarea id="reviewcomment" style="width:660px;height:100px;"></textarea>
                                                 <select id="rate"name="rate">
                                                     <option value="1">평점:1</option>
                                                     <option value="2">평점:2</option>
@@ -279,11 +279,6 @@ color:black;
                                     </c:if>
                                 </div>
                             </div>
-<!--                             <select size="1" style="width:100px;height:30px;" id="commentArray">
-                                <option value="releasedate desc">최신순</option>
-                                <option value="rating desc">평점순</option>
-                            </select>
-                            <button id="comment">Go</button> -->
                             <div>
                                 <ul id="commentList" class="comment-list-container"></ul>
                             </div>
@@ -296,27 +291,7 @@ color:black;
                 </div>
             </div>
         </div>
- <%--     </c:forEach> 
-    <div id="appearinfo">
-    <div style="display:flex;">
-    <ul class="vertical-container">
-    <li>
-    <c:forEach items="${cainfoprod}" var="cainfoprod">
-                        <div>
-                    	감독:${cainfoprod.prod}<img src=${cainfoprod.image_path}>
-                    </div>
-    </c:forEach>
-    </li>
-    <li class="flex-container">
-    <c:forEach items="${cainfoactor}" var="cainfoactor">
-                        <div>
-                    	배우:${cainfoactor.actor}<img src=${cainfoactor.image_path}>
-                    </div>
-    </c:forEach>
-    </li>
-    </ul>
-    </div>
-    </div> --%>
+
     </div>
     <%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
 
@@ -327,20 +302,6 @@ color:black;
     
     let getmname = $("#getmname").data("mname");
     
-/*     $.ajax({
-    	url:'/putreservation',
-    	type:'post',
-    	data:{getmname:getmname},
-        success: function(data) {
-        	console.log(data)
-        	let str = ''
-        	$('#reservation').empty();
-			str="예매율:"+data;
-			console.log(str);
-        	
-            $('#reservation').append(str);
-        }
-    }) */
 
     $.ajax({
     	url:'/updatereservation',
@@ -464,15 +425,6 @@ color:black;
             $(this).parent().append(textarea + rateSelectBox + editButton + deleteButton);
         });
         
-   /*      $(document).on('click', '#apinfo', function() {
-            $('#review').hide();
-            $('#paging').hide();
-            $('#comment').hide();
-            $('#commentList').hide();
-            $('#commentArray').hide();
-            $('#movieinfo').hide();
-            $('#appearinfo').show();
-        }); */
         function AverageRate(){
             $.ajax({
             	url:'/AverageRate',

@@ -27,7 +27,7 @@
 		passwd = #{passwd},
 		nickname = #{nickname},
 		email = #{email},
-		region = #{region},
+		fulladdress = #{region},
 		favorite = #{favorite},
 		mobile = #{mobile},
 		tellecom = #{tellecom},

@@ -25,13 +25,15 @@ public class ServiceController {
         ServiceHomeDTO serviceHome = new ServiceHomeDTO();
         
         // 뉴스 목록 가져오기
-        List<NewsDTO> newsList = newsDAO.getAllNews(10, 0); // 예시로 5개 뉴스 가져오기
+        List<NewsDTO> newsList = newsDAO.getAllNews(9, 0); // 예시로 5개 뉴스 가져오기
         model.addAttribute("newsList", newsList);
 
         model.addAttribute("serviceHome", serviceHome);
         return "service/ServiceHome";
     }
-   
+
+    
+
     @GetMapping("/faq")
     public String showFAQPage(
             @RequestParam(value = "page", defaultValue = "1") int page,
@@ -97,23 +99,20 @@ public class ServiceController {
         return "redirect:/faq";
     }
     @GetMapping("/FAQdetail")
-    public String showFAQDetailPage(@RequestParam(value = "id") Long id, 
-                                     @RequestParam(value = "page", defaultValue = "1") int currentPage, 
-                                     Model model) {
+    public String showFAQDetailPage(@RequestParam(value = "id") Long id, Model model) {
         FAQDTO faqDetail = faqDAO.getFAQById(id);
         if (faqDetail != null) {
             // 조회수 증가 및 FAQ 업데이트
             faqDetail.setViews(faqDetail.getViews() + 1);
             faqDAO.updateFAQ(faqDetail);
-            
+
             // 날짜 포맷 설정
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            String formattedDate = (faqDetail.getCreated_at() != null) ? faqDetail.getCreated_at() : "날짜 정보 없음";
+            String formattedDate = (faqDetail.getCreated_at() != null) ? faqDetail.getCreated_at().formatted(formatter) : "날짜 정보 없음";
 
             // 모델에 속성 추가
             model.addAttribute("faqDetail", faqDetail);
             model.addAttribute("formattedDate", formattedDate);
-            model.addAttribute("currentPage", currentPage); // currentPage 추가
         } else {
             model.addAttribute("error", "FAQ 항목을 찾을 수 없습니다.");
         }
@@ -181,19 +180,10 @@ public class ServiceController {
     }
 
     @GetMapping("/newsDetail")
-    public String showNewsDetailPage(
-            @RequestParam(value = "id") Long id, 
-            @RequestParam(value = "page", defaultValue = "1") int currentPage,
-            @RequestParam(value = "size", defaultValue = "10") int size,
-            @RequestParam(value = "search", defaultValue = "") String search, 
-            Model model) {
-
+    public String showNewsDetailPage(@RequestParam(value = "id") Long id, Model model) {
         newsDAO.incrementViewCount(id);
         NewsDTO newsDetail = newsDAO.getNewsById(id);
-        model.addAttribute("newsDetail", newsDetail);
-        model.addAttribute("currentPage", currentPage);
-        model.addAttribute("size", size);
-        model.addAttribute("search", search);
+        model.addAttribute("newsDetail", newsDetail); 
         return "service/Newsdetail";
     }
 

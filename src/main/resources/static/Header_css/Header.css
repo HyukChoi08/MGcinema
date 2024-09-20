@@ -4,9 +4,17 @@ html, body {
     padding: 0;
     line-height: 1.4;
     text-align: center;
+<<<<<<< HEAD
     box-sizing: border-box;
     background-color: #000000;
 }
+=======
+    box-sizing: border-box; /* 패딩을 포함한 전체 너비 계산 */
+    background-color: #000000; 
+} 
+
+
+>>>>>>> branch 'master' of https://github.com/HyukChoi08/MGcinema.git
 
 /* 헤더 설정 */
 .header {

@@ -25,7 +25,9 @@ public class TicketController {
 	@Autowired TicketDAO tdao;
 	
 	@GetMapping("/ticket")
-	public String ticket() {
+	public String ticket(HttpServletRequest req, Model model) {
+		String movieid = req.getParameter("id");
+		model.addAttribute("movieid",movieid);
 		return "ticketweb/ticket";
 	}
 	

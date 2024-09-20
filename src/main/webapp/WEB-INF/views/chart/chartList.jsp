@@ -224,21 +224,6 @@ $(document)
                 }
 
                 $('#movieList').append(str1);
-                
-                /*
-                * 
-                * <div class="vertical-container">
-                    <ol id="1">
-                    </ol>
-                </div>
-                <div class="vertical-container">
-                    <ol id="2">
-                    </ol>
-                </div>
-                * 
-                * 
-                * 
-                * */
             }
         });
     }

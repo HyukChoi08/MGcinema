@@ -60,6 +60,7 @@
         }
     </style>
 <body>
+	<h2>결제 성공</h2>
     <div class="container">
         <div class="success-icon">✔️</div>
         <h2>결제 성공!</h2>
@@ -80,7 +81,7 @@ $(document).ready(function() {
         
         window.dataSaved = true;
     }
-    
+
     function storeData() {
         // Extract URL parameters
         let urlParams = new URLSearchParams(window.location.search);
@@ -89,12 +90,10 @@ $(document).ready(function() {
         let uid = urlParams.get('uid');
         let item_name = urlParams.get('itemname');
         let totalprice = urlParams.get('totalprice');
-        let select = urlParams.get('select');
 
         console.log("totalprice: " + totalprice);
         console.log("source: " + source);
         console.log("uid: " + uid);
-        console.log("select: " + select);
 
         // Send store data
         $.ajax({
@@ -121,7 +120,7 @@ $(document).ready(function() {
                  $.ajax({
                      url: '/clearcart',
                      type: 'POST',
-                     data: { customer_id: uid,select: select },
+                     data: { customer_id: uid },
                      dataType:'text',
                      success: function(data) {
                          if (data === "ok") {
@@ -141,13 +140,10 @@ $(document).ready(function() {
        
     }
 })
-.on('click', '.btnclose', function() {
-    // 팝업창을 닫기
-    window.close(); // 팝업창을 닫기
 
-    // 기존 페이지를 store로 이동
-    window.opener.location.href = '/store';
-});       
+    
+
+            
             
 </script>
 </html>

@@ -34,10 +34,8 @@ String customer_id = (String) session.getAttribute("uid");
 	<div class="mainscreen">
 		<!-- 프로필 섹션 -->
 		<div class="profile-section">
-			<img id="profileImage" src="<%= customer.getProfileimg() != null ? customer.getProfileimg() : "/mypage_image/OO.png" %>" 
-			alt="   이미지없음" width="80" height="80" />
+			<img id="profileImage" src="<%= customer.getProfileimg() != null ? customer.getProfileimg() : "/mypage_image/OO.png" %>" alt="프로필이미지" width="80" height="80" />
 			<!-- <img src="/mypage_image/OO.png" alt="프로필이미지" width="80" height="80" /> -->
-
 			<div id="result"></div>
 			<div class="profile-info">
 				<h2>
@@ -159,7 +157,7 @@ String customer_id = (String) session.getAttribute("uid");
 					<c:forEach var="movie" items="${topMovies}">
 						<div>
 							<h3>${movie.mname}</h3> 
-							<div><img src="${movie.imagepath}" alt="${movie.mname}" id="gochart" data-mid="${movie.id}" style="width: 200px; height: 300px;"></div>
+							<div><img src="${movie.imagepath}" alt="${movie.mname}" id="gochart" data-id="${movie.id}" style="width: 200px; height: 300px;"></div>
 							<p>예매율: ${movie.reservation} %</p>
 						</div>
 					</c:forEach>
@@ -218,7 +216,7 @@ String customer_id = (String) session.getAttribute("uid");
 <script>
 	
 	$(document).on("click","#gochart", function(){
-		let movieid = $(this).data("mid");
+		let movieid = $(this).data("id");
 		window.location.href = "chartList1?id="+movieid;
 	})
 

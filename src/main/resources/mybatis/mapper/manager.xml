@@ -39,7 +39,7 @@
 </select>
 <insert id="moviein">
 	insert into movie set mname=#{param1}, age=#{param2}, runningtime=#{param3}, imagepath=#{param4}, director=#{param5},
-							cast=#{param6}, genre=#{param7}, releasedate=#{param8}, movieinfo=#{param9}, reservation=#{param10}, avgrate=#{param11}
+							cast=#{param6}, genre=#{param7}, releasedate=#{param8}, movieinfo=#{param9}, reservation=#{param10}
 </insert>
 <insert id="newsin">
 	insert into news set title=#{param1}, content=#{param2},selected=#{param3}, created_at=CURDATE()
@@ -69,11 +69,5 @@
 </update>
 <update id="itemup">
 	update item set item_name=#{param2}, item_type=#{param3}, price=#{param4}, discount_price=#{param5}, composition=#{param6}, origin=#{param7}, image_path=#{param8}, period=#{param9} where id=#{param1}
-</update>
-<update id="bestzero">
-	update item set best_id=0
-</update>
-<update id="bestitems">
-	update item set best_id=#{param1} where id=#{param2}
 </update>
 </mapper>

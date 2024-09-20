@@ -6,11 +6,6 @@
 <select id="storecustomer" resultType="com.cinema.store.storecustomerDTO"> select id,uid,passwd,realname,nickname,email,mobile from customer where uid=#{param1} </select>
 <insert id="insertStorepay"> insert into storepay set customer_id=#{param1}, random_id=#{param2}, item_name=#{param3}, totalprice=#{param4} </insert>
 <delete id="clearcart">
-delete from cart where customer_id=#{param1} and item_id=#{param2}
+delete from cart where customer_id=#{param1}
 </delete>
-<select id="storeage" resultType="com.cinema.store.storecustomerDTO">
-
-select birthday from customer where uid=#{param1} and id=#{param2}
-
-</select>
 </mapper>
