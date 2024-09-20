@@ -28,7 +28,6 @@
                 <div><img src="/homepage_image/image_08.jpg" alt="Promotion 8" class="image-slide" /></div>
          	</div>
         </div>
-
     <%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
 
 </body>
