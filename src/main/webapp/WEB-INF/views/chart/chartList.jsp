@@ -33,7 +33,7 @@ body {
     flex-direction: column; /* 세로 정렬 */
     align-items: center; /* 가운데 정렬 */
     width:1000px;
-    margin-top:150px;
+    margin-top:50px;
 }
 .vertical-container4 {
     flex: 1; /* 콘텐츠 영역이 남은 공간을 차지하도록 설정 */

@@ -23,8 +23,8 @@ body {
     height: 100vh; /* 또는 필요한 높이 설정 */
     padding: 20px; /* 필요에 따라 패딩 추가 */
     box-sizing: border-box;
-    margin-top:150px;
-    margin-bottom:100px;
+    margin-top:0px;
+    margin-bottom:50px;
     
 }
 .vertical-container4 {
@@ -32,7 +32,7 @@ body {
     flex-direction: column;
     align-items: center; /* 가운데 정렬 */
     justify-content: center; /* 수직 중앙 정렬 */
-    height: 150vh; /* 전체 뷰포트 높이 */
+    height: 130vh; /* 전체 뷰포트 높이 */
     width: 100%; /* 전체 너비 */
     padding: 20px; /* 적절한 여백 추가 */
 }
