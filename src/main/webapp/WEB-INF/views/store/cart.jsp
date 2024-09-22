@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>장바구니</title>
 <style>
 body{
 
@@ -22,6 +22,7 @@ ul, li {
     /* 점없애는곳*/ 
     
 }
+
 .contegory_contents_wrap {
     display: flex; /* flex 레이아웃을 사용 */
     flex-direction: row; /* 자식 요소를 수평으로 나열 */
@@ -96,7 +97,8 @@ vertical-align: middle; /* 수직 중앙 정렬 */
     background-color:black;
     margin-top: 150px; 
     margin-bottom: 335px;
-    border: 2px solid #808080;
+    border: 3px solid #808080; /* 회색 테두리 */
+    border-radius: 15px; /* 테두리 둥글게 만들기 */
 }
 
 
@@ -274,19 +276,23 @@ vertical-align: middle; /* 수직 중앙 정렬 */
     color:grey; 
 
 }
-#alldelete,#btndelete,.btnpay,#pay {
-    color: black; /* 텍스트 색상 설정 */
-}
+
 #alldelete{
 	position: relative;
     left:-440px; /* 원하는 위치로 이동 (음수 값으로 왼쪽으로 이동) */
 	margin-bottom:30px;
 	width:100px;
 	height:40px;
+  	border-radius: 5px;
+  	cursor: pointer; /* 마우스 커서를 포인터로 변경 */
+  	border: 2px solid #666; /* 테두리 색상 및 두께 설정 */
+  	color:whhite;
+  	background-color: #444; /* 배경색을 검정색으로 설정 */
+  	
 }
-
-
-
+#alldelete:hover{
+	background-color: red; /* 호버 시 배경색 변경 */
+}
 .cart-table {
     width: 100%;
     border-collapse: collapse;
@@ -368,7 +374,7 @@ margin-bottom:30px;
 }
 
 .qty-buttons button:hover {
-    background-color: #666;
+    background-color: red;
 }
 
 .qty-input {
@@ -383,6 +389,8 @@ margin-bottom:30px;
     flex-direction: column; /* 세로 방향으로 배치 */
     align-items: center; /* 수평 중앙 정렬 (선택사항) */
 }
+
+
 .choice input[type="button"] {
  
     width: 100px; /* 버튼 너비 설정 (필요에 따라 조정) */
@@ -397,8 +405,7 @@ margin-bottom:30px;
     border: 2px solid #666; /* 테두리 색상 및 두께 설정 */
     font-size: 13px; /* 폰트 크기 설정 */
     padding: 0; /* 패딩을 0으로 설정 (높이에 맞게 조정) */
-    cursor: pointer; /* 마우스 커서를 포인터로 변경 */
- 
+    cursor: pointer; /* 마우스 커서를 포인터로 변경 */ 
     width: 38px; /* 버튼 너비 자동 조정 */
     transition: background-color 0.3s, border-color 0.3s; /* 배경색과 테두리 색상의 전환 효과 */
     height: 40px; /* 버튼 높이 설정 */
@@ -407,7 +414,7 @@ margin-bottom:30px;
 }
 
 .btnchange:hover {
-    background-color: #666; /* 호버 시 배경색 변경 */
+    background-color: red; /* 호버 시 배경색 변경 */
     border-color: #444; /* 호버 시 테두리 색상 변경 */
 }
 .discount{
@@ -439,18 +446,23 @@ margin-bottom:30px;
     transition: background-color 0.3s, border-color 0.3s; /* 배경색과 테두리 색상의 전환 효과 */
    
 }
-#pay 
-{
+#pay{
   padding: 10px 20px; /* 버튼의 여백 조정 */
   font-size: 16px;    /* 글자 크기 조정 */
-  border: 1px solid #ccc; /* 테두리 추가 */
-  background-color: #f0f0f0; /* 배경색 조정 */
-  color: black;       /* 글자 색상 검정으로 설정 */
+  border: 2px solid #666; /* 테두리 색상 및 두께 설정 */
+  background-color: #444; /* 배경색 설정 */
+  color:white;
   cursor: pointer;    /* 커서가 버튼 위에 있을 때 손 모양으로 변경 */
   margin: 0 5px;      /* 버튼 간격 조정 */
   position: relative; /* 버튼의 위치를 조정할 수 있게 함 */
   left:160px;
+  border-radius: 5px; /* 테두리를 둥글게 설정 */
+     
 }
+#pay:hover {
+   background-color: red; /* 호버 시 배경색 변경 */
+}
+
 #btnback {  
    border-color: #0056b3;
    font-size:20px;
@@ -463,24 +475,56 @@ margin-bottom:30px;
  margin-bottom:30px;
 
 }
+.category_wrap {
+    width: 80%; /* 원하는 너비로 설정 */
+    margin: auto; /* 위쪽 마진 20px 추가, 좌우 자동 마진으로 중앙 정렬, 아래 여백 10px 유지 */
+    padding-top: 5px; /* 위쪽 안쪽 여백 추가 */
+}
+#store-link {
+    text-decoration: none; /* 링크의 밑줄 제거 */
+    color: inherit; /* 부모 요소의 색상 상속 */
+}
+#store-link:hover {
+    text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
+}
+.category_content a:hover {
+    text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
+}
+.cart_content a {
+    text-decoration: none; /* 기본 상태에서 밑줄 제거 */
+    color: inherit; /* 부모 색상 상속 */
+}
 
+.cart_content a:hover {
+    text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
+}
+.cart-item .btnpay:hover,
+.cart-item .btndelete:hover {
+  background-color: red; /* 호버 시 배경색 변경 */
+}
+ 
 </style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
 <div id="container">
   	<div class="contegory_contents_wrap">
-                <ul class="category_content"> <!-- ul로 변경 -->
-                  	<li><a href="/package" class="no-underline">패키지</a></li>
-                    <li><a href="/giftcard" class="no-underline">기프트카드</a></li>
-                    <li><a href="/combo" class="no-underline">콤보</a></li>
-                    <li><a href="/popcorn" class="no-underline">팝콘</a></li>
-                    <li><a href="/drink" class="no-underline">음료</a></li>
-                    <li><a href="/snack" class="no-underline">스낵</a></li>
-                </ul>
-                <ul class="cart_content"> <!-- ul로 변경 -->                  
-          		<li><a href="/cart" class="no-style-link">장바구니</a><span id="cart-count">0</span></li>
-                </ul>   
+    	   <div class="category_wrap">
+            <a href="/store" id="store-link">베스트상품</a>                 
+             <div class="separator"></div> <!-- 선을 스토어 아래에 위치 -->                
+            </div>
+        <ul class="category_content"> <!-- ul로 변경 -->            	
+        	<li><a href="/storeall" class="no-underline">전체상품</a></li>
+          	<li><a href="/package" class="no-underline">패키지</a></li>
+            <li><a href="/giftcard" class="no-underline">기프트카드</a></li>
+            <li><a href="/combo" class="no-underline">콤보</a></li>
+            <li><a href="/popcorn" class="no-underline">팝콘</a></li>
+            <li><a href="/drink" class="no-underline">음료</a></li>
+            <li><a href="/snack" class="no-underline">스낵</a></li>
+        </ul>
+        <ul class="cart_content"> <!-- ul로 변경 -->                  
+  		<li><a href="/cart" class="no-style-link">장바구니</a><span id="cart-count">0</span></li>
+        </ul>   
     </div>
     <div class="separator1"></div> <!-- 선을 contegory_contents_wrap 아래에 위치 -->
  	<div class="cart_step">
@@ -540,7 +584,7 @@ margin-bottom:30px;
                         <td class="total">${cart.total}</td>
                         <td class="choice">
                             <input type="button" class="btnpay" value="구매하기">
-                            <input type="button" id="btndelete" value="삭제하기">
+                            <input type="button" class="btndelete" value="삭제하기">
                         </td>
                     </tr>
                 </c:forEach>
@@ -571,9 +615,9 @@ margin-bottom:30px;
 		    <a href="javascript:history.back()" id="btnback">뒤로가기</a>
 		    <button type="button" id="pay">결제하기</button>
 		</form>
-
     </div> 
 </div>
+
 <%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
 </body>
 
@@ -886,7 +930,8 @@ $(document).ready(function() {
     });
 
     // 삭제 버튼 클릭 시
-    $(document).on('click', '#btndelete', function() {
+    $(document).on('click', '.btndelete', function() {
+
         let row = $(this).closest('.cart-item');
         let checked = row.find('.item-checkbox').is(':checked');
 

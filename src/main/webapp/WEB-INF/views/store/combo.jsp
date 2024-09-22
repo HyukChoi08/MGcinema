@@ -6,19 +6,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>콤보</title>
     <style>
 body{
 
- background-color:black;
+	background-color:black;
 }  
 *{
-color:white;
+	color:white;
 
 }    
 .contegory_contents_wrap a{
 
-color:white;
+	color:white;
 }    
     
        
@@ -111,17 +111,17 @@ ul, li {
 }
 #cart-count, #giftcon {
     display: inline-block; /* 텍스트와 함께 한 줄에 표시 */
-margin-left: 5px; /* 텍스트와 숫자 사이의 간격 추가 */
-padding: 0 4px; /* 숫자를 감싸는 여백 추가 */
-background-color: #ff0000; /* 배경색 */
-color: white; /* 글자색 */
-border-radius: 50%; /* 원형 배경 */
-font-size: 12px; /* 글자 크기 */
-line-height: 20px; /* 텍스트 수직 중앙 정렬 */
-height: 20px; /* 원형을 유지하기 위한 높이 */
-width: 20px; /* 원형을 유지하기 위한 너비 */
-text-align: center; /* 텍스트 중앙 정렬 */
-vertical-align: middle; /* 수직 중앙 정렬 */
+	margin-left: 5px; /* 텍스트와 숫자 사이의 간격 추가 */
+	padding: 0 4px; /* 숫자를 감싸는 여백 추가 */
+	background-color: #ff0000; /* 배경색 */
+	color: white; /* 글자색 */
+	border-radius: 50%; /* 원형 배경 */
+	font-size: 12px; /* 글자 크기 */
+	line-height: 20px; /* 텍스트 수직 중앙 정렬 */
+	height: 20px; /* 원형을 유지하기 위한 높이 */
+	width: 20px; /* 원형을 유지하기 위한 너비 */
+	text-align: center; /* 텍스트 중앙 정렬 */
+	vertical-align: middle; /* 수직 중앙 정렬 */
 }
 .category_title {
     display: flex;
@@ -169,15 +169,14 @@ img {
 }
 
 .product {
-position: relative; /* 이 부분을 추가하여 아이콘 위치 조정 */
-overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도록 설정 */
+	position: relative; /* 이 부분을 추가하여 아이콘 위치 조정 */
+	overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도록 설정 */
         }
 
 .product:hover .icon-overlay {
     display: none; /* 기본적으로 숨김 */
 }
-.icon-overlay {
-    
+.icon-overlay {    
     position: absolute;
     top: 50%; /* 이미지 상단에서 중앙 위치 */
     left: 50%; /* 이미지 왼쪽에서 중앙 위치 */
@@ -193,7 +192,7 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
     font-size: 30px;
     font-weight: bold;
 }
-    .hover-text {
+.hover-text {
     display: none; /* 기본적으로 숨김 */
     position: absolute; /* 아이콘에 대해 절대 위치 */
    
@@ -238,11 +237,10 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
     pointer-events: none; /* 아이콘의 클릭을 막고 이미지의 클릭을 가능하게 함 */
 }
 
-
 .icon-item img {
     width: 20px; /* 아이콘 크기 조정 */
     height: auto; /* 비율 유지 */
-     cursor: pointer;
+    cursor: pointer;
    
 }
 .icon-item:hover .hover-text {
@@ -257,22 +255,22 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
     padding-right: 50px; /* 버튼 너비만큼 여백을 추가하여 텍스트가 버튼에 겹치지 않게 함 */
 }
 .no-underline {
-      text-decoration: none; /* 링크의 밑줄을 제거합니다 */
-       color: black;    
+    text-decoration: none; /* 링크의 밑줄을 제거합니다 */
+    color: black;    
 }
 .no-underline:hover {
-text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도록 합니다 */
+	text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도록 합니다 */
 }
 .no-style-link {
-   text-decoration: none; /* 밑줄 제거 */
-   color: inherit; /* 링크 색상 유지 */
+   	text-decoration: none; /* 밑줄 제거 */
+   	color: inherit; /* 링크 색상 유지 */
 }
 
 .no-style-link:visited {
-   color: inherit; /* 방문 후 색상 유지 */
+   	color: inherit; /* 방문 후 색상 유지 */
 }
  .li1{
-  margin-top:10px;
+  	margin-top:10px;
   
   }
 #store-link {
@@ -287,8 +285,20 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
     display: none;
 }
 .product-composition{
-font-size:11px;
+	font-size:11px;
 }
+.category_content a:hover {
+    text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
+}
+.cart_content a {
+    text-decoration: none; /* 기본 상태에서 밑줄 제거 */
+    color: inherit; /* 부모 색상 상속 */
+}
+
+.cart_content a:hover {
+    text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
+}
+
     </style>
 </head>
 <body>
@@ -296,7 +306,7 @@ font-size:11px;
     <div id="container">
         <div id="contents">
             <div class="category_wrap">
-                 <a href="/store" id="store-link">스토어</a>
+                 <a href="/store" id="store-link">베스트상품</a>
              <input type="hidden" id="userid" value="${uid}">       
                 <div class="separator"></div> <!-- 선을 스토어 아래에 위치 -->
             </div>
@@ -318,7 +328,7 @@ font-size:11px;
             <div class="category_product_wrap">
                 <ul class="product_list">               
                     <li class="li1">
-                        <strong class="category_title">팝콘<strong class="category_dep">고소,달콤,짭짤한 맛까지, 다양하게 즐기세요.</strong><br>                                     
+                        <strong class="category_title">콤보<strong class="category_dep">영화 관람의 필수템! 콤보 상품으로 영화의 즐거움을 더하세요!</strong><br>                                     
                         </strong> 
                         <div class="separator2"></div>
                         <ul class="category_inner">
@@ -358,11 +368,11 @@ font-size:11px;
 <script src="https://code.jquery.com/jquery-latest.js">
 </script>
 <script>
-function updateCartCount(customer_id) {
+function updateCartCount() {
     $.ajax({
         url: '/countcart',
         type: 'post',
-        data: { customer_id: customer_id },
+        data: {},
         dataType: 'text',
         cache: false,
         success: function(data) {
@@ -374,11 +384,11 @@ function updateCartCount(customer_id) {
 $(document).ready(function() {
 	
 	 $('.product-info').each(function() {
-         // Find the price elements within the current product
-         var originalPrice = $(this).find('.original-price').text().replace('원', '').trim();
-         var discountedPrice = $(this).find('.discounted-price').text().replace('원', '').trim();
+      
+         var originalPrice = $(this).find('.original-price').text().replace('원', '').trim();    
+         var discountedPrice = $(this).find('.discounted-price').text().replace('원', '').trim();  
          
-         // Compare prices and hide the discounted price if they are equal
+         
          if (originalPrice === discountedPrice) {
              $(this).find('.discounted-price').addClass('hidden'); //값이 같으면 히든클래스에 넣어서 값을 숨긴다.
          }
@@ -388,51 +398,25 @@ $(document).ready(function() {
  	console.log(customer_id);
  	
 
- 	  updateCartCount(customer_id);
+  	updateCartCount();
 	
-	
-	//페이지가 로드될 때 강제로 새로고침
-	$(window).on('pageshow', function(event) {
-	    if (event.originalEvent.persisted) {
+    $(window).on('pageshow', function(event) {
+       	if (event.originalEvent.persisted) {
 	        window.location.reload();
-	    } else {
-	        let customer_id = $('#gg').val();
-	
-	        function updateCartCount() {
-	            $.ajax({
-	                url: '/countcart',
-	                type: 'post',
-	                data: { customer_id: customer_id },
-	                dataType: 'text',
-	                cache: false, // 캐시 비활성화
-	                success: function(data) {
-	                    $('#cart-count').text(data);
-	                }         
-	            });
-	        }
-	
 	        updateCartCount();
-	    }
-	})
-	
-	$(window).on('popstate', function(event) {
-	    window.location.reload();
-	})
-	// 페이지가 로드될 때 강제로 새로고침
+            }
+        });
 
- 	 
- 	 function checkItemInCart(item_id) {
-         return $.ajax({
-             url: '/checkitem', // 서버에서 장바구니에 아이템이 있는지 확인하는 엔드포인트
-             type: 'post',
-             data: {item_id: item_id },
-             dataType: 'json'
-         });
-     }
- 	 	 
-     // 페이지 로드 시 카운트 업데이트
-    
-     
+       //페이지가 로드될 때 강제로 새로고침	
+       
+        $(window).on('popstate', function(event) {
+            // 이 부분은 필요에 따라 조정
+            // 페이지가 새로 고쳐질 필요가 없는 경우 주석 처리
+            window.location.reload();
+            updateCartCount();
+        });
+     // 브라우저 히스토리 상태가 변경될 때 새로 고침 처리
+	 	     
     	    $('.icon-left').on('click', function(e) {
     	    	 e.preventDefault(); // 기본 동작을 막습니다.
     	    if (customer_id === '') {
@@ -476,7 +460,7 @@ $(document).ready(function() {
     	            console.log('Item Qty:', itemQty);
     	            console.log('Item Count:', itemCount);
 
-    	            if (itemCount >= 10 && itemQty === 0) {
+    	            if (itemCount >= 10) {
     	                alert('장바구니의 품목 종류가 10개 이상이므로 새로운 품목을 추가할 수 없습니다.');
     	            } else if (itemQty >= 10) {
     	                alert('장바구니에 이미 10개 이상의 수량이 있습니다.');
@@ -521,9 +505,8 @@ $(document).ready(function() {
     	            }
     	        }
     	      
-    	    })
-    	})
-    
+    	    });
+    	})   
 })
 let selectedItems = []; // 전역 변수로 선언
 
@@ -604,15 +587,10 @@ $('.buyButton').on('click', function(e) {
                 console.log('Product data:', $('#productData').val()); // 디버깅: 전송할 데이터 출력
 
                 $('#payForm').submit(); // 폼 제출
-            } else {
-                console.error('No data received from server.');
             }
-        },
-        error: function(xhr, status, error) {
-            console.error('AJAX Error:', status, error);
         }
     });
-});
+})
 //해상 사이트 이동하는거
 
 </script>

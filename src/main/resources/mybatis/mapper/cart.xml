@@ -34,17 +34,21 @@ WHERE item_id =#{param1} AND customer_id =#{param2} and cust_id=#{param3}
 </delete>
 <delete id="deletecart1"> DELETE FROM cart WHERE item_id =#{param1} AND customer_id =#{param2}</delete>
 <select id="countcart" resultType="_int">
-select count(DISTINCT item_id) from cart where customer_id=#{param1}
+SELECT COUNT(a.item_id) 
+FROM cart a 
+JOIN customer b ON a.customer_id = b.uid
+WHERE b.id =#{param2} AND a.customer_id =#{param1}
 </select>
 <select id="selectitem" resultType="com.cinema.store.cartDTO">
 select id,price, discount_price, composition, item_name, image_path from item where id=#{param1}
 </select>
 <select id="checkitem" resultType="com.cinema.store.cartDTO">
 SELECT 
-    COUNT(DISTINCT item_id) AS item_count,
-    SUM(CASE WHEN item_id =#{param2} THEN qty ELSE 0 END) AS item_qty
-FROM cart
-WHERE customer_id =#{param1}
+    COUNT(DISTINCT a.item_id) AS item_count,
+    SUM(CASE WHEN a.item_id =#{param2} THEN a.qty ELSE 0 END) AS item_qty
+FROM cart a
+JOIN customer b ON a.customer_id = b.uid
+WHERE b.id =#{param1}
 </select>
 <update id="updatecart">
  UPDATE cart SET qty=#{param3} WHERE customer_id =#{param1} and item_id=#{param2} and cust_id=#{param4}

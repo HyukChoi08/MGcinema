@@ -100,7 +100,8 @@ vertical-align: middle; /* 수직 중앙 정렬 */
     background-color:black;
     margin-top: 150px; 
     margin-bottom: 335px;
-    border: 2px solid #808080;
+    border: 3px solid #808080; /* 회색 테두리 */
+    border-radius: 15px; /* 테두리 둥글게 만들기 */
 }
 .cart_step {
     list-style-type: none;
@@ -266,7 +267,7 @@ position: relative;
 }
 .finalprice{
 	position: relative;
-    left:-20px; /* 원하는 위치로 이동 (음수 값으로 왼쪽으로 이동) */
+    left:-29px; /* 원하는 위치로 이동 (음수 값으로 왼쪽으로 이동) */
 }
 
 #btnback {  
@@ -280,28 +281,74 @@ position: relative;
 #btnpay {
   padding: 10px 20px; /* 버튼의 여백 조정 */
   font-size: 16px;    /* 글자 크기 조정 */
-  border: 1px solid #ccc; /* 테두리 추가 */
-  background-color: #f0f0f0; /* 배경색 조정 */
-  color: black;       /* 글자 색상 검정으로 설정 */
+  border: 2px solid #666; /* 테두리 색상 및 두께 설정 */
+  background-color: #444;
+  color: white;       /* 글자 색상 검정으로 설정 */
   cursor: pointer;    /* 커서가 버튼 위에 있을 때 손 모양으로 변경 */
   margin: 0 5px;      /* 버튼 간격 조정 */
   position: relative; /* 버튼의 위치를 조정할 수 있게 함 */
-  left:500px;
+  left:490px;
+  border-radius: 5px; /* 테두리를 둥글게 설정 */
 }
 .tol{
  border: 2px solid white;
  margin-bottom:30px;
 
 }
+#store-link {
+    text-decoration: none; /* 링크의 밑줄 제거 */
+    color: inherit; /* 부모 요소의 색상 상속 */
+}
+#store-link:hover {
+    text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
+} 
+.category_wrap {
+    width: 80%; /* 원하는 너비로 설정 */
+    margin: auto; /* 위쪽 마진 20px 추가, 좌우 자동 마진으로 중앙 정렬, 아래 여백 10px 유지 */
+    padding-top: 5px; /* 위쪽 안쪽 여백 추가 */
+}
+.separator2 {
+    width: 100%; /* 부모 요소의 전체 너비를 차지하도록 설정 */
+    height: 2px;
+    margin: 0;
+}
+.separator2 {
+ width: 100%; 
+ height: 2px;
+ margin: 0;
+}
+.separator2 {
+   
+    background-color: black; 
+    margin-bottom:20px;
+}
+.category_content a:hover {
+    text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
+}
+.cart_content a {
+    text-decoration: none; /* 기본 상태에서 밑줄 제거 */
+    color: inherit; /* 부모 색상 상속 */
+}
 
+.cart_content a:hover {
+    text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
+}
+#btnpay:hover {
+    background-color: red; /* 호버 시 배경색 변경 */
+}
 </style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
 <div id="container">
  	<div class="contegory_contents_wrap">
+ 	  	  <div class="category_wrap">
+            <a href="/store" id="store-link">베스트상품</a>                 
+             <div class="separator2"></div> <!-- 선을 스토어 아래에 위치 -->                
+            </div>
           <ul class="category_content"> <!-- ul로 변경 -->
-            	<li><a href="/package" class="no-underline">패키지</a></li>
+              <li><a href="/storeall" class="no-underline">전체상품</a></li>
+           	  <li><a href="/package" class="no-underline">패키지</a></li>
               <li><a href="/giftcard" class="no-underline">기프트카드</a></li>
               <li><a href="/combo" class="no-underline">콤보</a></li>
               <li><a href="/popcorn" class="no-underline">팝콘</a></li>

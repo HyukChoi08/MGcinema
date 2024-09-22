@@ -9,19 +9,16 @@
     <title></title>
     <style>
 body{
-
- background-color:black;
+	background-color:black;
 }  
 *{
-color:white;
-
+	color:white;
 }
 .contegory_contents_wrap a{
 
-color:white;
+	color:white;
 }
-
-         
+        
 ul, li {      
     list-style-type: none; 
     padding: 0; 
@@ -110,17 +107,17 @@ ul, li {
 }
 #cart-count, #giftcon {
     display: inline-block; /* 텍스트와 함께 한 줄에 표시 */
-margin-left: 5px; /* 텍스트와 숫자 사이의 간격 추가 */
-padding: 0 4px; /* 숫자를 감싸는 여백 추가 */
-background-color: #ff0000; /* 배경색 */
-color: white; /* 글자색 */
-border-radius: 50%; /* 원형 배경 */
-font-size: 12px; /* 글자 크기 */
-line-height: 20px; /* 텍스트 수직 중앙 정렬 */
-height: 20px; /* 원형을 유지하기 위한 높이 */
-width: 20px; /* 원형을 유지하기 위한 너비 */
-text-align: center; /* 텍스트 중앙 정렬 */
-vertical-align: middle; /* 수직 중앙 정렬 */
+	margin-left: 5px; /* 텍스트와 숫자 사이의 간격 추가 */
+	padding: 0 4px; /* 숫자를 감싸는 여백 추가 */
+	background-color: #ff0000; /* 배경색 */
+	color: white; /* 글자색 */
+	border-radius: 50%; /* 원형 배경 */
+	font-size: 12px; /* 글자 크기 */
+	line-height: 20px; /* 텍스트 수직 중앙 정렬 */
+	height: 20px; /* 원형을 유지하기 위한 높이 */
+	width: 20px; /* 원형을 유지하기 위한 너비 */
+	text-align: center; /* 텍스트 중앙 정렬 */
+	vertical-align: middle; /* 수직 중앙 정렬 */
 }
 .category_title {
     display: flex;
@@ -168,9 +165,9 @@ img {
 }
 
 .product {
-position: relative; /* 이 부분을 추가하여 아이콘 위치 조정 */
-overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도록 설정 */
-        }
+	position: relative; /* 이 부분을 추가하여 아이콘 위치 조정 */
+	overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도록 설정 */
+}
 
 .product:hover .icon-overlay {
     display: none; /* 기본적으로 숨김 */
@@ -192,7 +189,7 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
     font-size: 30px;
     font-weight: bold;
 }
-    .hover-text {
+.hover-text {
     display: none; /* 기본적으로 숨김 */
     position: absolute; /* 아이콘에 대해 절대 위치 */
    
@@ -255,29 +252,28 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
     padding-right: 50px; /* 버튼 너비만큼 여백을 추가하여 텍스트가 버튼에 겹치지 않게 함 */
 }
 .no-underline {
-      text-decoration: none; /* 링크의 밑줄을 제거합니다 */
-       color: black;    
+    text-decoration: none; /* 링크의 밑줄을 제거합니다 */
+    color: black;    
 }
 .no-underline:hover {
-text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도록 합니다 */
+	text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도록 합니다 */
 }
 .no-style-link {
-   text-decoration: none; /* 밑줄 제거 */
-   color: inherit; /* 링크 색상 유지 */
+   	text-decoration: none; /* 밑줄 제거 */
+   	color: inherit; /* 링크 색상 유지 */
 }
 
 .no-style-link:visited {
-   color: inherit; /* 방문 후 색상 유지 */
+   	color: inherit; /* 방문 후 색상 유지 */
 }
 .li1{
-  margin-top:10px;
+  	margin-top:10px;
   
   }
 #store-link {
     text-decoration: none; /* 링크의 밑줄 제거 */
     color: inherit; /* 부모 요소의 색상 상속 */
 }
-
 #store-link:hover {
     text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
 }
@@ -285,8 +281,20 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
     display: none;
 }
 .product-composition{
-font-size:11px;
-} 	
+	font-size:11px;
+}
+.category_content a:hover {
+    text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
+}
+.cart_content a {
+    text-decoration: none; /* 기본 상태에서 밑줄 제거 */
+    color: inherit; /* 부모 색상 상속 */
+}
+
+.cart_content a:hover {
+    text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
+}
+ 	
     </style>
 </head>
 <body>
@@ -294,7 +302,7 @@ font-size:11px;
     <div id="container">
         <div id="contents">
             <div class="category_wrap">
-                <a href="/store" id="store-link">스토어</a>
+                <a href="/store" id="store-link">베스트상품</a>
               <input type="hidden" id="userid" value="${uid}">         
                 <div class="separator"></div> <!-- 선을 스토어 아래에 위치 -->
             </div>
@@ -356,11 +364,11 @@ font-size:11px;
 <script src="https://code.jquery.com/jquery-latest.js">
 </script>
 <script>
-function updateCartCount(customer_id) {
+function updateCartCount() {
     $.ajax({
         url: '/countcart',
         type: 'post',
-        data: { customer_id: customer_id },
+        data: {},
         dataType: 'text',
         cache: false,
         success: function(data) {
@@ -369,16 +377,14 @@ function updateCartCount(customer_id) {
     });
 }
 
-
 $(document).ready(function() {
 	
-	
 	 $('.product-info').each(function() {
-         // Find the price elements within the current product
+        
          var originalPrice = $(this).find('.original-price').text().replace('원', '').trim();
          var discountedPrice = $(this).find('.discounted-price').text().replace('원', '').trim();
          
-         // Compare prices and hide the discounted price if they are equal
+        
          if (originalPrice === discountedPrice) {
              $(this).find('.discounted-price').addClass('hidden'); //값이 같으면 히든클래스에 넣어서 값을 숨긴다.
          }
@@ -388,35 +394,22 @@ $(document).ready(function() {
  	let customer_id= $('#userid').val();
  	console.log(customer_id);
  	   
- 	 updateCartCount(customer_id);
+ 	 updateCartCount();
 	
-	  
 		$(window).on('pageshow', function(event) {
             if (event.originalEvent.persisted) {
                 window.location.reload();
-                updateCartCount(customer_id);
+                updateCartCount();
             }
         });
-
         // 브라우저 히스토리 상태가 변경될 때 새로 고침 처리
         $(window).on('popstate', function(event) {
             // 이 부분은 필요에 따라 조정
             // 페이지가 새로 고쳐질 필요가 없는 경우 주석 처리
             window.location.reload();
-            updateCartCount(customer_id);
+            updateCartCount();
         });
- 	 
- 	 function checkItemInCart(item_id) {
-         return $.ajax({
-             url: '/checkitem', // 서버에서 장바구니에 아이템이 있는지 확인하는 엔드포인트
-             type: 'post',
-             data: {item_id: item_id },
-             dataType: 'json'
-         });
-     }
- 	 	 
-     // 페이지 로드 시 카운트 업데이트
- 
+
     $('.icon-left').on('click', function(event) {
 	    event.preventDefault(); // 기본 동작을 막습니다.
 	    console.log('Icon left clicked');
@@ -461,7 +454,7 @@ $(document).ready(function() {
 	            console.log('Item Qty:', itemQty);
 	            console.log('Item Count:', itemCount);
 
-	            if (itemCount >= 10 && itemQty === 0) {
+	            if (itemCount >= 10) {
 	                alert('장바구니의 품목 종류가 10개 이상이므로 새로운 품목을 추가할 수 없습니다.');
 	            } else if (itemQty >= 10) {
 	                alert('장바구니에 이미 10개 이상의 수량이 있습니다.');
@@ -506,7 +499,7 @@ $(document).ready(function() {
 	            }
 	        }
 	   
-	    })
+	    });
 	})   
 })
 let selectedItems = []; // 전역 변수로 선언
@@ -542,60 +535,55 @@ $('.buyButton').on('click', function(e) {
         success: function(data) {
             console.log('Server Response:', data);
 
-            // 데이터가 배열일 경우 첫 번째 항목을 사용
-            if (Array.isArray(data) && data.length > 0) {
-                let item = data[0]; // 첫 번째 항목 사용
+           // 데이터가 배열일 경우 첫 번째 항목을 사용
+           if (Array.isArray(data) && data.length > 0) {
+               let item = data[0]; // 첫 번째 항목 사용
 
-                // 기본값을 설정하고 문자열을 정리
-                let discount_price = (item.discount_price || '0').replace(/원/g, '').replace(/,/g, '').trim();
-                let price = (item.price || '0').replace(/원/g, '').replace(/,/g, '').trim();
+               // 기본값을 설정하고 문자열을 정리
+               let discount_price = (item.discount_price || '0').replace(/원/g, '').replace(/,/g, '').trim();
+               let price = (item.price || '0').replace(/원/g, '').replace(/,/g, '').trim();
 
-                // 문자열을 숫자로 변환
-                let discountPriceNum = parseFloat(discount_price) || 0;
-                let PriceNum = parseFloat(price) || 0;
+               // 문자열을 숫자로 변환
+               let discountPriceNum = parseFloat(discount_price) || 0;
+               let PriceNum = parseFloat(price) || 0;
 
-                // 금액충전형 조건
-                let isRechargeablePrice = (item.discount_price === '금액충전형') || (item.cart_price === '금액충전형');
+               // 금액충전형 조건
+               let isRechargeablePrice = (item.discount_price === '금액충전형') || (item.cart_price === '금액충전형');
 
-                // itemData 객체 생성
-                let itemData = {
-                    item_id: item.id, // data 객체의 속성 이름이 정확해야 합니다.
-                    name: item.name,
-                    composition: item.composition,
-                    image_path: item.image_path,
-                    discount_price: isRechargeablePrice ? 10000 : discountPriceNum,
-                    cart_price: (discountPriceNum === PriceNum) ? undefined : (isRechargeablePrice ? 10000 : PriceNum),
-                    total: (discountPriceNum === PriceNum) ? (isRechargeablePrice ? 10000 : discountPriceNum) : (isRechargeablePrice ? 10000 : PriceNum),
-                    qty: 1
-                };
+               // itemData 객체 생성
+               let itemData = {
+                   item_id: item.id, // data 객체의 속성 이름이 정확해야 합니다.
+                   name: item.name,
+                   composition: item.composition,
+                   image_path: item.image_path,
+                   discount_price: isRechargeablePrice ? 10000 : discountPriceNum,
+                   cart_price: (discountPriceNum === PriceNum) ? undefined : (isRechargeablePrice ? 10000 : PriceNum),
+                   total: (discountPriceNum === PriceNum) ? (isRechargeablePrice ? 10000 : discountPriceNum) : (isRechargeablePrice ? 10000 : PriceNum),
+                   qty: 1
+               };
 
-                selectedItems.push(itemData);
+               selectedItems.push(itemData);
 
-                // totalPrice를 설정할 때 cart_price가 0이면 discount_price를 사용
-                let totalPrice = (itemData.cart_price === 0 || itemData.cart_price === undefined) ? itemData.discount_price : (itemData.cart_price || 0);
-                let totalDiscount = (totalPrice === itemData.discount_price) ? 0 : (totalPrice - itemData.discount_price); // 할인 계산
-                let finalPrice = totalPrice - totalDiscount; // 최종 가격 계산
+               // totalPrice를 설정할 때 cart_price가 0이면 discount_price를 사용
+               let totalPrice = (itemData.cart_price === 0 || itemData.cart_price === undefined) ? itemData.discount_price : (itemData.cart_price || 0);
+               let totalDiscount = (totalPrice === itemData.discount_price) ? 0 : (totalPrice - itemData.discount_price); // 할인 계산
+               let finalPrice = totalPrice - totalDiscount; // 최종 가격 계산
 
-                // 폼 데이터 설정
-                $('#productData').val(JSON.stringify({
-                    items: selectedItems,
-                    totalPrice: totalPrice,
-                    totalDiscount: totalDiscount,
-                    finalPrice: finalPrice
-                }));
+               // 폼 데이터 설정
+               $('#productData').val(JSON.stringify({
+                   items: selectedItems,
+                   totalPrice: totalPrice,
+                   totalDiscount: totalDiscount,
+                   finalPrice: finalPrice
+               }));
 
-                console.log('Product data:', $('#productData').val()); // 디버깅: 전송할 데이터 출력
+               console.log('Product data:', $('#productData').val()); // 디버깅: 전송할 데이터 출력
 
-                $('#payForm').submit(); // 폼 제출
-            } else {
-                console.error('No data received from server.');
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error('AJAX Error:', status, error);
-        }
+               $('#payForm').submit(); // 폼 제출
+           } 
+        }   
     });
-});
+})
 </script>
 
 </html>

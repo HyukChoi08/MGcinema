@@ -21,15 +21,17 @@ ul, li {
 }
 #container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 1000px;
-    margin: 0 auto;
+    flex-wrap: wrap;      /* 이미지 정렬을 위해 사용 */
+    justify-content: center; 
+    width: 1000px; 
+    margin: 0 auto;   
     background-color: black;
-    margin-top: 150px;
-    margin-bottom: 335px;
-    border: 2px solid #808080;
-    box-sizing: border-box;
+    margin-top: 150px; 
+    margin-bottom: 335px; 
+    box-sizing: border-box; /* border와 padding을 포함한 너비 계산 */
+    border: 3px solid #808080; /* 회색 테두리 */
+    border-radius: 15px; /* 테두리 둥글게 만들기 */
+   
 }
 #contents {
     flex: 1 1 200px;
@@ -40,13 +42,13 @@ ul, li {
     position: relative;
     background-color: black;
 }
-.category_wrap {
+/* .category_wrap {
     margin-bottom: 20px;
-}
+} */
 .separator {
     width: 100%;
     height: 2px;
-    margin: 0;
+    margin: 10px;;
 }
 .separator {
     position: relative;
@@ -98,12 +100,12 @@ margin-bottom: 20px;
     align-items: center;
 }
 #bbb {
-    border-bottom: 2px solid #808080;
-    padding-bottom: 15px;
+   
+    padding-bottom: 20px;
 }
 #ccc {
     border: 1px solid #808080;
-    padding-bottom: 15px;
+    padding-bottom: 20px;
 }
 .table_wrap {
     display: flex;
@@ -176,10 +178,8 @@ td input[type="text"] {
         padding: 5px; /* 버튼의 패딩 조정 */
         cursor: pointer; /* 버튼 클릭 시 커서 모양 변경 */
         position: relative; /* 상대 위치 지정 */
-        top:8px;
-   
+        top:8px;  
 }
-
 
 .button-container {
     display: flex; /* 버튼들을 수직으로 정렬하기 위해 Flexbox 사용 */
@@ -213,7 +213,7 @@ button {
 }
 
 button:hover {
-    background-color: #555;
+    background-color: red;
 }
 
 
@@ -224,21 +224,19 @@ margin-left: -20px; /* 버튼과 입력 필드 사이의 간격 */
 }
 #giftprice {
     position: absolute; /* 위치를 절대적으로 설정 */
-    top: 15px; /* 원하는 위치를 조정합니다 */
-   
+    top: 13px; /* 원하는 위치를 조정합니다 */
     width: 200px;
-    margin-right: 58px; /* 여백을 조정합니다 */
-    
-    background-color: black; /* 배경색을 검은색으로 설정 */
+    margin-right: 58px; /* 여백을 조정합니다 */    
+    background-color: #444; /* 배경색을 #444로 설정 */
     color: white; /* 텍스트 색상을 흰색으로 설정 */
+    border: 2px solid grey; /* 선택 상자의 테두리 색상도 설정 가능 */
+    border-radius: 5px; /* 테두리 둥글게 설정 */
     
-    border: 1px solid white; /* 선택 상자의 테두리 색상도 설정 가능 */
-      border-radius: 4px; /* 테두리 둥글게 설정 */
 }
 
 /* 옵션 텍스트 색상 변경 */
 #giftprice option {
-    background-color: black; /* 드롭다운 옵션의 배경색 설정 */
+    background-color:#444; /* 드롭다운 옵션의 배경색 설정 */
     color: white; /* 드롭다운 옵션의 텍스트 색상 설정 */
 
 }
@@ -247,6 +245,11 @@ margin-left: -20px; /* 버튼과 입력 필드 사이의 간격 */
     height: 40px; /* 높이 조정 */
     font-size: 20px; /* 폰트 크기 조정 (필요시) */
     box-sizing: border-box; /* 패딩과 테두리를 너비와 높이에 포함 */
+   
+}
+#giftprice:focus {
+    border: 2px solid grey; /* 테두리 색상을 #444로 유지 */
+    outline: none; /* 아웃라인 제거 */
 }
 
 .label {
@@ -323,21 +326,59 @@ td {
 
 .separator1 {
     border-top: 2px solid grey; /* 선의 색상과 두께 */
-    width: 100%; /* 전체 너비 */
+    width: calc(110% + 12px); /* 100%에 20px 추가 */
     position: relative; /* 상대적 위치 설정 */
     top: 13px; /* 위에서 50px 아래로 이동 */
 }
+#store-link {
+    text-decoration: none; /* 링크의 밑줄 제거 */
+    color: inherit; /* 부모 요소의 색상 상속 */
+}
+#store-link:hover {
+    text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
+}
+.separator2 {
+    height: 2px; /* 선의 두께 */
+    background-color: grey; /* 선의 색상 (검은색) */
+    margin: 20px 0; /* 위아래 여백 */
+}
+.category_content a:hover {
+    text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
+}
+.cart_content a {
+    text-decoration: none; /* 기본 상태에서 밑줄 제거 */
+    color: inherit; /* 부모 색상 상속 */
+}
+
+.cart_content a:hover {
+    text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
+}
+#btncart,#btnbuy{
+	background-color: #444; /* 배경색을 검정색으로 설정 */
+	color: white; /* 텍스트 색상을 하얀색으로 설정 */
+	border: 2px solid #666; /* 테두리 색상 및 두께 설정 */
+	
+}
+#btncart:hover,
+#btnbuy:hover{
+	background-color: red;
+}
+
+
 </style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
  <div id="container">
     <div id="contents">
-        <div class="category_wrap">
-            <div class="separator"></div>
-        </div>
+           <div class="category_wrap">
+            <a href="/store" id="store-link">베스트상품</a>            
+            <input type="hidden" id="userid" value="${uid}">    
+                <div class="separator"></div> <!-- 선을 스토어 아래에 위치 -->
+            </div>
         <div class="contegory_contents_wrap">
             <ul class="category_content">
+           	    <li><a href="/storeall" class="no-underline">전체상품</a></li>
                 <li><a href="/package" class="no-underline">패키지</a></li>
                 <li><a href="/giftcard" class="no-underline">기프트카드</a></li>
                 <li><a href="/combo" class="no-underline">콤보</a></li>
@@ -349,9 +390,9 @@ td {
                 <li><a href="/cart" class="no-style-link">장바구니</a><span id="cart-count">0</span></li>
             </ul>   
         </div>
- 
-       
-        <div class="category_product_wrap">           
+     
+        <div class="category_product_wrap">
+          		<div class="separator2"></div>          
                 <div id="bbb">
                     <strong class="category_title">${arItem.item_name}</strong>
                 </div>    
@@ -418,7 +459,7 @@ td {
 						    </td>
 						</tr>
                         <tr id="total-row">
-                			<td>총 결제금액:</td><td id="tol"><input type="text" style="font-size:16px; width:60px;" readonly id="totalprice" value="${arItem.discount_price}">원</td>
+                			<td>총 결제금액:</td><td id="tol"><input type="text" style="font-size:16px; width:60px; font-weight: bold;"  readonly id="totalprice" value="${arItem.discount_price}">원</td>
                 			<td></td>
                 		<tr>
                 	</table>                     

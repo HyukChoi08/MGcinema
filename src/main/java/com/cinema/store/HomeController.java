@@ -37,7 +37,7 @@ public class HomeController {
 	@GetMapping("/storeall")
 	public String storeall(HttpServletRequest req,Model model) {
 		HttpSession s=req.getSession();
-		String uid=(String) s.getAttribute("uid");
+		String uid=(String) s.getAttribute("uid"); //세션에 저장된 uid 값을 가져온다.
 		
 		
 	   if (uid != null) {
@@ -46,10 +46,10 @@ public class HomeController {
             model.addAttribute("uid", ""); // 또는 다른 기본값
         }
 			
-		ArrayList<storeDTO> arStore = storedao.storeall();
+		ArrayList<storeDTO> arStore = storedao.storeall(); //전체 상품 select를 통해서 나열하기.
 		
 			
-		model.addAttribute("arStore",arStore);
+		model.addAttribute("arStore",arStore);  //모델로 리스트 배열을 보냄.
 		return "store/storeall";
 	}
 	
@@ -348,12 +348,15 @@ public class HomeController {
   	    String customer_id = (String) session.getAttribute("uid");
   	    System.out.println("cust"+customer_id);
     	
-        ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, Object> dataMap;
+        ObjectMapper objectMapper = new ObjectMapper();    // JSON 데이터를 Java 객체로 변환하거나, Java 객체를 JSON으로 변환하는 데 사용.
+        Map<String, Object> dataMap;  //키가 String이고 값이 Object인 Map 객체를 선언
 
         try {
             // JSON 문자열을 Map으로 변환
-            dataMap = objectMapper.readValue(productData, new TypeReference<Map<String, Object>>() {});
+            dataMap = objectMapper.readValue(productData, new TypeReference<Map<String, Object>>() {});  
+         // JSON 문자열인 productData를 Map<String, Object> 형태로 변환하여 dataMap에 저장
+         // - 각 JSON 키는 String 타입으로, 값은 Object 타입으로 매핑됨
+         // - 예: {"totalPrice": 10000, "items": [...]}
         } catch (IOException e) {
             e.printStackTrace();
             // JSON 파싱 오류 처리
@@ -381,16 +384,24 @@ public class HomeController {
         // JSP 파일명 반환
         return "store/storepay";
     }
-	@PostMapping("/countcart")
-	@ResponseBody
-	public String conuntcart(HttpServletRequest req) {
-		  HttpSession session = req.getSession();
-		  String customer_id = (String) session.getAttribute("uid");
-		
-		  int n=cartdao.countcart(customer_id);
-		  
-		return ""+n;
-	}
+    @PostMapping("/countcart")
+    @ResponseBody
+    public String conuntcart(HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        String customer_id = (String) session.getAttribute("uid");
+        String id1 = (String) session.getAttribute("id");
+
+        // 로그인하지 않았거나 id1이 null인 경우 0 반환
+        if (customer_id == null || id1 == null || id1.isEmpty()) {
+            return "0"; // 문자열 "0"을 반환
+        }
+
+        int cust_id = Integer.parseInt(id1);
+
+        int n = cartdao.countcart(customer_id, cust_id);
+        
+        return "" + n;
+    }
 	   @PostMapping("/selectitem")
 	    @ResponseBody
 	    public String selectitem(HttpServletRequest req) {
@@ -415,22 +426,29 @@ public class HomeController {
 	   @PostMapping("/checkitem")
 	   @ResponseBody
 	   public String checkitem(HttpServletRequest req) {
-		   HttpSession session = req.getSession();
-		   String customer_id = (String) session.getAttribute("uid");
-		   int item_id=Integer.parseInt(req.getParameter("item_id"));
-				
-		   System.out.println("item"+item_id);
-		   ArrayList<cartDTO> arCart =cartdao.checkitem(customer_id,item_id);
-			JSONArray ja= new JSONArray();
-			for(cartDTO bdto : arCart) {
-				JSONObject jo = new JSONObject();
-//				jo.put("id", bdto.getId());
-				jo.put("item_count", bdto.getItem_count()); 
-				jo.put("item_qty",bdto.getItem_qty());
+	       HttpSession session = req.getSession();
+	       String customer_id = (String) session.getAttribute("uid");
+	       int item_id = Integer.parseInt(req.getParameter("item_id"));
+	       String id1 = (String) session.getAttribute("id");
 
-				ja.put(jo);		
-			}
-			return ja.toString();	   
+	       // id1이 null이거나 비어있을 경우 0 반환
+	       if (id1 == null || id1.isEmpty()) {
+	           return "0"; // 0을 반환
+	       }
+	       
+	       int cust_id = Integer.parseInt(id1);
+	       
+	       System.out.println("item: " + item_id);
+	       ArrayList<cartDTO> arCart = cartdao.checkitem(cust_id, item_id);
+	       
+	       JSONArray ja = new JSONArray();
+	       for (cartDTO bdto : arCart) {
+	           JSONObject jo = new JSONObject();
+	           jo.put("item_count", bdto.getItem_count());
+	           jo.put("item_qty", bdto.getItem_qty());
+	           ja.put(jo);
+	       }
+	       return ja.toString();	   
 	   }
 	   @GetMapping("/store/storecheck")
 	    public String storeCheckoutPage(@RequestParam("itemname") String itemname,

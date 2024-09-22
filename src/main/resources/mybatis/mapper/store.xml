@@ -17,7 +17,7 @@ select id,item_name,price,discount_price,composition,origin,period from item whe
     SELECT image_path FROM item WHERE id =#{param1}
 </select>
 <select id="selectType" resultType="com.cinema.store.storeDTO">
-SELECT id, item_name, discount_price, price, image_path
+SELECT id, item_name, discount_price, price, image_path,composition
 FROM item
 where item_type=#{param1}
 ORDER BY id

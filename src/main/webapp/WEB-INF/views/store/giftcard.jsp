@@ -6,19 +6,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>기프트카드</title>
     <style>
 body{
 
- background-color:black;
+	background-color:black;
 }      
 *{
-color:white;
+	color:white;
 
 }  
  .contegory_contents_wrap a{
 
-color:white;
+	color:white;
 } 
     
 ul, li {      
@@ -109,17 +109,17 @@ ul, li {
 }
 #cart-count, #giftcon {
     display: inline-block; /* 텍스트와 함께 한 줄에 표시 */
-margin-left: 5px; /* 텍스트와 숫자 사이의 간격 추가 */
-padding: 0 4px; /* 숫자를 감싸는 여백 추가 */
-background-color: #ff0000; /* 배경색 */
-color: white; /* 글자색 */
-border-radius: 50%; /* 원형 배경 */
-font-size: 12px; /* 글자 크기 */
-line-height: 20px; /* 텍스트 수직 중앙 정렬 */
-height: 20px; /* 원형을 유지하기 위한 높이 */
-width: 20px; /* 원형을 유지하기 위한 너비 */
-text-align: center; /* 텍스트 중앙 정렬 */
-vertical-align: middle; /* 수직 중앙 정렬 */
+	margin-left: 5px; /* 텍스트와 숫자 사이의 간격 추가 */
+	padding: 0 4px; /* 숫자를 감싸는 여백 추가 */
+	background-color: #ff0000; /* 배경색 */
+	color: white; /* 글자색 */
+	border-radius: 50%; /* 원형 배경 */
+	font-size: 12px; /* 글자 크기 */
+	line-height: 20px; /* 텍스트 수직 중앙 정렬 */
+	height: 20px; /* 원형을 유지하기 위한 높이 */
+	width: 20px; /* 원형을 유지하기 위한 너비 */
+	text-align: center; /* 텍스트 중앙 정렬 */
+	vertical-align: middle; /* 수직 중앙 정렬 */
 }
 .category_title {
     display: flex;
@@ -167,9 +167,9 @@ img {
 }
 
 .product {
-position: relative; /* 이 부분을 추가하여 아이콘 위치 조정 */
-overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도록 설정 */
-        }
+	position: relative; /* 이 부분을 추가하여 아이콘 위치 조정 */
+	overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도록 설정 */
+}
 
 .product:hover .icon-overlay {
     display: none; /* 기본적으로 숨김 */
@@ -254,11 +254,11 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
     padding-right: 50px; /* 버튼 너비만큼 여백을 추가하여 텍스트가 버튼에 겹치지 않게 함 */
 }
 .no-underline {
-      text-decoration: none; /* 링크의 밑줄을 제거합니다 */
-       color: black;    
+    text-decoration: none; /* 링크의 밑줄을 제거합니다 */
+    color: black;    
 }
 .no-underline:hover {
-text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도록 합니다 */
+	text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도록 합니다 */
 }
 .no-style-link {
     text-decoration: none; /* 밑줄 제거 */
@@ -269,24 +269,37 @@ text-decoration: none; /* 마우스 오버 시에도 밑줄이 보이지 않도�
     color: inherit; /* 방문 후 색상 유지 */
 }
  .li1{
-  margin-top:10px;
+	margin-top:10px;
   
-  }
-#store-link {
-    text-decoration: none; /* 링크의 밑줄 제거 */
-    color: inherit; /* 부모 요소의 색상 상속 */
 }
 
 #store-link:hover {
     text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
 }
+#store-link {
+    text-decoration: none; /* 링크의 밑줄 제거 */
+    color: inherit; /* 부모 요소의 색상 상속 */
+}
+
 .hidden {
     display: none;
 } 
 .product-composition{
-font-size:11px;
+	font-size:11px;
 
-}  
+}
+.category_content a:hover {
+    text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
+}
+.cart_content a {
+    text-decoration: none; /* 기본 상태에서 밑줄 제거 */
+    color: inherit; /* 부모 색상 상속 */
+}
+
+.cart_content a:hover {
+    text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
+}
+  
   
     </style>
 </head>
@@ -295,7 +308,7 @@ font-size:11px;
     <div id="container">
         <div id="contents">
             <div class="category_wrap">
-               <a href="/store" id="store-link">스토어</a>
+               <a href="/store" id="store-link">베스트상품</a>
              <input type="hidden" id="userid" value="${uid}">        
                 <div class="separator"></div> <!-- 선을 스토어 아래에 위치 -->
             </div>
@@ -353,11 +366,11 @@ font-size:11px;
 <script src="https://code.jquery.com/jquery-latest.js">
 </script>
 <script>
-function updateCartCount(customer_id) {
+function updateCartCount() {
     $.ajax({
         url: '/countcart',
         type: 'post',
-        data: { customer_id: customer_id },
+        data: {},
         dataType: 'text',
         cache: false,
         success: function(data) {
@@ -366,15 +379,14 @@ function updateCartCount(customer_id) {
     });
 }
 
-$(document)
-.ready(function() {
+$(document).ready(function() {
 	
 	 $('.product-info').each(function() {
-         // Find the price elements within the current product
+     
          var originalPrice = $(this).find('.original-price').text();
          var discountedPrice = $(this).find('.discounted-price').text();
          
-         // Compare prices and hide the discounted price if they are equal
+        
          if (originalPrice === discountedPrice) {
              $(this).find('.discounted-price').addClass('hidden'); //값이 같으면 히든클래스에 넣어서 값을 숨긴다.
          }
@@ -383,36 +395,25 @@ $(document)
  	let customer_id= $('#userid').val();
  	console.log(customer_id);
 
-    updateCartCount(customer_id);
+    updateCartCount();
 	
 	
 	//페이지가 로드될 때 강제로 새로고침
-	$(window).on('pageshow', function(event) {
-	    if (event.originalEvent.persisted) {
-	        window.location.reload();
-	    } else {
-	        let customer_id = $('#gg').val();
-	
-	        function updateCartCount() {
-	            $.ajax({
-	                url: '/countcart',
-	                type: 'post',
-	                data: { customer_id: customer_id },
-	                dataType: 'text',
-	                cache: false, // 캐시 비활성화
-	                success: function(data) {
-	                    $('#cart-count').text(data);
-	                }         
-	            });
-	        }
-	
-	        updateCartCount();
-	    }
-	})
-	
-	$(window).on('popstate', function(event) {
-	    window.location.reload();
-	})
+   $(window).on('pageshow', function(event) {
+       	if (event.originalEvent.persisted) {
+           window.location.reload();
+           updateCartCount();
+           }
+      	 });
+
+       //페이지가 로드될 때 강제로 새로고침	
+
+    $(window).on('popstate', function(event) {
+        // 이 부분은 필요에 따라 조정
+        // 페이지가 새로 고쳐질 필요가 없는 경우 주석 처리
+        window.location.reload();
+        updateCartCount();
+    });
 	// 페이지가 로드될 때 강제로 새로고침
 
 })
@@ -488,14 +489,9 @@ $('.buyButton').on('click', function(e) {
                 console.log('Product data:', $('#productData').val()); // 디버깅: 전송할 데이터 출력
 
                 $('#payForm').submit(); // 폼 제출
-            } else {
-                console.error('No data received from server.');
             }
-        },
-        error: function(xhr, status, error) {
-            console.error('AJAX Error:', status, error);
-        }
-    })
+        }  
+    });
 })
 //해상 사이트 이동하는거
 

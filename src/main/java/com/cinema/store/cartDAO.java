@@ -12,9 +12,9 @@ public interface cartDAO {
 	ArrayList<cartDTO> selectcart(String userid,int cust_id);
 	void deletecart(int id,String uid,int cust_id);
 	void deletecart1(int id,String customer_id);
-	int countcart(String customer_id);
+	int countcart(String customer_id,int cust_id);
 	ArrayList<cartDTO> selectitem(int item_id);
-	ArrayList<cartDTO> checkitem(String customer_id,int item_id);
+	ArrayList<cartDTO> checkitem(int cust_id,int item_id);
 	void updatecart(String customer_id,int item_id,int qty,int cust_id);
 }
 
