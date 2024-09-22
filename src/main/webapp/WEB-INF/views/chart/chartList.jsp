@@ -142,7 +142,7 @@ color: #BE2E22;
                 <ol id="4">
                 </ol>
             </div>
-        </div>
+        </div><br><br><br>
 	    <div class="button-container"><button class="button-container button" id="plus">더보기</button></div>
 	</div>
 </div>
