@@ -75,7 +75,7 @@ form input, form textarea {
 	transition: border-color 0.3s ease; /* 경계선 색상 변경 시 애니메이션 추가 */
 } 
 
-.profile-input input {
+.profile-input input { 
 	padding: 10px;
 	margin-bottom: 0px;
 	border-radius: 5px;
