@@ -33,7 +33,9 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 	<!-- 프로필 섹션 -->
 	<div class="mainscreen">
 		<div class="profile-section">
-				<img id="profileImage" src="<%= customer.getProfileimg() != null ? customer.getProfileimg() : "/mypage_image/OO.png" %>" alt="프로필이미지" width="80" height="80" />
+			<img id="profileImage"
+				src="<%=customer.getProfileimg() != null ? customer.getProfileimg() : "/mypage_image/OO.png"%>"
+				alt="프로필이미지" width="80" height="80" />
 			<!-- <img src="/mypage_image/OO.png" alt="프로필이미지" width="80" height="80" /> -->
 			<div class="profile-info">
 				<h2>
@@ -91,7 +93,7 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 					<div>
 						<form method=post action='/profileUpdate'
 							enctype="multipart/form-data">
-							<table>
+							<table class="profile-input">
 								<tr>
 									<td></td>
 									<td><input type=hidden name=id id=id></td>
@@ -120,23 +122,21 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 								<tr>
 									<td><h4>주소</h4></td>
 									<td>
-										<div class="addr-wrap">
-										<!-- 우편번호 및 주소 검색 버튼 -->
-									<form>
-									    <label for="post">우편번호:</label>
-									    <input type="text" id="post" name=post readonly placeholder="우편번호를 입력하세요">
-									    <button type="button" onclick="searchAddr()">주소 검색</button>
-									    <br><br>
-									    
-									    <label for="address">주소:</label>
-									    <input type="text" id="address" name="address" readonly placeholder="주소를 입력하세요">
-									    <br><br>
-									    
-									    <label for="fulladdress">상세 주소:</label>
-									    <input type="text" id="fulladdress" name="fulladdress" placeholder="상세 주소를 입력하세요">
-									    <br><br>
-									</form>
-									</div>
+										<div>
+											<!-- 우편번호 및 주소 검색 버튼 -->
+											<form>
+												<label for="post">우편번호</label><br> <input type="text"
+													id="post" name=post readonly placeholder="우편번호를 입력하세요">
+												<button id="profilebtn" type="button" onclick="searchAddr()">주소
+													검색</button>
+												<br> <br> <label for="address">주소</label><br>
+												<input type="text" id="address" name="address" readonly
+													placeholder="주소를 입력하세요"><br> <br> <label
+													for="fulladdress">상세 주소</label><br> <input type="text"
+													id="fulladdress" name="fulladdress"
+													placeholder="상세 주소를 입력하세요"> <br> <br>
+											</form>
+										</div>
 									</td>
 								</tr>
 								<tr>
@@ -162,21 +162,20 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 
 
 								<tr>
-									<td><h4>관심분야</h4></td>
-									<td><input type="checkbox" name="favorite"
-										id="favoriteAction" value="액션">액션 <input
-										type="checkbox" name="favorite" id="favoriteThriller"
-										value="스릴러">스릴러 <input type="checkbox" name="favorite"
-										id="favoriteSF" value="코미디">SF<br> <input
-										type="checkbox" name="favorite" id="favoriteComedy"
-										value="코미디">코미디 <input type="checkbox" name="favorite"
-										id="favoriteRomance" value="로맨스">로맨스 <input
-										type="checkbox" name="favorite" id="favoriteFantasy"
-										value="판타지">판타지<br> <input type="checkbox"
-										name="favorite" id="favoriteAnimation" value="애니메이션">애니메이션
-										<input type="checkbox" name="favorite" id="favoriteFamily"
-										value="가족">가족 <input type="checkbox" name="favorite"
-										id="favoriteEtc" value="기타">기타</td>
+								    <td><h4>관심분야</h4></td>
+								    <td>
+								        <div class="profilecheckbox">
+								            <label><input type="checkbox" name="favorite" id="favoriteAction" value="액션"> 액션</label>
+								            <label><input type="checkbox" name="favorite" id="favoriteThriller" value="스릴러"> 스릴러</label>
+								            <label><input type="checkbox" name="favorite" id="favoriteSF" value="SF"> SF</label>
+								            <label><input type="checkbox" name="favorite" id="favoriteComedy" value="코미디"> 코미디</label>
+								            <label><input type="checkbox" name="favorite" id="favoriteRomance" value="로맨스"> 로맨스</label>
+								            <label><input type="checkbox" name="favorite" id="favoriteFantasy" value="판타지"> 판타지</label>
+								            <label><input type="checkbox" name="favorite" id="favoriteAnimation" value="애니메이션"> 애니메이션</label>
+								            <label><input type="checkbox" name="favorite" id="favoriteFamily" value="가족"> 가족</label>
+								            <label><input type="checkbox" name="favorite" id="favoriteEtc" value="기타"> 기타</label>
+								        </div>
+								    </td>
 								</tr>
 								<tr>
 									<td><h4>프로필 이미지</h4></td>
@@ -189,8 +188,8 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 								</tr>
 								<tr>
 									<td colspan=2 style='text-align: center'><input
-										type="submit" value="수정" class="button">
-										<button class="button" onClick="location.href='/myhome'">취소</button>
+										id="probtn" type="submit" value="수정">
+										<button id="probtn" onClick="location.href='/myhome'">취소</button>
 									</td>
 								</tr>
 							</table>

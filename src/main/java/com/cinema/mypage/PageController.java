@@ -231,10 +231,10 @@ public class PageController {
 	// 회원 정보 변경 페이지
 	@GetMapping("/profile")
 	public String profile(HttpSession session) {
-		if (session.getAttribute("passwordChecked") == null) {
-			return "redirect:/passcheck?redirectUrl=/profile";
-		}
-		session.removeAttribute("passwordChecked");
+		
+		 if (session.getAttribute("passwordChecked") == null) { return
+		 "redirect:/passcheck?redirectUrl=/profile"; }
+		 session.removeAttribute("passwordChecked");
 		return "mypage/profile";
 	}
 	// 회원 정보 변경 처리

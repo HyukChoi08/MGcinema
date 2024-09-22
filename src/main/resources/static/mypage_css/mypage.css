@@ -29,7 +29,7 @@ body {
 /* 테이블 스타일 */
 table {
 	width: 100%;
-	border-collapse: collapse; /* 테이블 셀 간의 간격 제거 */ 
+	border-collapse: collapse; /* 테이블 셀 간의 간격 제거 */
 	border-radius: 5px; /* 모서리 둥글게 */
 }
 
@@ -39,8 +39,8 @@ thead th {
 	padding: 2px;
 	text-align: left; /* 텍스트 왼쪽 정렬 */
 	border-bottom: 1px solid black; /* 헤더 아래쪽에 테두리 추가 */
-	border-left: 1px solid  black; 
-	border-right: 1px solid  black; 
+	border-left: 1px solid black;
+	border-right: 1px solid black;
 	text-align: center; /* 텍스트 왼쪽 정렬 */
 }
 
@@ -75,6 +75,79 @@ form input, form textarea {
 	transition: border-color 0.3s ease; /* 경계선 색상 변경 시 애니메이션 추가 */
 }
 
+.profile-input input {
+	padding: 10px;
+	margin-bottom: 0px;
+	border-radius: 5px;
+	font-size: 16px;
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+	transition: border-color 0.3s ease; /* 경계선 색상 변경 시 애니메이션 추가 */
+}
+.profile-input h4{
+	display: inline-block;
+	text-align: center;
+	width: 150px;
+	/* padding-left:30px; */
+	
+}
+
+#profilebtn { /*주소 찾기 버튼 */
+	/* margin: 10px; */
+	width: 100px;
+	padding: 8px;
+	background-color: #3a3d3f;
+	color: white;
+	 border: 1px solid transparent; 
+	border-radius: 5px;
+	cursor: pointer;
+	height:40px;
+	font-weight: bold;
+	transition: background-color 0.3s;
+	transition: border-color 0.3s ease;
+}
+
+#profilebtn:hover {
+	background-color: black; /* 버튼 hover 시 배경색 변경 */
+	border: 1px solid white; /* 흰색 줄 */
+}
+
+.profilecheckbox { /*체크박스 위치 맞추기*/
+    display: flex;
+    flex-wrap: wrap; /* 여러 줄로 나눠서 표시 */
+    gap: 10px; /* 체크박스 간의 간격 */
+
+}
+
+.profilecheckbox label {
+    flex-basis: calc(33.33% - 60px); /* 3개씩 배치되도록 너비 계산 */
+   
+    margin-right: 10px; /* 각 체크박스 간 간격 */
+    margin-bottom: 10px; /* 각 줄 간 간격 */
+}
+
+.profilecheckbox input[type="checkbox"] {
+    margin-right: 5px; /* 체크박스와 텍스트 사이 간격 */
+}
+
+#probtn { /*프로필 수정 , 취소 버튼*/
+	margin:20px;
+	width: 100px;
+	padding: 8px;
+	background-color: #3a3d3f;
+	color: white;
+	border-radius: 5px;
+	cursor: pointer;
+	height:40px;
+	font-weight: bold;
+	transition: background-color 0.3s;
+	border: none;
+	font-size: 12px;
+}
+#probtn:hover{
+		background-color: black; /* 버튼 hover 시 배경색 변경 */
+		border: 1px solid white; /* 흰색 줄 */
+}
+
 form input:focus, form textarea:focus {
 	border-color: #e50914; /* 포커스 시 경계선 색상 변경 */
 	outline: none; /* 기본 아웃라인 제거 */
@@ -90,7 +163,19 @@ form input[type="submit"] {
 }
 
 form input[type="submit"]:hover {
-	background-color: #808080;  /* 마우스 올렸을 때 색상 */
+	background-color: #808080; /* 마우스 올렸을 때 색상 */
+}
+
+#post {
+	width: 50px
+}
+
+#address {
+	width: 300px;
+}
+
+#fulladdress {
+	width: 300px;
 }
 
 .divMovie {
@@ -110,10 +195,11 @@ form input[type="submit"]:hover {
 	margin-bottom: 15px;
 	text-align: left;
 }
-#subutton{
+
+#subutton {
 	text-align: center;
- background-color: black;
- border-bottom: 0px solid #808080; /* 아래쪽에 테두리 추가 */
+	background-color: black;
+	border-bottom: 0px solid #808080; /* 아래쪽에 테두리 추가 */
 }
 
 /* 프로필 섹션 스타일 */
@@ -140,11 +226,12 @@ form input[type="submit"]:hover {
 	flex-grow: 1; /* 남은 공간 차지 */
 }
 
-.retd{ /* 예매상태 td칸  */
-	 text-align: center; /* 가로 중앙 정렬 */
-  vertical-align: middle; /* 세로 중앙 정렬 */
+.retd { /* 예매상태 td칸  */
+	text-align: center; /* 가로 중앙 정렬 */
+	vertical-align: middle; /* 세로 중앙 정렬 */
 }
-.reservationbutton{
+
+.reservationbutton {
 	font-size: 16px;
 	background-color: black;
 	color: white; /* 텍스트 색상 */
@@ -156,11 +243,11 @@ form input[type="submit"]:hover {
 	transition: background-color 0.3s ease; /* 배경색 변경 시 애니메이션 추가 */
 }
 
-.reservationbutton:hover{
+.reservationbutton:hover {
 	background-color: #c3c3c3; /* 버튼에 마우스 올렸을 때 색상 */
-		
 }
-.cancel-btn{ /* 스토어 결제 취소버튼*/
+
+.cancel-btn { /* 스토어 결제 취소버튼*/
 	font-size: 16px;
 	background-color: black;
 	color: white; /* 텍스트 색상 */
@@ -171,20 +258,22 @@ form input[type="submit"]:hover {
 	display: inline-block; /* 인라인 블록 요소로 설정 */
 	transition: background-color 0.3s ease; /* 배경색 변경 시 애니메이션 추가 */
 }
-.cancel-btn:hover{
+
+.cancel-btn:hover {
 	background-color: #c3c3c3; /* 버튼에 마우스 올렸을 때 색상 */
 }
 
 .button {
 	background-color: #808080; /* 버튼 배경색 */
 	color: white; /* 텍스트 색상 */
-	margin-top:20px;
+	margin-top: 20px;
 	padding: 1px 5px; /* 버튼 안쪽 여백 */
 	text-align: center; /* 텍스트 중앙 정렬 */
 	border-radius: 5px; /* 모서리 둥글게 */
-	height:50px;
+	height: 50px;
 	width: 200px;
 }
+
 .button:hover {
 	background-color: #c3c3c3; /* 버튼에 마우스 올렸을 때 색상 */
 }
@@ -333,11 +422,6 @@ form input[type="submit"]:hover {
 	font-weight: bold;
 }
 
-.inquiry-table tr:nth-child(even) {
-	/* background-color: #f9f9f9; */
-	
-}
-
 .status-complete {
 	color: green;
 	font-weight: bold;
@@ -414,9 +498,10 @@ form input[type="submit"]:hover {
 	font-size: 1em; /* 폰트 크기 */
 	border-radius: 5px; /* 모서리 둥글게 */
 	border: none; /* 테두리 제거 */
-	background-color: #001579; /* 버튼 배경색 (짙은 파랑) */
+	background-color: #808080; /* 버튼 배경색 (짙은 파랑) */
 	color: #fff; /* 버튼 텍스트 색상 (흰색) */
 	cursor: pointer; /* 커서를 포인터로 변경 */
+	transition: background-color 0.3s;
 }
 
 #saveNicknameBtn:hover {
