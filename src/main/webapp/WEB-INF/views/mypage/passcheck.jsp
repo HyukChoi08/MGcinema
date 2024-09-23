@@ -22,7 +22,7 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 	<!-- 프로필 섹션 -->
 	<div class="mainscreen">
 		<div class="profile-section">
-				<img id="profileImage" src="<%= customer.getProfileimg() != null ? customer.getProfileimg() : "/mypage_image/OO.png" %>" alt="프로필이미지" width="80" height="80" />
+				<img id="profileImage" src="<%= customer.getProfileimg() != null ? customer.getProfileimg() : "/mypage_image/profile.png" %>" alt="프로필이미지" width="80" height="80" />
 			<!-- <img src="/mypage_image/OO.png" alt="프로필이미지" width="80" height="80" /> -->
 
 			<div class="profile-info">
