@@ -34,7 +34,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script>
-        $(document).ready(function(){
+        /* $(document).ready(function(){
             $('.slider').slick({
                 dots: false,
                 infinite: true,
@@ -45,7 +45,21 @@
                 autoplaySpeed: 5000,
                 arrows: false
             });
+        }); */
+        
+        $('.slider').slick({
+            dots: false,
+            infinite: true,
+            speed: 1500,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 5000,
+            arrows: false,
+            fade: true, // 페이드 효과로 전환
+            cssEase: 'linear' // 선형 전환
         });
+
     </script>
 </html> 
 

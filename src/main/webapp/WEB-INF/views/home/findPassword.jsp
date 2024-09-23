@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>비밀번호 찾기</title>
     <link rel="stylesheet" href="findPassword_css/findPassword.css">
+    <script src='https://www.google.com/recaptcha/api.js'></script> 
 </head>
 <body>
     <%@ include file="/WEB-INF/views/header/header.jsp" %>
@@ -28,6 +29,9 @@
                 <label for="mobile">전화번호</label>
                 <input type="text" id="mobile" name="mobile" placeholder="01012345678 형식으로 작성해주세요." required maxlength="11">
             </div>                          
+            
+            <!--recaptcha-->
+			<div class="g-recaptcha" data-sitekey="6LerV0wqAAAAAKFPAIA1X0Iyfz55Hv2G_IvRop42"></div>
             
             <button type="submit">본인 인증</button>
             
