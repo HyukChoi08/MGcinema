@@ -326,9 +326,9 @@ td {
 
 .separator1 {
     border-top: 2px solid grey; /* 선의 색상과 두께 */
-    width: calc(110% + 12px); /* 100%에 20px 추가 */
+    width: calc(110% + 12px); 
     position: relative; /* 상대적 위치 설정 */
-    top: 13px; /* 위에서 50px 아래로 이동 */
+    top: 16px; 
 }
 #store-link {
     text-decoration: none; /* 링크의 밑줄 제거 */
@@ -363,12 +363,25 @@ td {
 #btnbuy:hover{
 	background-color: red;
 }
-
+.no-style-link:hover {
+    text-decoration: underline; /* 마우스 오버 시 밑줄 표시 */
+    color: inherit; /* 색상 유지 */
+}
+#info {
+   	left: 320px; /* 간격 조정 */
+    position: relative; /* 상대 위치 설정 */
+    top: -320px; /* 위쪽으로 이동 */
+}
+#storehead {
+    position: relative;
+    top: 60px; /* 원하는 만큼 아래로 이동 */
+}
 
 </style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
+ <h1 id="storehead">스토어</h1>
  <div id="container">
     <div id="contents">
            <div class="category_wrap">
@@ -387,7 +400,7 @@ td {
                 <li><a href="/snack" class="no-underline">스낵</a></li>
             </ul>
             <ul class="cart_content">
-                <li><a href="/cart" class="no-style-link">장바구니</a><span id="cart-count">0</span></li>
+               <li><span class="no-style-link" style="cursor:pointer;">장바구니</span><span id="cart-count">0</span></li>
             </ul>   
         </div>
      
@@ -434,7 +447,7 @@ td {
 				            </td>
 				            <td></td>   				
                 		</tr>	
-                		<tr id="origin-row">
+                		<tr id="origin-row" style="visibility: visible;">
                 			<td id="origin">원산지:</td><td>${arItem.origin}</td>
                 			<td></td>
                 		</tr>
@@ -466,8 +479,7 @@ td {
               </div>         
         </div>
  	</div>
-</div>                                    
-        
+</div>                                       
  <div id="info">
   ※구매할 수 있는 수량은 최대 10개 입니다.
 </div>   
@@ -495,9 +507,25 @@ function updateCartCount(customer_id) {
 }
 
 
+$(document).ready(function() {
+	
+	let discountText = $('#discount-price').text();
 
-$(document)
-.ready(function() {
+	if (discountText === '금액충전형') { // '금액충전형'은 실제 텍스트에 맞게 조정
+	    $('#info').hide(); // #info 숨기기
+	} else {
+	    $('#info').show(); // #info 보이기 (필요에 따라)
+	}
+	
+	let originValue = '${arItem.origin}'; // 서버에서 가져온 값
+
+	if (originValue === null || originValue === '') {
+	    $('#origin-row').css('visibility', 'hidden'); // 원산지가 null 또는 빈 문자열일 때 숨기기
+	} else {
+	    $('#origin-row').css('visibility', 'visible'); // 원산지가 있을 경우 보이기
+	}
+	
+	
 	
 	
 	 function updateTotalPrice() {
@@ -543,17 +571,18 @@ $(document)
 		}
 	  	 
 
-	    // 수량 증가 버튼 클릭 이벤트
-	    $('#increase').on('click', function() {
-	        var $input = $('#cnt');
-	        var currentValue = parseInt($input.val(), 10);
-	        var maxValue = parseInt($input.data('max'), 10);
+	 	$('#increase').on('click', function() {
+		    var $input = $('#cnt');
+		    var currentValue = parseInt($input.val(), 10);
+		    var maxValue = parseInt($input.data('max'), 10);
 
-	        if (!isNaN(currentValue) && currentValue < maxValue) {
-	            $input.val(currentValue + 1).change();
-	        }
-	    });
-
+		    if (!isNaN(currentValue) && currentValue < maxValue) {
+		        $input.val(currentValue + 1).change();
+		    } else {
+		        alert("최대 10개 수량까지 구매 가능합니다."); // 최대 수량 초과 시 알림
+		    }
+		});
+	 	
 	    // 수량 감소 버튼 클릭 이벤트
 	    $('#decrease').on('click', function() {
 	        var $input = $('#cnt');
@@ -573,7 +602,7 @@ $(document)
 	    // 페이지 로드 시 초기 총 가격 계산
 	    updateTotalPrice();
          
-    $('#cnt').change(); 
+   /*  $('#cnt').change();  */
 	
 
 	let customer_id=$('#userid').val();
@@ -732,7 +761,7 @@ console.log(customer_id);
     console.log('Customer ID:', customer_id);
 
     if ($('#userid').val() === '') {
-        alert("로그인 후 이용해주세요");
+        alert("로그인 후 이용해주세요.");
         return false;
     }
 
@@ -783,14 +812,9 @@ console.log(customer_id);
                         success: function(response) {
                             if (response === 'ok') {
                                 window.location.href = '/cart'; // 클릭 시 페이지 이동
-                            } else {
-                                alert('Error updating cart');
                             }
-                        },
-                        error: function(xhr, status, error) {
-                            console.error('Update cart AJAX request error:', status, error);
-                            alert('Error updating cart');
                         }
+                       
                     });
                 } else {
                     $.ajax({
@@ -806,22 +830,14 @@ console.log(customer_id);
                         success: function(response) {
                             if (response === 'ok') {
                                 window.location.href = '/cart'; // 클릭 시 페이지 이동
-                            } else {
-                                alert('Error inserting into cart');
                             }
-                        },
-                        error: function(xhr, status, error) {
-                            console.error('Insert cart AJAX request error:', status, error);
-                            alert('Error inserting into cart');
                         }
+                      
                     });
                 }
             }
-        },
-        error: function(xhr, status, error) {
-            console.error('Check item AJAX request error:', status, error);
-            alert('Error checking item');
         }
+     
     })
 })
 
@@ -832,7 +848,7 @@ $('#btnbuy').on('click', function(e) {
     e.preventDefault(); // 링크의 기본 동작을 방지
 
     if ($('#userid').val() === '') {
-        alert("로그인 후 이용해주세요");
+        alert("로그인 후 이용해주세요.");
         return false; // 이동을 막기 위해 return false를 사용
     }    
 
@@ -919,17 +935,22 @@ $('#btnbuy').on('click', function(e) {
                 console.log('Product data:', $('#productData').val()); // 디버깅: 전송할 데이터 출력
 
                 $('#payForm').submit(); // 폼 제출
-            } else {
-                console.error('No data received from server.');
             }
-        },
-        error: function(xhr, status, error) {
-            console.error('AJAX Error:', status, error);
         }
+     
     })
        
 })
-
+$(document).on('click', '.no-style-link', function() {
+    
+    let userid = $('#userid').val();
+    
+    if (userid === null || userid === '') {
+        alert("로그인 후 이용해주세요.");
+    } else {
+        window.location.href = '/cart'; 
+    }
+})
 
    
 </script>

@@ -241,21 +241,30 @@ public class HomeController {
 		return "store/storepay";
 	}
 	@GetMapping("/cart")
-	public String cart(HttpServletRequest req,Model model) {
+	public String cart(HttpServletRequest req, Model model) {
+	    HttpSession s = req.getSession();
+	    String uid = (String) s.getAttribute("uid");
 
-		HttpSession s=req.getSession();
-		String uid=(String) s.getAttribute("uid");
-		String id1=(String) s.getAttribute("id");
-		int cust_id=Integer.parseInt(id1);
-		System.out.println(uid);
-		
-		
-		ArrayList<cartDTO> arCart=cartdao.selectcart(uid,cust_id);
-		
-		model.addAttribute("uid",uid);
-		model.addAttribute("arCart",arCart);
-		
-		return "store/cart";
+	    // uid가 null인 경우 기본값 설정
+	    if (uid == null) {
+	        uid = ""; // 또는 다른 기본값
+	    }
+	    model.addAttribute("uid", uid);
+	    
+	    String id1 = (String) s.getAttribute("id");
+	    int cust_id = 0; // 기본값 설정
+
+	    if (id1 != null && !id1.isEmpty()) {
+	        // id1이 null도 아니고 빈 문자열도 아닐 경우 정수로 변환
+	        cust_id = Integer.parseInt(id1);
+	    }
+
+	    System.out.println(uid);
+
+	    ArrayList<cartDTO> arCart = cartdao.selectcart(uid, cust_id);
+	    model.addAttribute("arCart", arCart);
+
+	    return "store/cart";
 	}
 
 	@PostMapping("/insertcart")
@@ -541,8 +550,14 @@ public class HomeController {
 	@PostMapping("/clearcart")
 	@ResponseBody
 	public String clearcart(HttpServletRequest req) {
+		
+		HttpSession s =req.getSession();
+		String id1=(String) s.getAttribute("id");
+		int id= Integer.parseInt(id1);
+		
 		String customer_id=req.getParameter("customer_id");
 		String select = req.getParameter("select");
+		
 		
 		System.out.println("Received customer_id: " + customer_id);
 		System.out.println("Received select: " + select);
@@ -561,7 +576,7 @@ public class HomeController {
 		        System.out.println("item_id" + item_id);
 		        // 여기에 itemId를 사용하여 필요한 처리를 수행합니다.
 		        // 예: 장바구니에서 특정 아이템 제거
-				customerdao.clearcart(customer_id, item_id);
+				customerdao.clearcart(customer_id, item_id,id);
 		 }
 		
 		return "ok";

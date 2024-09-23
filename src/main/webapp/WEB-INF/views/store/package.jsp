@@ -125,9 +125,11 @@ ul, li {
     align-items: center; /* 수직 정렬 */
     gap: 20px; /* 텍스트와 버튼 사이의 간격 조정 */
     font-size: 20px;
+    margin-left: 20px; /* 원하는 왼쪽 마진 */
 }
 .category_dep{
     font-size: 15px;
+    margin-left: 20px; /* 원하는 왼쪽 마진 */
 }
 
 .category_inner {
@@ -271,6 +273,10 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
 .no-style-link:visited {
     color: inherit; /* 방문 후 색상 유지 */
 }
+.no-style-link:hover {
+    text-decoration: underline; /* 마우스 오버 시 밑줄 표시 */
+    color: inherit; /* 색상 유지 */
+}
 .discounted-price {
     font-size: 16px; /* 할인된 가격 크기 조정 */
     font-weight: bold; /* 할인된 가격 굵게 표시 */
@@ -293,7 +299,7 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
 	cursor: pointer;
 }
 .product-composition{
-	font-size:11px;
+	font-size:12px;
 }
 .category_content a:hover {
     text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
@@ -306,11 +312,16 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
 .cart_content a:hover {
     text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
 }
-	
+#storehead {
+    position: relative;
+    top: 60px; /* 원하는 만큼 아래로 이동 */
+}
+
     </style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
+	<h1 id="storehead">스토어</h1>
     <div id="container">
         <div id="contents">
             <div class="category_wrap">
@@ -330,7 +341,7 @@ overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도
                     <li><a href="/snack" class="no-underline">스낵</a></li>
                 </ul>
                 <ul class="cart_content"> <!-- ul로 변경 -->
-                    <li><a href="/cart" class="no-style-link">장바구니</a><span id="cart-count">0</span></li>
+                    <li><span class="no-style-link" style="cursor:pointer;">장바구니</span><span id="cart-count">0</span></li>
                 </ul>   
             </div>
             <div class="separator1"></div> <!-- 선을 contegory_contents_wrap 아래에 위치 -->
@@ -393,8 +404,9 @@ function updateCartCount() {
 
 $(document).ready(function() {
  	let customer_id= $('#userid').val();
- 	console.log(customer_id);
+ 	console.log(customer_id); 
  	
+ 		
  	$.ajax({
 	    url: '/storeage',
 	    type: 'POST',
@@ -646,7 +658,16 @@ $('.buyButton').on('click', function(e) {
        
     });
 })
-
+$(document).on('click', '.no-style-link', function() {
+    
+    let userid = $('#userid').val();
+    
+    if (userid === null || userid === '') {
+        alert("로그인 후 이용해주세요.");
+    } else {
+        window.location.href = '/cart'; 
+    }
+}); 	
 
 </script>
 

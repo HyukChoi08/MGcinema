@@ -502,11 +502,23 @@ margin-bottom:30px;
 .cart-item .btndelete:hover {
   background-color: red; /* 호버 시 배경색 변경 */
 }
- 
+#info {
+    left: 1080px; /* 간격 조정 */
+    position: relative; /* 상대 위치 설정 */
+    top: -320px; /* 위쪽으로 이동 */
+    text-align: left; /* 왼쪽 정렬 */
+    padding-left: 0; /* 여백 없앰 */
+}
+#storehead {
+    position: relative;
+    top: 60px; /* 원하는 만큼 아래로 이동 */
+}
+
 </style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
+<h1 id="storehead">스토어</h1>
 <div id="container">
   	<div class="contegory_contents_wrap">
     	   <div class="category_wrap">
@@ -616,6 +628,10 @@ margin-bottom:30px;
 		    <button type="button" id="pay">결제하기</button>
 		</form>
     </div> 
+</div>
+<div id="info">
+  ※구매할 수 있는 수량은 최대 10개 입니다.<br>
+  ※장바구니에 담을 수 있는 품목의 개수는 총 10개입니다.
 </div>
 
 <%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
@@ -759,7 +775,12 @@ $(document).ready(function() {
         let maxQty = parseInt(qtyInput.attr('max')) || 10;
 
         if (newQty < minQty) newQty = minQty;
-        if (newQty > maxQty) newQty = maxQty;
+
+        // 최대 수량 초과 시 alert
+        if (newQty > maxQty) {
+            alert("최대 10개 수량까지 구매 가능합니다."); // 최대 수량 초과 시 알림
+            return; // 더 이상 진행하지 않음
+        }
 
         qtyInput.val(newQty);
         calculateItemTotal(button.closest('.cart-item'));
@@ -794,12 +815,7 @@ $(document).ready(function() {
         $('.item-checkbox').prop('checked', checked);
         calculateTotal();
     });
-    
-    
-    
-    
-    
-    
+       
     // 결제 버튼 클릭 시
     $('#pay').on('click', function() {
         let selectedItems = [];
@@ -918,13 +934,8 @@ $(document).ready(function() {
         	                
 
         	                $('#payForm').submit(); // 폼 제출
-        	            } else {
-        	                console.error('No data received from server.');
-        	            }
-        	        },
-        	        error: function(xhr, status, error) {
-        	            console.error('AJAX Error:', status, error);
-        	        }
+        	            } 
+        	        }   	       
         	    });
 
     });
@@ -973,25 +984,24 @@ $(document).ready(function() {
     });
 
     // AJAX 요청
-    $.ajax({
-        url: '/choicedelete', // 서버 URL
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify({ item_id: selectedItems }),
-        success: function(response) {
-            let userconfirm=confirm("정말로 삭제하시겠습니까?")
-            
-            if(userconfirm){
-				
-            	alert("삭제가 성공되었습니다.")
-            	window.location.reload(); // 페이지 새로고침
-            	
-            }else {				
-                
-            }
-                                    
-        }    
-    })
+	    $.ajax({
+	        url: '/choicedelete', // 서버 URL
+	        type: 'POST',
+	        contentType: 'application/json',
+	        data: JSON.stringify({ item_id: selectedItems }),
+	        success: function(response) {
+	            let userconfirm=confirm("정말로 삭제하시겠습니까?");
+	            
+	            if(userconfirm){
+					            
+	            	window.location.reload(); // 페이지 새로고침
+	            	
+	            }else {				
+	                
+	            }
+	                                    
+	        }    
+	    });
    })
 })
 .on('click','.btnchange',function(){

@@ -151,7 +151,13 @@ ul, li {
     align-items: center; /* 수직 정렬 */
     gap: 20px; /* 텍스트와 버튼 사이의 간격 조정 */
     font-size: 20px;
+    margin-left: 20px; /* 원하는 왼쪽 마진 */
 }
+
+.category_dep {
+    margin-left: 20px; /* category_dep에 별도의 마진 */
+    font-size: 15px;
+} 
 
 .category_inner {
     display: flex; /* Flexbox 레이아웃을 사용 */
@@ -358,6 +364,10 @@ img {
 .no-style-link:visited {
    color: inherit; /* 방문 후 색상 유지 */
 }
+.no-style-link:hover {
+    text-decoration: underline; /* 마우스 오버 시 밑줄 표시 */
+    color: inherit; /* 색상 유지 */
+}
 #cart-icon {
    cursor: default; /* 손가락 모양 커서를 기본 커서로 변경 */
    text-decoration: none; /* 링크의 기본 밑줄 제거 */
@@ -388,11 +398,16 @@ img {
 .cart_content a:hover {
     text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
 }
-
+#storehead {
+    position: relative;
+    top: 60px; /* 원하는 만큼 아래로 이동 */
+}
+	
     </style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
+	<h1 id="storehead">스토어</h1>
     <div id="container">
         <div id="contents">
             <div class="category_wrap">
@@ -412,14 +427,14 @@ img {
                     <li><a href="/snack" class="no-underline">스낵</a></li>
                 </ul>
                 <ul class="cart_content"> <!-- ul로 변경 -->                  
-          		<li><a href="/cart" class="no-style-link">장바구니</a><span id="cart-count">0</span></li>
+          		<li><span class="no-style-link" style="cursor:pointer;">장바구니</span><span id="cart-count">0</span></li>
                 </ul>   
             </div>
             <div class="separator1"></div> <!-- 선을 contegory_contents_wrap 아래에 위치 -->
             <div class="category_product_wrap">
                 <ul class="product_list">           
                     <li class="li1">                   
-                        <strong class="category_title">베스트상품<br>                       
+                        <strong class="category_title">전체상품<strong class="category_dep">스토어의 상품을 이곳에서 한 번에 확인하세요.</strong><br>                      
                         </strong> 
                         <div class="separator2"></div>
                         <ul class="category_inner">                      	
@@ -773,8 +788,17 @@ $('.buyButton').on('click', function(e) {
         }
         
     });
-});
-
+})
+$(document).on('click', '.no-style-link', function() {
+    
+    let userid = $('#userid').val();
+    
+    if (userid === null || userid === '') {
+        alert("로그인 후 이용해주세요.");
+    } else {
+        window.location.href = '/cart'; 
+    }
+})
 
 
 </script>
