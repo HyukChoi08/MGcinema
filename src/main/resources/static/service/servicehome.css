@@ -257,7 +257,7 @@ body {
     vertical-align: middle; /* 텍스트와 이미지 정렬 */
     background-color: white;
 }
-
+		
 .emoji-search {
     background-image: url('/service/search.png'); /* 이미지 경로 */
 }
