@@ -57,25 +57,29 @@
                 <div class="service_area">
                     <span class="tit">즐겨찾는질문</span><Br><br>
                     <div class="faq_button">
-                        <a href="faq?selected=홈페이지/모바일" class="button-link">홈페이지/모바일</a>
-                        <a href="faq?selected=예매/매표" class="button-link">예매/매표</a>
-                        <a href="faq?selected=결제수단" class="button-link">결제수단</a>
-                        <a href="faq?selected=영화관이용" class="button-link">영화관이용</a>
-                        <a href="faq?selected=특별관" class="button-link">특별관</a>
-                        <a href="faq" class="button-link">더보기</a>
+                        <a href="faq?selected=홈페이지/모바일" class="button-link">홈페이지모바일</a>
+                        <a href="faq?selected=예매/매표" class="button-link">예매<br>문의</a>
+                        <a href="faq?selected=결제수단" class="button-link">결제수단문의</a>
+                        <a href="faq?selected=영화관이용" class="button-link">영화관<br>이용</a>
+                        <a href="faq?selected=특별관" class="button-link">특별관<br>상세</a>
+                        <a href="faq" class="button-link">질문<br>더보기</a>
                     </div>
                 </div>
-                <div class="notice_area">
+				<div class="notice_area">
     			<span class="tit">공지사항</span>
-    			<!-- 버튼으로 변환된 링크 -->
     			<a href="news" class="notice_more_btn">+</a>
-    			<ul class="list"><br>
-        		<c:forEach var="news" items="${newsList}">
-            		<li><a href="newsDetail?id=${news.id}" class="notice_list">[${news.selected}]  ${news.title} ${news.created_at}</a></li>
-        		</c:forEach>
-    			</ul>
-				</div>
-            </div>	
+    			<ul class="list"><br> 
+    				<c:forEach var="news" items="${newsList}">
+        		<li class="notice_item">
+            		<a href="newsDetail?id=${news.id}" class="notice_list">[${news.selected}] ${news.title}
+            		</a>
+            		<div class="notice_date">${news.created_at}
+            		</div>
+        		</li>
+    				</c:forEach>
+				</ul>
+				</div>	
+           </div>	
         </div>
     </div>
 </div>
