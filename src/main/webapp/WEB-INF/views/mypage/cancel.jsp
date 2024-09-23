@@ -84,7 +84,7 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 				<!-- 문의 폼 -->
 				<form action="/deleteCustomer" method="post"
 					onsubmit="return passerror();">
-					<table>
+					<table class="canceltable">
 						<tr>
 							<td>비밀번호</td>
 							<td><input type="password" name="passwd" id="passwd"
@@ -98,10 +98,11 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 						<tr>
 							<td>탈퇴 사유</td>
 							<td><textarea class=textareacancel name="message" id="message" rows="6" required
-									placeholder="탈퇴 사유를 기입해주세요. 탈퇴시 회원 정보는 초기화 됩니다"></textarea></td>
+									placeholder="탈퇴 사유를 기입해주세요. 
+									탈퇴시 회원 정보는 초기화 됩니다."></textarea></td>
 						</tr>
 					</table>
-					<input type="submit" value="탈퇴하기">
+					<input class="inputbtn"type="submit" value="탈퇴하기">
 				</form>
 
 

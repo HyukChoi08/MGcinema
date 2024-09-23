@@ -89,9 +89,9 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 										<td><textarea name="content" required></textarea></td>
 									</tr>
 									<tr>
-										<td colspan="2"><input id="inputbtn" type="submit"
+										<td colspan="2"><input class="inputbtn" type="submit"
 											value="등록" />
-											<button type="button" id="inputbtn"
+											<button type="button" class="inputbtn"
 												onclick="location.href='/inquiry'">목록</button></td>
 									</tr>
 								</table>

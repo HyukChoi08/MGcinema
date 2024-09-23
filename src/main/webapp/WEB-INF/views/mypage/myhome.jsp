@@ -220,6 +220,20 @@ String customer_id = (String) session.getAttribute("uid");
 						<h3>스토어 결제이력</h3>
 					</div>
 					<div class="div3">
+						<a href="/cart" style="text-decoration: none;">
+							<div class="hover01" style="cursor: pointer;">
+								<figure>
+									<img src="/mypage_image/mycarticon.png" alt="아이콘"
+										style="width: 150px; height: 170px;">
+								</figure>
+								<!-- 여기에 텍스트나 다른 요소도 추가 가능 -->
+							</div>
+						</a>
+						<h3>내 장바구니</h3>
+					</div>
+					<br>
+				</div>
+					<div class="div3">
 						<a href="/cinema" style="text-decoration: none;">
 							<div class="hover01" style="cursor: pointer;">
 								<figure>
@@ -231,8 +245,6 @@ String customer_id = (String) session.getAttribute("uid");
 						</a>
 						<h3>극장 정보</h3>
 					</div>
-				</div>
-
 				
 				
 				<div class="footer-section">

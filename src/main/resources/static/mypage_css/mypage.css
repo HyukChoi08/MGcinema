@@ -409,7 +409,7 @@ form input[type="submit"]:hover {
 	border-image: initial;
 }
 
-.inquiry-detail #inputbtn {
+.inputbtn {
 	width: 100px;
 	padding: 8px;
 	background-color: #3a3d3f;
@@ -417,7 +417,6 @@ form input[type="submit"]:hover {
 	border-radius: 5px;
 	cursor: pointer;
 	height: 40px;
-	font-weight: bold;
 	border: 1px solid transparent; 
 	transition: background-color 0.3s;
 	transition: border-color 0.3s ease;
@@ -425,12 +424,15 @@ form input[type="submit"]:hover {
 	border-style: outset;
 	border-color: buttonborder;
 	border-image: initial;
-	font-size: 16px;
+	font-size: 18px;
 }
 
-.inquiry-detail #inputbtn:hover {
+.inputbtn:hover {
 	background-color: black; /* 버튼 hover 시 배경색 변경 */
 	border: 1px solid white; /* 흰색 줄 */
+	border-style: outset;
+
+	border-image: initial;
 }
 
 .inquiry-detail textarea {
@@ -452,25 +454,40 @@ form input[type="submit"]:hover {
 	border-color: buttonborder;
 	border-image: initial;  
 }
-.textareacancel {
+.textareacancel{
 	height: 150px; /* 텍스트 영역 높이 지정 */
 	resize: none; /* 텍스트 영역 크기 조절 비활성화 */
 	width: 500px;
-	box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); 
+	  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 	transition: border-color 0.3s ease; /* 경계선 색상 변경 시 애니메이션 추가 */
 	border-radius: 5px;
 	font-size: 16px;
 	margin: 20px;
+	 border: 1px solid #ddd;
 	background-color: black;
 	color:white;
-	border: 1px solid transparent; 
 	transition: background-color 0.3s;
 	transition: border-color 0.3s ease;
 	border-width: 2px;
 	border-style: outset;
-	border-color: buttonborder;
 	border-image: initial;  
 }
+.canceltable input{
+	padding: 10px;
+   	margin:20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+	background-color: black;
+	transition: background-color 0.3s;
+	transition: border-color 0.3s ease;
+	border-width: 2px;
+	border-style: outset;
+	border-image: initial;  
+}
+
+
 .noline{ /*밑줄 지우기*/
 	border-bottom: 1px solid black;
 }
