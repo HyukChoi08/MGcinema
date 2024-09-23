@@ -336,10 +336,16 @@ position: relative;
 #btnpay:hover {
     background-color: red; /* 호버 시 배경색 변경 */
 }
+#storehead {
+    position: relative;
+    top: 60px; /* 원하는 만큼 아래로 이동 */
+}
+
 </style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
+<h1 id="storehead">스토어</h1>
 <div id="container">
  	<div class="contegory_contents_wrap">
  	  	  <div class="category_wrap">

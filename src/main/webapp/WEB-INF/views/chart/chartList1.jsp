@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +33,7 @@ body {
     flex-direction: column;
     align-items: center; /* 가운데 정렬 */
     justify-content: center; /* 수직 중앙 정렬 */
-    height: 130vh; /* 전체 뷰포트 높이 */
+    height: 170vh; /* 전체 뷰포트 높이 */
     width: 100%; /* 전체 너비 */
     padding: 20px; /* 적절한 여백 추가 */
 }
@@ -243,6 +244,11 @@ color:black;
     background-color: #555; /* 원하는 배경색으로 설정 */
     cursor: pointer; /* 마우스 커서 변경 */
 }
+.reviewStatus {
+    text-align: center; /* 가운데 정렬 */
+    display: flex; /* 플렉스 박스로 변경 */
+    justify-content: center; /* 수평 가운데 정렬 */
+}
     </style>
 </head>
 <body>
@@ -286,7 +292,7 @@ color:black;
                             <div>
                                 <p>
                                     <span>
-                                        <em>"${countreview} 명의 실관람객이 글을 남겨주셨습니다."</em>
+                                        <em>"${countreview} 명의 실관람객이 리뷰를 남겨주셨습니다."</em>
                                     </span>
                                 </p>
                                 <div>
@@ -318,6 +324,11 @@ color:black;
                                             </li>
                                         </ul>
                                     </c:if>
+                                    <c:if test="${movieReview != null}">
+                                    	<ul class="reviewStatus">
+                                    		<li> ${sessionScope.Nick}님은 작성해 주신 리뷰가 있습니다.</li>
+                                    	</ul>	
+                                    </c:if>
                                 </div>
                             </div>
                             <br><br>
@@ -341,7 +352,6 @@ color:black;
 </body>
     <script src="https://code.jquery.com/jquery-latest.js"></script>
     <script>
-    
     let getmname = $("#getmname").data("mname");
     
 

@@ -163,10 +163,24 @@ public class HomepageController {
 		String realname = req.getParameter("realname");
 		String birthday = req.getParameter("birthday");
 		String mobile = req.getParameter("mobile");
+		
+
+		String gRecaptchaResponse = req.getParameter("g-recaptcha-response");
+
+	    // reCAPTCHA 검증
+	    if (gRecaptchaResponse == null || gRecaptchaResponse.trim().isEmpty()) {
+			model.addAttribute("errorMessage", "로봇인지 아닌지 확인해주세요.");
+	        return "home/findId"; // 같은 페이지로 포워딩
+	    }
+		
+		
 
 		String uid = ldao.getFindId(realname, birthday, mobile);
 		//System.out.println("zzzzzzzz" + uid);
 
+
+		
+		
 		if (uid == null || uid.equals("")) {
 			model.addAttribute("errorMessage", "입력하신 정보와 일치하는 아이디를 찾을 수 없습니다. 다시 입력해 주세요.");
 		} else {
@@ -175,6 +189,11 @@ public class HomepageController {
 
 		return "home/findId"; // Forward to the same page
 	}
+	
+	
+	
+	
+	
 
 	@GetMapping("/findPassword")
 	public String findPassword() {
@@ -188,6 +207,14 @@ public class HomepageController {
 		String birthday = req.getParameter("birthday");
 		String mobile = req.getParameter("mobile");
 
+		String gRecaptchaResponse = req.getParameter("g-recaptcha-response");
+
+	    // reCAPTCHA 검증
+	    if (gRecaptchaResponse == null || gRecaptchaResponse.trim().isEmpty()) {
+			model.addAttribute("errorMessage", "로봇인지 아닌지 확인해주세요.");
+	        return "home/findPassword"; // 같은 페이지로 포워딩
+	    }
+		
 		String passwd = ldao.getFindP(uid, birthday, mobile);
 
 		if (passwd == null || passwd.equals("")) {

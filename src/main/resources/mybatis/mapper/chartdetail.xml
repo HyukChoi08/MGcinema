@@ -10,14 +10,14 @@
 	
 	<select id="dirimg" resultType="string">
 		select image_path from appearance_info
-		where moviename = #{movieid}
+		where movieid = #{movieid}
 		and actor = #{dirn};
 	</select>
 	
 	<select id="getCastImages" resultType="com.cinema.chartsecond.castDTO">
 	    SELECT image_path, actor
 	    FROM appearance_info
-	    WHERE moviename = #{movieid}
+	    WHERE movieid = #{movieid}
 	    AND actor IN
 	    <foreach item="name" collection="castNames" open="(" separator="," close=")">
 	        #{name}

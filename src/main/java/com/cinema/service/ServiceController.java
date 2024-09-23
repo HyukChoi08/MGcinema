@@ -24,6 +24,8 @@ public class ServiceController {
     public String getServiceHome(@RequestParam(value = "id", defaultValue = "1") int id, Model model) {
         ServiceHomeDTO serviceHome = new ServiceHomeDTO();
         
+        
+        
         // 뉴스 목록 가져오기
         List<NewsDTO> newsList = newsDAO.getAllNews(10, 0); // 예시로 5개 뉴스 가져오기
         model.addAttribute("newsList", newsList);

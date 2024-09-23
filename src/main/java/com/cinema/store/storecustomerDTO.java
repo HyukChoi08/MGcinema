@@ -15,5 +15,6 @@ public class storecustomerDTO {
 	String userid;
 	String totalprice;
 	String birthday;
+	
 
 }

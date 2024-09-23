@@ -29,7 +29,7 @@
         <div class="col-detail">
             <div class="customer_top">
                 <h2 class="tit">공지/뉴스</h2>
-                <p class="stit">MG Cinema의 주요한 이슈 및 여러 가지 소식들을 확인하실 수 있습니다.</p>
+                <p class="stit">주요한 이슈 및 여러 가지 소식들을 확인하실 수 있습니다.</p>
             </div>
             
             <!-- 검색 영역 추가 -->

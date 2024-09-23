@@ -40,7 +40,7 @@
 	<div class="mid">
 		<ul class="midlist">
 			<li><span class="Listonbtn">상세정보</span></li>
-			<li><span class="nowbtn">감독/출현</span></li>
+			<li><span class="nowbtn">감독/출연</span></li>
 			<li><span class="cutbtn">스틸컷</span></li>
 			<li><span class="revbtn">평점/리뷰</span></li>
 			<li><span class="thebtn">상영시간</span></li>

@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>아이디 찾기</title>
     <link rel="stylesheet" href="findId_css/findId.css">
+    <script src='https://www.google.com/recaptcha/api.js'></script> 
 </head>
 <body>
     <%@ include file="/WEB-INF/views/header/header.jsp" %>
@@ -25,6 +26,9 @@
                 <label for="mobile">전화번호</label>
                 <input type="text" id="mobile" name="mobile" placeholder="01012345678 형식으로 작성해주세요." required maxlength="11">
             </div>
+            <!--recaptcha-->
+			<div class="g-recaptcha" data-sitekey="6LerV0wqAAAAAKFPAIA1X0Iyfz55Hv2G_IvRop42"></div>
+
             <button type="submit">아이디 찾기</button>
 
             <!-- Display error message if available -->
@@ -49,4 +53,5 @@
     
     <%@ include file="/WEB-INF/views/footer/footer.jsp" %>
 </body>
+
 </html>
