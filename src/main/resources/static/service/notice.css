@@ -29,9 +29,7 @@ body {
 	border-radius: 10px; /* 모서리 둥글게 */
 	flex: 1 1 15%; /* 전체 공간에서 30% 차지 */
 }
-
 .sidebar ul {
-	
     list-style-type: none;
     padding: 5px;
 }
@@ -42,7 +40,7 @@ body {
 
 .sidebar ul li a {
 	text-decoration: none; /* 링크 밑줄 제거 */
-	color: #ffffff; /* 텍스트 색상 */
+	color: #808080; /* 텍스트 색상 */
 	font-weight: bold; /* 텍스트 굵게 */
 	transition: color 0.3s ease; /* 색상 변경 시 애니메이션 추가 */
 }
@@ -50,6 +48,17 @@ body {
 .sidebar ul li a:hover {
    color: #3a3d3f; /* 사이드바 링크 hover 색상 */
    font-size:19px;
+}
+
+
+.sidebar ul li.on a {
+    background-color: #3a3d3f; /* 현재 페이지 호버 색상 */
+    color: white; /* 현재 페이지 글씨 색상 */
+}
+
+.sidebar ul li.on a:hover {
+    background-color: #ffffff; /* 호버 시 색상 변경 */
+    color: #3a3d3f; /* 호버 시 글씨 색상 변경 */
 }
 
 .col-detail {
@@ -129,24 +138,44 @@ body {
 }
 
 .tbl_notice_list {
-    width: 100%;
-    border-collapse: collapse;
+    width: 100%; /* 테이블 전체 너비 설정 */
+    border-collapse: collapse; /* 테두리 겹침 방지 */
 }
 
 .tbl_notice_list th, .tbl_notice_list td {
-    padding: 10px;
-    border: 2px solid #808080; /* 테두리 색상 흰색으로 설정 */
-    text-align: left;
+    padding: 10px; /* 패딩 설정 */
+    border: 2px solid #808080; /* 테두리 색상 설정 */
+    text-align : left;
 }
 
-.tbl_notice_list th {
-    background-color: #333; /* 헤더 배경색 검정으로 설정 */
-    color: white; /* 헤더 글씨색 흰색으로 설정 */
+.tbl_notice_list td.id {
+    width: 50px; /* ID 열 너비 */
+}
+
+.tbl_notice_list td.select {
+    width: 100px; /* Select 열 너비 */
 }
 
 .tbl_notice_list td.title {
-    width: 400px; /* 제목 칸의 너비를 50%로 설정 */
+    width: 400px; /* Title 열 너비 */
 }
+
+.tbl_notice_list td.created {
+    width: 100px; /* Created 열 너비 */
+}
+
+.tbl_notice_list td.view {
+    width: 50px; /* View 열 너비 */
+}
+
+.tbl_notice_list td {
+    vertical-align: middle; /* 셀 내용의 세로 정렬 */
+}
+
+
+
+
+
 
 .paging {
     margin: 20px 0;

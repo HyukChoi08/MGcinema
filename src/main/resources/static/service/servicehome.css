@@ -29,9 +29,7 @@ body {
 	border-radius: 10px; /* 모서리 둥글게 */
 	flex: 1 1 15%; /* 전체 공간에서 30% 차지 */
 }
-
 .sidebar ul {
-	
     list-style-type: none;
     padding: 5px;
 }
@@ -42,7 +40,7 @@ body {
 
 .sidebar ul li a {
 	text-decoration: none; /* 링크 밑줄 제거 */
-	color: #ffffff; /* 텍스트 색상 */
+	color: #808080; /* 텍스트 색상 */
 	font-weight: bold; /* 텍스트 굵게 */
 	transition: color 0.3s ease; /* 색상 변경 시 애니메이션 추가 */
 }
@@ -51,6 +49,18 @@ body {
    color: #3a3d3f; /* 사이드바 링크 hover 색상 */
    font-size:19px;
 }
+
+
+.sidebar ul li.on a {
+    background-color: #3a3d3f; /* 현재 페이지 호버 색상 */
+    color: white; /* 현재 페이지 글씨 색상 */
+}
+
+.sidebar ul li.on a:hover {
+    background-color: #ffffff; /* 호버 시 색상 변경 */
+    color: #3a3d3f; /* 호버 시 글씨 색상 변경 */
+}
+
 
 .col-detail {
 	width:1000px;
@@ -210,12 +220,13 @@ body {
     border-radius: 5px; /* 둥근 버튼을 위해 5px 설정 */
     border: 2px solid white; /* 흰색 테두리 설정 */
     text-decoration: none; /* 링크 밑줄 제거 */
-    margin-left: 10px; /* 공지사항과의 간격 설정 */
+    margin-left: 5px; /* 공지사항과의 간격 설정 */
+   
 }
 
 .notice_more_btn:hover {
     background-color: white; /* 버튼 hover 시 배경색 변경 */
-    border-color: white; /* hover 시 테두리 색상 변경 */
+    border-color:white;
 }
 
 .notice_area .list {
@@ -257,7 +268,7 @@ body {
     vertical-align: middle; /* 텍스트와 이미지 정렬 */
     background-color: white;
 }
-		
+
 .emoji-search {
     background-image: url('/service/search.png'); /* 이미지 경로 */
 }

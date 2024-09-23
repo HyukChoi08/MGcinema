@@ -77,11 +77,11 @@
                         <tbody>
                             <c:forEach var="faq" items="${faqList}">
                                 <tr>
-                                    <td>${faq.id}</td>
-                                    <td>${faq.selected}</td>
-                                    <td><a href="/FAQdetail?id=${faq.id}">${faq.title}</a></td>
-                                    <td>${fn:substring(faq.created_at, 0, 10)}</td>
-                                    <td>${faq.views}</td>
+                                    <td class="id">${faq.id}</td>
+                                    <td class="select">${faq.selected}</td>
+                                    <td class="title"><a href="/FAQdetail?id=${faq.id}&page=${currentPage}">${faq.title}</a></td>
+                                    <td class="create">${fn:substring(faq.created_at, 0, 10)}</td>
+                                    <td class="view">${faq.views}</td>
                                 </tr>
                             </c:forEach>
 

@@ -19,7 +19,7 @@
                 <ul>
                     <li><a href="/serviceHome">고객센터 메인</a></li>
                     <li><a href="/faq">자주찾는 질문</a></li>
-                    <li><a href="/news">공지/뉴스</a></li>
+                    <li class="hover-item"><a href="/news">공지/뉴스</a></li>
                     <li><a href="/inquiry">이메일 문의</a></li>
                 </ul>
             </div>
@@ -37,9 +37,11 @@
             </div>
            
 
-            <div class="btn-group">
-                <button class="btn-list" onclick="window.history.back()">목록</button>
-            </div>
+<div class="btn-group">
+    <button class="btn-list" onclick="window.location.href='/news?page=${currentPage}&size=${size}&search=${search}&selected=${newsDetail.selected}'">목록</button>
+</div>
+
+
         </div>
     </div>
 </div>

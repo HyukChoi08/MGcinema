@@ -20,7 +20,7 @@
                 <div class="snb">
                     <ul>
                         <li><a href="serviceHome">고객센터 메인</a></li>
-                        <li><a href="faq">자주찾는 질문</a></li>
+                        <li class="hover-item"><a href="faq">자주찾는 질문</a></li>
                         <li><a href="news">공지/뉴스</a></li>
                         <li><a href="inquiry">이메일 문의</a></li>
                     </ul>
@@ -38,10 +38,17 @@
                     <pre>${faqDetail.content}</pre>
                 </div>
                 <!-- 버튼 그룹 -->
-                <div class="btn-group">
-                    <button class="btn-list" onclick="window.history.back()">목록</button>
-                    <button class="btn-edit" onclick="location.href='FAQedit?id=${faqDetail.id}'">수정</button>
-              <!--       <button class="btn-delete" onclick="if(confirm('정말 삭제하시겠습니까?')) location.href='FAQdelete?id=${faqDetail.id}'">삭제</button>  -->
+                
+<div class="btn-group">
+    <button class="btn-list" 
+            onclick="location.href='/faq?page=${currentPage}&size=${size}&search=${param.search}&selected=${faqDetail.selected}'">
+        목록
+    </button>
+   <!--  <button class="btn-edit" onclick="location.href='FAQedit?id=${faqDetail.id}'">수정</button> -->
+    <!-- <button class="btn-delete" onclick="if(confirm('정말 삭제하시겠습니까?')) location.href='FAQdelete?id=${faqDetail.id}'">삭제</button> -->
+</div>
+
+
                 </div>
             </div>
         </div>
