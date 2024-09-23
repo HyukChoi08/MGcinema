@@ -25,7 +25,9 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 	<!-- 헤더 포함 -->
 	<div class="mainscreen">
 		<div class="profile-section">
-			<img id="profileImage" src="<%= customer.getProfileimg() != null ? customer.getProfileimg() : "/mypage_image/OO.png" %>" alt="프로필이미지" width="80" height="80" />
+			<img id="profileImage"
+				src="<%=customer.getProfileimg() != null ? customer.getProfileimg() : "/mypage_image/OO.png"%>"
+				alt="프로필이미지" width="80" height="80" />
 			<!-- <img src="/mypage_image/OO.png" alt="프로필이미지" width="80" height="80" /> -->
 
 			<div class="profile-info">
@@ -77,66 +79,69 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 
 			<!-- 메인 콘텐츠 -->
 			<div class="main-content">
-				<h2>1:1 문의 게시판</h2>
-
-				<!-- 문의 목록을 보여주는 테이블 -->
-				<table class="inquiry-table">
-					<thead>
-						<tr>
-							<th>번호</th>
-							<th>제목</th>
-							<th>작성일</th>
-							<th>상태</th>
-						</tr>
-						<!-- 목록 출력 -->
-						<c:forEach var="inquiry" items="${inquiries}" varStatus="status">
+				<h3>1:1 문의 게시판</h3>
+				<div class="inquiryline">
+					<!-- 문의 목록을 보여주는 테이블 -->
+					<table class="inquiry-table">
+						<thead>
 							<tr>
-								<td><c:out value="${status.index + 1}" /></td>
-								<!-- 1부터 시작하는 인덱스 출력 -->
-								<td><a href='/inquirydetail/${inquiry.id}'>${inquiry.title}</a></td>
-								<td>${inquiry.created}</td>
-								<td>${inquiry.current}</td>
+								<th>번호</th>
+								<th>제목</th>
+								<th>작성일</th>
+								<th>상태</th>
 							</tr>
-						</c:forEach>
-
-						<!-- 내역이 5개 미만일 때 빈 줄 추가 -->
-						<c:if test="${fn:length(inquiries) < 5}">
-							<c:forEach begin="${fn:length(inquiries) + 1}" end="5">
+							<!-- 목록 출력 -->
+							<tbody>
+							<c:forEach var="inquiry" items="${inquiries}" varStatus="status">
 								<tr>
-									<td colspan="4">&nbsp;</td>
-									<!-- 빈 칸 유지 -->
+									<td><c:out value="${status.index + 1}" /></td>
+									<!-- 1부터 시작하는 인덱스 출력 -->
+									<td><a href='/inquirydetail/${inquiry.id}'>${inquiry.title}</a></td>
+									<td>${inquiry.created}</td>
+									<td>${inquiry.current}</td>
 								</tr>
 							</c:forEach>
+							</tbody>
+							<!-- 내역이 5개 미만일 때 빈 줄 추가 -->
+							<c:if test="${fn:length(inquiries) < 5}">
+								<c:forEach begin="${fn:length(inquiries) + 1}" end="5">
+									<tr>
+										<td colspan="4">&nbsp;</td>
+										<!-- 빈 칸 유지 -->
+									</tr>
+								</c:forEach>
+							</c:if>
+						</thead>
+					</table>
+
+
+					<!-- 페이징 처리 -->
+					<div class="pagination">
+						<c:if test="${currentPage > 1}">
+							<a href="?page=${currentPage - 1}">이전</a>
 						</c:if>
-					</thead>
-				</table>
-				
-				
-				<!-- 페이징 처리 -->
-				<div class="pagination">
-					<c:if test="${currentPage > 1}">
-						<a href="?page=${currentPage - 1}">이전</a>
-					</c:if>
 
-					<c:forEach var="i" begin="1" end="${totalPages}">
-						<c:choose>
-							<c:when test="${i == currentPage}">
-								<span>${i}</span>
-							</c:when>
-							<c:otherwise>
-								<a href="?page=${i}">${i}</a>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
+						<c:forEach var="i" begin="1" end="${totalPages}">
+							<c:choose>
+								<c:when test="${i == currentPage}">
+									<span>${i}</span>
+								</c:when>
+								<c:otherwise>
+									<a href="?page=${i}">${i}</a>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
 
-					<c:if test="${currentPage < totalPages}">
-						<a href="?page=${currentPage + 1}">다음</a>
-					</c:if>
+						<c:if test="${currentPage < totalPages}">
+							<a href="?page=${currentPage + 1}">다음</a>
+						</c:if>
+					</div>
 				</div>
-					<!-- 문의 폼 -->
-				<button class="button" onclick="location.href='/inquirywrite'">문의하기</button>
+				<!-- 문의 폼 -->
+				<button class="button" onclick="location.href='/inquirywrite' 
+					"style="font-size:20px;font-weight:bold ">문의하기</button>
 				<!-- 나의 문의 내역 -->
-				
+
 				<br>
 
 

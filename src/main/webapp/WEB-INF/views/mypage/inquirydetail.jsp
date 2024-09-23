@@ -20,16 +20,14 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/header/header.jsp"%>
-	<!-- 헤더 포함 -->
 	<!-- 프로필 섹션 -->
 	<div class="mainscreen">
 		<div class="profile-section">
-			<img id="profileImage" src="<%= customer.getProfileimg() != null ? customer.getProfileimg() : "/mypage_image/OO.png" %>" alt="프로필이미지" width="80" height="80" />
-			<!-- <img src="/mypage_image/OO.png" alt="프로필이미지" width="80" height="80" /> -->
-
+			<img id="profileImage"
+				src="<%=customer.getProfileimg() != null ? customer.getProfileimg() : "/mypage_image/OO.png"%>"
+				alt="프로필이미지" width="80" height="80" />
 			<div class="profile-info">
-				<h2>
-					<%=customer.getRealname()%>
+				<h2><%=customer.getRealname()%>
 					님
 				</h2>
 				<div>
@@ -40,11 +38,9 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 				</div>
 				<div>
 					아이디 :
-					<%=customer.getUid()%>
-				</div>
+					<%=customer.getUid()%></div>
 			</div>
 		</div>
-
 
 		<!-- 닉네임 변경하기 모달 -->
 		<div id="nicknameModal" class="modal">
@@ -77,48 +73,72 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 			<div class="main-content">
 				<h2>1:1 문의 게시판</h2>
 
-				<!-- 문의 작성 폼 -->
-				<c:choose>
-					<c:when test="${view == 'inquirywrite' }">
-						<h3>문의 작성</h3>
-						<form action="/inquirywrite" method="post">
-							제목: <input type="text" name="title" required /><br /> <br />
-							내용:
-							<textarea name="content" rows="10" cols="50" required></textarea>
-							<br /> <br /> <input type="submit" value="등록" />
-							<button type="button" onclick="location.href='/inquiry'">목록</button>
-						</form>
+				<!-- 문의 작성 및 상세보기 -->
+				<div class="inquiry-detail">
+					<c:choose>
+						<c:when test="${view == 'inquirywrite'}">
+							<h3>문의 작성</h3>
+							<form action="/inquirywrite" method="post">
+								<table>
+									<tr>
+										<td>제목</td>
+										<td><input type="text" name="title" id="inputcreated" required /></td>
+									</tr>
+									<tr>
+										<td>내용</td>
+										<td><textarea name="content" required></textarea></td>
+									</tr>
+									<tr>
+										<td colspan="2"><input id="inputbtn" type="submit"
+											value="등록" />
+											<button type="button" id="inputbtn"
+												onclick="location.href='/inquiry'">목록</button></td>
+									</tr>
+								</table>
+							</form>
+						</c:when>
 
-					</c:when>
-
-					<c:when test="${view == 'inquirydetail'}">
-						<h3>1:1 문의 상세보기</h3>
-						<!-- 나의 문의 내용 -->
-					제목: 
-					<input type="text" name="title" value="${inquiry.title}" readonly />
-						<br />
-						<br /> 
-					내용: 
-					<textarea name="content" rows="10" cols="50" readonly>${inquiry.content}</textarea>
-						<br />
-						<br /> 	
-					작성일자: 
-					<input type="text" name="created" value="${inquiry.created}"
-							readonly />
-						<br />
-						<br />
-						<!-- 관리자 응답 -->
-						<c:if test="${inquiry.current == '답변완료'}">
-							<div class="response">
-								<h2>관리자 답변</h2>
-								답변내용: <br>
-								<textarea name="answer" rows="10" cols="50" readonly>${inquiry.answer}</textarea>
-								<br> 답변일자: <br> <input type="text" name="ancreated"
-									value="${inquiry.ancreated}" readonly>
-							</div>
-						</c:if>
-					</c:when>
-				</c:choose>
+						<c:when test="${view == 'inquirydetail'}" >
+							<h3>상세보기</h3>
+							<table>
+								<tr>
+									<td>제목</td>
+									<td><input type="text" name="title" id="inputcreated"
+										value="${inquiry.title}" readonly /></td>
+								</tr>
+								<tr >
+									<td class="noline">내용</td>
+						 			<td class="noline"><textarea name="content" rows="10" cols="50" readonly>${inquiry.content}</textarea></td>
+								</tr>
+								<tr>
+									<td>작성일자</td>
+									<td><input type="text" name="created"  id="inputcreated"
+										value="${inquiry.created}" readonly /></td>
+								</tr>
+								
+								<c:if test="${inquiry.current == '답변완료'}">
+								<div>
+									<tr>
+										<td colspan="2" class="noline">
+											<h3>관리자 답변</h3>
+										</td>
+									</tr>
+									<tr >
+										<td class="noline">답변내용</td>
+										<td class="noline"><textarea name="answer" rows="10" cols="50" readonly>${inquiry.answer}</textarea></td>
+									</tr>
+									<tr>
+										<td>답변일자</td>
+										<td><input type="text" name="ancreated" id="inputcreated"
+											value="${inquiry.ancreated}" readonly /></td>
+									</tr>
+									</div>
+								</c:if>
+								
+							</table>
+						</c:when>
+					</c:choose>
+				</div>
 
 				<!-- 나의 문의 내역 -->
 				<h3>나의 문의 내역</h3>
@@ -130,6 +150,8 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 							<th>작성일</th>
 							<th>상태</th>
 						</tr>
+					</thead>
+					<tbody>
 						<c:forEach var="inquiry" items="${inquiries}" varStatus="status">
 							<tr>
 								<td><c:out value="${status.index + 1}" /></td>
@@ -138,15 +160,14 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 								<td>${inquiry.current}</td>
 							</tr>
 						</c:forEach>
-					</thead>
+					</tbody>
 				</table>
-				
+
 				<!-- 페이징 처리 -->
 				<div class="pagination">
 					<c:if test="${currentPage > 1}">
 						<a href="?page=${currentPage - 1}">이전</a>
 					</c:if>
-
 					<c:forEach var="i" begin="1" end="${totalPages}">
 						<c:choose>
 							<c:when test="${i == currentPage}">
@@ -157,68 +178,66 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-
 					<c:if test="${currentPage < totalPages}">
 						<a href="?page=${currentPage + 1}">다음</a>
 					</c:if>
 				</div>
-				
+
 			</div>
 		</div>
 	</div>
+
 	<%@ include file="/WEB-INF/views/footer/footer.jsp"%>
 	<!-- 푸터 포함 -->
-
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-	const modal = document.getElementById('nicknameModal');
-	const editBtn = document.querySelector('.fa-pen');
-	const closeBtn = document.querySelector('.close');
-	const saveNicknameBtn = document.getElementById('saveNicknameBtn');
+	document.addEventListener('DOMContentLoaded', function() {
+		const modal = document.getElementById('nicknameModal');
+		const editBtn = document.querySelector('.fa-pen');
+		const closeBtn = document.querySelector('.close');
+		const saveNicknameBtn = document.getElementById('saveNicknameBtn');
 
-	// 닉네임 수정 버튼 클릭 시 모달 창 열기
-	editBtn.addEventListener('click', function() {
-		modal.style.display = 'block';
-	});
+		// 닉네임 수정 버튼 클릭 시 모달 창 열기
+		editBtn.addEventListener('click', function() {
+			modal.style.display = 'block';
+		});
 
-	// 닫기 버튼 클릭 시 모달 닫기
-	closeBtn.addEventListener('click', function() {
-		modal.style.display = 'none';
-	});
-
-	// 모달 밖을 클릭하면 닫히게 설정
-	window.addEventListener('click', function(event) {
-		if (event.target == modal) {
+		// 닫기 버튼 클릭 시 모달 닫기
+		closeBtn.addEventListener('click', function() {
 			modal.style.display = 'none';
-		}
-	});
+		});
 
-	// 닉네임 저장 버튼 클릭 시 AJAX 요청
-	saveNicknameBtn.addEventListener('click', function() {
-		const newNickname = document.getElementById('newNickname').value;
-		if (newNickname) {
-			$.ajax({
-				url : '/updateNickname',
-				method : 'POST',
-				data : {
-					nickname : newNickname
-				},
-				success : function(response) {
-					alert(response); // 서버로부터 성공 메시지 받기
-					location.reload(); // 페이지 새로고침해서 닉네임 업데이트 반영
-				},
-				error : function() {
-					alert('닉네임 변경에 실패했습니다.');
-				}
-			});
-			modal.style.display = 'none';
-		} else {
-			alert('새 닉네임을 입력하세요.');
-		}
-	});
-});
+		// 모달 밖을 클릭하면 닫히게 설정
+		window.addEventListener('click', function(event) {
+			if (event.target == modal) {
+				modal.style.display = 'none';
+			}
+		});
 
+		// 닉네임 저장 버튼 클릭 시 AJAX 요청
+		saveNicknameBtn.addEventListener('click', function() {
+			const newNickname = document.getElementById('newNickname').value;
+			if (newNickname) {
+				$.ajax({
+					url : '/updateNickname',
+					method : 'POST',
+					data : {
+						nickname : newNickname
+					},
+					success : function(response) {
+						alert(response); // 서버로부터 성공 메시지 받기
+						location.reload(); // 페이지 새로고침해서 닉네임 업데이트 반영
+					},
+					error : function() {
+						alert('닉네임 변경에 실패했습니다.');
+					}
+				});
+				modal.style.display = 'none';
+			} else {
+				alert('새 닉네임을 입력하세요.');
+			}
+		});
+	});
 </script>
 </html>

@@ -97,7 +97,7 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 						</tr>
 						<tr>
 							<td>탈퇴 사유</td>
-							<td><textarea name="message" id="message" rows="6" required
+							<td><textarea  name="message" id="message" rows="6" required
 									placeholder="탈퇴 사유를 기입해주세요."></textarea></td>
 						</tr>
 					</table>

@@ -55,17 +55,16 @@ tbody tr:hover {
 }
 
 /* 폼 스타일 */
-form {
+/* form {
 	display: flex;
-	flex-direction: column; /* 폼 요소들을 세로로 정렬 */
-}
-
+	flex-direction: column; 폼 요소들을 세로로 정렬
+} */
 form label {
 	margin-bottom: 5px;
 	font-weight: bold;
 }
 
-form input, form textarea {
+form input {
 	padding: 10px;
 	margin-bottom: 20px;
 	border: 1px solid #ddd;
@@ -73,9 +72,9 @@ form input, form textarea {
 	font-size: 16px;
 	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 	transition: border-color 0.3s ease; /* 경계선 색상 변경 시 애니메이션 추가 */
-} 
+}
 
-.profile-input input { 
+.profile-input input {
 	padding: 10px;
 	margin-bottom: 0px;
 	border-radius: 5px;
@@ -83,12 +82,12 @@ form input, form textarea {
 	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 	transition: border-color 0.3s ease; /* 경계선 색상 변경 시 애니메이션 추가 */
 }
-.profile-input h4{
+
+.profile-input h4 {
 	display: inline-block;
 	text-align: center;
 	width: 150px;
 	/* padding-left:30px; */
-	
 }
 
 #profilebtn { /*주소 찾기 버튼 */
@@ -97,10 +96,10 @@ form input, form textarea {
 	padding: 8px;
 	background-color: #3a3d3f;
 	color: white;
-	 border: 1px solid transparent; 
+	border: 1px solid transparent;
 	border-radius: 5px;
 	cursor: pointer;
-	height:40px;
+	height: 40px;
 	font-weight: bold;
 	transition: background-color 0.3s;
 	transition: border-color 0.3s ease;
@@ -112,60 +111,58 @@ form input, form textarea {
 }
 
 .profilecheckbox { /*체크박스 위치 맞추기*/
-    display: flex;
-    flex-wrap: wrap; /* 여러 줄로 나눠서 표시 */
-    gap: 10px; /* 체크박스 간의 간격 */
-
+	display: flex;
+	flex-wrap: wrap; /* 여러 줄로 나눠서 표시 */
+	gap: 10px; /* 체크박스 간의 간격 */
 }
 
 .profilecheckbox label {
-    flex-basis: calc(33.33% - 60px); /* 3개씩 배치되도록 너비 계산 */
-   
-    margin-right: 10px; /* 각 체크박스 간 간격 */
-    margin-bottom: 10px; /* 각 줄 간 간격 */
+	flex-basis: calc(33.33% - 60px); /* 3개씩 배치되도록 너비 계산 */
+	margin-right: 10px; /* 각 체크박스 간 간격 */
+	margin-bottom: 10px; /* 각 줄 간 간격 */
 }
 
 .profilecheckbox input[type="checkbox"] {
-    margin-right: 5px; /* 체크박스와 텍스트 사이 간격 */
+	margin-right: 5px; /* 체크박스와 텍스트 사이 간격 */
 }
 
 #probtn { /*프로필 수정 , 취소 버튼*/
-	margin:20px;
+	margin: 20px;
 	width: 100px;
 	padding: 8px;
 	background-color: #3a3d3f;
 	color: white;
 	border-radius: 5px;
 	cursor: pointer;
-	height:40px;
+	height: 40px;
 	font-weight: bold;
 	transition: background-color 0.3s;
 	border: none;
 	font-size: 12px;
 }
-#probtn:hover{
-		background-color: black; /* 버튼 hover 시 배경색 변경 */
-		border: 1px solid white; /* 흰색 줄 */
+
+#probtn:hover {
+	background-color: black; /* 버튼 hover 시 배경색 변경 */
+	border: 1px solid white; /* 흰색 줄 */
 }
 
 form input:focus, form textarea:focus {
 	border-color: #e50914; /* 포커스 시 경계선 색상 변경 */
 	outline: none; /* 기본 아웃라인 제거 */
 }
-
+/* 
 form input[type="submit"] {
 	background-color: #3a3d3f;
 	color: white;
 	border: none;
 	cursor: pointer;
-	transition: background-color 0.3s ease; /* 배경색 변경 시 애니메이션 추가 */
-	padding: 30px; /*패딩 설정 */
+	transition: background-color 0.3s ease; 배경색 변경 시 애니메이션 추가
+	padding: 10px; 패딩 설정
 }
 
 form input[type="submit"]:hover {
-	background-color: #808080; /* 마우스 올렸을 때 색상 */
-}
-
+	background-color: #808080; 마우스 올렸을 때 색상
+} */
 #post {
 	width: 50px
 }
@@ -385,11 +382,93 @@ form input[type="submit"]:hover {
 	border: 1px solid #ddd; /* 테두리 색상 */
 	border-radius: 5px; /* 모서리 둥글게 */
 }
+
+.inquiry-detail {
+	border: 1px solid #ddd; /* 테두리 색상 */
+	margin-bottom: 20px;
+	padding: 10px;
+	border-radius: 5px; /* 모서리 둥글게 */
+}
+
+.inquiry-detail	#inputcreated {
+	background-color: black;
+	padding: 5px;
+	margin: 18px;
+	color:white;
+	border-radius: 5px;
+	font-size: 16px;
+	border: 1px solid transparent; 
+	transition: background-color 0.3s;
+	transition: border-color 0.3s ease;
+	border-width: 2px;
+	border-style: outset;
+	border-color: buttonborder;
+	border-image: initial;
+}
+
+.inquiry-detail #inputbtn {
+	width: 100px;
+	padding: 8px;
+	background-color: #3a3d3f;
+	color: white;
+	border-radius: 5px;
+	cursor: pointer;
+	height: 40px;
+	font-weight: bold;
+	border: 1px solid transparent; 
+	transition: background-color 0.3s;
+	transition: border-color 0.3s ease;
+	border-width: 2px;
+	border-style: outset;
+	border-color: buttonborder;
+	border-image: initial;
+	font-size: 16px;
+}
+
+.inquiry-detail #inputbtn:hover {
+	background-color: black; /* 버튼 hover 시 배경색 변경 */
+	border: 1px solid white; /* 흰색 줄 */
+}
+
+.inquiry-detail textarea {
+	height: 150px; /* 텍스트 영역 높이 지정 */
+	resize: none; /* 텍스트 영역 크기 조절 비활성화 */
+	width: 500px;
+	box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); 
+	transition: border-color 0.3s ease; /* 경계선 색상 변경 시 애니메이션 추가 */
+	border-radius: 5px;
+	font-size: 16px;
+	margin: 20px;
+	background-color: black;
+	color:white;
+	border: 1px solid transparent; 
+	transition: background-color 0.3s;
+	transition: border-color 0.3s ease;
+	border-width: 2px;
+	border-style: outset;
+	border-color: buttonborder;
+	border-image: initial;
+    
+}
+.noline{ /*밑줄 지우기*/
+	border-bottom: 1px solid black;
+}
+
+.lnquiry-page {
+	padding: 10px;
+	margin-bottom: 20px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	font-size: 16px;
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+	transition: border-color 0.3s ease;
+}
+
 /* 관리자 응답 스타일 */
 .response {
-	margin-top: 40px;
+	margin-top: 20px;
 	padding: 20px;
-	background-color: #f7f7f7;
+	background-color: #000000;
 	border: 1px solid #ddd;
 	border-radius: 10px;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 응답 섹션 그림자 효과 */
@@ -397,18 +476,19 @@ form input[type="submit"]:hover {
 
 .response h2 {
 	margin-top: 0;
-	color: #e50914; /* 제목 색상 */
-}
-
-.response p {
-	line-height: 1.6;
+	color: #c0c0c0; /* 제목 색상 */
 }
 
 /* 문의 내역 테이블 스타일 */
+.inquiryline {
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 10px;
+}
+
 .inquiry-table {
 	width: 100%;
 	/* 테이블 경계선 겹치기 */
-	/* border: 1px solid black; 테두리 색상 */
 }
 
 .inquiry-table th, .inquiry-table td {
@@ -420,6 +500,23 @@ form input[type="submit"]:hover {
 .inquiry-table th {
 	/* background-color: #f7f7f7; */
 	font-weight: bold;
+}
+
+.inquiry-table th:nth-child(1) {
+	width: 30px; /* 첫 번째 열 번호에 50px 고정 */
+	text-align: center;
+}
+
+.inquiry-table th:nth-child(2) {
+	width: 370px; /* 두 번째 열 제목에 350px 고정 */
+}
+
+.inquiry-table th:nth-child(3) {
+	width: 150px; /* 세 번째 열 작성일에 150px 고정 */
+}
+
+.inquiry-table th:nth-child(4) {
+	width: 100px; /* 네 번째 열 상태에 100px 고정 */
 }
 
 .status-complete {
