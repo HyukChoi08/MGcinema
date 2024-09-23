@@ -15,7 +15,6 @@ html, body {
     );
     color: #ffffff;
     min-width: 1200px; /* 최소 너비 설정 */
-    margin: 0 auto;
     height: auto; /* 높이를 자동으로 설정 */
     padding-top: 40px; /* 위아래 여백 추가 */
     display: flex;

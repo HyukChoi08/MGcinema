@@ -207,6 +207,14 @@ public class HomepageController {
 		String birthday = req.getParameter("birthday");
 		String mobile = req.getParameter("mobile");
 
+		String gRecaptchaResponse = req.getParameter("g-recaptcha-response");
+
+	    // reCAPTCHA 검증
+	    if (gRecaptchaResponse == null || gRecaptchaResponse.trim().isEmpty()) {
+			model.addAttribute("errorMessage", "로봇인지 아닌지 확인해주세요.");
+	        return "home/findPassword"; // 같은 페이지로 포워딩
+	    }
+		
 		String passwd = ldao.getFindP(uid, birthday, mobile);
 
 		if (passwd == null || passwd.equals("")) {
