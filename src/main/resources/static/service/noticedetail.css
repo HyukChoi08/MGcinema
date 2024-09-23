@@ -75,6 +75,7 @@ body {
     background-color: #3a3d3f; /* 호버 시 배경색 변경 */
     border-radius: 5px; /* 모서리 둥글게 유지 */
     padding: 5px; /* 패딩 유지 */
+   
 }
 
 
@@ -96,6 +97,8 @@ body {
             font-weight: bold;
             margin: 0;
             text-align: left;
+            
+            
         }
         .customer_top .stit {
             color: white; /* 기존 페이지와 일치하는 색상 */

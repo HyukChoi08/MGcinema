@@ -79,7 +79,20 @@
                                 <tr>
                                     <td class="id">${faq.id}</td>
                                     <td class="select">${faq.selected}</td>
-                                    <td class="title"><a href="/FAQdetail?id=${faq.id}&page=${currentPage}">${faq.title}</a></td>
+                                    <td class="title">
+    								<c:choose>
+        									<c:when test="${fn:length(faq.title) > 30}">
+            									<a href="/FAQdetail?id=${faq.id}&page=${currentPage}">
+                								${fn:substring(faq.title, 0, 30)}...
+            									</a>
+        									</c:when>
+        								<c:otherwise>
+            								<a href="/FAQdetail?id=${faq.id}&page=${currentPage}">
+                							${faq.title}
+            								</a>
+        								</c:otherwise>
+    								</c:choose>
+									</td>
                                     <td class="create">${fn:substring(faq.created_at, 0, 10)}</td>
                                     <td class="view">${faq.views}</td>
                                 </tr>

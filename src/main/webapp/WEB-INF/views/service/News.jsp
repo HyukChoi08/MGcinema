@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -76,37 +77,46 @@
                                 <td class="id">${news.id}</td>
                                 <td class="select">${news.selected}</td>
                               	<td class="title">
-   								<a href="/newsDetail?id=${news.id}&page=${currentPage}&selected=${news.selected}">${news.title}
-   								</a>
-								</td>
-                                <td class="created">${news.created_at}</td>
+    							<c:choose>
+        							<c:when test="${fn:length(news.title) > 30}">
+           								<a href="/newsDetail?id=${news.id}&page=${currentPage}&selected=${news.selected}">
+                						${fn:substring(news.title, 0, 30)}...
+            							</a>
+        							</c:when>
+        						<c:otherwise>
+            						<a href="/newsDetail?id=${news.id}&page=${currentPage}&selected=${news.selected}">
+                					${news.title}
+            						</a>
+        						</c:otherwise>
+    						</c:choose>
+							</td>
+								<td class="created">${news.created_at}</td>
                                 <td class="view">${news.views}</td>
                             </tr>
                         </c:forEach>
                     </tbody>
                 	</table>
             	</div>
-
-<div class="paging">
-    <c:if test="${currentPage > 1}">
-    <a href="/news?page=${currentPage - 1}&size=${size}&search=${search}" class="btn-paging">이전</a>
-</c:if>
-<ul>
-    <c:forEach var="i" begin="1" end="${totalPages}">
-        <li>
-            <a href="/news?page=${i}&size=${size}&search=${search}" class="${i == currentPage ? 'active' : ''}">
-                ${i}
-            </a>    
-        </li>
-    </c:forEach>
-</ul>
-<c:if test="${currentPage < totalPages}">
-    <a href="/news?page=${currentPage + 1}&size=${size}&search=${search}" class="btn-paging">다음</a>
-</c:if>
-</div>
-        </div>
-    </div>
-</div>
+				<div class="paging">
+    				<c:if test="${currentPage > 1}">
+    					<a href="/news?page=${currentPage - 1}&size=${size}&search=${search}" class="btn-paging">이전</a>
+					</c:if>
+					<ul>
+    					<c:forEach var="i" begin="1" end="${totalPages}">
+        					<li>
+            					<a href="/news?page=${i}&size=${size}&search=${search}" class="${i == currentPage ? 'active' : ''}">
+                				${i}
+           						</a>    
+        					</li>
+    					</c:forEach>
+					</ul>
+						<c:if test="${currentPage < totalPages}">
+    						<a href="/news?page=${currentPage + 1}&size=${size}&search=${search}" class="btn-paging">다음</a>
+						</c:if>
+						</div>
+        			</div>
+    			</div>
+    		</div>
 <footer>
      <%@ include file="/WEB-INF/views/footer/footer.jsp" %>
 </footer>
