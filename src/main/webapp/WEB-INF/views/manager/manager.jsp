@@ -108,15 +108,20 @@
 				<tbody></tbody>
 		</table>
 	</div>
-	<!-- <div class="bestbox">
+	<div class="bestbox">
 		<table id="bestlist">
 				<thead>
-					<tr><td><h3>베스트상품변경</h3></td></tr>
+					<tr><td colspan="3"><h3>베스트상품변경</h3></td></tr>
 				</thead>
-				<tbody></tbody>
+				<tbody><tr><td><select id="best1"></select></td><td><select id="best2"></select></td><td><select id="best3"></select></td></tr>
+					   <tr><td><select id="best4"></select></td><td><select id="best5"></select></td><td><select id="best6"></select></td></tr>
+					   <tr><td><select id="best7"></select></td><td><select id="best8"></select></td><td><select id="best9"></select></td></tr>
+					   <tr><td colspan="3"><input type="button" id="bestbtn" value="적용"></td></tr></tbody>
 		</table>
-	</div> -->
+	</div>
+
 </div>
+
 <div class="container" id="a">
 	<input type="hidden" id="anid" readonly>
 		<div class="answerbox">
@@ -191,7 +196,7 @@
 	</div>
 </div>
 </div>
-<%-- <%@ include file="/WEB-INF/views/footer/footer.jsp" %> --%>
+<%@ include file="/WEB-INF/views/footer/footer.jsp" %>
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
@@ -341,7 +346,7 @@ $(document)
 .on('change','#movienum',function(){
 	let runtime = $(this).val().split(',');
 	let runminutes = parseInt(runtime[1].replace('분', ''));
-	$('#runtime').text('러닝타임: '+runtime[1]+' + 광고 10분');
+	$('#runnigtime').text('러닝타임: '+runtime[1]+' + 광고 10분');
 	$('#totalrun').val(runminutes+10);
 })
 .on('change','#stime',function(){
@@ -407,48 +412,54 @@ $(document)
 	let delid = $(this).closest('tr').find('td:eq(0)').text();
 	console.log($(this).closest('tr').find('td:eq(0)').text());
 	
-	$.post('/schedel',{delid:delid},function(data){
-			schedules();
-	})
+	if(window.confirm("정말 삭제하시겠습니까?")){
+		$.post('/schedel',{delid:delid},function(data){
+				schedules();
+		})
+	}
 	
 })
 .on('click','#moviedel',function(){
 	let delid = $(this).closest('tr').find('td:eq(0)').text();
 	console.log($(this).closest('tr').find('td:eq(0)').text());
 	
-	$.post('/moviedel',{delid:delid},function(data){
-		showmovie();
-	})
-	
+	if(window.confirm("정말 삭제하시겠습니까?")){
+		$.post('/moviedel',{delid:delid},function(data){
+			showmovie();
+		})
+	}
 })
 .on('click','#itemdel',function(){
 	let delid = $(this).closest('tr').find('td:eq(0)').text();
 	console.log($(this).closest('tr').find('td:eq(0)').text());
-	
-	$.post('/itemdel',{delid:delid},function(data){
-		showitem();
-		clear();
-	})
-	
+	if(window.confirm("정말 삭제하시겠습니까?")){
+		$.post('/itemdel',{delid:delid},function(data){
+			showitem();
+			clear();
+		})
+	}
 })
 .on('click','#inquirydel',function(){
 	let delid = $(this).closest('tr').find('td:eq(0)').text();
 	console.log($(this).closest('tr').find('td:eq(0)').text());
 	
-	
-	$.post('/inquirydel',{delid:delid},function(data){
-		showinquiry();
-		clear();
-	})	
+	if(window.confirm("정말 삭제하시겠습니까?")){	
+		$.post('/inquirydel',{delid:delid},function(data){
+			showinquiry();
+			clear();
+		})	
+	}
 })
 .on('click','#newsdel',function(){
 	let delid = $(this).closest('tr').find('td:eq(0)').text();
 	console.log($(this).closest('tr').find('td:eq(0)').text());
 		
-	$.post('/newsdel',{delid:delid},function(data){
-		shownews();
-		clear();
-	})	
+	if(window.confirm("정말 삭제하시겠습니까?")){
+		$.post('/newsdel',{delid:delid},function(data){
+			shownews();
+			clear();
+		})	
+	}
 })
 .on('click','#roomlist tbody tr',function(){
 	let roomid = $(this).find('td:eq(0)').text();
@@ -556,6 +567,26 @@ $(document)
 		shownews();
 	})
 })
+.on('click','#bestbtn',function(){
+	let bestitems = [];
+	
+	for (let i = 1; i <= 9; i++) {	   
+	    let value = $('#best'+i).val();
+	    bestitems.push(value);
+	}
+	 let uniqueItems = new Set(bestitems);
+	    if (uniqueItems.size !== bestitems.length) {
+	        alert("중복된 값이 있습니다. 선택된 값들을 확인하세요.");
+	    } else {
+			$.ajax({
+			    url: '/bestitem',type: 'POST',contentType: 'application/json; charset=utf-8',data: JSON.stringify(bestitems),
+			    success: function(response) {
+			        alert("베스트 아이템이 적용되었습니다");
+			    }   
+			});
+	    }
+	
+})
 .on('click','#roomupbtn',function(){
 	let roomid = $('#roomid').val();
 	let rlevel = $('#rlevel').val();
@@ -620,7 +651,7 @@ function mlist(){
 		}
 		let runt = $('#movienum').val().split(',');
 		let runminutes = parseInt(runt[1].replace('분', ''));
-		$('#runtime').text('러닝타임: '+runt[1]+' + 광고 10분');
+		$('#runnigtime').text('러닝타임: '+runt[1]+' + 광고 10분');
 		$('#totalrun').val(runminutes+10);
 	},'json')
 }
@@ -663,8 +694,8 @@ function clear(){
 		+'#rname,#rlevel,#adprice,#yoprice,#itemtype').val('');
 	$('#image').val('/chartImage/.jpg');
 	$('#itemimage').val('/store_Images/.jpg');
-	$('#nubtn').prop('disabled', true);
-	$('#nbtn').prop('disabled', false);
+	$('#nubtn,#iubtn').prop('disabled', true);
+	$('#nbtn,#ibtn').prop('disabled', false);
 }
 function showmovie(){
 	$.post('/showmovie',{},function(data){
@@ -680,12 +711,14 @@ function showmovie(){
 }
 function showitem(){
 	$.post('/showitem',{},function(data){
-		console.log("aaaaaaa",data)
 		$('#itemlist tbody').empty();
 		for( let x of data){
 			let str ='<tr><td style=display:none>'+x['id']+'</td><td>'+x['item_name']+'</td><td>'+x['item_type']+'</td><td>'+x['price']+'</td><td>'+x['discount_price']+'</td><td>'+x['composition']+'</td><td>'+
 						x['origin']+'</td><td>'+x['image_path']+'</td><td>'+x['period']+'</td><td><input type=button id=itemdel value=삭제></td></tr>'
 			$('#itemlist tbody').append(str);
+			
+			let beststr = '<option value='+x['id']+'>'+x['item_name']+', '+x['price']+', '+x['item_type']+'</option>';
+			$('#bestlist tbody select').append(beststr);
 		}
 		
 	},'json')

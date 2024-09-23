@@ -4,9 +4,16 @@
 } 
 .manager-page{
 	margin-bottom:120px;
-	height:600px;
+	height:1100px;
+	margin-top:100px;
 	
 }
+#bestlist tbody td,select{
+	width:200px;
+	padding-left:15px;
+	padding-right:15px;
+}
+
 .tdleft {
 	text-align:left;
 }
@@ -41,7 +48,7 @@
 .movieinsert4{
 	border:1px solid white;
 	margin:15px;
-	width:1500px;
+	width:1600px;
 	 height: 600px;
      overflow-y: auto; 
      border-radius:6px;
@@ -55,7 +62,7 @@
 	 height:600px;
      overflow-y: auto; 
      border-radius:6px;
-     border-radius:6px;
+     
 }
 .itembox{
 	border:1px solid white;
@@ -124,12 +131,18 @@
 .bestbox{
 	border:1px solid white;
 	margin:15px;
-	width:270px;
-	 height: 500px;
-     overflow-y: auto; 
-     border-radius:6px;
-          display: flex;
-     justify-content: center;
+	width:1000px;
+	height: 400px;
+	position: absolute;
+	top:630px;
+    left: 330px;
+    padding: 10px;
+    border-radius:6px;
+    overflow-y: auto; 
+    border-radius:6px;
+    display: flex;
+    justify-content: center;
+    margin-bottom:150px;
     
       
 }
@@ -141,7 +154,7 @@
     position: absolute;
     left: 50%;
     transform: translate(-50%, -50%);
-    top: 550px;
+    top: 700px;
     visibility: hidden; /* 요소를 숨기지만 공간은 유지 */
    	opacity: 0;
    	
