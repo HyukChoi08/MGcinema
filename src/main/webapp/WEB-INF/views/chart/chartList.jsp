@@ -122,7 +122,7 @@ color: #BE2E22;
 
 <body>
  <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
-<div class="vertical-container4"> 
+<div class="vertical-container4">
 	<div class="vertical-container1">
 		<div><h1>무비차트</h1></div>
 		<div class="button-container">
@@ -146,7 +146,7 @@ color: #BE2E22;
 	    <div class="button-container"><button class="button-container button" id="plus">더보기</button></div>
 	</div>
 </div>
-<%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
+<!-- 푸터 포함 -->
 </body>
 
 <script src="https://code.jquery.com/jquery-latest.js"></script>
