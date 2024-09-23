@@ -10,6 +10,13 @@
 <%-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/detail_css/chartdetail.css"> --%>
 </head>
 <style>
+.bottit {
+    display: flex;
+    text-align:left;
+}
+#dirimg, #castimg {
+	font-size:20px;
+}
 </style>
 <body>
 <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
@@ -31,19 +38,21 @@
 		</div>
 	</div>
 	<div class="mid">
-		<div id="gobtn"><span class="Listonbtn">상세정보</span></div>
-		<div id="gobtn"><span class="nowbtn">감독/출현</span></div>
-		<div id="gobtn"><span class="cutbtn">스틸컷</span></div>
-		<div id="gobtn"><span class="revbtn">평점/리뷰</span></div>
-		<div id="gobtn"><span class="thebtn">상영시간</span></div>
+		<ul class="midlist">
+			<li><span class="Listonbtn">상세정보</span></li>
+			<li><span class="nowbtn">감독/출현</span></li>
+			<li><span class="cutbtn">스틸컷</span></li>
+			<li><span class="revbtn">평점/리뷰</span></li>
+			<li><span class="thebtn">상영시간</span></li>
+		</ul>
 	</div>
 	<div class="bot">
 	    <div class="director-section">
-	        <div>감독</div>
+	        <div class="bottit">감독</div>
 	        <div id="dirimg"></div>
 	    </div>
 	    <div class="cast-section">
-	        <div>배우</div>
+	        <div class="bottit">배우</div>
 	        <div id="castimg"></div>
 	    </div>
 	</div>
@@ -130,7 +139,8 @@ $(document).ready(function(){
 						castcell.empty();
 						$.each(data, function(index, actor) {
 							let imagePath = actor.image_path || '/default_image_path.jpg';
-							castcell.append('<div><img src="' + imagePath + '" class="actorimg" alt="배우 이미지">' + actor.actor + '</div>');
+							castcell.append('<div><img src="' + imagePath + '" class="actorimg" alt="배우 이미지"></div>');
+							castcell.append(actor.actor);
 						});
 					}
 				});
