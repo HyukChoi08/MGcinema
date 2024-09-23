@@ -29,15 +29,17 @@
 		</div>
 	</div>
 	<div class="mid">
-		<div id="gobtn"><span class="Listonbtn">상세정보</span></div>
-		<div id="gobtn"><span class="actbtn">감독/출현</span></div>
-		<div id="gobtn"><span class="nowbtn">스틸컷</span></div>
-		<div id="gobtn"><span class="revbtn">평점/리뷰</span></div>
-		<div id="gobtn"><span class="thebtn">상영시간</span></div>
+		<ul class="midlist">
+			<li><span class="Listonbtn">상세정보</span></li>
+			<li><span class="actbtn">감독/출현</span></li>
+			<li><span class="nowbtn">스틸컷</span></li>
+			<li><span class="revbtn">평점/리뷰</span></li>
+			<li><span class="thebtn">상영시간</span></li>
+		</ul>
 	</div>
 	<div class="bot">
 	    <div class="cut-section">
-	        <div>스틸컷</div>
+	        <div class="bottit">스틸컷</div>
 	        <div id="cutimg"></div>
 	    </div>
 	</div>

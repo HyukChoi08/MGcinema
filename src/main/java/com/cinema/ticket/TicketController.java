@@ -27,7 +27,9 @@ public class TicketController {
 	@GetMapping("/ticket")
 	public String ticket(HttpServletRequest req, Model model) {
 		String movieid = req.getParameter("id");
+		String moviename = req.getParameter("mname");
 		model.addAttribute("movieid",movieid);
+		model.addAttribute("reqmname", moviename);
 		return "ticketweb/ticket";
 	}
 	

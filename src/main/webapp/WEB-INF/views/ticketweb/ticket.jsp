@@ -92,6 +92,7 @@ let getdate = "${date}".trim();
 let getroom = "${room}".trim();
 let gettime = "${time}".trim();
 let callmovie = "${movieid}".trim();
+let reqmname = "${reqmname}".trim();
 let allseat = "";
 
 $(document).ready(function() {
@@ -678,6 +679,33 @@ $(document).ready(function() {
         });
     }
     loadChartData();
+    
+    function loadChartDataB() {
+        if (!reqmname) {
+            return;
+        }
+
+        $.ajax({
+            url: "/movies",
+            type: "GET",
+            success: function(data) {
+                let movieList = $("#movieList ul");
+                movieList.empty();
+                $.each(data, function(index, movie) {
+                    movieList.append('<li data-time="' + movie.runningtime + '" data-name="' + movie.mname + '" data-id="' + movie.id + '" data-age="' + movie.age + '">' +
+                        '<span class="age' + movie.age + '">' + movie.age + '</span>' + movie.mname + '</li>');
+                });
+
+                $("#movieList li").each(function() {
+                    if ($(this).data("name") == reqmname) {
+                        $(this).click();
+                        scrollToSelected("#movieList li");
+                    }
+                });
+            }
+        });
+    }
+    loadChartDataB();
     
     function scrollToSelected(selector) {
         $(selector).each(function() {
