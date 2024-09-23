@@ -34,7 +34,9 @@ String customer_id = (String) session.getAttribute("uid");
 	<div class="mainscreen">
 		<!-- 프로필 섹션 -->
 		<div class="profile-section">
-			<img id="profileImage" src="<%= customer.getProfileimg() != null ? customer.getProfileimg() : "/mypage_image/profile.png" %>" alt="프로필이미지" width="80" height="80" />
+			<img id="profileImage"
+				src="<%=customer.getProfileimg() != null ? customer.getProfileimg() : "/mypage_image/profile.png"%>"
+				alt="프로필이미지" width="80" height="80" />
 			<!-- <img src="/mypage_image/OO.png" alt="프로필이미지" width="80" height="80" /> -->
 			<div id="result"></div>
 			<div class="profile-info">
@@ -151,21 +153,29 @@ String customer_id = (String) session.getAttribute("uid");
 
 					</div>
 				</div>
-				<div >
-				<h2>Top 3 Movies</h2>
-				<div class=divMovie>
-					<c:forEach var="movie" items="${topMovies}">
-						<div>
-							<h3>${movie.mname}</h3> 
-							<div><img src="${movie.imagepath}" alt="${movie.mname}" id="gochart" data-id="${movie.id}" style="width: 200px; height: 300px;"></div>
-							<p>예매율: ${movie.reservation} %</p>
-						</div>
-					</c:forEach>
-				</div>
+				<div>
+					<h2>Top 3 Movies</h2>
+					<div class="divMovie hover01">
+						<c:forEach var="movie" items="${topMovies}">
+							<div>
+								<h3>${movie.mname}</h3>
+								<div>
+									<figure style="margin: 0; display: inline-block;">
+										<!-- 기본 여백 제거 및 인라인 블록 설정 -->
+										<img src="${movie.imagepath}" alt="${movie.mname}"
+											id="gochart" data-id="${movie.id}"
+											style="width: 200px; height: 300px;">
+									</figure>
+								</div>
+								<p>예매율: ${movie.reservation} %</p>
+							</div>
+						</c:forEach>
+					</div>
 				</div>
 				<!-- 문의 내역 섹션 -->
 				<div class="div2">
 
+				<!-- 이걸 살려야 해 말아야 해,.  	
 					<div class="div3" style="border: 0px;">
 						<div class="link">
 							<ul>
@@ -182,25 +192,49 @@ String customer_id = (String) session.getAttribute("uid");
 
 							</ul>
 						</div>
+					</div> -->
+
+					<div class="div3">
+						<a href="/inquirywait" style="text-decoration: none;">
+							<div class="hover01" style="cursor: pointer;">
+								<figure>
+									<img src="/mypage_image/inquiryicon.png" alt="아이콘"
+										style="width: 150px; height: 170px;">
+								</figure>
+								<!-- 여기에 텍스트나 다른 요소도 추가 가능 -->
+							</div>
+						</a>
+						<h3>질문 하기</h3>
 
 					</div>
 					<div class="div3">
-						<h3>
-							1:1 문의 작성하기 <br>
-						</h3>
-
+						<a href="/payment" style="text-decoration: none;">
+							<div class="hover01" style="cursor: pointer;">
+								<figure>
+									<img src="/mypage_image/mystore.png" alt="아이콘"
+										style="width: 150px; height: 170px;">
+								</figure>
+								<!-- 여기에 텍스트나 다른 요소도 추가 가능 -->
+							</div>
+						</a>
+						<h3>스토어 결제이력</h3>
 					</div>
 					<div class="div3">
-						<h3>최근 스토어 결제이력</h3>
+						<a href="/cinema" style="text-decoration: none;">
+							<div class="hover01" style="cursor: pointer;">
+								<figure>
+									<img src="/mypage_image/movieicon.jpg" alt="아이콘"
+										style="width: 150px; height: 170px;">
+								</figure>
+								<!-- 여기에 텍스트나 다른 요소도 추가 가능 -->
+							</div>
+						</a>
+						<h3>극장 정보</h3>
 					</div>
 				</div>
 
-				<!-- My CGV Home 섹션 -->
-				<button class="button" onclick="location.href='/cinema'">CGV
-					영화 예매 바로가기</button>
-				<br> <br> <br>
-
-				<!-- 푸터 섹션 -->
+				
+				
 				<div class="footer-section">
 					<p>보고싶은 영화가 있나요?</p>
 					<a href="/chart" class="button">상영중인 영화 바로가기</a>
@@ -208,18 +242,17 @@ String customer_id = (String) session.getAttribute("uid");
 			</div>
 		</div>
 	</div>
-	</div>
+	
+		<!-- 푸터 포함 -->
 	<%@ include file="/WEB-INF/views/footer/footer.jsp"%>
 	<!-- 푸터 포함 -->
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
-	
-	$(document).on("click","#gochart", function(){
+	$(document).on("click", "#gochart", function() {
 		let movieid = $(this).data("id");
-		window.location.href = "chartList1?id="+movieid;
+		window.location.href = "chartList1?id=" + movieid;
 	})
-
 
 	document.addEventListener('DOMContentLoaded', function() {
 		const modal = document.getElementById('nicknameModal');
@@ -266,9 +299,9 @@ String customer_id = (String) session.getAttribute("uid");
 			} else {
 				alert('새 닉네임을 입력하세요.');
 			}
-			
+
 		});
-		
+
 	});
 
 	/* 	$(document).ready(function() {

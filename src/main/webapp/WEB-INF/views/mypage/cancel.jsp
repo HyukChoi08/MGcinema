@@ -88,17 +88,17 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 						<tr>
 							<td>비밀번호</td>
 							<td><input type="password" name="passwd" id="passwd"
-								placeholder="탈퇴할거야?" required></td>
+								placeholder="비밀 번호를 입력해주세요" required></td>
 						</tr>
 						<tr>
 							<td>비밀번호 확인</td>
 							<td><input type="password" name="passwd1" id="passwd1"
-								placeholder="진짜루?ㅠ" required></td>
+								placeholder="비밀번호를 입력해주세요" required></td>
 						</tr>
 						<tr>
 							<td>탈퇴 사유</td>
-							<td><textarea  name="message" id="message" rows="6" required
-									placeholder="탈퇴 사유를 기입해주세요."></textarea></td>
+							<td><textarea class=textareacancel name="message" id="message" rows="6" required
+									placeholder="탈퇴 사유를 기입해주세요. 탈퇴시 회원 정보는 초기화 됩니다"></textarea></td>
 						</tr>
 					</table>
 					<input type="submit" value="탈퇴하기">

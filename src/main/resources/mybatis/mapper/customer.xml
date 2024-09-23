@@ -109,9 +109,9 @@
 		DELETE FROM moviepay WHERE id = #{id}
 	</delete>
 
-	<!-- 예매 정보를 moviedelete 테이블로 이동 -->
+	<!-- 예매 정보를 moviepaydelete 테이블로 이동 -->
 	<insert id="moveToMovieDelete" parameterType="int">
-		INSERT INTO moviedelete (id, random_id, customer_id, movie_name, room_name,
+		INSERT INTO moviepaydelete (id, random_id, customer_id, movie_name, room_name,
 		totalprice, runningtime, seat, totalpeople, begintime, endtime,
 		datetime, created)
 		SELECT id, random_id, customer_id, movie_name, room_name, totalprice,
@@ -124,7 +124,7 @@
 	<select id="getCanceledMovieList" parameterType="string"
 		resultType="com.cinema.mypage.MovieGetDTO">
 		SELECT *
-		FROM moviedelete
+		FROM moviepaydelete
 		WHERE customer_id = #{customer_id}
 	</select>
 
@@ -163,7 +163,7 @@
 	<!-- 취소된 예매 내역을 페이징 및 최신순 정렬로 가져오기 -->
 	<select id="getCanceledMovieListWithPaging" parameterType="map"
 		resultType="com.cinema.mypage.MovieGetDTO">
-		SELECT * FROM moviedelete
+		SELECT * FROM moviepaydelete
 		WHERE customer_id = #{customer_id}
 		ORDER BY datetime DESC  <!-- 최신순 정렬 -->
 		LIMIT #{limit} OFFSET #{offset}  <!-- 페이징 처리 -->
@@ -173,7 +173,7 @@
 	<select id="getTotalCanceledReservationCount"
 		parameterType="string" resultType="int">
 		SELECT COUNT(*)
-		FROM moviedelete
+		FROM moviepaydelete
 		WHERE customer_id = #{customer_id}
 	</select>
 

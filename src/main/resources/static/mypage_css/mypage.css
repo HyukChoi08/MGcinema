@@ -176,6 +176,7 @@ form input[type="submit"]:hover {
 }
 
 .divMovie {
+	cursor: pointer;
 	display: flex; /* 이미지와 텍스트를 옆으로 배치 */
 	text-align: center;
 	border-bottom: 2px solid #808080; /* 아래쪽에 테두리 추가 */
@@ -269,10 +270,12 @@ form input[type="submit"]:hover {
 	border-radius: 5px; /* 모서리 둥글게 */
 	height: 50px;
 	width: 200px;
+	transition: font-size 0.1s ease-in-out;
 }
 
 .button:hover {
-	background-color: #c3c3c3; /* 버튼에 마우스 올렸을 때 색상 */
+	background-color: black; /* 버튼에 마우스 올렸을 때 색상 */
+	font-size: 18px;
 }
 
 /* 메인 컨테이너 스타일 */
@@ -376,7 +379,7 @@ form input[type="submit"]:hover {
 }
 
 .div3 {
-	width: 30%;
+	width:30%;
 	margin: 5px;
 	padding: 10px;
 	border: 1px solid #ddd; /* 테두리 색상 */
@@ -447,8 +450,26 @@ form input[type="submit"]:hover {
 	border-width: 2px;
 	border-style: outset;
 	border-color: buttonborder;
-	border-image: initial;
-    
+	border-image: initial;  
+}
+.textareacancel {
+	height: 150px; /* 텍스트 영역 높이 지정 */
+	resize: none; /* 텍스트 영역 크기 조절 비활성화 */
+	width: 500px;
+	box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); 
+	transition: border-color 0.3s ease; /* 경계선 색상 변경 시 애니메이션 추가 */
+	border-radius: 5px;
+	font-size: 16px;
+	margin: 20px;
+	background-color: black;
+	color:white;
+	border: 1px solid transparent; 
+	transition: background-color 0.3s;
+	transition: border-color 0.3s ease;
+	border-width: 2px;
+	border-style: outset;
+	border-color: buttonborder;
+	border-image: initial;  
 }
 .noline{ /*밑줄 지우기*/
 	border-bottom: 1px solid black;
@@ -603,4 +624,17 @@ form input[type="submit"]:hover {
 
 #saveNicknameBtn:hover {
 	background-color: #fa0107; /* 호버 시 배경색 변경 (빨간색) */
+}
+
+/*호버시 이미지 튀어나오는 애니메이션 추가항목*/
+.hover01 figure img {
+    -webkit-transform: scale(1);  /* 구형 브라우저에서 사용되는 웹킷 엔진을 위한 초기 크기 설정 (1배) */
+    transform: scale(1);  /* 이미지의 기본 크기를 1배로 설정 */
+    -webkit-transition: .1s ease-in-out;  /* 웹킷 엔진에서 0.5초 동안의 애니메이션을 부드럽게 적용 */
+    transition: .2s ease-in-out;  /* 0.5초 동안 부드러운 전환 효과를 설정 (ease-in-out은 천천히 시작하고 끝나는 효과) */
+}
+
+.hover01 figure:hover img {
+    -webkit-transform: scale(1.2);  /* 마우스를 올렸을 때 웹킷 엔진에서 이미지를 1.3배 확대 */
+    transform: scale(1.2);  /* 마우스를 올렸을 때 이미지를 1.3배 확대 */
 }
