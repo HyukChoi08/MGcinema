@@ -211,12 +211,6 @@ public class ServiceController {
         return "service/Newsdetail";
     }
 
-    @GetMapping("/eaq")
-    public String showEAQPage(Model model) {
-        List<EAQDTO> eaqList = List.of(
-            new EAQDTO(1L, "EAQ 제목 1", "EAQ 내용 1", 100)
-        );
-        model.addAttribute("eaqList", eaqList);
-        return "service/EAQ";
-    }
+   
+    
 }
