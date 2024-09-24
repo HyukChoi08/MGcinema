@@ -1,13 +1,6 @@
 @charset "UTF-8";
 
-body {
-	/* 오른쪽이 짤린다*/
 
-/* 
-        display: flex;
-    align-items: center; 슬라이드 중앙 정렬 */
-
-}
 /* 슬라이더를 중앙에 배치하고, 컨테이너 너비 조정 */
 .promo-container {
     margin: 0 auto; /* 가운데 정렬 */
