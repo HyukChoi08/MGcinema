@@ -480,13 +480,7 @@ margin-bottom:30px;
     margin: auto; /* 위쪽 마진 20px 추가, 좌우 자동 마진으로 중앙 정렬, 아래 여백 10px 유지 */
     padding-top: 5px; /* 위쪽 안쪽 여백 추가 */
 }
-#store-link {
-    text-decoration: none; /* 링크의 밑줄 제거 */
-    color: inherit; /* 부모 요소의 색상 상속 */
-}
-#store-link:hover {
-    text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
-}
+
 .category_content a:hover {
     text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
 }
@@ -521,11 +515,11 @@ margin-bottom:30px;
 <h1 id="storehead">스토어</h1>
 <div id="container">
   	<div class="contegory_contents_wrap">
-    	   <div class="category_wrap">
-            <a href="/store" id="store-link">베스트상품</a>                 
+    	   <div class="category_wrap">                
              <div class="separator"></div> <!-- 선을 스토어 아래에 위치 -->                
             </div>
-        <ul class="category_content"> <!-- ul로 변경 -->            	
+        <ul class="category_content"> <!-- ul로 변경 -->
+        	<li><a href="/store" class="no-underline">베스트상품</a></li>            	
         	<li><a href="/storeall" class="no-underline">전체상품</a></li>
           	<li><a href="/package" class="no-underline">패키지</a></li>
             <li><a href="/giftcard" class="no-underline">기프트카드</a></li>

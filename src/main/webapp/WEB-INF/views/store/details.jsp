@@ -330,13 +330,7 @@ td {
     position: relative; /* 상대적 위치 설정 */
     top: 16px; 
 }
-#store-link {
-    text-decoration: none; /* 링크의 밑줄 제거 */
-    color: inherit; /* 부모 요소의 색상 상속 */
-}
-#store-link:hover {
-    text-decoration: underline; /* 마우스 오버 시 밑줄 추가 */
-}
+
 .separator2 {
     height: 2px; /* 선의 두께 */
     background-color: grey; /* 선의 색상 (검은색) */
@@ -384,13 +378,13 @@ td {
  <h1 id="storehead">스토어</h1>
  <div id="container">
     <div id="contents">
-           <div class="category_wrap">
-            <a href="/store" id="store-link">베스트상품</a>            
+           <div class="category_wrap">      
             <input type="hidden" id="userid" value="${uid}">    
                 <div class="separator"></div> <!-- 선을 스토어 아래에 위치 -->
             </div>
         <div class="contegory_contents_wrap">
             <ul class="category_content">
+            	<li><a href="/store" class="no-underline">베스트상품</a></li>
            	    <li><a href="/storeall" class="no-underline">전체상품</a></li>
                 <li><a href="/package" class="no-underline">패키지</a></li>
                 <li><a href="/giftcard" class="no-underline">기프트카드</a></li>
