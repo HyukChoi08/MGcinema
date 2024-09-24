@@ -11,9 +11,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.cinema.mypage.CustomerDTO;
+import com.cinema.mypage.MypageDAO;
+
+import jakarta.servlet.http.HttpSession;
 @Controller
 public class ServiceController {
-
+	@Autowired
+	private MypageDAO mdao;
     private static final String String = null;
 	@Autowired
     private FAQDAO faqDAO;
@@ -21,18 +27,24 @@ public class ServiceController {
     private NewsDAO newsDAO;
 
     @GetMapping("/serviceHome")
-    public String getServiceHome(@RequestParam(value = "id", defaultValue = "1") int id, Model model) {
+    public String getServiceHome(@RequestParam(value = "id", defaultValue = "1") int id, Model model, HttpSession session) {
         ServiceHomeDTO serviceHome = new ServiceHomeDTO();
-        
-        
-        
+
         // 뉴스 목록 가져오기
-        List<NewsDTO> newsList = newsDAO.getAllNews(10, 0); // 예시로 5개 뉴스 가져오기
+        List<NewsDTO> newsList = newsDAO.getAllNews(10, 0); // 예시로 10개 뉴스 가져오기
         model.addAttribute("newsList", newsList);
+
+        // 고객 정보 세션에 저장
+        String uid = (String) session.getAttribute("uid"); // uid를 세션에서 가져옴
+        if (uid != null) {
+            CustomerDTO cusDTO = mdao.getCustomerInfoByUid(uid);
+            session.setAttribute("cusDTO", cusDTO);
+        }
 
         model.addAttribute("serviceHome", serviceHome);
         return "service/ServiceHome";
     }
+
    
     @GetMapping("/faq")
     public String showFAQPage(
