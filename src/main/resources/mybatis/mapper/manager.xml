@@ -76,4 +76,10 @@
 <update id="bestitems">
 	update item set best_id=#{param1} where id=#{param2}
 </update>
+<select id="msaleslist" resultType="com.cinema.management.SalesDTO">
+	select * from moviepay
+</select>
+<select id="ssaleslist" resultType="com.cinema.management.SalesDTO">
+	select * from storepay
+</select>
 </mapper>
