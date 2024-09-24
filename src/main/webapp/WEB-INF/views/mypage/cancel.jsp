@@ -102,6 +102,7 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 									탈퇴시 회원 정보는 초기화 됩니다."></textarea></td>
 						</tr>
 					</table>
+					<br>
 					<input class="inputbtn"type="submit" value="탈퇴하기">
 				</form>
 

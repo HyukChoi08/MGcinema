@@ -153,6 +153,53 @@ String customer_id = (String) session.getAttribute("uid");
 
 					</div>
 				</div>
+								<div class="div2">
+					<div class="div4">
+						<a href="/cinema" style="text-decoration: none;">
+							<div class="hover01" style="cursor: pointer;">
+								<figure>
+									<img src="/mypage_image/movieicon.jpg" alt="아이콘" class="custom-img"
+										style="width: 120px; height: 100px;">
+										<span style="font-size:25px">극장 정보</span>
+								</figure>
+								
+								<!-- 여기에 텍스트나 다른 요소도 추가 가능 -->
+							</div>
+						</a>
+						
+					</div>
+					<div class="div4">
+						<a href="/ticket" style="text-decoration: none;">
+							<div class="hover01" style="cursor: pointer;">
+								<figure>
+									<img src="/mypage_image/myticket.png" alt="아이콘"class="custom-img"
+										style="width: 120px; height: 100px;">
+											<span style="font-size:25px">영화 예매 </span>
+								</figure>
+								<!-- 여기에 텍스트나 다른 요소도 추가 가능 -->
+							</div>
+						</a>
+						
+					</div>
+						
+					<!-- <div class="div3" style="border: 0px;">
+						<div class="link">
+							<ul>
+								<li><a href=/chart>무비차트 보러가기</a></li>
+								<br>
+								<li><a href=/ageinfo>상영영화 예매율 순위</a></li>
+								<br>
+								<li><a href=/ticket>상영중인 영화</a></li>
+								<br>
+								<li><a href=/serviceHome>고객센터 바로가기</a></li>
+								<br>
+								<li><a href=/store>스토어 바로가기</a></li>
+								<br>
+
+							</ul>
+						</div>
+					</div>  -->
+				</div>
 				<div>
 					<h2>Top 3 Movies</h2>
 					<div class="divMovie hover01">
@@ -172,30 +219,14 @@ String customer_id = (String) session.getAttribute("uid");
 						</c:forEach>
 					</div>
 				</div>
-				<!-- 문의 내역 섹션 -->
+				<!-- icon 메뉴 -->
+
 				<div class="div2">
 
-				<!-- 이걸 살려야 해 말아야 해,.  	
-					<div class="div3" style="border: 0px;">
-						<div class="link">
-							<ul>
-								<li><a href=/chart>무비차트 보러가기</a></li>
-								<br>
-								<li><a href=/ageinfo>상영영화 예매율 순위</a></li>
-								<br>
-								<li><a href=/ticket>상영중인 영화</a></li>
-								<br>
-								<li><a href=/serviceHome>고객센터 바로가기</a></li>
-								<br>
-								<li><a href=/store>스토어 바로가기</a></li>
-								<br>
-
-							</ul>
-						</div>
-					</div> -->
+					
 
 					<div class="div3">
-						<a href="/inquirywait" style="text-decoration: none;">
+						<a href="/inquirywrite" style="text-decoration: none;">
 							<div class="hover01" style="cursor: pointer;">
 								<figure>
 									<img src="/mypage_image/inquiryicon.png" alt="아이콘"
@@ -233,32 +264,16 @@ String customer_id = (String) session.getAttribute("uid");
 					</div>
 					<br>
 				</div>
-					<div class="div3">
-						<a href="/cinema" style="text-decoration: none;">
-							<div class="hover01" style="cursor: pointer;">
-								<figure>
-									<img src="/mypage_image/movieicon.jpg" alt="아이콘"
-										style="width: 150px; height: 170px;">
-								</figure>
-								<!-- 여기에 텍스트나 다른 요소도 추가 가능 -->
-							</div>
-						</a>
-						<h3>극장 정보</h3>
-					</div>
 				
-				
-				<div class="footer-section">
-					<p>보고싶은 영화가 있나요?</p>
-					<a href="/chart" class="button">상영중인 영화 바로가기</a>
-				</div>
 			</div>
 		</div>
 	</div>
-	
-		<!-- 푸터 포함 -->
+
+	<!-- 푸터 포함 -->
 	<%@ include file="/WEB-INF/views/footer/footer.jsp"%>
 	<!-- 푸터 포함 -->
 </body>
+
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
 	$(document).on("click", "#gochart", function() {
