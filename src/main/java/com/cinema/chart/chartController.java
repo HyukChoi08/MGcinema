@@ -204,5 +204,16 @@ public String updaterenewal (HttpServletRequest req, Model model) {
 	cdao.updaterenewal();
 return "ok";	
 }
+@PostMapping("/reviewCheck")
+@ResponseBody
+public String reviewCheck (HttpServletRequest req, Model model) {
+	int id =Integer.parseInt(req.getParameter("id"));
+	String uid = req.getParameter("uid");
+	String moviename = req.getParameter("moviename");
+	
+	
+	int n= cpcdao.buyTicketCheck(id, uid, moviename);
+	return ""+n;
+}
 
 }

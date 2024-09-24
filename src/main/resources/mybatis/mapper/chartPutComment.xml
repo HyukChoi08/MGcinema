@@ -31,4 +31,9 @@
 		FROM review
 		WHERE moviechart = ${param1}
 	</select>
+	
+	<select id="buyTicketCheck" resultType="_int">
+	select count(*) from moviepay 
+	where c_id =#{param1} and customer_id=#{param2} and movie_name = #{param3};
+	</select>
 </mapper>

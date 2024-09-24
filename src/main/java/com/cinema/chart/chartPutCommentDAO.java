@@ -16,5 +16,8 @@ chartPutCommentDTO selectMovieReview(String userId, int movieId);
 
 double selectMovieAverageRate(int movieId);
 
+ int buyTicketCheck(int c_id, String customer_id,String movie_name);
+
+
 
 }

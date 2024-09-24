@@ -17,25 +17,22 @@ body {
     color: white;
 }
 .vertical-container1 {
+    flex-grow: 1; /* 남은 공간을 모두 차지하도록 설정 */
     display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 1000px;
-    height: 100vh; /* 또는 필요한 높이 설정 */
-    padding: 20px; /* 필요에 따라 패딩 추가 */
-    box-sizing: border-box;
-    margin-top:0px;
-    margin-bottom:50px;
+    flex-direction: column; /* 세로 방향으로 배치 */
+    align-items: center; /* 가운데 정렬 */
+    justify-content: flex-start; /* 상단 정렬 */
+    width: 1000px; /* 전체 너비 */
     
 }
 .vertical-container4 {
-    display: flex;
-    flex-direction: column;
+    display: flex; /* 플렉스 컨테이너로 설정 */
+    flex-direction: column; /* 세로 방향으로 배치 */
     align-items: center; /* 가운데 정렬 */
-    justify-content: center; /* 수직 중앙 정렬 */
-    height: 170vh; /* 전체 뷰포트 높이 */
-    width: 100%; /* 전체 너비 */
-    padding: 20px; /* 적절한 여백 추가 */
+    justify-content: flex-start; /* 상단 정렬 */
+    min-height: 100vh; /* 최소 높이를 뷰포트 높이로 설정 */
+    padding: 20px; /* 패딩 추가 */
+    box-sizing: border-box; /* 패딩 포함 전체 높이 계산 */
 }
 
 .vertical-container {
@@ -45,6 +42,8 @@ body {
     text-align: center;
     width: 800px;
     max-width: 1000px; /* 필요에 따라 최대 너비 설정 */
+
+
 }
 
 .flex-container {
@@ -53,6 +52,8 @@ body {
     justify-content: center;
     align-items: flex-start;
     width: 800px;
+
+    
 }
 .flex-container3 {
     display: flex;
@@ -214,9 +215,8 @@ color:black;
 }
 .left-aligned {
     text-align: left;
-    margin: 0; /* 여백 제거 */
-    padding: 0; /* 패딩 제거 */
-    width: 73%; /* 부모 요소의 너비를 가득 채우게 설정 */
+	width: 480px;
+
 }
 .text-size {
     font-size: 24px; /* 원하는 글씨 크기로 설정 */
@@ -254,16 +254,16 @@ color:black;
 <body>
     <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
     <div class="vertical-container4">
-<%--     <c:forEach items="${chartList3}" var="chartList3"> --%>
+
         <div class="vertical-container1">
             <div class="vertical-container">
                 <div class="flex-container">
                     <img src="${chartList2}" height="400px" class="movieImage">
                     <div class="vertical-container">
-                        <div class="title"><h1 id="getmname" data-mname="${chartList3.mname}">${chartList3.mname}</h1></div>
-                       <div class="left-aligned" id="reservation">예매율 ${chartList3.reservation} %</div>
-                        <div>
-                            <dl style="text-align: left;" class="textPosition">
+                        <div class="title"><h1 id="getmname" data-mname="${chartList3.mname}">${chartList3.mname}</h1></div><input type="hidden" id="mnameSave" value="${chartList3.mname}">
+                        <div class="left-aligned">
+                            <dl  class="textPosition">
+                            	<dt>예매율:&nbsp;${chartList3.reservation} %</dt>
                                 <dt>감독:&nbsp;${chartList3.director}</dt>
                                 <dt>배우 :&nbsp;${chartList3.cast}</dt>
                                 <dt>장르 :&nbsp;${chartList3.genre}/관람가:&nbsp;${chartList3.age}/상영시간:&nbsp;${chartList3.runningtime}</dt>
@@ -282,7 +282,7 @@ color:black;
                             <li id="apinfo"><a href="/chartdetail?id=${sessionScope.dataId}">감독/출연</a></li>
                             <li><a href="/chartcut?id=${sessionScope.dataId}">스틸컷</a></li>
                             <li><a href="#commentList">평점/리뷰</a></li>
-                            <li>상영시간</li>
+                            <li><a href="/cinema">상영시간</a></li>
                         </ul>
                     </div>
                     <br><br><br>
@@ -371,10 +371,25 @@ color:black;
                 let moviechart = $('#moviechart').val();
                 let content = $('#reviewcomment').val();
                 let uid = '${sessionScope.uid}';
+                let id = '${sessionScope.id}';
                 let nick = '${sessionScope.Nick}';
                 let rate = $("[name='rate']").val();
                 console.log("uid",uid);
                $('#idname').val(uid);
+               
+               $.ajax({
+            	   url:'/reviewCheck',
+            	   type:'post',
+            	   data:{id:id,uid:uid,moviename:$('#mnameSave').val()},
+               	   success: function(data){
+               		   console.log(data)
+               		   if(data==0){
+               			   alert('영화를 보신 후 리뷰등록이 가능합니다');
+               			   return false;
+               		   } 
+               	   }
+               });
+               
                 if (uid==null||uid==='') {
                     alert('로그인이 필요합니다');
                     $('#reviewcomment').val('');
