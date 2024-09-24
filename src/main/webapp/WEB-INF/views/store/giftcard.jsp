@@ -339,10 +339,10 @@ img {
 	                                <a href="/details?id=${Store.id}" class="btn_category_product">
 	                                    <img src="${Store.image_path}" alt="${Store.item_name}"></a>
 	                                     <div class="icon-container">                                                                                                                                               
-	                                        <a href="/storepay" class="icon-item icon-right">
-	                                            <img src="/store_images/구매하기.png" alt="Right Icon" class="buyButton">
-	                                            <span class="hover-text">구매하기</span>                          
-	                                        </a>
+	                                       <div class="icon-item icon-right" data-product-id="${Store.id}">
+                                            <img src="/store_images/구매하기.png" alt="Right Icon" class="buyButton">
+                                            <span class="hover-text">구매하기</span>                          
+                                        </div>
 	                                    </div>
 	                                    <div class="product-info">
 	                                        <span class="product-name">${Store.item_name}</span><br>
@@ -419,66 +419,49 @@ $(document).ready(function() {
 })
 let selectedItems = []; // 전역 변수로 선언
 
+
 $('.buyButton').on('click', function(e) {
-	 
     e.preventDefault(); // 클릭 시 기본 동작 방지
-	
+
     let item_id = $(this).closest('.product').attr('id');
-    console.log('item_id:', item_id);
-    
-    let userid=$('#userid').val();
+    let userid = $('#userid').val();
     
     if (userid === '') {
-        
-        let  userConfirmed = confirm("로그인 페이지로 이동하시겠습니까?");
-                
-         if ( userConfirmed) {
-             // 로그인 페이지로 리다이렉트
-             window.location.href = '/login';
-             
-             return false;
-         }else{
-        	    return false;
-         } 
-        	
-     }
-        
+        let userConfirmed = confirm("로그인 페이지로 이동하시겠습니까?");
+        if (userConfirmed) {
+            window.location.href = '/login';
+            return false;
+        } else {
+            return false;
+        }
+    }
+
+    // AJAX 요청
     $.ajax({
         url: '/selectitem',
         type: 'POST',
         data: { item_id: item_id },
         dataType: 'json',
         success: function(data) {
-            console.log('Server Response:', data);
-
-            // 데이터가 배열일 경우 첫 번째 항목을 사용
             if (Array.isArray(data) && data.length > 0) {
-                let item = data[0]; // 첫 번째 항목 사용
-
-          
-                // itemData 객체 생성
+                let item = data[0];
                 let itemData = {
-                    item_id: item.id, // data 객체의 속성 이름이 정확해야 합니다.
+                    item_id: item.id,
                     name: item.name,
                     composition: item.composition,
                     image_path: item.image_path,
-                    discount_price:10000, 
-                    
-                    cart_price:0, 
-                    	
-                    total:10000, 
-                    	
+                    discount_price: 10000,
+                    cart_price: 0,
+                    total: 10000,
                     qty: 1
                 };
 
                 selectedItems.push(itemData);
 
-                // totalPrice를 설정할 때 cart_price가 0이면 discount_price를 사용
                 let totalPrice = itemData.discount_price;
-                let totalDiscount =itemData.cart_price;
-                let finalPrice = totalPrice - totalDiscount; // 최종 가격 계산
+                let totalDiscount = itemData.cart_price;
+                let finalPrice = totalPrice - totalDiscount;
 
-                // 폼 데이터 설정
                 $('#productData').val(JSON.stringify({
                     items: selectedItems,
                     totalPrice: totalPrice,
@@ -486,13 +469,18 @@ $('.buyButton').on('click', function(e) {
                     finalPrice: finalPrice
                 }));
 
-                console.log('Product data:', $('#productData').val()); // 디버깅: 전송할 데이터 출력
-
-                $('#payForm').submit(); // 폼 제출
+                // 기존 제출 이벤트 핸들러 해제 후 수동 제출
+                $('#payForm').off('submit').submit(); // 폼 제출
             }
-        }  
+        }
+     
     });
-})
+});
+
+// 폼 제출 이벤트 핸들러
+$('#payForm').on('submit', function(e) {
+    e.preventDefault(); // 기본 제출 방지
+});
 
 $(document).on('click', '.no-style-link', function() {
     
