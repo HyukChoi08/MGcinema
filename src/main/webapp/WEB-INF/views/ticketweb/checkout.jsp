@@ -61,6 +61,7 @@
     	      orderId: "${orderId}",
     	      orderName: "${moviename} ${Aticket} ${Yticket}",
     	      successUrl: window.location.origin + "/success?orderId=" + encodeURIComponent("${orderId}") +
+    	      			  "&cid=" + encodeURIComponent("${cid}") +
     	                  "&uid=" + encodeURIComponent("${uid}") +
     	                  "&moviename=" + encodeURIComponent("${moviename}") +
     	                  "&roomname=" + encodeURIComponent("${roomname}") +

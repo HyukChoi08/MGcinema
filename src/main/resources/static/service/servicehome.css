@@ -95,7 +95,7 @@ body {
 }
 
 .search_area button:hover {
-    background-color: black; /* 버튼 hover 색상 */
+    background-color: #d10813; /* 버튼 hover 색상 */
 }
 
 .c_check_warp {
@@ -130,7 +130,7 @@ body {
 }
 
 .button:hover, .btn_add:hover {
-    background-color: white; /* 버튼 hover 색상 */
+    background-color: #d10813; /* 버튼 hover 색상 */
 }
 
 .c_qu a, .service_area .list a, .notice_area a {

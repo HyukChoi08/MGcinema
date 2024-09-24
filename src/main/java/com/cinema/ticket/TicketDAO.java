@@ -36,7 +36,7 @@ public interface TicketDAO {
 
     customerDTO getCustomer(String uid);
     
-    void insertData(String a,String b,String c,String d, String e, String f, String g , String h, String i, String j, String k);
+    void insertData(String a,String b,String c,String d, String e, String f, String g , String h, String i, String j, String k, int l);
 
     @Select("SELECT COUNT(*) FROM moviepay WHERE random_id = #{randomId}")
     int checkIfExists(@Param("randomId") String randomId);

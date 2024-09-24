@@ -16,6 +16,7 @@
 <button id="answerbtn" class="mainbutton">1:1문의</button>
 <button id="newsbtn" class="mainbutton">공지</button>
 <button id="roombtn" class="mainbutton">상영관</button>
+<button id="salesbtn" class="mainbutton">매출현황</button>
 
 <div class="container" id="s">
 	<div class="movieinsert1">
@@ -196,6 +197,35 @@
 	</div>
 </div>
 </div>
+<div class="container" id="l">
+	<div class="sales">
+		<table id="mpaylist">
+			<caption><h3>영화매출</h3></caption>
+				<thead>
+					<tr><td>결제번호</td><td>사용자아이디</td><td>금액</td><td>일시</td></tr>
+				</thead>
+				<tbody></tbody>
+		</table>
+	</div>
+	<div class="sales">
+		<table id="spaylist">
+			<caption><h3>스토어매출</h3></caption>
+				<thead>
+					<tr><td>결제번호</td><td>사용자아이디</td><td>금액</td><td>일시</td></tr>
+				</thead>
+				<tbody></tbody>
+		</table>
+	</div>
+	<div class="salesbox">
+		<table id="totallist">
+				<tbody>
+				   <tr><td>영화매출합계</td><td id="mpay"></td></tr>
+				   <tr><td>스토어매출합계</td><td id="spay"></td></tr>
+				   <tr><td>총매출</td><td id="tpay"></td></tr>
+			    </tbody>
+		</table>
+	</div>
+</div>
 <%@ include file="/WEB-INF/views/footer/footer.jsp" %>
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
@@ -209,6 +239,8 @@ $(document)
 	showitem();
 	showinquiry();
 	shownews();
+	showspay();
+	showmpay();
 })
 .on('click','#sbtn',function(){
 	let rid = $('#roomnum').val().split(',');
@@ -613,33 +645,60 @@ $(document)
 })
 .on('click','#schebtn',function(){
 	$('#s').addClass('visible');
-	$('#m,#i,#a,#n,#r').removeClass('visible').addClass('container');
+	$('#m,#i,#a,#n,#r,#l').removeClass('visible').addClass('container');
 	clear();
 })
 .on('click','#moviebtn',function(){
 	$('#m').addClass('visible');
-	$('#s,#i,#a,#n,#r').removeClass('visible').addClass('container');
+	$('#s,#i,#a,#n,#r,#l').removeClass('visible').addClass('container');
 	clear();
 })
 .on('click','#itembtn',function(){
 	$('#i').addClass('visible');
-	$('#m,#s,#a,#n,#r').removeClass('visible').addClass('container');
+	$('#m,#s,#a,#n,#r,#l').removeClass('visible').addClass('container');
 	clear();
 })
 .on('click','#answerbtn',function(){
 	$('#a').addClass('visible');
-	$('#m,#i,#s,#n,#r').removeClass('visible').addClass('container');
+	$('#m,#i,#s,#n,#r,#l').removeClass('visible').addClass('container');
 	clear();
 })
 .on('click','#newsbtn',function(){
 	$('#n').addClass('visible');
-	$('#m,#i,#a,#s,#r').removeClass('visible').addClass('container');
+	$('#m,#i,#a,#s,#r,#l').removeClass('visible').addClass('container');
 	clear();
 })
 .on('click','#roombtn',function(){
 	$('#r').addClass('visible');
-	$('#m,#i,#a,#s,#n').removeClass('visible').addClass('container');
+	$('#m,#i,#a,#s,#n,#l').removeClass('visible').addClass('container');
 	clear();
+})
+.on('click','#salesbtn',function(){
+	$('#l').addClass('visible');
+	$('#m,#i,#a,#s,#n,#r').removeClass('visible').addClass('container');
+	clear();
+	
+	let mtotal = 0;
+	let stotal = 0;
+
+    $('#mpaylist tbody tr').each(function() {
+        let mvalue = parseInt($(this).find('td:eq(2)').text());
+        mtotal += mvalue;
+    });
+    let formTotal = mtotal.toLocaleString('en-US', { style: 'decimal', minimumFractionDigits: 0 });
+    $('#mpay').text(formTotal+"  원  ");
+    
+    $('#spaylist tbody tr').each(function() {
+        let svalue = parseInt($(this).find('td:eq(2)').text());
+        stotal += svalue;
+    });
+    let forsTotal = stotal.toLocaleString('en-US', { style: 'decimal', minimumFractionDigits: 0 });
+    $('#spay').text(forsTotal+"  원  ");
+    
+    let ftotal = mtotal+stotal;
+    let fortTotal = ftotal.toLocaleString('en-US', { style: 'decimal', minimumFractionDigits: 0 });
+    $('#tpay').text(fortTotal+"  원  ");
+     
 })
 function mlist(){
 	$.post('/mlist',{},function(data){
@@ -740,6 +799,26 @@ function shownews(){
 		for( let x of data){
 			let str ='<tr><td style=display:none>'+x['id']+'</td><td style=display:none>'+x['content']+'</td><td>'+x['selected']+'</td><td>'+x['title']+'</td><td>'+x['create']+'</td><td>'+x['hit']+'</td><td><input type=button id=newsdel value=삭제></td></tr>'
 			$('#newslist tbody').append(str);
+		}
+		
+	},'json')
+}
+function showmpay(){
+	$.post('/showmpay',{},function(data){
+		$('#mpaylist tbody').empty();
+		for( let x of data){
+			let str ='<tr><td>'+x['random_id']+'</td><td>'+x['customer_id']+'</td><td>'+x['totalprice']+'</td><td>'+x['created']+'</td></tr>'
+			$('#mpaylist tbody').append(str);
+		}
+		
+	},'json')
+}
+function showspay(){
+	$.post('/showspay',{},function(data){
+		$('#spaylist tbody').empty();
+		for( let x of data){
+			let str ='<tr><td>'+x['random_id']+'</td><td>'+x['customer_id']+'</td><td>'+x['totalprice']+'</td><td>'+x['created']+'</td></tr>'
+			$('#spaylist tbody').append(str);
 		}
 		
 	},'json')

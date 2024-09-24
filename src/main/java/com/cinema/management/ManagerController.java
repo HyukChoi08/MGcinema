@@ -368,4 +368,34 @@ public class ManagerController {
 	  }
 		return "manager/manager";
 	}
+	@PostMapping("/showmpay")
+	@ResponseBody
+	public String showmpay(HttpServletRequest req,Model model) {
+		ArrayList<SalesDTO> a = mmdao.msaleslist();
+		JSONArray Ty = new JSONArray();
+		for(SalesDTO Rdto : a) {
+			JSONObject T = new JSONObject();
+			T.put("random_id",Rdto.getRandom_id());
+			T.put("customer_id",Rdto.getCustomer_id());
+			T.put("totalprice",Rdto.getTotalprice());
+			T.put("created",Rdto.getCreated());
+			Ty.put(T);
+		}
+		return Ty.toString();
+	}
+	@PostMapping("/showspay")
+	@ResponseBody
+	public String showspay(HttpServletRequest req,Model model) {
+		ArrayList<SalesDTO> a = mmdao.ssaleslist();
+		JSONArray Ty = new JSONArray();
+		for(SalesDTO Rdto : a) {
+			JSONObject T = new JSONObject();
+			T.put("random_id",Rdto.getRandom_id());
+			T.put("customer_id",Rdto.getCustomer_id());
+			T.put("totalprice",Rdto.getTotalprice());
+			T.put("created",Rdto.getCreated());
+			Ty.put(T);
+		}
+		return Ty.toString();
+	}
 }

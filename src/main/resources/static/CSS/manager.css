@@ -48,7 +48,7 @@
 .movieinsert4{
 	border:1px solid white;
 	margin:15px;
-	width:1600px;
+	width:1500px;
 	 height: 600px;
      overflow-y: auto; 
      border-radius:6px;
@@ -100,6 +100,17 @@
           display: flex;
      justify-content: center;
 }
+.sales{
+	border:1px solid white;
+	margin:15px;
+	width:800px;
+	 height: 600px;
+     overflow-y: auto; 
+     border-radius:6px;
+          display: flex;
+     justify-content: center;
+}
+
 .roomupbox{
 	border:1px solid white;
 	margin:15px;
@@ -143,8 +154,22 @@
     display: flex;
     justify-content: center;
     margin-bottom:150px;
-    
-      
+}
+.salesbox{
+	border:1px solid white;
+	margin:15px;
+	width:1000px;
+	height: 200px;
+	position: absolute;
+	top:630px;
+    left: 330px;
+    padding: 10px;
+    border-radius:6px;
+    overflow-y: auto; 
+    border-radius:6px;
+    display: flex;
+    justify-content: center;
+    margin-bottom:150px;
 }
 .mselect{
 	width:180px
@@ -173,13 +198,18 @@ thead tr{
 td{
 	height:30px;
 }
+#totallist td{
+	width:150px;
+}
 #schedules tbody td,
 #movieinfo tbody td,
 #itemlist tbody td,
 #inquirylist tbody td,
 #newslist tbody td,
 #roomlist tbody td,
-#bestlist tbody td{
+#bestlist tbody td,
+#spaylist tbody td,
+#mpaylist tbody td{
 	height:40px;
 }
 
@@ -199,7 +229,9 @@ td{
 #inquirylist thead td,
 #newslist thead td,
 #roomlist thead td,
-#bestlist thead td{
+#bestlist thead td,
+#spaylist thead td,
+#mpaylist thead td{
 	border-bottom:2px solid white;
 	background-color:black;
 }

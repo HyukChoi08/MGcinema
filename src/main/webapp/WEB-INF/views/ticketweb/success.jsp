@@ -124,6 +124,7 @@ $(document).ready(function() {
     }
 
     function saveData() {
+    	let cid = "${param.cid}";
         let orderId = "${param.orderId}";
         let uid = "${param.uid}";
         let moviename = "${param.moviename}";
@@ -151,7 +152,8 @@ $(document).ready(function() {
                 begintime: begintime,
                 endtime: endtime,
                 datetime: datetime,
-                people: people
+                people: people,
+                cid: cid
             },
             dataType: 'text',
             success: function(data) {

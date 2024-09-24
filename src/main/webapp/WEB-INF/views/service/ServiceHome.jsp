@@ -21,7 +21,7 @@
                     <li class="on"><a href="serviceHome">고객센터 메인</a></li>
                     <li><a href="faq">자주찾는 질문</a></li>
                     <li><a href="news">공지/뉴스</a></li>
-                    <li><a href="inquiry">이메일 문의</a></li>
+                    <li><a href="inquiry">문의하기</a></li>
                 </ul>
             </div>
         </div>
@@ -42,7 +42,7 @@
                 </div>
                 <div class="c_box email_inquiry">
                     <strong class="c_tit">
-    					<span class="emoji-email"></span></span><br>이메일 문의</strong><br><br>
+    					<span class="emoji-email"></span></span><br>1:1 문의</strong><br><br>
                     <span class="c_txt">365일 언제든지 문의해주세요.</span>
                     <br><br><a href="inquirywrite" class="button">문의하기</a>
                 </div>

@@ -41,7 +41,7 @@
 			- 원활한 운영을 위해 지하 4층을 이용해 주세요.
 			</div>
 			■ 주소: 화성시 목성구 태양로 29, 지구빌딩 1F
-			<div id="addresslink"><a id="adda" href="https://map.naver.com/p?c=15.00,0,0,0,dh" target="_black">실시간 빠른길 찾기</a></div>
+			<div id="addresslink"><a id="adda" href="https://map.naver.com/p/directions/-/-/-/transit?c=15.00,0,0,0,dh" target="_black">실시간 빠른길 찾기</a></div>
 		</div>      
 	</div>
 		<div class="info">

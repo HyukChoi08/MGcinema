@@ -22,7 +22,7 @@
                         <li><a href="serviceHome">고객센터 메인</a></li>
                         <li class="hover-item"><a href="faq">자주찾는 질문</a></li>
                         <li><a href="news">공지/뉴스</a></li>
-                        <li><a href="inquiry">이메일 문의</a></li>
+                        <li><a href="inquiry">문의하기</a></li>
                     </ul>
                 </div>
             </div>
