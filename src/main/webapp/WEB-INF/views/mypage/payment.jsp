@@ -77,7 +77,7 @@
 				<!-- 스토어 결제 이력 섹션 -->
 				<div>
 					<h3>스토어 결제 내역</h3>
-					<div class="my-history">
+					<div class="my-historypayment">
 						<table>
 							<thead>
 								<tr>
@@ -141,7 +141,7 @@
 
 				<!-- 스토어 결제 취소내역 섹션 -->
 				<h3>스토어 결제 취소내역</h3>
-				<div class="ask-section">
+				<div class="my-historypayment">
 					<table>
 						<thead>
 							<tr>

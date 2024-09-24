@@ -150,19 +150,7 @@ form input:focus, form textarea:focus {
 	border-color: #e50914; /* 포커스 시 경계선 색상 변경 */
 	outline: none; /* 기본 아웃라인 제거 */
 }
-/* 
-form input[type="submit"] {
-	background-color: #3a3d3f;
-	color: white;
-	border: none;
-	cursor: pointer;
-	transition: background-color 0.3s ease; 배경색 변경 시 애니메이션 추가
-	padding: 10px; 패딩 설정
-}
 
-form input[type="submit"]:hover {
-	background-color: #808080; 마우스 올렸을 때 색상
-} */
 #post {
 	width: 50px
 }
@@ -369,6 +357,34 @@ form input[type="submit"]:hover {
 	border-right: 1px black solid; */
 	/* background-color: #f7f7f7; 배경색 */
 }
+.my-historypayment{ /*스토어 목록*/
+	margin-bottom: 20px;
+	padding: 10px;
+	/* background-color: #f7f7f7; 배경색 */
+	border: 1px solid #ddd; /* 테두리 색상 */
+	border-radius: 5px; /* 모서리 둥글게 */
+}
+.my-historypayment th:nth-child(1) {
+	width: 30px; /* 첫 번째 열 번호에 30px 고정 */
+	text-align: center;
+}
+
+.my-historypayment th:nth-child(2) {
+	width: 130px; /* 두 번째 열 제목에 100 고정 */
+}
+
+.my-historypayment th:nth-child(3) {
+	width: 300px; /* 세 번째 열 작성일에 150px 고정 */
+}
+
+.my-historypayment th:nth-child(4) {
+	width: 70px; /* 네 번째 열 상태에 100px 고정 */
+}
+.my-historypayment th:nth-child(5) {
+	width: 90px; /* 네 번째 열 상태에 100px 고정 */
+}
+
+
 /*마이페이지 홈 블럭*/
 .div2 {
 	display: flex;
@@ -415,7 +431,6 @@ form input[type="submit"]:hover {
 }
 
 .inquiry-detail	#inputcreated {
-	
 	background-color: black;
 	padding: 5px;
 	margin: 18px;
