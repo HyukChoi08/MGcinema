@@ -62,8 +62,8 @@
 	</select>
 	
 	<insert id="insertData">
-		insert into moviepay (random_id, customer_id, movie_name, room_name, totalprice, runningtime, seat, totalpeople, begintime, endtime, datetime, created)
-		values (#{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6}, #{param7}, #{param8}, #{param9}, #{param10}, #{param11}, current_timestamp)
+		insert into moviepay (random_id, customer_id, movie_name, room_name, totalprice, runningtime, seat, totalpeople, begintime, endtime, datetime, created, c_id)
+		values (#{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6}, #{param7}, #{param8}, #{param9}, #{param10}, #{param11}, current_timestamp, #{param12})
 	</insert>
 	
 	<select id="getOccupiedSeats" resultType="String">

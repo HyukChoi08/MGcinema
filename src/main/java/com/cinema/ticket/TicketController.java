@@ -98,7 +98,7 @@ public class TicketController {
 		String userid = (String) s.getAttribute("uid");
 		customerDTO customer = tdao.getCustomer(userid);
 		
-		model.addAttribute("id", customer.getId());
+		model.addAttribute("cid", customer.getId());
         model.addAttribute("uid", customer.getUid());
         model.addAttribute("passwd", customer.getPasswd());
         model.addAttribute("realname", customer.getRealname());
@@ -128,6 +128,7 @@ public class TicketController {
 	public String paymentSuccess(@RequestParam Map<String, String> params, Model model) {
 	    // 파라미터로 전달된 값을 모델에 추가
 	    model.addAttribute("orderId", params.get("orderId"));
+	    model.addAttribute("cid", params.get("cid"));
 	    model.addAttribute("uid", params.get("uid"));
 	    model.addAttribute("moviename", params.get("moviename"));
 	    model.addAttribute("roomname", params.get("roomname"));
@@ -156,13 +157,14 @@ public class TicketController {
 	    String endtime = req.getParameter("endtime");
 	    String datetime = req.getParameter("datetime");
 	    int people = Integer.parseInt(req.getParameter("people"));
+	    int cid = Integer.parseInt(req.getParameter("cid"));
 	    
 	    int count = tdao.checkIfExists(random_id);
 	    if (count > 0) {
 	        return "home/homepage"; // Or some appropriate response
 	    }
 	    
-	    tdao.insertData(random_id, customer_id, movie_name, room_name, totalprice, runningtime, seat, totalpeople, begintime, endtime, datetime);
+	    tdao.insertData(random_id, customer_id, movie_name, room_name, totalprice, runningtime, seat, totalpeople, begintime, endtime, datetime, cid);
 	    tdao.updateSeat(movie_name, room_name, datetime, begintime, people);
 	    return "home/homepage";
 	}
