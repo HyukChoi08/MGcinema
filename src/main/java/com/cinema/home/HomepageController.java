@@ -182,7 +182,7 @@ public class HomepageController {
 		
 		
 		if (uid == null || uid.equals("")) {
-			model.addAttribute("errorMessage", "입력하신 정보와 일치하는 아이디를 찾을 수 없습니다. 다시 입력해 주세요.");
+			model.addAttribute("errorMessage", "입력하신 정보와 일치하는 아이디를 찾을 수 없습니다.<br> 다시 입력해 주세요.");
 		} else {
 			model.addAttribute("successMessage", realname + "님의 아이디는 [ " + uid + " ] 입니다.");
 		}
