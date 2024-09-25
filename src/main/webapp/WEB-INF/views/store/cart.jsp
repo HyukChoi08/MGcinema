@@ -623,10 +623,6 @@ margin-bottom:30px;
 		</form>
     </div> 
 </div>
-<div id="info">
-  ※구매할 수 있는 수량은 최대 10개 입니다.<br>
-  ※장바구니에 담을 수 있는 품목의 개수는 총 10개입니다.
-</div>
 
 <%@ include file="/WEB-INF/views/footer/footer.jsp" %> <!-- 푸터 포함 -->
 </body>
@@ -768,14 +764,17 @@ $(document).ready(function() {
         let minQty = parseInt(qtyInput.attr('min')) || 1;
         let maxQty = parseInt(qtyInput.attr('max')) || 10;
 
-        if (newQty < minQty) newQty = minQty;
+        if (newQty < minQty) {
+            // 수량이 최소값보다 작을 경우 alert 띄움
+            alert("최소 1개 수량부터 구매 가능합니다.");
+            return; // 더 이상 진행하지 않음
+        }
 
         // 최대 수량 초과 시 alert
         if (newQty > maxQty) {
             alert("최대 10개 수량까지 구매 가능합니다."); // 최대 수량 초과 시 알림
             return; // 더 이상 진행하지 않음
         }
-
         qtyInput.val(newQty);
         calculateItemTotal(button.closest('.cart-item'));
         calculateTotal(); // 전체 총합 재계산
@@ -902,6 +901,12 @@ $(document).ready(function() {
         	                selectedItems.push(itemData);
         	                console.log(itemData.discount_price);  //66000
         	                console.log(itemData.cart_price);      //62000
+        	                
+        	                let userconfirm = confirm("정말로 구매하시겠습니까?");
+        	                if (!userconfirm) {
+        	                    return; // 사용자가 취소하면 이후 처리를 중단
+        	                }
+        	                
         	                
         	                // totalPrice를 설정할 때 cart_price가 0이면 discount_price를 사용
         	                let totalPrice = (itemData.cart_price === 0 || itemData.cart_price === undefined) ? itemData.discount_price : (itemData.cart_price || 0);

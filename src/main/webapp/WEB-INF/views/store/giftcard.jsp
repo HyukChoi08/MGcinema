@@ -167,7 +167,9 @@ img {
 .category_content li {
     cursor: pointer; /* 클릭 커서로 변경 */
 }
-
+.icon-item.icon-right {
+    cursor: pointer; /* 포인터 커서로 변경 */
+}
 .product {
 	position: relative; /* 이 부분을 추가하여 아이콘 위치 조정 */
 	overflow: hidden; /* 아이콘과 텍스트가 이미지 영역을 넘지 않도록 설정 */
