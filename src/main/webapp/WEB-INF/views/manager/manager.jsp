@@ -199,7 +199,7 @@
 </div>
 <div class="container" id="l">
 	<div class="sales">
-		<table id="mpaylist">
+		<table id="mpaylist" style="margin:auto;">
 			<caption><h3>영화매출</h3></caption>
 				<thead>
 					<tr><td>결제번호</td><td>사용자아이디</td><td>금액</td><td>일시</td></tr>
@@ -208,7 +208,7 @@
 		</table>
 	</div>
 	<div class="sales">
-		<table id="spaylist">
+		<table id="spaylist" style="margin:auto;">
 			<caption><h3>스토어매출</h3></caption>
 				<thead>
 					<tr><td>결제번호</td><td>사용자아이디</td><td>금액</td><td>일시</td></tr>
@@ -219,9 +219,9 @@
 	<div class="salesbox">
 		<table id="totallist">
 				<tbody>
-				   <tr><td>영화매출합계</td><td id="mpay"></td></tr>
-				   <tr><td>스토어매출합계</td><td id="spay"></td></tr>
-				   <tr><td>총매출</td><td id="tpay"></td></tr>
+				   <tr><td style="white-space: nowrap;"><input type="month" id="smonth">&nbsp;<input type="button" value="조회" id="ssalesbtn"></td><td>영화매출</td><td id="mpay"></td><td></td></tr>
+				   <tr><td><input type="button" value="전체기간조회" id="tsalesbtn"></td><td>스토어매출</td><td id="spay"></td></tr>
+				   <tr><td></td><td>합계</td><td id="tpay"></td></tr>
 			    </tbody>
 		</table>
 	</div>
@@ -239,8 +239,6 @@ $(document)
 	showitem();
 	showinquiry();
 	shownews();
-	showspay();
-	showmpay();
 })
 .on('click','#sbtn',function(){
 	let rid = $('#roomnum').val().split(',');
@@ -255,7 +253,7 @@ $(document)
 	let aprice = $('#aprice').val();
 	let yprice = $('#yprice').val();
 	let ptype = $('#ptype').val();
-	console.log(movienum,roomnum,date,stime,etime,seat,aprice,yprice,ptype);
+	
 	clear();
 	
 	$.post('/playlistin',{movienum:movienum,roomnum:roomnum,date:date,stime:stime,etime:etime,seat:seat,
@@ -278,7 +276,6 @@ $(document)
 		let genre = $('#genre').val();
 		let rdate = $('#rdate').val();
 		let minfo = $('#minfo').val();
-		console.log(mname,age,runningtime,image,director,cast,genre,rdate,minfo);
 		
         clear();
         $.post('/moviein',{mname:mname,age:age,runningtime:runningtime,image:image,director:director,cast:cast,genre:genre,rdate:rdate,minfo:minfo},
@@ -359,7 +356,6 @@ $(document)
 		let newscontent = $('#newscontent').val();
 		let newskat = $('#newskat').val();
 	
-		console.log(newstitle,newscontent,newskat);
 		clear();
 		
 			$.post('/newsin',{newstitle:newstitle,newscontent:newscontent,newskat:newskat},
@@ -397,7 +393,6 @@ $(document)
 	totalSeconds = (hours * 3600) + (minutes * 60);
 	ntime = totalSeconds * 1000;
 	
-	console.log(stime,jtime,ntime);
 	if(stime<jtime){
 		let a = $('#aprice').val();
 		let y = $('#yprice').val();
@@ -419,10 +414,7 @@ $(document)
 	
 	let srtime = $('#stime').val();
 	let [endhour, endminute] = srtime.split(':').map(Number);
-	console.log(endhour,endminute);
-	console.log($('#totalrun').val());
 	endminute += parseInt($('#totalrun').val());
-	console.log(endminute);
 	
 	if (endminute >= 60) {
 		endhour += Math.floor(endminute / 60);
@@ -435,14 +427,12 @@ $(document)
 	let formattedHour = endhour.toString().padStart(2, '0');
 	let formattedMinute = endminute.toString().padStart(2, '0');
 	
-	console.log(formattedHour,formattedMinute);
 	
 	$('#etime').val(formattedHour+':'+formattedMinute); 
 	
 })
 .on('click','#schedel',function(){
 	let delid = $(this).closest('tr').find('td:eq(0)').text();
-	console.log($(this).closest('tr').find('td:eq(0)').text());
 	
 	if(window.confirm("정말 삭제하시겠습니까?")){
 		$.post('/schedel',{delid:delid},function(data){
@@ -453,7 +443,6 @@ $(document)
 })
 .on('click','#moviedel',function(){
 	let delid = $(this).closest('tr').find('td:eq(0)').text();
-	console.log($(this).closest('tr').find('td:eq(0)').text());
 	
 	if(window.confirm("정말 삭제하시겠습니까?")){
 		$.post('/moviedel',{delid:delid},function(data){
@@ -463,7 +452,7 @@ $(document)
 })
 .on('click','#itemdel',function(){
 	let delid = $(this).closest('tr').find('td:eq(0)').text();
-	console.log($(this).closest('tr').find('td:eq(0)').text());
+
 	if(window.confirm("정말 삭제하시겠습니까?")){
 		$.post('/itemdel',{delid:delid},function(data){
 			showitem();
@@ -473,7 +462,6 @@ $(document)
 })
 .on('click','#inquirydel',function(){
 	let delid = $(this).closest('tr').find('td:eq(0)').text();
-	console.log($(this).closest('tr').find('td:eq(0)').text());
 	
 	if(window.confirm("정말 삭제하시겠습니까?")){	
 		$.post('/inquirydel',{delid:delid},function(data){
@@ -484,7 +472,6 @@ $(document)
 })
 .on('click','#newsdel',function(){
 	let delid = $(this).closest('tr').find('td:eq(0)').text();
-	console.log($(this).closest('tr').find('td:eq(0)').text());
 		
 	if(window.confirm("정말 삭제하시겠습니까?")){
 		$.post('/newsdel',{delid:delid},function(data){
@@ -517,7 +504,6 @@ $(document)
 	let created = $(this).find('td:eq(6)').text();
 	let ancreated = $(this).find('td:eq(7)').text();
 	
-	console.log(anid,content,answer,nickname,title,current,created,ancreated);
 	
 	$('#anid').val(anid);
 	$('#writer').val(nickname);
@@ -542,7 +528,6 @@ $(document)
 	$('#ibtn').prop('disabled', true);
 	$('#iubtn').prop('disabled', false);
 	
-	console.log(newsid,newstitle,newscontent);
 	
 	$('#itemid').val(itemid);
 	$('#itemname').val(itemname);
@@ -582,7 +567,6 @@ $(document)
 	$('#nbtn').prop('disabled', true);
 	$('#nubtn').prop('disabled', false);
 	
-	console.log(newsid,newstitle,newscontent);
 	
 	$('#newsid').val(newsid);
 	$('#newstitle').val(newstitle);
@@ -677,32 +661,26 @@ $(document)
 	$('#l').addClass('visible');
 	$('#m,#i,#a,#s,#n,#r').removeClass('visible').addClass('container');
 	clear();
+	showmpay();
+	showspay();
+})
+.on('click','#ssalesbtn',function(){
+	if($('#smonth').val()==''){
+		alert("조회기간을 선택해주세요")
+	}else{
+		showmpay();
+		showspay();
+		totalsales();
+	}
 	
-	let mtotal = 0;
-	let stotal = 0;
-
-    $('#mpaylist tbody tr').each(function() {
-        let mvalue = parseInt($(this).find('td:eq(2)').text());
-        mtotal += mvalue;
-    });
-    let formTotal = mtotal.toLocaleString('en-US', { style: 'decimal', minimumFractionDigits: 0 });
-    $('#mpay').text(formTotal+"  원  ");
-    
-    $('#spaylist tbody tr').each(function() {
-        let svalue = parseInt($(this).find('td:eq(2)').text());
-        stotal += svalue;
-    });
-    let forsTotal = stotal.toLocaleString('en-US', { style: 'decimal', minimumFractionDigits: 0 });
-    $('#spay').text(forsTotal+"  원  ");
-    
-    let ftotal = mtotal+stotal;
-    let fortTotal = ftotal.toLocaleString('en-US', { style: 'decimal', minimumFractionDigits: 0 });
-    $('#tpay').text(fortTotal+"  원  ");
-     
+})
+.on('click','#tsalesbtn',function(){
+	clear();
+	showmpay();
+	showspay();
 })
 function mlist(){
 	$.post('/mlist',{},function(data){
-		console.log(data);
 		$('#movienum').empty();
 		for( let x of data){
 			let str ='<option value='+x['id']+','+x['runningtime']+'>'+x['id']+', '+x['mname']+', '+x['runningtime']+'</option>';
@@ -716,7 +694,6 @@ function mlist(){
 }
 function rlist(){
 	$.post('/rlist',{},function(data){
-		console.log(data);
 		$('#roomnum').empty();
 		$('#roomlist tbody').empty();
 		for(let x of data){
@@ -750,7 +727,7 @@ function clear(){
 	$('#date,#stime,#etime,#mname,#runningtime,#director,#cast,#genre,#minfo,#rdate,#itemname,#itemprice,'
 		+'#disprice,#conposition,#origin,#itemimage,#period,#anid,#writer,#title,#newsid,'
 		+'#content,#answer,#createt,#answert,#newstitle,#newscontent,#itemfile,#moviefile,#roomid,'
-		+'#rname,#rlevel,#adprice,#yoprice,#itemtype').val('');
+		+'#rname,#rlevel,#adprice,#yoprice,#itemtype,#smonth').val('');
 	$('#image').val('/chartImage/.jpg');
 	$('#itemimage').val('/store_Images/.jpg');
 	$('#nubtn,#iubtn').prop('disabled', true);
@@ -804,24 +781,54 @@ function shownews(){
 	},'json')
 }
 function showmpay(){
-	$.post('/showmpay',{},function(data){
+	let smonth = $('#smonth').val();
+	smonth += '%';
+	
+	
+	$.post('/showmpay',{smonth:smonth},function(data){
 		$('#mpaylist tbody').empty();
 		for( let x of data){
 			let str ='<tr><td>'+x['random_id']+'</td><td>'+x['customer_id']+'</td><td>'+x['totalprice']+'</td><td>'+x['created']+'</td></tr>'
 			$('#mpaylist tbody').append(str);
 		}
-		
+		totalsales();
 	},'json')
 }
 function showspay(){
-	$.post('/showspay',{},function(data){
+	let smonth = $('#smonth').val();
+	smonth += '%';
+	
+	$.post('/showspay',{smonth:smonth},function(data){
 		$('#spaylist tbody').empty();
 		for( let x of data){
 			let str ='<tr><td>'+x['random_id']+'</td><td>'+x['customer_id']+'</td><td>'+x['totalprice']+'</td><td>'+x['created']+'</td></tr>'
 			$('#spaylist tbody').append(str);
 		}
-		
+		totalsales();
 	},'json')
+}
+function totalsales(){
+	let mtotal = 0;
+	let stotal = 0;
+
+    $('#mpaylist tbody tr').each(function() {
+        let mvalue = parseInt($(this).find('td:eq(2)').text());
+        mtotal += mvalue;
+    });
+    let formTotal = mtotal.toLocaleString('en-US', { style: 'decimal', minimumFractionDigits: 0 });
+    $('#mpay').text(formTotal+"  원  ");
+    
+    
+    $('#spaylist tbody tr').each(function() {
+        let svalue = parseInt($(this).find('td:eq(2)').text());
+        stotal += svalue;
+    });
+    let forsTotal = stotal.toLocaleString('en-US', { style: 'decimal', minimumFractionDigits: 0 });
+    $('#spay').text(forsTotal+"  원  ");
+    
+    let ftotal = mtotal+stotal;
+    let fortTotal = ftotal.toLocaleString('en-US', { style: 'decimal', minimumFractionDigits: 0 });
+    $('#tpay').text(fortTotal+"  원  ");
 }
 
 

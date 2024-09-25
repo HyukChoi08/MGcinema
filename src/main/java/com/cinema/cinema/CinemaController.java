@@ -81,7 +81,7 @@ public class CinemaController {
 			T.put("lestseat",Mdto.getLestseat());
 			Tli.put(T);
 		}
-		System.out.println("tttttttt"+mlist);
+		
 		return Tli.toString();
 	}
 	
@@ -89,7 +89,7 @@ public class CinemaController {
 	@ResponseBody
 	public String moviedate(HttpServletRequest req,Model model) {
 		String mdate = req.getParameter("mdate");
-		System.out.println(mdate);
+		
 		ArrayList<MoviedateDTO> mlist = cdao.Moviedate(mdate);
 		JSONArray Mli = new JSONArray();
 		for(MoviedateDTO Mdto : mlist) {

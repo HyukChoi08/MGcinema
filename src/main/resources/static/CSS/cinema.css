@@ -14,6 +14,10 @@ small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form
     text-align:center;
     
 }
+.title{
+	margin-top:80px;
+	margin-bottom:50px;
+}
 body{
 	background-color:black;
 	color:white;
@@ -96,13 +100,13 @@ span{
 .item:hover {
        background-color: black; /* 호버 시 배경색 변경 */
        transform: scale(1.1); /* 호버 시 크기 확대 */
-}    
+}
 #contents {
 	clear: both;
     padding-bottom: 50px;
     position: relative;
     margin: auto;
-    margin-top: 50px; 
+    margin-top: 130px; 
 	margin-bottom:150px;
     height:100%;
     width:1700px;
