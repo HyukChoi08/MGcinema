@@ -197,6 +197,9 @@
                     </div>
                     <input type="hidden" name="currentStep" value="3">
                     <button type="submit" id="signup" name="signup">회원가입</button>
+                    <c:if test="${not empty error}">
+            			<div class="error-message">${error}</div>
+        			</c:if>
                 </form>     
             </c:when>
          
@@ -211,9 +214,9 @@
           
         </c:choose>
 	
-        <c:if test="${not empty error}">
+        <%-- <c:if test="${not empty error}">
             <div class="error-message">${error}</div>
-        </c:if>
+        </c:if> --%>
     </div> 
 	<%@ include file="/WEB-INF/views/footer/footer.jsp" %>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -235,14 +238,6 @@ $(function() {
  
  
 
-/* function searchAddr() {
-     new daum.Postcode({
-         oncomplete: function(data) {
-             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성
-     }).open();
- } */
-
- 
  
 
  

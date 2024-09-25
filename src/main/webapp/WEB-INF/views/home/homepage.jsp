@@ -24,7 +24,7 @@
                 
                 <div><img src="/homepage_image/image_05.jpg" alt="Promotion 5" class="image-slide" /></div>
                 <div><img src="/homepage_image/image_06.jpg" alt="Promotion 6" class="image-slide" /></div>
-                <div><img src="/homepage_image/로비5.jpg" alt="Promotion 7" class="image-slide" /></div>
+                <div><img src="/homepage_image/로비2.jpeg" alt="Promotion 7" class="image-slide" /></div>
                 <div><img src="/homepage_image/image_08.jpg" alt="Promotion 8" class="image-slide" /></div>
          	</div>
         </div>
