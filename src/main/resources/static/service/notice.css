@@ -46,19 +46,34 @@ body {
 }
 
 .sidebar ul li a:hover {
-   color: #3a3d3f; /* 사이드바 링크 hover 색상 */
-   font-size:19px;
+   color: #808080; /* 사이드바 링크 hover 색상 */
+   font-size:17px;
 }
 
-
 .sidebar ul li.on a {
-    background-color: #3a3d3f; /* 현재 페이지 호버 색상 */
+    background-color: #808080; /* 현재 페이지 호버 색상 */
     color: white; /* 현재 페이지 글씨 색상 */
 }
 
 .sidebar ul li.on a:hover {
-    background-color: #ffffff; /* 호버 시 색상 변경 */
-    color: #3a3d3f; /* 호버 시 글씨 색상 변경 */
+    background-color: white; /* 호버 시 색상 변경 */
+    color: white; /* 호버 시 글씨 색상 변경 */
+}
+.hover-item a {
+    color: white; /* 기본 상태에서 글씨 색상 */
+    font-size: 15px; /* 기본 상태에서 폰트 크기 */
+    background-color: white; /* 기본 상태에서 배경색 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    padding: 5px; /* 패딩 추가 */
+    text-decoration: none; /* 링크의 밑줄 제거 */
+}
+
+.hover-item a:hover {
+    color: #3a3d3f; /* 호버 상태에서 글씨 색상 */
+    font-size: 19px; /* 호버 상태에서 폰트 크기 */
+    background-color: #3a3d3f; /* 호버 시 배경색 변경 */
+    border-radius: 5px; /* 모서리 둥글게 유지 */
+    padding: 5px; /* 패딩 유지 */
 }
 
 .col-detail {
