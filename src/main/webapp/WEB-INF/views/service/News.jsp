@@ -12,7 +12,7 @@
     </style>
 </head>
 <body>
- <%@ include file="/WEB-INF/views/header/header.jsp" %>
+<%@ include file="/WEB-INF/views/header/header.jsp" %>
 <div id="container">
     <div id="contents">
         <div class="sidebar">
@@ -40,26 +40,26 @@
                 </form>
             </div>
             <div class="total-count">
-   			 총 <span class="num">${totalNewsCount}건</span>
-			</div>
+                총 <span class="num">${totalNewsCount}건</span>
+            </div>
 
             <div class="c_tab_wrap">
-   			<ul>
-        		<li class="${empty selected ? 'on' : ''}">
-            		<a href="/news">전체</a>
-        		</li>
-        		<li class="${selected == '시스템점검' ? 'on' : ''}">
-            		<a href="/news?selected=시스템점검">시스템점검</a>
-        		</li>
-        		<li class="${selected == '극장' ? 'on' : ''}">
-            		<a href="/news?selected=극장">극장</a>
-        		</li>
-        		<li class="${selected == '기타' ? 'on' : ''}">
-            		<a href="/news?selected=기타">기타</a>
-        		</li>
-    		</ul>
-			</div>
-			
+                <ul>
+                    <li class="${empty selected ? 'on' : ''}">
+                        <a href="/news">전체</a>
+                    </li>
+                    <li class="${selected == '시스템점검' ? 'on' : ''}">
+                        <a href="/news?selected=시스템점검">시스템점검</a>
+                    </li>
+                    <li class="${selected == '극장' ? 'on' : ''}">
+                        <a href="/news?selected=극장">극장</a>
+                    </li>
+                    <li class="${selected == '기타' ? 'on' : ''}">
+                        <a href="/news?selected=기타">기타</a>
+                    </li>
+                </ul>
+            </div>
+            
             <div class="tbl_area">
                 <table class="tbl_notice_list">
                     <thead>
@@ -72,53 +72,55 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="news" items="${newsList}">
+                        <c:set var="itemsPerPage" value="10" /> <!-- 페이지당 항목 수 -->
+                        <c:set var="startIndex" value="${(currentPage - 1) * itemsPerPage}" /> <!-- 시작 인덱스 계산 -->
+                        <c:forEach var="news" items="${newsList}" varStatus="status">
                             <tr>
-                                <td class="id">${news.id}</td>
+                                <td class="id">${startIndex + status.index + 1}</td> <!-- 시작 인덱스와 상태 인덱스를 조합 -->
                                 <td class="select">${news.selected}</td>
-                              	<td class="title">
-    							<c:choose>
-        							<c:when test="${fn:length(news.title) > 30}">
-           								<a href="/newsDetail?id=${news.id}&page=${currentPage}&selected=${news.selected}">
-                						${fn:substring(news.title, 0, 30)}...
-            							</a>
-        							</c:when>
-        						<c:otherwise>
-            						<a href="/newsDetail?id=${news.id}&page=${currentPage}&selected=${news.selected}">
-                					${news.title}
-            						</a>
-        						</c:otherwise>
-    						</c:choose>
-							</td>
-								<td class="created">${news.created_at}</td>
+                                <td class="title">
+                                    <c:choose>
+                                        <c:when test="${fn:length(news.title) > 30}">
+                                            <a href="/newsDetail?id=${news.id}&page=${currentPage}&selected=${news.selected}">
+                                                ${fn:substring(news.title, 0, 30)}...
+                                            </a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a href="/newsDetail?id=${news.id}&page=${currentPage}&selected=${news.selected}">
+                                                ${news.title}
+                                            </a>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
+                                <td class="created">${news.created_at}</td>
                                 <td class="view">${news.views}</td>
                             </tr>
                         </c:forEach>
                     </tbody>
-                	</table>
-            	</div>
-				<div class="paging">
-    				<c:if test="${currentPage > 1}">
-    					<a href="/news?page=${currentPage - 1}&size=${size}&search=${search}" class="btn-paging">이전</a>
-					</c:if>
-					<ul>
-    					<c:forEach var="i" begin="1" end="${totalPages}">
-        					<li>
-            					<a href="/news?page=${i}&size=${size}&search=${search}" class="${i == currentPage ? 'active' : ''}">
-                				${i}
-           						</a>    
-        					</li>
-    					</c:forEach>
-					</ul>
-						<c:if test="${currentPage < totalPages}">
-    						<a href="/news?page=${currentPage + 1}&size=${size}&search=${search}" class="btn-paging">다음</a>
-						</c:if>
-						</div>
-        			</div>
-    			</div>
-    		</div>
+                </table>
+            </div>
+            <div class="paging">
+                <c:if test="${currentPage > 1}">
+                    <a href="/news?page=${currentPage - 1}&size=${size}&search=${search}" class="btn-paging">이전</a>
+                </c:if>
+                <ul>
+                    <c:forEach var="i" begin="1" end="${totalPages}">
+                        <li>
+                            <a href="/news?page=${i}&size=${size}&search=${search}" class="${i == currentPage ? 'active' : ''}">
+                                ${i}
+                            </a>    
+                        </li>
+                    </c:forEach>
+                </ul>
+                <c:if test="${currentPage < totalPages}">
+                    <a href="/news?page=${currentPage + 1}&size=${size}&search=${search}" class="btn-paging">다음</a>
+                </c:if>
+            </div>
+        </div>
+    </div>
+</div>
 <footer>
-     <%@ include file="/WEB-INF/views/footer/footer.jsp" %>
+    <%@ include file="/WEB-INF/views/footer/footer.jsp" %>
 </footer>
 </body>
 </html>
