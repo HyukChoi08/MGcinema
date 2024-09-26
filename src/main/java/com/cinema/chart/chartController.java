@@ -144,6 +144,7 @@ public String insertselectcomment(HttpServletRequest req, Model model) {
 		jo.put("created_at", cpcdto.getCreated_at());
 		jo.put("customer_uid",cpcdto.getCustomer_uid());
 		jo.put("rate",cpcdto.getRate());
+		jo.put("customer_id",cpcdto.getCustomer_id());
 		ja.put(jo);
 	}
 	return ja.toString(); 
