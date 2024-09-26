@@ -81,11 +81,11 @@ ol, ul {
      padding: 0; /* 기본 패딩 제거 */
      margin: 0; /* 기본 마진 제거 */
      list-style-type: none; /* 숫자 지우는 것 */
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 40px;
+     margin-block-start: 1em;
+     margin-block-end: 1em;
+     margin-inline-start: 0px;
+     margin-inline-end: 0px;
+     padding-inline-start: 40px;
 }
 
 #appearinfo{
@@ -274,7 +274,7 @@ color:black;
                             	<dt>예매율:&nbsp;${chartList3.reservation} %</dt><br>
                                 <dt>감독:&nbsp;${chartList3.director}</dt><br>
                                 <dt>배우 :&nbsp;${chartList3.cast}</dt><br>
-                                <dt>장르 :&nbsp;${chartList3.genre}/관람가:&nbsp;${chartList3.age}/상영시간:&nbsp;${chartList3.runningtime}</dt><br>
+                                <dt>장르 :&nbsp;${chartList3.genre}/관람이용가:&nbsp;${chartList3.age}/상영시간:&nbsp;${chartList3.runningtime}</dt><br>
                                 <dt>개봉일:&nbsp;${chartList3.releasedate}</dt><br>
                                 <div id="movieAverageRate"></div><br>
                                 <div id="buyMovieTicket"><a href="/ticket?mname=${chartList3.mname}">예매하기</a></div>
@@ -406,7 +406,7 @@ color:black;
                     $.ajax({
                         url: '/putcomment',
                         type: 'post',
-                        data: {moviechart: moviechart, content: content, writer: nick ,uid:uid, rate:rate},
+                        data: {moviechart: moviechart, content: content, writer: nick ,uid:uid, rate:rate,customer_id:${sessionScope.id}},
                         success: function(data) {
                             console.log(data);
                             $('#moviechart').val('');
