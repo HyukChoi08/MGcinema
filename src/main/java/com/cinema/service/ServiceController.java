@@ -68,7 +68,6 @@ public class ServiceController {
             faqList = faqDAO.getFAQsBySelected(selected, size, offset);
             totalFAQCount = faqDAO.getTotalFAQCountBySelected(selected);
         }
-        System.out.println(faqList+"123");
         int totalPages = (int) Math.ceil((double) totalFAQCount / size);
 
         model.addAttribute("faqList", faqList);
@@ -80,13 +79,11 @@ public class ServiceController {
         model.addAttribute("totalFAQCount", totalFAQCount);
         return "service/FAQ";
     }
-
     @GetMapping("/faqcreate")
     public String showFAQCreatePage(Model model) {
         model.addAttribute("faqDTO", new FAQDTO());
         return "service/FAQcreate";
     }
-
     @PostMapping("/FAQcreate")
     public String createFAQ(@ModelAttribute FAQDTO faqDTO) {
         // 현재 날짜와 시간 가져오기
@@ -162,7 +159,7 @@ public class ServiceController {
             @RequestParam(value = "search", defaultValue = "") String search,
             @RequestParam(value = "selected", defaultValue = "") String selected, // 추가된 부분
             Model model) {
-
+    	
         int offset = (page - 1) * size;
         List<NewsDTO> newsList;
         int totalNewsCount;
@@ -180,9 +177,7 @@ public class ServiceController {
             newsList = newsDAO.getNewsBySelected(selected, size, offset);
             totalNewsCount = newsDAO.getTotalNewsCountBySelected(selected);
         }
-
         int totalPages = (int) Math.ceil((double) totalNewsCount / size);
-
         model.addAttribute("newsList", newsList);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPages);
@@ -193,7 +188,6 @@ public class ServiceController {
 
         return "service/News";
     }
-
     @GetMapping("/newsDetail")
     public String showNewsDetailPage(
             @RequestParam(value = "id") Long id, 
@@ -210,7 +204,4 @@ public class ServiceController {
         model.addAttribute("search", search);
         return "service/Newsdetail";
     }
-
-   
-    
 }
