@@ -544,7 +544,8 @@ color:black;
                      for (let i = 0; i < pageData.length; i++) {
                         console.log("uid = " + uid);
                         console.log("pageData[i]['customer_uid'] = " + pageData[i]['customer_uid']);
-                        if ((uid == pageData[i]['customer_uid']&& customer_id==pageData[i]['customer_id']) {
+                        console.log("pageData[i]['customer_id']"+pageData[i]['customer_id'])
+                        if ((uid == pageData[i]['customer_uid'] && customer_id==pageData[i]['customer_id'])) {
                             str += '<li><div><ul><li id="reviewWriter" value="' + pageData[i]['id'] + '">' + pageData[i]['writer'] + '</li><li>평점:'+pageData[i]['rate']+'</li><li>' + pageData[i]['created_at'] + '</li></ul></div><div>' +
                                 '<p>' + pageData[i]['content'] + '</p></div><button class="reviewupdete" data-content="' + pageData[i]['content'] + '" data-rate="' + pageData[i]['rate'] + '"><img src="/chartImage/더보기3.jpg"></button>';
                         } else {
