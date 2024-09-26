@@ -44,8 +44,6 @@ public class ServiceController {
         model.addAttribute("serviceHome", serviceHome);
         return "service/ServiceHome";
     }
-
-   
     @GetMapping("/faq")
     public String showFAQPage(
             @RequestParam(value = "page", defaultValue = "1") int page,
