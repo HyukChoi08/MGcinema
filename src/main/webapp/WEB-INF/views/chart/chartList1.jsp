@@ -394,30 +394,35 @@ color:black;
                		   if(data==0){
                			   alert('영화를 보신 후 리뷰등록이 가능합니다');
                			   return false;
-               		   } 
+               		   }else{ 
+               		   
+                       if (uid==null||uid==='') {
+                           alert('로그인이 필요합니다');
+                           $('#reviewcomment').val('');
+                           return false;
+                       } else {
+                           $.ajax({
+                               url: '/putcomment',
+                               type: 'post',
+                               data: {moviechart: moviechart, content: content, writer: nick ,uid:uid, rate:rate,customer_id:${sessionScope.id}},
+                               success: function(data) {
+                                   console.log(data);
+                                   $('#moviechart').val('');
+                                   $('#reviewcomment').val('');
+                                   $('#idname').val('');
+                                   loadreview();
+                                   AverageRate();
+                                   
+                               }
+                           });
+                       }
+               		   
+               		   
+               	   }
                	   }
                });
                
-                if (uid==null||uid==='') {
-                    alert('로그인이 필요합니다');
-                    $('#reviewcomment').val('');
-                    return false;
-                } else {
-                    $.ajax({
-                        url: '/putcomment',
-                        type: 'post',
-                        data: {moviechart: moviechart, content: content, writer: nick ,uid:uid, rate:rate,customer_id:${sessionScope.id}},
-                        success: function(data) {
-                            console.log(data);
-                            $('#moviechart').val('');
-                            $('#reviewcomment').val('');
-                            $('#idname').val('');
-                            loadreview();
-                            AverageRate();
-                            
-                        }
-                    });
-                }
+
             })
             .on('click', '#comment', function() { //리뷰 li에 셀렉트
                 $.ajax({
