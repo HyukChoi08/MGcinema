@@ -14,7 +14,7 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 <link rel="stylesheet" href="/mypage_css/mypage.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>1:1 문의</title>
+<title>1:1 문의</title> 
 <style>
 </style>
 </head>
