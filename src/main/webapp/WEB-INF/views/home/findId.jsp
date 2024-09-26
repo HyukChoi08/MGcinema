@@ -10,7 +10,7 @@
 </head>
 <body>
     <%@ include file="/WEB-INF/views/header/header.jsp" %>
-    
+
     <div class="findId-page">
         <h2>아이디 찾기</h2>
         <form action="/doFindId" method="post">
@@ -26,6 +26,7 @@
                 <label for="mobile">전화번호</label>
                 <input type="text" id="mobile" name="mobile" placeholder="01012345678 형식으로 작성해주세요." required maxlength="11">
             </div>
+
             <!--recaptcha-->
 			<div class="g-recaptcha" data-sitekey="6LerV0wqAAAAAKFPAIA1X0Iyfz55Hv2G_IvRop42"></div>
 

@@ -42,11 +42,11 @@
             </c:if>
             
         </form>
-        	<div class="password-links">
-                <a href="/findId">아이디 찾기</a>
-                <a href="/login">로그인</a>
-                <a href="/signup">회원가입</a>
-       	 	</div>
+        <div class="password-links">
+        	<a href="/findId">아이디 찾기</a>
+            <a href="/login">로그인</a>
+            <a href="/signup">회원가입</a>
+       	</div>
 	</div>
     
     <%@ include file="/WEB-INF/views/footer/footer.jsp" %>

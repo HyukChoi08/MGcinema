@@ -38,7 +38,6 @@
     text-align: center;
 }
 
-
 .g-recaptcha {
     display: flex;               /* Flexbox 사용 */
     justify-content: center;     /* 가로 중앙 정렬 */
@@ -86,8 +85,6 @@ button:hover {
 body {
     background-color: #000000; 
 }
-
-
 
 .error-message {
     color: red;               /* 에러 메시지 색상 설정 */

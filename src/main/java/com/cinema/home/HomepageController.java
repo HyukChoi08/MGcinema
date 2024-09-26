@@ -35,16 +35,12 @@ public class HomepageController {
 		} else if ("admin".equals(uid)) {
 			linkstr = "<li>[" + Nickname + "]</li>" + "<li><a href='/logout'>로그아웃</a></li>"
 					+ "<li><a href='/manager'>관리</a></li>";
-
 		} else {
 			linkstr = "<li>사용자 [" + Nickname + "]</li>" + "<li><a href='/logout'>로그아웃</a></li>";
 		}
-		// model.addAttribute("linkstr",linkstr);
 		s.setAttribute("linkstr", linkstr);
 		return "home/homepage";
 	}
-
-	
 	
 	@GetMapping("/login")
 	public String login() {
@@ -78,14 +74,12 @@ public class HomepageController {
 	    }
 	}
 
-
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest req) {
 		HttpSession s = req.getSession();
 		s.invalidate();
 		return "redirect:/";
 	}
-
 
 	@GetMapping("/signup")
 	public String signup(HttpServletRequest req, Model model) {
@@ -144,7 +138,6 @@ public class HomepageController {
 				return "home/signup";
 			}
 			
-			
 			int nicknameCount = ldao.checkNicknameExists(nickname);
 			if (nicknameCount > 0) {
 				model.addAttribute("error", "이미 사용 중인 닉네임입니다.");
@@ -176,7 +169,6 @@ public class HomepageController {
 		String birthday = req.getParameter("birthday");
 		String mobile = req.getParameter("mobile");
 		
-
 		String gRecaptchaResponse = req.getParameter("g-recaptcha-response");
 
 	    // reCAPTCHA 검증
@@ -184,15 +176,9 @@ public class HomepageController {
 			model.addAttribute("errorMessage", "로봇인지 아닌지 확인해주세요.");
 	        return "home/findId"; // 같은 페이지로 포워딩
 	    }
-		
-		
 
 		String uid = ldao.getFindId(realname, birthday, mobile);
-		//System.out.println("zzzzzzzz" + uid);
-
-
-		
-		
+				
 		if (uid == null || uid.equals("")) {
 			model.addAttribute("errorMessage", "입력하신 정보와 일치하는 아이디를 찾을 수 없습니다.<br> 다시 입력해 주세요.");
 		} else {
@@ -201,11 +187,6 @@ public class HomepageController {
 
 		return "home/findId"; // Forward to the same page
 	}
-	
-	
-	
-	
-	
 
 	@GetMapping("/findPassword")
 	public String findPassword() {
@@ -237,24 +218,15 @@ public class HomepageController {
 		}
 		return "home/findPassword";
 	}
-
 	
-	
-	
+	// 비밀번호 변경 처리
 	@PostMapping("/newPassword")
 	public String newPassword(HttpServletRequest req, Model model) {
 	    String uid = req.getParameter("uid");
 	    String passwd = req.getParameter("passwd");
-
-		System.out.println("zzzzzzzz" + uid + "," + passwd);
-
-	    // 비밀번호 변경 처리
-	    
+		
 	    ldao.newPasswd(uid, passwd);
 	    
-
 	    return "home/login";
 	}
-
-	 
 }

@@ -25,16 +25,15 @@
 		select id from customer where uid = #{param1}
 	</select>
 	
-	
- 	 <select id="getFindId" resultType="String">
+ 	<select id="getFindId" resultType="String">
         select uid
         from customer
         where realname = #{param1}
           and birthday = #{param2}
           and mobile = #{param3}
-     </select>
+    </select>
      
-     <select id="getFindP" resultType="String">
+    <select id="getFindP" resultType="String">
         select passwd
         from customer
         where uid = #{param1}

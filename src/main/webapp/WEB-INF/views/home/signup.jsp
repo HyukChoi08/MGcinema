@@ -6,9 +6,8 @@
     <meta charset="UTF-8">
     <title>회원가입</title>
     <link rel="stylesheet" href="signup_css/signup.css">
-    
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
     <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
@@ -113,21 +112,10 @@
                     </div>
                     <div class="form-group">
                         <label for="mobile">전화번호</label>
-                        <input
-                            type="text" id="mobile" name="mobile" value="${formData.mobile}" placeholder="(필수) 01012345678 형식으로 작성해주세요" required maxlength="11">
+                        <input type="text" id="mobile" name="mobile" value="${formData.mobile}" placeholder="(필수) 01012345678 형식으로 작성해주세요" required maxlength="11">
                     </div>
-                    <%-- <div class="form-group">
-                        <label for="region">주소</label>
-                        <input
-                            type="text" id="region" name="region" value="${formData.region}" placeholder="(선택)">
-                    </div> --%>
                     
-                    
-                    
-                    
-                    <%-- 주소 검색 api 추가 중 --%>
-                    
-                    
+                    <%-- 주소 검색 api --%>
                     <div class="addr-wrap">
             			<label for="userAddr1">주소</label>
             			<button type="button" onclick="searchAddr();">주소찾기</button>
@@ -137,13 +125,6 @@
             			<input type="text" id="userAddr2" name="userAddr2" placeholder="상세 주소 입력" required>
        				</div>
 
-
-                    
-                    
-                    
-                    
-                    
-                    
                     <div class="form-group">
                         <label for="nickname">닉네임</label>
                         <input type="text" id="nickname" name="nickname" value="${formData.nickname}" placeholder="(필수)" required maxlength="10">
@@ -211,12 +192,7 @@
                     </form>
                 </div>
             </c:when>
-          
         </c:choose>
-	
-        <%-- <c:if test="${not empty error}">
-            <div class="error-message">${error}</div>
-        </c:if> --%>
     </div> 
 	<%@ include file="/WEB-INF/views/footer/footer.jsp" %>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -235,13 +211,7 @@ $(function() {
     $('#birthday').attr('max', today);
 });
  
- 
- 
 
- 
-
- 
- 
 //kakad map api
  function searchAddr() {
      new daum.Postcode({
@@ -269,9 +239,5 @@ $(function() {
      }).open();
  }
 
-
- 
- 
- 
 </script>   
 </html>

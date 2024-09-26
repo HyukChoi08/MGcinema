@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Footer Component</title>
-    <!-- 절대 경로 CSS 파일 링크 -->
     <link rel="stylesheet" href="/footer_css/footer.css">
 </head>
 <body>

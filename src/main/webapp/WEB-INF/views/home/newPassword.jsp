@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <title>비밀번호 찾기</title>
     <link rel="stylesheet" href="newPassword_css/newPassword.css">
-
 </head>
 <body>
     <%@ include file="/WEB-INF/views/header/header.jsp" %>
@@ -28,6 +27,7 @@
             </div>
             
             <button type="submit">비밀번호 변경</button>
+            
         </form>
         
         <!-- 메시지 표시 -->
