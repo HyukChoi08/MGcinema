@@ -31,7 +31,7 @@ body {
     align-items: center; /* 가운데 정렬 */
     justify-content: flex-start; /* 상단 정렬 */
     min-height: 100vh; /* 최소 높이를 뷰포트 높이로 설정 */
-    padding: 20px; /* 패딩 추가 */
+    margin-top:80px;
     box-sizing: border-box; /* 패딩 포함 전체 높이 계산 */
 }
 
@@ -60,14 +60,17 @@ body {
     flex-direction: row;
     justify-content: center;
     align-items: flex-start;
-    width: 800px;
+    width: 750px;
     color: #c7b199;
-    border-top: 2px solid #c7b199; /* 윗줄 보더 추가 */
-    border-bottom: 2px solid #c7b199; /* 아랫줄 보더 추가 */
+    border-top: 2px solid #c7b199;
+    border-bottom: 2px solid #c7b199;
+    margin: 0px;
+    height:25px;
 }
 .flex-container3 li {
-    margin-right: 20px; /* 각 <li> 요소 사이의 간격 설정 */
-    font-size: 18px;    /* 글씨 크기 설정 */
+	width:90px;
+    margin-right: 20px;
+    font-size: 18px;
 }
 
 .flex-container3 li:last-child {
@@ -78,6 +81,11 @@ ol, ul {
      padding: 0; /* 기본 패딩 제거 */
      margin: 0; /* 기본 마진 제거 */
      list-style-type: none; /* 숫자 지우는 것 */
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
 }
 
 #appearinfo{
@@ -263,12 +271,12 @@ color:black;
                         <div class="title"><h1 id="getmname" data-mname="${chartList3.mname}">${chartList3.mname}</h1></div><input type="hidden" id="mnameSave" value="${chartList3.mname}">
                         <div class="left-aligned">
                             <dl  class="textPosition">
-                            	<dt>예매율:&nbsp;${chartList3.reservation} %</dt>
-                                <dt>감독:&nbsp;${chartList3.director}</dt>
-                                <dt>배우 :&nbsp;${chartList3.cast}</dt>
-                                <dt>장르 :&nbsp;${chartList3.genre}/관람가:&nbsp;${chartList3.age}/상영시간:&nbsp;${chartList3.runningtime}</dt>
-                                <dt>개봉일:&nbsp;${chartList3.releasedate}</dt>
-                                <div id="movieAverageRate"></div>
+                            	<dt>예매율:&nbsp;${chartList3.reservation} %</dt><br>
+                                <dt>감독:&nbsp;${chartList3.director}</dt><br>
+                                <dt>배우 :&nbsp;${chartList3.cast}</dt><br>
+                                <dt>장르 :&nbsp;${chartList3.genre}/관람가:&nbsp;${chartList3.age}/상영시간:&nbsp;${chartList3.runningtime}</dt><br>
+                                <dt>개봉일:&nbsp;${chartList3.releasedate}</dt><br>
+                                <div id="movieAverageRate"></div><br>
                                 <div id="buyMovieTicket"><a href="/ticket?mname=${chartList3.mname}">예매하기</a></div>
                             </dl>
                         </div>

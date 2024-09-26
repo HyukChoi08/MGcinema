@@ -579,14 +579,16 @@ $(document).ready(function() {
 	 	
 	    // 수량 감소 버튼 클릭 이벤트
 	    $('#decrease').on('click', function() {
-	        var $input = $('#cnt');
-	        var currentValue = parseInt($input.val(), 10);
-	        var minValue = parseInt($input.data('min'), 10);
-
-	        if (!isNaN(currentValue) && currentValue > minValue) {
-	            $input.val(currentValue - 1).change();
-	        }
-	    });
+		    var $input = $('#cnt');
+		    var currentValue = parseInt($input.val(), 10);
+		    var minValue = parseInt($input.data('min'), 10);
+		
+		    if (!isNaN(currentValue) && currentValue > minValue) {
+		        $input.val(currentValue - 1).change();
+		    } else {
+		        alert("최소 1개 수량부터 구매 가능합니다."); // 최소 수량 경고
+		    }
+		});
 
 	    // 수량 입력 필드 변경 이벤트
 	    $('#cnt').on('change', function() {
@@ -755,8 +757,16 @@ console.log(customer_id);
     console.log('Customer ID:', customer_id);
 
     if ($('#userid').val() === '') {
-        alert("로그인 후 이용해주세요.");
-        return false;
+    	
+    	 let  userConfirmed = confirm("로그인 페이지로 이동하시겠습니까?");
+    	
+    	 if (userConfirmed) {
+             
+             window.location.href = '/login';
+             
+             return false;
+         }
+           
     }
 
     $.ajax({
@@ -784,7 +794,7 @@ console.log(customer_id);
             // 최대 수량
             const maxQty = 10;
 
-            if (itemCount >= 10 && itemQty === 0) {
+            if (itemCount >= 10) {
                 alert('장바구니의 품목 종류가 10개 이상이므로 새로운 품목을 추가할 수 없습니다.');
             } else if (newQty > maxQty) {
                 let remainingQty = maxQty - itemQty;
@@ -842,9 +852,16 @@ $('#btnbuy').on('click', function(e) {
     e.preventDefault(); // 링크의 기본 동작을 방지
 
     if ($('#userid').val() === '') {
-        alert("로그인 후 이용해주세요.");
-        return false; // 이동을 막기 위해 return false를 사용
-    }    
+	
+ 		let  userConfirmed = confirm("로그인 페이지로 이동하시겠습니까?");
+    	 
+ 	    if (userConfirmed) {
+            window.location.href = '/login';
+            return false; // 로그인 페이지로 이동 후 종료
+        } else {
+            return false; // 취소 시 폼 제출 중단
+        }
+    }   
 
     let item_id = $('#hiddenid').val();
     console.log('item_id:', item_id);
@@ -940,7 +957,16 @@ $(document).on('click', '.no-style-link', function() {
     let userid = $('#userid').val();
     
     if (userid === null || userid === '') {
-        alert("로그인 후 이용해주세요.");
+    	
+    	 let  userConfirmed = confirm("로그인 페이지로 이동하시겠습니까?");
+    	 
+    	 if (userConfirmed) {
+            
+             window.location.href = '/login';
+             
+             return false;
+         }
+           
     } else {
         window.location.href = '/cart'; 
     }

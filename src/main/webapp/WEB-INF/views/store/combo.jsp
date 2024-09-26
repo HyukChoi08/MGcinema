@@ -300,6 +300,11 @@ img {
     position: relative;
     top: 60px; /* 원하는 만큼 아래로 이동 */
 }
+.original-price {
+	text-decoration: line-through; /* 가격에 취소선 추가 */
+	color: #999; /* 취소선 색상 설정 */
+	font-size: 14px; /* 취소선 가격 크기 조정 */
+}
     </style>
 </head>
 <body>
@@ -350,9 +355,9 @@ img {
                                     </div>
                                 <div class="product-info">
                                     <span class="product-name">${Store.item_name}</span><br>
-                                    <span class="product-composition">${Store.composition}</span><br>
-                                    <span class="original-price">${Store.price}원</span>
+                                    <span class="product-composition">${Store.composition}</span><br>             
                                     <span class="discounted-price">${Store.discount_price}원</span>
+                                    <span class="original-price">${Store.price}원</span>
                                 </div>
                             </li>
                            </c:forEach>            			
@@ -391,9 +396,9 @@ $(document).ready(function() {
          var discountedPrice = $(this).find('.discounted-price').text().replace('원', '').trim();  
          
          
-         if (originalPrice === discountedPrice) {
+      /*    if (originalPrice === discountedPrice) {
              $(this).find('.discounted-price').addClass('hidden'); //값이 같으면 히든클래스에 넣어서 값을 숨긴다.
-         }
+         } */
      })
 	
  	let customer_id= $('#userid').val();

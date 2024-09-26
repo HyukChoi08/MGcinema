@@ -9,7 +9,7 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/views/header/header.jsp" %>
-<!-- <div><h1>THEATER</h1></div> -->
+<!-- <h1 class="title">극장</h1> -->
 <div id="contents">
 	<div class="container" style="border: none;position: relative; width:1500px; height:700px;margin:auto;">
 		<img src="room_image/로비5.jpg" class="background-image" id="backgroundImage" alt="zzzz">
@@ -94,7 +94,7 @@
 									<tr><td><img src="room_image/15.png" class="imgt">15세 관람가</td><td>만 15세 미만의 고객님은 보호자를 동반하셔야 관람하실 수 있습니다.</td></tr>
 									<tr><td><img src="room_image/19.png" class="imgt">청소년관람불가</td><td>만 19세 미만(영/유아 포함)은 보호자가 동반하여도 관람이 불가합니다.<br>
 													(단, 만19세가 되는 해의 1월 1일을 맞이한 사람은 제외)<br>
-													- 입장 시 신분증을 꼭 지참하시기 바랍니다<br>
+													- 입장 시 신분증을 꼭 지참하시기 바랍니다.<br>
 													- 신분증(사진/캡쳐 불가)<br>
 													  주민등록증, 운전면허증, 여권, 모바일신분증(PASS, 정부24등)</td></tr>
 									<tr><td><img src="room_image/미정.png" class="imgt">미정</td><td>등급 미정 영화입니다.</td></tr>
@@ -129,14 +129,12 @@ $(document)
 	let days = ['일','월','화','수','목','금','토'];
 	let dow = days[date.getDay()];
 	
-	//console.log(now,year,month,dow,day);
 	let daystr = month+'월'+day+'일'+'  '+dow;
-	console.log(year+'-'+month+'-'+day);
+	/* console.log(year+'-'+month+'-'+day); */
 	movied.push(year+'-'+month+'-'+day)
 	$('#calendar-table thead th:eq('+j+')').text(daystr)
 	$('#calendar-table thead th:eq('+j+')').data('dbdate',movied[j])
 	}
-	console.log(movied[0]);
 	$('#hiddendate').val(movied[0]);
 		
 	movielist();
@@ -150,7 +148,6 @@ $(document)
 .on('click','.container .item', function() {
         
         var img = $(this).data('image');
-        console.log(img);
         
         $('#backgroundImage').attr('src', img);
     })
@@ -181,7 +178,7 @@ async function movielist(){
 	            data: { mdate: mdate },
 	            dataType: 'json'
 	        });
-	        console.log('Request 1 succeeded:', response1);
+	        /* console.log('Request 1 succeeded:', response1); */
 	        processData1(response1);
 	        
 	        let response2 = await $.ajax({
@@ -190,7 +187,7 @@ async function movielist(){
 	            data: { mdate: mdate },
 	            dataType: 'json'
 	        });
-	        console.log('Request 2 succeeded:', response2);
+	        /* console.log('Request 2 succeeded:', response2); */
 	        processData2(response2);
 	        
 	        let response3 = await $.ajax({
@@ -199,7 +196,7 @@ async function movielist(){
 	            data: { mdate: mdate },
 	            dataType: 'json'
 	        });
-	        console.log('Request 3 succeeded:', response3);
+	        /* console.log('Request 3 succeeded:', response3); */
 	        processData3(response3);
 	        
 	    } catch (error) {
@@ -211,10 +208,10 @@ async function movielist(){
 function processData1(data) {
 	 let timelist = '';
 		for(x of data){	
-			console.log("영화이름",x['mname']);
+			/* console.log("영화이름",x['mname']); */
 			timelist = '<div class=timelistdiv><table><tr><td><img src=room_image/'+x['age']+'.png>'+'</td><td><h1 class=mname>'+x['mname']+'</h1></td><td>'+x['runningtime']+' / </td><td>'+x['genre']+' / </td><td>'+x['releasedate']+' 개봉</td></tr></table></div>';
 			$('#timelist').append(timelist);
-	 		 console.log('Processing data 1:', data);
+	 		 /* console.log('Processing data 1:', data); */
 		}
 		let lastdiv = '<div class=ldiv>[공지] 입장 지연에 따른 관람 불편을 최소화하기 위해 영화는 10분 후 상영이 시작됩니다.</div>'
 		$('#timelist').append(lastdiv);
@@ -222,7 +219,7 @@ function processData1(data) {
 function processData2(data) {
 	for(let i=0 ; i<$('#timelist div').length; i++){
 		let id = $('#timelist div').eq(i).find('tr td:eq(1)').text();
-		console.log(data); 
+		/* console.log(data);  */
 		for(let x of data){
 			if(x['mname']==id){
 			let room = '<div class=roomdiv><table><tr><td><h2 class=roomname><img src=room_image/관화살표.png>'+x['Sname']+'</h2></td><td style=width:65px>'+x['seatlevel']+'</td><td>총 '+x['allseat']+'석</td></tr></table></div>';
@@ -230,17 +227,17 @@ function processData2(data) {
 			}
 		}
 	}
-    console.log('Processing data 2:', data);
+    /* console.log('Processing data 2:', data); */
 }
 
 function processData3(data) {
 	$('.timelistdiv').each(function() {
-		console.log('테스트',$(this).find('tr').find('td').eq(1).text());
+		/* console.log('테스트',$(this).find('tr').find('td').eq(1).text()); */
 		id = $(this).find('tr').find('td').eq(1).text();
 			
 	        $(this).find('table').each(function() {
 	            let room = $(this).find('tr').find('td').eq(0).text();
-	            console.log('관이름', room);
+	            /* console.log('관이름', room); */
 	            	for(let x of data){
 	            		if (x['mname'] == id && x['Sname'] == room) {
 	            			let date = new Date();
@@ -251,7 +248,7 @@ function processData3(data) {
 	            	        let minute = date.getMinutes();
 	            	        let dt = new Date(year, month, day, hour, minute);
 	            	        let nowtime = dt.getTime(); 
-	            	        console.log(nowtime);
+	            	        /* console.log(nowtime); */
 	                        
 	                        let bdate = $('#hiddendate').val();
 	                        let [byear, bmonth, bday] = bdate.split('-').map(Number);
@@ -259,9 +256,9 @@ function processData3(data) {
 	                    	let [bhour, bminute] = btime.split(':').map(Number);
 	                    	let bdt = new Date(byear, bmonth, bday, bhour, bminute);
 	            	        let betime = bdt.getTime(); 
-	            	        console.log(betime);
+	            	        /* console.log(betime); */
 	                    	
-	                    	console.log('현재밀리초',nowtime,'선택밀리초',betime);
+	                    	/* console.log('현재밀리초',nowtime,'선택밀리초',betime); */
 	                    	
 	                    	
 	                    	if(betime<nowtime){
@@ -269,7 +266,7 @@ function processData3(data) {
 	                    	}else{
 			                        if (x['mname'].includes(' ')) {
 			                        	mname = x['mname'].replace(/\s+/g,'%20');
-			                        	console.log('last',mname);
+			                        	/* console.log('last',mname); */
 			                        	$(this).append('<td class=td-link><a href=/ticket/?mname='+mname+'&date='+$('#hiddendate').val()+'&room='+x['Sname']+'&time='+x['begintime']+'>'+x['begintime']+'<br><span>'+x['lestseat']+'석</i></span></td>');
 			                        }else{
 			                        	$(this).append('<td class=td-link><a href=/ticket/?mname='+x['mname']+'&date='+$('#hiddendate').val()+'&room='+x['Sname']+'&time='+x['begintime']+'>'+x['begintime']+'<br><span>'+x['lestseat']+'석</span></a></td>');
@@ -279,7 +276,7 @@ function processData3(data) {
 	            	}  	
 	        })
 	})
-    console.log('Processing data 3:', data);
+    /* console.log('Processing data 3:', data); */
 }
 
 </script>

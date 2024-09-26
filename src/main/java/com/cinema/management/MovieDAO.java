@@ -28,6 +28,6 @@ public interface MovieDAO {
 	void itemup(int a,String b,String c,String d,String e,String f,String g,String h,String i);
 	void bestzero();
 	void bestitems(int a, int b);
-	ArrayList<SalesDTO> msaleslist();
-	ArrayList<SalesDTO> ssaleslist();
+	ArrayList<SalesDTO> msaleslist(String a);
+	ArrayList<SalesDTO> ssaleslist(String a);
 }

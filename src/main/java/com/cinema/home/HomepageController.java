@@ -109,6 +109,7 @@ public class HomepageController {
 			String uid = req.getParameter("uid");
 
 			String passwd = req.getParameter("passwd");
+			String passwd2 = req.getParameter("passwd2");
 			String birthday = req.getParameter("birthday");
 			String mobile = req.getParameter("mobile");
 			String userPostCode = req.getParameter("userPostCode");
@@ -132,6 +133,17 @@ public class HomepageController {
 				));
 				return "home/signup";
 			}
+			
+			if (!passwd.equals(passwd2)) {
+				model.addAttribute("error", "비밀번호를 확인해주세요.");
+				req.setAttribute("currentStep", "2"); // 다시 Step 2로 이동
+				// 폼 데이터 유지
+				model.addAttribute("formData", Map.of("realname", realname, "email", email, "uid", uid, "passwd", passwd, 
+						"birthday", birthday, "mobile", mobile,"nickname", nickname, "favorite", favorite, "tellecom", tellecom
+				));
+				return "home/signup";
+			}
+			
 			
 			int nicknameCount = ldao.checkNicknameExists(nickname);
 			if (nicknameCount > 0) {

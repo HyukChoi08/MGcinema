@@ -107,8 +107,9 @@
 	 height: 600px;
      overflow-y: auto; 
      border-radius:6px;
-          display: flex;
-     justify-content: center;
+         /*  display: flex;
+     justify-content: center; */
+     margin:15px;
 }
 
 .roomupbox{
@@ -201,6 +202,7 @@ td{
 #totallist td{
 	width:150px;
 }
+
 #schedules tbody td,
 #movieinfo tbody td,
 #itemlist tbody td,

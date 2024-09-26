@@ -118,7 +118,7 @@ public class ManagerController {
 	@ResponseBody
 	public String moviedel(HttpServletRequest req,Model model) {
 		int delid = Integer.parseInt(req.getParameter("delid"));
-		System.out.println(delid);
+		
 		mmdao.moviedel(delid);
 		return "manager/manager";
 	}
@@ -126,7 +126,7 @@ public class ManagerController {
 	@ResponseBody
 	public String itemdel(HttpServletRequest req,Model model) {
 		int delid = Integer.parseInt(req.getParameter("delid"));
-		System.out.println(delid);
+		
 		mmdao.itemdel(delid);
 		return "manager/manager";
 	}
@@ -134,7 +134,7 @@ public class ManagerController {
 	@ResponseBody
 	public String inquirydel(HttpServletRequest req,Model model) {
 		int delid = Integer.parseInt(req.getParameter("delid"));
-		System.out.println(delid);
+		
 		mmdao.inquirydel(delid);
 		return "manager/manager";
 	}
@@ -142,7 +142,7 @@ public class ManagerController {
 	@ResponseBody
 	public String newsdel(HttpServletRequest req,Model model) {
 		int delid = Integer.parseInt(req.getParameter("delid"));
-		System.out.println(delid);
+		
 		mmdao.newsdel(delid);
 		return "manager/manager";
 	}
@@ -371,7 +371,9 @@ public class ManagerController {
 	@PostMapping("/showmpay")
 	@ResponseBody
 	public String showmpay(HttpServletRequest req,Model model) {
-		ArrayList<SalesDTO> a = mmdao.msaleslist();
+		String smonth = req.getParameter("smonth");
+		
+		ArrayList<SalesDTO> a = mmdao.msaleslist(smonth);
 		JSONArray Ty = new JSONArray();
 		for(SalesDTO Rdto : a) {
 			JSONObject T = new JSONObject();
@@ -386,7 +388,9 @@ public class ManagerController {
 	@PostMapping("/showspay")
 	@ResponseBody
 	public String showspay(HttpServletRequest req,Model model) {
-		ArrayList<SalesDTO> a = mmdao.ssaleslist();
+		String smonth = req.getParameter("smonth");
+		
+		ArrayList<SalesDTO> a = mmdao.ssaleslist(smonth);
 		JSONArray Ty = new JSONArray();
 		for(SalesDTO Rdto : a) {
 			JSONObject T = new JSONObject();
