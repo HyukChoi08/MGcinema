@@ -23,7 +23,7 @@ String customer_id = (String) session.getAttribute("uid");
 <link rel="stylesheet" href="/mypage_css/mypage.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My CGV</title>
+<title>My Page</title>
 <style>
 </style>
 </head>

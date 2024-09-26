@@ -149,6 +149,7 @@ form input {
 form input:focus, form textarea:focus {
 	border-color: #e50914; /* 포커스 시 경계선 색상 변경 */
 	outline: none; /* 기본 아웃라인 제거 */
+	 border-width: 2px; /* 경계선 두께 설정 */
 }
 
 #post {
@@ -464,6 +465,7 @@ form input:focus, form textarea:focus {
 	border-color: buttonborder;
 	border-image: initial;
 	font-size: 18px;
+		margin: 20px 5px;
 }
 
 .inputbtn:hover {
@@ -471,6 +473,7 @@ form input:focus, form textarea:focus {
 	border: 1px solid white; /* 흰색 줄 */
 	border-style: outset;
 	border-image: initial;
+	
 }
 
 .inquiry-detail textarea {

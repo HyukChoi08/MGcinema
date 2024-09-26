@@ -14,7 +14,7 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 <link rel="stylesheet" href="/mypage_css/mypage.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>1:1 문의 게시판</title>
+<title>1:1 문의</title>
 <style>
 </style>
 </head>
@@ -82,7 +82,8 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 								<table>
 									<tr>
 										<td>제목</td>
-										<td><input type="text" name="title" id="inputcreated" required /></td>
+										<td><input type="text" name="title" id="inputcreated"
+											required /></td>
 									</tr>
 									<tr>
 										<td>내용</td>
@@ -91,14 +92,14 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 									<tr>
 										<td colspan="2"><input class="inputbtn" type="submit"
 											value="등록" />
-											<button type="button" class="inputbtn"
-												onclick="location.href='/inquiry'">목록</button></td>
+											<button colspan="2" type="button" class="inputbtn"
+												onclick="location.href='/inquiry'">뒤로가기</button></td>
 									</tr>
 								</table>
 							</form>
 						</c:when>
 
-						<c:when test="${view == 'inquirydetail'}" >
+						<c:when test="${view == 'inquirydetail'}">
 							<h3>상세보기</h3>
 							<table>
 								<tr>
@@ -106,40 +107,46 @@ CustomerDTO customer = (CustomerDTO) session.getAttribute("cusDTO");
 									<td><input type="text" name="title" id="inputcreated"
 										value="${inquiry.title}" readonly /></td>
 								</tr>
-								<tr >
+								<tr>
 									<td class="noline">내용</td>
-						 			<td class="noline"><textarea name="content" rows="10" cols="50" readonly>${inquiry.content}</textarea></td>
+									<td class="noline"><textarea name="content" rows="10"
+											cols="50" readonly>${inquiry.content}</textarea></td>
 								</tr>
 								<tr>
 									<td>작성일자</td>
-									<td><input type="text" name="created"  id="inputcreated"
+									<td><input type="text" name="created" id="inputcreated"
 										value="${inquiry.created}" readonly /></td>
 								</tr>
-								
+
 								<c:if test="${inquiry.current == '답변완료'}">
-								<div>
-									<tr>
-										<td colspan="2" class="noline">
-											<h3>관리자 답변</h3>
-										</td>
-									</tr>
-									<tr >
-										<td class="noline">답변내용</td>
-										<td class="noline"><textarea name="answer" rows="10" cols="50" readonly>${inquiry.answer}</textarea></td>
-									</tr>
-									<tr>
-										<td>답변일자</td>
-										<td><input type="text" name="ancreated" id="inputcreated"
-											value="${inquiry.ancreated}" readonly /></td>
-									</tr>
+									<div>
+										<tr>
+											<td colspan="2" class="noline">
+												<h3>관리자 답변</h3>
+											</td>
+										</tr>
+										<tr>
+											<td class="noline">답변내용</td>
+											<td class="noline"><textarea name="answer" rows="10"
+													cols="50" readonly>${inquiry.answer}</textarea></td>
+										</tr>
+										<tr>
+											<td>답변일자</td>
+											<td><input type="text" name="ancreated"
+												id="inputcreated" value="${inquiry.ancreated}" readonly /></td>
+										</tr>
 									</div>
 								</c:if>
 								
 							</table>
+							<button type="button" class="inputbtn"
+												onclick="location.href='/inquiry'">뒤로가기</button></td>
 						</c:when>
+						
 					</c:choose>
+					
 				</div>
-
+					
 				<!-- 나의 문의 내역 -->
 				<h3>나의 문의 내역</h3>
 				<table border="1" class="inquiry-table">
