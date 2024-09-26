@@ -224,32 +224,36 @@ margin-left: -20px; /* 버튼과 입력 필드 사이의 간격 */
 }
 #giftprice {
     position: absolute; /* 위치를 절대적으로 설정 */
-    top: 13px; /* 원하는 위치를 조정합니다 */
+    top:13px; /* 원하는 위치를 조정합니다 */
     width: 200px;
     margin-right: 58px; /* 여백을 조정합니다 */    
     background-color: #444; /* 배경색을 #444로 설정 */
     color: white; /* 텍스트 색상을 흰색으로 설정 */
     border: 2px solid grey; /* 선택 상자의 테두리 색상도 설정 가능 */
     border-radius: 5px; /* 테두리 둥글게 설정 */
-    
+ 
 }
 
 /* 옵션 텍스트 색상 변경 */
 #giftprice option {
     background-color:#444; /* 드롭다운 옵션의 배경색 설정 */
     color: white; /* 드롭다운 옵션의 텍스트 색상 설정 */
+    
 
 }
 .gift-price-select {
     width: 100px; /* 너비 조정 */
-    height: 40px; /* 높이 조정 */
-    font-size: 20px; /* 폰트 크기 조정 (필요시) */
+    height: 30px; /* 높이 조정 */
+    font-size: 10px; /* 폰트 크기 조정 (필요시) */
     box-sizing: border-box; /* 패딩과 테두리를 너비와 높이에 포함 */
    
 }
 #giftprice:focus {
     border: 2px solid grey; /* 테두리 색상을 #444로 유지 */
     outline: none; /* 아웃라인 제거 */
+}
+#giftprice {
+    font-size: 12px; /* 드롭다운의 기본 폰트 크기 설정 */
 }
 
 .label {
@@ -316,7 +320,7 @@ td {
 }
 #replace1{
  	position: relative;
- 	top:-80px;
+ 	top:-90px;
    
 }
 
@@ -502,7 +506,9 @@ function updateCartCount(customer_id) {
 
 
 $(document).ready(function() {
+
 	
+
 	let discountText = $('#discount-price').text();
 
 	if (discountText === '금액충전형') { // '금액충전형'은 실제 텍스트에 맞게 조정
@@ -518,9 +524,6 @@ $(document).ready(function() {
 	} else {
 	    $('#origin-row').css('visibility', 'visible'); // 원산지가 있을 경우 보이기
 	}
-	
-	
-	
 	
 	 function updateTotalPrice() {
 	        var $input = $('#cnt');
@@ -684,6 +687,7 @@ $(document).ready(function() {
             $('#empty-row').show(); // 빈 줄 표시
             $('.button-container').hide();
             $("#ccnt").hide();
+                                     
         } else {         
 
         	let price = $('#price').text();

@@ -146,7 +146,7 @@ $(document).ready(function() {
     window.close(); // 팝업창을 닫기
 
     // 기존 페이지를 store로 이동
-    window.opener.location.href = '/store';
+    window.opener.location.href = '/payment';
 });       
             
 </script>
