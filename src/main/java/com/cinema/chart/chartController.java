@@ -31,8 +31,10 @@ public String chartList1(HttpServletRequest req, Model model) {
 	HttpSession session = req.getSession();
 	String userId = (String)session.getAttribute("uid");
 	int id = Integer.parseInt(req.getParameter("id"));
+	String cust_id = (String) session.getAttribute("id");
+	int customer_id = Integer.parseInt(cust_id);
 	
-	chartPutCommentDTO movieReview = cpcdao.selectMovieReview(userId, id);
+	chartPutCommentDTO movieReview = cpcdao.selectMovieReview(userId, id,customer_id);
 	
 	session.setAttribute("dataId", id);
 	System.out.println("id"+id);
@@ -124,7 +126,11 @@ public String chartList11() {
 @PostMapping("/insertselectcomment")//리뷰 리뷰란에 셀렉트
 @ResponseBody
 public String insertselectcomment(HttpServletRequest req, Model model) {
+
+
+	
 	int id = Integer.parseInt(req.getParameter("id1"));
+
 	ArrayList<chartPutCommentDTO> ar = cpcdao.selectputcomment(id);
 	
 	
@@ -147,6 +153,7 @@ public String insertselectcomment(HttpServletRequest req, Model model) {
 @PostMapping("/putcomment")
 @ResponseBody 
 public String update (HttpServletRequest req, Model model) {
+
 	int moviechart = Integer.parseInt(req.getParameter("moviechart"));
 
 	String content = req.getParameter("content");
@@ -154,7 +161,10 @@ public String update (HttpServletRequest req, Model model) {
 	String writer = req.getParameter("writer");
 	String uid = req.getParameter("uid");
 	int rate = Integer.parseInt(req.getParameter("rate"));
-	cpcdao.putcomment(moviechart, content, writer,uid, rate);
+	String customer_id1 = req.getParameter("customer_id");
+	int customer_id = Integer.parseInt(customer_id1);
+
+	cpcdao.putcomment(moviechart, content, writer,uid, rate, customer_id);
 	return "ok";
 }
 //리뷰 수정

@@ -12,4 +12,5 @@ public class chartPutCommentDTO {
     String customer_uid;
     int liked;
     int rate;
+    String customer_id;
 }

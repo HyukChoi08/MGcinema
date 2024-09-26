@@ -6,13 +6,13 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface chartPutCommentDAO {
-	  void putcomment(int moviechart, String content, String writer, String uid, int rate);
-ArrayList<chartPutCommentDTO> selectputcomment(int id);
+	  void putcomment(int moviechart, String content, String writer, String uid, int rate, int customer_id);
+ArrayList<chartPutCommentDTO> selectputcomment(int moviechart);
 void updatereview(int id, String content, int rate, String userId);
 void deletereview(int id);
 int count(String moviename);
 
-chartPutCommentDTO selectMovieReview(String userId, int movieId);
+chartPutCommentDTO selectMovieReview(String userId, int movieId,int customer_id);
 
 double selectMovieAverageRate(int movieId);
 
