@@ -37,7 +37,10 @@ WHERE item_id =#{param1} AND customer_id =#{param2} and cust_id=#{param3}
 SELECT COUNT(a.item_id) 
 FROM cart a 
 JOIN customer b ON a.customer_id = b.uid
-WHERE b.id =#{param2} AND a.customer_id =#{param1}
+LEFT JOIN item c ON a.item_id = c.id 
+WHERE b.id =#{param2}
+  AND a.customer_id =#{param1} 
+  AND c.id IS NOT NULL 
 </select>
 <select id="selectitem" resultType="com.cinema.store.cartDTO">
 select id,price, discount_price, composition, item_name, image_path from item where id=#{param1}
