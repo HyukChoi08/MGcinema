@@ -1018,7 +1018,7 @@ $(document).ready(function() {
 		success:function(data){
 			if(data=='ok'){
 			console.log(data);
-			alert("수량 변경이 되었습니다.");
+			alert("수량 저장 되었습니다.");
 			 window.location.reload();
 			}								
 		}

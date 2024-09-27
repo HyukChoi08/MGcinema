@@ -32,7 +32,7 @@ public class HomepageController {
 		if (uid == null || uid.equals("")) {
 			linkstr = "<li><a href='/login'>로그인</a></li>" + "<li><a href='/signup'>회원가입</a></li>";
 
-		} else if ("admin".equals(uid)) {
+		} else if (id.equals("25")) {
 			linkstr = "<li>[" + Nickname + "]</li>" + "<li><a href='/logout'>로그아웃</a></li>"
 					+ "<li><a href='/manager'>관리</a></li>";
 		} else {

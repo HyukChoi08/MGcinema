@@ -20,7 +20,7 @@
                 <ul>
                     <li><a href="/serviceHome">고객센터 메인<i></i></a></li>
                     <li><a href="/faq">자주찾는 질문<i></i></a></li>
-                    <li class="on"><a href="/news">공지/뉴스<i></i></a></li>
+                    <li class="hover-item"><a href="/news">공지/뉴스<i></i></a></li>
                     <li><a href="/inquiry">문의하기<i></i></a></li>
                 </ul>
             </div>
