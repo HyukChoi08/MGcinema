@@ -21,14 +21,14 @@ public class StoreListDTO {
         String[] parts = itemName.split(","); // 각 항목을 나누기 위해 콤마로 분리
         StringBuilder itemNameBuilder = new StringBuilder();
         StringBuilder compositionBuilder = new StringBuilder();
-
+        	
         for (int i = 0; i < parts.length; i++) {
             String part = parts[i].trim();
-            int spaceIndex = part.indexOf(" ");
+            int spaceIndex = part.indexOf("  ");
             if (spaceIndex != -1) {
                 String itemPart = part.substring(0, spaceIndex); // 상품명 부분
                 String compositionPart = part.substring(spaceIndex + 1); // 구성 부분
-
+            	System.out.println(spaceIndex);
                 // 상품명에 추가 (각 항목마다 줄바꿈)
                 if (i > 0) {
                     itemNameBuilder.append("<br>"); // 줄바꿈 추가

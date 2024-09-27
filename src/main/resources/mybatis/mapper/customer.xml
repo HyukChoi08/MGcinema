@@ -6,7 +6,8 @@
 	<select id="getCustomerInfo"
 		resultType="com.cinema.mypage.CustomerDTO">
 		SELECT id, uid, passwd, realname, nickname, email, address,
-		favorite, mobile, tellecom, created, updated, birthday , fulladdress, post
+		favorite, mobile, tellecom, created, updated, birthday , fulladdress,
+		post
 		FROM customer
 		WHERE id = #{param1}
 	</select>
@@ -25,48 +26,50 @@
 		UPDATE customer
 		SET
 		passwd = #{passwd},
-		nickname = #{nickname},
+		nickname =
+		#{nickname},
 		email = #{email},
 		address= #{address},
-		fulladdress = #{fulladdress},
+		fulladdress =
+		#{fulladdress},
 		favorite = #{favorite},
 		mobile = #{mobile},
-		tellecom = #{tellecom},
+		tellecom =
+		#{tellecom},
 		updated = NOW(),
 		birthday = #{birthday},
-		profileimg = #{profileimg},
+		profileimg =
+		#{profileimg},
 		post = #{post}
 		WHERE id = #{id}
 	</update>
-	
+
 	<!-- 고객 테이블에서 프로필 이미지 경로(profileimg)를 조회하는 쿼리 -->
-	<select id="getProfileImage" resultType="String" parameterType="int">
-    SELECT profileimg 
-    FROM customer 
-    WHERE id = #{id}
+	<select id="getProfileImage" resultType="String"
+		parameterType="int">
+		SELECT profileimg
+		FROM customer
+		WHERE id = #{id}
 	</select>
 
-	<!-- 고객 삭제 -->
+	<!-- customer 테이블에서 고객 삭제 -->
 	<delete id="deleteCustomer">
-		DELETE FROM customer WHERE id = #{param1}
+		DELETE FROM customer WHERE id = #{param1};
 	</delete>
 
 	<!-- 1:1 문의 목록 조회 (고객 ID 기반) -->
-	<!-- <select id="getInquiryList"
-		resultType="com.cinema.mypage.InquiryDTO">
-		SELECT id, customer_id, title, content, answer, created,
-		ancreated, current
-		FROM inquiry
-		WHERE customer_id = #{param1}
-	</select> -->
-	
+	<!-- <select id="getInquiryList" resultType="com.cinema.mypage.InquiryDTO"> 
+		SELECT id, customer_id, title, content, answer, created, ancreated, current 
+		FROM inquiry WHERE customer_id = #{param1} </select> -->
+
 	<!-- 페이징 기반 1:1 문의 목록 조회 -->
 	<select id="getInquiryList" parameterType="map"
 		resultType="com.cinema.mypage.InquiryDTO">
 		SELECT *
 		FROM inquiry
 		WHERE customer_id = #{customerId}
-		ORDER BY created DESC
+		ORDER
+		BY created DESC
 		LIMIT #{offset}, #{limit}
 	</select>
 
@@ -85,7 +88,7 @@
 		FROM inquiry
 		WHERE id = #{param1}
 	</select>
-	
+
 	<!-- 1:1 문의 페이징 -->
 	<select id="getTotalInquiryCount" parameterType="int"
 		resultType="int">
@@ -106,16 +109,20 @@
 
 	<!-- 예매 삭제 (ID 기반) -->
 	<delete id="deleteMovieReservation" parameterType="int">
-		DELETE FROM moviepay WHERE id = #{id}
+		DELETE FROM
+		moviepay WHERE id = #{id}
 	</delete>
 
 	<!-- 예매 정보를 moviepaydelete 테이블로 이동 -->
 	<insert id="moveToMovieDelete" parameterType="int">
-		INSERT INTO moviepaydelete (id, random_id, customer_id, movie_name, room_name,
+		INSERT INTO
+		moviepaydelete (id, random_id, customer_id, movie_name, room_name,
 		totalprice, runningtime, seat, totalpeople, begintime, endtime,
 		datetime, created)
-		SELECT id, random_id, customer_id, movie_name, room_name, totalprice,
-		runningtime, seat, totalpeople, begintime, endtime, datetime, created
+		SELECT id, random_id, customer_id, movie_name,
+		room_name, totalprice,
+		runningtime, seat, totalpeople, begintime,
+		endtime, datetime, created
 		FROM moviepay
 		WHERE id = #{id}
 	</insert>
@@ -125,22 +132,24 @@
 		resultType="com.cinema.mypage.MovieGetDTO">
 		SELECT *
 		FROM moviepaydelete
-		WHERE customer_id = #{customer_id}
+		WHERE customer_id =
+		#{customer_id}
 	</select>
 
 	<!-- 닉네임 업데이트 -->
 	<update id="updateNickname">
 		UPDATE customer
 		SET nickname = #{nickname}
-		WHERE uid = #{uid}
+		WHERE uid =
+		#{uid}
 	</update>
-	 <!-- 이미지 업데이트 -->
-	 <update id="updateProfileImage">
-        UPDATE customer
-        SET profileimg = #{fileName} <!-- 프로필 이미지 컬럼 업데이트 -->
-        WHERE id = #{userId} <!-- 사용자 ID로 조건 설정 -->
-    </update>
-    
+	<!-- 이미지 업데이트 -->
+	<update id="updateProfileImage">
+		UPDATE customer
+		SET profileimg = #{fileName} <!-- 프로필 이미지 컬럼 업데이트 -->
+		WHERE id = #{userId} <!-- 사용자 ID로 조건 설정 -->
+	</update>
+
 
 	<!-- 예매 목록을 페이징 및 최신순 정렬로 가져오기 -->
 	<select id="getMovieListWithPaging" parameterType="map"
@@ -148,7 +157,8 @@
 		SELECT *
 		FROM moviepay
 		WHERE customer_id = #{customer_id}
-		ORDER BY datetime DESC  <!-- 최신순 정렬 -->
+		ORDER BY
+		datetime DESC  <!-- 최신순 정렬 -->
 		LIMIT #{limit} OFFSET #{offset}  <!-- 페이징 처리 -->
 	</select>
 
@@ -157,7 +167,8 @@
 		resultType="int">
 		SELECT COUNT(*)
 		FROM moviepay
-		WHERE customer_id = #{customer_id}
+		WHERE customer_id =
+		#{customer_id}
 	</select>
 
 	<!-- 취소된 예매 내역을 페이징 및 최신순 정렬로 가져오기 -->
@@ -165,7 +176,8 @@
 		resultType="com.cinema.mypage.MovieGetDTO">
 		SELECT * FROM moviepaydelete
 		WHERE customer_id = #{customer_id}
-		ORDER BY datetime DESC  <!-- 최신순 정렬 -->
+		ORDER BY
+		datetime DESC  <!-- 최신순 정렬 -->
 		LIMIT #{limit} OFFSET #{offset}  <!-- 페이징 처리 -->
 	</select>
 
@@ -183,15 +195,18 @@
 		SELECT *
 		FROM moviepay
 		WHERE customer_id = #{customer_id}
-		ORDER BY datetime DESC  <!-- 최신순 정렬 -->
+		ORDER BY
+		datetime DESC  <!-- 최신순 정렬 -->
 		LIMIT 5  <!-- 최근 5건만 가져오기 -->
 	</select>
 	<!-- 예매 탑3가져오기 -->
-	 <select id="getTop3MoviesByReservation" resultType="com.cinema.chart.chartDTO">
-        SELECT id, mname, imagepath, reservation
-        FROM movie
-        ORDER BY reservation DESC
-        LIMIT 3
-    </select>
-	
+	<select id="getTop3MoviesByReservation"
+		resultType="com.cinema.chart.chartDTO">
+		SELECT id, mname, imagepath, reservation
+		FROM movie
+		ORDER BY
+		reservation DESC
+		LIMIT 3
+	</select>
+
 </mapper>

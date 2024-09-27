@@ -338,34 +338,39 @@ public class PageController {
 	// 회원 탈퇴 처리
 	@PostMapping("/deleteCustomer")
 	public String deleteCustomer(HttpServletRequest req, 
-			@RequestParam("passwd") String passwd, 
-			@RequestParam("passwd1") String passwd1, 
-			RedirectAttributes redirectAttributes) {
-		HttpSession session = req.getSession();
+	                             @RequestParam("passwd") String passwd, 
+	                             @RequestParam("passwd1") String passwd1, 
+	                             RedirectAttributes redirectAttributes) {
+	    HttpSession session = req.getSession();
 
-		CustomerDTO cusDTO = (CustomerDTO) session.getAttribute("cusDTO");
+	    CustomerDTO cusDTO = (CustomerDTO) session.getAttribute("cusDTO");
 
-		if (cusDTO == null) {
-			redirectAttributes.addFlashAttribute("error", "로그인이 필요합니다.");
-			return "redirect:/login";
-		}
+	    // 로그인 여부 확인
+	    if (cusDTO == null) {
+	        redirectAttributes.addFlashAttribute("error", "로그인이 필요합니다.");
+	        return "redirect:/login";
+	    }
 
-		if (!passwd.equals(passwd1)) {
-			redirectAttributes.addFlashAttribute("error", "패스워드가 일치하지 않습니다.");
-			return "redirect:/cancel";
-		}
+	    // 패스워드 확인
+	    if (!passwd.equals(passwd1)) {
+	        redirectAttributes.addFlashAttribute("error", "패스워드가 일치하지 않습니다.");
+	        return "redirect:/cancel";
+	    }
 
-		if (!cusDTO.getPasswd().equals(passwd)) {
-			redirectAttributes.addFlashAttribute("error", "패스워드가 일치하지 않습니다.");
-			return "redirect:/cancel";
-		}
+	    if (!cusDTO.getPasswd().equals(passwd)) {
+	        redirectAttributes.addFlashAttribute("error", "패스워드가 일치하지 않습니다.");
+	        return "redirect:/cancel";
+	    }
 
-		mdao.deleteCustomer(cusDTO.getId());
-		session.invalidate();
+	    // 순차적으로 각 테이블에서 데이터를 삭제
 
-		return "redirect:/cinema"; // 홈 페이지로 리다이렉트
+	    mdao.deleteCustomer(cusDTO.getId());  // customer 삭제
+
+	    // 세션 무효화
+	    session.invalidate();
+
+	    return "redirect:/cinema"; // 홈 페이지로 리다이렉트
 	}
-
 
 
 	//스토어 결제내역 목록
