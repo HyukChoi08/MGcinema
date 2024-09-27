@@ -260,6 +260,7 @@ $(document)
 							aprice:aprice,yprice:yprice,ptype:ptype},
 							function(data){
 								schedules();
+								alert('상영일정이 추가되었습니다')
 	})
 	
 })
@@ -307,7 +308,7 @@ $(document)
 .on('click','#ibtn',function(){
 	if($('#itemname').val()=='' || $('#itemprice').val()=='' || $('#disprice').val()=='' || $('#conposition').val()==''
 		|| $('#origin').val()==''|| $('#itemtype').val()==''){
-		alert("제대로")
+		alert("빈 칸이 없는지 확인 좀 해주세요")
 	}else{
 	
         let itemname = $('#itemname').val();
@@ -393,21 +394,19 @@ $(document)
 	totalSeconds = (hours * 3600) + (minutes * 60);
 	ntime = totalSeconds * 1000;
 	
+	roomprice = $('#roomnum').val().split(',');
+	
 	if(stime<jtime){
-		let a = $('#aprice').val();
-		let y = $('#yprice').val();
-		$('#aprice').val(fseat[2]-3000);
-		$('#yprice').val(fseat[3]-3000);
+		$('#aprice').val(roomprice[2]-3000);
+		$('#yprice').val(roomprice[3]-3000);
 		$('#ptype').val("조조");
 	}else if(ntime<stime){
-		let a = $('#aprice').val();
-		let y = $('#yprice').val();
-		$('#aprice').val(fseat[2]-3000);
-		$('#yprice').val(fseat[3]-3000);
+		$('#aprice').val(roomprice[2]-3000);
+		$('#yprice').val(roomprice[3]-3000);
 		$('#ptype').val("심야");
 	}else{
-		$('#aprice').val(fseat[2]);
-		$('#yprice').val(fseat[3]);
+		$('#aprice').val(roomprice[2]);
+		$('#yprice').val(roomprice[3]);
 		$('#ptype').val("일반");
 	}
 	
@@ -540,23 +539,27 @@ $(document)
 	$('#period').val(period);
 })
 .on('click','#iubtn',function(){
-	let itemid = $('#itemid').val();
-	let itemname = $('#itemname').val();
-	let itemtype = $('#itemtype').val();
-	let itemprice = $('#itemprice').val();
-	let disprice = $('#disprice').val();
-	let conposition = $('#conposition').val();
-	let origin = $('#origin').val();
-	let itemimage = $('#itemimage').val();
-	let period = $('#period').val();
-	
-	
-	clear();
-	$.post('/itemup',{itemid:itemid,itemname:itemname,itemtype:itemtype,itemprice:itemprice,disprice:disprice,conposition:conposition,origin:origin,
-						itemimage:itemimage,period:period},function(data){
-		showitem();
-		alert("상품수정이 완료되었습니다")
-	})
+	if($('#itemname').val()=='' || $('#itemtype').val()=='' || $('#itemprice').val()=='' || $('#disprice').val()=='' || $('#conposition').val()==''||$('#origin').val()==''|| $('#itemimage').val()==''|| $('#period').val()==''){
+		alert("비어있는 항목이 있습니다")
+	}else{
+		let itemid = $('#itemid').val();
+		let itemname = $('#itemname').val();
+		let itemtype = $('#itemtype').val();
+		let itemprice = $('#itemprice').val();
+		let disprice = $('#disprice').val();
+		let conposition = $('#conposition').val();
+		let origin = $('#origin').val();
+		let itemimage = $('#itemimage').val();
+		let period = $('#period').val();
+		
+		
+		clear();
+		$.post('/itemup',{itemid:itemid,itemname:itemname,itemtype:itemtype,itemprice:itemprice,disprice:disprice,conposition:conposition,origin:origin,
+							itemimage:itemimage,period:period},function(data){
+			showitem();
+			alert("상품수정이 완료되었습니다")
+		})
+	}
 })
 .on('click','#newslist tbody tr',function(){
 	let newsid = $(this).find('td:eq(0)').text();
@@ -592,7 +595,7 @@ $(document)
 	}
 	 let uniqueItems = new Set(bestitems);
 	    if (uniqueItems.size !== bestitems.length) {
-	        alert("중복된 값이 있습니다. 선택된 값들을 확인하세요.");
+	        alert("중복된 상품이 있습니다.");
 	    } else {
 			$.ajax({
 			    url: '/bestitem',type: 'POST',contentType: 'application/json; charset=utf-8',data: JSON.stringify(bestitems),
