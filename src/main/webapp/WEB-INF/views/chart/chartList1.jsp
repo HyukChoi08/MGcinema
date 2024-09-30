@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>되나연</title>
+    <title>영화상세페이지</title>
     <style>
 
 body {
@@ -414,6 +414,7 @@ color:black;
                                           $('#moviechart').val('');
                                           $('#reviewcomment').val('');
                                           $('#idname').val('');
+                                          location.reload();
                                           loadreview();
                                           AverageRate();
                                           
@@ -487,6 +488,7 @@ color:black;
                     dataType: 'text',
                     success: function(data) {
                         console.log(data);
+                        location.reload();
                         loadreview();
                         AverageRate();
                     }
