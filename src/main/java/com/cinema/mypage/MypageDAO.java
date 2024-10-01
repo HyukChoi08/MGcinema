@@ -12,7 +12,9 @@ import org.apache.ibatis.annotations.Mapper;
 public interface MypageDAO {
 	CustomerDTO getCustomerInfo(int id);
 	void updateCusInfo(CustomerDTO cusDTO);
-	void deleteCustomer(int id);
+	void deleteCustomer(int id); //고객정보 삭제	
+
+	
 	CustomerDTO getCustomerInfoByUid(String uid);  // 새로 추가
 	// 닉네임 업데이트 메서드
 	void updateNickname(@Param("uid") String uid, @Param("nickname") String newNickname);
@@ -66,5 +68,5 @@ public interface MypageDAO {
 	
 	//영화 상위 가져오기
 	 List<chartDTO> getTop3MoviesByReservation();
-	
+
 }

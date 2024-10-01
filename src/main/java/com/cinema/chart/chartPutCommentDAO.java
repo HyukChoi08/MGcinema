@@ -12,7 +12,7 @@ void updatereview(int id, String content, int rate, String userId);
 void deletereview(int id);
 int count(String moviename);
 
-chartPutCommentDTO selectMovieReview(String userId, int movieId,int customer_id);
+chartPutCommentDTO selectMovieReview(String userId, int movieId,String customer_id);
 
 double selectMovieAverageRate(int movieId);
 

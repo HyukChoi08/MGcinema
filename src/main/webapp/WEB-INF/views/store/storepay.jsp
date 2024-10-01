@@ -524,6 +524,7 @@ $(document).ready(function() {
             let itemName = $(this).text().trim();
             let itemCompo = $('.itemcompo').eq(index).text().trim();
             str += itemName + '  ' + itemCompo + ',';
+            console.log("str"+str);
         });
 
         // 마지막 쉼표 제거

@@ -604,7 +604,7 @@ $(document).ready(function() {
  	    if (productName.includes('맥주') || productName.includes('샴페인')) {   //해당 단어를 포함하는거에 조건을 걸었음.
  	      if (age < 20) {
  	        
- 	        alert('20살 이상만 구매할 수 있습니다.');
+ 	        alert('미성년자는 구매하실 수 없습니다.');
  	        return false;
  	      }
  	    }
@@ -715,7 +715,7 @@ $('.buyButton').on('click', function(e) {
     if (productName.includes('맥주') || productName.includes('샴페인')) {
       if (age < 20) {
         // 나이가 20세 이상일 때 구매를 허용
-        alert('20살 이상만 구매할 수 있습니다.');
+        alert('미성년자는 구매하실 수 없습니다.');
         return false;
       }
     }

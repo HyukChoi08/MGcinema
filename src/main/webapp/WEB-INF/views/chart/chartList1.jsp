@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>되나연</title>
+    <title>영화상세페이지</title>
     <style>
 
 body {
@@ -262,7 +262,7 @@ color:black;
 <body>
     <%@ include file="/WEB-INF/views/header/header.jsp" %> <!-- 헤더 포함 -->
     <div class="vertical-container4">
-
+			<input type=hidden id="hid" value="${sessionScope.id}">
         <div class="vertical-container1">
             <div class="vertical-container">
                 <div class="flex-container">
@@ -304,7 +304,7 @@ color:black;
                                     </span>
                                 </p>
                                 <div>
-                                    <c:if test="${movieReview == null}">
+                                     <c:if test="${movieReview == null}">
                                         <!--   <button id="review">리뷰작성</button> -->
                                         <ul id="addtextarea" data-id="${chartList3.id}">
                                             <li>
@@ -336,7 +336,7 @@ color:black;
                                     	<ul class="reviewStatus">
                                     		<li> ${sessionScope.Nick}님은 작성해 주신 리뷰가 있습니다.</li>
                                     	</ul>	
-                                    </c:if>
+                                    </c:if> 
                                 </div>
                             </div>
                             <br><br>
@@ -372,7 +372,7 @@ color:black;
     	}
     })
         $(document)
-            .on('click', '#putcomment', function() { //리뷰 인서트
+             .on('click', '#putcomment', function() { //리뷰 인서트
                 let chartId = $('#addtextarea').data('id');
                 console.log("chartList3Id", chartId);
                 $('#moviechart').val(chartId);
@@ -385,41 +385,51 @@ color:black;
                 console.log("uid",uid);
                $('#idname').val(uid);
                
-               $.ajax({
-            	   url:'/reviewCheck',
-            	   type:'post',
-            	   data:{id:id,uid:uid,moviename:$('#mnameSave').val()},
-               	   success: function(data){
-               		   console.log(data)
-               		   if(data==0){
-               			   alert('영화를 보신 후 리뷰등록이 가능합니다');
-               			   return false;
-               		   } 
-               	   }
-               });
                
-                if (uid==null||uid==='') {
-                    alert('로그인이 필요합니다');
-                    $('#reviewcomment').val('');
-                    return false;
-                } else {
-                    $.ajax({
-                        url: '/putcomment',
-                        type: 'post',
-                        data: {moviechart: moviechart, content: content, writer: nick ,uid:uid, rate:rate,customer_id:${sessionScope.id}},
-                        success: function(data) {
-                            console.log(data);
-                            $('#moviechart').val('');
-                            $('#reviewcomment').val('');
-                            $('#idname').val('');
-                            loadreview();
-                            AverageRate();
-                            
-                        }
-                    });
-                }
+         		 if (uid==null||uid==='') {
+                     alert('로그인이 필요합니다');
+                     $('#reviewcomment').val('');
+                     return false;
+                 } else{
+                	  $.ajax({
+                   	   url:'/reviewCheck',
+                   	   type:'post',
+                   	   data:{id:id,uid:uid,moviename:$('#mnameSave').val()},
+                      	   success: function(data){
+                      		   console.log(data)
+                      		   if(data==0){
+                      			   alert('영화를 보신 후 리뷰등록이 가능합니다');
+                      			   return false;
+                      		   }else{
+                      			   
+                      			   if($('#reviewcomment').val()===""){
+                      				   alert('내용을 입력해주세요')
+                      			   }else{
+                             	  $.ajax({
+                                      url: '/putcomment',
+                                      type: 'post',
+                                      data: {moviechart: moviechart, content: content, writer: nick ,uid:uid, rate:rate,customer_id: $('#hid').val() },
+                                      success: function(data) {
+                                          console.log(data);
+                                          $('#moviechart').val('');
+                                          $('#reviewcomment').val('');
+                                          $('#idname').val('');
+                                          location.reload();
+                                          loadreview();
+                                          AverageRate();
+                                          
+                                          
+                                      }
+                                  });
+                      			   }
+                       
+                           } 
+                      	   }
+                      });
+                 }
+            
             })
-            .on('click', '#comment', function() { //리뷰 li에 셀렉트
+             .on('click', '#comment', function() { //리뷰 li에 셀렉트
                 $.ajax({
                     url: '/insertselectcomment',
                     type: 'post',
@@ -452,6 +462,10 @@ color:black;
 
             .on('click', '#editcomment', function() { //리뷰수정
             	let updeId=$(this).data('review-id');
+            
+            if($('#updetext').val()===""){
+            	alert('내용을 입력해주세요')
+            }else{
                 $.ajax({
                     url: '/updatereview',
                     type: 'post',
@@ -463,6 +477,7 @@ color:black;
                         AverageRate();
                     }
                 });
+            }
             })
             .on('click', '#deletecomment', function() { //리뷰삭제
             	let updeId=$(this).data('review-id');
@@ -473,6 +488,7 @@ color:black;
                     dataType: 'text',
                     success: function(data) {
                         console.log(data);
+                        location.reload();
                         loadreview();
                         AverageRate();
                     }
@@ -514,6 +530,8 @@ color:black;
             });
         }
         function loadreview(page = 1) {
+        	console.log($('#hmid').val());
+        	console.log(${sessionScope.dataId});
             $.ajax({
                 url: '/insertselectcomment',
                 type: 'post',
