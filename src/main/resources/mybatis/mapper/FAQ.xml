@@ -13,36 +13,36 @@
     </resultMap>
 
     <select id="getAllFAQs" parameterType="map" resultMap="FAQResultMap">
-        SELECT * FROM FAQ
+        SELECT * FROM faq
         LIMIT #{size} OFFSET #{offset}
     </select>
 
     <select id="getTotalFAQCount" resultType="int">
-        SELECT COUNT(*) FROM FAQ
+        SELECT COUNT(*) FROM faq
     </select>
 
     <select id="getFAQById" parameterType="long" resultMap="FAQResultMap">
-        SELECT * FROM FAQ WHERE id = #{id}
+        SELECT * FROM faq WHERE id = #{id}
     </select>
 
     <insert id="addFAQ" parameterType="com.cinema.service.FAQDTO">
-        INSERT INTO FAQ (title, content, created_at, views, selected) 
+        INSERT INTO faq (title, content, created_at, views, selected) 
         VALUES (#{title}, #{content}, #{created_at}, #{views}, #{selected})
     </insert>
 
     <update id="updateFAQ" parameterType="com.cinema.service.FAQDTO">
-    UPDATE FAQ
+    UPDATE faq
     SET title = #{title}, content = #{content}, views = views + 1, selected = #{selected}
     WHERE id = #{id}
 </update>
 
     <delete id="deleteFAQ" parameterType="long">
-        DELETE FROM FAQ WHERE id = #{id}
+        DELETE FROM faq WHERE id = #{id}
     </delete>
 
     <!-- 검색어를 기반으로 FAQ 목록을 가져오는 쿼리 -->
     <select id="getFAQsByKeyword" parameterType="map" resultMap="FAQResultMap">
-        SELECT * FROM FAQ
+        SELECT * FROM faq
         WHERE title LIKE CONCAT('%', #{keyword}, '%')
         ORDER BY created_at DESC
         LIMIT #{size} OFFSET #{offset}
@@ -51,13 +51,13 @@
    
     <select id="getTotalFAQCountByKeyword" parameterType="string" resultType="int">
         SELECT COUNT(*)
-        FROM FAQ
+        FROM faq
         WHERE title LIKE CONCAT('%', #{keyword}, '%')
     </select>
     
         <select id="getFAQsBySelected" resultType="com.cinema.service.FAQDTO">
         SELECT *
-        FROM FAQ
+        FROM faq
         WHERE selected = #{selected}
         ORDER BY created_at DESC
         LIMIT #{size} OFFSET #{offset}
@@ -66,7 +66,7 @@
     <!-- 선택된 항목을 기반으로 FAQ 총 개수를 가져오는 쿼리 -->
     <select id="getTotalFAQCountBySelected" resultType="int">
         SELECT COUNT(*)
-        FROM FAQ
+        FROM faq
         WHERE selected = #{selected}
     </select>
 

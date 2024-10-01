@@ -55,9 +55,11 @@ public class ServiceController {
         int offset = (page - 1) * size;
         List<FAQDTO> faqList;
         int totalFAQCount;
-
+        
         if (search.isEmpty() && selected.isEmpty()) {
+        	
             faqList = faqDAO.getAllFAQs(size, offset);
+           
             totalFAQCount = faqDAO.getTotalFAQCount();
         } else if (!search.isEmpty()) {
             faqList = faqDAO.getFAQsByKeyword(search, size, offset);
@@ -164,6 +166,7 @@ public class ServiceController {
 
         if (search.isEmpty() && selected.isEmpty()) {
             // 검색어와 선택된 항목이 없는 경우
+        	
             newsList = newsDAO.getAllNews(size, offset);
             totalNewsCount = newsDAO.getTotalNewsCount();
         } else if (!search.isEmpty()) {
