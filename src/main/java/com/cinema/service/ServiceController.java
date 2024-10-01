@@ -57,9 +57,9 @@ public class ServiceController {
         int totalFAQCount;
         
         if (search.isEmpty() && selected.isEmpty()) {
-        	System.out.println(size + offset + "aaaabbb");
+        	
             faqList = faqDAO.getAllFAQs(size, offset);
-            System.out.println(faqList);
+           
             totalFAQCount = faqDAO.getTotalFAQCount();
         } else if (!search.isEmpty()) {
             faqList = faqDAO.getFAQsByKeyword(search, size, offset);
@@ -166,7 +166,7 @@ public class ServiceController {
 
         if (search.isEmpty() && selected.isEmpty()) {
             // 검색어와 선택된 항목이 없는 경우
-        	System.out.println(size + offset + "aaacccc");
+        	
             newsList = newsDAO.getAllNews(size, offset);
             totalNewsCount = newsDAO.getTotalNewsCount();
         } else if (!search.isEmpty()) {
