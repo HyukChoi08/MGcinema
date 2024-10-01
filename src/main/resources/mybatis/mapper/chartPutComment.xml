@@ -21,7 +21,7 @@
 	</select>
 	
 	<select id="selectMovieReview" resultType="com.cinema.chart.chartPutCommentDTO">
-		SELECT * FROM REVIEW
+		SELECT * FROM review
 		WHERE
 		customer_id=#{param3}
 		AND	MOVIECHART = #{param2}
